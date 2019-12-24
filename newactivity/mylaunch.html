@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/activity_order.css"/>
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+<div id="mylaunch">
+    <header class="mint-header">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">活动订单</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="warp_dd_p">
+        <a class="current" href="#" onclick="jump('../post/personal_post_list.html')">
+            <span>我发起</span>
+        </a>
+        <a href="#" onclick="jump('../task/task_myOrder.html')">
+            <span>我参与</span>
+        </a>
+        <a href="#" onclick="jump('../post/personal_post_history_list.html')">
+            <span>历史订单</span>
+        </a>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#mylaunch',
+    data () {
+        return {
+            fil: null,
+            recordList: [],
+            addFrom: {
+                org: 'AAA789', // 机构标识
+                url: null
+            },
+            searchFrom: {
+                org: 'AAA789', // 机构标识
+                current: 1, // 当前页
+                size: 20 // 页容量	
+            }
+        };
+    },
+    created () {
+        // this.init();
+    },
+    methods: {
+        init (){
+            // 线上
+            this.searchFrom.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'AAA789';
+        },
+        zhankai () {
+            $('.activitmark').css({height: "auto"});
+        }
+    }
+})
+</script>
+</html>

@@ -54,13 +54,13 @@
 .warp_dd_p a {
     display: inline-block;
     text-align: center;
-    font-size: 12px;
+    font-size: 14px;
     margin: 0 4%;
 }
 
 .warp_dd_p a span {
     display: block;
-    color: #999999;
+    color: #101010;
     line-height: 34px;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .warp_dd_p a.current {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .warp_dd_p a.current span {
