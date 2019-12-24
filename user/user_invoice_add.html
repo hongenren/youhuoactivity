@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>新增发票抬头</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>新增发票抬头</span>
+    </div>
+    <!--<form id='form'>-->
+        <div class="ht10"></div>
+        <div>
+        <ul class="warp_pws_s">
+            <li>
+                <b>名称</b>
+                <input type="text" placeholder="填写准确的抬头名称" class="warp_pws_s_ex" name="name">
+            </li>
+            <li>
+                <b>默认抬头</b>
+                <p class="myradio">
+                    <label class="open ">
+                        <input name="default" type="radio" value="open" />
+                    </label>
+                    <label class="close hidden">
+                        <input name="default" type="radio" value="close" />
+                    </label>
+                </p>
+            </li>
+        </ul>
+        <div class="warp_pws_sp">
+            <ul class="warp_pws_so">
+                <li class="thisclass">
+                    <label>
+                        <input type="radio" name="type" value="1" checked="true" style="display: none">
+                        <span>个人</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="type" value="2" style="display: none">
+                        <span>单位</span>
+                    </label>
+                </li>
+            </ul>
+            <ul class="warp_pws_si">
+                <li>
+                    <b>电话号码</b>
+                    <input type="text" placeholder="输入电话号码" name="phone">
+                </li>
+                <li>
+                    <b>邮箱</b>
+                    <input type="email" placeholder="收票人电子邮箱" name="email">
+                </li>
+            </ul>
+            <ul class="warp_pws_si" style="display: none">
+                <li>
+                    <b>税号</b>
+                    <input type="text" placeholder="输入税号识别号" name="dutyNo">
+                </li>
+                <li>
+                    <b>电话号码</b>
+                    <input type="text" placeholder="输入公司电话号码" name="pphone">
+                </li>
+                <li>
+                    <b>开户银行</b>
+                    <input type="text" placeholder="收票单位开户银行" name="openBlank">
+                </li>
+                <li>
+                    <b>银行账号</b>
+                    <input type="text" placeholder="收票单位银行账号" name="blankNo">
+                </li>
+            </ul>
+        </div>
+    <!--</form>-->
+    <ul class="warp_pws_su">
+        <li>&nbsp</li>
+        <li style="display: none">建议全部填写，以便开具增值税专用发票</li>
+    </ul>
+    <div class="ht30"></div>
+    <div class="ht60"></div>
+    <div class="warp_pws_g_se">
+        <input type="button" value="保存" onclick="sub_message()">
+    </div>
+</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/web-storage-cache.js"></script>
+<script type="text/javascript" src="../wap/js/regular.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function(){
+        $('.warp_pws_so li').click(function(){
+            $('.warp_pws_si').hide();
+            $('.warp_pws_si').eq($(this).index()).show()
+        });
+        $('.warp_pws_so li').click(function(){
+            $('.warp_pws_su li').hide();
+            $('.warp_pws_su li').eq($(this).index()).show()
+        });
+    });
+    $(function(){
+        var cotrs = $(".warp_pws_so li");
+        cotrs.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    });
+</script>
+<script>
+    function iradio(){
+        $('.hidden').siblings('label').find(':radio').attr('checked',true);
+        $(".myradio input").click(function(e){
+            var state = e.delegateTarget.defaultValue;
+            var myradio = $(".myradio");
+            var iclose = $(this).parents(".myradio").find('.close');
+            // console.log(iclose);
+            var iopen = $(this).parents(".myradio").find('.open');
+            // console.log(state);
+            $(this).parents(".myradio").find(':radio').removeAttr('checked');
+            $(this).parent('label').addClass('disabled');
+            $(this).parent('label').siblings('label').find(':radio').attr('checked',true);
+            if (state == 'open') {
+                open();
+            } else {
+                close();
+            }
+            function open(){
+                iopen.animate({left:"30px"},100);
+                setTimeout(function(){
+                    iopen.hide();
+                    iclose.show();
+                    iopen.css('left',0);
+                    $(".myradio label").removeClass('disabled');
+                    $(".myradio").addClass('cla');
+                },300);
+            }
+
+            function close(){
+                iclose.animate({left:"0px"},100);
+                setTimeout(function(){
+                    iclose.hide();
+                    iopen.show();
+                    iclose.css('left','30px');
+                    $(".myradio label").removeClass('disabled');
+                    $(".myradio").removeClass('cla');
+                },300);
+            }
+        })
+    }
+</script>
+<script>
+    iradio();
+</script>
+
+<script type="text/javascript">
+    /**
+     * 注册第二步操作
+     */
+    function sub_message() {
+        var name = $.trim($("input[name='name']").val());
+        var phone = $.trim($("input[name='phone']").val());
+        var email = $.trim($("input[name='email']").val());
+        var dutyNo = $.trim($("input[name='dutyNo']").val());
+        var addr = $.trim($("input[name='addr']").val());
+        var pphone = $.trim($("input[name='pphone']").val());
+        var openBlank = $.trim($("input[name='openBlank']").val());
+        var blankNo = $.trim($("input[name='blankNo']").val());
+        var type=$(".thisclass").index()+1;
+        var arry=new Array()
+        if(type==2){
+            phone=pphone
+            arry=[name,phone,dutyNo,openBlank,openBlank];
+        }else{
+            arry=[name,phone,email];
+        }
+        console.log(arry)
+        var kong=arry.some(function(item,index,array){
+            return (item=="")
+        })
+        var user_msg = '';
+        var token = '';
+        var user_msg = JSON.parse($.cookie('user_msg'));
+        var token = $.cookie('token');
+        console.log(kong)
+        if(kong==false){
+            $.ajax({
+				xhrFields: {
+				   withCredentials: true
+				},
+                type: "post",
+                url: base_url + "html5/v1/userInvoice/add",
+                data: JSON.stringify({
+                    "name": name,
+                    "phone": phone,
+                    "email": email,
+                    "dutyNo": dutyNo,
+                    "openBlank": openBlank,
+                    "blankNo": blankNo,
+                    "type": type,
+                    "user":user_msg.userId
+                }),
+                headers : {'token':token},
+                dataType: 'json',
+                contentType: "application/json;charset=utf-8",
+                success: function(data) {
+                    console.log(data);
+                    if (data.code==0) {
+                        console.log(data.code)
+                        layer.open({
+                            content: '添加成功'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                        setTimeout(function(){window.location.href='user_invoice.html';})
+                    }else{
+                        layer.open({
+                            content: '添加失败'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                        return false;
+                    }
+                },
+                error: function(e) {
+                    layer.open({
+                        content: '提交错误',
+                        skin: 'msg',
+                        time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            })
+        }else{
+            layer.open({
+                content: '提交错误',
+                skin: 'msg',
+                time: 1 //2秒后自动关闭
+            });
+        }
+    }
+
+</script>
+
+</body>
+</html>

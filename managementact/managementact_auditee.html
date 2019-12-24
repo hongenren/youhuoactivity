@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/swiper.min.js"></script>
+    <style>
+        #header {width: 100%;height: 43px;overflow: hidden;background: #FFFFFF;}
+        #header .swiper-slide {width:auto;line-height: 41px;height: 41px;flex-grow:1;}
+        #header .swiper-slide a{display: block;overflow: hidden;font-size: 14px;color: #000000;text-align:center;}
+        #header .swiper-slide.current{border-bottom: 2px solid #72B91E}
+        #header .swiper-slide.current a{color: #72B91E}
+        .warp_hm_p{overflow: hidden;padding: 0 3%}
+        .warp_hm_p .warp_gl_u_so{padding: 3% 0;width: 49%}
+        #warp_hm_o .warp_gl_u_se{border: 0;}
+        .warp_gl_u_sq i{font-style: normal;float: right;color: #999999;background: url(../wap/img/pws_102.png) no-repeat right center;background-size: 6px 11px;padding-right: 14px}
+        .warp_hm_i{overflow: hidden;padding-left: 3%;line-height: 50px;font-size: 14px;}
+        .warp_hm_i i{font-style: normal;float: right;color: #999999;background: url(../wap/img/pws_102.png) no-repeat right center;background-size: 6px 11px;padding-right: 14px}
+        .warp_hm_i span{display: block;float: left;color: #000000}
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>待审核人员</span>
+    </div>
+    <div class="warp_gl_u">
+        <div id="header">
+            <div id="top-line"></div>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide current">
+                    <a href="javascript:void(0);" onclick="evaluateScrollEvent($_GET['sectionCode'],1);">志愿岗位</a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="javascript:void(0);" onclick="evaluateScrollEvent($_GET['sectionCode'],2)">活动任务</a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="javascript:void(0);" onclick="evaluateScrollEvent($_GET['sectionCode'],3)">公众</a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="javascript:void(0);" onclick="evaluateScrollEvent($_GET['sectionCode'],4)">管理员</a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="javascript:void(0);" onclick="evaluateScrollEvent($_GET['sectionCode'],5)">嘉宾</a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="javascript:void(0);" onclick="evaluateScrollEvent($_GET['sectionCode'],6)">媒体</a>
+                </div>
+            </div>
+        </div>
+        <div class="warp_gl_u_sp"></div>
+    </div>
+
+    <div id="search"></div>
+
+    <div class="warp_gl_u_st">
+        <span></span>
+    </div>
+    <ul class="warp_gl_u_sr" id="warp_hm_o">
+
+    </ul>
+
+    <div class="warp_gl_y_sw">
+        <div class="warp_gl_y_sq"></div>
+        <ul class="warp_gl_y_sl">
+
+        </ul>
+    </div>
+
+</div>
+<div class="warp_gl_w_sf" id="reason">
+        <div class="warp_gl_w_sd"></div>
+        <div class="warp_gl_w_ss">
+            <textarea placeholder="请输入" class="warp_gl_w_sa" id="resaon_info"></textarea>
+            <input type="hidden" value="" id="no_url">
+            <input type="hidden" value="" id="no_data">
+            <div class="warp_gl_w_sm">
+                <a href="javascript:void(0)" onclick="hid_reason()">取消</a>
+                <a href="javascript:void(0)" onclick="get_reason()">发送</a>
+            </div>
+        </div>
+    </div>
+<script>
+    $(function(){
+        $(".warp_gl_u_so span").live("click",function(){
+            $(".warp_gl_y_sw").fadeIn();
+			$("body,html").css({
+					"height":"100%",
+					"overflow":"hidden"
+				  });
+				  $('body').addClass('add');
+        });
+        $(".warp_gl_y_sl li").live("click",function(){
+            $(".warp_gl_y_sw").fadeOut();
+			$("body,html").css({
+					"height":"auto",
+					"overflow":"auto"
+				  });
+				  $('body').removeClass('add');
+        });
+    });
+</script>
+<script>
+    $(function(){
+        var cotrs = $(".warp_gl_y_sl li");
+        cotrs.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    });
+</script>
+<script type="text/javascript">
+    window.onload = function() {
+        var mySwiper1 = new Swiper('#header',{
+            freeMode : true,
+            slidesPerView : 'auto'
+        });
+    }
+</script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/managementact/managementact.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: base_url+'/html5/v1/activity/queryDetail',
+            //url: '/cm/termapi/geArticletListByMy',
+            type: "post",
+            dataType: "json",
+            data: JSON.stringify({"activityCode": $_GET['activityCode']}),
+            headers: {'Content-Type': 'application/json'},
+            success: function (resp) {
+                if (resp.code == 0) {
+                    if(ConvertStrToDate(resp.data.endDay+" 23:59:59")>new Date()){}
+                    $('.agree1').unbind();
+                    $('.agree1').css("color","#999");
+                }
+            }
+        });
+    })
+    //get_activity_work($_GET['sectionCode'])
+    // get_activity_auditee($_GET['sectionCode'],1);
+
+
+    var evaluateScrollEvent=function(code,type=1,recruitCode=''){
+        var page = 1;//从1
+        var size = 5;
+        var t=0;
+        var p=0;
+        console.log(type)
+        get_activity_auditee($_GET['sectionCode'],type,recruitCode,'',page,size,1)
+        $(document).unbind('scroll').scroll(function(e){
+            t=$(this).scrollTop();
+            var doc=$(document).height();
+            var win=$(window).height();
+            if(p<=t){//console.log("向下");
+                if(t>doc-(win+60)){
+                    if($(document).height() - $(window).height() == $(window).scrollTop()){
+                        $("#warp_hm_o").append("<img class='loadings' src='../wap/img/loading.gif' style='width:24px;heigth:24px; margin:0 auto;display:block'/>");
+                        page++;
+                        get_activity_auditee($_GET['sectionCode'],type,recruitCode,'',page,size,2)
+                    }
+
+                }else{
+                    $(".loadings").remove();
+                }
+
+            }
+            setTimeout(function(){p=t},0)
+        });
+    };
+    evaluateScrollEvent($_GET['sectionCode'],1);
+</script>
+<script type="text/javascript">
+    $(".swiper-slide").click(function(){
+        $(".swiper-slide").removeClass("current")
+        $(this).addClass("current")
+    })
+</script>
+<script type="text/javascript">
+    var search_list_scroll=function(code,searchVal,typeNum){
+        var page = 1;//从1
+        var size = 10;
+        var t=0;
+        var p=0;
+        search_list(code,searchVal,typeNum,page,size,1);
+        $(document).unbind('scroll').scroll(function(e){
+            t=$(this).scrollTop();
+            var doc=$(document).height();
+            var win=$(window).height();
+            if(p<=t){//console.log("向下");
+                if(t>doc-(win+60)){
+                    if($(document).height() - $(window).height() == $(window).scrollTop()){
+                        $("#warp_hm_o").append("<img class='loadings' src='../wap/img/loading.gif' style='width:24px;heigth:24px; margin:0 auto;display:block'/>");
+                        page++;
+                        search_list(code,searchVal,typeNum,page,size,2);
+                    }
+
+                }else{
+                    $(".loadings").remove();
+                }
+
+            }
+            setTimeout(function(){p=t},0)
+        });
+    };
+    $(".warp_gl_u_su").live('click',function(){
+        var searchVal = $(".warp_gl_u_sy").val();
+        var typeNum   = $(".warp_gl_u_sy").attr("data-id");
+        if(searchVal){
+            search_list_scroll($_GET['sectionCode'],searchVal,typeNum);
+        }else{
+            layer.open({
+                content: '关键词不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+        }
+    })
+
+    function get_reason()
+    {
+        // console.log(token)
+        var resaon_info = $("#resaon_info").val();
+        var url         = $("#no_url").val();
+        var data1_1       = $("#no_data").val();
+
+        var cen_result = JSON.parse(data1_1);
+        cen_result['reason'] = resaon_info;
+
+        var data1 = JSON.stringify(cen_result);
+        // console.log(url)
+        // console.log(data1)
+        btn_form(url,data1);
+    }
+    function hid_reason()
+    {
+        $("#reason").hide();
+    }
+    //把字符串日期转为日期
+    function ConvertStrToDate(datetimeStr) {
+        var mydateint = Date.parse(datetimeStr);//数值格式的时间
+        if (!isNaN(mydateint)) {
+            var mydate = new Date(mydateint);
+            return mydate;
+        }
+        var mydate = new Date(datetimeStr);//字符串格式时间
+        var monthstr = mydate.getMonth() + 1;
+        if (!isNaN(monthstr)) {//转化成功
+            return mydate;
+        }//字符串格式时间转化失败
+        var dateParts = datetimeStr.split(" ");
+        var dateToday = new Date();
+        var year = dateToday.getFullYear();
+        var month = dateToday.getMonth();
+        var day = dateToday.getDate();
+        if (dateParts.length >= 1) {
+            var dataPart = dateParts[0].split("-");//yyyy-mm-dd  格式时间
+            if (dataPart.length == 1) {
+                dataPart = dateParts[0].split("/");//yyyy/mm/dd格式时间
+            }
+            if (dataPart.length == 3) {
+                year = Math.floor(dataPart[0]);
+                month = Math.floor(dataPart[1]) - 1;
+                day = Math.floor(dataPart[2]);
+            }
+        }
+        if (dateParts.length == 2) {//hh:mm:ss格式时间
+            var timePart = dateParts[1].split(":");//hh:mm:ss格式时间
+            if (timePart.length == 3) {
+                var hour = Math.floor(timePart[0]);
+                var minute = Math.floor(timePart[1]);
+                var second = Math.floor(timePart[2]);
+                return new Date(year, month, day, hour, minute, second);
+            }
+        }
+        else {
+            return new Date(year, month, day);
+        }
+    }
+</script>
+</body>
+</html>

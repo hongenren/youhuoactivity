@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海" />
+    <meta name="description" content="公益上海" />
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript" src="js/offset.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+    <link rel="stylesheet" href="css/mobile.css"/>
+</head>
+<body>
+<div class="searchWrap">
+    <div class="map_head">
+        <div class="mapHead_but" onclick="javascript:history.back(-1);"></div>
+        机构搜索
+    </div>
+    <div class="searchButWrap">
+        <div class="searchBut">
+            <input type="text" id="textName" placeholder="机构名称或基地数字编号">
+            <i onclick="selectName(1,0)"></i>
+        </div>
+    </div>
+    <div class="searchTabWrap">
+        <ul>
+            <!--<li><span>附近</span> <i></i></li>-->
+            <!--<li class="on"><span>筛选</span> <i></i></li>-->
+            <!--<li><span>类别</span> <i></i></li>-->
+        </ul>
+    </div>
+    <div class="searchListWrap">
+
+        <!--<div class="searchList">
+            <div class="searchListLeft" style="background-image:url('images/wall.jpg')"></div>
+            <div class="searchListRight">
+                <ul>
+                    <li>上海市服务促进服务中心 <span><i></i>实名</span></li>
+                    <li><b></b><b></b><b></b><b></b><b class="on"></b></li>
+                    <li><strong>长宁区</strong><strong>公益基地</strong><p>1.3km</p></li>
+                </ul>
+            </div>
+        </div>-->
+
+    </div>
+</div>
+<div style="text-align: center;" id="msg"></div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/config.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+<script>
+    var pageNumber=1;
+    function selectName(pageNumber,type){
+        $.ajax({
+            url: base_url1+'/html5/v1/orgPlace/queryTotalListByName',
+            type: "post",
+            dataType: "json",
+            data: "{\"name\":\""+$("#textName").val()+"\", \"pageNumber\": "+pageNumber+"}",
+            headers: {'Content-Type': 'application/json'},
+            success: function (resp) {
+                if (resp.code == 0) {
+                    if(type==0){
+                        pageNumber==1;
+                    }
+                    if(pageNumber==1){
+                        $(".searchListWrap").html("");
+                    }
+                    var record = resp.data.records;
+                    var len = resp.data.size;
+                    for (var i in record) {
+                        var shiming = "", jumpStr = "mobileDetailClaim.html?id="+record[i].id;
+                        if(record[i].orgThirdAccount){
+                            shiming = '<span><i></i>实名</span>';
+                            jumpStr = "mobileDetail.html?id="+record[i].id+"&prjvUserId="+record[i].prjvUserId;
+                        }
+                        var div = "<div class='searchList' onclick='jump(\""+jumpStr+"\")'>" +
+                            "            <div class='searchListLeft' style='background-image:url("+record[i].imgs+")'></div>" +
+                            "            <div class='searchListRight'>" +
+                            "                <ul>" +
+                            "                    <li>" + record[i].name + ""+shiming+"</li><li>" ;
+                        if(record[i].star!=undefined && record[i].star!=null && record[i].star!=""){
+                            for(var i=0;i<5;i++){
+                                if(i<record[i].star){
+                                    div += "<b></b>";
+                                }else{
+                                    div += "<b class='on'></b>";
+                                }
+                            }
+                        }
+                        //标签
+                        var markTags = "";
+                        if(record[i].markTags!=undefined && record[i].markTags!=null && record[i].markTags!=""){
+                            var markTags_arr = record[i].markTags.split(";");
+                            for (var j = 0; j <markTags_arr.length; j++) {
+                                var markTagsArr = markTags_arr[j];
+                                if(markTagsArr.indexOf("公益基地")>=0){
+                                    if(record[i].baseNo!=undefined && record[i].baseNo!=null && record[i].baseNo!=""){
+                                        markTags += '<strong>'+record[i].baseNo+"号公益基地</strong>";
+                                    }
+                                }else{
+                                    markTags += '<strong>'+markTagsArr+'</strong>';
+                                }
+                            }
+                        }
+                        var district = record[i].district;
+                        district = district!=undefined && district!=null && district!=""?district:"";
+                        var addressDetail = record[i].addressDetail;
+                        addressDetail = addressDetail!=undefined && addressDetail!=null && addressDetail!=""?addressDetail:"";
+                        var address = district+addressDetail;
+                        if(addressDetail.indexOf(district) != -1){
+                            address = addressDetail;
+                        }
+                        div += "</li>" +
+                            "                    <li><strong>" + address + "</strong>"+markTags.replace("1001:", "")+"</li>" +
+                            "                </ul>" +
+                            "            </div>" +
+                            "        </div>";
+                        $(".searchListWrap").append(div);
+                    }
+                }
+            }
+        });
+    }
+    window.onload=function(){
+        selectName(pageNumber);
+    }
+    $(window).scroll(function () {
+        var bot = 1;
+        if ((bot + $(window).scrollTop()) >= ($(document).height() - $(window).height() -1)) {
+            $('#msg').html('正在加载');
+            pageNumber = pageNumber+1;
+            selectName(pageNumber);
+        }else if($(document).scrollTop() <= 0){
+            //("滚动条已经到达顶部为0");
+        }
+    });
+</script>
+</body>
+</html>

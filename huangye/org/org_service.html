@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>机构信息</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../css/org.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mobiscroll.custom.min.css"/>
+    <script type="text/javascript" src="../js/offset.js"></script>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+    <div class="warp_zy_j bg">
+        <a href="javascript:history.go(-1);"></a>
+        <span>机构志愿服务信息</span>
+    </div>
+    <div class="warp_zy_p">
+        <ul class="warp_zy_y">
+            <li class="selectEvent">
+                <b>服务对象</b>
+                <textarea type="text" name="selectEvent" cols="3" placeholder="请选择" class="warp_zy_y_sp" disabled="disabled" style="color:#000000;height:auto;background: url(../../wap/img/pws_54.png) no-repeat right center;"></textarea>
+                <input type="hidden" name="selectEvent_hide" />
+            </li>
+            <li class="selectClass">
+                <b>关注的领域</b>
+                <textarea type="text" name="selectClass" cols="3" placeholder="请选择" class="warp_zy_y_sp" disabled="disabled" style="color:#000000;height:auto;background: url(../../wap/img/pws_54.png) no-repeat right center;"></textarea>
+                <input type="hidden" name="selectClass_hide" />
+            </li>
+        </ul>
+    </div>
+
+    <div class="ht70"></div>
+    <div class="warp_pws_m_sw">
+        <button class="sub_msg">保存提交</button>
+        <!--<input type="button" value="提交添加">-->
+    </div>
+
+    <div class="warp_zy_t">
+        <div class="warp_zy_t_sp"></div>
+        <div class="warp_zy_t_so" style="overflow:auto;">
+            <div class="warp_zy_t_si">
+                <a href="javascript:void(0)"></a>
+                <span>请选择服务对象</span>
+            </div>
+            <ul class="warp_zy_t_su">
+            </ul>
+            <input type="button" value="确认"  class="warp_zy_t_sy">
+        </div>
+    </div>
+    <div class="warp_zy_t2">
+        <div class="warp_zy_t_sp"></div>
+        <div class="warp_zy_t_so" style="overflow:auto;">
+            <div class="warp_zy_t_si2">
+                <a href="javascript:void(0)"></a>
+                <span>请选择关注的领域</span>
+            </div>
+            <ul class="warp_zy_t_su">
+            </ul>
+            <input type="button" value="确认"  class="warp_zy_t_sy2">
+        </div>
+    </div>
+
+
+</div>
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/mobiscroll.custom.min.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/layer.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/config.js"></script>
+<script>
+    var prjvOrgId = $.getUrlParam("prjvOrgId");
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    var currYear = (new Date()).getFullYear();
+    $('.demo_time').mobiscroll().time({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang
+    });
+
+</script>
+<script>
+    var unSelected = "#999999";
+    var selected = "#333333";
+    $(function () {
+        $("select").css("color", unSelected);
+        $("option").css("color", selected);
+        $("select").change(function () {
+            var selItem = $(this).val();
+            if (selItem == $(this).find('option:first').val()) {
+                $(this).css("color", unSelected);
+            } else {
+                $(this).css("color", selected);
+            }
+        });
+    })
+</script>
+<script>
+    //服务对象
+    function service1(){
+        $.ajax({
+            url: base_url1+'/html5/v1/orgPlace/queryOrgServiceObjects',
+            //url: 'http://test.dakaqi.cn:28080/html5/v1/orgPlace/queryOrgServiceObjects',
+            type: "post",
+            dataType: "json",
+            data: "{}",
+            headers: {'Content-Type': 'application/json'},
+            success: function (resp) {
+                if (resp.code == 0) {
+                    var Objects = resp.data.data
+                    for(var z in Objects){
+                        var li='<li>\n' +
+                            '                    <label>\n' +
+                            '                        <input type="checkbox" name="weeks1" value="'+Objects[z].code.trim()+'">\n' +
+                            '                        <span id="'+Objects[z].code.trim()+'">'+Objects[z].name+'</span>\n' +
+                            '                    </label>\n' +
+                            '                </li>';
+                        $(".warp_zy_t").find(".warp_zy_t_su").append(li);
+                    }
+                    service1_1();
+                }
+            }
+        });
+        $(".selectEvent").click(function(){
+            $(".warp_zy_t").fadeIn();
+        })
+        $(".warp_zy_t_si a").click(function(){
+            $(".warp_zy_t").fadeOut();
+        })
+        $(".warp_zy_t_sy").click(function(){
+            $(".warp_zy_t").fadeOut();
+        })
+    }
+    function service1_1(){
+        $("input[name='weeks1']").bind("click",function(){
+            var str = '', str1 = '';
+            var checked = $(this).prop('checked');
+            if(checked){
+                $(this).parent().parent().addClass('cla');
+            }else{
+                $(this).parent().parent().removeClass('cla');
+            }
+            $("input[name='weeks1']:checked").each(function(){
+                str += "{\"code\":\""+$(this).val() + "\"},";
+                str1 += $("#"+$(this).val()+"").html()+";";
+            })
+            if (str.length > 0) {
+                str = str.substr(0, str.length - 1);
+                str1 = str1.substr(0, str1.length - 1);
+            }
+            $("input[name='selectEvent_hide']").val(str);
+            $("textarea[name='selectEvent']").html(str1);
+
+        });
+    }
+
+
+    //关注的领域
+    function service2(){
+        $.ajax({
+            url: base_url1+'/html5/v1/orgPlace/queryOrgServiceTypes',
+            //url: 'http://test.dakaqi.cn:28080/html5/v1/orgPlace/queryOrgServiceTypes',
+            type: "post",
+            dataType: "json",
+            data: "{}",
+            headers: {'Content-Type': 'application/json'},
+            success: function (resp) {
+                if (resp.code == 0) {
+                    var Objects = resp.data.data;
+                    for(var t in Objects){
+                        var li='<li>\n' +
+                            '                    <label>\n' +
+                            '                        <input type="checkbox" name="weeks2" value="'+Objects[t].code.trim()+'">\n' +
+                            '                        <span id="'+Objects[t].code.trim()+'">'+Objects[t].name+'</span>\n' +
+                            '                    </label>\n' +
+                            '                </li>';
+                        $(".warp_zy_t2").find(".warp_zy_t_su").append(li);
+                    }
+                    service2_2();
+                }
+            }
+        });
+        $(".selectClass").click(function(){
+
+            $(".warp_zy_t2").fadeIn();
+        })
+        $(".warp_zy_t_si2 a").click(function(){
+            $(".warp_zy_t2").fadeOut();
+        })
+        $(".warp_zy_t_sy2").click(function(){
+            $(".warp_zy_t2").fadeOut();
+        })
+    }
+    function service2_2(){
+        $("input[name='weeks2']").bind("click",function(){
+            var str = '', str1 = '';
+            var checked = $(this).prop('checked');
+            if(checked){
+                $(this).parent().parent().addClass('cla');
+            }else{
+                $(this).parent().parent().removeClass('cla');
+            }
+            $("input[name='weeks2']:checked").each(function(){
+                str += "{\"code\":\""+$(this).val() + "\"},";
+                str1 += $("#"+$(this).val()+"").html()+";";
+            })
+            if (str.length > 0) {
+                str = str.substr(0, str.length - 1);
+                str1 = str1.substr(0, str1.length - 1);
+            }
+            $("input[name='selectClass_hide']").val(str);
+            $("textarea[name='selectClass']").html(str1);
+
+        });
+    }
+
+</script>
+
+<script>
+    function sub_msg(pid){
+        var eventVal=$("input[name='selectEvent_hide']").val();
+        var classVal=$("input[name='selectClass_hide']").val();
+        if(eventVal==''){
+            layer.open({
+                content: '服务对象不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return
+        }else if(classVal==''){
+            layer.open({
+                content: '关注的领域不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return
+        }
+        var prjvorgMsg = JSON.parse(localStorage.getItem('prjvorgMsg'));
+        var arr = {
+            "orgThirdAccount": prjvorgMsg.orgThirdAccount,
+            "serviceObjects": JSON.parse("["+eventVal+"]"),
+            "serviceTypes": JSON.parse("["+classVal+"]")
+        };
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url + "perfectOrgServiceInfo2",
+            data:JSON.stringify(arr),
+            dataType:'json',
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            beforeSend:function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data){
+                    if(data.code==0){
+                        layer.open({
+                            content: '保存成功'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                        //setTimeout(function(){history.back(-1)},1500);
+                    }else{
+                        layer.open({
+                            content: '保存失败'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                    }
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '保存失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+
+        })
+    }
+    function get_real(){
+        var arr = {
+            "prjvOrgId": prjvOrgId
+        };
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url + "queryOrgByPrjvOrgId",
+            data:JSON.stringify(arr),
+            dataType:'json',
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            beforeSend:function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                var datas=data.data;
+                if(datas){
+                    var serviceObjects=datas.serviceObjects;
+                    var serviceTypes=datas.serviceTypes;
+                    $("textarea[name='selectEvent']").html(serviceObjects);
+                    $("textarea[name='selectClass']").html(serviceTypes);
+                    var serviceObjectsCodes = datas.serviceObjectsCode.split(';'), serviceObjectsCode = '';
+                    for(var i in serviceObjectsCodes){
+                        serviceObjectsCode += '{"code":"'+serviceObjectsCodes[i]+'"},';
+                    }
+                    var serviceTypesCodes = datas.serviceTypesCode.split(';'), serviceTypesCode = '';
+                    for(var i in serviceTypesCodes){
+                        serviceTypesCode += '{"code":"'+serviceTypesCodes[i]+'"},';
+                    }
+                    $("input[name='selectEvent_hide']").val(serviceObjectsCode.substring(0, serviceObjectsCode.length-1));
+                    $("input[name='selectClass_hide']").val(serviceTypesCode.substring(0, serviceTypesCode.length-1));
+                    /*if(undefined != serviceObjects && null != serviceObjects && "" != serviceObjects){
+                        $("input[name='selectEvent_hide']").val(serviceObjects);
+                        var ObjectsErr=serviceObjects.split(';');
+                        var Objects=[];
+                        var Objectstr = "";
+                        for(var i in ObjectsErr){
+                            Objects.push(ObjectsErr[i].split(':'));
+                            Objectstr += ObjectsErr[i].split(':')[1]+"，";
+                        }
+                        $("input[name='selectEvent']").val(Objectstr.substring(0, Objectstr.length-1));
+                    }
+                    if(undefined != serviceTypes && null != serviceTypes && "" != serviceTypes){
+                        $("input[name='selectClass_hide']").val(serviceTypes);
+                        var TypesErr=serviceTypes.split(';');
+                        var Types=[];
+                        var Typestr = "";
+                        for(var j in TypesErr){
+                            Types.push(TypesErr[j].split(':'));
+                            Typestr += TypesErr[j].split(':')[1]+"，";
+                        }
+                        $("input[name='selectClass']").val(Typestr.substring(0, Typestr.length-1));
+                    }*/
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+
+        })
+    };
+    $(function(){
+        get_real(id='',token='');
+        service1();
+        service2();
+        $(".sub_msg").click(function(){
+            sub_msg(prjvOrgId)
+        })
+    })
+</script>
+</body>
+</html>

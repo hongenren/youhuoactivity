@@ -1,0 +1,56 @@
+
+    <div class="warp">
+
+    <div class="warp_gl_u">
+        <div class="warp_glr_p">
+            <div>
+                <i></i>
+                <span>管理人员必须是本系统的实名认证用户</span>
+            </div>
+        </div>
+
+        <div class="warp_gl_u_si">
+            <input type="button" value="搜索" class="warp_gl_u_su">
+            <input type="text" placeholder="请输入姓名或手机号" name="searchContent" class="warp_gl_u_sy">
+        </div>
+    </div>
+    <form id='formOrgAdd'>
+    <div class="warp_glr_o">
+        <div class="warp_glr_i">
+            <em></em>
+            <b>已成功添加</b>
+        </div>
+        <ul class="warp_glr_u" id="glry_tj">
+           
+        </ul>
+    </div>
+    </form>
+    <div class="warp_glr_o">
+        <div class="warp_glr_i">
+            <em></em>
+            <b>机构通讯录</b>
+        </div>
+        <ul class="warp_glr_u" id="glry_txl">
+           
+        </ul>
+    </div>
+
+    <div class="warp_pws_m_sw" style="position: relative">
+        <ul class="warp_pws_hd">
+            <li>
+                <input type="button" value="返回" id="closeAddr">
+            </li>
+            <li>
+                <input type="button" value="完成" class="warp_pws_v_si1" id="orgAddrSub">
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#closeAddr").click(function() {
+        $(".member_list").animate({
+            left: "100%"
+        })
+    })
+</script>

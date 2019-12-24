@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海-团体报名</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../post/css/job_list.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/calendar_dan.css" />
+    <link rel="stylesheet" type="text/css" href="../post/css/group_apply_list.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/task_apply_user_list.css"/>
+    <style>
+        .task_failure-list{
+            padding:.2rem .1rem;
+            background-color:#fff;
+            border-top:1px solid #eee;
+        }
+        .task_failure-list span{
+            padding:0 .1rem;
+            font-size:.24rem;
+            line-height:.4rem;
+            color:#333;
+        }
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <!--头部开始-->
+    <div class="warp_zy_j">
+        <a href="javascript:void(0);" onclick="jump('./task_already_apply_list.html?type=1')"></a>
+        <span id="title">报名失败人员</span>
+    </div>
+    <!--头部结束-->
+    <div class="warp_dd_p" style="padding-bottom:.1rem;">
+        <a href="javascript:void(0)" onclick="groupApplyList(0,1)" id="shibai" class="current" style="font-size: 18px;">
+            <span>提交失败</span>
+        </a>
+        <a href="javascript:void(0)" onclick="groupApplyList(0,2)" id="shenhe" style="font-size: 18px;">
+            <span>审核未通过</span>
+        </a>
+    </div>
+    <div class="succeed-list clearfix" style="height:auto;"><!--成功列表-->
+        <div class="succeed-list-title">
+            <div class="succeed-list-title-div" style="display: none;">
+                <div style="border: 0px">
+
+                </div>
+            </div>
+        </div>
+        <div class="screenButList" style="margin: 0px;padding: 2% 0px;background: white">
+            <input type="search" class="search_input" id="name_input" placeholder="请输入姓名或手机号进行查询">
+            <input type="button" class="search_button" value="" onclick="groupApplyList(0, 0);">
+        </div>
+    </div>
+    <div class="tam_box_list hycon_con">
+        <div class="tem_enroll_list_wrap">
+            <!--<div class="tem_enroll_list">-->
+                <!--<div class="tem_enroll_radios on"></div>-->
+                <!--<div class="tem_enroll_top clearfix">-->
+                    <!--<div class="tem_enroll_user" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="tem_enroll_name">-->
+                        <!--<h2>张三 <a class="tem_enroll_question_tog" href="javascript:void(0)"></a></h2>-->
+                        <!--<p><span style="margin-left:0;">18221222122</span></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="tem_enroll_progress_wrap">-->
+                    <!--<div class="tme_progress clearfix">-->
+                        <!--<div class="tme_progress_left">任务进度</div>-->
+                        <!--<div class="tme_progress_right clearfix">-->
+                            <!--<div class="tme_progress_list">-->
+                                <!--<i></i>-->
+                                <!--<strong>任务提交成功</strong>-->
+                                <!--<span>11-03 18:00</span>-->
+                            <!--</div>-->
+                            <!--<div class="tme_progress_list">-->
+                                <!--<i></i>-->
+                                <!--<strong>任务提交成功</strong>-->
+                                <!--<span>11-03 18:00</span>-->
+                            <!--</div>-->
+                            <!--<div class="tme_progress_list">-->
+                                <!--<i></i>-->
+                                <!--<strong>任务提交成功</strong>-->
+                                <!--<span>11-03 18:00</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <ul class="warp_pws_c succeed-list-ul">
+        <li style="display: none;">
+            <img >
+            <span style="font-size: 16px;">name</span>
+            <p style="float: right;">电12121232话</p>
+            <p>顶岗</p><br/><br/>
+            <p>代打卡</p>
+        </li>
+    </ul>
+
+    <div class="task_failure-list"><!--失败列表-->
+
+    </div>
+</div>
+<div class="select-time" style="background: #FFFFFF;display: none;">
+    <span class="time entertime" style="color: #9d9d9d;"></span><!--开始时间-->
+    <input id="serviceDay" type="text" class="input-enter none">
+</div>
+<div id="select_div" class="select_div" style="overflow:auto;margin-top: 10px">
+
+</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+<script type="text/javascript" src="js/task_apply_user_list.js"></script>
+<!--<script type="text/javascript" src="../post/js/date_dan_personnel_management_2.js"></script>-->
+<script>
+    var type = $.getUrlParam("type");
+    var pkPostCode = $.getUrlParam("pkPostCode"), pkUnitCodeZ = "", auditNumList = [];
+    $(function() {
+        // $('.select-time').hotelDate();
+        // if(type==0){
+        //     $("#title").html("报名成功");
+        //     $(".succeed-list").show();
+        //     $(".succeed-list-ul").show();
+        //     $(".failure-list").hide();
+        // }
+        // getList(type, pkPostCode);
+        if(type==0){
+            groupApplyList(0,0)
+        }else {
+            groupApplyList(0,1)
+        }
+
+    });
+</script>
+</body>
+</html>

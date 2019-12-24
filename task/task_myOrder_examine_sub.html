@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海"/>
+    <meta name="description" content="公益上海"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="../meng/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/task_myOrder_content.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>子任务确认</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+    <div class="tem_search_wrap">
+        <div class="tem_search"><input type="text" id="searchValue" placeholder="请输入姓名或手机号进行查询"><button class="tem_searchBtn"></button></div>
+    </div>
+    <div class="tme_sub_wrap_box" id="tme_sub_wrap_box">
+        <!--<div class="tme_sub_wrap">-->
+            <!--<div class="tmeSubUser clearfix">-->
+                <!--<div class="tme_sub_user" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                <!--<div class="tme_sub_name">张三</div>-->
+            <!--</div>-->
+            <!--<div class="tmeSubTimes">-->
+                <!--<strong>提交任务时间： </strong>-->
+                <!--<span>2019年11月1日 18:00</span>-->
+            <!--</div>-->
+            <!--<div class="tmeSubText">-->
+                <!--这是志愿者提交的任务内容-->
+            <!--</div>-->
+            <!--<div class="tme_imgs_wrap clearfix" style="padding:.1rem 0;">-->
+                <!--<div class="tme_imgs">-->
+                    <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="clearfix">-->
+                <!--<div class="tme_evaluate_list">-->
+                    <!--<strong>任何联系人给我的评价</strong>-->
+                    <!--<span><i class="on"></i><i></i><i></i><i></i><i></i></span>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="tme_sub_btn"><button>确认提交</button></div>-->
+        <!--</div>-->
+        <div class="dropload-down"><div class="dropload-noData" style="text-align:center;line-height:.7rem;">没有啦~</div></div>
+    </div>
+
+</div>
+<!--<div class="sendButtonWrap on">-->
+    <!--<button class="targetNext on">修改提交任务</button>-->
+<!--</div>-->
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script>
+    function deleteIImg(obj){
+        $(obj).parent().parent().remove();
+    }
+    $(".warp_pws_m_sy i").live("click", function() {
+        $(this).parent().parent().remove();
+    });
+    function uploadImg(i) {
+        var form = document.getElementsByClassName("test_form")[i];
+        var imgdata = new FormData(form);
+        //利用ajax上传
+        jQuery.ajax({
+            type: "POST",
+            url: img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper',
+            data: imgdata,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function(XMLHttpRequest) {
+                $(".warp_jm").html("<div class='warp_jz'><img src='../wap/img/loading.gif' style='width:24px;height:24px; margin:0 auto;display:block;position: absolute;left: 50%;top: 50%;margin: -12px 0 0 -12px'/></div>");
+            },
+            success: function(data) {
+                $(".warp_jm").empty();
+                if(data.errorcode==0){
+                    var src = data.data;
+                    $('#img' + i).attr('src', src);
+                    $('#imgsrc' + i).val('{"img":"' + src + '","demo":""}');
+                }
+            }
+        })
+    }
+
+    var submitGradeEvent=function(obj){
+        var arr={
+            "id":$(obj).attr('data-id'),
+            "checkScore":$(obj).parents('.tme_sub_wrap').find('.starsCheckBtns').find('i.on').length
+        };
+
+        console.log(arr)
+
+        if(arr.checkScore<0){
+            layer.open({
+                content: '请选择评分'
+                ,skin: 'msg'
+                ,time: 1
+            });
+            return false
+        }
+
+        layer.open({
+            title:'提示',
+            content: '确定提交？'
+            ,btn: ['确定', '取消']
+            ,yes: function(index){
+                layer.closeAll();
+                $.ajax({
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type: 'post',
+                    url: base_url + "html5/v1/newTask/submitCheck",
+                    data: JSON.stringify(arr),
+                    dataType: 'json',
+                    headers: {'token': token},
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        if (data.code == 0) {
+                            layer.open({
+                                content: "提交成功"
+                                ,skin: 'msg'
+                                ,time: 1
+                            });
+                            setTimeout(function(){
+                                window.location.reload()
+                            });
+
+                        }else{
+                            layer.open({
+                                content: data.msg
+                                ,skin: 'msg'
+                                ,time: 1
+                            });
+                        }
+                    },
+                    error:function(e){
+                        layer.open({
+                            content: '提交失败'
+                            ,skin: 'msg'
+                            ,time: 1
+                        });
+                    }
+                })
+            }
+        });
+
+    };
+
+    var dataJson = {};
+    function submitListBySubCode(pageNumber, pageSize){
+        $(".tme_sub_wrap_box").empty();
+        $('#tme_sub_wrap_box').dropload({
+            scrollArea: window,
+            loadDownFn: function (me) {
+                $(".dropload-down").remove();
+                pageNumber++;
+                if ($("#searchValue").val()) {
+                    dataJson.searchValue = $("#searchValue").val();
+                }else {
+                    dataJson.searchValue=''
+                }
+                dataJson.state = 10;
+                dataJson.pageNumber = pageNumber;
+                dataJson.pageSize = pageSize;
+                $.ajax({
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type: 'post',
+                    url: base_url + "html5/v1/newTask/submitListBySubCode",
+                    data: JSON.stringify(dataJson),
+                    dataType: 'json',
+                    headers: {'token': token},
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        if (data.code == 0) {
+                            var data_index = data.data.records;
+                            var html = "";
+                            if(data_index.length>0) {
+                                $.each(data_index, function (k, val) {
+
+                                    var subCode=val.subCode;
+                                    var ticket=val.ticket;
+                                    var id=val.id;
+                                    var nickName=val.nickName;
+                                    var headImg=val.headImg;
+                                    var createTime=val.createTime;
+                                    var content=val.content;
+                                    var adminCommentScore=val.adminCommentScore;
+                                    var checkScore=0;
+                                    var img=val.img;
+                                    var times=val.times;
+                                    if(headImg==''){
+                                        headImg='../wap/img/bp_1.jpg'
+                                    }
+                                    var span='<span class="starsCheckBtns">';
+                                    if(checkScore>0){
+                                        var index=parseInt(checkScore);
+                                        for(var i=0; i<index;i++){
+                                            span+='<i class="on"></i>'
+                                        }
+                                        if(index<5){
+                                            for(var i=0; i<(5-index);i++){
+                                                span+='<i></i>'
+                                            }
+                                        }
+                                    }else {
+                                        for(var i=0; i<5;i++){
+                                            span+='<i></i>'
+                                        }
+                                    }
+                                    span+="</span>";
+
+                                    var temImg='';
+                                    if(img!==''){
+                                        imgs=img.split(';');
+                                        for(var j=0;j<imgs.length;j++){
+                                            if(imgs[j]!==''){
+                                                temImg+=' <div class="temImg" style="background-image:url(\''+imgs[j].replace(/\"/,'')+'\')"></div>'
+                                            }
+
+                                        }
+                                    }
+                                    var submitGradeArr={
+                                        "id":id
+                                    };
+
+                                    html+='<div class="tme_sub_wrap">\n' +
+                                        '            <div class="tmeSubUser clearfix">\n' +
+                                        '                <div class="tme_sub_user" style="background-image:url(\''+headImg+'\')"></div>\n' +
+                                        '                <div class="tme_sub_name">'+nickName+'</div>\n' +
+                                        '            </div>\n' +
+                                        '            <div class="tmeSubTimes">\n' +
+                                        '                <strong>提交任务时间： </strong>\n' +
+                                        '                <span>'+createTime+'</span>\n' +
+                                        '            </div>\n' +
+                                        '            <div class="tmeSubText">\n' +
+                                        content +
+                                        '            </div>\n' +
+                                        '            <div class="tme_imgs_wrap clearfix" style="padding:.1rem 0;">\n' +
+                                        '                <div class="tme_imgs">\n' +
+                                        temImg+
+                                        '                </div>\n' +
+                                        '            </div>\n' +
+                                        '            <div class="clearfix">\n' +
+                                        '                <div class="tme_evaluate_list">\n' +
+                                        '                    <strong>任务达成度</strong>\n' +
+                                        span+
+                                        '                </div>\n' +
+                                        '            </div>\n' +
+                                        '\n' +
+                                        '            <div class="tme_sub_btn" data-id="'+val.id+'" onclick="submitGradeEvent(this)"><button>确认提交</button></div>\n' +
+                                        '        </div>'
+
+                                });
+                                $(".tme_sub_wrap_box").append(html);
+                                me.resetload();
+                            }else{
+                                $(".noneLi").hide();
+                                $(".tme_sub_wrap_box").append(
+                                    "<div class='noneLi'>\
+                                        <a href='javascript:void(0)'>\
+                                            <h3 style='text-align: center;line-height:.7rem;'>已经没有更多啦。。。</h3>\
+                                        </a>\
+                                    </div>");
+                                me.lock();
+                                me.noData();//无数据重置
+                                me.resetload();
+                            }
+                        }else{
+                            layer.open({
+                                content: resp.msg
+                                ,skin: 'msg'
+                                ,time: 1
+                            });
+                            me.lock();
+                            me.noData();
+                        }
+                    },
+                    error:function(e){
+                        layer.open({
+                            content: '获取失败'
+                            ,skin: 'msg'
+                            ,time: 1
+                        });
+                        me.lock();
+                        me.noData();//无数据重置
+                        me.resetload();
+                    }
+                })
+            }
+        })
+    }
+    $(function(){
+        var subCode=$.getUrlParam('subCode');
+        if(subCode!==''||subCode!=='undefined'){
+            dataJson.subCode = subCode;
+            submitListBySubCode(0,20)
+        }else {
+            layer.open({
+                content: 'subCode为空'
+                ,skin: 'msg'
+                ,time: 1
+            });
+            setTimeout(function(){
+                window.history.back()
+            },1000)
+
+        }
+
+        $(".tem_searchBtn").click(function(){
+            submitListBySubCode(0,20)
+        });
+
+        $(".starsCheckBtns i").live("click",function(){
+            var index=$(this).index();
+            $(this).parents('.starsCheckBtns').find('i').removeClass('on');
+            for(var i=0;i<=index;i++){
+                $(this).parents('.starsCheckBtns').find('i').eq(i).addClass('on')
+            }
+        })
+        // var searchValue=$("#searchValue").val();
+        // var pageNumber=1;
+        // var pageSize=20;
+        // var arr={
+        //     "subCode":subCode,
+        //     "pageNumber":pageNumber,
+        //     "pageSize":pageSize
+        // };
+        // $.ajax({
+        //     xhrFields: {
+        //         withCredentials: true
+        //     },
+        //     type: "post",
+        //     url: base_url + "html5/v1/newTask/submitListBySubCode",
+        //     data: JSON.stringify(arr),
+        //     dataType: 'json',
+        //     headers: {'token': token},
+        //     contentType: "application/json;charset=utf-8",
+        //     success: function (data) {
+        //         if (data.code == 0) {
+        //             var data1 = data.data;
+        //         }
+        //     }
+        // })
+    })
+</script>
+</body>
+</html>

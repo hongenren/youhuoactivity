@@ -1,0 +1,164 @@
+
+.personalCardWrap{
+    display:none;
+    /*padding:.2rem 0;*/
+}
+/*.personalCardWrap img{*/
+    /*width:94%;*/
+    /*height:auto;*/
+    /*margin:3%;*/
+/*}*/
+/*pasterPhoto*/
+.subPhotoWrap{
+    padding:.1rem .3rem;
+}
+.subPhoto{
+    height:3.7rem;
+    border-radius:8px;
+    border:1px solid #eee;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    position:relative;
+}
+.subPhotoFont{
+    position:absolute;
+    padding:.1rem;
+    text-align:center;
+}
+.subPhotoFont span{
+    -webkit-text-size-adjust: 100%;
+    font-size: 0.18rem;
+    font-weight: 500;
+    color: #231815;
+    font-family: "黑体"
+}
+.subPhotoName{
+    top: 1.530rem;
+    left: 0.40rem;
+}
+.subPhotoSex{
+    top: 1.8853rem;
+    left: 0.40rem;
+}
+.subPhotoBirthday{
+    top: 1.8893rem;
+    left: 1.755rem
+}
+.subPhotoCode{
+    top: 2.220rem;
+    left: 1.07rem;
+}
+.subPhotoValidityPeriod{
+    top: 2.525rem;
+    left: 1.07rem;
+}
+.subPhotoQrCode{
+    top: 2.335rem;
+    left: 0.315rem
+}
+.qrCode, #qrcodeImg{
+    width: 0.6rem;
+    height: 0.6rem;
+}
+.subPhotoTime strong,.subPhotoTime span{
+    display:inline-block;
+    vertical-align:middle;
+    line-height:.4rem;
+    text-shadow:0 0 5px rgba(255,255,255,.6);
+}
+.subPhotoTime strong{
+    color:#000;
+    padding-right:.1rem;
+}
+.subPhotoTime span.red{
+    color:#f07730;
+    text-shadow:0 0 5px rgba(0,0,0,.9);
+}
+
+
+.personalLevel .commendTogBase a{
+    padding:.2rem 0;
+}
+.personalLevel .commendTogIcon{
+    /*margin-bottom:.05rem;*/
+}
+.personalLevel .commendTogTxt{
+    font-weight:bold;
+    color:#000;
+    line-height:.4rem;
+}
+.commendTogTime{
+    line-height:.4rem;
+    text-align:center;
+}
+.commendTogStar{
+    text-align:center;
+    height:.4rem;
+}
+.commendTogStar i{
+    display:inline-block;
+    width:.34rem;
+    height:.34rem;
+    background:url("../../wap/img/pws_53.png") no-repeat center;
+    background-size:contain;
+    margin:0 .03rem;
+}
+.personalHonorWrap{
+    background-color:#fff;
+    margin-top:.2rem;
+    padding-bottom:.3rem;
+}
+.personalHonorWrap h3{
+    font-size:.24rem;
+    font-weight:bold;
+    color:#000;
+    line-height:.7rem;
+    padding:0 .2rem;
+}
+.personalHonorListWrap{
+    padding:.1rem .3rem;
+}
+.personalHonorList{
+    position:relative;
+    padding:0 .2rem .3rem;
+    border-left:1px solid #72b81e;
+}
+.personalHonorList .base{
+    /*padding:0 .2rem;*/
+}
+.personalHonorList .personalHonorTime{
+    line-height:1;
+}
+.personalHonorList .personalHonorTitle{
+    font-size:.3rem;
+    font-weight:bold;
+    color:#f07730;
+    padding:.2rem 0 0;
+}
+.personalHonorList .personalHonorContent{
+    margin:.2rem 0 0;
+    padding:.1rem .2rem;
+    color:#999;
+    background-color:#f3f3f3;
+}
+.personalHonorImg{
+    margin-top:.2rem;
+}
+.personalHonorImg img{
+    width:100%;
+    height:auto;
+}
+.personalHonorNum,.personalHonorUnit{
+    line-height:.4rem;
+    padding-left:.1rem;
+}
+.personalHonorIcon{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background-color:#72b81e;
+    position:absolute;
+    left:-6px;
+    top:0;
+}

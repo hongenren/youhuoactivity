@@ -1,0 +1,25 @@
+.explainName{
+    color:#999;
+    padding:.2rem .2rem 0;
+}
+.explainCont{
+    color:#000;
+    padding:.1rem .2rem .2rem;
+}
+.explainTextarea{
+    border-top:1px solid #eee;
+    border-bottom:1px solid #eee;
+}
+.explainTextarea textarea{
+    display:inline-block;
+    width:100%;
+    min-height:2rem;
+    padding:.1rem;
+}
+.contentSize{
+    padding:.1rem;
+    text-align:right;
+}
+.sendButText{
+    width:100%;
+}

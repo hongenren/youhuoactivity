@@ -1,0 +1,30 @@
+.button-div input, .button-div a{
+    float: right;
+    border-radius: 50px;
+    padding: 3px 6px;
+    margin: 0px 5px;
+}
+
+.serviceTimeDiv{
+    position:relative;
+    margin: 0px 3%;
+    height: 50px;
+    border-top: 1px solid #E6E6E6;
+    border-bottom: 1px solid #E6E6E6;
+}
+.serviceTimeDiv div{
+    float: left;
+    line-height: 50px;
+}
+.serviceTimeDivTitle{
+    font-size: 16px;
+    font-weight: bold;
+}
+ .serviceTimeDivContent{
+
+ }
+
+.serviceTimeDivContent input{
+    height: 50px;
+    text-align: center;
+}

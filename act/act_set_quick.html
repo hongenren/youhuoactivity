@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/cc_dh_p.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/calendar_dan.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/honeySwitch.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>    
+    <script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+    <script type="text/javascript" src="../wap/js/modernizr.custom.17475.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+    <script type="text/javascript" src="../wap/js/honeySwitch.js"></script>
+    <script type="text/javascript" src="../wap/js/more.js"></script>
+    <script type="text/javascript" src="../wap/js/act/act.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    
+</head>
+
+<body style="background: #F2F2F2">
+<!--头部开始-->
+<div class="warp_zy_j">
+    <a href="javascript:history.go(-1);"></a>
+	<span>公益上海</span>
+</div>
+<div class="warp_pws_b" style="margin-top: 0px;">
+    <div style="overflow: hidden;padding: 0 3%;background: #F2F2F2;">
+        <h2 style="padding-left: 0px;border: 0;">活动基础信息<i>（场次信息不可修改）</i></h2>
+    </div>
+</div>
+<!--头部结束-->
+<form id='form1'>
+<div class="warp">
+    <div class="warp_pws_b_sp"style="margin-top: 0px;padding-bottom: 0px;">
+        <div class="warp_pws_b_so">
+            <b id="showTitle"></b>
+            <!-- <a href="javascript:void(0)" id="showUrl">修改</a> -->
+        </div>
+        <span id="showDate"></span>
+    </div>
+    <ul class="warp_pws_c warp_pws_b">
+        <div style="overflow: hidden;padding: 2% 4%;;border-bottom: 1px solid #E6E6E6;background: #FFD46C;">
+            <span style="font-size: 13px;color: #D07500;line-height: 16px;padding: 0 0 0 20px;background: url(../wap/img/pws_210.png) no-repeat left center;background-size:13px;">请设置活动相关的岗位、管理员工作证、公众门票</span>
+        </div>
+        <div style="overflow: hidden;padding: 0 3%;border-bottom: 1px solid #E6E6E6;background: #F2F2F2;">
+            <h2 style="padding-left: 0px;border: 0;line-height: 50px;">志愿服务岗位招募<i>（按民政部标准记录志愿服务时长）</i></h2>
+        </div>
+        <li style="border-bottom: 1px solid #bbbbbb;">
+            <div class="warp_pws_c_sp">
+                <b style="padding-left: 0px;"><i>*</i>报名开始时间</b>
+                <input class='demo_time' id="applyBeginTime" type="text" readonly="true" name="applyBeginTime" placeholder="请选择报名开始时间" value="" style="text-align: right;float: right;margin: 0px;width: auto;"/>
+            </div>
+        </li>
+        <li style="border-bottom: 1px solid #bbbbbb;">
+            <div class="warp_pws_c_sp">
+                <b style="padding-left: 0px;"><i>*</i>报名结束时间</b>
+                <input class='demo_time' id="applyEndTime" type="text" readonly="true" name="applyEndTime" placeholder="请选择报名结束时间" value="" style="text-align: right;float: right;margin: 0px;width: auto;"/>
+            </div>
+        </li>
+        <li style="border-bottom: 1px solid #bbbbbb;">
+            <div class="warp_pws_c_sp">
+                <b><i>*</i>招募人数</b>
+                <input type="text" name="recruit_total" class="spinnerExample"/>
+            </div>
+            <input type="text" placeholder="每场次所需志愿者人数，支持点击或手动输入" readonly="true" class="warp_pws_c_so">
+        </li>
+        <li style="border-bottom: 1px solid #bbbbbb;">
+            <h2 style="margin-top: 0px;border-bottom: 0px;padding-left: 0px;">仅限本机构成员</h2>
+            <div class="common-row">
+                <div class="cell-right"><span class="switch-off"></span></div>
+                <input type="hidden" name="recruit_self" value="20">
+            </div>
+        </li>
+        <li style="padding-bottom: 0px;">
+            <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                <b><!-- <i>*</i> -->赠送每人积分</b>
+                <input type="text" name="recruit_inIntegral" class="spinnerExample"/>
+            </div>
+        </li>
+        <li style="padding-top: 0px;">
+            <div class="warp_pws_c_si">
+                <span>剩余积分：<i style="font-style: normal">0</i></span>
+                <b>完成签到，系统自动发放</b>
+            </div>
+        </li>
+    </ul>
+
+    <ul class="warp_pws_c warp_pws_b">
+        <div style="overflow: hidden;padding: 0 3%;border-bottom: 1px solid #E6E6E6;background: #F2F2F2;">
+            <h2 style="padding-left: 0px;border: 0;line-height: 50px;">管理员工作证发放<i>（管理人员）</i></h2>
+        </div>
+        <li style="border-bottom: 1px solid #bbbbbb;">
+            <a href="javascript:void(0)" onclick="add_person()" class="warp_pws_c_rs" style="width: 100%;background: none;text-align: center;margin-top: 0px;padding: 0px;border: 1px solid #72B81E;padding-top: 2%;padding-bottom: 2%;color: #000000">
+                点击添加</a>
+        </li>
+        <li class="warp_sh_u_lm" id="per_old" style="border-bottom: 1px solid #bbbbbb;">
+                    
+                    
+        </li>
+        <li style="padding-bottom: 0px;">
+            <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                <b><!-- <i>*</i> -->赠送每人积分</b>
+                <input type="text" name="manage_inIntegral" class="spinnerExample"/>
+            </div>
+        </li>
+        <li style="padding-top: 0px;">
+            <div class="warp_pws_c_si">
+                <span>剩余积分：<i style="font-style: normal">0</i></span>
+                <b>完成签到，系统自动发放</b>
+            </div>
+        </li>
+    </ul>
+
+    <ul class="warp_pws_c warp_pws_b">
+        <div style="overflow: hidden;padding: 0 3%;border-bottom: 1px solid #E6E6E6;background: #F2F2F2;">
+            <h2 style="padding-left: 0px;border: 0;line-height: 50px;">公众门票<i>（普通参与者）</i></h2>
+        </div>
+        <li style="border-bottom: 1px solid #bbbbbb;">
+            <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                <b><!-- <i>*</i> -->数量</b>
+                <input type="text" name="public_total" class="spinnerExample"/>
+            </div>
+        </li>
+        
+        <li style="padding-bottom: 0px;">
+            <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                <b><!-- <i>*</i> -->赠送每人积分</b>
+                <input type="text" name="public_inIntegral" class="spinnerExample"/>
+            </div>
+        </li>
+        <li style="padding-top: 0px;">
+            <div class="warp_pws_c_si">
+                <span>剩余积分：<i style="font-style: normal">0</i></span>
+                <b>完成签到，系统自动发放</b>
+            </div>
+        </li>
+    </ul>
+
+    <div class="ht60"></div>
+    <input type="button" value="发布活动" onclick="quick_sub()" class="warp_pws_b_su">
+</div>
+</form>
+<div class="member_list">
+   
+</div>
+<script type="text/javascript">
+    $('.spinnerExample').spinner({});
+</script>
+<script type="text/javascript">
+    $(function(){
+        pushHistory();
+        window.addEventListener("popstate", function(e) {
+            layer.open({
+                content: '活动未发布完成，您确定要返回吗？'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    window.history.go(-1);
+                    //$(location).attr('href', "./act_base_add_quick.html");
+                }
+                , no: function (index) {
+                    e.preventDefault();
+                    pushHistory();
+                }
+            })
+        }, false);
+        function pushHistory() {
+            var state = {
+                title: "title",
+                url: "#"
+            };
+            window.history.pushState(state, "title", "#");
+        }
+    });
+    $('.cell-right').click(function(){
+        var tre = $(this).find('span').hasClass('switch-on');
+        var type = tre?10:20;
+        $(this).next('input').val(type);
+    })
+    function remove_per(obj){
+        $(obj).parent().remove();
+    }
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    var currYear = (new Date()).getFullYear();
+    $('.demo_time').mobiscroll().datetime({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        timeWheels: 'HHii',//HH:24小时制；hh:12小时制
+        dateFormat:"yy-mm-dd",
+        timeFormat: 'HH:ii',
+        startYear: currYear,
+        endYear: currYear +30,
+        stepMinute: 1,
+        showNow: true
+    });
+</script>
+<script type="text/javascript">
+    var activityCode = $_GET['activityCode'];
+    $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/activity/queryDetail",
+            data:JSON.stringify({'activityCode':activityCode}),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                data_index = data.data;
+                if(data_index.startDay=='--'){
+                    var showDate = data_index.endDay;
+                }else{
+                    var showDate = data_index.startDay +"至"+ data_index.endDay;
+                }
+                $("#showDate").html(showDate)
+                $("#showTitle").html("<i>*</i>"+data_index.name)
+                $("#showUrl").attr("href","/managementact/act_base_edit.html?activityCode="+activityCode)
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    //快速岗位发布提交
+    function quick_sub(){
+        var ans = '1';
+        var arr = $('#form1').serializeArray();
+        var json = {};
+        var person = [];
+        var manage_name = "管理员通证";
+        var public_name = "公众门票";
+        var recruit_name = "通用岗位";
+        $.each(arr, function(){
+            json[this.name] = this.value;
+        });
+        if(json.recruit_total==0){
+            layer.open({content: '志愿服务招募人数不能为空',skin: 'msg',time: 1});
+            return false;
+        }
+        // if(json.public_total==0){
+        //     layer.open({content: '公众门票人数不能为空',skin: 'msg',time: 1});
+        //     return false;
+        // }
+        //console.log(a);return;
+
+        $("#per_old").find("input[name='mobile']").each(function(index,data){
+            var mobile = $(this).val();
+            var name = $(this).parent().find("input").val();
+            var openId = $(this).parent().find("input[name='prjvUserId']").val();
+            var headUrl = $(this).parent().find("input[name='headUrl']").val();
+            
+            var tel=/^1\d{10}$/;
+            
+            if(!tel.test(mobile)){
+                layer.open({
+                    content: '手机号码有误'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                ans = '2';
+                return false;
+            }  
+            if(mobile=='' || name==''){
+                layer.open({
+                    content: '人员信息不全'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                ans = '2';
+                return false;
+            }else{
+                person.push({"mobile":mobile,'nickName':name,'openId':openId});
+            }
+        })
+        // if(person == ''){
+        //     layer.open({
+        //         content: '请添加人员信息'
+        //         ,skin: 'msg'
+        //         ,time: 1 //2秒后自动关闭
+        //     });
+            
+        //     return false;
+        // }
+        if(ans == 2){
+            return false;
+        }
+        var applyBeginTime = json.applyBeginTime, applyEndTime = json.applyEndTime;
+        if(applyBeginTime){
+            applyBeginTime = json.applyBeginTime+':00';
+        }else{
+            layer.open({content: '报名开始时间不能为空',skin: 'msg',time: 1});
+            return false;
+        }
+        if(applyEndTime){
+            applyEndTime = json.applyEndTime+':00';
+        }else{
+            layer.open({content: '报名结束时间不能为空',skin: 'msg',time: 1});
+            return false;
+        }
+        var data_json = {
+            "activityCode":actMsg.activityCode,
+            "address":actMsg.address,
+            "contactPhone":actMsg.contactPhone,
+            "coverImg":actMsg.coverImg,
+            "lat":actMsg.lat,
+            "lng":actMsg.lng,
+            "orgCode":actMsg.orgCode,
+            "manageWebParam":{
+                "inIntegral":json.manage_inIntegral,
+                "name":manage_name,
+                "userList":person
+            },
+            "publicWebParam":{
+                "inIntegral":json.public_inIntegral,
+                "name":public_name,
+                "total":json.public_total
+
+            },
+            "recruitParam":{
+                "inIntegral": json.recruit_inIntegral,
+                "name": recruit_name,
+                "applyBeginTime": applyBeginTime,
+                "applyEndTime": applyEndTime,
+                "self": json.recruit_self,
+                "total": json.recruit_total
+            },
+            "user":prjvorgMsg.prjvUserId
+        }
+        $.ajax({
+            type:"post",
+            url: base_url + "html5/v1/activity/quickPublish",
+            data:JSON.stringify(data_json),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            beforeSend:function(){
+                layer.open({type: 2,content: '提交中'});
+            },
+            success:function(data){
+                if(data.code==0){
+                    layer.open({
+                        content: '提交成功'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    if($.cookie('date_list')){
+                        localStorage.clear();
+                            
+                        $.cookie('date_list',null);
+                    }
+                    setTimeout(function(){layer.closeAll();window.location.href ='../org/institutions.html'},1000);
+                }else{
+                    layer.closeAll();
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return;
+                }
+                
+            },
+            error:function(e){
+                layer.closeAll();
+                layer.open({
+                    content: '网络错误'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                setTimeout(function(){layer.closeAll();},1000);
+                return false;
+            }
+        })
+    }
+</script>
+</body>
+
+</html>

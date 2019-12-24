@@ -1,0 +1,75 @@
+.divideList{
+    border-bottom:1px solid #eee;
+    padding:.14rem .2rem;
+    padding-right:.6rem;
+    position:relative;
+}
+.divideList.on{
+    opacity:.6;
+}
+.divideList h2{
+    font-size:.32rem;
+    font-weight:bold;
+    color:#000;
+    padding-bottom:.1rem;
+}
+.divideType span{
+    display:inline-block;
+    padding:0 .14rem;
+    font-size:.24rem;
+    border-radius:4px;
+    border:1px solid #ddd;
+}
+.divideMap{
+    padding-left:.4rem;
+    padding-top:.1rem;
+    padding-bottom:.1rem;
+    position:relative;
+    line-height:.4rem;
+}
+.divideMap i{
+    display:inline-block;
+    width:.4rem;
+    height:.4rem;
+    position:absolute;
+    left:0;
+    top:50%;
+    margin-top:-.2rem;
+    background:url("../images/map.png") no-repeat left center;
+    background-size:auto 70%;
+}
+.divideAdmin{
+    padding:.1rem 0;
+}
+.divideAdmin strong,.divideAdmin span{
+    display:inline-block;
+    vertical-align:middle;
+}
+.divideAdmin strong{
+    padding-right:.1rem;
+}
+.divideButton{
+    position:absolute;
+    right:.2rem;
+    top:50%;
+    width:.4rem;
+    height:.4rem;
+    border:1px solid #ddd;
+    border-radius:50%;
+    margin-top:-.2rem;
+}
+.divideButton.on{
+    background:url("../images/near.png") no-repeat center;
+    background-size:contain;
+    border:0;
+}
+.divideText{
+    position:absolute;
+    right:.2rem;
+    top:50%;
+    height:.4rem;
+    margin-top:-.2rem;
+    line-height:.4rem;
+}
+.divideText.o{color:#f07730}
+.divideText.g{color:#72b81e}

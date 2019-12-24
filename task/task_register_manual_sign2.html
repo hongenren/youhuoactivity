@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>补登</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/cc_dh_o.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="css/mobiscroll.custom-3.0.0-beta6.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/honeySwitch.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <style type="text/css">
+        .demo_time{float: right;margin: 0;width:200px;text-align: center}
+        .my_tp{width: 100%;height: 100%;position: fixed;left: 100%;top: 0;background: #FFFFFF;z-index: 9999;overflow-y: auto}
+        .my_tp .warp_pws_m_sw{left: 100%}
+        .warp_dp{height: 20px;line-height: 20px;overflow: hidden;float: right;color: #999999;font-size: 16px;background: url(../wap/img/pws_102.png) no-repeat right center;background-size: 8px 14px;padding-right: 14px;}
+        .warp_dp input{float: right;text-align: right;color: #999999;width: 80px;height: 20px;line-height: 18px;border: 0;margin-top: 0;}
+        .warp_dp u{display: block;float: right;text-decoration:none}
+        .warp_dp{display: block;}
+        .warp_dp i{font-style: normal}
+        .warp_do{width: 100%;overflow: hidden;border: 0; font-size: 15px;padding: 4% 0;}
+        .warp_do u{display: block;line-height: 24px;color: #999999;text-decoration:none}
+        .content{display: flex; justify-content: center; align-items: center;}
+        .content img {width: 70px;border-radius: 100px;}
+        .trms_tips{font-size:.24rem;color:#999;line-height:.4rem;}
+        .userListWrap{
+            overflow:hidden;
+        }
+        .userList:after{clear:both; display:block; height:0; visibility:hidden; line-height:0; content:'\20';}
+        .userList strong{
+            display:inline-block;
+            min-width:20%;
+            max-width:50%;
+            float:left;
+            font-size:14px;
+        }
+        .userList span{
+            display:inline-block;
+            margin-left:2%;
+            font-size:14px;
+            float:left;
+        }
+        .warp_pws_c{
+            background-color:transparent;
+            margin-top:0;
+        }
+        .warp_pws_c li{
+            padding:0;
+            border:0;
+        }
+        .warp_pws_c_sp{
+            background-color:#fff;
+            margin-top:0;
+            padding:.1rem .2rem;
+            margin:0;
+        }
+        .warp_pws_c_sp b{
+            font-weight:normal;
+            line-height:.44rem;
+        }
+        .content{
+            display:block;
+            text-align:left;
+            padding:.2rem .2rem;
+            color:#999;
+            font-size:.15rem;
+            font-weight:normal;
+        }
+        .spinner{
+            margin-top:.07rem;
+        }
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<!--头部开始-->
+<div class="warp_zy_j">
+    <a href="javascript:history.go(-1);"></a>
+    <span class="trms_title">未报名补登</span>
+</div>
+<!--头部结束-->
+<div class="warp" style="padding-bottom: 100px;">
+    <div class="tmc_warning">志愿者服务时长将记录来源，发现虚假记录，将被记录于个人信用系统，请谨慎操作</div>
+    <ul class="warp_pws_c">
+        <li>
+            <div class="content">
+                <b class="nickName">请核对补登信息</b>
+            </div>
+            <div class="warp_pws_c_sp">
+                <div class="clearfix">
+                    <b class="shuju" style="font-size: 14px"></b>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="content">
+                <b class="nickName" style="margin-top:20px;">请核对需要补登的人员信息</b>
+            </div>
+            <div class="warp_pws_c_sp">
+                <div>
+                    <div class="userListWrap">
+                        <!--<div class="userList"><strong>张三</strong><span>18221222122</span></div>-->
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="content">
+                <b class="nickName" style="display:inline-block;width:100%;font-size:.3rem;color:#000;font-weight:bold;margin-top:.5rem;text-align:center;">补登时长</b>
+            </div>
+            <div class="warp_pws_c_sp" style="width:50%;height:.5rem;margin:0 auto;">
+
+                <input id="input2" type="text" value="3小时" name="times" style="display:inline-block;width:100%;height:.5rem;text-align:center;line-height:.5rem;font-size:.24rem;color:#f03727;">
+                <!--<input type="text" name="times" class="spinnerExample" data-time="0" readonly="readonly" unselectable="on" onfocus="this.blur();" onchange="update()"/><br /><br />-->
+
+                <!--<p class="trms_tips">默认显示最大时长，点击可修改</p>-->
+            </div>
+            <b style="display:inline-block;width:100%;font-size:14px;text-align:center;color:#999;margin-top:.2rem;">默认显示最大时长，点击可修改</b>
+        </li>
+    </ul>
+    <footer class="warp_pws_m_sw">
+        <ul class="warp_pws_hd">
+            <li style="display:block;width:auto;clear:both;float:none;">
+                <input type="button" class="addUploadBtn" value="确认补登">
+            </li>
+        </ul>
+    </footer>
+    <div id="loading"></div>
+</div>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="js/mobiscroll.custom-3.0.0-beta6.min.js"></script>
+
+<script type="text/javascript">
+    //时间
+    var timeEvent=function(num){
+        if(num!==null&&parseInt(num)>0){
+            var fromValues = [],
+                toValues = ['00','30'];
+            for(var i=0;i<parseInt(num);i++){
+                fromValues.push(i+1)
+            }
+
+            $('#input2').mobiscroll().scroller({
+                display: 'bottom',
+                theme: 'mobiscroll',
+                lang: "zh",
+                rows: 7,
+                wheels: [
+                    [{
+                        circular: false,
+                        data: fromValues,
+                        label: '时'
+                    }
+                        // , {
+                        //     circular: false,
+                        //     data: toValues,
+                        //     label: '分'
+                        // }
+                    ]
+                ],
+                showLabel: true,
+                minWidth: 130,
+                onSet: function (event, inst) {
+                    console.log(event)
+                    console.log(inst)
+                    $(".warp_zy_h_List li").each(function(){
+                        if($(this).hasClass('on')){
+                            $(this).find(".trac_times").text(event.valueText)
+                        }
+                    })
+                    // Your custom event handler goes here
+                },
+                formatValue: function (data) {
+                    return data[0] + '小时';
+                }
+            });
+        }
+
+    };
+
+
+    $(function(){
+
+        var type=$.getUrlParam('type');
+        if(type==3){
+            $(".trms_title").text('未发任务补登')
+        }else if(type==2){
+            $(".trms_title").text('已报名任务补登')
+        }
+
+        if($.cookie("postfile")){
+            var postfile=$.cookie("postfile");
+            var str=JSON.parse(decodeURI(postfile));
+
+            if(type==3||type==1){
+                str.name=decodeURI(str.name)
+            }
+            console.log(str)
+
+            if(str.beginTime){
+                str.beginTime=str.beginTime
+            }
+            if(str.endTime){
+                str.endTime=str.endTime
+            }
+
+            $('.shuju').html("任务名称："+str.name+"<br />开始时间："+(str.beginTime.replace(/\-/g,'/')).substring(0,str.beginTime.indexOf(':')+3)+"<br />结束时间："+(str.endTime.replace(/\-/g,'/')).substring(0,str.endTime.indexOf(':')+3));
+            if(str.userList.length>0){
+                var userList=str.userList;
+                var li='';
+                $.each(userList,function(index,item){
+                    li+='<div class="userList"><strong>'+item.nickName+'</strong><span>'+item.mobile+'</span></div>'
+                });
+                $(".userListWrap").html(li)
+            }
+
+            console.log(type)
+            // if(type==3){
+            //     $("input[name='times']").attr('data-maxlength',10).attr('data-time',0)
+            // }else if(str.serviceTime!==''){
+            //     $("input[name='times']").attr('data-maxlength',parseInt(str.serviceTime==''?1:str.serviceTime)).attr('data-time',parseInt(str.serviceTime))
+            // }
+            var nums=str.serviceTime==''?3:str.serviceTime;
+            $("input[name='times']").attr('data-maxlength',parseInt(str.serviceTime==''?3:str.serviceTime)).val(nums+'小时');
+            timeEvent(parseInt(nums));
+            // $('.spinnerExample').spinner({});
+
+            var serviceTime=parseInt(str.serviceTime);
+            console.log(serviceTime)
+
+            $(".addUploadBtn").click(function(){
+                layer.open({
+                    content: '请确认补登成员信息和补登服务时长'
+                    , btn: ['确定', '取消']
+                    , yes: function (index) {
+                        if(type==3){
+                            var times = parseInt($("input[name='times']").val());
+                            str.serviceTime=timeTransformToMinute(times);
+                            $.ajax({
+                                url: base_url + 'html5/v1/newTask/manualAddTask',
+                                //url: '/cm/termapi/geArticletListByMy',
+                                type: "post",
+                                async: false,
+                                dataType: "json",
+                                data: JSON.stringify(str),
+                                headers: {'Content-Type': 'application/json', 'token': $.cookie("token")},
+                                success: function (resp) {
+                                    if (resp.code == 0) {
+                                        layer.open({
+                                            content: '补登成功'
+                                            , skin: 'msg'
+                                            , time: 1 //2秒后自动关闭
+                                        });
+                                        setTimeout(function () {
+                                            // window.location.href='task_register.html'
+                                        }, 1000);
+                                    } else {
+                                        layer.open({
+                                            content: '补登失败'
+                                            , skin: 'msg'
+                                            , time: 1 //2秒后自动关闭
+                                        });
+                                    }
+                                }
+                            })
+                        }else if(type==1){
+                            var url='';
+                            if(type==1){
+                                url='html5/v1/newTask/batchManualAddApply'
+                            }else if(type==2){
+                                url='html5/v1/newTask/batchManualChange'
+                            }
+                            var times = $('.spinnerExample').val();
+                            var json = {};
+                            json.subCode = $.getUrlParam('subCode');
+                            json.times = times;
+                            json.userList = str.userList;
+                            console.log(json,1)
+                            $.ajax({
+                                url: base_url + url,
+                                //url: '/cm/termapi/geArticletListByMy',
+                                type: "post",
+                                async: false,
+                                dataType: "json",
+                                data: JSON.stringify(json),
+                                headers: {'Content-Type': 'application/json', 'token': $.cookie("token")},
+                                success: function (resp) {
+                                    if (resp.code == 0) {
+                                        layer.open({
+                                            content: '补登成功'
+                                            , skin: 'msg'
+                                            , time: 1 //2秒后自动关闭
+                                        });
+                                        setTimeout(function () {
+                                            // window.location.href='task_register.html'
+                                        }, 1000);
+                                    } else {
+                                        layer.open({
+                                            content: '补登失败'
+                                            , skin: 'msg'
+                                            , time: 1 //2秒后自动关闭
+                                        });
+                                    }
+                                }
+                            })
+                        }
+
+                    }
+                })
+            })
+
+        }
+    });
+
+
+    // var ticketCode = $.getUrlParam("ticketCode");
+    // var userCode = $.getUrlParam("userCode");
+    //
+    // var nickName = decodeURI($.getUrlParam("nickName"));
+    // var headImg = $.getUrlParam("headImg");
+    // var recruitName = decodeURI($.getUrlParam("recruitName"));//岗位名称
+    // var arriveTime = $.getUrlParam("arriveTime");//报到时间
+    // var times = $.getUrlParam("times");//服务时长
+    // var checkInTime = $.getUrlParam("checkInTime");//签到时间
+    // var checkOutTime = $.getUrlParam("checkOutTime");//签出时间
+    // window.onload=function(){
+    //     // $('.nickName').html(nickName);
+    //     $("input[name='times']").val(3);
+    //     $('.headImg').attr("src", headImg);
+    //     $('.shuju').html("岗位名称："+recruitName+"<br />报到时间："+get_date(arriveTime, 0)+"<br />服务时长："+toHourMinute(times));
+    //
+    //     if(checkInTime==null || checkInTime==""){
+    //         $('.checkInTime').html("未签到");
+    //     }else{
+    //         $('.checkInTime').html(get_date(checkInTime));
+    //     }
+    //     if(checkOutTime==null || checkOutTime==""){
+    //         $('.checkOutTime').html("未签出");
+    //     }else{
+    //         $('.checkOutTime').html(get_date(checkOutTime));
+    //     }
+    // }
+    function add(){
+        layer.open({
+            content: '请确认补登成员信息和补登服务时长'
+            , btn: ['确定', '取消']
+            , yes: function (index) {
+                var times = $('.spinnerExample').val();
+                var json = {};
+                json.ticketCode = ticketCode;
+                json.userCode = userCode;
+                json.times = times * 60;
+                json.arriveTime = arriveTime;
+                $.ajax({
+                    url: base_url + '/html5/v1/ticketSign/manualSign',
+                    //url: '/cm/termapi/geArticletListByMy',
+                    type: "post",
+                    async: false,
+                    dataType: "json",
+                    data: JSON.stringify(json),
+                    headers: {'Content-Type': 'application/json', 'token': $.cookie("token")},
+                    success: function (resp) {
+                        if (resp.code == 0) {
+                            layer.open({
+                                content: '补登成功'
+                                , skin: 'msg'
+                                , time: 1 //2秒后自动关闭
+                            });
+                            setTimeout(function () {
+                                history.back(-1)
+                            }, 1000);
+                        } else {
+                            layer.open({
+                                content: '补登失败'
+                                , skin: 'msg'
+                                , time: 1 //2秒后自动关闭
+                            });
+                        }
+                    }
+                })
+            }
+        })
+    }
+</script>
+</body>
+</html>
+

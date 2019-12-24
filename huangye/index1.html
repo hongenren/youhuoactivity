@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>黄页首页</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+    <script type="text/javascript" src="../wap/js/swiper.min.js"></script>
+    <script type="text/javascript" src="../huangye/js/offset.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/web-storage-cache.js"></script>
+    <script type="text/javascript" src="../wap/js/regular.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../huangye/js/common.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <link rel="stylesheet" href="../huangye/css/mobile.css" />
+    <link rel="stylesheet" href="../wap/css/activity_list.css" />
+    <style>
+        .selected{background-color: #72B81E;color: #FFFFFF;}
+        .no_selected{background-color: #ffffff;color: #000000;}
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <form action="javascript:return true" class="search">
+        <div class="warp_zy_j" style="position:fixed;left:0;top:0;right:0;background-color:#fff;">
+            <a href="javascript:void(0);" style="background: none;width: 0px;"></a>
+            <div class="screenButList screenBut screenButListNew" style="border-bottom: 1px solid #E6E6E6;">
+                <a href="javascript:void(0)" id="area_info_city" data-id="">
+                    按区域
+                    <i></i>
+                </a>
+            </div>
+        </div>
+        <div class="warp_lb_p" style="background-color: #72B81E; width: 100%;border-top: 1px solid #E6E6E6;">
+            <!--<a href="javascript:void(0)" class="warp_pws_i_act"></a>-->
+            <div class="mlbileWrap">
+                <div class="chylisthead" style="border-bottom: 1px solid #E6E6E6;">
+                    <div class="screenButList screenBut" style="border-right: 1px solid #D9D9D9;">
+                        <a href="javascript:void(0)" id="area_info" data-id="">
+                            区域
+                            <i></i>
+                        </a>
+                    </div>
+                    <div class="screenButList orgTypesB1" style="border-right: 1px solid #D9D9D9;">
+                        <a href="javascript:void(0)">
+                            <b class="selectBut_screen" data-id="0">单位性质</b>
+                            <i></i>
+                        </a>
+                    </div>
+                    <div class="screenButList orgTypesB2" style="border-right: 1px solid #D9D9D9;">
+                        <a href="javascript:void(0)">
+                            <b class="selectBut_screen" data-id="0">筛选</b>
+                            <i></i>
+                        </a>
+                    </div>
+                    <div class="screenButList orgTypesB3" style="">
+                        <a href="javascript:void(0)">
+                            <b class="selectBut_screen" data-id="0">排序</b>
+                            <i></i>
+                        </a>
+                    </div>
+                    <div class="screenButList screenButList1" style="float: left;font-size: 0;"><!--
+                        <a href="index.html" style="display: inline-block;background:url('../wap/img/pws_170.png') no-repeat left center;background-size:14px;padding-left: 18px">附近</a>-->
+                        <input type="search" class="search_input" id="name_input" placeholder="找组织：查找公益机构、设施"
+                               style="width: 80%;display: inline-block;margin: 0px;border-right: 1px solid #E6E6E6;border-left: 1px solid #E6E6E6;-webkit-appearance:none;border-radius:0px;">
+                        <a href="maps.html" style="display: inline-block;background:url('../wap/img/pws_242.png') no-repeat left center;background-size:20px;padding-left: 18px">地图</a>
+                    </div>
+                </div>
+                <div class="chylisthead_b" style="height: auto;"></div>
+                <div class="hylist">
+                    <ul id="list_tree">
+
+                    </ul>
+                </div>
+            </div>
+        </div><!--
+        <div style="width: 100%;height: 380px"></div>-->
+        <div id="content" class="hycon_con" style="margin-top: 150px;">
+            <ul class="warp_bp_p lists" id="info_list"></ul>
+        </div>
+    </form>
+
+    <div class="mb mb_1" style="cursor:pointer"></div>
+    <div class="mb mb_2" style="cursor:pointer"></div>
+    <div class="mb mb_3" style="cursor:pointer"></div>
+    <div class="mb mb_4" style="cursor:pointer"></div>
+    <div class="mb mb_5" style="cursor:pointer"></div>
+    <div class="hylistsxw">
+        <div class="hylistsx1 hylistsxc">
+            <div class="hylistsx_l" style="width: 100%;height:auto;">
+                <div class="screenButList screenButList1">
+                    <input type="search" class="search_input" id="city_search" placeholder="输入城市名或拼音查询" style="border-bottom: 1px solid #E6E6E6;-webkit-appearance:none;border-radius:0px;">
+                </div>
+                <ul class="warp_pws_g" style="border: 0px;margin-bottom: 0px;height: auto;padding-left: 0px;padding-right: 0.01%;" id="gps_city">
+                    <li style="line-height: normal;border: 0px;margin-bottom: 0px;background-color: #ffffff;height: auto;padding-top: 3px;padding-bottom: 3px;">
+                        <a href="javascript:void(0)" onclick="select_address('address','','310000000000','上海',0)" style="background: none;height: 0.75rem;vertical-align: middle;display: table-cell;">
+                            <b style="font-size: 0.25rem" id="GPS_city_b">上海<i style="color: #999999;">GPS定位</i></b>
+                        </a>
+                    </li>
+                    <li style="line-height: normal;border: 0px;margin-bottom: 0px;background-color: #f5f5f5;height: auto;padding-top: 3px;padding-bottom: 3px;">
+                        <a href="javascript:void(0)" style="background: none;">
+                            <b style="font-size: 10px;font-weight:bold;">热门城市</b>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="hylistsx_l" style="width: 100%;height:30%;" id="hot_city">
+                <table style="width: 100%;height:100%;text-align: center;">
+                    <tr style="height: 25%">
+                        <td class="border_right" onclick="select_address('adCode','','110000000000','北京',0)">北京</td>
+                        <td class="border_right" onclick="select_address('adCode','546507','510100000000','成都',1)">成都</td>
+                        <td onclick="select_('adCode','','500000000000','重庆',0)">重庆</td></tr>
+                    <tr style="height: 25%">
+                        <td class="border_right border_top" onclick="select_address('adCode','486062','440100000000','广州',1)">广州</td>
+                        <td class="border_right border_top" onclick="select_address('adCode','182272','330100000000','杭州',1)">杭州</td>
+                        <td class="border_top" onclick="select_address('adCode','161276','320100000000','南京',1)">南京</td></tr>
+                    <tr style="height: 25%">
+                        <td class="border_right border_top" onclick="select_address('adCode','','310000000000','上海',0)">上海</td>
+                        <td class="border_right border_top" onclick="select_address('adCode','490407','440300000000','深圳',1)">深圳</td>
+                        <td class="border_top" onclick="select_address('adCode','167598','320500000000','苏州',1)">苏州</td></tr>
+                    <tr style="height: 25%">
+                        <td class="border_right border_top" onclick="select_address('adCode','','120000000000','天津',0)">天津</td>
+                        <td class="border_right border_top" onclick="select_address('adCode','408718','420100000000','武汉',1)">武汉</td>
+                        <td class="border_top" onclick="select_address('adCode','646421','610100000000','西安',1)">西安</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="hylistsx_l" style="width: 100%;height:auto;background-color: #000000;" id="city_name">
+                <ul style="overflow:auto;">
+                    <li style="line-height: normal;border: 0px;margin-bottom: 0px;background-color: #f5f5f5;height: auto;padding-top: 3px;padding-bottom: 3px;">
+                        <a href="javascript:void(0)" style="background: none;">
+                            <b style="font-size: 10px;font-weight:bold;">省市区筛选列表</b>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="hylistsx_l" id="provinceDiv" style="width: 100%;height:50%;">
+                <ul id="province" style="overflow:auto;margin-bottom: 30px;">
+                </ul>
+            </div>
+            <div class="hylistsx_l" id="cityDiv" style="width: 100%;height:50%;">
+                <ul id="city" style="overflow:auto">
+                </ul>
+            </div>
+            <div class="hylistsx_l" style="width: 100%;height:auto">
+                <ul id="area" style="overflow:auto">
+                </ul>
+            </div>
+            <div class="hylistsx_center" style="width: 100%;height:auto;">
+                <ul id="area_c1" style="overflow:auto">
+                </ul>
+            </div>
+            <div class="hylistsx_r" style="width: 100%;height:auto;">
+                <ul id="area_1" style="overflow:auto">
+                </ul>
+            </div>
+        </div>
+    <div class="hylistsx2 hylistsxc" style="width: 100%;height: 100%;overflow:auto;padding-bottom: 200px;">
+        <div id="screening">
+            <ul class="warp_hd_t_bu markTagList" style="border-bottom: 1px solid #E6E6E6;">
+                <li><span onclick="selectedScreening('markTag',undefined,this)">全部</span></li>
+            </ul>
+            <ul class="warp_hd_t_bu orgNatureList" style="border-bottom: 1px solid #E6E6E6;">
+                <li><span onclick="selectedScreening('orgNature',undefined,this)">全部</span></li>
+            </ul>
+            <ul class="warp_hd_t_bu industryTypeList">
+                <li><span onclick="selectedScreening('industryType',undefined,this)">全部</span></li>
+            </ul>
+            <ul class="warp_hd_t_bu orgServiceTypeList">
+                <li><span onclick="selectedScreening('serviceType',undefined,this)">全部</span></li>
+            </ul>
+            <ul class="warp_hd_t_bu" style="position: fixed;bottom: 0px;">
+                <li style="width: 100%;" onclick="select_();"><span data-id="" style="width: 28%;margin-left: 33%;background-color: #72B81E;color: #ffffff">确定</span></li>
+            </ul>
+        </div>
+        <div id="sorting">
+            <ul class="warp_hd_t_bu" style="border-bottom: 1px solid #E6E6E6;">
+                <li style="width: 94%;"><span data-id="isFanCount" onclick="select_('isFanCount','',this)">智能</span></li>
+                <li style="width: 94%;"><span data-id="lnglat" onclick="select_('lnglat','',this)">距离优先</span></li>
+                <li style="width: 94%;"><span data-id="isVolHours" onclick="select_('isVolHours','',this)">累计志愿时间优先</span></li>
+                <li style="width: 94%;"><span data-id="isVolPersonCount" onclick="select_('isVolPersonCount','',this)">志愿者成员数量优先</span></li>
+            </ul>
+        </div>
+        <div id="orgTypeDiv">
+            <ul class="warp_hd_t_bu orgTypeList" style="border-bottom: 1px solid #E6E6E6;">
+                <li><span onclick="select_('orgType',undefined,this)">全部</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="allmap" style="height:0;overflow:hidden"></div>
+</body>
+<script>
+    var categorycode = $_GET['categorycode'],token = $.cookie("token"),latCurrent,lngCurrent,city;
+    window.onload=function() {
+        queryOrgClassify();
+        get_msg(0,20,categorycode);
+        $(".mb").on("click",function(){
+            $(".hylistsxc").hide();
+            $(".mb").hide();
+            $(".screenBut").removeClass("choice");
+        })
+    };
+</script>
+<script>
+    $(".orgTypesB1").live("click",function(){
+        $("#orgTypeDiv").show();
+        $("#sorting").hide();
+        $("#screening").hide();
+        var selectList = $(".hylistsx2");
+        if(selectList.is(':hidden')){
+            selectList.show();
+            $(".mb_5").show();
+        }else{
+            selectList.hide();
+            $(".mb_5").show();
+        }
+    });
+    $(".orgTypesB2").live("click",function(){
+        $("#screening").show();
+        $("#sorting").hide();
+        $("#orgTypeDiv").hide();
+        var selectList = $(".hylistsx2");
+        if(selectList.is(':hidden')){
+            selectList.show();
+            $(".mb_3").show();
+        }else{
+            selectList.hide();
+            $(".mb_3").show();
+        }
+    });
+    $(".orgTypesB3").live("click",function(){
+        $("#sorting").show();
+        $("#screening").hide();
+        $("#orgTypeDiv").hide();
+        var selectList = $(".hylistsx2");
+        if(selectList.is(':hidden')){
+            selectList.show();
+            $(".mb_3").show();
+        }else{
+            selectList.hide();
+            $(".mb_3").show();
+        }
+    });
+    $(".warp_zy_j .screenBut").live("click",function(){
+        $(".hylistsx1").css("top", "50");
+        $("#hot_city").show();
+        $("#gps_city").show();
+        $("#city_name").show();
+        $("#provinceDiv").show();
+        $("#cityDiv").hide();
+        $("#area").hide();
+        $("#area_c1").hide();
+        $("#area_1").hide();
+        var cla=$(this).attr("class")
+        if(cla.indexOf("choice") > 0){
+            $(".hylistsx1").hide();
+            $(this).removeClass("choice");
+            $(".mb_2").hide();
+        }else{
+            $(this).addClass("choice").siblings().removeClass("choice");
+            $(".hylistsx1").show().siblings().hide();
+            $(".mb_2").show();
+        }
+    })
+    $(".chylisthead .screenBut").live("click",function(){
+        $(".hylistsx1").css("top", "280");
+        $("#hot_city").hide();
+        $("#gps_city").hide();
+        $("#city_name").hide();
+        var cla=$(this).attr("class");
+        $("#provinceDiv").hide();
+        $("#cityDiv").hide();
+        $("#area").show();
+        $("#area_c1").hide();
+        $("#area_1").hide();
+        if(cla.indexOf("choice") > 0){
+            $(".hylistsx1").hide();
+            $(".mb_1").hide();
+            $(this).removeClass("choice")
+        }else{
+            $(this).addClass("choice").siblings().removeClass("choice");
+            $(".hylistsx1").show().siblings().hide();
+            $(".mb_1").show();
+        }
+    })
+    function get_msg(pageNumber,pageSize,categoryCode='FJ',me=''){
+        $('#allmap').attr('lat',31.24916171);
+        $('#allmap').attr('lng',121.48789949);
+        $('#allmap').attr('city',"上海");
+        $("#area_info_city").html('上海<i></i>');
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(116.331398,39.897445);
+        map.centerAndZoom(point,12);
+        var geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function(r){
+            if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                var mk = new BMap.Marker(r.point);
+                map.addOverlay(mk);
+                map.panTo(r.point);
+                latCurrent = r.point.lat;
+                lngCurrent = r.point.lng;
+                city = r.address.city;
+                $('#allmap').attr('lat',latCurrent);
+                $('#allmap').attr('lng',lngCurrent);
+                $('#allmap').attr('city',city);
+                $("#area_info_city").html(city+'<i></i>');
+                $("#GPS_city_b").html(city+"<i style=\"color: #999999;\">GPS定位</i>");
+            }else{
+                layer.open({
+                    content: '获取定位失败,请重试'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+            get_district_msg2(155387,1,"上海市",310000000000);
+            get_quanguo();
+            //queryIndex();
+        });
+    }
+    $("#name_input").keypress(function(e){
+        var key = $.trim($(this).val());
+        if(e.keyCode === 13) {
+            //  搜索工作
+            select_("searchContent",key);
+        }
+    })
+    $("#city_search").keypress(function(e){
+        var key = $.trim($(this).val());
+        if(e.keyCode === 13) {
+            findCity(key);
+        }
+    })/*
+    $.ajax({
+        type:"get",
+        url:news_base_url+"/cm/unitapi/getIndexList?type=2&autitFlag=2&pageNum=0&pageSize=1",
+        dataType:'json',
+        success:function(data){
+            if(data.success==1){
+                var data1 = data.data;
+                if(data1!=null){
+                    var tit = data1[0].title;
+                    if(tit.length>=15){
+                        tit = tit.substring(0, 15)+"...";
+                    }
+                    $(".warp_pws_i_act").html(
+                        '<img src="../wap/img/pws_12.jpg" class="warp_pws_i_act_ip">\
+                        <em></em>\
+                        <img src="'+data1[0].title_img+'" class="warp_pws_i_act_io">\
+                    <div class="warp_pws_i_act_ii">\
+                    <span style="white-space:pre-wrap;">'+tit+'</span>\
+                    </div>\
+                    <i>'+data1[0].news_date+'</i>');
+                    $(".warp_pws_i_act").live("click",function(){
+                        $(location).attr('href', news_base_url+'/gysh_cm_pub/article/normal/detail/'+data1[0].article_id+'.html');
+                    });
+                }
+            }
+        }
+    })*/
+</script>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>机构主页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>机构主页</span>
+        <input type="hidden" id="orgPlaceId">
+    </div>
+    <ul class="warp_pws_m_sp" style="margin-bottom: 20px;">
+    </ul>
+    <input type="button" value="申请" class="warp_pws_r_si" onclick="add(this)" style="width: 94%;margin: auto;">
+</div>
+
+<div class="warp_zy_t">
+    <div class="warp_zy_t_sp"></div>
+    <div class="warp_zy_t_so" style="overflow:auto;">
+        <div class="warp_zy_t_si">
+            <a href="javascript:void(0)"></a>
+            <span>请选择申请类型</span>
+        </div>
+        <ul class="warp_zy_t_su">
+            <li class="cla">
+                <label>
+                    <input type="checkbox" name="weeks1" value="10" checked>
+                    <span id="10">微信</span>
+                </label>
+            </li>
+        </ul>
+        <input type="button" value="确认"  class="warp_zy_t_sy">
+    </div>
+</div>
+
+<div class="warp_sm_u_sa" style="background: none;">
+    <div style="color: #6A6A6A">本功能主要为方便机构在自有微信公众号使用公益上海信息系统：<br/>
+        <b style="font-size: 18px;">机构主页地址如何部署</b><br/>
+        &nbsp;	1. 点击复制机构主页地址<br/>
+        &nbsp;	2. 打开微信公众号的管理后台，【自定义菜单】->设置【菜单名称】->【菜单内容】选择【跳转网页】->【页面地址】填写第一步复制的机构主页地址，保存并发布即可。</div>
+</div>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+
+<script type="text/javascript">
+    queryByOrgPlaceId();
+    function queryByOrgPlaceId(){
+        var orgPlaceId = $.getUrlParam("orgPlaceId");
+        var un = $.cookie("un");
+        $("#orgPlaceId").val(orgPlaceId);
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"post",
+            url:base_url + "home/queryByOrgPlaceId",
+            data:JSON.stringify({"orgPlaceId":orgPlaceId}),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    var data_list = data.data, warp_pws_m_sp_html = "";
+                    if(data_list.length==0){
+                        $(".warp_pws_r_si").val("提交申请");
+                        warp_pws_m_sp_html = '<li>\
+                                                    <a href="javascript:void(0)" style="background: none;">\
+                                                        <input type="text" placeholder="请选择" id="type" value="微信" style="padding: 0;" onclick="warp_zy_t_fadeIn();" readonly="readonly">\
+                                                        <input type="hidden" id="type_hidden" value="10"/>\
+                                                        <b><i>*</i>申请类型</b>\
+                                                    </a>\
+                                                </li>\
+                                                <li>\
+                                                    <a href="javascript:void(0)" style="background: none;">\
+                                                        <input type="text" placeholder="请填写" id="orgName" style="padding: 0;">\
+                                                        <b><i>*</i>申请名称</b>\
+                                                    </a>\
+                                                </li>';
+
+                    }else{
+                        $(".warp_pws_r_si").val("修改");
+                        $.each(data_list,function(index,val){
+                            warp_pws_m_sp_html = '<li>\
+                                                    <a href="javascript:void(0)" style="background: none;">\
+                                                        <input type="text" placeholder="请选择" id="type" value="微信" style="padding: 0;" readonly="readonly">\
+                                                        <input type="hidden" id="type_hidden" value="'+val.type+'"/>\
+                                                        <b>申请类型</b>\
+                                                    </a>\
+                                                </li>\
+                                                <li>\
+                                                    <a href="javascript:void(0)" style="background: none;">\
+                                                        <input type="text" placeholder="请填写" id="orgName" style="padding: 0;" value="'+val.name+'">\
+                                                        <b><i>*</i>申请名称</b>\
+                                                    </a>\
+                                                </li>\
+                                                <li style="height: auto">\
+                                                    <a href="javascript:void(0)" style="background: none;height: auto;" id="copy_a" onclick="copyHomePage(\''+val.homePage+'\')"\
+                                                    ontouchstart="gtouchstart()" ontouchmove="gtouchmove()" ontouchend="gtouchend(\''+val.homePage+'\')">\
+                                                        <span  type="text" id="homePage"  style="" readonly="readonly" readonly="readonly">'+val.homePage+'</span>\
+                                                        <b>机构主页地址（点击复制）</b>\
+                                                    </a>\
+                                                </li>';
+                        })
+                    }
+                    $('.warp_pws_m_sp').html(warp_pws_m_sp_html);
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '查询失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+
+    function add(obj){
+        var orgName = $('#orgName').val(), orgPlaceId = $('#orgPlaceId').val(),type = $('#type_hidden').val();
+        if(orgName==null || orgName==""){
+            layer.open({
+                content: "请输入申请名称"
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+        }
+        if(orgPlaceId==null || orgPlaceId==""){
+            layer.open({
+                content: "参数不全"
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+        }
+        if(type==null || type==""){
+            layer.open({
+                content: "请选择申请类型"
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+        }
+            $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            url: base_url + "home/add",
+            data: JSON.stringify({"name": orgName, "orgPlaceId": orgPlaceId, "type": type}),
+            headers: {'token': token},
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                if (data.code == 0) {
+                    layer.open({
+                        content: $(obj).val()+'成功'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    setTimeout(function(){location.reload();},1000);
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: $(obj).val()+'失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        });
+    }
+
+    function warp_zy_t_fadeIn() {
+        $(".warp_zy_t").fadeIn();
+    }
+    $(function () {
+        var type_hidden = 10, type = '微信';
+        $(".warp_zy_t_si a").click(function(){
+            type_hidden = "";
+            type = "";
+            $(".warp_zy_t").fadeOut();
+        });
+        $(".warp_zy_t_sy").click(function(){
+            $("#type_hidden").val(type_hidden);
+            $("#type").val(type);
+            type_hidden = "";
+            type = "";
+            $(".warp_zy_t").fadeOut();
+        })
+        $("input[name='weeks1']").bind("click",function(){
+            var str = '', str1 = '';
+            var checked = $(this).prop('checked');
+            if(checked){
+                $(this).parent().parent().addClass('cla');
+            }else{
+                $(this).parent().parent().removeClass('cla');
+            }
+            $("input[name='weeks1']:checked").each(function(){
+                str += $(this).val() +";";
+                str1 += $("#"+$(this).val()+"").html()+"，";
+            })
+            if (str.length > 0) {
+                str = str.substr(0, str.length - 1);
+                str1 = str1.substr(0, str1.length - 1);
+            }
+            type_hidden = str;
+            type = str1;
+        });
+    })
+
+    var timeOutEvent=0;//定时器
+    //开始按
+    function gtouchstart(){
+        timeOutEvent = setTimeout("longPress()",500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适
+        return false;
+    };
+    //手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件
+    function gtouchend(homePage){
+        clearTimeout(timeOutEvent);//清除定时器
+        if(timeOutEvent!=0){
+            copyHomePage(homePage);
+        }
+        return false;
+    };
+    //如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按
+    function gtouchmove(){
+        clearTimeout(timeOutEvent);//清除定时器
+        timeOutEvent = 0;
+    };
+    //真正长按后应该执行的内容
+    function longPress(homePage){
+        timeOutEvent = 0;
+        copyHomePage(homePage);
+    }
+    function copyHomePage(homePage){
+        var flag = copyText(homePage);//这个必须在DOM对象的事件线程中执行
+        layer.open({
+            content: flag ? "复制成功！" : "复制失败！"
+            ,skin: 'msg'
+            ,time: 1 //2秒后自动关闭
+        });
+    }
+</script>
+</body>
+</html>

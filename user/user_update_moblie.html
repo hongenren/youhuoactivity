@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>修改手机号</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <style type="text/css">
+        .warp_pws_m{
+            padding: 0% 3% 0% 40px; margin-top: 3%;
+            background: #FFFFFF url("../wap/img/pws_38.jpg") no-repeat center;
+            background-size:auto 30px;
+            background-position: 3%;
+        }
+        .warp_pws_m input{
+            margin: 0;
+            width: 70%;
+            padding-left: 3%;
+        }
+
+        .warp_pws_m span{float: left;height: 40px; background:none;padding-right: 0px;}
+        .span1{width: 40%;position: relative;}
+        .span2{width: 40%;position: relative;}
+        .warp_pws_m span input{width: 100%;}
+        .span2 input{
+            margin-top: 4px;
+            height: 32px;
+            border-radius: 5px;
+            color: #ffffff;
+            background-color: #72B81E;
+        }
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>修改手机号</span>
+    </div>
+    <div class="warp">
+        <header class="warp_pws_m">
+            <input type="text" maxlength="20" id="moblie" disabled style="color: #999999;">
+        </header>
+        <header class="warp_pws_m" style="background: #FFFFFF url(../wap/img/pws_cwed.png) no-repeat center;background-size: auto 30px;background-position: 3%;">
+            <input type="text" maxlength="20" id="id_num" placeholder="请输入证件号">
+        </header>
+        <header class="warp_pws_m">
+            <input type="text" maxlength="20" id="new_moblie" placeholder="请输入新手机号">
+        </header>
+        <header class="warp_pws_m" style="background: #FFFFFF url('../wap/img/pws_39.jpg') no-repeat center;background-size:auto 30px;background-position: 3%;padding-top: 0%;height: 40px;">
+            <span class="span1"><input type="text" maxlength="20" placeholder="输入6位验证码" /></span>
+            <span class="span2" style="float: right;">
+                <input id="btnSendCode1" type="button" value="获取验证码" style="width: 100px;height: 32px;float: right;"/>
+            </span>
+        </header>
+    </div>
+</div>
+
+<div class="ht70"></div>
+<footer class="warp_pws_m_sw">
+    <input type="button" value="确定" id="btn">
+</footer>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/regular.js"></script>
+
+<script type="text/javascript">
+    var moblie, InterValObj //timer变量，控制时间
+    ,count = 60 //间隔函数，1秒执行
+    ,curCount//当前剩余秒数
+    $.ajax({
+        xhrFields: {
+            withCredentials: true
+        },
+        type:"post",
+        url:base_url + "html5/v1/user/center",
+        data:JSON.stringify({"userId":user_msg.userId}),
+        headers : {'token':token},
+        dataType:'json',
+        contentType: "application/json;charset=utf-8",
+        success:function(data){
+            if(data.code==0){
+                var data1=data.data;
+                moblie = data1.userLoginMobile;
+                $('#moblie').val(data1.userLoginMobile);
+            }else{
+                layer.open({
+                    content: data.msg
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+        },
+        error:function(e){
+            layer.open({
+                content: '登录失败'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+    })
+
+    $("#btn").click(function() {
+        if(!ajax_check_code()){
+            layer.open({
+                content: '验证码错误！'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/user/changeMobile",
+            data:JSON.stringify({"userId":user_msg.userId, "mobile":$("#new_moblie").val(), "userNo":$("#id_num").val()}),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    layer.open({
+                        content: '修改成功！请重新登录。'
+                        , btn: ['确定', '取消']
+                        , no: function (index) {
+                            setTimeout(function(){layer.closeAll(); window.location.href = "../login/login.html";},1000);
+                        }
+                        , yes: function (index) {
+                            setTimeout(function(){layer.closeAll(); window.location.href = "../login/login.html";},1000);
+                        }
+                    });
+                }else{
+                    layer.open({
+                        content:  data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    //setTimeout(function(){layer.closeAll(); window.location.reload();},1000);
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content:  '修改失败！请稍后重试。'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                setTimeout(function(){layer.closeAll(); window.location.reload();},1000);
+            }
+        })
+    })
+
+    $(".span2 input").click(function() {
+        var new_moblie = $.trim($("#new_moblie").val());
+        if(new_moblie == "" || new_moblie==null){
+            layer.open({
+                content: '新手机号不可为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+        if(new_moblie == moblie){
+            layer.open({
+                content: '新手机号不可与旧手机号重复'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+        if(!regular_tel(new_moblie)){
+            return false;
+        };
+
+        var userCertNo = $.trim($("#id_num").val());
+        if(isCardNo(userCertNo)){
+            layer.open({
+                content: '身份证号输入错误'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+
+        curCount = count;
+        ajax_code(new_moblie);
+        $("#btnSendCode1").attr("disabled", "true");
+        $("#btnSendCode1").val( + curCount + "秒再获取");
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+    })
+    function ajax_code(mobile){
+        var str = false;
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url :base_url + "html5/v1/sms/sendSms",
+            data:JSON.stringify({"mobile":mobile,"signName":'公益上海'}),
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code == 0){
+                    str = true;
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                    return str;
+                }else if(data.code == -1){
+                    $("#btnSendCode1").attr('id','btnSend')
+                    $("#btnSend").attr("disabled","disabled");
+                    $("#btnSend").val("获取验证码");
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                    return str;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '短信发送失败'
+                    ,btn: '确定'
+                });
+                return str;
+            }
+        })
+        return str;
+    }
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $("#btnSendCode1").removeAttr("disabled");//启用按钮
+            $("#btnSendCode1").val("重新发送");
+        }
+        else {
+            curCount--;
+            $("#btnSendCode1").val( + curCount + "秒再获取");
+        }
+    }
+    function ajax_check_code(){
+        var str1 = false;
+        var mobile = $.trim($("#new_moblie").val());
+        var code = $.trim($(".span1 input").val());
+        if(!regular_code(code)){
+            return false;
+        }
+        $.ajax({
+            type:'post',
+            url :base_url + "html5/v1/sms/verifyCode",
+            data:JSON.stringify({'mobile':mobile,'code':code}),
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            async: false,
+            success:function(data){
+                if(data.code==0){
+                    if(data.data.status){
+                        str1 = true;
+                    }else{
+                        layer.open({
+                            content: '验证码不正确',
+                            skin: 'msg',
+                            time: 2 //2秒后自动关闭
+                        });
+                    }
+                }else{
+                    layer.open({
+                        content: '验证码不正确',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    });
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '验证失败'
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
+                });
+            }
+        })
+        return str1;
+    }
+</script>
+</body>
+</html>

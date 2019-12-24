@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结盟</title>
+    <meta name="Keywords" content="结盟"/>
+    <meta name="description" content="结盟"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/launch.css">
+    <link rel="stylesheet" href="plugins/layerUI/src/css/layui.css">
+</head>
+<body>
+<div class="container">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="index.html"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>发起结盟</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+    <div class="searchWrap">
+        <div class="searchBox">
+            <input name="search" type="text" placeholder="请输入机构名称进行查询">
+            <button class="searchBut"></button>
+        </div>
+    </div>
+    <div class="searchTxt">请使用‘搜索’功能，查询到要结盟的机构</div>
+    <div class="divideListWrap">
+        <!--<div class="divideList">-->
+            <!--<h2>上海市公益服务促进中心</h2>-->
+            <!--<div class="divideType"><span>0号公益基地</span></div>-->
+            <!--<div class="divideMap">-->
+                <!--<i></i>-->
+                <!--<span>上海市黄浦区普育西路</span>-->
+            <!--</div>-->
+            <!--<div class="divideAdmin"><strong>管理员姓名:</strong><span>张三</span></div>-->
+            <!--<div class="divideAdmin"><strong>管理员电话:</strong><span>23403893</span></div>-->
+            <!--<div class="divideButton on"></div>-->
+        <!--</div>-->
+        <!--<div class="divideList">-->
+            <!--<h2>上海市公益服务促进中心</h2>-->
+            <!--<div class="divideType"><span>0号公益基地</span></div>-->
+            <!--<div class="divideMap">-->
+                <!--<i></i>-->
+                <!--<span>上海市黄浦区普育西路</span>-->
+            <!--</div>-->
+            <!--<div class="divideAdmin"><strong>管理员姓名:</strong><span>张三</span></div>-->
+            <!--<div class="divideAdmin"><strong>管理员电话:</strong><span>23403893</span></div>-->
+            <!--<div class="divideButton"></div>-->
+        <!--</div>-->
+    </div>
+</div>
+<div class="sendButtonWrap on">
+    <button class="targetNext on">下一步</button>
+</div>
+<script src="plugins/jquery/jquery-1.11.1.min.js"></script>
+<script src="plugins/layerUI/src/layui.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/public.js"></script>
+<script src="js/config.js"></script>
+<script src="js/launch.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script>
+    $(function(){
+        $(".divideButton").click(function(){
+            $(".divideButton").removeClass('on');
+            $(this).addClass('on')
+        })
+    })
+</script>
+</body>
+</html>

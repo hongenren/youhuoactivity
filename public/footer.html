@@ -1,0 +1,410 @@
+<style>
+.warp_hd_y{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999999;
+    display: none;
+}
+.warp_hd_y_lp{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #FFFFFF;
+    opacity: 0.8;
+}
+.warp_hd_y_lo{
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    bottom: 60px;
+}
+.warp_hd_y_lo li{
+    width: 41%;
+    overflow: hidden;
+    float: left;
+    text-align: center;
+    margin: 0 0 0 6%;
+    padding-bottom: 5%;
+    display: none;
+}
+.warp_hd_y_lo li a{
+    display: inline-block;
+}
+.warp_hd_y_lo li a img{
+    width: 60%;
+    margin: auto;
+}
+.warp_hd_y_lo li a span{
+    display: block;
+    text-align: center;
+    font-size: 15px;
+    color: #333333;
+    padding-top: 6px;
+}
+.warp_hd_y_li{
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    bottom: 20px;
+    text-align: center;
+}
+.warp_hd_y_li a{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(../wap/img/pws_dh_7.png) no-repeat center;
+    background-size: 100% 100%;
+}
+.footer {
+    width: 100%;
+    height: 60px;
+    background: #FFF;
+    position: fixed;
+	left: 0;
+    padding-bottom: constant(safe-area-inset-bottom);
+    z-index: 9999;
+    border-top: 1px solid #B3B3B3;
+    box-shadow: 0px 0px 5px 1px #B3B3B3;
+}
+
+.footer_qt3 li {
+    float: left;
+    width: 20%;
+    height: 60px;
+}
+
+.footer_qt3 li a {
+    width: 100%;
+    display: block;
+    color: #999999;
+    font-size: 14px;
+    text-align: center;
+    height: 60px;
+}
+
+.footer_qt3 li a span {
+    margin-top: 5px;
+    display: block;
+    height: 30px
+}
+
+.footer_qt3 li a b {
+    display: block;
+    font-weight: normal;
+    text-align: center;
+    font-family: '微软雅黑'
+}
+
+.footer_qt3 .qt_ft1 a span {
+    background: url(../wap/img/pws_29.png) center no-repeat;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft2 a span {
+    background: url(../wap/img/pws_30.png) center no-repeat;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft3 a span {
+    background: url(../wap/img/pws_31.png) center no-repeat;
+    background-size: 48px auto;
+    height: 60px;
+    margin-top: -25px;
+}
+
+.footer_qt3 .qt_ft4 a span {
+    background: url(../wap/img/pws_32.png) center no-repeat;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft5 a span {
+    background: url(../wap/img/pws_33.png) center no-repeat;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft1.current a span {
+    background: url(../wap/img/pws_29_on.png) no-repeat center;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft2.current a span {
+    background: url(../wap/img/pws_30_on.png) no-repeat center;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft3.current a span {
+    background: url(../wap/img/pws_31.png) center no-repeat;
+    background-size: 48px auto;
+    height: 60px;
+    margin-top: -25px;
+}
+
+.footer_qt3 .qt_ft4.current a span {
+    background: url(../wap/img/pws_32_on.png) no-repeat center;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft5.current a span {
+    background: url(../wap/img/pws_33_on.png) no-repeat center;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft1.current a b {
+    color: #72B81E;
+}
+
+.footer_qt3 .qt_ft2.current a b {
+    color: #72B81E;
+}
+
+.footer_qt3 .qt_ft3.current a b {
+    color: #72B81E;
+}
+
+.footer_qt3 .qt_ft4.current a b {
+    color: #72B81E;
+}
+
+.footer_qt3 .qt_ft5.current a b {
+    color: #72B81E;
+}
+</style>
+<!------底部开始------>
+    <div class="ht60"></div>
+
+<footer class="footer" id="footer1">
+         <div class="footer_qt3">
+            <ul id="nav">
+                <li class="qt_ft1">
+                    <a href="/" data-href=''>
+                        <span></span>
+                        <b>首页</b>
+                    </a>
+                </li>
+                <li class="qt_ft2">
+                    <a href="javascript:void(0)" class="find_1" data-href='find'>
+                        <span></span>
+                        <b>发现</b>
+                    </a>
+                </li>
+                <li class="qt_ft3">
+                    <a href="javascript:void(0)">
+                        <span></span>
+                        <b>发布</b>
+                    </a>
+                </li>
+                <li class="qt_ft4">
+                    <a href="../post/personal_post_list.html" data-href='order' data-id="post" data-task="task">
+                        <span></span>
+                        <b>订单</b>
+                    </a>
+                </li>
+                <li class="qt_ft5">
+                    <a href="javascript:void(0)" data-href="user" onclick="user_index()" >
+                        <span></span>
+                        <b>我的</b>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <footer class="footer" id="footer2" style="display: none;">
+        <div class="footer_qt3">
+            <ul id="nav">
+                <li class="qt_ft1">
+                    <a href="/" data-href='' id="indexHref">
+                        <span></span>
+                        <b>首页</b>
+                    </a>
+                </li>
+                <li class="qt_ft2">
+                    <a href="javascript:void(0)" class="find_1" data-href='find'>
+                        <span></span>
+                        <b>发现</b>
+                    </a>
+                </li>
+                <li class="qt_ft1">
+                    <a href="javascript:void(0)" data-href='' onclick="jumpIndex('index.html',0)">
+                        <span></span>
+                        <b>公益上海</b>
+                    </a>
+                </li>
+                <li class="qt_ft4">
+                    <a href="javascript:void(0)" data-href="order" data-id="post" onclick="jumpIndex('post/personal_post_list.html',1)" >
+                        <span></span>
+                        <b>订单</b>
+                    </a>
+                </li>
+                <li class="qt_ft5">
+                    <a href="javascript:void(0)" data-href="user" onclick="jumpIndex('user/user_index.html',1)" >
+                        <span></span>
+                        <b>我的</b>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <div class="warp_hd_y">
+    <div class="warp_hd_y_lp"></div>
+    <ul class="warp_hd_y_lo">
+        <!-- <li class="warp_hd_y_lo_1">
+            <a href="../act/act_base_add.html">
+                <img src="../wap/img/pws_dh_1.png">
+                <span>标准发布</span>
+            </a>
+        </li>
+        <li class="warp_hd_y_lo_2">
+            <a href="">
+                <img src="../wap/img/pws_dh_2.png">
+                <span>快速发布</span>
+            </a>
+        </li> -->
+        <li class="warp_hd_y_lo_1">
+            <a href="../find/tiwen.html">
+                <img src="../wap/img/pws_dh_3.png">
+                <span>提问</span>
+            </a>
+        </li>
+        <li class="warp_hd_y_lo_2">
+            <a href="../find/fabutuwen.html">
+                <img src="../wap/img/pws_dh_4.png">
+                <span>发布图文</span>
+            </a>
+        </li>
+        <li class="warp_hd_y_lo_3">
+            <a href="../find/fabutupian.html">
+                <img src="../wap/img/pws_dh_5.png">
+                <span>发布图片</span>
+            </a>
+        </li>
+        <li class="warp_hd_y_lo_4">
+            <a href="../find/fabushipin.html">
+                <img src="../wap/img/pws_dh_6.png">
+                <span>发布视频</span>
+            </a>
+        </li>
+    </ul>
+    <div class="warp_hd_y_li">
+        <a href="javascript:void(0)"></a>
+    </div>
+    <!------底部结束------>
+<script language="javascript" type="text/javascript">
+    var hrefPrefix="";
+    var jumpType = $.getUrlParam("jumpType");
+    var jumpAdd = $.getUrlParam("jumpAdd");
+    if(jumpAdd){
+        $("#indexHref").attr("href", jumpAdd);
+        $('#footer1').hide();
+        $('#footer2').show();
+        $('.find_1').attr("href","http://news.shcvs.cn/gysh_cm_pub/article/recommend.html?jumpType=0&jumpAdd="+jumpAdd);
+    }else{
+        $('.find_1').attr('href','http://news.shcvs.cn/gysh_cm_pub/article/recommend.html');
+    }/*
+
+    $(function(){
+        $('.find_1').attr('href',news_base_url+'/gysh_cm_pub/article/recommend.html');
+    })*/
+    $(".qt_ft3 a").click(function(){
+        var un = $.cookie("un");//是否实名
+        if(un==null || un==undefined || un=="") {
+            layer.open({
+                content: '请实名后再进行操作'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    //$(location).attr('href', "../cert/cert_index.html");
+                    jumpBank('web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=');
+                }
+                , no: function (index) {
+                    return;
+                }
+            });
+        }else{
+            if(reporter()){
+                $(".warp_hd_y").fadeIn();
+                $(".warp_hd_y_lo_1").fadeIn("slow");
+                $(".warp_hd_y_lo_2").fadeIn(1000);
+                $(".warp_hd_y_lo_3").fadeIn(2000);
+                $(".warp_hd_y_lo_4").fadeIn(3000);
+                // $(".warp_hd_y_lo_5").fadeIn(4000);
+                // $(".warp_hd_y_lo_6").fadeIn(5000);
+                $("body,html").css({
+                    "height":"100%",
+                    "overflow":"hidden"
+                });
+                $('body').addClass('add');
+            }else{
+                layer.open({
+                    content: '暂无权限'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+        }
+    });
+    $(".warp_hd_y_li a").click(function(){
+        $(".warp_hd_y").fadeOut();
+		$("body,html").css({
+					"height":"auto",
+					"overflow":"auto"
+				  });
+				  $('body').removeClass('add')
+    });
+</script>
+<script type="text/javascript">
+    function reporter(){//是不是小记者或者机构账号
+        var userOrgTags = JSON.parse($.cookie('userOrgTags'));
+        for(var i in userOrgTags) {
+            if ("NP0002" == userOrgTags[i].tagCode) {
+                return true;
+            }
+        }
+        return false;
+    }
+    if(jumpType!=0){
+        hrefPrefix = "../";
+    }
+    function user_index(){
+        var url = '';
+        if($.cookie('user_msg')==undefined||$.cookie('token')==undefined){
+            var url = hrefPrefix+'login/login.html?jumpAdd='+location.href;
+        }else{
+            var url = hrefPrefix+'user/user_index.html';
+
+        }
+        window.location.href = url;
+
+    }
+    var curr_url = window.location.pathname+window.location.search;//获取当前URL
+    var str = curr_url.split('/');
+    console.log(curr_url)
+    console.log(str)
+
+    $('#nav a').each(function(i,n){  //循环导航的a标签
+        var href = $(this).attr('data-href'); //a标签中的href链接
+        var id = $(this).attr('data-id');
+        var task = $(this).attr('data-task');
+        //console.log(href);
+        if(href == str[1]||str[1]==id||str[1]==task){  //如果当前URL,和a标签中的href相等。
+            $(this).parent().addClass('current');  //那么就给这个a标签的父元素增加selected类。
+        }
+    })
+    function jumpIndex(href,type){
+        var url = '';
+        if($.cookie('user_msg')==undefined||$.cookie('token')==undefined){
+            var url = hrefPrefix+'login/login.html?jumpAdd='+location.href;
+        }else{
+            var url = hrefPrefix+href+'?jumpType='+type+'&jumpAdd='+encodeURI(jumpAdd);
+        }
+        window.location.href = url;
+    }
+</script>
+

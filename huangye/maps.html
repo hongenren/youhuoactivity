@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海" />
+    <meta name="description" content="公益上海" />
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript" src="js/offset.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+    <link rel="stylesheet" href="css/mobile.css"/>
+</head>
+<body>
+<div class="mapWrap">
+    <div class="map_head on">
+        <div class="mapHead_but" onclick="javascript:history.back(-1);"></div>
+        公益上海
+    </div>
+    <div class="locaWrap" id="map"></div>
+    <div class="mapListWrap">
+        <div class="mapListTop">为你找到附近<span id="mapNums">0</span>个公益机构</div>
+        <div class="mapListMain">
+            <!--<div class="mapList">
+                <ul>
+                    <li>上海市服务促进服务中心 <span><i></i>实名</span></li>
+                    <li><b></b><b></b><b></b><b></b><b class="on"></b></li>
+                    <li><strong>长宁区</strong><strong>公益基地</strong><p>1.3km</p></li>
+                </ul>
+            </div>-->
+        </div>
+        <!--<div class="mapListBottom">
+            <ul>
+                <li class="on">全部分类</li>
+                <li>公益基金</li>
+                <li>基金会</li>
+                <li>爱心企业</li>
+                <li>公共厕所</li>
+            </ul>
+        </div>-->
+    </div>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/config.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<!--<script src="js/base.js"></script>-->
+
+<script type="text/javascript">
+    //创建和初始化地图函数：
+    function initMap(){
+        createMap($.getUrlParam("lng"),$.getUrlParam("lat"));//创建地图
+        setMapEvent();//设置地图事件
+        addMapControl();//向地图添加控件
+        //addMapOverlay(121.401842,31.131284);//向地图添加覆盖物
+        map.addEventListener("click", showInfo);
+    }
+    function createMap(lng, lat){
+        map = new BMap.Map("map");
+        //map.centerAndZoom(new BMap.Point(121.400548,31.138324),15);
+        if(lng && lat){
+            map.centerAndZoom(new BMap.Point(lng, lat),15);
+            selevtList(lng, lat);//根据经纬度查询列表
+        }else{
+            var geolocation = new BMap.Geolocation();
+            geolocation.getCurrentPosition(function(r){
+                if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                    var mk = new BMap.Marker(r.point);
+                    map.addOverlay(mk);
+                    map.panTo(r.point);
+                    map.centerAndZoom(new BMap.Point(r.point.lng,r.point.lat),15);
+                    selevtList(r.point.lng,r.point.lat);//根据经纬度查询列表
+                }
+                else {
+                    alert('获取经纬度失败');/*+this.getStatus()*/
+                }
+            });
+        }
+        //拖动结束事件
+        map.addEventListener("dragend", function(){
+            var center = map.getCenter();
+            // document.getElementById("info").innerHTML = center.lng + ", " + center.lat;
+            createMap(center.lng, center.lat);//创建地图
+        });
+    }
+    function setMapEvent(){
+        map.enableScrollWheelZoom();
+        map.enableKeyboard();
+        map.enableDragging();
+        map.enableDoubleClickZoom()
+    }
+    function addClickHandler(target,window){
+        target.addEventListener("click",function(){
+            target.openInfoWindow(window);
+        });
+    }
+    function addMapOverlay(markers){
+        map.clearOverlays();
+        /*var la=["background-image:url('images/la.png')","background-image:url('images/ma.png')","background-image:url('images/ta.png')"];
+        var markers = [
+            {content:'<div class="mapLays">\n' +
+                    '        <div class="mapList on">\n' +
+                    '            <ul>\n' +
+                    '                <li>上海市服务促进服务中心 <span><i></i>实名</span></li>' +
+                    '                <li><b></b><b></b><b></b><b></b><b class="on"></b></li>' +
+                    '                <li><strong>长宁区</strong><strong>公益基地</strong></li>' +
+                    '            </ul>' +
+                    '        </div>' +
+                    '        <div class="mapLayLines center"><i style="'+la[0]+'"></i>1.3km&nbsp;&nbsp;&nbsp;&nbsp;步行约13分钟</div>' +
+                    '        <div class="mapLayDetail"><i style="'+la[1]+'"></i>福州北路411号 A座</div>' +
+                    '        <div class="mapLayTell"><i style="'+la[2]+'"></i>021-454464623</div>' +
+                    '        <div class="mapLayIcon"></div>' +
+                    '    </div>',title:"",imageOffset: {width:0,height:0},position:{lat:varlat,lng:varlng}
+            },
+            {content:'<div class="mapLays">\n' +
+                    '        <div class="mapList on">\n' +
+                    '            <ul>\n' +
+                    '                <li>上海市服务促进服务中心 <span><i></i>实名</span></li>\n' +
+                    '                <li><b></b><b></b><b></b><b></b><b class="on"></b></li>\n' +
+                    '                <li><strong>长宁区</strong><strong>公益基地</strong></li>\n' +
+                    '            </ul>\n' +
+                    '        </div>\n' +
+                    '        <div class="mapLayLines center"><i style="'+la[0]+'"></i>1.3km&nbsp;&nbsp;&nbsp;&nbsp;步行约13分钟</div>\n' +
+                    '        <div class="mapLayDetail"><i style="'+la[1]+'"></i>福州北路411号 A座</div>\n' +
+                    '        <div class="mapLayTell"><i style="'+la[2]+'"></i>021-454464623</div>\n' +
+                    '        <div class="mapLayIcon"></div>\n' +
+                    '    </div>',title:"",imageOffset: {width:0,height:0},position:{lat:31.137324,lng:121.403548}
+            }
+        ];*/
+        for(var index = 0; index < markers.length; index++ ){
+            var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
+            var marker = new BMap.Marker(point,{icon:new BMap.Icon("images/maps.png",new BMap.Size(30,40),{
+                    imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
+                })});
+            var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,25)});
+            var lin=mapLin();
+            var opts = {
+                width: 5*lin,
+                height:4.32*lin,
+                title: markers[index].title,
+                enableAutoPan:true,
+                enableMessage: false
+            };
+            label.setStyle({width: "0",color: '#fff',background: 'transparent',border: '0 solid "#ff8355"',borderRadius: "5px",textAlign: "center",height: "0",lineHeight: "26px"});
+
+            var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
+            marker.setLabel(label);
+            addClickHandler(marker,infoWindow);
+
+            infoWindow.addEventListener("open", function () {
+                $(".mapListWrap").slideUp();
+            });
+            infoWindow.addEventListener("close", function () {
+                $(".mapListWrap").slideDown();
+            });
+            map.addOverlay(marker);
+        };
+    }
+    //向地图添加控件
+    function addMapControl(){
+        var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+        scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
+        // map.addControl(scaleControl);
+        var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:1});
+        // map.addControl(navControl);
+        var overviewControl = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:false});
+        // map.addControl(overviewControl);
+    }
+    var map;
+
+</script>
+<script>
+    window.onload=function(){
+        initMap();
+        //拖动结束事件
+        map.addEventListener("dragend", function(){
+            var center = map.getCenter();
+            // document.getElementById("info").innerHTML = center.lng + ", " + center.lat;
+            console.log(center.lng + ", " + center.lat);
+            createMap(center.lng, center.lat);//创建地图
+        });
+    };
+    window.onresize=function(){
+        initMap();
+    }
+    //单击地图事件
+    function showInfo(e){
+        //addMapOverlay(e.point.lng, e.point.lat);
+    }
+    var regionJson;
+    var la=["background-image:url('images/la.png')","background-image:url('images/ma.png')","background-image:url('images/ta.png')"];
+    function selevtList(lng,lat){
+        $.ajax({
+            url: base_url1+'/html5/v1/orgPlace/chooseByLngLatAdCodeMarkTag',
+            //url: '/cm/termapi/geArticletListByMy',
+            type: "post",
+            dataType: "json",
+            data: "{\"pageNumber\": 1, \"pageSize\": 100, \"distance\":3000, \"lng\":"+lng+", \"lat\": "+lat+"}",
+            headers: {'Content-Type': 'application/json'},
+            success: function (resp) {
+                if (resp.code == 0) {
+                    var region = resp.data.records;
+                    regionJson = region;
+                    var div = "";
+                    var div1 = "";
+                    var arrayObj = new Array();
+
+                    $("#mapNums").html(region.length);
+                    for (var i in region) {
+                        var shiming = "";
+                        if(region[i].orgThirdAccount){
+                            shiming = '<i></i>实名';
+                        }
+                        //标签
+                        var markTags = "";
+                        var markTags_arr = region[i].markTags.split(";");
+                        for (var j = 0; j <markTags_arr.length; j++) {
+                            var markTagsArr = markTags_arr[j];
+                            if(markTagsArr.indexOf("公益基地")>=0){
+                                if(region[i].baseNo!=undefined && region[i].baseNo!=null && region[i].baseNo!=""){
+                                    markTags += '<strong>'+region[i].baseNo+"号公益基地</strong>";
+                                }
+                            }else{
+                                markTags += '<strong>'+markTagsArr+'</strong>';
+                            }
+                        }
+                        div += "<div class='mapList' onclick='tagMap("+region[i].id+")'>"+
+                            "<ul>"+
+                            "<li>"+region[i].name+"<span>"+shiming+"</span></li>"+
+                            "<li>";
+                        if(region[i].star!=undefined && region[i].star!=null && region[i].star!=""){
+                            for(var i=0;i<5;i++){
+                                if(i<region[i].star){
+                                    div += "<b></b>";
+                                }else{
+                                    div += "<b class='on'></b>";
+                                }
+                            }
+                        }
+                        div += "<li><strong>"+region[i].district+"</strong>"+markTags+"<p></p></li>"+
+                            "</ul>"+
+                            "</div>";
+
+                        div1 += '<div class="mapLays">' +
+                            '<div class="mapList on">' +
+                            '<ul>' +
+                            '<li>'+region[i].name+'<span>'+shiming+'</span></li>' +
+                            '<li>';
+                        if(region[i].star!=undefined && region[i].star!=null && region[i].star!="") {
+                            for (var i = 0; i < 5; i++) {
+                                if (i < region[i].star) {
+                                    div1 += '<b></b>';
+                                } else {
+                                    div1 += '<b class="on"></b>';
+                                }
+                            }
+                        }
+                        div1 += '</li>' +
+                            '<li><strong>'+region[i].district+'</strong>'+markTags+'</li>' +
+                            '</ul>' +
+                            '</div>' +
+                            '<div class="mapLayLines center"><i style="'+la[0]+'"></i></div>' +
+                            '<div class="mapLayDetail"><i style="'+la[1]+'"></i>'+region[i].addressDetail+'</div>' +
+                            '<div class="mapLayTell"><i style="'+la[2]+'"></i>'+region[i].mobile+'</div>' +
+                            '<div class="mapLayIcon"></div>' +
+                            '</div>';
+                        var jsonObj = {content:div1,title:"",imageOffset: {width:0,height:0},position:{lat:region[i].lat,lng:region[i].lng}};
+                        arrayObj. push(jsonObj);
+                    }
+                    $(".mapListMain").html(div);
+                    addMapOverlay(arrayObj);
+                }
+            }
+        });
+    }
+    function tagMap(id){
+        var arrayObj = new Array();
+        for (var i in regionJson) {
+            if(regionJson[i].id==id){
+                var shiming = "";
+                if(regionJson[i].orgThirdAccount){
+                    shiming = '<i></i>实名';
+                }
+                var div = "<div class='mapList' onclick='tagMap("+regionJson[i].id+")'>"+
+                    "<ul>"+
+                    "<li>"+regionJson[i].name+"<span>"+shiming+"</span></li>"+
+                    "<li>";
+                for(var i=0;i<5;i++){
+                    if(i<regionJson[i].star){
+                        div += "<b></b>";
+                    }else{
+                        div += "<b class='on'></b>";
+                    }
+                }
+                div += "<li><strong>"+regionJson[i].district+"</strong><strong>公益基地</strong><p>1.3km</p></li>"+
+                    "</ul>"+
+                    "</div>";
+
+                var div1 = "";
+                div1 += '<div class="mapLays">' +
+                    '<div class="mapList on">' +
+                    '<ul>' +
+                    '<li>'+regionJson[i].name+'<span>'+shiming+'</span></li>' +
+                    '<li>';
+                for(var i=0;i<5;i++){
+                    if(i<regionJson[i].star){
+                        div1 += '<b></b>';
+                    }else{
+                        div1 += '<b class="on"></b>';
+                    }
+                }
+                div1 += '</li>' +
+                    '<li><strong>'+regionJson[i].district+'</strong><strong>公益基地</strong></li>' +
+                    '</ul>' +
+                    '</div>' +
+                    '<div class="mapLayLines center"><i style="'+la[0]+'"></i></div>' +
+                    '<div class="mapLayDetail"><i style="'+la[1]+'"></i>'+regionJson[i].addressDetail+'</div>' +
+                    '<div class="mapLayTell"><i style="'+la[2]+'"></i>'+regionJson[i].mobile+'</div>' +
+                    '<div class="mapLayIcon"></div>' +
+                    '</div>';
+                var jsonObj = {content:div1,title:"",imageOffset: {width:0,height:0},position:{lat:regionJson[i].lat,lng:regionJson[i].lng}};
+                arrayObj. push(jsonObj)
+                $(".mapListMain").html(div);
+                addMapOverlay(arrayObj);
+            }
+        }
+    }
+</script>
+</body>
+</html>

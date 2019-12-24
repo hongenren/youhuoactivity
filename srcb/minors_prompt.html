@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益护照</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+</head>
+<body style="background: #F2F2F2;height: 100%;">
+<div class="warp" style="height: 100%;">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>提示</span>
+    </div>
+    <ul class="warp_pws_g" style="height: 100%;">
+        <li style="margin-top: 50%;border: 0px;text-align: center">
+            未成年人公益护照申领稍后开放，敬请期待。
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+
+<script type="text/javascript">
+    queryOrgByPersonFirstAccount();
+    function queryOrgByPersonFirstAccount(){
+        var un = $.cookie("un");
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/orgPlace/queryOrgByPersonFirstAccount",
+            data:JSON.stringify({"personFirstAccount":un, "pageNumber":1, "pageSize":100}),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    var data_list=data.data.records;
+                    $.each(data_list,function(index,val){
+                        $('.warp_pws_g').append("<li>\
+                                        <a href=\"../huangye/mobileDetail.html?id="+val.id+"&prjvUserId="+val.prjvUserId+"\">\
+                                            <b>"+val.name+"</b>\
+                                        </a>\
+                                    </li>");
+                    })
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '登录失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+</script>
+</body>
+</html>

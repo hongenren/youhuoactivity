@@ -1,0 +1,176 @@
+.warp_hd_y{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999999;
+    display: none;
+}
+.warp_hd_y_lp{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #FFFFFF;
+    opacity: 0.8;
+}
+.warp_hd_y_lo{
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    bottom: 60px;
+}
+.warp_hd_y_lo li{
+    width: 41%;
+    overflow: hidden;
+    float: left;
+    text-align: center;
+    margin: 0 0 0 6%;
+    padding-bottom: 5%;
+    display: none;
+}
+.warp_hd_y_lo li a{
+    display: inline-block;
+}
+.warp_hd_y_lo li a img{
+    width: 60%;
+    margin: auto;
+}
+.warp_hd_y_lo li a span{
+    display: block;
+    text-align: center;
+    font-size: 15px;
+    color: #333333;
+    padding-top: 6px;
+}
+.warp_hd_y_li{
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    bottom: 20px;
+    text-align: center;
+}
+.warp_hd_y_li a{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(../../wap/img/pws_dh_7.png) no-repeat center;
+    background-size: 100% 100%;
+}
+.footer {
+    width: 100%;
+    height: 60px;
+    background: #FFF;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 9999;
+    border-top: 1px solid #B3B3B3;
+    box-shadow: 0px 0px 5px 1px #B3B3B3;
+}
+
+.footer_qt3 li {
+    float: left;
+    width: 20%;
+    height: 60px;
+}
+
+.footer_qt3 li a {
+    width: 100%;
+    display: block;
+    color: #999999;
+    font-size: 14px;
+    text-align: center;
+    height: 60px;
+}
+
+.footer_qt3 li a span {
+    margin-top: 5px;
+    display: block;
+    height: 30px
+}
+
+.footer_qt3 li a b {
+    display: block;
+    font-weight: normal;
+    text-align: center;
+    font-family: '微软雅黑'
+}
+
+.footer_qt3 .qt_ft1 a span {
+    background: url(../../wap/img/pws_29.png) center no-repeat;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft2 a span {
+    background: url(../../wap/img/pws_30.png) center no-repeat;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft3 a span {
+    background: url(../../wap/img/pws_31.png) center no-repeat;
+    background-size: 48px auto;
+    height: 60px;
+    margin-top: -25px;
+}
+
+.footer_qt3 .qt_ft4 a span {
+    background: url(../../wap/img/pws_32.png) center no-repeat;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft5 a span {
+    background: url(../../wap/img/pws_33.png) center no-repeat;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft1.current a span {
+    background: url(../../wap/img/pws_29_on.png) no-repeat center;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft2.current a span {
+    background: url(../../wap/img/pws_30_on.png) no-repeat center;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft3.current a span {
+    background: url(../../wap/img/pws_31.png) center no-repeat;
+    background-size: 48px auto;
+    height: 60px;
+    margin-top: -25px;
+}
+
+.footer_qt3 .qt_ft4.current a span {
+    background: url(../../wap/img/pws_32_on.png) no-repeat center;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft5.current a span {
+    background: url(../../wap/img/pws_33_on.png) no-repeat center;
+    background-size: 26px auto;
+}
+
+.footer_qt3 .qt_ft1.current a b {
+    color: #72B81E;
+}
+
+.footer_qt3 .qt_ft2.current a b {
+    color: #72B81E;
+}
+
+.footer_qt3 .qt_ft3.current a b {
+    color: #72B81E;
+}
+
+.footer_qt3 .qt_ft4.current a b {
+    color: #72B81E;
+}
+
+.footer_qt3 .qt_ft5.current a b {
+    color: #72B81E;
+}

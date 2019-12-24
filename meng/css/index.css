@@ -1,0 +1,59 @@
+
+.divideList{
+    border-bottom:1px solid #eee;
+    padding:.14rem .2rem;
+}
+.divideList h2{
+    font-size:.32rem;
+    font-weight:bold;
+    color:#000;
+    padding-bottom:.1rem;
+}
+.divideType span{
+    display:inline-block;
+    padding:0 .14rem;
+    font-size:.24rem;
+    border-radius:4px;
+    border:1px solid #ddd;
+}
+.divideMap{
+    padding-left:.4rem;
+    padding-top:.1rem;
+    padding-bottom:.1rem;
+    position:relative;
+    line-height:.4rem;
+}
+.divideMap i{
+    display:inline-block;
+    width:.4rem;
+    height:.4rem;
+    position:absolute;
+    left:0;
+    top:50%;
+    margin-top:-.2rem;
+    background:url("../images/map.png") no-repeat left center;
+    background-size:auto 70%;
+}
+.divideButton{
+    padding-top:.3rem;
+    text-align:right;
+}
+.divideButton button{
+    display:inline-block;
+    height:.5rem;
+    padding:0 .1rem;
+    border:1px solid #72b81e;
+    border-radius:.25rem;
+    color:#72b81e;
+}
+
+
+
+
+
+
+
+
+
+
+

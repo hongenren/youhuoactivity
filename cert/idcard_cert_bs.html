@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+    <link href="../wap/css/mobiscroll.custom.min.css" rel="stylesheet" type="text/css" />
+	<style>
+	.mhp_p{width: 100%;position: relative}
+	.mhp_o{width: 70px;height: 38px;border: 0;background: #72B81E;color: #FFFFFF;font-size: 14px;font-family: '微软雅黑';position: absolute;right: 0;top: 3px;border-radius: 3px}
+    .warp_pws_m_sw input[disabled]{background:#999999;}
+	.zjh_yz_p{width: 92%;overflow: hidden;margin: auto}
+	.zjh_yz_p span{display: block;font-size: 14px;color: #FF0000;padding: 0 3%}
+	</style>
+</head>
+<body style="background: #F5F5F5">
+<div class="warp_zy_j">
+			<a href="javascript:history.go(-1);"></a>
+			<span>公益上海</span>
+		</div>
+<form id='form' method="post" enctype="multipart/form-data">
+    <div class="warp" style="overflow: visible">
+	
+        <div class="warp_sm_u" style="overflow: visible">
+            <img src="../wap/img/pws_213.png">
+            <h2 style="padding:10px 10px 0;font-weight:normal;">请确认您的身份信息：</h2>
+            <ul class="warp_sm_u_sp" style="overflow: visible">
+                <li>
+                    <div class="warp_sm_u_so">
+                        <b><i>*</i>证件号</b>
+                    </div>
+                    <div class="mhp_p">
+						<input id="cardNo" type="text" placeholder="" class="warp_sm_u_si" name="id_num" readonly="true">
+						<!--<input type="button" onclick="checkcert()" value="搜索" class="mhp_o">-->
+					</div>
+                </li>
+                <li>
+                    <div class="warp_sm_u_so">
+                        <b><i>*</i>姓名</b>
+                    </div>
+                    <input id="realName" type="text" placeholder="" class="warp_sm_u_si" name="name" readonly="true">
+                </li>
+            </ul>
+        </div>
+        <input type="hidden" name="usercerttype" value="SFZ">
+		<div class="zjh_yz_p">
+			
+		</div>
+        <div class="ht70"></div>
+        <div class="warp_pws_m_sw">
+            <input type="button" value="下一步" onclick="setup()">
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script type="text/javascript" src="../wap/js/web-storage-cache.js"></script>
+<script type="text/javascript" src="../wap/js/regular.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#cardNo").val(get_querystr("cardNo"));
+        $("#realName").val(get_querystr("realName"));
+        var data = JSON.stringify({
+            "cardNo": get_querystr("cardNo"),
+            "realName":get_querystr("realName"),
+            "cardType": "SFZ",
+            "nationality": "中国",
+            "endDate": "",
+            "startDate": "",
+            "userId":user_msg.userId
+        });
+        localStorage.setItem('sfzcert',data);
+//        if(localStorage.getItem!=''){
+//            window.location.href='./idcard_cert_sec.html';
+//        }
+        $(".warp_cq_p span").click(function(){
+            $(".warp_cq_o").fadeIn()
+        });
+        $('.warp_cq_o li').click(function(){
+            $(".warp_cq_o").hide();
+            $('.warp_cq_p span').hide();
+            $('.warp_cq_i li').hide();
+            $('.warp_cq_i li').eq($(this).index()).show()
+        });
+        function get_querystr(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return decodeURI(r[2]);
+            return null;
+        }
+    });
+</script>
+<script>
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    var currYear = (new Date()).getFullYear();
+    $('.demo_date').mobiscroll().date({
+        theme: theme,
+        mode: mode,
+        display: display,
+        dateFormat:"yy-mm-dd",
+        lang: lang,
+        startYear: currYear -30,
+        endYear: currYear +30,
+        stepMinute: 1,
+        showNow: true
+    });
+
+    function btn()
+    {
+        // uploadImg()
+        sub_message('__CONTROLLER__/idcard_cert_do')
+    }
+    //图片上传
+    function uploadImg() {
+        var form = document.getElementById("form");
+        var imgdata = new FormData(form);
+        //利用ajax上传
+        jQuery.ajax({
+            type: "POST",
+            url: img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper',
+            data: imgdata,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data)
+                $("#idcard").val(data.data);
+            },
+        })
+    }
+</script>
+
+<script type="text/javascript">
+    var age = 0;
+/**
+ * 根据返回判断用户填写是否正确
+ */
+/**
+* 注册第二步操作
+*/
+    function setup() {
+    window.location.href='./idcard_cert_sec.html';
+    }
+    function id_numOninput(obj){
+        $(".warp_pws_m_sw input").attr("disabled",true);
+        $(".warp_pws_m_sw input").css('background','#999999');
+    }
+</script>
+
+</body>
+</html>

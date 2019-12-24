@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>个人信息</span>
+    </div>
+    <ul class="warp_pws_g">
+        <li>
+            <a class="personal_home" href="../commend/personal_home.html">
+                <img src="../wap/img/pws_20.png" class="warp_pws_t1" id="img">
+                <b>个人主页</b>
+            </a>
+        </li>
+        <li><!--
+            ../../cert/cert_index.html-->
+            <a href="../../cert/cert_index.html"><!--
+                <a href="javascript:void(0)" onclick="jumpBank('web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=')">-->
+                <div class="warp_pws_g_sp">
+                    <span id="shenfenrenzheng"></span>
+                    <img src="../wap/img/pws_70.jpg">
+                    <!--<img src="../wap/img/pws_71.jpg">-->
+                </div>
+                <b>身份认证</b>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" onclick="checkRealName1('./user_qcode.html','请进行实名认证后再查看个人二维码',0);">
+                <img src="../wap/img/pws_72.jpg" class="warp_pws_t2">
+                <b>我的二维码</b>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" onclick="updateName();">
+                <div class="warp_pws_g_sp" >
+                    <span id='nickname'></span>
+                </div>
+                <b>昵称</b>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" onclick="checkRealName1('user_update_moblie.html','未实名，如需更换手机请注销账户。',1);">
+                <div class="warp_pws_g_sp" >
+                    <span id='moblie'></span>
+                </div>
+                <b>手机号</b>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" id="ElePhotoA" onclick="checkRealName1('elePhoto.html','未实名，请实名后再上传电子照片。',1);">
+                <div class="warp_pws_g_sp" >
+                    <span id="ElePhoto">未上传</span>
+                </div>
+                <b>电子照片</b>
+            </a>
+        </li>
+        <!-- <li>
+            <a href="./edit_password.html">
+                <div class="warp_pws_g_sp" >
+                    <span id='moblie'></span>
+                </div>
+                <b>修改密码</b>
+            </a>
+        </li> -->
+    </ul>
+    <!--
+        <ul class="warp_pws_g">
+            <li>
+                <a href="./user_address.html">
+                    <b>收货地址</b>
+                </a>
+            </li>
+            <li>
+                <a href="./user_invoice.html">
+                    <b>我的发票抬头</b>
+                </a>
+            </li>
+        </ul>-->
+<!--
+    <ul class="warp_pws_g">
+        <li>
+            <a href="#">
+                <b>我的客服</b>
+            </a>
+        </li>
+    </ul>-->
+    <!-- <input type="button" value="退出登录" class="warp_pws_r_si" onclick="login_out()" style="width: 94%;margin: auto"> -->
+</div>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+
+<script type="text/javascript">
+    login_in();
+    function checkRealName1(url,tit,type){
+        var un = $.cookie("un");//是否实名
+        if(un==null || un==undefined || un=="") {
+            layer.open({
+                content: tit
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    //$(location).attr('href', "../cert/cert_index.html");
+                    jumpBank('web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=');
+                }
+                , no: function (index) {
+                    return;
+                }
+            });
+        }else{
+            $(location).attr('href', url);
+        }
+    }
+    var userNickName = "", userNickNameZuiChu = "";
+    function limitLength(obj, byteLength, title, attribute) {
+        var value = obj.value;
+        var newvalue = value.replace(/[^\x00-\xff]/g, "**"); //输入内容
+        var length = newvalue.length;//获取内容长度
+
+        //当填写的字节数小于设置的字节数
+        if (length * 1 <=byteLength * 1){
+            return;
+        }
+        var limitDate = newvalue.substr(0, byteLength);
+        var count = 0;
+        var limitvalue = "";
+        for (var i = 0; i < limitDate.length; i++) {
+            console.log(i);
+            var flat = limitDate.substr(i, 1);
+            if (flat == "*") {
+                count++;
+            }
+        }
+        var size = 0;
+        var istar = newvalue.substr(byteLength * 1 - 1, 1);//校验点是否为“×”
+
+        //if 基点是×; 判断在基点内有×为偶数还是奇数
+        if (count % 2 == 0) {
+            //当为偶数时
+            size = count / 2 + (byteLength * 1 - count);
+            limitvalue = value.substr(0, size);
+        } else {
+            //当为奇数时
+            size = (count - 1) / 2 + (byteLength * 1 - count);
+            limitvalue = value.substr(0, size);
+        }
+        document.getElementById(attribute).value = limitvalue;
+        alert('昵称最多可以输入10个汉字！');
+        return;
+    }
+    function updateName(){
+        layer.open({
+            content: '修改昵称<br /><input name="explain"  id="explain" type="text" style="text-align:center;border-radius:5px;border:#D0D0D0 1px solid;height: 40px;width: 80%" value="'+userNickName+'" onkeyup="limitLength(this,20,\'\',\'explain\')" oninput="setUserNickName(this);">'
+            , btn: ['确定', '取消']
+            , no: function (index) {
+                userNickName = userNickNameZuiChu;
+            }
+            , yes: function (index) {
+                if(userNickName==null || userNickName==""){
+                    userNickName = userNickNameZuiChu;
+                    layer.open({
+                        content: '昵称不可为空！'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }else{
+                    $.ajax({
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        type:"post",
+                        url:base_url + "html5/v1/user/updateNickName",
+                        data:JSON.stringify({"userId":user_msg.userId,"userNickName":userNickName}),
+                        headers : {'token':token},
+                        dataType:'json',
+                        contentType: "application/json;charset=utf-8",
+                        success:function(data){
+                            if(data.code==0){
+                                $('#nickname').text(userNickName);
+                                layer.open({
+                                    content: '修改成功！'
+                                    ,skin: 'msg'
+                                    ,time: 1 //2秒后自动关闭
+                                });
+                            }else{
+                                userNickName = userNickNameZuiChu;
+                                layer.open({
+                                    content: '修改失败！'
+                                    ,skin: 'msg'
+                                    ,time: 1 //2秒后自动关闭
+                                });
+                            }
+                        }
+                    })
+                }
+            }
+        });
+    }
+    function setUserNickName(obj){
+        userNickName = $(obj).val();
+    }
+    function login_in(){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/user/center",
+            data:JSON.stringify({"userId":user_msg.userId}),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    var data1=data.data;
+                    if(data1.userHeadImg!=''){
+                        $('#img').attr('src',data1.userHeadImg+"?x-oss-process=image/crop,x_0,y_0");
+                    }
+                    if(data1.userNo==''){
+                        $('.warp_pws_g_sp img').attr('src','../wap/img/pws_70.jpg');
+                        $(".personal_home").attr('href','javascript:void(0)').click(function(){
+                            layer.open({
+                                content: '请先实名验证'
+                                ,skin: 'msg'
+                                ,time: 1 //2秒后自动关闭
+                            });
+                        });
+                    }else{
+                        $('.warp_pws_g_sp img').attr('src','../wap/img/pws_71.jpg');
+                        $(".personal_home").attr('href',$(".personal_home").attr('href')+'?passport='+data1.passport);
+                    }
+                    if(data1.userCertUserName!=''){
+                        $('#shenfenrenzheng').text(data1.userCertUserName);
+                    }
+                    if(data1.userCertImg1!=''){
+                        $('#ElePhoto').text("已上传");
+                    }/*
+                    if(data1.certImgLevel!=0){
+                        $('#ElePhotoA').removeAttr("onclick");
+                        $("#ElePhotoA").click(function(){
+                            layer.open({
+                                content: "不可修改！"
+                                ,skin: 'msg'
+                                ,time: 1 //2秒后自动关闭
+                            });
+                        })
+                    }*/
+                    userNickName = data1.userNickName;
+                    userNickNameZuiChu = userNickName;
+                    // $(".personal_home").attr('href',$(".personal_home").attr('href')+'?passport='+data1.passport);
+                    $('#nickname').text(userNickName);
+                    $('#moblie').html(data1.userLoginMobile);
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '登录失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+    //退出登录
+    function login_out(){
+        localStorage.removeItem("orgThirdAccount");//删除法人三类账户
+        localStorage.removeItem("appUserInfo");//删除用户信息
+        $.cookie('token','',{ expires: -1 , path: '/' ,domain:domain_url});
+        $.cookie('user_msg','',{ expires: -1, path: '/',domain:domain_url});
+        $.cookie('nn','',{ expires: -1, path: '/',domain:domain_url});
+        $.cookie('ts','',{ expires: -1, path: '/',domain:domain_url});
+        $.cookie('u','',{ expires: -1, path: '/',domain:domain_url});
+        $.cookie('uh','',{ expires: -1, path: '/',domain:domain_url});
+        $.cookie('un','',{ expires: -1, path: '/',domain:domain_url});
+        $.cookie('uv','',{ expires: -1, path: '/',domain:domain_url});
+        localStorage.setItem('prjvorgMsg','');
+        $.cookie('userOrgTags','',{ expires: -1, path: '/',domain:domain_url});
+        if($.cookie('token')==undefined||$.cookie('user_msg')==undefined){
+            var jumpAdd = $.cookie("jumpAdd");
+            if(jumpAdd!=undefined && jumpAdd!=null && jumpAdd!=""){
+                window.location.href = jumpAdd;
+            }else{
+                window.location.href ='/';
+            }
+        }else{
+            layer.open({
+                content: '退出失败'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

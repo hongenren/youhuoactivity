@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海-任务管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" href="../huangye/css/mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="../post/css/service_day.css"/>
+    <link rel="stylesheet" type="text/css" href="css/task_management.css"/>
+    <link rel="stylesheet" type="text/css" href="../post/css/post_management.css"/>
+    <link rel="stylesheet" type="text/css" href="../post/RightMenu/smartMenu.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>
+    <style type="text/css">
+        .swiper-wrapper {
+            height: 40px;
+            background-color: #72B81E;
+            width: 100%;
+            text-align: center;
+        }
+
+        @media (min-width: 641px) {
+            .warp_zy_j, .warp_lb_p, .warp_hd_i {
+                width: auto !important;
+                left: auto !important;
+                margin-left: 0 !important;
+            }
+        }
+        html,body{
+            overflow-y:visible;
+        }
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <!--头部开始-->
+    <div class="warp_zy_j">
+        <a id="black_base_mineBtn" href="javascript:void(0)" onclick="jumpInstitutions();"></a>
+        <div class="screenButList screenBut screenButListNew" style="margin: 0px;">
+            <a href="javascript:void(0)" id="area_info_city" data-id="">
+                任务管理
+            </a>
+        </div>
+    </div>
+    <!--头部结束-->
+    <div class="warp_lb_p">
+        <div id="header">
+            <div class="screenButList">
+                <input type="text" class="search_input" id="name_input" placeholder="请输入岗位名称进行查询">
+                <input type="button" class="search_button" value="" onclick="queryPostByOrgCode(0,20);">
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <ul class="warp_pws_c">
+            <!--<li>-->
+                <!--<a href="javascript:void(0)">-->
+                    <!--<h3 onclick="jump('./post_content.html?pkPostCode=31011200000020190809104956490&amp;type=19478f81h')" id="name">导览 <span class="tma_topBtn">修改</span></h3>-->
+                    <!--<div class="tma_contx_wrap">-->
+                        <!--<div class="tma_contxt">这是任务内容这是任务内容这是任务内容这是任务内容，这是任务内容，这是任务内容</div>-->
+                        <!--<div class="hycon2">-->
+                            <!--<img src="../wap/img/pws_125.png">-->
+                            <!--<p><span id="day">2019年8月11日至2020年1月11日&nbsp;&nbsp;&nbsp;16:41-17:00&nbsp;&nbsp;&nbsp;至少参加2次</span></p>-->
+                        <!--</div>-->
+                        <!--<div class="hycon2">-->
+                            <!--<img src="../wap/img/pws_151.png">-->
+                            <!--<p><span id="address">上海市闵行区上海市民政干部学校301室地址很长很长很长很长很长</span></p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="button-div">-->
+                        <!--<input type="button" value="报名管理" onclick="jump('./task_enroll_management.html?where=0&amp;type=0&amp;pkPostCode=31011200000020190809104956490')" style="border: 1px solid red;color: red;">-->
+                        <!--<input type="button" value="执行管理" onclick="jump('./task_implement_management.html?pkPostCode=31011200000020190809104956490')"-->
+                               <!--style="border: 1px solid #72B81E;color: #72B81E;">-->
+                        <!--<input type="button" value="海报"-->
+                               <!--onclick="jumpPosters('./task_poster_management.html?pkPostCode=31011200000020190809104956490&amp;userId=1001658','1001658')"-->
+                               <!--style="border: 1px solid deepskyblue;color: deepskyblue;">-->
+                        <!--<input type="button" value="更多"-->
+                               <!--data-code="31011200000020190809104956490"-->
+                               <!--data-begintime="16:41"-->
+                               <!--data-endtime="17:00"-->
+                               <!--class="more"-->
+                               <!--style="border: 0px; color: #999999;margin: 0px;">-->
+                    <!--</div>-->
+                <!--</a>-->
+            <!--</li>-->
+        </ul>
+    </div>
+</div>
+<footer class="warp_pws_m_sw" style="display: none;">
+    <input type="button" value="新增岗位" onclick="jump('./add_post.html')">
+</footer>
+<input class='demo_time2' id="serviceBeginTime" type="text" readonly="true" style="display: none;" value=""
+       onchange="setServiceTime(this);"/>
+<input class='demo_time2' id="serviceEndTime" type="text" readonly="true" style="display: none;" value=""
+       onchange="setServiceTime(this);"/>
+
+<script type="text/javascript" src="../wap/js/jquery-1.9.1.js"></script>
+
+<script type="text/javascript" src="../post/RightMenu/jquery-smartMenu.js"></script>
+
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+
+<script type="text/javascript" src="js/task_management.js"></script>
+<script type="text/javascript" src="../post/js/jquery.mousewheel.js"></script>
+
+
+<script>
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang = "zh";
+    $('.demo_time2').mobiscroll().time({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        timeWheels: 'HHii',//HH:24小时制；hh:12小时制
+        dateFormat: "hh-mm",
+        startYear: 1900,
+        endYear: nowYear,
+        stepMinute: 1,
+        showNow: true
+    });
+
+    // [{
+    //     text: "发通知",
+    //     func: function () {
+    //         jump("./task_send_management.html?type=0&pkPostCode=" + pkPostCode);
+    //     }
+    // }, {
+    //     text: "收消息",
+    //     func: function () {
+    //         jump("./task_receive_management.html?pkPostCode=" + pkPostCode);
+    //     }
+    // }, {
+    //     text: "下载数据",
+    //     func: function () {
+    //         jump("./task_download_management.html?pkPostCode=" + pkPostCode);
+    //     }
+    // }, {
+    //     text: "评价管理",
+    //     func: function () {
+    //         jump("./task_evaluate_management.html?pkPostCode=" + pkPostCode);
+    //     }]
+    var imageMenuData = [
+        [{
+            text: "发通知",
+            func: function () {
+                jump("../post/send_notification.html?type=0&pkPostCode=" + pkPostCode);
+            }
+        }, {
+            text: "收消息",
+            func: function () {
+                jump("./task_receive_management.html?pkPostCode=" + pkPostCode);
+            }
+        }, {
+            text: "下载数据",
+            func: function () {
+                jump("../post/download_data.html?pkPostCode=" + pkPostCode);
+            }
+        }, {
+            text: "评价管理",
+            func: function () {
+                var getType=$(this).parents('.button-div').prev('.tma_contx_wrap').length;
+                jump("../post/evaluate_list.html?pkPostCode=" + pkPostCode+'&taskType='+getType);
+            }
+        }, {
+            text: "子任务修改",
+            func: function () {
+                jump("./task_index_update_sub.html?pkPostCode=" + pkPostCode+'&mainCode='+pkMainCode);
+            }
+        }, {
+            text: "取消",
+            func: function () {
+                console.log($(this).parents('.button-div').prev('.tma_contx_wrap').length);
+                if($(this).parents('li').find('.tma_contx_wrap').length>1){
+                    layer.open({
+                        content: '确定取消子任务吗？'
+                        , btn: ['确定', '取消']
+                        , yes: function (index) {
+                            $.ajax({
+                                xhrFields: {
+                                    withCredentials: true
+                                },
+                                type:'post',
+                                url:base_url + "html5/v1/newTask/delSubTask",
+                                data: "{\"subCode\": \"" + pkPostCode + "\"}",
+                                dataType:'json',
+                                headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+                                beforeSend:function(XMLHttpRequest){
+
+                                },
+                                success:function(data){
+                                    var datas=data;
+                                    if(datas){
+                                        if(datas.msg=='success'){
+                                            layer.open({
+                                                content: '操作成功'
+                                                ,skin: 'msg'
+                                                ,time: 1 //2秒后自动关闭
+                                            });
+
+                                            $(this).parents('.button-div').prev('.tma_contx_wrap').remove();
+                                            return false;
+                                        }else {
+                                            layer.open({
+                                                content: '操作失败,'+data.msg
+                                                ,skin: 'msg'
+                                                ,time: 1 //2秒后自动关闭
+                                            });
+                                            return false;
+                                        }
+                                    }
+                                },
+                                error:function(){
+                                    layer.open({
+                                        content: '请求失败'
+                                        ,skin: 'msg'
+                                        ,time: 1 //2秒后自动关闭
+                                    });
+                                    return false;
+                                }
+
+                            })
+                        }
+                    });
+                }else {
+                    layer.open({
+                        content: '不能取消最后一个子任务'
+                        ,skin: 'msg'
+                        ,time: 2
+                    });
+                }
+
+            }
+        }]
+    ];
+    $(".more").each(function(){
+        var that=$(this);
+        var offsetWidth=$(window).width() - that.offset().left - that.outerWidth();
+        if(offsetWidth<200){
+            that.smartMenu(imageMenuData,{offsetX:-100});
+        }else {
+            if(window.innerWidth<640){
+                that.smartMenu(imageMenuData);
+            }else{
+                that.smartMenu(imageMenuData,{offsetX:-parseInt(that.offset().left)/1.7});
+            }
+
+        }
+        console.log()
+    });
+    $(document).click(function(){
+        $.smartMenu.hide();
+        $("#smartMenu_").hide();
+    });
+    $(function () {
+        console.log(1)
+        setTimeout(function(){
+            console.log(2)
+        })
+
+        console.log(3)
+        console.log(4)
+        queryPostByOrgCode(0,20);
+
+    });
+</script>
+</body>
+</html>
+

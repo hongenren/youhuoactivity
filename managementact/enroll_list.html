@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-fscale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <style>
+        #header {width: 100%;height: 43px;overflow: hidden;background: #FFFFFF;}
+        #header .swiper-slide {padding: 0 18px;width:auto;line-height: 41px;height: 41px}
+        #header .swiper-slide a{display: block;overflow: hidden;font-size: 14px;color: #000000}
+        #header .swiper-slide.current{border-bottom: 2px solid #72B91E}
+        #header .swiper-slide.current a{color: #72B91E}
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+
+    <header class="warp_gl_u">
+        <nav id="header">
+            <div id="top-line"></div>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide current" data-type='1'>
+                    <a href="javascript:void(0)" onclick="get_activity_auditee($_GET['sectionCode'],1)">志愿岗位</a>
+                </div>
+                <!--<div class="swiper-slide" data-type='2'>
+                    <a href="javascript:void(0)" onclick="get_activity_auditee($_GET['sectionCode'],2)">任务</a>
+                </div>-->
+                <div class="swiper-slide" data-type='3'>
+                    <a href="javascript:void(0)" onclick="get_activity_auditee($_GET['sectionCode'],3)">公众</a>
+                </div>
+                 <div class="swiper-slide" data-type='4'>
+                    <a href="javascript:void(0)" onclick="get_activity_auditee($_GET['sectionCode'],4)"><!--现场-->管理员</a>
+                </div>
+                <div class="swiper-slide" data-type='5'>
+                    <a href="javascript:void(0)" onclick="get_activity_auditee($_GET['sectionCode'],5)">嘉宾</a>
+                </div>
+                <div class="swiper-slide" data-type='6'>
+                    <a href="javascript:void(0)" onclick="get_activity_auditee($_GET['sectionCode'],6)">媒体</a>
+                </div><!--
+                 <div class="swiper-slide" data-type='7'>
+                    <a href="javascript:void(0)" onclick="get_activity_auditee($_GET['sectionCode'],7)">活动管理员</a>
+                </div>-->
+            </div>
+        </nav>
+        <div class="warp_gl_u_sp"></div>
+
+        <div class="warp_gl_u_so">
+            <!-- <span>全部岗位</span> -->
+        </div>
+
+        <div class="warp_gl_u_si">
+            <input type="button" value="搜索" class="warp_gl_u_su">
+            <input type="text" placeholder="请输入姓名或手机号" class="warp_gl_u_sy">
+        </div>
+
+    </header>
+
+    <div class="warp_gl_u_st">
+        <span>总报名<i id="all_num">0</i>人/已签到<i id="sign_num">0</i>人</span>
+    </div>
+    <div id="content">
+        <ul class="warp_gl_u_sr">
+
+        </ul>
+    </div>
+    <div class="warp_gl_y_sw">
+        <div class="warp_gl_y_sq"></div>
+        <ul class="warp_gl_y_sl">
+        </ul>
+    </div>
+
+</div>
+<div id="allmap"></div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/swiper.min.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+<script type="text/javascript" src="../wap/js/managementact/enroll_list.js"></script>
+<script>
+    $(function(){
+        $(".warp_gl_y_sl li").on("click",function(){
+            $(".warp_gl_y_sw").hide();
+        });
+    });
+</script>
+<script>
+    $(function(){
+        var cotrs = $(".warp_gl_y_sl li");
+        cotrs.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    });
+</script>
+<script type="text/javascript">
+    window.onload = function() {
+        var mySwiper1 = new Swiper('#header',{
+            freeMode : true,
+            slidesPerView : 'auto'
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    get_activity_work($_GET['sectionCode']);
+    // get_activity_auditee($_GET['sectionCode'],1);
+    function countCheckInTicket(sectionCode, ticketOrder, typeNum){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/userTicket/countCheckInTicket",
+            data:JSON.stringify({"sectionCode":sectionCode,"ticketOrder":ticketOrder,"type":typeNum}),
+            dataType:'json',
+            headers : {'token':token},
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    data_list = data.data;
+                    // console.log(data_list)
+                    $("#sign_num").html(data_list.size)
+                }else{
+                    layer.open({
+                        content: '获取失败'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+</script>
+</body>
+</html>

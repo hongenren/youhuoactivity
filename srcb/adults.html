@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>申领公益护照</title>
+    <meta name="Keywords" content="公益护照"/>
+    <meta name="description" content="公益护照"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/choice.css">
+    <link rel="stylesheet" href="css/identity.css">
+</head>
+<body style="background: #F2F2F2">
+<div class="sendHistoryHead">
+    <a class="sendBack" href="javascript:void(0)" onclick="historyLocalStorage();"><i></i><!--<span>返回</span>--></a>
+    <div class="sendHeadList"><span>选择类型</span></div>
+    <!--<div class="sendHeadButton"><button>发送历史</button></div>-->
+</div>
+<div class="sendInspectContent">
+    <div class="typeOld" style="display: none;">请选择类型:</div>
+    <div class="sendInspectListWrap">
+        <div class="sendInspectList bigDiv" onclick="select(this);">
+            <div class="sendListName">成年人“公益护照”实体卡</div>
+            <div class="sendListCheck"><input class="big" value="1" type="radio" name="applyType"></div>
+        </div>
+        <div class="sendInspectList bigSmallDiv" onclick="select(this);">
+            <div class="sendListName">成年人和未成年人的“公益护照”实体卡</div>
+            <div class="sendListCheck"><input class="bigSmall" value="2" type="radio" name="applyType"></div>
+        </div>
+        <div class="sendInspectList smallDiv" onclick="select(this);">
+            <div class="sendListName">未成年人的“公益护照”实体卡</div>
+            <div class="sendListCheck"><input class="small" value="3" type="radio" name="applyType"></div>
+        </div>
+    </div>
+    <div class="oldTestListBigSmall" style="display: none;">
+        <!--<div style="float: right;width: 100%"><span style="color: red;margin-left: .3rem;line-height: .7rem" class="bigSmallTestBut" onclick="bigSmallClick(this);">添加未成年人信息</span></div>-->
+        <div class="oldTestList oldTestList1">
+            <div class="oldTestTop clearfix">
+                <div class="left">未成年人信息</div>
+                <!--<div class="right new_right">-->
+                    <!--<span class="bigRemoveBut" style="color: red;" onclick="removeBut(this, 1)">删除</span>-->
+                <!--</div>-->
+            </div>
+            <div class="oldColumn" style="background-color:#fff;">
+                <div class="identityInputWrap">
+                    <div class="left identityName"><i>*</i>姓名</div>
+                    <div class="identityInput"><input class="v1" id="v1" name="name" type="text" placeholder="请输入未成年人的真实姓名"></div>
+                </div>
+                <div class="identityInputWrap">
+                    <div class="left identityName"><i>*</i>姓名拼音</div>
+                    <div class="identityInput"><input class="v1" name="ename" type="text" placeholder="请输入真实姓名的拼音"></div>
+                </div>
+                <div class="identityInputWrap">
+                    <div class="left identityName"><i>*</i>身份证号</div>
+                    <div class="identityInput"><input class="v1" name="idCard" type="text" placeholder="请输入未成年人的身份证号"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="oldTestListSmall">
+        <div class="oldTestList-1 oldTestList1">
+            <div class="oldTestTop clearfix">
+                <div class="left">未成年人信息</div>
+                    <!--<div class="right new_right">-->
+                        <!--<span class="bigRemoveBut" style="color: red;" onclick="removeBut(this, 1)">删除</span>-->
+                    <!--</div>-->
+            </div>
+            <div class="oldColumn">
+                <div class="identityInputWrap">
+                    <div class="left identityName"><i>*</i>姓名</div>
+                    <div class="identityInput"><input class="v5" id="v5" name="name" type="text" placeholder="请输入未成年人的真实姓名"></div>
+                </div>
+                <div class="identityInputWrap">
+                    <div class="left identityName"><i>*</i>姓名拼音</div>
+                    <div class="identityInput"><input class="v5" name="ename" type="text" placeholder="请输入真实姓名的拼音"></div>
+                </div>
+                <div class="identityInputWrap">
+                    <div class="left identityName"><i>*</i>身份证号</div>
+                    <div class="identityInput"><input class="v5" name="idCard" type="text" placeholder="请输入未成年人的身份证号"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="overflow: hidden;padding: 2% 4%;">
+        <!--<span style="font-size: 13px;line-height: 16px;padding: 0px;color: #807d7d">提示：<br>未成年人“公益护照”实体卡的申领，将于2019年11月5日开放，请先完成成年人“公益护照”实体卡的申领，届时可直接申领未成年人“公益护照”实体卡。</span>-->
+        <span style="font-size: 13px;line-height: 16px;padding: 0px;color: #807d7d">提示：<br>成年人“公益护照”实体卡为主卡，未成年人“公益护照”实体卡为附属卡，一张主卡下最多可申领4张附属卡，每次操作只能申领一张附属卡，如需申领多张，请多次操作。</span>
+    </div>
+
+    <div class="sendNextButton" onclick="sub()">下一步</div>
+</div>
+<div class="choiceSearchWrap">
+
+</div>
+<input type="hidden" class="hide_name" />
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script src="js/pinyin.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script>
+    var sendListCheck=function(){
+        $('.sendInspectList').each(function(){
+            var bool=$(this).find('input[type="radio"]').is(':checked');
+            if(!bool){
+                $(this).find('.sendListCheck').removeClass('on');
+            }else{
+                $(this).find('.sendListCheck').addClass('on')
+                if($(this).find('input[type="radio"]').hasClass('big')){
+                    $(".oldTestListSmall,.oldTestListBigSmall").hide();
+                }else if($(this).find('input[type="radio"]').hasClass('bigSmall')){
+                    $(".oldTestListSmall").hide();
+                    $(".oldTestListBigSmall").show();
+                }else if($(this).find('input[type="radio"]').hasClass('small')){
+                    $(".oldTestListBigSmall").hide();
+                    $(".oldTestListSmall").show();
+                }
+            }
+
+        })
+    },bigSmallLength = 1;
+    function select(obj){
+        if($(obj).hasClass("noClick")){
+            return;
+        }else{
+            var bool=$(obj).find('input[type="radio"]').prop('checked');
+            if(!bool){
+                $(obj).find('input[type="radio"]').prop('checked',true);
+                if($(obj).hasClass("sendInspectList bigDiv")){
+                    blankType = 1;
+                }
+                if($(obj).hasClass("sendInspectList smallDiv")){
+                    blankType = 2;
+                }
+                if($(obj).hasClass("sendInspectList bigSmallDiv")){
+                    blankType = 3;
+                }
+                sendListCheck();
+            }else{
+                /*$(this).find('input[type="radio"]').prop('checked',false);
+                blankType = 0;
+                sendListCheck();*/
+            }
+        }
+    }
+    function bigSmallClick(obj){
+        if($(".oldTestList").html()){
+            if(bigSmallLength>=4){
+                layer.open({
+                    content: "最多只能添加4个附属卡信息！"
+                    ,skin: 'msg'
+                    ,time: 3
+                });
+                return;
+            }
+            bigSmallLength ++;
+            var list='<div class="oldTestList oldTestList'+bigSmallLength+'">\n' +
+                '            <div class="oldTestTop clearfix">\n' +
+                '                <div class="left">未成年人信息</div>\n' +
+                '                <div class="right new_right">' +
+                '                   <span class="bigRemoveBut" style="color: red;" onclick="removeBut(this)">删除</span>' +
+                '               </div>\n' +
+                '            </div>\n' +
+                '            <div class="oldColumn">\n' +
+                '                <div class="identityInputWrap">\n' +
+                '                    <div class="left identityName"><i>*</i>姓名</div>\n' +
+                '                    <div class="identityInput"><input class="v'+bigSmallLength+'" id="v'+bigSmallLength+'" name="name" type="text" placeholder="请输入未成年人的真实姓名"></div>\n' +
+                '                </div>\n' +
+                '                <div class="identityInputWrap">\n' +
+                '                    <div class="left identityName"><i>*</i>姓名拼音</div>\n' +
+                '                    <div class="identityInput"><input class="v'+bigSmallLength+'" name="ename" type="text" placeholder="请输入真实姓名的拼音"></div>\n' +
+                '                </div>\n' +
+                '                <div class="identityInputWrap">\n' +
+                '                    <div class="left identityName"><i>*</i>身份证号</div>\n' +
+                '                    <div class="identityInput"><input class="v'+bigSmallLength+'" name="idCard" type="text" placeholder="请输入未成年人的身份证号"></div>\n' +
+                '                </div>\n' +
+                '            </div>\n' +
+                '        </div>'
+            $(".oldTestList"+(bigSmallLength-1)).before(list);
+            //$(".old_right").html("<span class=\"bigRemoveBut\" onclick=\"removeBut(this)\">删除</span>");
+            $(".bigSmallTestBut").parent().removeClass("new_right");
+            $(".bigSmallTestBut").parent().addClass("old_right");
+        }else{
+            $(".oldTestList1").show();
+        }
+    }
+    $('input').live('input propertychange', function(){
+        if($(this).attr("name")=="name"){
+            $(".hide_name").val($(this).val());
+            $.each( $("."+$(this).attr("id")), function (i, obj) {
+                if($(obj).attr("name")=="ename") {
+                    $(obj).val($(".hide_name").toPinyin());
+                }
+            })
+        }
+    })
+    var uuid = $.getUrlParam("uuid");
+    var blankType = $.getUrlParam("blankType");
+    var userNo = $.getUrlParam("userNo");
+    var channel = $.getUrlParam("channel");
+    var removeBut=function(e, index){
+        if(index==1){
+            $(".oldTestList1").hide();
+        }else{
+            bigSmallLength --;
+            e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode)
+        }
+    };
+    var user_bank = {}, subCards = [], subClass = "oldTestList";
+    $(function(){
+        if(localStorage.getItem('user_bank')){
+            user_bank = JSON.parse(localStorage.getItem('user_bank'));
+            if(blankType){
+                user_bank.blankType = blankType;
+            }else{
+                blankType = user_bank.blankType;
+            }
+
+            if(user_bank.ifSchool==1){
+                $('.big').attr('checked','true');
+                sendListCheck();
+                $('.oldTestListBigSmall').hide();
+                $('.oldTestListSmall').hide();
+                $('.bigSmallDiv').hide();
+                $('.smallDiv').hide();
+                if(user_bank.blankType == 1){
+                    $('.sendInspectList').addClass("noClick");
+                }
+                if(user_bank.blankType == 3){
+                    $('.smallDiv').show();
+                }
+                if(user_bank.blankType == 2){
+                    $('.bigSmallDiv').show();
+                }
+            }else{
+                if(user_bank.blankType==1){//主
+                    $('.sendInspectList').eq(0).trigger('click');
+                    $('.bigDiv').show();
+                    $('.bigSmallDiv').hide();
+                    $('.smallDiv').hide();
+                }
+                else if(user_bank.blankType==3){//附
+                    subClass = "oldTestList-1";
+                    $('.sendInspectList').eq(2).trigger('click');
+                    $('.bigDiv').hide();
+                    $('.bigSmallDiv').hide();
+                    $('.smallDiv').show();
+                    $('.sendInspectList').addClass("noClick");
+                }
+                else if(user_bank.blankType==2){//主附
+                    $('.sendInspectList').eq(0).trigger('click');
+                    $('.bigDiv').show();
+                    $('.bigSmallDiv').show();
+                    $('.smallDiv').hide();
+                }
+            }
+        }else{
+            user_bank.uuid = uuid;
+            user_bank.blankType = blankType;
+            user_bank.channel = channel;
+
+            if(user_bank.blankType==1){//主
+                $('.sendInspectList').eq(0).trigger('click');
+                $('.bigDiv').show();
+                $('.bigSmallDiv').hide();
+                $('.smallDiv').hide();
+            }
+            else if(user_bank.blankType==3){//附
+                subClass = "oldTestList-1";
+                $('.sendInspectList').eq(2).trigger('click');
+                $('.bigDiv').hide();
+                $('.bigSmallDiv').hide();
+                $('.smallDiv').show();
+            }
+            else if(user_bank.blankType==2){//主附
+                $('.sendInspectList').eq(0).trigger('click');
+                $('.bigDiv').show();
+                $('.bigSmallDiv').show();
+                $('.smallDiv').hide();
+            }
+        }
+    })
+
+    function sub(){
+        if(blankType==1){//主
+            savePersion();
+        }
+        else if(blankType==2 || blankType==3){//主附 || //附
+            var persons = [];
+            subCards = [];
+            $.each($("."+subClass), function (i, obj) {
+                var user = {};
+                var user_sub = {};
+                var j = i+1;
+                if(blankType==2){
+                    j = 5;
+                }
+                $.each($(".v"+j), function (i, obj_1) {
+                    if($(obj_1).attr("name")=="name") {
+                        user.realName = $(obj_1).val();
+                        user_sub.name = $(obj_1).val();
+                    }
+                    if($(obj_1).attr("name")=="ename"){
+                        user_sub.ename = $(obj_1).val();
+                    }
+                    if($(obj_1).attr("name")=="idCard"){
+                        user.cardNo = $(obj_1).val();
+                        user_sub.idCard = $(obj_1).val();
+                    }
+                })
+                persons.push(user);
+                subCards.push(user_sub);
+            })
+            var err = false;
+            $.each(subCards, function (i, val) {
+                if(val.name==undefined || val.name==null || val.name==""){
+                    err = true;
+                    return false;
+                }
+                if(val.ename==undefined || val.ename==null || val.ename==""){
+                    err = true;
+                    return false;
+                }
+                if(val.idCard==undefined || val.idCard==null || val.idCard==""){
+                    err = true;
+                    return false;
+                }
+            })
+            if(err){
+                layer.open({
+                    content: "请完善未成年人信息"
+                    ,skin: 'msg'
+                    ,time: 3 //2秒后自动关闭
+                });
+                return false;
+            }
+            assistQueryPersonInfo(persons);
+        }
+    }
+    function savePersion(){
+        var json = {"uuid":user_bank.uuid,"channel":user_bank.channel, "applyType":$('input:radio:checked').val()};
+        json.blankType = blankType;
+        if(subCards.length>0){
+            json.subCards = subCards;
+        }
+        if(uuid){
+            json.uuid = uuid;
+            user_bank.uuid = uuid;
+        }
+        localStorage.setItem('user_bank',JSON.stringify(user_bank));
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'post',
+            url: base_url + "/html5/v2/srcb/savePersion",
+            data: JSON.stringify(json),
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            beforeSend: function (XMLHttpRequest) {
+                layer.open({
+                    content: "提交中，请稍后。。。"
+                    , skin: 'msg'
+                    , time: 999
+                });
+            },
+            success: function (data) {
+                layer.closeAll();
+                if (data.code == 0) {
+                    var d = data.data;
+                    subCards = [];
+                    jump("./mailing_information.html?isType="+json.blankType);
+                }else{
+                    subCards = [];
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 3 //2秒后自动关闭
+                    });
+                }
+            },
+            error:function(e){
+                subCards = [];
+                layer.open({
+                    content: '提交失败，请返回重试！'
+                });
+            }
+        })
+    }
+    function assistQueryPersonInfo(persons){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'post',
+            url: base_url + "/html5/v2/srcb/assistQueryPersonInfo",
+            data: JSON.stringify(persons),
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            beforeSend: function (XMLHttpRequest) {
+                layer.open({
+                    content: "验证身份信息中，请稍后。。。"
+                    , skin: 'msg'
+                    , time: 999
+                });
+            },
+            success: function (data) {
+                layer.closeAll();
+                if (data.code == 0) {
+                    savePersion();
+                }else{
+                    layer.open({
+                        content: data.msg
+                        , skin: 'msg'
+                        , time: 10
+                    });
+                    subCards = [];
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '检查失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                subCards = [];
+            }
+        })
+    }
+</script>
+</body>
+</html>

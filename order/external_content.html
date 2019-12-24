@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/order/order.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.qrcode.min.js"></script>
+	<style>
+	    #qrcode{width: 150px;margin: auto}
+	</style>
+</head>
+<body>
+<div class="warp">
+
+	<div class="warp_zy_j">
+        <span>公益上海</span>
+    </div>
+
+     <div class="warp_dd_i_su">
+        <div class="warp_dd_i_se" style="background: #72B81E">
+            <img src="../wap/img/pws_275.jpg" class="headimg">
+            <div class="warp_dd_i_sw" style="float:none; margin-right: 80px">
+                <div class="warp_dd_i_sq">
+                    <b class="b1">姓名<span class='span1'></span></b>
+                    <!--<span class='span2'>加载中</span>-->
+                </div>
+                <div class="warp_dd_i_sl">
+                    <span>活动名称</span>
+                </div>
+            </div>
+        </div>
+        <div class="warp_dd_i_sh">
+            <div class="warp_dd_i_sk">
+                <span class="arriveTime" style="background: url(../wap/img/pws_169.png) no-repeat left center;background-size: 13px 13px;background-position: 0 3px">加载中  <time>加载中</time></span>
+                <span class="address" style="background: url(../wap/img/pws_170.png) no-repeat left center;background-size: 13px 14px;background-position: 0 3px">加载中</span>
+                <span class="phone" style="background: url(../wap/img/pws_167.png) no-repeat left center;background-size: 13px 14px;background-position: 0 3px">加载中</span>
+                <span class="times" style="background: url(../wap/img/pws_169.png) no-repeat left center;background-size: 13px 13px;background-position: 0 3px">可获取服务时长：</span>
+            </div>
+            
+            <div class="warp_dd_i_sj">
+				<div id="qrcode"></div>
+                <b>描述</b>
+                <span class='demo'></span>
+            </div>
+        </div>
+         <a id="download" download="qrcode.jpg"></a>
+        <input type="button" value="请截图保存，以便入场时使用" class="warp_dd_i_sr" id="bcxc">
+    </div>
+</div>
+<script type="text/javascript">
+    var type = $.getUrlParam("type"), typename = "名称：", state = $.getUrlParam("state");
+    var timeSrc = "可获取服务时长：";
+    var manual = "";
+    if(type != 10 && type != 20){
+        $('.times').hide();
+    }
+    typename = getTypeName(type);
+    get_task_content();
+   function get_task_content(){
+    var ticket = $_GET['ticket'];
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/userTicket/detail",
+            data:JSON.stringify({"ticket":ticket}),
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    var data1 = data.data;
+                    if(state==30){
+                        manual = "（"+data1.txtManual+"）";
+                        timeSrc = "已获取服务时长：";
+                    }
+                    var arriveTime = split_datetime(data1.arriveTime);
+                    $('.b1').html($('.b1').html().replace("姓名",data1.nickName));//姓名
+                    $('.span1').text(typename+data1.name);//岗位名称
+                    $('.warp_dd_i_sl span').text("活动名称："+data1.title);//活动名称
+                    if(type==20){
+                        $('.arriveTime').text("截止时间："+arriveTime.date + " " + arriveTime.str);
+                    }else{
+                        $('.arriveTime').text("报到时间："+arriveTime.date + " " + arriveTime.str);
+                    }
+                    $('.address').text("报到地址："+data1.address);
+                    $('.phone').html("<a href='tel:"+data1.mobile+"' style='color: #999999;'>电话："+data1.mobile+"</a>");
+                    $('.times').text(timeSrc+ChangeHourMinutestr(data1.validTime)+manual);
+                    if(data1.demo==null || data1.demo==""){
+                        $('.demo').text("暂无描述");
+                    }else{
+                        $('.demo').text(data1.demo);
+                    }
+                    if(data1.headImg!=''){
+                        $('.headimg').attr('src',data1.headImg);
+                    }
+                    $(".warp_dd_i_sl").click(function () {
+                        jump("../activity/activity_content.html?activityCode="+data1.activityCode);
+                    });
+                    qrcode1(data1.qrCode);
+                }else{
+                    layer.open({
+                    content: data.msg
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+                
+
+            },
+            error:function(){
+                layer.open({
+                content: '账号或密码错误'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+   }
+    function qrcode1(url){
+        $("#qrcode").qrcode({
+            render: "canvas", // 渲染方式有table方式（IE兼容）和canvas方式
+            width: 150, //宽度
+            height: 150, //高度
+            text: url, //内容
+            typeNumber: -1,//计算模式
+            correctLevel: 2,//二维码纠错级别
+            background: "#ffffff",//背景颜色
+            foreground: "#000000"  //二维码颜色
+        });     
+    }
+    if(IsWhat()==1) {//判断是否是苹果，如果是就把保存图片的按钮隐藏
+        $('#bcxc').hide();
+    }else{
+        $('#bcxc').click(function(){
+            var canvas = $('#qrcode').find("canvas").get(0);
+            try {//解决IE转base64时缓存不足，canvas转blob下载
+                var blob = canvas.msToBlob();
+                navigator.msSaveBlob(blob, 'qrcode.jpg');
+            } catch (e) {//如果为其他浏览器，使用base64转码下载
+                var url = canvas.toDataURL('image/jpeg');
+                $("#download").attr('href', url).get(0).click();
+            }
+            return false;
+        });
+    }
+</script>
+
+</body>
+</html>

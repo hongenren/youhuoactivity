@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海" />
+    <meta name="description" content="公益上海" />
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript" src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/sendHistory.css"/>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <!--<script type="text/javascript" src="../wap/js/jquery.js"></script>-->
+    <script type="text/javascript" src="../../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../wap/js/public.js"></script>
+    <script type="text/javascript" src="../../wap/js/common.js"></script>
+    <script type="text/javascript" src="../../wap/js/config.js"></script>
+    <script type="text/javascript" src="../../wap/js/public.js"></script>
+    <script src="js/sendAlone.js"></script>
+</head>
+<body>
+<div class="sendHistoryWrap">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i><span></span></a>
+        <div class="sendHeadList"><span>公益上海</span></div>
+        <!--<div class="sendHeadButton"><button>发送历史</button></div>-->
+    </div>
+    <nav>
+        <ul class="warp_gl_q_st">
+            <li>
+                <a id="qfHref" href="javascript:void(0)">群发</a>
+            </li>
+            <li class="current">
+                <a id="dfHref" href="javascript:void(0)">单发</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="sendInspectContent">
+        <div class="sendInspectSearch clearfix" style="margin-top:0;">
+            <div class="sendInspectSearchLeft">
+                <i></i>
+                <input id="search" type="text" placeholder="请输入姓名或手机号进行搜索">
+                <button id="cleanContent"></button>
+            </div>
+            <button class="sendInspectSearchRight">搜索</button>
+        </div>
+        <div class="sendInspectListWrap" id="initList">
+        </div>
+        <button class="sendNextButton">下一步</button>
+        <!--<div class="sendNextButton">下一步</div>-->
+    </div>
+</div>
+<div class="sendAloneLayerWrap" style="display: block">
+    <div class="sendAloneLayer">
+        <div class="sendAloneLayerTxt"><textarea id="sendContent">请输入通知广播内容</textarea></div>
+        <div class="sendAloneLayerButton">
+            <button class="sendAloneButtonList sendLayerClose">取消</button>
+            <button class="sendAloneButtonList sendLayerSubmit">发送</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

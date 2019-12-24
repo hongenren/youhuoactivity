@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>账户切换</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <style>
+        .warp_qp_p{overflow: hidden;padding: 3%;background: #FFFFFF;}
+        .warp_qp_p_sp{display: block;float: right}
+        .warp_qp_p_sp img{width: 14px;height: 14px;margin: auto}
+        .warp_qp_p_sp span{display: block;text-align: center;font-size: 14px;color: #F75506;line-height: 24px}
+        .warp_qp_p_so{display: block;float: left;font-size: 16px;color: #333333;line-height: 38px;background: url(../wap/img/prev.png) no-repeat left center;background-size: 8px 14px;padding-left: 18px}
+        .warp_qp_o{display: block;overflow: hidden;padding: 3%;background: #FFFFFF;margin-top: 3%}
+        .warp_qp_o img{width: 44px;height: 44px;float: left}
+        .warp_qp_o_sp{overflow: hidden;padding-left: 3%}
+        .warp_qp_o_so{width: 100%;overflow: hidden;color: #000000;line-height: 20px}
+        .warp_qp_o_so span{display: block;float: right;font-size: 13px;background: url(../wap/img/pws_16.png) no-repeat right center;background-size: 7px 12px;padding-right: 12px}
+        .warp_qp_o_so b{display: block;float: left;font-size: 15px;font-weight: normal}
+        .warp_qp_o_si{width: 100%;overflow: hidden;padding-top: 5px}
+        .warp_qp_o_si span{display: inline-block;color: #BBBBBB;border: 1px solid #BBBBBB;padding: 0 3px}
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <div class="warp_qp_p">
+        <a href="../user/change_account.html" class="warp_qp_p_sp">
+            <img src="../wap/img/pws_35.png">
+            <span>切换账户</span>
+        </a>
+        <a href="javascript:history.go(-1)" class="warp_qp_p_so">返回</a>
+    </div>
+
+    <a href="javascript:void(0)" class="warp_qp_o">
+       <img src="../wap/img/pws_275.jpg">
+        <div class="warp_qp_o_sp">
+            <div class="warp_qp_o_so">
+                <span>修改</span>
+                <b class='name'>加载中</b>
+            </div>
+            <div class="warp_qp_o_si">
+                <span>公益基地</span>
+                <span>实名认证</span>
+                <span>其他标签</span>
+            </div>
+        </div>
+    </a>
+
+    <ul class="warp_pws_l">
+        <li>
+            <a href="javascript:void(0)">
+                <span>1899</span>
+                <b>阅读量排名</b>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <span>1899</span>
+                <b>关注</b>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <span>1899</span>
+                <b>粉丝</b>
+            </a>
+        </li>
+    </ul>
+    <ul class="warp_pws_k">
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/pws_51.png" class="warp_pws_k_tp">
+                <div class="warp_pws_k_sp">
+                    <b>公益信用</b>
+                    <span>199</span>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/pws_52.png" class="warp_pws_k_tp">
+                <div class="warp_pws_k_sp">
+                    <b>积分余额</b>
+                    <span>1,899.10</span>
+                </div>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="warp_gl_i">
+        <li>
+            <a href="javascript:void(0)" id="scanQRCode">
+                <img src="../wap/img/pws_225.png">
+                <span>扫一扫</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/pws_226.png">
+                <span>扫我</span>
+            </a>
+        </li>
+        <li>
+            <a href="../act/act_base_add_quick.html">
+                <img src="../wap/img/pws_227.png">
+                <span>快速发布</span>
+            </a>
+        </li>
+        <li>
+            <a href="../act/act_base_add.html">
+                <img src="../wap/img/pws_228.png">
+                <span>标准发布</span>
+            </a>
+        </li>
+        <li>
+            <a href="//fuli.shcvs.cn/wap">
+                <img src="../wap/img/pws_229.png">
+                <span>福利管理</span>
+            </a>
+        </li>
+        <li>
+            <a href="//h5.shcvs.cn/find/fabutuwen.html">
+                <img src="../wap/img/pws_230.png">
+                <span>发布资讯</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/pws_231.png">
+                <span>会籍管理</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/pws_232.png">
+                <span>举报受理</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/pws_233.png">
+                <span>标签库</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/pws_234.png">
+                <span>公益数据</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/pws_235.png">
+                <span>记录补偿</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/pws_236.png">
+                <span>保险保障</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/pws_237.png">
+                <span>公共资源</span>
+            </a>
+        </li>
+        <li>
+            <a href="./subordinate.html">
+                <img src="../wap/img/pws_238.png">
+                <span>下属团体</span>
+            </a>
+        </li>
+    </ul>
+	
+	<!------底部开始------>
+    <div class="ht60"></div>
+    <div class="footer_jg">
+        <div class="footer_jg_qt3">
+            <ul>
+                <li class="jg_ft1 current">
+                    <a href="./institutions.html">
+                        <span style="background-size: 36px auto;"></span>
+                        <b>我的机构</b>
+                    </a>
+                </li>
+                <li class="jg_ft2">
+                    <a href="javascript:void(0)">
+                        <span></span>
+                        <b>消息</b>
+                    </a>
+                </li>
+                <li class="jg_ft3">
+                    <a href="./mylaunch.html">
+                        <span></span>
+                        <b>订单</b>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!------底部结束------>
+</div>
+<script type="text/javascript">
+getWxConfig();
+function getWxConfig(){
+    var wwwurl = location.href.split('#')[0];
+        $.ajax({
+            type:"post",
+            url:base_url + "html5/v1/wechat/getWeChatJsSign",
+            data:JSON.stringify({"url":wwwurl}),
+            headers : {'token':token},
+            async:false,
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                console.log(data);
+                if(data.code==0){
+                    var data1 = JSON.parse(data.data.data);
+                    //sessionStorage.setItem('WxConfig',data1); //获取WX配置信息
+                     wx.config({
+                        debug: false, 
+                        appId: data1.appId, // 必填，公众号的唯一标识
+                        timestamp:parseInt(data1.timestamp), // 必填，生成签名的时间戳
+                        nonceStr: data1.nonceStr, // 必填，生成签名的随机串
+                        signature: data1.signature,// 必填，签名，见附录1
+                        jsApiList: ['checkJsApi','scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    });
+                }  
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }    
+        wx.error(function(res) {
+            console.log("出错了error：" + res.errMsg);
+        });
+ 
+        wx.ready(function() {
+            wx.checkJsApi({
+                jsApiList : ['scanQRCode'],
+                success : function(res) {
+                    console.log(res);
+                }
+            });
+            //机构扫一扫
+            document.querySelector('#scanQRCode').onclick = function() {
+                wx.scanQRCode({
+                    needResult : 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                    scanType : ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                    success : function(res) {
+                        var result = res.resultStr; 
+                        location.href = result;
+                    }
+                });
+            };
+            document.querySelector('#startCan').onclick = function() {
+                wx.scanQRCode({
+                    needResult : 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                    scanType : ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                    success : function(res) {
+                        var result = res.resultStr; 
+                        location.href = result;
+                    }
+                });
+            };
+
+        });
+        
+</script>
+<script type="text/javascript">
+    $(function(){
+        var data1 = '';
+        $.ajax({
+            type:"post",
+            url:base_url + "html5/v1/orgPlace/queryOrgByPrjvOrgId",
+            data:JSON.stringify({"prjvOrgId":prjvorgMsg.prjvOrgId}),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                console.log(data);
+                data1 = data.data;
+                $('.warp_qp_o_so b').empty();
+                $('.warp_qp_o_so b').text(data1.name);
+                
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+        $(".warp_qp_o_so span").click(function(){
+            window.location.href = "./org_msg.html";
+        })
+    })
+
+</script>
+</body>
+</html>

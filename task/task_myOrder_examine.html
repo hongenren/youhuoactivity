@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海"/>
+    <meta name="description" content="公益上海"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="../meng/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/task_myOrder_content.css"/>
+    <link rel="stylesheet" type="text/css" href="css/task_implement_management.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>提交任务内容</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+    <div class="tme_wrap">
+        <div class="tme_progress clearfix">
+            <div class="tme_progress_left">任务进度</div>
+            <div class="tme_progress_right queryChangeApplyList clearfix" style="margin-left:24%;">
+                <div class="tme_progress_list">
+                    <i></i>
+                    <strong>任务提交</strong>
+                    <span></span>
+                </div>
+                <div class="tme_progress_list">
+                    <i></i>
+                    <strong>审核</strong>
+                    <span></span>
+                </div>
+                <div class="tme_progress_list">
+                    <i></i>
+                    <strong>任务提交成功</strong>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <h2 class="adminEvaluateTitle" style="padding-left:.2rem;">我提交的任务内容：</h2>
+        <div class="tme_text">
+            暂无提交内容
+        </div>
+        <div class="tme_imgs_wrap">
+            <div class="tme_imgs">
+                <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+            </div>
+        </div>
+        <div class="tme_evaluate clearfix">
+            <div class="tme_evaluate_list checkScore" style="display:none">
+                <strong>任务联系人给我的评价</strong>
+                <span><i></i><i></i><i></i><i></i><i></i></span>
+            </div>
+            <div class="tme_evaluate_list adminCommentScore" style="display:none">
+                <strong>任务达成度</strong>
+                <span><i></i><i></i><i></i><i></i><i></i></span>
+            </div>
+            <div class="tme_evaluate_list timesGress" style="display:none">
+                <strong>获得志愿服务时长(小时)</strong>
+                <span>0</span>
+            </div>
+            <div class="tme_evaluate_list adminComment" style="display:none">
+                <h2 class="adminEvaluateTitle">管理员给我的评价：</h2>
+                <p>暂无评价内容</p>
+            </div>
+            <div class="tme_evaluate_list adminCommentImg" style="display:none">
+                <!--<div class="tme_evaluate_imgs" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                <!--<div class="tme_evaluate_imgs" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                <!--<div class="tme_evaluate_imgs" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                <!--<div class="tme_evaluate_imgs" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="sendButtonWrap on" style="display:none">
+    <button class="targetNext on tme_submitBtns">修改提交任务</button>
+</div>
+<div class="batchExamine_wrap" style="top:0;background-color:#fff;">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:void(0)"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>修改任务</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+    <div class="tmc_wrap">
+        <div class="tmc_warning">提交内容后，需要管理员审核</div>
+        <div class="tmc_textarea">
+            <textarea name="cont" placeholder="请输入您要提交的任务内容(300汉字以内)"></textarea>
+        </div>
+        <div class="tmc_uploadImgs tim_uploadImgs clearfix">
+            <!--<div class="warp_pws_m_sy" style="background-image:url('../wap/img/pws_27.jpg')">-->
+            <!--<i onclick="deleteIImg(this)"></i>-->
+            <!--</div>-->
+            <!--<div class="warp_pws_m_sy" style="background-image:url('../wap/img/pws_27.jpg')">-->
+            <!--<i onclick="deleteIImg(this)"></i>-->
+            <!--</div>-->
+            <!--<div class="warp_pws_m_sy" style="background-image:url('../wap/img/pws_27.jpg')">-->
+            <!--<i onclick="deleteIImg(this)"></i>-->
+            <!--</div>-->
+            <div class="warp_pws_m_sy smallerStop">
+                <div class="warp_pws_m_sq">
+                    <form class="test_form" action="" method="post" enctype="multipart/form-data">
+                        <img src="../wap/img/pws_96.jpg" id="img0" width="100" height="100">
+                        <input type="file" onchange="uploadImg(0)" name="gg">
+                        <input type="hidden" id="imgsrc0" value='' name="imgsrc">
+                    </form>
+                </div>
+                <!--<i onclick="deleteIImg(this)"></i>-->
+            </div>
+        </div>
+        <div class="tmc_uploadImgs">
+            <!--<div class="warp_pws_m_sy">-->
+            <!--<div class="warp_pws_m_sq">-->
+            <!--<img src="../wap/img/pws_96.jpg" id="img0" width="100" height="100">-->
+            <!--<input type="file" onchange="uploadImg(0)" name="gg">-->
+            <!--<input type="hidden" id="imgsrc0" value='' name="imgsrc">-->
+            <!--</div>-->
+            <!--<i onclick="deleteIImg(this)"></i>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="sendButtonWrap on">
+        <button class="targetNext tme_modifyBtn on">提交</button>
+    </div>
+</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<!--<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>-->
+<script>
+    function deleteIImg(obj){
+        $(obj).parent().remove();
+        if($(".tim_uploadImgs").find(".warp_pws_m_sy").length<=9){
+            $(".smallerStop").show();
+        }
+    }
+    $(".warp_pws_m_sy i").live("click", function() {
+        $(this).parent().parent().remove();
+    });
+    function uploadImg(i) {
+        var form = document.getElementsByClassName("test_form")[i];
+        var imgdata = new FormData(form);
+        //利用ajax上传
+        jQuery.ajax({
+            type: "POST",
+            url: img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper',
+            data: imgdata,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function(XMLHttpRequest) {
+                $(".warp_jm").html("<div class='warp_jz'><img src='../wap/img/loading.gif' style='width:24px;height:24px; margin:0 auto;display:block;position: absolute;left: 50%;top: 50%;margin: -12px 0 0 -12px'/></div>");
+            },
+            success: function(data) {
+                $(".warp_jm").empty();
+                if(data.errorcode==0){
+                    var src = data.data;
+                    var bgSrc='<div class="warp_pws_m_sy" style="background-image:url(\''+src+'\')">\n' +
+                        '                <i onclick="deleteIImg(this)"></i>\n' +
+                        '            </div>';
+                    // $('#img' + i).attr('src', src);
+                    // $('#imgsrc' + i).val('{"img":"' + src + '","demo":""}');
+                    $(".tim_uploadImgs").prepend(bgSrc);
+                    if($(".tim_uploadImgs").find(".warp_pws_m_sy").length>9){
+                        $(".smallerStop").hide();
+                    }
+                }
+            }
+        })
+    }
+    var time1='';
+    var time2='';
+    var time3='';
+    var gressStyleEvent=function(types,times){
+        // var types=20;
+        var time=times||0;
+        var submitStateClass=1;
+        var submitStateClassTxt='管理员审核中';
+        var submitStateClassTxt2='获得时长'+time+'小时';
+
+        // var time1='11-03 18:00';
+        // var time2='11-03 18:00';
+        // var time3='11-03 18:00';
+        if(types==10){
+            submitStateClass=2;
+            submitStateClassTxt='管理员审核中'
+
+            if($.getUrlParam('type')!==null&&$.getUrlParam('type')==2){
+                $(".sendButtonWrap").hide();
+            }else {
+                $(".sendButtonWrap").show();
+            }
+
+        }else if(types==15){
+            submitStateClass=2;
+            submitStateClassTxt='联系人审核中';
+        }else if(types==20){
+            submitStateClass=3;
+            submitStateClassTxt='管理员审核中'
+        }else if(types==-10){
+            submitStateClass=3+' red';
+            submitStateClassTxt2='管理员拒绝'
+        }
+
+        var gress='<div class="tme_progress_list ao tme_progress_list_'+submitStateClass+'">\n' +
+            '                    <i></i>\n' +
+            '                    <strong>任务提交成功</strong>\n' +
+            '                    <span>'+time1+'</span>\n' +
+            '                </div>\n' +
+            '                <div class="tme_progress_list bo tme_progress_list_'+submitStateClass+'">\n' +
+            '                    <i></i>\n' +
+            '                    <strong>'+submitStateClassTxt+'</strong>\n' +
+            '                    <span>'+time2+'</span>\n' +
+            '                </div>\n' +
+            '                <div class="tme_progress_list co tme_progress_list_'+submitStateClass+'">\n' +
+            '                    <i></i>\n' +
+            '                    <strong>'+submitStateClassTxt2+'</strong>\n' +
+            '                    <span>'+time3+'</span>\n' +
+            '                </div>';
+
+        $(".queryChangeApplyList").html(gress);
+    };
+
+    var imgs='';
+    var querySubmit=function(ticket){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url + "html5/v1/newTask/querySubmit",
+            data:JSON.stringify({"ticket":ticket}),
+            dataType:'json',
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            beforeSend:function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                var datas=data.data;
+                if(data.code==0){
+                    if(datas!==''){
+                        var id=datas.id;
+                        var state=datas.state;
+                        var times=datas.times;
+                        time1=datas.updateTime;
+                        var content=datas.content;
+                        var img=datas.img;
+
+                        var checkScore=datas.checkScore;
+                        var adminCommentScore=datas.adminCommentScore;
+                        var adminComment=datas.adminComment;
+                        var adminCommentImg=datas.adminCommentImg;
+
+                        if(img!==''){
+                            $(".tme_imgs").empty();
+                            imgs=img.split(';');
+                            console.log(imgs)
+                            $.each(imgs,function(index,item){
+                                var im='<div class="temImg" style="background-image:url(\''+item.replace(/\"/g,"")+'\')"></div>';
+                                $(".tme_imgs").append(im);
+                            })
+                        }
+                        if(checkScore){
+                            $(".checkScore").find('span').remove();
+                            var span='<span class="starsCheckBtns">';
+                            if(checkScore>0){
+                                var index=parseInt(checkScore);
+                                for(var i=0; i<index;i++){
+                                    span+='<i class="on"></i>'
+                                }
+                                if(index<5){
+                                    for(var i=0; i<(5-index);i++){
+                                        span+='<i></i>'
+                                    }
+                                }
+                            }else {
+                                for(var i=0; i<5;i++){
+                                    span+='<i></i>'
+                                }
+                            }
+                            span+="</span>";
+                            $(".checkScore").append(span);
+                        }
+                        if(adminCommentScore){
+                            $(".adminCommentScore").find('span').remove();
+                            var span2='<span class="starsCheckBtns">';
+                            if(adminCommentScore>0){
+                                var index=parseInt(adminCommentScore);
+                                for(var i=0; i<index;i++){
+                                    span2+='<i class="on"></i>'
+                                }
+                                if(index<5){
+                                    for(var i=0; i<(5-index);i++){
+                                        span2+='<i></i>'
+                                    }
+                                }
+                            }else {
+                                for(var i=0; i<5;i++){
+                                    span2+='<i></i>'
+                                }
+                            }
+                            span2+="</span>";
+                            $(".adminCommentScore").append(span2);
+                        }
+                        if(adminComment!==''){
+                            $(".adminComment").find('p').text(adminComment)
+                        }
+                        if(times!==''){
+                            $(".timesGress").find('span').text(times)
+                        }
+
+                        if(adminCommentImg!==''){
+                            $(".adminCommentImg").empty();
+                            adminCommentImg=adminCommentImg.split(';');
+                            $.each(adminCommentImg,function(index,item){
+                                var im2='<div class="tme_evaluate_imgs" style="background-image:url(\''+item.replace(/\"/g,"")+'\')"></div>';
+                                $(".adminCommentImg").append(im2);
+                            })
+                        }
+                        if($.getUrlParam('type')!==null&&$.getUrlParam('type')==2){
+                            $(".adminComment").show();
+                            $(".adminCommentScore").show();
+                            $(".checkScore").show();
+                            $(".timesGress").show();
+                            $(".adminCommentImg").show()
+                        }
+                        if(state==20){
+                            $(".adminComment").show();
+                            $(".adminCommentScore").show();
+                            $(".checkScore").show();
+                            $(".timesGress").show();
+                            $(".adminCommentImg").show()
+                        }
+
+                        gressStyleEvent(state,times);
+                        $(".tme_text").text(content);
+                        $(".tme_modifyBtn").attr('data-id',id)
+                    }else {
+                        layer.open({
+                            content: '暂无提交内容'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                    }
+
+                }else {
+                    layer.open({
+                        content: '请求失败'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+
+            },
+            error:function(){
+                layer.open({
+                    content: '请求失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+
+        })
+    };
+    $(function(){
+        var ticket=$.getUrlParam('ticket');
+        if(ticket){
+            querySubmit(ticket)
+        }
+        $(".tme_submitBtns").click(function(){
+            $(".batchExamine_wrap").show();
+
+            var cont=$(".tme_text").text();
+            $("textarea[name='cont']").val(cont);
+            if(imgs.length>0){
+                $.each(imgs,function(index,item){
+                    var bgSrc='<div class="warp_pws_m_sy" style="background-image:url(\''+item.replace(/\"/g,"")+'\')">\n' +
+                        '                <i onclick="deleteIImg(this)"></i>\n' +
+                        '            </div>';
+                    $(".tim_uploadImgs").prepend(bgSrc);
+                });
+
+
+            }
+        });
+
+        $(".tme_modifyBtn").click(function(){
+            var tmo_reason=$("textarea[name='cont']").val();
+            var tmo_arr={
+                "img":'',
+                "content":tmo_reason,
+                "id":$(".tme_modifyBtn").attr('data-id')
+            };
+
+            var imgs2='';
+            if($(".tim_uploadImgs").find(".warp_pws_m_sy").length>1){
+                $(".tim_uploadImgs").find(".warp_pws_m_sy").each(function(index,item){
+                    if(!$(item).hasClass('smallerStop')){
+                        var img=$(item).css('background-image');
+                        var imgUrl=img.replace(/url\(([^\)]+)\).*/gi,'$1');
+                        imgs2+=imgUrl+';'
+                    }
+                });
+                tmo_arr.img=imgs2.substring(0,imgs2.length-1)
+            };
+            if(tmo_arr.content==''){
+                layer.open({
+                    content: '任务内容不能为空'
+                    ,skin: 'msg'
+                    ,time: 1
+                });
+                return false
+            }
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: "post",
+                url: base_url + "html5/v1/newTask/submitModify",
+                data: JSON.stringify(tmo_arr),
+                dataType: 'json',
+                headers: {'token': token},
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    if (data.code == 0) {
+                        layer.open({
+                            content: '修改成功'
+                            ,skin: 'msg'
+                            ,time: 1
+                        });
+                        setTimeout(function(){
+                            window.location.reload()
+                        },1000)
+                    }
+                }
+            })
+        });
+    })
+</script>
+</body>
+</html>

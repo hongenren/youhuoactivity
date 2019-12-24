@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>
+    <style>
+        .demo_time{
+            margin: 0;
+        }
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+<form id='form'>
+    <div class="warp">
+        <ul class="warp_pws_c">
+        <li>
+            <div class="warp_pws_c_sp">
+                <b>报到信息</b>
+                <input type="text" readonly="true" placeholder="报到信息介绍" class="warp_pws_c_so">
+            </div>
+        </li>
+        <li>
+            <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                <b>报到时间</b>
+                <input type="text" placeholder="" name="arriveTime" class="demo_time" style="width: 160px;float: right">
+            </div>
+        </li>
+        </ul>
+        <ul class="warp_pws_c">
+            <li>
+                <div class="warp_pws_c_sp">
+                    <b>公开招聘</b>
+                </div>
+                <input type="text" placeholder="通过活动页面自行报名，需审核" readonly="true" class="warp_pws_c_so">
+            </li>
+            <li>
+                <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                    <b>积分赠送</b>
+                    <input type="text" name="inIntegral" class="spinnerExample"/>
+                </div>
+                <input type="hidden" name="ticketOrder" value="">
+                <input type="hidden" name="code" value="">
+            </li>
+            <li>
+                <div class="warp_pws_c_si">
+                    <span>剩余积分：10029</span>
+                    <b>签到/签出成功，自动发放</b>
+                </div>
+            </li>
+        </ul>
+        <div class="warp_pws_v">
+            <div class="warp_sh_u_lk">
+                <b><i>*</i>说明</b>
+                <span>- 管理人员不获取志愿服务时间</span>
+            </div>
+        </div>
+        <div class="ht60"></div>
+        <input type="button" value="保存修改" onclick="edit_sub()" class="warp_pws_b_su">
+    </div>
+</form>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script>
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    var currYear = (new Date()).getFullYear();
+    // Date & Time demo initialization
+    $('.demo_time').mobiscroll().datetime({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
+        dateFormat:"yy-mm-dd",
+        timeFormat: 'HH:ii',
+        startYear: currYear,
+        endYear: currYear +30,
+        stepMinute: 1,
+        showNow: true
+    });
+</script>
+<script type="text/javascript">
+    $('.spinnerExample').spinner({});
+    //获取信息
+    get_msg();
+    function get_msg(){
+        var sectionCode = $_GET['sectionCode'];
+         $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/manager/queryBySectionCode",
+            data:JSON.stringify({"sectionCode":sectionCode,"type": 80}),
+            dataType:'json',
+            headers : {'token':token},
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    console.log(data);
+                    var data1 = data.data;
+                    $("input[name='inIntegral']").val(data1.inIntegral);
+                    var atim = split_datetime(data1.arriveTime);
+                    $("input[name='arriveTime']").val(atim.date +' '+ atim.str);
+                    $("input[name='ticketOrder']").val(data1.ticketOrder);
+                    $("input[name='code']").val(data1.code);
+                    
+                }else{
+                    layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                return false;
+            }
+        })
+    }
+    //提交修改信息\
+    function edit_sub(){
+        var arr = $('#form').serializeArray();
+        var json = {};
+        $.each(arr, function(){
+            json[this.name] = this.value;
+        });
+        
+        var datetime = getFormatDate();
+        if(!compareTime(datetime,json['arriveTime'])){
+            layer.open({ content: '截止时间必须晚于当前时间!' ,skin: 'msg' ,time: 1});    
+            return false;
+        }
+        json['arriveTime'] = json['arriveTime']+":00";
+        //console.log(JSON.stringify(json));
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url +'html5/v1/manager/changeInfo',
+            data:JSON.stringify(json),
+            dataType:'json',
+            headers : {'token':token},
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                console.log(data);
+                if(data.code==0){
+                    layer.open({content: '操作成功',skin: 'msg',time: 1});
+                    setTimeout(function(){window.history.back();},1000);
+                }else{
+                    layer.open({
+                    content: '提交失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                return false;
+            }
+        })
+    }
+</script>
+</body>
+</html>

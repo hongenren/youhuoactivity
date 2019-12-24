@@ -1,0 +1,22 @@
+.ticketdetail {
+    padding-bottom: 5rem;
+    font-size: 14px;
+}
+
+.ticketdinfo{
+    padding: 1.3rem 1.1rem;
+}
+.ticketdinfo p{
+    padding: 0.2rem 0;
+}
+.blod{
+    font-weight: bold;
+}
+.mt30{
+    margin-top: 1.3rem;
+}
+.submit-btn{
+    bottom: 0.2rem;
+    width: 17.8rem;
+    margin: 0 0.5rem;
+}

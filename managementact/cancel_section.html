@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/managementact/managementact.js"></script>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+    <div class="warp_pws_n_st_bj"></div>
+    <div class="warp_gl_w_sc">
+        <h2>验证身份</h2>
+        <ul class="warp_gl_w_sx">
+            <li>
+                <input type="text" placeholder="请输入发布者手机号">
+            </li>
+            <li>
+                <input type="text" placeholder="请输入手机验证码">
+                <input id="btnSendCode" type="button" value="获取验证码" onClick="sendMessage()" />
+            </li>
+        </ul>
+    </div>
+
+    <div class="warp_gl_w_sc">
+        <h2>取消原因</h2>
+        <ul class="warp_gl_w_sx">
+            <li>
+                <textarea placeholder="请输入取消原因，以便通知相关人员"></textarea>
+            </li>
+        </ul>
+    </div>
+
+    <div class="warp_gl_w_sc">
+        <h2>联系电话</h2>
+        <ul class="warp_gl_w_sx">
+            <li>
+                <input type="text" placeholder="请填写联系电话">
+            </li>
+        </ul>
+    </div>
+
+    <div class="warp_gl_w_sz">
+        <span>提示：取消活动后，所有报名人员参与权限将被作废</span>
+    </div>
+
+    <div class="ht60"></div>
+    <input type="button" value="取消活动" class="warp_pws_b_su">
+
+</div>
+<script type="text/javascript">
+    var InterValObj; //timer变量，控制时间
+    var count = 30; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+    var code = ""; //验证码
+    var codeLength = 6;//验证码长度
+    function sendMessage() {
+        curCount = count;
+        var dealType; //验证方式
+        var uid=$("#uid").val();//用户uid
+        if ($("#phone").attr("checked") == true) {
+            dealType = "phone";
+        }
+        else {
+            dealType = "email";
+        }
+//产生验证码
+        for (var i = 0; i < codeLength; i++) {
+            code += parseInt(Math.random() * 9).toString();
+        }
+//设置button效果，开始计时
+        $("#btnSendCode").attr("disabled", "true");
+        $("#btnSendCode").val( + curCount + "秒再获取");
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+    }
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $("#btnSendCode").removeAttr("disabled");//启用按钮
+            $("#btnSendCode").val("重新发送");
+            code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效
+        }
+        else {
+            curCount--;
+            $("#btnSendCode").val( + curCount + "秒再获取");
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.qrcode.min.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+    <div class="warp_gl_e">
+        <div class="warp_gl_e_sp"></div>
+        <div class="warp_gl_e_so">
+            <b>加载中</b>
+            <span style="background: url(../wap/img/pws_133.png) no-repeat left center;background-size: 18px 18px;background-position: 0 3px">00月00日 下午场 <time>00:00</time>入场</span>
+            <span style="background: url(../wap/img/pws_134.png) no-repeat left center;background-size: 18px 18px;background-position: 0 3px">东大门长宁区北新泾街道东大门长宁区北新泾街道</span>
+        </div>
+        <div class="warp_gl_e_si">
+            <img src="../wap/img/pws_78.jpg">
+        </div>
+        <a id="download" download="qrcode.jpg"></a>
+        <input type="button" value="保存到相册" class="warp_gl_e_su"  id="dataImg">  <!--download='filename'-->
+    </div>
+</div>
+<script type="text/javascript">
+    selectact($_GET['msg']);
+    function selectact(code){
+        if(code!=''){
+            var code_msg = decodeURI(decodeURI(code));
+            var json_data = JSON.parse(code_msg); //转为JSON对象
+            console.log(json_data);
+            $('.warp_gl_e_so b').text(json_data.name);
+            $('.warp_gl_e_so').find('span:eq(0)').text(json_data.arriveTime+'入场');
+            $('.warp_gl_e_so').find('span:eq(1)').text(json_data.arriveAddress);
+            qrcodefor(json_data.qrCode); //输出到二维码
+        }else{
+            layer.open({
+                content: '获取失败,请重试'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+                });
+            return false;
+        }
+ 
+    }
+    //二维码信息输出到对应
+    // @param val对应二维码 地址
+    function qrcodefor(val){        
+            $(".warp_gl_e_si").empty();
+            $(".warp_gl_e_si").qrcode({
+                render: "canvas", // 渲染方式有table方式（IE兼容）和canvas方式
+                width: 150, //宽度
+                height: 150, //高度
+                text: val, //内容
+                typeNumber: -1,//计算模式
+                correctLevel: 2,//二维码纠错级别
+                background: "#ffffff",//背景颜色
+                foreground: "#000000"  //二维码颜色
+			
+            });           
+
+    }
+    if(IsWhat()==1) {//判断是否是苹果，如果是就把保存图片的按钮隐藏
+        $('#dataImg').hide();
+    }else{
+        $('#dataImg').click(function(){
+            var canvas = $('.warp_gl_e_si').find("canvas").get(0);
+            try {//解决IE转base64时缓存不足，canvas转blob下载
+                var blob = canvas.msToBlob();
+                navigator.msSaveBlob(blob, 'qrcode.jpg');
+            } catch (e) {//如果为其他浏览器，使用base64转码下载
+                var url = canvas.toDataURL('image/jpeg');
+                $("#download").attr('href', url).get(0).click();
+            }
+            return false;
+        });
+    }
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".warp_gl_e_si canvas").attr("id","DemoImg");
+	});
+</script>
+
+<script> 
+// v0.4.1
+html2canvas(element, {
+    onrendered: function(canvas) {
+        // 现在你已经拿到了canvas DOM元素    
+    }
+});
+
+// v0.5.0
+html2canvas(element, options).then(canvas => {
+    // 现在你已经拿到了canvas DOM元素    
+});
+/**
+ * 根据window.devicePixelRatio获取像素比
+ */
+function DPR() {
+    if (window.devicePixelRatio && window.devicePixelRatio > 1) {
+        return window.devicePixelRatio;
+    }
+    return 1;
+}
+/**
+ *  将传入值转为整数
+ */
+function parseValue(value) {
+    return parseInt(value, 10);
+};
+/**
+ * 绘制canvas
+ */
+async function drawCanvas(selector) {
+    // 获取想要转换的 DOM 节点
+    const dom = document.querySelector(selector);
+    const box = window.getComputedStyle(dom);
+    // DOM 节点计算后宽高
+    const width = parseValue(box.width);
+    const height = parseValue(box.height);
+    // 获取像素比
+    const scaleBy = DPR();
+    // 创建自定义 canvas 元素
+    const canvas = document.createElement('canvas');
+
+    // 设定 canvas 元素属性宽高为 DOM 节点宽高 * 像素比
+    canvas.width = width * scaleBy;
+    canvas.height = height * scaleBy;
+    // 设定 canvas css宽高为 DOM 节点宽高
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    // 获取画笔
+    const context = canvas.getContext('2d');
+
+    // 将所有绘制内容放大像素比倍
+    context.scale(scaleBy, scaleBy);
+
+    // 将自定义 canvas 作为配置项传入，开始绘制
+    return await html2canvas(dom, {canvas});
+}
+/**
+ * 图片转base64格式
+ */
+img2base64(url, crossOrigin) {
+    return new Promise(resolve => {
+        const img = new Image();
+
+        img.onload = () => {
+            const c = document.createElement('canvas');
+
+            c.width = img.naturalWidth;
+            c.height = img.naturalHeight;
+
+            const cxt = c.getContext('2d');
+
+            cxt.drawImage(img, 0, 0);
+            // 得到图片的base64编码数据
+            resolve(c.toDataURL('image/png'));
+        };
+
+        crossOrigin && img.setAttribute('crossOrigin', crossOrigin);
+        img.src = url;
+    });
+}
+</script> 
+
+
+</body>
+</html>

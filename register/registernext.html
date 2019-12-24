@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+    <img src="../wap/img/pws_37.jpg">
+    <div class="warp_pws_r">
+        <ul class="warp_pws_r_sp">
+            <li>
+                <img src="../wap/img/pws_41.jpg">
+                <input type="password" placeholder="输入4-16位数字、字母密码" class="warp_pws_r_so" name="userPassword">
+            </li>
+            <li>
+                <img src="../wap/img/pws_41.jpg">
+                <input type="password" placeholder="请再次输入密码" class="warp_pws_r_so" name="repeatuserPassword">
+            </li>
+        </ul>
+        <input type="button" value="确定" class="warp_pws_r_si" onclick="register()">
+    </div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/web-storage-cache.js"></script>
+<script type="text/javascript" src="../wap/js/regular.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript">
+    /**
+     * 注册第二步操作
+     */
+    function register() {
+        var mobile = $.cookie('reg_mobile');//$_GET['mobile'];
+        //console.log(mobile);
+        var userPassword = $.trim($("input[name='userPassword']").val());
+        var repeatuserPassword = $.trim($("input[name='repeatuserPassword']").val());
+        if(!regular_pwd(userPassword)){
+            return false;
+        }
+        if(userPassword==repeatuserPassword && userPassword!=""){
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type: "post",
+            url: base_url + "html5/v1/user/quickReg",
+            data: JSON.stringify({
+                "userLoginMobile": mobile,
+                "userPassword": userPassword
+            }),
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function(data) {
+               //console.log(data);
+               if (data.code==0) {
+                //console.log(data.code)
+                    layer.open({
+                        content: '注册成功'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    $.cookie('reg_mobile',null);
+                    setTimeout(function(){window.location.href='../login/login.html?jumpAdd='+location.href;},1000);
+               }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+               }
+            },
+            error: function(e) {
+                layer.open({
+                    content: '提交错误',
+                    skin: 'msg',
+                    time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+        }else{
+            layer.open({
+                content: '两次密码输入不一致',
+                skin: 'msg',
+                time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+
+    }
+</script>

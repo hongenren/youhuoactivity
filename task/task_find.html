@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海-找任务</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <link rel="stylesheet" href="../huangye/css/mobile.css" />
+    <link rel="stylesheet" type="text/css" href="../post/css/job_list.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <style type="text/css">
+        .swiper-wrapper{
+            height: 40px;
+            background-color: #72B81E;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <!--头部开始-->
+    <div class="warp_zy_j">
+        <a id="black_base_mineBtn" href="javascript:void(0)" onclick="javascript:history.back(-1);"></a>
+        <div class="screenButList screenBut screenButListNew" style="margin: 0px;" onclick="clickProvince(this, 0);">
+            <a href="javascript:void(0)" id="area_info_city" data-id="">
+                按区域
+                <i></i>
+            </a>
+        </div>
+        <!--<a href="javascript:void(0)" onclick="jump('./task_already_apply_list.html?type=1');" style="width: auto;height:30px;line-height:30px;background-size: 11px 20px;left: auto;right:3%;background: none;border: 1px solid #72B81E;border-radius: 5px;padding: 0% 1%">-->
+            <!--已报名</a>-->
+    </div>
+    <!--头部结束-->
+    <div class="warp_lb_p wth">
+        <div id="header">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide " style="width: 30%;background: rgb(240,103,108);"><!--current-->
+                    <a href="javascript:void(0)" onclick="jumpSelect('./task_apply_list_select.html?type=0')" style="">按日期找</a>
+                </div>
+                <div class="swiper-slide" style="width: 30%;background:deepskyblue;">
+                    <a href="javascript:void(0)" class="screenBut" onclick="jumpSelect('./task_apply_list_select.html?type=1')">按地区找</a><!-- onclick="jumpSelect('./post_list_select.html?type=1')"-->
+                </div>
+                <div class="swiper-slide" style="width: 40%;background:orange;">
+                    <a href="javascript:void(0)" onclick="jumpSelect('./task_apply_list_select.html?type=2')">按服务对象找</a>
+                </div>
+            </div>
+            <div class="screenButList">
+                <input type="search" class="search_input" id="name_input" placeholder="请输入任务或机构名称查询">
+                <input type="button" class="search_button" value="" onclick="queryPostByRecommend2(0, 20);">
+            </div>
+        </div>
+    </div>
+    <span class="tf_Recommend" style="padding: 3% 3%;line-height: 30px;font-size: 0.23rem;">推荐任务</span>
+    <ul class="warp_pws_c">
+    </ul>
+
+
+    <div class="mb mb_1" style="cursor:pointer"></div>
+    <div class="hylistsxw">
+        <div class="hylistsx1 hylistsxc" style="top:50px;">
+            <div class="hylistsx_l" style="width: 100%;height:auto;">
+                <div class="screenButList screenButList1">
+                    <input type="search" class="search_input" id="city_search" placeholder="输入城市名或拼音查询" style="border-bottom: 1px solid #E6E6E6;-webkit-appearance:none;border-radius:0px;">
+                </div>
+                <ul class="warp_pws_g" style="border: 0px;margin-bottom: 0px;height: auto;padding-left: 0px;padding-right: 0.01%;" id="gps_city">
+                    <li style="line-height: normal;border: 0px;margin-bottom: 0px;background-color: #ffffff;height: auto;padding-top: 3px;padding-bottom: 3px;">
+                        <a href="javascript:void(0)" onclick="select_address('address','','310000000000','上海',0)" style="background: none;height: 0.75rem;vertical-align: middle;display: table-cell;">
+                            <b style="font-size: 0.25rem" id="GPS_city_b">上海<i style="color: #999999;">GPS定位</i></b>
+                        </a>
+                    </li>
+                    <li style="line-height: normal;border: 0px;margin-bottom: 0px;background-color: #f5f5f5;height: auto;padding-top: 3px;padding-bottom: 3px;">
+                        <a href="javascript:void(0)" style="background: none;">
+                            <b style="font-size: 10px;font-weight:bold;">热门城市</b>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="hylistsx_l" style="width: 100%;height:30%;" id="hot_city">
+
+            </div>
+            <div class="hylistsx_l" style="width: 100%;height:auto;background-color: #000000;" id="city_name">
+                <ul style="overflow:auto;">
+                    <li style="line-height: normal;border: 0px;margin-bottom: 0px;background-color: #f5f5f5;height: auto;padding-top: 3px;padding-bottom: 3px;">
+                        <a href="javascript:void(0)" style="background: none;">
+                            <b style="font-size: 10px;font-weight:bold;">省市区筛选列表</b>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="hylistsx_l" id="provinceDiv" style="width: 100%;height:50%;">
+                <ul id="province" style="overflow:auto;margin-bottom: 30px;">
+                </ul>
+            </div>
+            <div class="hylistsx_l" id="cityDiv" style="width: 100%;height:50%;">
+                <ul id="city" style="overflow:auto">
+                </ul>
+            </div>
+            <div class="hylistsx_l" style="width: 100%;height:auto">
+                <ul id="area" style="overflow:auto">
+                </ul>
+            </div>
+            <div class="hylistsx_center" style="width: 100%;height:auto;">
+                <ul id="area_c1" style="overflow:auto">
+                </ul>
+            </div>
+            <div class="hylistsx_r" style="width: 100%;height:auto;">
+                <ul id="area_1" style="overflow:auto">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="allmap" style="height:0;overflow:hidden"></div>
+
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<!--<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>-->
+<script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+
+<script type="text/javascript" src="js/task_find.js"></script>
+<script type="text/javascript" src="js/task_list_map.js"></script>
+
+
+<script>
+    // var type = $.getUrlParam("type");
+    var type = 0;
+    var whole_province = 0;
+    $(function() {
+        get_msg(0,20);
+        //queryPostByRecommend(0, 20);
+        $(".mb").on("click",function(){
+            $(".hylistsxc").hide();
+            $(".mb").hide();
+            $(".screenBut").removeClass("choice");
+        })
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            url: base_url + 'html5/v1/region/hotCity',
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function (resp) {
+                if (resp.code == 0) {
+                    var record = resp.data.data;
+                    for (var i in record) {
+                        $("#hot_city").append("<div name='hot_city' onclick=\"select_address('address','"+record[i].id+"','"+record[i].areaCode+"','"+record[i].name+"',1)\" style=\"height: 25%;width: 33.3%;float: left;text-align: center;\">"+record[i].name+"</div>");
+                    }
+                    $("div[name='hot_city']").each(function () {
+                        $(this).css("line-height",($(this).height()*2)+"px");
+                    })
+                }
+            }
+        })
+    });
+</script>
+</body>
+</html>

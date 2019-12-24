@@ -1,0 +1,115 @@
+
+.tsm_textarea{
+    padding:.2rem;
+    position:relative;
+}
+.tsm_textarea textarea{
+    display:block;
+    width:100%;
+    height:1.97rem;
+    background-color:#fff;
+    border:1px solid #eee;
+    padding:.05rem .1rem .4rem;
+    line-height:.4rem;
+}
+.tsm_textarea_long{
+    position:absolute;
+    right:.3rem;
+    bottom:.25rem;
+}
+.tsm_textarea_txt{
+    padding:0 .2rem;
+    line-height:.3rem;
+}
+
+.tsm_personal_list{
+    padding:.2rem;
+    border-bottom:1px solid #eee;
+    position:relative;
+}
+.tsm_personal_list .tem_enroll_radios{
+    margin-top:.1rem;
+}
+.tsm_personal_user{
+    width:.6rem;
+    height:.6rem;
+    border-radius:.3rem;
+    margin:0 .1rem;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    float:left;
+}
+.tsm_personal_name{
+    line-height:.6rem;
+    padding-left:.1rem;
+    float:left;
+}
+
+
+/*收消息*/
+.trm_personal_detail{
+    line-height:.3rem;
+    color:#999;
+    position:absolute;
+    right:.2rem;
+    top:50%;
+    margin-top:-.15rem;
+}
+.trm_personal_detail i{
+    display:inline-block;
+    width:.14rem;
+    height:.28rem;
+    background:url("../../wap/img/pws_102.png") no-repeat center;
+    background-size:contain;
+    margin-left:.1rem;
+    vertical-align:middle;
+    position:relative;
+    margin-top:-1px;
+}
+
+
+/*审核详情*/
+.trm_personal_examine_wrap{
+    position:fixed;
+    left:0;top:0;right:0;bottom:0;
+    background-color:#fff;
+    z-index:191115;
+    display:none;
+}
+.tped_user{
+    padding:.1rem .2rem;
+    line-height:.34rem;
+}
+.tped_user span,.tped_user strong,.tped_user a{
+    display:inline-block;
+    vertical-align:middle;
+}
+.tped_user strong{
+    padding-right:.2rem;
+}
+.tped_tell_icon{
+    display:inline-block;
+    width:.24rem;
+    height:.24rem;
+    margin-left:.1rem;
+    background:url("../../wap/img/pws_159.png") no-repeat center;
+    background-size:contain;
+}
+.tped_buttons{
+    padding:.2rem;
+    text-align:right;
+}
+.tped_buttons button{
+    display:inline-block;
+    padding:.14rem .3rem;
+    border-radius:.4rem;
+    line-height:1;
+    border:1px solid #72b81e;
+    color:#72b81e;
+    margin-left:.2rem;
+}
+.tped_buttons button.on{
+    border:1px solid #f03727;
+    color:#f03727;
+}

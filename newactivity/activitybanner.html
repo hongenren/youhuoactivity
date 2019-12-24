@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/activitybanner.css"/>
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+<div id="activitybanner">
+    <header class="mint-header">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">活动封面图</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="banner" v-for="(item, index) in recordList" :key="index">
+        <img :src="item.url" alt="">
+        <div class="selectbtn pattern" @click="selectImg(item.url)">选择</div>
+        <div class="bannertype pattern">{{item.note}}</div>
+    </div>
+    <label for="file1"  class="submit-btn">从本地相册中选择</label>
+    <input type="file" id="file1" runat="server" ref="inputer1" accept="image/*" class="inputfile" @change="uploadImg(addFrom.url)" />
+</div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#activitybanner',
+    data () {
+        return {
+            fil: null,
+            recordList: [],
+            addFrom: {
+                org: 'AAA789', // 机构标识
+                url: null
+            },
+            searchFrom: {
+                org: 'AAA789', // 机构标识
+                current: 1, // 当前页
+                size: 20 // 页容量	
+            }
+        };
+    },
+    created () {
+        // this.init();
+        this.getcoverImg();
+    },
+    methods: {
+        init (){
+            // 线上
+            this.searchFrom.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'AAA789';
+        },
+        getcoverImg () {
+            var that = this;
+            $.ajax({
+                url: base_url + '/html5/v2/activity/coverImg/list',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(this.searchFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    that.recordList = res.data.records;
+                    console.log(that.recordList);
+                }
+            });
+        },
+        uploadImg (url) {
+            let inputDOM;
+            inputDOM = this.$refs.inputer1;
+            // 通过DOM取文件数据
+            this.fil = inputDOM.files;
+            console.log(inputDOM, this.fil);
+            let formData = new FormData();
+            let headers = {
+                'Content-Type': 'multipart/form-data'
+            };
+            formData.append('file', this.fil[0]);
+            formData.append('storage', 'platform-mgmt');
+            formData.append('fileName', this.fil[0].name);
+            var that = this;
+            //利用ajax上传
+            jQuery.ajax({
+                type: "POST",
+                url: 'https://news.shcvs.cn/cm/upload/uploadImgFolderOSS?folderName=insurance',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function(XMLHttpRequest) {
+                   layer.open({type: 2,content: '上传中'});
+                },
+                success: function(data) {
+                    window.location.href='./activityinfo.html';
+                    sessionStorage.setItem('bannerimg', data.data);
+                    layer.closeAll();
+                },
+                error: function(){
+                    layer.closeAll();
+                    layer.open({
+                        content: '上传失败，网络错误',
+                        skin: 'msg',
+                        time: 2
+                    });
+                    return false;
+                }
+            })
+        },
+        selectImg (url) {
+            window.location.href='./activityinfo.html';
+            sessionStorage.setItem('bannerimg', url);
+        }
+    }
+})
+</script>
+</html>

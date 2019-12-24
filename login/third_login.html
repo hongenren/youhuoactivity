@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海-跳转</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+	<style>
+        .content{display: flex; justify-content: center; align-items: center;}
+        .content img {width: 100px;border-radius: 100px;margin-top: 50%;}
+        .content b {font-size: 12px;color: #72B81E;margin-top: 10%;}
+	</style>
+</head>
+<body style="background: #FFFFFF">
+
+<div class="content">
+    <img src="../wap/img/loading.gif">
+</div><br />
+<div class="content">
+    <b>正在跳转至公益上海-首页，请稍后。。。</b>
+</div>
+
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript">
+     var code = $.getUrlParam("code");
+     login_in(code);
+     function login_in(loginName){
+         if(loginName==null || loginName==""){
+             layer.open({
+                 content: "缺少参数！！！"
+                 ,skin: 'msg'
+                 ,time: 1 //2秒后自动关闭
+             });
+             return false;
+         }
+        $.ajax({
+            xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "/html5/v1/user/tokenLogin",
+            data:JSON.stringify({"loginName":loginName,"loginType":3}),
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    var data1 = data.data;
+                    var cookieResp =data1.cookieResp;
+                    var expiresDate= new Date();
+                    expiresDate.setTime(expiresDate.getTime() + (60*60*8000));
+                    var userdata = JSON.stringify({"userId":data1.userId,"userNo":data1.userNo,"userNickName":data1.userNickName,"userHeadImg":data1.userHeadImg});
+                    var appUserInfo = JSON.stringify(data1);
+                    $.cookie('user_msg',userdata, {expires: expiresDate, path:'/',domain:domain_url});
+                    $.cookie('u',cookieResp.u, {expires: expiresDate, path:'/',domain: domain_url});
+                    $.cookie('un',cookieResp.un, {expires: expiresDate, path:'/',domain:domain_url});
+                    $.cookie('ts',cookieResp.ts, {expires: expiresDate, path:'/' ,domain:domain_url});
+                    $.cookie('nn',cookieResp.nn, {expires: expiresDate, path:'/' ,domain:domain_url});
+                    $.cookie('uh',cookieResp.uh, {expires: expiresDate, path:'/' ,domain:domain_url});
+                    $.cookie('uv',cookieResp.uv, {expires: expiresDate, path:'/' ,domain:domain_url});
+                    $.cookie('token',cookieResp.token, {expires: expiresDate, path:'/' ,domain:domain_url});
+                    $.cookie('userOrgTags',JSON.stringify(cookieResp.userOrgTags), {expires: expiresDate, path:'/' ,domain:domain_url});
+                    /*setCookie('user_msg', userdata);setCookie('u', cookieResp.u);setCookie('un', cookieResp.un);setCookie('ts', cookieResp.ts);
+                    setCookie('nn', cookieResp.nn);setCookie('uh', cookieResp.uh);setCookie('uv', cookieResp.uv);setCookie('token', cookieResp.token);setCookie('userOrgTags', cookieResp.userOrgTags);
+                    */localStorage.setItem('appUserInfo',appUserInfo);
+                    if($.cookie('user_msg')||$.cookie('token')){
+                        var url = '../';
+                        if($_GET['activityCode']===undefined){
+                            var url = '../';
+                        }else{
+                            var url = '../activity/activity_enroll.html?activityCode='+$_GET['activityCode'];
+                        }
+                        window.location.href = url;
+                    }else{
+                        layer.open({
+                            content: '登录失败'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                        return false;
+                    }
+                }else{
+                    layer.open({
+                    content: data.msg
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '登录失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+            }
+        })
+     }
+</script>
+</body>
+</html>

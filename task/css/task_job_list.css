@@ -1,0 +1,106 @@
+html,body{
+    background-color:#fff;
+}
+.sendHistoryHead{
+    background-color:#fff;
+}
+
+
+/**/
+
+.tem_enroll_btns{
+    padding:.2rem 0;
+    text-align:right;
+}
+.tem_enroll_btns button,.tem_enroll_btns a{
+    display:inline-block;
+}
+.tem_enroll_btns button{
+    height:.5rem;
+    padding:0 .3rem;
+    border-radius:.3rem;
+    border:1px solid transparent;
+    margin-left:.1rem;
+}
+.tem_enroll_btns button.gr{
+    border-color:#72b81e;
+    color:#72b81e;
+}
+.tem_enroll_btns button.re{
+    border-color:#f03727;
+    color:#f03727;
+}
+.tem_enroll_btns button.ye{
+    border-color:#f07730;
+    color:#f07730;
+}
+
+/*调查问卷*/
+.tem_enroll_question_wrap{
+    position:fixed;
+    left:0;top:0;right:0;bottom:0;
+    z-index:191114;
+    background-color:#fff;
+    display:none;
+}
+.tem_enroll_question_title{
+    padding:.1rem .2rem;
+    font-size:.28rem;
+    line-height:.4rem;
+    color:#f07730;
+}
+.tem_enroll_question_list{
+    padding:.2rem;
+    border-bottom:1px solid #eee;
+}
+.tem_enroll_question_list h4{
+    line-height:.34rem;
+    padding-bottom:.1rem;
+}
+.tem_enroll_question_list p{
+    line-height:.34rem;
+    padding:.1rem 0;
+}
+.tem_enroll_question_list p strong{
+    padding-right:.1rem;
+}
+.tem_enroll_question_list p.on{
+    color:#72b81e;
+}
+.tem_enroll_question_list p.on .red{
+    color:#f03727;
+    padding-right:.1rem;
+}
+
+/*已报名*/
+.tem_enroll_progress_wrap{
+    margin-top:.3rem;
+}
+.tem_enroll_progress_wrap .tme_progress_list{
+    padding-bottom:.4rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

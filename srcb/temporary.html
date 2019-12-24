@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益护照</title>
+    <meta name="Keywords" content="公益护照"/>
+    <meta name="description" content="公益护照"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/identity.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/layer.css">
+</head>
+<body>
+<div class="sendHistoryHead">
+    <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+    <div class="sendHeadList"><span>申领公益护照</span></div>
+    <!--<div class="sendHeadButton"><button>发送历史</button></div>-->
+</div>
+<div class="identityInputWrap">
+    <div class="left identityName">姓&nbsp;&nbsp;&nbsp;&nbsp;名</div>
+    <div class="identityInput"><input type="text" id="name" placeholder="请输入18-70周岁的18位身份证号"></div>
+</div>
+<div class="identityInputWrap">
+    <div class="left identityName">身份证号</div>
+    <div class="identityInput"><input type="text" id="idCard" placeholder="请输入18-70周岁的18位身份证号"></div>
+</div>
+<div class="identityInputWrap">
+    <div class="left identityName">手机号</div>
+    <div class="identityInput"><input type="text" id="phone" placeholder="请输入手机号"></div>
+</div>
+<div class="sendNextButton on" onclick="j()">第三方</div>
+<div class="sendNextButton on" onclick="jidi()">基地</div>
+<div class="sendNextButton on" onclick="gaoxiao()">高校</div>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/layer.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script>
+    function j(){
+        var name = $("#name").val();
+        var idCard = $("#idCard").val();
+        var phone = $("#phone").val();
+        jump("http://test.dakaqi.cn:28080/web/srcb/index?channel=S834f27c41e014d849d4752912f5be162&name="+name+"&idCard="+idCard+"&phone="+phone+"&userNo=");
+    }
+    function jidi(){
+        jump("http://test.dakaqi.cn:28080/web/srcb/index?channel=B1ff9e7304a4445cbb46dcff6e1a6c231&name=&idCard=&phone=&userNo=");
+    }
+    function gaoxiao(){
+        jump("http://test.dakaqi.cn:28080/web/srcb/index?channel=U3c18db7cdc2142d3a4386a88ecde284a&name=&idCard=&phone=&userNo=");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结盟</title>
+    <meta name="Keywords" content="结盟"/>
+    <meta name="description" content="结盟"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/launchExplain.css">
+</head>
+<body>
+<div class="container" style="padding-bottom:1.2rem;">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>发起结盟邀请</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+    <div class="explainName">您要结盟的机构为:</div>
+    <div class="explainCont">上海市公益服务促进中心</div>
+    <div class="explainTextarea">
+        <textarea name="content">请输入您要结盟的原因</textarea>
+        <div class="contentSize">130字以内</div>
+    </div>
+</div>
+<div class="sendButtonWrap on">
+    <div class="sendButText">结盟哟爱情发送成功后，对方机构管理员审核通过，双方结盟成功，审核拒绝后，可再次发起申请</div><br/>
+    <button class="on">发起结盟邀请</button>
+</div>
+<script src="plugins/jquery/jquery-1.11.1.min.js"></script>
+<script>
+    $(function(){
+        $("textarea[name='content']").focus(function(){
+            var txt=$(this).val();
+            console.log(txt);
+            if(txt=='请输入您要结盟的原因'){
+                $(this).val('')
+            }
+        })
+    })
+</script>
+</body>
+</html>

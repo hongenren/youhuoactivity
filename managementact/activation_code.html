@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+    <div class="warp_gl_r_sg">
+        <span>激活码门票共<i>0</i>张</span>
+    </div>
+    <ul class="warp_gl_r_sf">
+       
+    </ul>
+</div>
+<script type="text/javascript">
+    selectact($_GET['sectionCode']);
+    function selectact(sectionCode){
+        var html = '';
+        $.ajax({
+            type:"post",
+            url:base_url + "html5/v1/public/selectActivationList",
+            data:JSON.stringify({"sectionCode":sectionCode}),
+            dataType:'json',
+            headers : {'token':token},
+            contentType: "application/json;charset=utf-8",
+            // beforeSend:function(XMLHttpRequest){
+            //         $(".warp_gl_r_sf").html("<img src='../wap/img/loading.gif' style='width:24px;heigth:24px; margin:0 auto;display:block'/>");
+            //     },
+            success:function(data){
+                 if(data.code==0){
+                    data_list = data.data;
+                    console.log(data_list)
+                    var length = data.data.length;
+                    if(data_list!=''){
+                        $.each(data_list,function(index,val){
+                        var msg = encodeURI(encodeURI(JSON.stringify(val)));
+                        html += '<li>\
+                                    <a href="./activation_content.html?code='+val.code+'&msg='+msg+'">';
+                        if(val.state==-10){
+                            html += '<i class="warp_gl_r_sf_1">作废</i>';
+                        }else if(val.state==10){
+                            html += '<i class="warp_gl_r_sf_1">待使用</i>';
+                        }else if(val.state==20){
+                            html += '<i class="warp_gl_r_sf_1">使用中</i>';
+                        }else if(val.state==30){
+                            html += '<i class="warp_gl_r_sf_1">已结算</i>';
+                        }else if(val.state==40){
+                            html += '<i class="warp_gl_r_sf_1">转岗中</i>';
+                        }else if(val.state==50){
+                            html += '<i class="warp_gl_r_sf_1">冻结</i>';
+                        }else if(val.state==60){
+                            html += '<i class="warp_gl_r_sf_1">锁定</i>';
+                        }
+                        html += '<span>激活码：'+val.activationCode+'C</span>\
+                                    </a>\
+                                </li>';
+                        $(".warp_gl_r_sf").empty();
+                        $(".warp_gl_r_sg i").text(length);
+                        $(".warp_gl_r_sf").html(html);
+                        })
+                    }else{
+                       html += "<div class=\"zw_sj_p\">\
+                                <img src=\"../wap/img/pws_164.png\">\
+                                <span>暂无数据</span>\
+                            </div>";
+                        $('.warp_gl_r_sf').html(html);
+
+                        return false;
+                    }
+                    
+                 }else{
+                    layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                    $(".warp_gl_r_sf").empty();
+                    return false;
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                $(".warp_gl_r_sf").empty();
+                return false;
+            }
+
+        })
+    }
+    
+</script>
+</body>
+</html>

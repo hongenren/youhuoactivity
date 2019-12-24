@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/calendar_dan.css" />
+
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="./js/evaluate_list_user.js"></script>
+    <style>
+        .exc2{padding-top: 1%}
+        .list ul li{width: 28.3%;margin: 3% 3% 0 0;float: left}
+        .list ul li a img{width: 100%;border-radius: 5px}
+        .warp_gl_w_sp li{width: 49.8%;}
+        .warp_gl_w_si li h3 {
+            font-size: 0.26rem;
+            line-height: 0.5rem;
+            color: #000;
+            margin-top: 3%;
+            font-weight: bold;
+        }
+        .warp_zy_j div{
+            background: white;
+            width: 20%;
+            float: left;
+            text-align: center;
+            margin-top:10px;
+            height: 30px;
+            border: 1px solid #72B81E;
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+
+    <div class="warp_zy_j">
+        <a href="javascript:void(0)" onclick="jump('../user/user_index.html')"></a>
+        <div style="margin-left: 30%;border-right: 0px;background: #72B81E;color: white;" onclick="jump('../post/evaluate_list_user.html')">岗位</div>
+        <div style="" onclick="jump('../user/evaluate_list.html')">活动</div>
+    </div>
+    <div id="select_div" class="select_div" style="overflow:auto;border-top:1px solid #E6E6E6;">
+
+    </div>
+
+    <div class="warp_gl_w">
+        <nav>
+            <ul class="warp_gl_w_sp">
+                <li class="thisclass" value="10">
+                    <span>我评价的</span>
+                </li>
+                <li value="20">
+                    <span>评价我的</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!----循环点开始---->
+        <div class="warp_gl_w_so">
+            <ul class="warp_gl_w_si">
+
+            </ul>
+        </div>
+        <!----循环点结束---->
+
+        <!----循环点开始---->
+        <div class="warp_gl_w_so" style="display: none">
+            <ul class="warp_gl_w_si">
+                
+            </ul>
+        </div>
+        <!----循环点结束---->
+
+    </div>
+
+
+    <div class="warp_gl_y_sw">
+        <div class="warp_gl_y_sq"></div>
+        <ul class="warp_gl_y_sl">
+            <li>
+                <a href="#">志愿岗位名称1</a>
+            </li>
+            <li>
+                <a href="#">志愿岗位名称1</a>
+            </li>
+            <li>
+                <a href="#">志愿岗位名称1</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="xiugai" class="warp_gl_w_sf">
+        <div class="warp_gl_w_sd"></div>
+        <div class="warp_gl_w_ss">
+            <textarea placeholder="请输入" id="content" name="content" class="warp_gl_w_sa"></textarea>
+            <div class="warp_gl_w_sm">
+                <a href="javascript:void(0)" class="chance">取消</a>
+                <a href="javascript:void(0)" class="sub">修改</a>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" name="id" value="">
+    <input type="hidden" name="prjvUser" value="">
+    <input type="hidden" name="star" value="">
+    <input type="hidden" name="imgs" value="">
+
+    <div id="huifu" class="warp_gl_w_sf">
+        <div class="warp_gl_w_sd"></div>
+        <div class="warp_gl_w_ss">
+            <textarea placeholder="请输入" id="contenthuifu" name="contenthuifu" class="warp_gl_w_sa"></textarea>
+            <div class="warp_gl_w_sm">
+                <a href="javascript:void(0)" class="chance">取消</a>
+                <a href="javascript:void(0)" class="subhuifu">发送</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="select-time" style="background: #FFFFFF;display: none;">
+    <span class="time entertime" style="color: #9d9d9d;display: none;"></span><!--开始时间-->
+    <input id="serviceDay" type="text" class="input-enter none">
+</div>
+<script src="../wap/js/touchTouch.jquery.js"></script>
+<script type="text/javascript">
+    var type=10;
+    $(function() {
+        get_evaluate_list(1, 20);
+    })
+</script>
+</body>
+</html>

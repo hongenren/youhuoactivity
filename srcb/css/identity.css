@@ -1,0 +1,243 @@
+
+.identityInputWrap{
+    padding:.2rem;
+    position:relative;
+}
+.identityName{
+    width:1.4rem;
+    line-height:.8rem;
+}
+.identityInput{
+    margin-left:1.4rem;
+    line-height:.8rem;
+    border-bottom:1px solid #eee;
+}
+
+.identityInput input{
+    display:inline-block;
+    width:100%;
+
+}
+
+/*addRessee*/
+.addResseeContent{
+    padding-bottom:1rem;
+}
+.addResseeInput input{
+    width:50%;
+}
+.cityWrap{
+    position:fixed;
+    left:0;top:0;right:0;bottom:0;
+    background-color:rgba(0,0,0,.8);
+    z-index:200;
+    display:none;
+}
+.city{
+    width:4rem;
+    height:6rem;
+    border-radius:10px;
+    background-color:#fff;
+    position:absolute;
+    left:50%;top:50%;
+    margin-left:-2rem;
+    margin-top:-3rem;
+    padding:.2rem 0;
+    overflow-y:auto;
+}
+.city ul li{
+    text-align:center;
+    line-height:.6rem;
+}
+.addResseeTextarea textarea{
+    display:block;
+    width:100%;
+    min-height:1.6rem;
+    padding:.1rem;
+    line-height:.7rem;
+    border-bottom:1px solid #eee;
+}
+.getYZM{
+    display:inline-block;
+    padding:0 .14rem;
+    height:.5rem;
+    border-radius:4px;
+    border:1px solid #72b81e;
+    position:absolute;
+    right:.3rem;top:50%;
+    color:#72b81e;
+    margin-top:-.25rem;
+}
+.addResseeWarn{
+    padding:.2rem .3rem;
+}
+.applyTop{
+    padding:.1rem 0;
+    font-weight:bold;
+    line-height:2;
+    color:#f07730;
+}
+.applyList{
+    position:relative;
+    margin:.1rem 0;
+}
+.applyList span{
+    padding-right:.14rem;
+}
+
+/*submisstion*/
+.subTextTop{
+    padding:.5rem 0 .3rem;
+}
+.subTextTop h1{
+    font-size:.36rem;
+    font-weight:bold;
+    color:#000;
+    line-height:1;
+    text-align:center;
+}
+.subTextTop p{
+    text-align:center;
+    font-size:.24rem;
+    line-height:.5rem;
+    color:#f07730;
+}
+
+
+/*pasterPhoto*/
+.subPhotoWrap{
+    padding:.1rem .3rem;
+}
+.subPhoto{
+    height:3.7rem;
+    border-radius:8px;
+    border:1px solid #eee;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    position:relative;
+}
+.subPhotoFont{
+    position:absolute;
+    padding:.1rem;
+    text-align:center;
+}
+.subPhotoFont span{
+    -webkit-text-size-adjust: 100%;
+    font-size: 0.18rem;
+    font-weight: 500;
+    color: #231815;
+    font-family: "黑体"
+}
+.subPhotoName{
+    top: 1.530rem;
+    left: 0.40rem;
+}
+.subPhotoSex{
+    top: 1.8853rem;
+    left: 0.40rem;
+}
+.subPhotoBirthday{
+    top: 1.8893rem;
+    left: 1.755rem
+}
+.subPhotoCode{
+    top: 2.220rem;
+    left: 1.07rem;
+}
+.subPhotoValidityPeriod{
+    top: 2.525rem;
+    left: 1.07rem;
+}
+.subPhotoQrCode{
+    top: 2.335rem;
+    left: 0.315rem
+}
+.qrCode, #qrcodeImg{
+    width: 0.6rem;
+    height: 0.6rem;
+}
+
+
+.subPhotoTime strong,.subPhotoTime span{
+    display:inline-block;
+    vertical-align:middle;
+    line-height:.4rem;
+    text-shadow:0 0 5px rgba(255,255,255,.6);
+}
+.subPhotoTime strong{
+    color:#000;
+    padding-right:.1rem;
+}
+.subPhotoTime span.red{
+    color:#f07730;
+    text-shadow:0 0 5px rgba(0,0,0,.9);
+}
+
+
+/*passport*/
+.passHead{
+    padding:.3rem;
+}
+.passLogo{
+    padding-bottom:.3rem;
+    text-align:center;
+    font-size:0;
+}
+.passLogo img{
+    display:inline-block;
+    width:1rem;
+    height:auto
+}
+.passLogoText{
+    font-size:18px;
+    line-height:.54rem;
+    font-weight:bold;
+    color:#000;
+    text-align:center;
+}
+.passEnText{
+    font-size:14px;
+    text-align:center;
+}
+.passColumn{
+    padding:0 .3rem 1rem;
+}
+.passRight{
+    width:34%;
+    float:right;
+}
+.passRight img{
+    width:100%;
+    height:auto;
+}
+.passLeft{
+    margin-right:34%;
+    padding-right:.3rem;
+}
+.personame{
+    font-size:14px;
+}
+.passPersonList{
+    padding-bottom:.3rem;
+}
+.passPersonList .left,.passPersonList .right{
+    max-width:50%;
+}
+.passEwm .ewm{
+    text-align:center;
+}
+.passEwm .ewm img{
+    display:inline-block;
+    width:1.5rem;
+    height:auto;
+}
+.ewmText{
+    font-size:14px;
+    text-align:center;
+}
+
+.oldColumn i{
+    color: red;
+    padding-right: 0.1rem;
+}

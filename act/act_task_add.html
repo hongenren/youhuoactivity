@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海-任务添加</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/cc_dh_o.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/honeySwitch.css"/>
+    <style type="text/css">
+    .demo_time{float: right;margin: 0;width:200px;text-align: center}
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+<!--头部开始-->
+<div class="warp_zy_j">
+	<a href="javascript:history.go(-1);"></a>
+	<span>任务添加</span>
+</div>
+<!--头部结束-->
+ <form id='form1'>
+    <header class="warp_pws_m">
+        <b><i>*</i>任务名称</b>
+
+        <input type="text" name='name' placeholder="请输入任务名称，比如：现场采访" id='title'>
+    </header>
+    <header class="warp_pws_m">
+        <b><i>*</i>任务描述</b>
+        <input type="text" placeholder="请描述任务内容" name='demo' id='content'>
+    </header>
+
+    <ul class="warp_pws_c">
+        <li>
+            <div class="warp_pws_c_sp">
+                <b><i>*</i>招募人数</b>
+                <input type="text" class="spinnerExample" value="0"  name='total' id='ren'/>
+            </div>
+            <input type="text" placeholder="每场次需志愿者人数，支持点击或手动输入"  readonly="readonly" unselectable="on" onfocus="this.blur()"  class="warp_pws_c_so">
+        </li>
+
+        <li>
+            <div class="warp_pws_c_sp">
+                <b><i>*</i>服务时长<u>（小时）</u></b>
+                <input type="text" class="spinnerExample" value='0'  name='times' id='time'/>
+            </div>
+            <input type="text" placeholder="完成任务所获取的服务时长"  readonly="readonly" unselectable="on" onfocus="this.blur()"  class="warp_pws_c_so">
+        </li>
+        <li>
+            <div class="warp_pws_c_sp">
+                <b><i>*</i>截止时间</b>
+                <input type="text" name="stopTime" class="demo_time" class="mbsc-comp warp_pws_c_so" readonly="" placeholder="请选择截止时间" value="" style="text-align: right">
+            </div>
+        </li>
+        <li>
+            <div class="warp_pws_c_sp">
+                <b><i>*</i>报名开始时间</b>
+                <input type="text" name="applyBeginTime" class="demo_time" class="mbsc-comp warp_pws_c_so" readonly="" placeholder="请选择报名开始时间" value="" style="text-align: right">
+            </div>
+        </li>
+        <li>
+            <div class="warp_pws_c_sp">
+                <b><i>*</i>报名结束时间</b>
+                <input type="text" name="applyEndTime" class="demo_time" class="mbsc-comp warp_pws_c_so" readonly="" placeholder="请选择报名结束时间" value="" style="text-align: right">
+            </div>
+        </li>
+        <li>
+            <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                <b>积分赠送</b>
+                <input type="text" class="spinnerExample" value="0" name='inIntegral'/>
+            </div>
+        </li>
+       <li>
+            <div class="warp_pws_c_si">
+                <span>剩余积分：<i style="font-style: normal">0</i></span>
+                <b>签到/签出成功，自动发放</b>
+            </div>
+        </li>
+    </ul>
+
+ <div class="warp_pws_v">
+        <div class="warp_pws_v_sp">
+            <em></em>
+            <b>报名选项</b>
+        </div>
+        <ul class="warp_pws_c_sy" id='xm'>
+            <li>
+                <h2 style="background: url(../wap/img/pws_112.png) no-repeat left center;background-size: 20px 20px">需审核</h2>
+                <div class="common-row">
+                    <div class="cell-right"><span class="switch-off" id='a'></span></div>
+                    <input type='hidden' name='audit' value="20"/>
+                </div>
+            </li>
+            <li>
+                <h2 style="background: url(../wap/img/pws_114.png) no-repeat left center;background-size: 20px 20px">仅限本机构成员</h2>
+                <div class="common-row">
+                    <div class="cell-right"><span class="switch-off"></span></div>
+                    <input type="hidden" name="self" value="20">
+                </div>
+            </li>
+            <li>
+                <h2 style="background: url(../wap/img/pws_115.png) no-repeat left center;background-size: 20px 20px">参与者需要获取保险保障</h2>
+                <div class="common-row">
+                    <div class="cell-right"><span class="switch-off" id='c'></span></div>
+                    <input type="hidden" name="insurance" value="20">
+                </div>
+            </li>
+            <li>
+                <h2 style="background: url(../wap/img/pws_106.png) no-repeat left center;background-size: 20px 20px">参与者需获取公众门票</h2>
+                <div class="common-row">
+                    <div class="cell-right"><span class="switch-off" id='d'></span></div>
+                    <input type='hidden' name='sendPublicTickets' value="20"/>
+                </div>
+            </li>
+            <!-- <input type='hidden' name='orgCode' value='youhuo'/>
+            <input type='hidden' name='address' value='金钟路658弄'/>
+
+            <input type='hidden' name='contactPhone' value='15245078864'/> -->
+             <input type='hidden' name='application' value='公益上海'/>
+            <input type='hidden' name='skill' value='无'/>
+
+        </ul>
+    </div>
+</form>
+    <div class="ht10"></div>
+    <div class="ht70"></div>
+    <footer class="warp_pws_m_sw">
+        <ul class="warp_pws_hd">
+          <li>
+            <input type="button" value="返回" onclick="window.history.go(-1)">
+          </li>
+          <li>
+            <input type="button" value="设置成功" onclick='add_task2()'>
+          </li>
+        </ul>
+    </footer>
+
+</div>
+
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/swiper_sime.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/honeySwitch.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/act/act.js"></script>
+<script type="text/javascript" src="../wap/js/act/task.js"></script>
+
+<script>
+    //场次信息提交
+    function add_task2(){
+        var arr = $('#form1').serializeArray();
+        var json = {};
+        var quesion = [];
+        $.each(arr, function(){
+            json[this.name] = this.value;
+        });
+
+        if(!click_str_null(json['name'],'任务名称不能为空')){
+            return false;
+        }
+        if(!click_str_null(json['demo'],'任务描述不能为空')){
+            return false;
+        }
+        if(!click_str_null(json['total'],'请设置招募人数')){
+            return false;
+        }
+        if(!click_str_null(json['times'],'请设置服务时长')){
+            return false;
+        }
+        if(!click_str_null(json['stopTime'],'请设置截止时间')){
+            return false;
+        }
+        if(!click_str_null(json['applyBeginTime'],'请设置报名开始时间')){
+            return false;
+        }
+        if(!click_str_null(json['applyEndTime'],'请设置报名结束时间')){
+            return false;
+        }
+        // if(!click_str_null(json['inIntegral'],'请设置积分赠送')){
+        //     return false;
+        // }
+
+        json['audit'] = parseInt(json['audit']);
+        json['inIntegral'] = parseInt(json['inIntegral']);
+        json['insurance'] = parseInt(json['insurance']);
+        //json['radius'] = parseInt(json['radius']);
+        json['self'] = parseInt(json['self']);
+        json['times'] = parseInt(Number(json['times'])*Number(60));
+        json['total'] = parseInt(json['total']);
+        json['stopTime'] =json['stopTime']+':00';
+        json['applyBeginTime'] =json['applyBeginTime']+':00';
+        json['applyEndTime'] =json['applyEndTime']+':00';
+        json['sendPublicTickets'] = parseInt(json['sendPublicTickets']);
+        json['activityCode'] = $_GET['activityCode'];
+        json['sectionCode'] = $_GET['sectionCode'];
+        //json['day'] = $_GET['day'];
+        //json['startTime'] = $_GET['starttime'];
+        //json['endTime'] = $_GET['endtime'];
+        json['user'] = prjvorgMsg.prjvUserId;
+        json['orgCode'] = prjvorgMsg.orgThirdAccount;
+        json['coverImg'] = actMsg.coverImg;  //活动封面图片
+        json['address'] = actMsg.address;  //活动地址
+        json['contactPhone'] = actMsg.contactPhone;
+        console.log(json);
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url: base_url + "html5/v1/task/save",
+            data:JSON.stringify(json),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                console.log(data);
+                if(data.code==0){
+                    localStorage.setItem('task_'+data.data.code,JSON.stringify(data.data));
+                    layer.open({
+                        content: '添加成功'
+                        ,skin: 'msg'
+                        ,time: 2 //1秒后自动关闭
+                    });
+                    setTimeout(function(){
+                        var code = $_GET['activityCode'];
+                        $(location).attr('href', "./act_task.html?activityCode="+code);
+                        // window.history.go(-1);
+                        },3000);
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '添加失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+    $(function(){
+        if(!history.state){
+            pushHistory();
+        }
+        window.addEventListener("popstate", function(e) {
+            layer.open({
+                content: '岗位未设置完成，您确定要返回吗？'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    window.history.go(-1);
+                    //$(location).attr('href', "./act_base_add.html");
+                }
+                , no: function (index) {
+                    e.preventDefault();
+                    pushHistory();
+                }
+            })
+        }, false);
+        function pushHistory() {
+            var state = {
+                title: "title",
+                url: "#"
+            };
+            window.history.pushState(state, "title", "#");
+        }
+    });
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    var currYear = (new Date()).getFullYear();
+    // Date & Time demo initialization
+    $('.demo_time').mobiscroll().datetime({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        timeWheels: 'HHii',//HH:24小时制；hh:12小时制
+        dateFormat:"yy-mm-dd",
+        timeFormat: 'HH:ii',
+        startYear: currYear,
+        endYear: currYear +30,
+        stepMinute: 1,
+        showNow: true
+    });
+</script>
+<script type="text/javascript">
+    $('.spinnerExample').spinner({});
+</script>
+<script type="text/javascript">
+    $('.cell-right').click(function(){
+        var tre = $(this).find('span').hasClass('switch-on');
+        var type = tre?10:20;
+        $(this).next('input').val(type);
+    })
+
+</script>
+</body>
+</html>
+

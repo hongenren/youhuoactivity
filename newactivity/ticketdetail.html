@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/ticketdetail.css"/>
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+<div id="ticketdetail">
+    <header class="mint-header">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">活动详情</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="period">场次：2019年10月11日 08:00-12:00</div>
+    <div class="ticketdinfo">
+        <p>票证名称：南京东路慈善超市参观门票</p>
+        <p class="blod">票证地点：上海市长宁区金钟路658弄11号2楼东华大学科技园</p>
+        <p class="blod mt30">已领10/共100张   领取无需审核 </p>
+        <p>领取票证需支付1积分，票证核销后赠送3积分</p>
+        <p class="mt30">指定机构成员领取：</p>
+        <p>上海市公益服务促进中心</p>
+        <p>上海市公益服务促进中心南京路慈善超市</p>
+        <p>上海市公益服务促进中心南京路慈善超市2</p>
+    </div>
+    <button class="submit-btn">立即领取</button>
+</div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#ticketdetail',
+    data () {
+        return {
+            fil: null,
+            recordList: [],
+            addFrom: {
+                org: 'AAA789', // 机构标识
+                url: null
+            },
+            searchFrom: {
+                org: 'AAA789', // 机构标识
+                current: 1, // 当前页
+                size: 20 // 页容量	
+            }
+        };
+    },
+    created () {
+        // this.init();
+    },
+    methods: {
+        init (){
+            // 线上
+            this.searchFrom.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'AAA789';
+        },
+        zhankai () {
+            $('.activitmark').css({height: "auto"});
+        }
+    }
+})
+</script>
+</html>

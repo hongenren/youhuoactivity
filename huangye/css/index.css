@@ -1,0 +1,961 @@
+
+.hyhead{
+    display:flex;
+    width: 100%;
+    height: 0.86rem;
+    overflow: hidden;
+    background: #73b820;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right:0;
+    z-index:20;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 .2rem;
+}
+.hyhead_b{
+    display: block;
+    width: 100%;
+    height: 0.86rem;
+}
+.hyhead_l{
+    display: block;
+    width: 0.7rem;
+}
+.hyhead_l img{
+    display: block;
+    width: 0.26rem;
+    height: 0.26rem;
+    margin: 0 auto;
+}
+.hyhead_l span{
+    display: block;
+    width: 100%;
+    line-height: 0.32rem;
+    text-align: center;
+    font-size: 0.22rem;
+    color: #fff;
+}
+.hyhead_c{
+    display: block;
+    width: 4.5rem;
+    height: 0.54rem;
+    background: #fff;
+    border-radius: 0.27rem;
+    position:relative;
+}
+.hyhead_c i{
+    display: block;
+    width: 0.28rem;
+    height: 0.28rem;
+    position:absolute;
+    left:.16rem;top:50%;
+    margin-top:-.14rem;
+    background:url("../images/sear.png") no-repeat center;
+    background-size:contain;
+}
+.hyhead_c input{
+    display: block;
+    width:100%;
+    height:100%;
+    font-size:.24rem;
+    color:#000;
+    padding:0 .1rem 0 .54rem;
+}
+.hyhead_r{
+    display: block;
+    width: 0.7rem;
+}
+.hyhead_r img{
+    display: block;
+    width: 0.26rem;
+    height: 0.26rem;
+    margin:0 auto;
+}
+.hyhead_r span{
+    display: block;
+    float: right;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    line-height: 0.35rem;
+    font-size: 0.22rem;
+}
+
+.htnav{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 0.15rem solid #f1f1f1;
+}
+.htnav ul{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    padding: 0.21rem 0;
+}
+.htnav li{
+    width: 25%;
+    margin-top: 0.11rem;
+    float: left;
+    overflow: hidden;
+}
+.htnav a{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+.htnav li a img{
+    display: block;
+    width: 0.86rem;
+    height: 0.86rem;
+    margin: 0 auto;
+}
+.htnav li a span{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    line-height: 0.57rem;
+    font-size: 0.24rem;
+    color: #1c1c1c;
+}
+.hycon h2{
+    height: 0.86rem;
+    font-size:.28rem;
+    line-height: 0.85rem;
+    color:#000;
+    border-bottom: 1px solid #e5e5e5;
+    padding-left:.3rem;
+    position:relative;
+}
+.hycon h2 i{
+    display:block;
+    width: 0.06rem;
+    height: 0.24rem;
+    background: #73b820;
+    position:absolute;
+    left:0;top:50%;
+    margin-top:-.12rem;
+}
+.hycon_con ul li{
+    padding: 0 0.3rem;
+    border-bottom: 0.15rem solid #f2f2f2;
+}
+.hycon_con ul li h3{
+    font-size: 0.26rem;
+    line-height: 0.8rem;
+    color: #000;
+}
+.hycon_con dl:after{clear:both; display:block; height:0; visibility:hidden; line-height:0; content:'\20';}
+.hycon_con dl dd{
+    float: left;
+    padding: 0 0.1rem;
+    background: #f5f5f5;
+    line-height: 0.32rem;
+    font-size: 0.2rem;
+    color: #9d9d9d;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.05rem;
+    margin-right: 0.08rem;
+}
+.hycon_con dl dd.on{
+    background: #fff3e3;
+    border: 1px solid #ffd59f;
+}
+.hycon1{
+    display: block;
+    width: 5.4rem;
+    height: 0.2rem;
+    border: 1px solid #73b820;
+    border-radius: 0.09rem;
+    position: relative;
+    margin-top: 0.24rem;
+    overflow:hidden;
+}
+.hycon1 span{
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom:0;
+    line-height: 0.18rem;
+    font-size: 0.18rem;
+    color:#333;
+}
+.hycon1 i{
+    display: block;
+    width: 1.93rem;
+    height: 0.18rem;
+    background: #73b820;
+}
+.hycon2{
+    display:flex;
+    width:5.4rem;
+    margin: 0.24rem 0 0.3rem;
+    align-items:center;
+    justify-content:space-between;
+    flex-direction:row;
+}
+.hycon2 img{
+    display: block;
+    width: 0.2rem;
+    height: 0.2rem;
+}
+.hycon2 p{
+    font-size: 0.2rem;
+    line-height: 0.2rem;
+    color: #666;
+    width: 5.4rem;
+    text-align:right;
+}
+.hycon2 p span{
+    margin-left: 0.05rem;
+    margin-right: 0.15rem;
+    float:left;
+}
+
+/*详情页*/
+.yrljg1{
+    display: block;
+    width: 5.9rem;
+    height: 3.2rem;
+    margin: 0.3rem auto 0;
+    overflow: hidden;
+    position: relative;
+}
+.yrljg1 img{
+    display: block;
+    width: 100%;
+    height: 3.2rem;
+}
+.yrljg1 ul{
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    bottom: 0.1rem;
+    float: left;
+}
+.yrljg1 li{
+    display: block;
+    float: left;
+    height: 0.4rem;
+    margin-right: 0.2rem;
+    background: rgba(0,0,0,0.5);
+    border-radius: 0.2rem;
+}
+.yrljg1 li a{
+    display: block;
+    overflow: hidden;
+    float: left;
+    padding: 0 0.15rem;
+}
+.yrljg1 li img{
+    display: block;
+    width: 0.36rem;
+    height: 0.24rem;
+    float: left;
+    margin-top: 0.08rem;
+}
+.yrljg1 li span{
+    display: block;
+    float: left;
+    font-size: 0.2rem;
+    color: #fff;
+    line-height: 0.4rem;
+    margin-left: 0.06rem;
+}
+.yrljg2{
+    display: block;
+    overflow: hidden;
+    padding: 0 0.3rem;
+    border-bottom: 1px solid #e6e6e6;
+}
+.yrljg2 h3{
+    font-size:.3rem;
+    line-height: 0.8rem;
+    color:#000;
+    font-weight:bold;
+}
+.yrljg2 h3 span{
+    float: left;
+}
+.yrljg2 h3 a{
+    float: right;
+    color: #000;
+    font-weight: normal;
+    font-size: 0.24rem;
+}
+.yrljg2 div{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+.yrljg2 div span{
+    display: block;
+    width: 0.3rem;
+    height: 0.3rem;
+    background: url("../images/star.png") no-repeat center;
+    background-size: 100% 100%;
+    float: left;
+    overflow: hidden;
+    margin-right: 0.05rem;
+}
+.yrljg2 div span img{
+    display: block;
+    width: 0.3rem;
+    height: 0.3rem;
+}
+.yrljg2 ul{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    padding: 0.2rem 0 0.3rem;
+}
+.yrljg2 li{
+    display: block;
+    float: left;
+    border-radius: 0.05rem;
+    margin-right: 0.08rem;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+.yrljg2 li a{
+    float: left;
+    line-height: 0.31rem;
+    color: #9d9d9d;
+    display: block;
+    padding: 0 0.12rem;
+}
+.yrljg3{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 0.15rem solid #f2f2f2;
+}
+.yrljg3 ul{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+.yrljg3 li{
+    display: block;
+    height: 0.84rem;
+    margin-left:.3rem;
+    overflow: hidden;
+    border-bottom: 1px solid #eeeeee;
+}
+.yrljg3 li img{
+    display: block;
+    width: 0.28rem;
+    height: 0.28rem;
+    float: left;
+    margin-top: 0.28rem;
+    margin-right: 0.12rem;
+}
+.yrljg3 li span{
+    display: block;
+    float: left;
+    overflow: hidden;
+    font-size: 0.24rem;
+    line-height: 0.84rem;
+}
+.yrljg3 li p{
+    display: block;
+    float: left;
+    line-height: 0.84rem;
+    font-size: 0.24rem;
+    color: #676767;
+}
+.yrljg3_b{
+    display: block;
+    width: 5.9rem;
+    margin: 0 auto;
+    overflow: hidden;
+
+}
+.yrljg3_b div{
+    float: left;
+}
+.yrljg3_b div p img{
+    display:inline-block;
+    width: 0.28rem;
+    height: 0.28rem;
+    vertical-align:middle;
+}
+.yrljg3_b div p span{
+    display:inline-block;
+    line-height: 0.84rem;
+    color: #676767;
+    font-size: 0.24rem;
+    margin-left: 0.12rem;
+    vertical-align:middle;
+}
+.yrljg3_b a{
+    display: block;
+    float: right;
+    overflow: hidden;
+    margin:0.07rem 0;
+}
+.yrljg3_b a img{
+    display: block;
+    width: 0.7rem;
+    height: 0.7rem;
+}
+.yrljghead{
+    display: block;
+    padding: 0 0.24rem;
+    height: 0.87rem;
+    line-height: 0.87rem;
+    border-bottom: 1px solid #eeeeee;
+    position:relative;
+}
+.yrljghead i{
+    display:inline-block;
+    width: 0.06rem;
+    height: 0.26rem;
+    background: #73b820;
+    position:absolute;
+    left:0;top:50%;
+    margin-top:-.13rem;
+}
+.yrljghead b{
+    display: block;
+    float: left;
+    line-height: 0.86rem;
+    margin-left: 0.07rem;
+    font-size: 0.28rem;
+    font-weight: normal;
+    color:#000;
+}
+.yrljghead a{
+    display: block;
+    float: right;
+    line-height: 0.86rem;
+    overflow: hidden;
+    color: #676767;
+    font-size: 0.24rem;
+}
+.yrljg4{
+    border-bottom: 0.15rem solid #eeeeee;
+}
+.yrljg4con{
+    padding:0.3rem .3rem;
+}
+.yrljg4con ul li{
+    width: 1.84rem;
+    float: left;
+    margin-right: 0.14rem;
+}
+.yrljg4con ul li:nth-child(3n){
+    margin:0;
+}
+.yrljg4con ul li a img{
+    display: block;
+    width: 1.84rem;
+    height:auto;
+}
+.yrljg4con ul li p{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    font-size: 0.24rem;
+    margin-top: 0.22rem;
+    color: #676767;
+}
+.yrljg4con ul li span{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0.37rem;
+    color: #676767;
+    font-size: 0.22rem;
+}
+.yrljg5{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 0.15rem solid #eeeeee;
+}
+.yrljg5{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+.yrljg5con{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+.yrljg5 li{
+    padding: 0.21rem 0.24rem;
+    border-bottom: 1px solid #eeeeee;
+}
+.yrljg5 li:after{clear:both; display:block; height:0; visibility:hidden; line-height:0; content:'\20';}
+.yrljg5 li a img{
+    display: block;
+    width: 1.4rem;
+    height: 1.4rem;
+    float: left;
+    margin-top: 0.09rem;
+}
+.yrljg5 li a div{
+    display: block;
+    float: right;
+    width: 4.32rem;
+    overflow: hidden;
+}
+.yrljg5 li h3{
+    display: block;
+    width: 100%;
+    line-height: 0.43rem;
+    font-size: 0.24rem;
+    overflow: hidden;
+    font-weight: normal;
+    color: #343434;
+}
+.yrljg5 li p{
+    display: block;
+    width: 100%;
+    font-size: 0.22rem;
+    overflow: hidden;
+    line-height: 0.4rem;
+    color: #676767;
+}
+.yrljg5 li span{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0.36rem;
+    font-size: 0.2rem;
+    color: #9a9a9a;
+}
+.yrljg6{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 0.15rem solid #eeeeee;
+}
+.yrljg6con{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+.yrljg6con ul{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+.yrljg6con li{
+    display: block;
+    width: 25%;
+    float: left;
+    overflow: hidden;
+}
+.yrljg6con li a{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.yrljg6con li a img{
+    display: block;
+    width: 0.45rem;
+    height: 0.45rem;
+    margin: 0.4rem auto 0;
+}
+.yrljg6con li a span{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    font-size: 0.24rem;
+    line-height: 0.83rem;
+    color: #000;
+}
+.yrljg6con li a i{
+    display: block;
+    width: 0.25rem;
+    height: 0.25rem;
+    text-align: center;
+    line-height: 0.25rem;
+    color: #fff;
+    font-style: normal;
+    border-radius: 100%;
+    background: #ff9c28;
+    font-size: 0.2rem;
+    position: absolute;
+    right: 0.3rem;
+    top: 0.2rem;
+}
+.yrljg7{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+.yrljg7con{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+.yrljg7con ul{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+.yrljg7con li{
+    display: block;
+    width: 3.2rem;
+    height: 1.3rem;
+    float: left;
+    overflow: hidden;
+    border-bottom: 1px solid #e6e6e6;
+}
+.yrljg7con li a{
+    display: block;
+    width: 100%;
+    height: 1.3rem;
+    overflow: hidden;
+}
+.yrljg7con li a img{
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    float: left;
+    margin: 0.4rem 0 0 0.25rem;
+}
+.yrljg7con li a div{
+    display: block;
+    width: 2.25rem;
+    float: right;
+}
+.yrljg7con li a h4{
+    display: block;
+    width: 100%;
+    font-weight: normal;
+    margin-top: 0.23rem;
+    line-height: 0.46rem;
+    font-size: 0.24rem;
+    color: #000;
+}
+.yrljg7con li a p{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    font-size: 0.28rem;
+    color: #676767;
+    line-height: 0.46rem;
+}
+.yrljg7con li:last-child{
+    border-bottom: none;
+}
+.sqjr{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+.sqjr a{
+    display: block;
+    width: 100%;
+    line-height: 0.7rem;
+    text-align: center;
+    font-size: 0.28rem;
+    color: #fff;
+    background: #73b820;
+}
+.sqjr_b{
+    display: block;
+    width: 100%;
+    height: 1.5rem;
+    background: #f2f2f2;
+}
+.tc{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 20;
+    background: rgba(0,0,0,0.5);
+    display: none;
+}
+.tc div{
+    display: block;
+    width: 4.6rem;
+    padding: 0.45rem;
+    background: #fff;
+    margin: 3rem auto 0;
+    border-radius: 0.05rem;
+}
+.tc div h3{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0.6rem;
+    font-size: 0.28rem;
+    text-align: center;
+}
+.tc div p{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    font-size: 0.24rem;
+    line-height: 0.4rem;
+}
+.tc a{
+    display: block;
+    width: 0.6rem;
+    height: 0.6rem;
+    overflow: hidden;
+    margin: 1rem auto 0;
+}
+.tc a img{
+    display: block;
+    width: 0.6rem;
+    height: 0.6rem;
+}
+
+/*筛选*/
+.chylisthead{
+    display: block;
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    top: 0.86rem;
+    z-index: 20;
+}
+.chylisthead_b{
+    display: block;
+    width: 100%;
+    height: 0.75rem;
+}
+.screenButList{
+    width: 25%;
+    float: left;
+}
+.screenButList a{
+    display: block;
+    width: 100%;
+    height: 0.75rem;
+    text-align: center;
+    line-height: 0.75rem;
+    font-size: 0.24rem;
+    color: #343434;
+}
+.screenButList i{
+    display:inline-block;
+    width:.18rem;
+    height:.1rem;
+    background: url("../images/hylist2.png") no-repeat center;
+    background-size:contain;
+    vertical-align:middle;
+    margin-left:.05rem;
+    position:relative;
+    margin-top:-.02rem;
+}
+.screenButList.choice i{
+    background: url("../images/hylist1.png") no-repeat center;
+    background-size:contain;
+}
+.hylist ul li{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+    border-top: 0.15rem solid #f1f1f1;
+}
+.hylist ul li a{
+    padding: 0.1rem 0.24rem;
+}
+.hylist ul li a:after,.hylist_r dl:after{clear:both; display:block; height:0; visibility:hidden; line-height:0; content:'\20';}
+.hylist_l{
+    display: block;
+    float: left;
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.42rem;
+}
+.hylist_r{
+    display: block;
+    width: 4.6rem;
+    float: right;
+    overflow: hidden;
+}
+.hylist_r h3{
+    line-height: 0.44rem;
+    font-size: 0.26rem;
+    font-weight: normal;
+    color: #333;
+    margin-top:.08rem;
+}
+.hylist_r h3 span{
+    display:inline-block;
+    padding-right:.12rem;
+    vertical-align:middle;
+}
+.hylist_r h3 b{
+    display:inline-flex;
+    height: 0.32rem;
+    padding:0 .1rem;
+    background: #f3ffe4;
+    border: 1px solid #c3e69a;
+    border-radius: 0.05rem;
+    line-height: 0.32rem;
+    font-size: 0.2rem;
+    vertical-align:middle;
+
+    align-items:center;
+    justify-content:space-between;
+}
+.hylist_r h3 img{
+    width: 0.22rem;
+    height: 0.22rem;
+}
+.hylist_r h3 i{
+    display:inline-block;
+    color: #79bb29;
+    line-height: 0.31rem;
+    font-size: 0.2rem;
+    font-weight: normal;
+    margin-left:.06rem;
+}
+.hylist_r dl dd{
+    display: block;
+    float: left;
+    padding: 0 0.09rem;
+    background: #f5f5f5;
+    line-height: 0.31rem;
+    font-size: 0.2rem;
+    color: #9d9d9d;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.05rem;
+    margin-right: 0.08rem;
+    margin-top:.1rem;
+}
+.hylist_r dl dd.on{
+    background: #fff3e3;
+    border: 1px solid #ffd59f;
+}
+.hylist_r div{
+    padding:0.24rem .24rem .24rem 0;
+    position:relative;
+}
+.hylist_r div i{
+    display:inline-block;
+    width: 0.2rem;
+    height: 0.24rem;
+    position:absolute;
+    left:0;top:50%;
+    margin-top:-.12rem;
+    background:url("../images/hylist5.png") no-repeat center;
+    background-size:contain;
+}
+.hylist_r div p{
+    padding-left:.3rem;
+    color: #717171;
+}
+
+.hylistsx1{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 1.61rem;
+    right:0;bottom:0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #dddddd;
+}
+.hylistsx2{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 1.61rem;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #dddddd;
+}
+.hylistsx_l{
+    display: block;
+    width: 30%;
+    float: left;
+    overflow-y:scroll;
+}
+
+.hylistsx_l li{
+    line-height: 0.62rem;
+    background: #f8f8f8;
+    text-indent: 0.25rem;
+}
+.hylistsx_l li a{
+    color: #676767;
+}
+.hylistsx_l .choice {
+    background: #fff;
+}
+.hylistsx_center{
+    display: block;
+    width: 30%;
+    float: left;
+    overflow-y:scroll;
+}
+.hylistsx_center li{
+    line-height: 0.62rem;
+    background: #f8f8f8;
+    text-indent: 0.25rem;
+}
+.hylistsx_center li a{
+    color: #676767;
+}
+.hylistsx_center .choice {
+    background: #fff;
+}
+.hylistsx_r{
+    display: block;
+    width: 40%;
+    float: right;
+    overflow-y:scroll;
+}
+.hylistsx_r li{
+    line-height: 0.62rem;
+    /*background: #f8f8f8;*/
+    text-indent: 0.25rem;
+}
+.hylistsx_r li a{
+    color: #676767;
+}
+.hylistsx_r .choice {
+    background: #fff;
+}
+.hylistsxc{
+    z-index: 20;
+}
+.mb{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.5);
+}
+.hylistsx_l{
+    height:100%;
+    overflow-y:scroll;
+}
+.hylistsx_center{
+    height:100%;
+    overflow-y:auto;
+}
+.hylistsx_r{
+    height:100%;
+    overflow-y:auto;
+}
+
+

@@ -1,0 +1,209 @@
+.recordSelectWrap{
+    width:1.2rem;
+    height:.5rem;
+    float:left;
+}
+.recordMargin{
+    margin-left:1.2rem;
+}
+.recordSelectTxt{
+    text-align:center;
+    line-height:.5rem;
+}
+.recordSelectTxt span,.recordSelectTxt i{
+    display:inline-block;
+    vertical-align:middle;
+}
+.recordSelectTxt i{
+    width:.2rem;
+    height:.2rem;
+    border:.1rem solid transparent;
+    border-top-color:#333;
+    position:relative;
+    margin-bottom:-.1rem;
+    margin-left:.05rem;
+}
+.recordSelect{
+    position:absolute;
+    left:0;right:0;top:.5rem;
+    padding:0 .2rem;
+    background-color:#fff;
+    display:none;
+    z-index:8224;
+}
+.selectList{
+    padding:.1rem 0;
+    position:relative;
+}
+.selectList i{
+    display:inline-block;
+    width:.3rem;
+    height:.3rem;
+    background:url("../images/near.png") no-repeat center;
+    background-size:contain;
+    position:absolute;
+    right:.2rem;top:50%;
+    margin-top:-.15rem;
+    opacity:0;
+}
+.selectList.on i{
+    opacity:1;
+}
+
+
+/**/
+.recordList{
+    padding:.2rem 0;
+    border-bottom:1px solid #eee;
+}
+.recordLeft{
+    width:44%;
+    float:left;
+    padding-left:.95rem;
+    padding-right:.1rem;
+    position:relative;
+}
+.recordRight{
+    width:54%;
+    float:right;
+    padding-right:.1rem;
+    text-align:justify;
+}
+.recordTop{
+    display:flex;
+    align-items:center;
+    flex-wrap:nowrap;
+}
+.recordStart{
+    width:.8rem;
+    height:.8rem;
+    border-radius:50%;
+    line-height:.8rem;
+    text-align:center;
+    font-size:.32rem;
+    color:#fff;
+    background-color:#72b81e;
+    position:absolute;
+    left:.1rem;top:50%;
+    margin-top:-.4rem;
+}
+.recordTitle{
+    line-height:.4rem;
+    border-bottom:1px solid #72b81e;
+    text-align:center;
+}
+.recordMessage{
+    line-height:.4rem;
+    border-top:1px solid #72b81e;
+    text-align:center;
+}
+.recordMessage.o{color:#f07730}
+.recordMessage.g{color:#72b81e}
+.recordMessage.r{color:#f03727}
+.recordMessage.i{color:#999}
+.recordIcon{
+    width:.3rem;
+    height:.3rem;
+    border-right:2px solid #72b81e;
+    border-bottom:2px solid #72b81e;
+    transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg);
+    position:absolute;
+    right:.1rem;
+    top:50%;
+    margin-top:-.15rem;
+}
+.doubleLeft .recordIcon{
+    transform:rotate(135deg);
+    -webkit-transform:rotate(135deg);
+    left:1rem;
+    top:50%;
+}
+.double .recordTitle{
+    border-bottom:2px solid #72b81e;
+}
+.double .recordMessage{
+    border-top:2px solid #72b81e;
+    margin-top:.1rem;
+}
+.double .recordIconA{
+    width:.3rem;
+    height:.3rem;
+    border-right:2px solid #72b81e;
+    position:absolute;
+    margin-top:-.22rem;
+}
+.double .recordIconB{
+    width:.3rem;
+    height:.3rem;
+    border-right:2px solid #72b81e;
+    position:absolute;
+}
+.doubleA .recordIconA{
+    transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg);
+    right:.12rem;
+    top:50%;
+    margin-top:-.22rem;
+}
+.doubleA .recordIconB{
+    transform:rotate(135deg);
+    -webkit-transform:rotate(135deg);
+    left:1.04rem;
+    top:50%;
+    margin-top:-.07rem;
+}
+.doubleB .recordIconA{
+    transform:rotate(-135deg);
+    -webkit-transform:rotate(-135deg);
+    left:1.04rem;
+    top:50%;
+    margin-top:-.22rem;
+}
+.doubleB .recordIconB{
+    transform:rotate(135deg);
+    -webkit-transform:rotate(135deg);
+    left:1.04rem;
+    top:50%;
+    margin-top:-.07rem;
+}
+.doubleC .recordIconA{
+    transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg);
+    right:.12rem;
+    top:50%;
+    margin-top:-.22rem;
+}
+.doubleC .recordIconB{
+    transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    right:.12rem;
+    top:50%;
+    margin-top:-.07rem;
+}
+.doubleD .recordIconA{
+    transform:rotate(-135deg);
+    -webkit-transform:rotate(-135deg);
+    left:1.04rem;
+    top:50%;
+    margin-top:-.22rem;
+}
+.doubleD .recordIconB{
+    transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    right:.12rem;
+    top:50%;
+    margin-top:-.07rem;
+}
+
+.recordTime{
+    width:100%;
+    padding:.2rem;
+}
+.recordTime strong,.recordTime span{
+    display:inline-block;
+    vertical-align:middle;
+}
+.recordTime strong{
+    padding-right:.1rem;
+}

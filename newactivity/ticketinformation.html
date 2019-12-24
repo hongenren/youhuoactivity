@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>填写活动信息</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/ticketinformation.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css" />
+    <script type="text/javascript" src="js/rem.js"></script>
+    <style>
+        .warp_ci {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            position: fixed;
+            left: 100%;
+            top: 0;
+            background: #FFFFFF;
+            z-index: 99
+        }
+        .warp{
+            width: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="ticketinformation">
+    <header class="mint-header">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">票证信息</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="period">场次：{{addFrom.day}} {{addFrom.startTime}}-{{addFrom.endTime}}</div>
+    <div class="addticketbox" v-for="(item, index) in publicParamList" :key="index">
+        <div class="addtickettitle">
+            <span class="fl" @click="addnewticket" v-if="index == 0"><i class="iconfont icon-tianjiajiahaowubiankuang"></i><span>添加新票证</span></span>
+            <span class="fr"><span style="color:#F0676C;">删除</span></span>
+        </div>
+        <div class="addticketinfo">
+            <div class="yh-group">
+                <span class="l">票证名称</span>
+                <div><input type="text" placeholder="例：公众门票/嘉宾证/媒体证" v-model="item.name"><i class="iconfont icon-youjiantou"></i></div>
+            </div>
+            <div class="yh-group">
+                <span class="l">票证地点{{item.publicAddressId}}</span>
+                <a href="javascript:;" class="warp_dd" @click="warpdd('publicAddressId', index)">
+                    <textarea style="width: 200px;" :id="`address${index}`" class="address" placeholder="请选择" readonly="readonly" disabled="disabled"></textarea>
+                </a>
+                <!-- <input type="hidden" id="lat" value="">
+                <input type="hidden" id="lng" value="">
+                <input type="hidden" id="addressId"> -->
+            </div>
+            <div class="yh-group" style="border: none">
+                <span class="l">积分赠送<span style="color:#bbbbbb;">（每人每次）</span></span>
+                <div class="jiajian">
+                    <i class="iconfont icon-icon_weitijiao"></i>
+                    <input type="text" class="feedin" v-model="item.inIntegral">
+                    <i class="iconfont icon-add"></i>
+                </div>
+            </div>
+            <div class="integral">
+                <span>票证核销后赠送给用户的积分</span>
+                <span>可用积分：<span style="color:#73B81F;" id="jifen"></span></span>
+            </div>
+            <div class="getway">
+                <span :class="{ active: item.publicApply==10 }" @click="toggleTabs(10, item)">公开领取</span><span :class="{ active: item.publicApply==20 }" @click="toggleTabs(20, item)">指定发放</span>
+            </div>
+            <!-- 公开领取 -->
+            <div v-if="true">
+                <div class="yh-group">
+                    <span class="l">票证数量</span>
+                    <div class="jiajian">
+                        <i class="iconfont icon-icon_weitijiao"></i>
+                        <input type="text" class="feedin" v-model="item.total">
+                        <i class="iconfont icon-add"></i>
+                    </div>
+                </div>
+                <div class="yh-group" style="border: none;">
+                    <span class="l">票证积分价格</span>
+                    <div class="jiajian">
+                        <i class="iconfont icon-icon_weitijiao"></i>
+                        <input type="text" class="feedin" v-model="item.outIntegral">
+                        <i class="iconfont icon-add"></i>
+                    </div>
+                </div>
+                <div class="integral" style="border-bottom: 1px solid #BBBBBB;">
+                    <span style="padding-bottom: 5px;">用户领取票证时需支付的积分</span>
+                </div>
+                <div class="yh-group">
+                    <span class="l" style="line-height: 32px;">领取需审核{{item.audit}}</span>
+                    <div class="testswitch">
+                        <input class="testswitch-checkbox" :id='"examined"+index' type="checkbox" v-model="item.audit" true-value="10" false-value="20">
+                        <label class="testswitch-label" :for='"examined"+index'>
+                            <span class="testswitch-inner"></span>
+                            <span class="testswitch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="member">
+                    <span>领取成员</span>
+                    <span><input type="radio" class="yh-radio" value="10" v-model="item.isOpen" :id='"allMembers"+index'><label :for='"allMembers"+index' class="yh-rlable">全平台机构成员</label></span>
+                    <span><input type="radio" class="yh-radio" value="20" v-model="item.isOpen" :id='"appointMembers"+index'><label :for='"appointMembers"+index' class="yh-rlable">指定机构成员</label></span>
+                </div>
+                <div class="yh-group">
+                    <span class="l" style="line-height: 32px;">本机构成员{{item.selfOrg}}</span>
+                    <div class="testswitch">
+                        <input class="testswitch-checkbox" :id='"myMembers"+index' type="checkbox" v-model="item.selfOrg" true-value="10" false-value="20">
+                        <label class="testswitch-label" :for='"myMembers"+index'>
+                            <span class="testswitch-inner" data-on="" data-off=""></span>
+                            <span class="testswitch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="yh-group">
+                    <span class="l" style="line-height: 32px;">活动参与方成员</span>
+                    <div class="testswitch">
+                        <input class="testswitch-checkbox" :id='"partyMembers"+index' type="checkbox" v-model="item.unitOrg" true-value="10" false-value="20">
+                        <label class="testswitch-label" :for='"partyMembers"+index'>
+                            <span class="testswitch-inner" data-on="" data-off=""></span>
+                            <span class="testswitch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="yh-group" style="border: none;">
+                    <span class="l">指定机构成员领取</span>
+                    <span class="ricon">请选择</span>
+                </div>
+                <div class="companybox" style="border-bottom: 1px solid #bbb;">
+                    <div class="yh-group-company" v-for="(item, index) in companyShow" :key="index">
+                        <span>{{item.assignOrgName}}</span>
+                        <span class="iconfont icon-cha1" @click="delcompany(index)"></span>
+                    </div>
+                </div>
+                <!-- 主办搜索开始 -->
+                <div class="searchcompany">
+                    <div class="screenButList">
+                        <input type="text" id="activityUniteParamName" placeholder="请输入机构名称进行查询"><i @click="search" class="iconfont icon-fangdajing"></i>
+                    </div>
+                    <ul class="warp_company">
+                        <li v-for="(item, index) in companyList">
+                            <div :class="{companyname:item.checked}" @click="toggleClass(item)">{{item.name}}</div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 搜索结束 -->
+            </div>
+            <!-- 指定发放 -->
+            <div v-if="false">
+                <div class="tishi">如指定用户是系统中已实名注册用户，在Ta的个人订单中将会生成一张票证订单；如指定用户是非系统实名用户，系统将会以短信形式发送给Ta。</div>
+                <div class="addtickettitle"><i class="iconfont icon-jiahao"></i>添加新用户</div>
+                <div class="yh-group">
+                    <span class="l">手机号</span>
+                    <input type="text">
+                </div>
+                <div class="yh-group">
+                    <span class="l">姓名</span>
+                    <input type="text">
+                </div>
+                <div class="yh-group">
+                    <span class="l">所在单位名称</span>
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="submit-btn" @click="submit">保存提交</button>
+    <!--地点开始-->
+    <div class="warp_ci">
+
+    </div>
+    <!--地点结束-->
+    <!---- 地图开始 ---->
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+    <div class="warp_ifrem" style="background-color: #ffffff;">
+
+    </div>
+    <!---- 地图结束 ---->
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="js/act.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#ticketinformation',
+    data () {
+        return {
+            newIndex: 10,
+            companyList: null,
+            companyShow: [],
+            addFrom: {
+                activityCode: sessionStorage.getItem('activityCode'), // 活动一号通 
+                sectionCode: null, // 场次标识 新增场次不用传值
+                day: sessionStorage.getItem('postime'), // 场次日期
+                startTime: sessionStorage.getItem('.start_time' + this.getUrlParam('id')), // 开始时间
+                endTime: sessionStorage.getItem('.end_time' + this.getUrlParam('id')), // 结束时间
+                orgCode: JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'BBA119945', // 法人三类标识
+            },
+            publicParamList: [
+                    {
+                        assignOrgCode: '', // 指定其他机构标识
+                        assignOrgName: '', // 指定其他机构
+                        publicApply: '10', // 公开领取标识	10是20直接发放
+                        isOpen: '10', // 领取范围 10全平台20指定机构
+                        audit: null, // 需审核 10是20否
+                        inIntegral: null, // 赠送积分
+                        name: null, // 票证名称
+                        outIntegral: null, // 支付积分
+                        publicAddressId: null, // 票证地址
+                        selfOrg: null, // 指定本机构
+                        unitOrg: null, // 指定参与方机构 10是20否
+                        outIntegral: null, // 支付积分 10是20否
+                        total: null // 数量
+                    }
+                ] //票证
+        }
+    },
+    mounted () {
+        this.getIntegral();
+        console.log(sessionStorage.getItem(1));
+        JSON.parse(sessionStorage.getItem(this.getUrlParam('id'))) && (this.publicParamList = JSON.parse(sessionStorage.getItem(this.getUrlParam('id'))));
+    },
+    methods: {
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
+        // 获取积分
+        getIntegral () {
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: 'post',
+                url: base_url + "html5/v1/orgPlace/queryOrgByPrjvOrgId",
+                data: JSON.stringify({"prjvOrgId": prjvorgMsg.prjvOrgId}),
+                dataType:'json',
+                headers : {'token':token},
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    if (data.code == 0) {
+                        $('#jifen').text(data.data.integral);
+                    }
+                }
+            });
+        },
+        // 添加新场次
+        addnewticket () {
+            this.publicParamList.unshift({
+                assignOrgCode: '', // 指定其他机构标识
+                assignOrgName: '', // 指定其他机构
+                publicApply: '10', // 公开领取标识	10是20直接发放
+                isOpen: '10', // 领取范围 10全平台20指定机构
+                audit: null, // 需审核 10是20否
+                inIntegral: null, // 赠送积分
+                name: null, // 票证名称
+                outIntegral: null, // 支付积分
+                publicAddressId: null, // 票证地址
+                selfOrg: null, // 指定本机构
+                unitOrg: null, // 指定参与方机构 10是20否
+                outIntegral: null, // 支付积分 10是20否
+                total: null // 数量
+            });
+        },
+        // 地点
+        warpdd (publicAddressId, index) {
+            var that = this;
+            that.index = index;
+            console.log(that.publicParamList[index][publicAddressId]);
+            $('.warp_ci').load('./act_addr_list.html');
+            user_addr_list();
+
+            if(window.innerWidth>640){
+                $(".warp_ci").animate({left:"50%",marginLeft:'-320px'})
+            }else{
+                $(".warp_ci").animate({left:"0"})
+            }
+            //点击已有地址触发事
+            $(".warp_pws_v_sy li div").live('click',function(item){
+                var id = $(this).parent().attr('data-id');
+                var name = $(this).parent().attr('data-name');
+                var address = $(this).parent().attr('data-address');
+                var lat = $(this).parent().attr('data-lat');
+                var lng = $(this).parent().attr('data-lng');
+                if($("#edit_address").val()=="true"){
+                    $('.addr11').parent().find("#job_lat").val(lat);
+                    $('.addr11').parent().find("#job_lng").val(lng);
+                    $('.addr11').parent().find(".cnowiucioq").text(name);
+                    $('.addr11').parent().find("#address").val(name);
+                }else{
+                    //此处信息为
+                    // $("#lat").val(lat);
+                    // $("#lng").val(lng);
+                    // //$("#address").val(data1.name);
+                    // $(".address").text(address);
+                    // $("#job_address").val(address);
+                    // $("#job_lng").val(lng);
+                    // $("#job_lat").val(lat);
+                    // $(".addr11").text(address);
+                    $("#address" + index).val(name);
+                    // $("#addressId").val(id);
+                    that.publicParamList[that.index][publicAddressId] = id;
+                    console.log(that.publicParamList);
+                }
+                $(".warp_ci").animate({left:"200%"});
+            })
+        },
+        // 公开领取10 指定发放20
+        toggleTabs (index, item) {
+            this.newIndex = index;
+            item.publicApply = index;
+        },
+        // 搜索公司
+        search () {
+            var that = this;
+            $.ajax({
+                url: base_url + '/html5/v1/orgPlace/queryTotalListByName',
+                type: "post",
+                dataType: "json",
+                data: "{\"name\":\"" + $("#activityUniteParamName").val() + "\", \"pageNumber\": 1, \"pageSize\": 6, \"orgThirdAccount\":\""+that.addFrom.orgCode+"\" }",
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        that.companyList = resp.data.records;
+                        // $(".warp_company").html("");
+                        // for (var i in record) {
+                        //     $(".warp_company").append(`<li>
+                        //         <span data-orgId="${record[i].id}" data-type="${record[i].type}" data-orgName="${record[i].name}" data-orgCode="${record[i].orgThirdAccount}">${record[i].name}</span>
+                        //     </li>`);
+                        // }
+                        // $(".warp_company li span").click(function() {
+                        //     $(this).toggleClass('companyname');
+                        // });
+                    }
+                }
+            });
+        },
+        // 选择公司
+        toggleClass (item) {
+            if (typeof item.checked == 'undefined') {
+                this.$set(item, "checked", true)
+            } else {
+				item.checked = !item.checked
+			}
+            this.companyShow = [];
+            this.companyList.map((item)=>{
+                if (item.checked) {
+                    this.companyShow.push({
+                        assignOrgName: item.name,
+                        assignOrgCode: item.orgThirdAccount
+                    });
+                }
+            });
+        },
+        // 删除
+        delcompany (index) {
+            this.companyShow.splice(index, 1);
+        },
+        // 提交
+        submit () {
+            this.publicParamList[0].assignOrgName ='',
+            this.publicParamList[0].assignOrgCode ='',
+            this.companyShow.map((item)=>{
+                this.publicParamList[0].assignOrgName += item.assignOrgName + ',';
+                this.publicParamList[0].assignOrgCode += item.assignOrgCode + ',';
+            });
+            this.addFrom.publicParamList = this.publicParamList;
+            var that = this;
+            $.ajax({
+                url: base_url + '/html5/v2/activity/sectionPublic/add',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.addFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        console.log(resp.data.sectionCode);
+                        sessionStorage.setItem(that.getUrlParam('id'), JSON.stringify(that.publicParamList));
+                        sessionStorage.setItem(that.getUrlParam('sectionCode'), resp.data.sectionCode);
+                    } else {
+                        layer.open({
+                            content: resp.msg,
+                            skin: 'msg',
+                            time: 1
+                        });
+                    }
+                }
+            });
+            console.log(this.publicParamList);
+        }
+    },
+})
+</script>
+</html>

@@ -1,0 +1,141 @@
+.addResseeContent{
+    padding-bottom:1rem;
+}
+.identityInputWrap{
+    padding: 0;
+    margin: 3%;
+    height: 44px;
+    position:relative;
+}
+.identityName{
+    width:2.1rem;
+    font-size: .24rem;
+    line-height:44px;
+}
+.identityInput{
+    margin-left:2.1rem;
+    line-height:44px;
+    border-bottom:1px solid #eee;
+}
+
+.identityInput input{
+    font-size: .24rem;
+    display:inline-block;
+    width:100%;
+}
+.teamsCreateEwm{
+    padding:.3rem;
+    text-align:center;
+}
+.teamsCreateEwm button{
+    font-weight: bold;
+    display:inline-block;
+    width:70%;
+    height:.6rem;
+    border-radius:.3rem;
+    border:1px solid #72b81e;
+    background: #72b81e;
+    color: white;
+    font-size:.24rem;
+    line-height:1;
+}
+
+.teamManageWrap{
+    padding:3%;
+}
+.teamManageWrap h2{
+    padding:0 .1rem;
+    font-size:.28rem;
+    font-weight:bold;
+}
+.teamManageList{
+    padding:.1rem;
+    border-bottom:1px solid #eee;
+}
+.teamEvm{
+    width:1.2rem;
+    float:right;
+}
+.teamEvm img{
+    width:100%;
+    height:auto;
+}
+.teamTxt{
+    font-size:.24rem;
+    text-align:center;
+}
+.teamLeftTest{
+    margin-right:1.3rem;
+}
+.teamTest strong,.teamTest span{
+    display:inline-block;
+    vertical-align:middle;
+    font-size:.24rem;
+}
+.teamTest strong{
+    font-weight:normal;
+    color:#999999;
+    padding-right:.1rem;
+}
+.teamTest span{
+    color:#000;
+}
+
+.receiveWrap{
+    position:fixed;
+    left:0;top:0;right:0;bottom:0;
+    z-index:3000;
+    background-color:#fff;
+    /*display:none;*/
+}
+.receiveEwm{
+    margin:1.6rem;
+    position:relative;
+}
+.receiveEwm img{
+    width:100%;
+    height:auto;
+}
+.ewmText{
+    width:1.2rem;
+    height:.6rem;
+    border-radius:4px;
+    background-color:#fff;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-.6rem;
+    margin-top:-.3rem;
+    line-height:.6rem;
+    text-align:center;
+}
+.receiveText{
+    text-align:center;
+    color:#72b81e;
+}
+
+.receiveButtonWrap{
+    position:fixed;
+    left:0;bottom:0;right:0;
+    padding:.3rem;
+    text-align:center;
+}
+.receiveBut{
+    display:inline-block;
+    vertical-align:middle;
+    width:40%;
+    height:.7rem;
+    font-size:.24rem;
+    line-height:.7rem;
+    text-align:center;
+    border-radius:.35rem;
+    border:1px solid #72b81e;
+    margin:0 .2rem;
+}
+.receiveBut.on{
+    background-color:#72b81e;
+    color:#fff;
+}
+.receiveBut.on a{
+    color:#fff;
+}

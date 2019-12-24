@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.qrcode.min.js"></script>
+	<script src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script><!--地图-->
+    <script src="../wap/js/jquery.baiduMap.min.js"></script><!--地图-->
+	<style>
+	.warp_dd_o_su{width: 34%}
+	.warp_dd_o_su div{width: 90px;margin: auto}
+	.map_xp_p{width: 100%;height: 100%;position: fixed;left: 0;top: 0;z-index: 999999;background: #FFFFFF;display: none}
+	.map_xp_o{width: 30px;height: 30px;background: url(../wap/img/pws_223.png) no-repeat center;position: fixed;right: 3%;top: 1%;z-index: 9999999}
+	.map_xp_o a{display: block;width: 30px;height: 30px;}
+	.left {width: 100%}
+    .container{width:100%;height: 100%;position: absolute;left: 0;top: 0;font-size: 12px}
+	</style>
+</head>
+<body>
+<div class="warp">
+
+    <div class="warp_zy_j" style="border-bottom: 1px solid #BBBBBB;background-color: white">
+        <a href="javascript:history.go(-1);"></a>
+        <span>历史订单</span>
+        <a href="#" class="curremt" style="/*osition: fixed;*/left: auto;top: 15px;right:3%;display: inline-block;text-align: center;margin: 0 4%;background: none;">
+            <img src="../wap/img/pws_281.png" style="width: auto;height: 20px;">
+            <i id="nums" style="
+                        display: inline-block;
+                        width: 9px;
+                        height: 9px;
+                        border-radius: 50%;
+                        position: absolute;
+                        right: -12px;
+                        top: -9px;
+                        background-color: red;
+                        color: #fff;
+                        text-align: center;
+                        line-height: 18px;
+                        font-size: 12px;
+                        font-style: normal;
+                    "></i>
+        </a>
+    </div>
+    <header class="warp_dd_p" style="border-bottom: 1px solid #BBBBBB;">
+        <a href="#" onclick="jump('../post/personal_post_history_list.html')">
+            <span>岗位订单</span>
+        </a>
+        <a href="#" onclick="jump('../task/task_history_list.html')">
+            <span>任务订单</span>
+        </a>
+        <a href="#" class="current" onclick="jump('../order/myorder.html')">
+            <span>活动订单</span>
+        </a>
+    </header>
+
+    <div class="warp_pws_n_st_bj">
+        <a href="javascript:void(0)" id="screening" onclick="openScreening()">筛选</a>
+        <div class="selectList">
+            <dl class="orgTypes" data-id="">全部</dl>
+            <dl class="orgTypes" data-id="1">近一个月订单</dl>
+            <dl class="orgTypes" data-id="3">近三个月订单</dl>
+        </div>
+    </div>
+
+    <div id="content">
+        <ul class="warp_dd_o">
+
+        </ul>
+    </div>
+
+	<div class="map_xp_p">
+		<div class="map_xp_o"><a href="javascript:void(0)"></a></div>
+		<!------地图开始------>
+		<div class="left">
+			<div id="container1" class="container"></div>
+		</div>
+
+		<!------地图结束------>
+	</div>
+
+    <!------底部开始------>
+    <div id='footer'></div>
+    <!------底部结束------>
+</div>
+<script>
+    // $("#footer").load("../public/footer.html");
+    $(".selectList").append('<dl class="orgTypes" data-id="'+nowYear+'">今年内订单</dl>');
+    $(".selectList").append('<dl class="orgTypes" data-id="'+(nowYear-1)+'">'+(nowYear-1)+'年订单</dl>');
+    $(".selectList").append('<dl class="orgTypes" data-id="'+(nowYear-2)+'">'+(nowYear-2)+'年订单</dl>');
+    $(".selectList").append('<dl class="orgTypes" data-id="'+(nowYear-3)+'">'+(nowYear-3)+'年订单</dl>');
+</script>
+<script>
+    $(document).ready(function () {
+        function getNotReadNums() {
+            var user_msg = JSON.parse($.cookie('user_msg'));
+            $(".curremt").attr('href', '../managementact/oneSend/lastList.html');
+            $.ajax({
+                url: '//im.shcvs.cn/api/getNotReadNums',
+                type: "post",
+                dataType: "json",
+                data: {"clientId": 'userId:' + user_msg.userId},
+                success: function (resp) {
+                    if (resp.success == true) {
+//                        debugger;
+//                        var getCookieNotread = $.cookie('not_read_num');
+                        if (resp.data == 0) {
+                            $("#nums").hide();
+                        }
+                    }
+                }
+            });
+        }
+
+        getNotReadNums();
+    });
+$(".tc_dt_p").live("click",function(){
+        $(".map_xp_p").fadeIn();
+		$("body,html").css({
+					"height":"100%",
+					"overflow":"hidden"
+				  });
+				  $('body').addClass('add');
+    });
+    $(".map_xp_o a").live("click",function(){
+        $(".map_xp_p").fadeOut();
+		$("body,html").css({
+					"height":"auto",
+					"overflow":"auto"
+				  });
+				  $('body').removeClass('add')
+    });
+function jumpMy(url,type){
+    if(type==1){
+        $(location).attr('href', encodeURI(location.href.replace("myorder",url)));
+    }else{
+        window.location.reload();
+    }
+}
+</script>
+<script src="../wap/js/dropload.min.js"></script>
+<script src="../wap/js/order/myorder.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海"/>
+    <meta name="description" content="公益上海"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="../meng/js/offset.js"></script>
+    <link rel="stylesheet" href="../meng/css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/personal.css">
+</head>
+<body>
+<div class="container">
+    <div class="sendHistoryHead">
+        <!--<a class="sendBack" href="javascript:void(0)" onclick="jump('../org/institutions.html');"><i></i></a>-->
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i></a>
+        <div class="sendHeadList"><span>个人主页</span></div>
+        <!--<div class="sendHeadButton"><button><a href="record.html">结盟记录</a></button></div>-->
+    </div>
+    <div class="personalCardWrap">
+        <div class="subPhotoWrap">
+            <div class="subPhoto" style="background-image:url('../srcb/images/blank_card.jpg')">
+                <div class="subPhotoFont subPhotoName"><span class="name">姓名</span><!--<span class="red">待激活</span>--></div>
+                <div class="subPhotoFont subPhotoSex"><span class="sex">性别</span></div>
+                <div class="subPhotoFont subPhotoBirthday" style="display: none;"><span class="birthday">出生日期</span></div>
+                <div class="subPhotoFont subPhotoCode"><span class="code">公益护照编号</span></div>
+                <div class="subPhotoFont subPhotoValidityPeriod"><span class="validityPeriod">有效期</span></div>
+                <div id="qrcode" style="display: none;"></div>
+                <div class="subPhotoFont subPhotoQrCode"><img id="qrcodeImg" class="qrCode" src="../srcb/images/qrCode.png" /></div>
+            </div>
+        </div>
+    </div>
+    <div class="commendTog personalLevel clearfix">
+        <div class="commendTogBase left">
+            <a href="javascript:void(0)">
+                <div class="commendTogIcon" style="background-image:url('../wap/img/pws_49.png')"></div>
+                <div class="commendTogTxt">志愿服务时间</div>
+                <div class="commendTogTime">230小时38分钟</div>
+            </a>
+        </div>
+        <div class="commendTogBase right">
+            <a href="javascript:void(0)">
+                <div class="commendTogIcon" style="background-image:url('../wap/img/pws_50.png')"></div>
+                <div class="commendTogTxt">星级</div>
+                <div class="commendTogStar"></div>
+            </a>
+        </div>
+    </div>
+    <div class="personalHonorWrap">
+        <h3>荣誉墙</h3>
+        <div class="personalHonorListWrap">
+            <!--<div class="personalHonorList">-->
+                <!--<div class="personalHonorTime base">2019年11月06日</div>-->
+                <!--<div class="personalHonorTitle base">荣获“上海优秀企业家”称号</div>-->
+                <!--<div class="personalHonorContent base">在过去一年水电表水电费是的，风格不哭第三方吃。单身聚会把的手机号</div>-->
+                <!--<div class="personalHonorImg base"><img src="../wap/img/pws_27.jpg" alt="img"></div>-->
+                <!--<div class="personalHonorNum base"><strong>文书名称及文号: </strong>12324235234</div>-->
+                <!--<div class="personalHonorUnit base"><strong>颁发者: </strong>12324235234</div>-->
+                <!--<div class="personalHonorIcon base"></div>-->
+            <!--</div>-->
+            <!--<div class="personalHonorList">-->
+                <!--<div class="personalHonorTime base">2019年11月06日</div>-->
+                <!--<div class="personalHonorTitle base">荣获“上海优秀企业家”称号</div>-->
+                <!--<div class="personalHonorContent base">在过去一年水电表水电费是的，风格不哭第三方吃。单身聚会把的手机号</div>-->
+                <!--<div class="personalHonorImg base"><img src="../wap/img/pws_27.jpg" alt="img"></div>-->
+                <!--<div class="personalHonorNum base"><strong>文书名称及文号: </strong>12324235234</div>-->
+                <!--<div class="personalHonorUnit base"><strong>颁发者: </strong>12324235234</div>-->
+                <!--<div class="personalHonorIcon base"></div>-->
+            <!--</div>-->
+        </div>
+
+    </div>
+</div>
+<script src="../meng/plugins/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script src="../meng/js/jquery.cookie.js"></script>
+<script src="../meng/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<!--<script src="../meng/js/prjvorg.js"></script>-->
+<script src="js/index.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<!--<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>-->
+<script type="text/javascript" src="../wap/js/jquery.qrcode.min.js"></script>
+<script>
+    // if($.cookie('user_msg')==undefined||$.cookie('token')==undefined){
+    //     window.location.href = '../login/login.html?jumpAdd='+location.href;
+    // }
+    function qrcode1(url){
+        $("#qrcode").qrcode({
+            render: "canvas", // 渲染方式有table方式（IE兼容）和canvas方式
+            width: 150, //宽度
+            height: 150, //高度
+            text: url, //内容
+            typeNumber: -1,//计算模式
+            correctLevel: 2,//二维码纠错级别
+            background: "#ffffff",//背景颜色
+            foreground: "#000000"  //二维码颜色
+        });
+        var canvas = $('#qrcode').find("canvas").get(0);
+        var url = canvas.toDataURL('image/jpeg');
+        $("#qrcodeImg").attr('src', url);
+    }
+    function querySuccess(passport){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'get',
+            url: base_url + "html5/v1/volunteer/info?passport="+passport,
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                layer.closeAll();
+                if (data.code == 0) {
+                    var passport = data.data.passport;
+                    if(passport){
+                        $(".personalCardWrap").show();
+                        qrcode1(passport.qr);
+                        $(".name").html("姓名："+passport.realName);
+                        $(".sex").html("性别："+passport.sex);
+                        $(".birthday").html("出生日期："+passport.birthday);
+                        $(".code").html("公益护照编号："+passport.licenseCode);
+                        var validityPeriod = passport.validityPeriod;
+                        if(validityPeriod=="待激活"){
+                            $(".validityPeriod").html("有效期至：<span style='color: red;'>"+validityPeriod+"</span>");
+                            $(".jihuo").show();
+                        }else if(validityPeriod=="待领取"){
+                            $(".validityPeriod").html("有效期至：<span style='color: red;'>"+validityPeriod+"</span>");
+                            $(".lingqu").show();
+                        }else{
+                            $(".validityPeriod").html("有效期至：<span>"+validityPeriod+"</span>");
+                        }
+                    }else{
+                        $(".personalCardWrap").hide()
+                    }
+
+                    //
+                    var datas=data.data;
+                    var stars=datas.stars;
+                    var time=ChangeHourMinutestr(datas.time);
+                    $(".commendTogTime").html(time||'/');
+                    if(parseInt(stars)>0){
+                        var ti='';
+                        for(var i=0;i<parseInt(stars);i++){
+                            ti+='<i></i>'
+                        }
+                        $(".commendTogStar").html(ti)
+                    }else{
+                        $(".commendTogStar").html('暂无星级')
+                    }
+                    var achievement=data.data.achievement;
+                    if(achievement.length>0){
+                        var li='';
+                        for(var j in achievement){
+                            var createTime=achievement[j].createTime=='undefined'||achievement[j].createTime==''?'':'<div class="personalHonorTime base">'+achievement[j].createTime+'</div>\n';
+                            var title=achievement[j].title;
+                            var content=achievement[j].content;
+                            var imgs=achievement[j].imgs;
+                            var num=achievement[j].num=='undefined'||achievement[j].num==''?'':'<div class="personalHonorNum base"><strong>文书名称及文号: </strong>'+achievement[j].num+'</div>\n';
+                            var unit=achievement[j].unit=='undefined'||achievement[j].unit==''?'':'<div class="personalHonorUnit base"><strong>颁发者: </strong>'+achievement[j].unit+'</div>\n';
+
+                            if(imgs==''||imgs=='undefined'){
+                                imgs='<img src="../wap/img/pws_27.jpg" alt="img">'
+                            }else {
+                                imgs='<img src="'+imgs+'" alt="img">'
+                            }
+                            li+='<div class="personalHonorList">\n' +
+                                createTime+
+                                '                <div class="personalHonorTitle base">'+title+'</div>\n' +
+                                '                <div class="personalHonorContent base">'+content+'</div>\n' +
+                                '                <div class="personalHonorImg base">'+imgs+'</div>\n' +
+                                num+
+                                unit+
+                                '                <div class="personalHonorIcon base"></div>\n' +
+                                '            </div>'
+                        }
+                        $(".personalHonorListWrap").html(li)
+                    }
+                }else {
+                    layer.open({
+                        content: '获取失败，网络错误',
+                        skin: 'msg',
+                        time: 2
+                    });
+                }
+            },
+            error: function(){
+                layer.closeAll();
+                layer.open({
+                    content: '获取失败，网络错误',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false;
+            }
+        })
+    }
+
+
+    $(function(){
+        var passport = $.getUrlParam("passport");
+        if(passport==''){
+            layer.open({
+                content: '请实名认证',
+                skin: 'msg',
+                time: 2
+            });
+            setTimeout(function(){
+                window.location.href='../user/user_msg.html'
+            },2000);
+            return false
+        }
+        querySuccess(passport);
+    })
+</script>
+</body>
+</html>

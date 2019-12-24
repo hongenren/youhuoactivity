@@ -1,0 +1,84 @@
+.warp_dd_p{
+    padding: 1% 0px;
+    background: #ffffff;
+}
+.warp_zy_j{
+    background: #F2F2F2;
+    border-bottom:1px solid #cccccc;
+}
+
+.button-div input{
+    float: right;
+    border-radius: 50px;
+    padding: 3px 6px;
+    margin: 0px 5px;
+}
+.failure-list{
+    margin-top: 0px;
+ }
+.failure-list div{
+    color: #999999;
+    margin-bottom: 3px;
+}
+.succeed-list{
+    display: none;
+    width: 100%;
+    height: 60px;
+    background: white;
+    padding-top: 2%;
+}
+.succeed-list-title{
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+.succeed-list-title-div{
+    text-align: center;
+    border-right:  1px solid #BBBBBB;
+    float: left;
+    width: 16.4%;
+    height: 60px;
+}
+.succeed-list-title-div div{
+    font-weight: bold;
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+}
+.pitch-on{
+    background: #83d222;
+    color: #ffffff;
+}
+.succeed-list-title-div div span{
+    display: block;
+    line-height: 20px;
+    width: 100%;
+}
+.succeed-list-ul{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: white;
+}
+.succeed-list-ul li{
+    background: white;
+    border-bottom:1px solid #cccccc;
+    margin-bottom: 0px;
+}
+.succeed-list-ul img{
+    width: 60px;
+    height: 60px;
+    border-radius:50%;
+    overflow:hidden;
+    float: left;
+}
+.succeed-list-ul span, .succeed-list-ul p{
+    line-height: 20px;
+    display: block;
+    float: left;
+    margin-top: 1%;
+    margin-left: 3%;
+}
+.succeed-list-ul p{
+    color: #999999;
+}

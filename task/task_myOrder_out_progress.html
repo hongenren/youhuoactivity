@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海"/>
+    <meta name="description" content="公益上海"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="../meng/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/task_myOrder_content.css"/>
+    <style>
+        .tme_progress_right{
+            margin-left:24%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>申请退出</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+    <div class="tme_wrap">
+        <!--<div class="tme_progress tmt_progress clearfix">-->
+            <!--<div class="tme_progress_left">接收人姓名</div>-->
+            <!--<div class="tme_progress_right clearfix" style=" margin-left:1.4rem;">-->
+                <!--<div class="tmo_out_text textAlign_right tmtp_name">张三</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="tme_progress tmt_progress clearfix">-->
+            <!--<div class="tme_progress_left tmtp_mobile_text">接收人手机号</div>-->
+            <!--<div class="tme_progress_right clearfix" style=" margin-left:1.4rem;">-->
+                <!--<div class="tmo_out_text textAlign_right tmtp_mobile">18221221211</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="tme_progress clearfix">
+            <div class="tme_progress_left" style="padding-top:.2rem;">退出原因</div>
+            <div class="tme_progress_right clearfix" style=" margin-left:1.4rem;">
+                <div class="tmo_out_text tmtp_content">暂无退出原因</div>
+            </div>
+        </div>
+        <div class="tme_progress clearfix">
+            <div class="tme_progress_left">申请进度</div>
+            <div class="tme_progress_right on queryChangeApplyList clearfix">
+                <!--<div class="tme_progress_list">-->
+                <!--<i></i>-->
+                <!--<strong>任务提交成功</strong>-->
+                <!--<span>11-03 18:00</span>-->
+                <!--</div>-->
+                <!--<div class="tme_progress_list">-->
+                <!--<i></i>-->
+                <!--<strong>任务提交成功</strong>-->
+                <!--<span>11-03 18:00</span>-->
+                <!--</div>-->
+                <!--<div class="tme_progress_list">-->
+                <!--<i></i>-->
+                <!--<strong>任务提交成功</strong>-->
+                <!--<span>11-03 18:00</span>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sendButtonWrap on" style="display:none">
+    <button class="targetNext on revokeBtn">撤销申请</button>
+</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<!--<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>-->
+<script>
+    var time1='';
+    var time2='';
+    var time3='';
+    var cancelChangeApply=function(id){
+        layer.open({
+            content: '确定要撤销吗？'
+            , btn: ['确定', '取消']
+            , yes: function (index) {
+                $.ajax({
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type:'post',
+                    url:base_url + "html5/v1/newTask/cancelChangeApply",
+                    data:JSON.stringify({"id":id}),
+                    dataType:'json',
+                    headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+                    beforeSend:function(XMLHttpRequest){
+
+                    },
+                    success:function(data){
+                        var datas=data.data;
+                        if(data.code==0){
+                            layer.open({
+                                content: '撤销成功'
+                                ,skin: 'msg'
+                                ,time: 1 //2秒后自动关闭
+                            });
+                            setTimeout(function(){
+                                window.location.href='task_myOrder.html'
+                            },1000)
+                        }else {
+                            layer.open({
+                                content: '请求失败'
+                                ,skin: 'msg'
+                                ,time: 1 //2秒后自动关闭
+                            });
+                        }
+
+                    },
+                    error:function(){
+                        layer.open({
+                            content: '请求失败'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                        return false;
+                    }
+
+                })
+            }
+        });
+
+    };
+    var queryChangeApply=function(){
+        var arr={
+            "ticket":$.getUrlParam('ticket'),
+            "type":$.getUrlParam('getType')
+        };
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url + "html5/v1/newTask/queryChangeApply",
+            data:JSON.stringify(arr),
+            dataType:'json',
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            beforeSend:function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                var datas=data.data;
+                if(data.code==0){
+
+                    var id=datas.id;
+                    var state=datas.state;
+                    var updateTime=datas.updateTime;
+                    var receiverCardNo=datas.receiverCardNo;
+                    var tmtp_mobile_text='接收人手机号';
+                    var tmtp_mobile=datas.receiverMobile;
+
+                    time1=updateTime;
+                    gressStyleEvent(state);
+
+                    if(receiverCardNo!==''){
+                        tmtp_mobile_text='接收人身份证号';
+                        tmtp_mobile=datas.subCode
+                    }
+                    $(".tmtp_name").text(datas.receiverNickName);
+                    $(".tmtp_mobile_text").text(tmtp_mobile_text);
+                    $(".tmtp_mobile").text(tmtp_mobile);
+                    $(".tmtp_content").text(datas.reason);
+
+                    $(".revokeBtn").click(function(){
+                        cancelChangeApply(id)
+                    })
+                }else {
+                    layer.open({
+                        content: '请求失败'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+
+            },
+            error:function(){
+                layer.open({
+                    content: '请求失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+
+        })
+
+
+    };
+    var gressStyleEvent=function(types){
+        // var types=20;
+        var submitStateClass='';
+        var submitStateClassTxt='管理员审核中';
+        var submitStateClassTxt2='管理员审核中';
+        // var time1='11-03 18:00';
+        // var time2='11-03 18:00';
+        // var time3='11-03 18:00';
+        if(types==10){
+            submitStateClass=1;
+            $(".sendButtonWrap").show();
+        }else if(types==15){
+            submitStateClass=2;
+            submitStateClassTxt2='接收人同意'
+        }else if(types==-5){
+            submitStateClass=2+' red';
+            submitStateClassTxt2='顶岗/转接人拒绝'
+        }else if(types==-10){
+            submitStateClass=2+' red';
+            submitStateClassTxt2='管理员拒绝'
+        }else if(types==20){
+            submitStateClass=2;
+            submitStateClassTxt2='管理员同意'
+        }
+
+        var gress='<div class="tme_progress_list ao tme_progress_list_'+submitStateClass+'">\n' +
+            '                    <i></i>\n' +
+            '                    <strong>申请提交成功</strong>\n' +
+            '                    <span>'+time1+'</span>\n' +
+            '                </div>\n' +
+            '                <div class="tme_progress_list bo tme_progress_list_'+submitStateClass+'">\n' +
+            '                    <i></i>\n' +
+            '                    <strong>'+submitStateClassTxt2+'</strong>\n' +
+            '                    <span>'+time2+'</span>\n' +
+            '                </div>\n'
+            // '                <div class="tme_progress_list co tme_progress_list_'+submitStateClass+'">\n' +
+            // '                    <i></i>\n' +
+            // '                    <strong>'+submitStateClassTxt2+'</strong>\n' +
+            // '                    <span>'+time3+'</span>\n' +
+            // '                </div>';
+
+        $(".queryChangeApplyList").html(gress);
+    };
+    $(function(){
+        queryChangeApply();
+        // var types=$.getUrlParam('type');
+        // gressStyleEvent(types);
+
+        $(".revokeBtn").click(function(){
+            layer.open({
+                content: '您确定要撤销吗？'
+                ,btn: ['刷新', '不要']
+                ,yes: function(index){
+                    console.log(index)
+                    console.log('yes');
+                    layer.closeAll();
+                }
+                ,no:function(){
+                    console.log('no');
+                    layer.closeAll();
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>

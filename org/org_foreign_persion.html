@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../huangye/css/mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/org_data.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp" style="padding-bottom: 100px;">
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>临时公益护照</span>
+    </div>
+
+    <div class="memberSearchWrap clearfix">
+        <div class="memberSearchLeft" style="width: 100%; border-radius: 0px;background: none;border: 1px solid #E6E6E6;">
+            <input class="nameNo" type="text" placeholder="请输入姓名或证件号进行查询" style="padding-right: 0px;width: 85%;">
+            <div onclick="get_list('html5/v1/foreignPersion/findByOrgCodeAndCardNo')" class="memberSearchIcon memberSearchBut" style="float:right;height:100%;width:15%;border: 0px;background: #72B81E;position:static;
+            background-image: url(../wap/img/pws_999.png);background-repeat: no-repeat;background-position: 50% 50%;background-size: auto 20px;"></div>
+        </div>
+    </div>
+
+    <ul class="warp_pws_g" style="padding: 0px;margin-bottom: 0px;background: none;margin-top: 5px;border: 0px;">
+        <!--<li style="background: #FFFFFF;width: 100%;height: auto;padding-left: 3%;margin-bottom: 5px;border:0px;">
+            <div style="padding: 10px 0px;font-size: 50%">
+                <img src="../wap/images/pws_275.jpg" style="float: right;width: 92.5px;height: 103.9px;margin-right: 10px;">
+                <div style="line-height: 23px"><b>姓名：'+val.realName+'</b></div>
+                <div style="line-height: 23px;"><b>性别：<b style="margin-right: 30px;">男</b>国籍：中国</b></div>
+                <div style="line-height: 23px"><b>出生日期：'+val.birthday+'</b></div>
+                <div style="line-height: 23px"><b>登录账号：'+val.mobile+'</b></div>
+                <div style="line-height: 23px"><b>证件类型：'+val.licenseCode+'</b></div>
+                <div style="line-height: 23px"><b>证件号码：'+val.applyTime+'</b></div>
+                <div style="line-height: 23px"><b>公益护照编号：'+val.applyTime+'</b></div>
+                <div style="line-height: 23px"><b>有效期：'+val.applyTime+'</b></div>
+                <div style="line-height: 23px"><b>签发机构：'+val.applyTime+'</b></div>
+            </div>
+        </li>-->
+    </ul>
+</div>
+<footer class="warp_pws_m_sw">
+    <input type="button" value="添加临时公益护照" onclick="jump('./org_add_foreign_persion.html')">
+</footer>
+</body>
+<script type="text/javascript" src="../wap/js/org_foreign_persion.js"></script>
+<script>
+    $(function() {
+        get_list("html5/v1/foreignPersion/findByOrgCode");
+    })
+</script>
+</html>

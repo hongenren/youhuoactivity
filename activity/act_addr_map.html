@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script>
+        function offset(){
+            var html = document.querySelector('html');
+            var rem = html.offsetWidth / 6.4;
+            if(html.offsetWidth>750){
+                rem = html.offsetWidth / 12.8;
+            }
+            if(html.offsetWidth>1400){
+                rem = html.offsetWidth / 20;
+            }
+            html.style.fontSize = rem + "px";
+        }
+        offset();
+        window.onresize=offset;
+    </script>
+    <style type="text/css">
+        body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";font-size:14px;}
+        #l-map{height:50%;width:100%;}
+        #r-result{width:100%;}
+        .tangram-suggestion-main {z-index: 999999;}
+        input, button, textarea, select,a{ font-size:100%; outline:none; resize:none;border:none;background:none;-webkit-tap-highlight-color:transparent}
+        .mapLabel{
+            font-size:.24rem;
+            line-height:.8rem;
+            padding:0 .24rem;
+        }
+        .mapTest{
+            display:inline-block;
+            width:80%;
+            height:.5rem;
+            font-size:.24rem;
+            line-height:.5rem;
+            border:1px solid #ddd;
+            border-radius:4px;
+            margin-left:10%;
+            padding:0 .1rem;
+        }
+        .mapButtonWrap{
+            text-align: center;
+            padding:0 .24rem;
+            margin-top:.24rem;
+        }
+        .mapButton{
+            margin-left: 5%;
+            display:block;
+            width:40%;
+            height: .7rem;
+            /*background-color: #72b81e;*/
+            background-color: #999999;
+            color: #fff;
+            border-radius: 4px;
+            font-size: .28rem;
+            float: left;
+        }
+        .mapButton1{
+            margin-left: 10%;
+            margin-bottom: 5%;
+            float: left;
+            display:block;
+            width:40%;
+            height: .7rem;
+            /*background-color: #72b81e;*/
+            background-color: #0069ff;
+            color: #fff;
+            border-radius: 4px;
+            font-size: .28rem;
+        }
+    </style>
+    <title>关键字输入提示词条</title>
+</head>
+<body>
+<div id="r-result"><span class="mapLabel" id="shuru">正在定位中，请稍后</span><br /><input class="mapTest" type="text" id="suggestId" size="50" value="百度" disabled="disabled" oninput="ban(this)"/></div>
+<div class="mapButtonWrap">
+    <button class="mapButton">确定</button>
+    <button class="mapButton1" onclick=" $('.warp_ifrem').fadeOut();">返回</button>
+</div>
+<div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+<div id="l-map"></div>
+</body>
+</html>
+<script type="text/javascript">
+    function ban(obj){
+        $(".mapButton").css("background-color", "#999999");
+        $(".mapButton").attr("onclick","");
+    }
+    var lng, lat, address, province, city, district;
+    function fanhui(){
+        window.parent.tianrushuju(province, city, district, address, $("#suggestId").val(), lng, lat);
+    }
+    // 百度地图API功能
+    var map = new BMap.Map("l-map");
+    map.centerAndZoom("上海",15);
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r){
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            var mk = new BMap.Marker(r.point);
+            map.addOverlay(mk);
+            map.panTo(r.point);
+            var pt = r.point;
+            var mk = new BMap.Marker(pt);
+            var geoc = new BMap.Geocoder();
+            map.addOverlay(mk);
+            map.panTo(r.point);
+            lng = r.point.lng;
+            lat = r.point.lat;
+            geoc.getLocation(pt, function(rs){
+                var addComp = rs.addressComponents;
+                address =addComp.street+addComp.streetNumber;
+                province = addComp.province;
+                city = addComp.city;
+                district = addComp.district;
+                var myGeo = new BMap.Geocoder();
+                myGeo.getLocation(new BMap.Point(lng, lat), function(result){
+                    if (result){
+                        district = result.addressComponents.district;
+                    }
+                });
+                $("#suggestId").val(addComp.street+addComp.streetNumber);
+            });
+            $("#suggestId").removeAttr("disabled");
+            $(".mapButton").css("background-color", "#72b81e");
+            $(".mapButton").attr("onclick","fanhui();");
+            $("#shuru").html("请输入地址或名称进行查询：");
+            //alert('您的位置：'+r.point.lng+','+r.point.lat);
+        }else {
+            $("#suggestId").removeAttr("disabled");
+            $(".mapButton").css("background-color", "#72b81e");
+            $(".mapButton").attr("onclick","fanhui();");
+            $("#shuru").html("请输入地址或名称进行查询：");
+            alert("当前定位失败，请输入地址进行搜索。");
+        }
+    });
+
+    var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+        {"input" : "suggestId"
+            ,"location" : map
+        });
+    ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+        var str = "";
+        var _value = e.fromitem.value;
+        var value = "";
+        if (e.fromitem.index > -1) {
+            value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+        }
+        str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+        value = "";
+        if (e.toitem.index > -1) {
+            _value = e.toitem.value;
+            value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+        }
+        str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+        $("#searchResultPanel").html(str);
+    });
+    var myValue;
+    ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+        var _value = e.item.value;
+        myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+        $("#searchResultPanel").html("onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue);
+        setPlace();
+        $(".mapButton").css("background-color", "#72b81e");
+        $(".mapButton").attr("onclick","fanhui();");
+    });
+    function setPlace(){
+        map.clearOverlays();    //清除地图上所有覆盖物
+        function myFun(){
+            var results = local.getResults();
+            var p = results.getPoi(0);
+            var pp = p.point;    //获取第一个智能搜索的结果
+            lng = pp.lng;
+            lat = pp.lat;
+            address = p.address;
+            province = p.province;
+            city = p.city;
+            district = p.district;
+            map.centerAndZoom(pp, 18);
+            map.addOverlay(new BMap.Marker(pp));    //添加标注
+
+            var myGeo = new BMap.Geocoder();
+            myGeo.getLocation(new BMap.Point(lng, lat), function(result){
+                if (result){
+                    district = result.addressComponents.district;
+                }
+            });
+            if (local.getStatus() == BMAP_STATUS_SUCCESS) {
+                var html = "";
+                for (var i = 0; i < results.getCurrentNumPois(); i++) {
+                    var poi = results.getPoi(i);
+                    //alert(poi.district);
+                }
+            }
+        }
+        var local = new BMap.LocalSearch(map, { //智能搜索
+            onSearchComplete: myFun
+        });
+        local.search(myValue);
+    }
+</script>

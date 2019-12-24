@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/cc_dh_o.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/honeySwitch.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+    <script type="text/javascript" src="../wap/js/honeySwitch.js"></script>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>
+    <style type="text/css">
+    .warp_sy_p{overflow: hidden;border: 1px solid #E6E6E6;padding: 3%;margin: 3% 3% 1% 3%}
+    .warp_sy_p li{width: 100%;overflow: hidden;}
+    .warp_sy_p li span{display: block;font-size: 14px;line-height: 24px}
+    .int1{
+        border-color: rgb(100, 189, 99)!important; box-shadow: rgb(100, 189, 99) 0px 0px 0px 16px inset!important; background-color: rgb(100, 189, 99)!important;
+    }
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <div class="warp_sh_p">
+        <div class="warp_hr">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                </div>
+                <!-- Add Arrows -->
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+
+    <ul class="warp_sh_y">
+        <li class="warp_sh_y_li">
+            <div class="warp_sh_o">
+                <ul class="warp_sh_i">
+
+                </ul>
+            </div>
+            <ul class="warp_sh_u">
+            </ul>
+        </li>
+    </ul>
+    <form id="form1">
+    <ul class="warp_sh_u" style="margin: 0;padding: 0;background: none">
+        <li>
+            <div class="warp_sh_u_ls">
+                <div class="warp_sh_u_ly">
+                    <em></em>
+                    <b>基础信息</b>
+                </div>
+                <div class="warp_sh_u_ld">
+                    <div class="warp_sh_u_la">
+                        <div class="warp_pws_c_sp">
+                            <b>积分赠送</b>
+                            <input type="text" class="spinnerExample" name="inIntegral" />
+                        </div>
+                        <div class="warp_sh_u_lt">
+                            <span>（积分剩余：<i style="font-style: normal">0</i>）</span>
+                            <b>（签到后，自动发放）</b>
+                        </div>
+                    </div>
+                    <div class="warp_sh_u_la">
+                        <div class="warp_pws_c_sp changci" style="margin: 3% 0 ">
+                            <b><i>*</i>报到时间</b>
+                            <input class='demo_time' type="text" readonly="true" name="arriveTime" placeholder="请选择报到时间" value="" style="width: 150px;float: right;margin: 0"/>
+                        </div>
+                    </div>
+                    <div class="warp_sh_u_la">
+                        <div class="warp_pws_c_sp changci" style="margin: 3% 0">
+                            <b><i>*</i>报到地点</b>
+                            <a href="javascript:void(0)" class="warp_dd">请选择</a>
+                            <input type="text" name="arriveAddress" id="address" placeholder="请在常用岗位库中选择"  readonly="readonly" unselectable="on" onfocus="this.blur()" class="warp_pws_c_so">
+                            <input type="hidden" name="lat" id="lat" value="">
+                            <input type="hidden" name="lng" id="lng" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="warp_sh_u_lv">
+                <div class="warp_sh_u_ly">
+                    <em></em>
+                    <b>直接发证<i>（活动管理方直接指定人员）</i></b>
+                </div>
+                <div class="warp_sh_u_lf " style="width: auto;padding: 0 3%;display: none;">
+                    <h2 style="padding: 0">是否使用短信发送通知给管理员</h2>
+                    <div class="common-row">
+                        <div class="cell-right"><span class="switch-off"></span></div>
+                        <input type="hidden" name="sendSMS" value="20" />
+                    </div>
+                </div>
+                <ul class="warp_sy_p">
+                    <li>
+                        <span>每条短信发送需要使用积分：<i style="font-style: normal">100</i></span>
+                    </li>
+                    <li>
+                        <span>当前剩余积分：<i style="font-style: normal">0</i></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="warp_sh_u_lr">
+                <div class="warp_sh_u_lm" id="per_old">
+
+
+                </div>
+                <a class="warp_sh_u_li" onclick="add_person()"><i>+</i>添加</a>
+            </div>
+
+            <div class="warp_pws_v changci">
+                <div class="warp_sh_u_ly">
+                    <em></em>
+                    <b>公开招聘 <i>（通过活动页面自行报名，需审核）</i></b>
+                </div>
+                <div class="warp_sh_u_ld">
+                    <div class="warp_pws_c_sp" style="margin: 5% 0">
+                        <b><i>*</i>数量</b>
+                        <input type="text" class="spinnerExample" name="total" />
+                    </div>
+                </div>
+            </div>
+            <div class="warp_sh_u_lf changci" style="width: auto;padding: 0 3%;background: #FFFFFF;">
+                <h2 style="padding: 0">仅限本机构成员</h2>
+                <div class="common-row">
+                    <div class="cell-right"><span class="switch-off"></span></div>
+                    <input type="hidden" name="self" value="20" />
+                </div>
+            </div>
+        </li>
+
+        <input type="hidden" name="sectionCode" value="" />
+        <input type="hidden" name="activityCode" value="" />
+    </ul>
+    </form>
+    <div class="ht60"></div>
+    <div class="ht70"></div>
+     <footer class="warp_pws_m_sw">
+        <ul class="warp_pws_hd">
+          <li>
+            <input type="button" value="返回" onclick="window.history.go(-1)">
+          </li>
+          <li>
+            <input type="button" value="设置成功" onclick="sub_form()" id="sub_button">
+          </li>
+        </ul>
+    </footer>
+
+
+</div>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+<div class="warp_ci">
+
+</div>
+<div class="warp_ifrem" style="background: #FFFFFF">
+
+</div>
+<div class="member_list">
+
+</div>
+<link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/swiper_sime.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/act/act.js"></script>
+<script type="text/javascript" src="../wap/js/regular.js"></script>
+<script type="text/javascript">
+    $('.spinnerExample').spinner({});
+</script>
+<script>
+    $(function(){
+        if(!history.state){
+            pushHistory();
+        }
+        window.addEventListener("popstate", function(e) {
+            layer.open({
+                content: '管理员未设置完成，您确定要返回吗？'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    window.history.go(-1);
+                    //$(location).attr('href', "./act_base_add.html");
+                }
+                , no: function (index) {
+                    e.preventDefault();
+                    pushHistory();
+                }
+            })
+        }, false);
+        function pushHistory() {
+            var state = {
+                title: "title",
+                url: "#"
+            };
+            window.history.pushState(state, "title", "#");
+        }
+    });
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    var currYear = (new Date()).getFullYear();
+    // Date & Time demo initialization
+    $('.demo_time').mobiscroll().time({
+       theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
+        //dateFormat:"yy-mm-dd",
+        timeFormat: 'HH:ii',
+        startYear: currYear,
+        endYear: currYear +30,
+        stepMinute: 1,
+        showNow: true
+    });
+</script>
+<script type="text/javascript">
+    //加载日期
+    function ajax_date(){
+        var date_list = '';
+        var date_list = JSON.parse(localStorage.getItem('date_list'));
+        var html = '<div style="cursor:pointer" class="swiper-slide" data-type="70" day="all" id="allmanage">\
+                        <a href="javascript:void(0)">通证</a>\
+                    </div>';
+        html = '';
+        $.each(date_list,function(index,val){
+            //console.log(index);
+            var thisclass = index==0?'thisclass':'';
+                html +='<div style="cursor:pointer;" class="swiper-slide '+thisclass+'" data-type="80" day="'+val.day+'">\
+                        <a href="javascript:void(0)">\
+							<span style="line-height: 42px;">'+val.day+'</span>\
+						</a>\
+                    </div>';
+            });
+
+        $('.swiper-wrapper').empty();
+        $('.swiper-wrapper').html(html);
+
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 4,
+            spaceBetween: 5,
+            slidesPerGroup: 4,
+            loop: false,
+            loopFillGroupWithBlank: false,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            }
+        });
+
+
+        $("input[name='sectionCode']").val(date_list[0]['sections'][0]['code']);
+        $("input[name='activityCode']").val(date_list[0]['sections'][0]['activityCode']);
+        $("input[name='day']").val(date_list[0]['sections'][0]['day']);
+        $("input[name='startTime']").val(date_list[0]['sections'][0]['startTime']);
+        $("input[name='endTime']").val(date_list[0]['sections'][0]['endTime']);
+
+        ajax_sections(date_list[0]['sections'],date_list[0]['day']);
+
+    }
+    //加载场次
+    function ajax_sections(sections,day,code=''){
+            var html = '';
+            var name = '';
+            var index2 = '';
+            $.each(sections,function(index2,val2){
+                if(code==''){
+                    var class1 = index2==0?'thisclass':'';
+
+                    $("input[name='sectionCode']").val(val2['code']);
+                    $("input[name='day']").val(val2['day']);
+                    $("input[name='startTime']").val(val2['startTime']);
+                    $("input[name='endTime']").val(val2['endTime']);
+                }else{
+                    if(code==val2['code']){
+                        var class1 = 'thisclass';
+
+                        $("input[name='sectionCode']").val(val2['code']);
+                        $("input[name='day']").val(val2['day']);
+                        $("input[name='startTime']").val(val2['startTime']);
+                        $("input[name='endTime']").val(val2['endTime']);
+                    }
+                }
+
+                switch(val2.type){
+                    case 10:
+                    var name ='全天';
+                    break;
+                    case 20:
+                    var name ='上午场';
+                    break;
+                    case 30:
+                    var name ='下午场';
+                    break;
+                    case 40:
+                    var name ='晚上场';
+                    break;
+                }
+                html += '<li style="cursor:pointer" class="'+class1+'" data-date="'+day+'" data-code="'+val2.code+'" data-startTime="'+val2.startTime+'" data-endTime="'+val2.endTime+'">\
+                        <span>'+name+'</span>\
+                        <i></i>\
+                        </li>';
+                if(localStorage.getItem('manage'+val2.code)!=undefined){
+                    $('#sub_button').val("已设置");
+                    $('#sub_button').val("已设置");
+                    $('#sub_button').css({'background-color':'#ACACAC'});
+                    $('#sub_button').attr("onclick",'');
+                }else{
+                    $('#sub_button').val("设置完成");
+                    $('#sub_button').css({'background-color':'#72B81E'});
+                    $('#sub_button').attr("onclick","sub_form()");
+                }
+
+            })
+
+            $("input[name='total']").val(0);
+            $("input[name='inIntegral']").val(0);
+            $("input[name='audit']").val('20');
+            $("input[name='self']").val('20');
+            $("input[name='arriveTime']").val('');
+            $("input[name='arriveAddress']").val('');
+            $(".switch-on").attr('style','border-color: rgb(223, 223, 223); box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; background-color: rgb(255, 255, 255);');
+            $(".switch-on").attr('class','switch-off');
+            $('.warp_sh_i').empty();
+            $('.warp_sh_i').html(html);
+            get_this_msg(sections[0]['code'],80);
+
+    }
+      ///查询该场次信息
+    function get_this_msg(sectionCode,type){
+        if(type==70){
+            var manage = localStorage.getItem('manageall'+sectionCode); //通证
+
+         }else{
+            var manage = localStorage.getItem('manage'+sectionCode);//场次管理员
+         }
+        if(manage!=undefined){
+            var data = JSON.parse(manage);  //JSON字符串 转为JSON 对象
+            $.each(data,function(index,val){
+                if(index=='arriveTime'){
+                    var atim = split_datetime(val);
+                    var val = atim.str;
+                    $("input[name='arriveTime']").val(atim.date);
+                }
+                $("input[name='"+index+"']").val(val);
+            })
+            // if(data.applyParams!=''){
+            //     get_person_list(data.applyParams); //获取嘉宾邀请函列表
+            // }
+            botton_decide_class();
+        }
+    }
+    //查询未设置的场次
+    function find_not_set(){
+        var see = 1;
+        //获取日期列表
+        var date_list = JSON.parse(localStorage.getItem('date_list'));
+        //console.log(date_list);
+        //循环日期
+        $.each(date_list,function(index,data){
+            //循环场次
+            $.each(data.sections,function(index2,data2){
+
+                //判断场次是否设置
+                if(localStorage.getItem('manage'+data2.code)!=1){
+                    //console.log(data2.day);
+                    $(".swiper-wrapper .thisclass").removeClass("thisclass");
+
+                    $("div[day='"+data2.day+"']").addClass("thisclass");
+                    //发现未设置走追加接口
+                    ajax_sections(data.sections,data2.day,data2.code);
+                    see = 2;
+                    return false;
+                }
+            })
+            if(see == 2){
+                return false;
+            }
+        })
+        if(see == 2){
+            return false;
+        }
+        //console.log(date_list[0]['sections'][0]['activityCode']);
+        // if(localStorage.getItem('manageall')==1){
+        //     layer.open({
+        //                 content: '已全部设置'
+        //                 ,skin: 'msg'
+        //                 ,time: 1 //1秒后自动关闭
+        //             });
+        //     setTimeout(function(){window.location.href ='./act_set.html?activityCode='+date_list[0]['sections'][0]['activityCode']},1000);
+        // }else{
+            $("#allmanage").addClass("thisclass").siblings().removeClass("thisclass");
+
+                $("input[name='total']").val(0);
+                $("input[name='inIntegral']").val(0);
+                $("input[name='audit']").val('20');
+                $("input[name='self']").val('20');
+
+
+
+                $("input[name='arriveTime']").val('');
+                $("input[name='arriveAddress']").val('');
+                $(".switch-on").attr('style','border-color: rgb(223, 223, 223); box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; background-color: rgb(255, 255, 255);');
+                $(".switch-on").attr('class','switch-off');
+                $(".warp_sh_i").html('');
+
+                if(localStorage.getItem('manageall')!=undefined){
+                    $('#sub_button').val("已设置");
+                    $('#sub_button').val("已设置");
+                    $('#sub_button').css({'background-color':'#ACACAC'});
+                    $('#sub_button').attr("onclick",'');
+                }else{
+                    $('#sub_button').val("设置完成");
+                    $('#sub_button').css({'background-color':'#72B81E'});
+                    $('#sub_button').attr("onclick","sub_formAll()");
+                }
+        //}
+    }
+     //判断 底部按钮选择
+    function botton_decide_class(){
+        var cla = '';
+        $('.common-row input').each(function(){
+            var val1 = $(this).val();
+            //console.log(val1)
+            var cla = val1==10?'switch-on':'switch-off';
+            //console.log($(this).prev('div').html())
+            if(cla=='switch-on'){
+                $(this).prev('div').find('span:eq(0)').attr('class',cla).addClass('int1');
+            }else{
+                $(this).prev('div').find('span:eq(0)').attr('class',cla);
+            }
+
+        })
+    }
+</script>
+<script type="text/javascript">
+    ajax_date();
+    find_not_set();
+</script>
+
+<script>
+    $(function(){
+        var cotrs = $(".swiper-wrapper div");
+        cotrs.live('click',function(index,val){
+
+            var index = $(this).index()-1;
+            var type = $(this).attr('data-type');
+            console.log(type);
+            if(index != -1){
+                $(".changci").show();
+                var date_list = JSON.parse(localStorage.getItem('date_list'));
+
+                $(this).addClass("thisclass").siblings().removeClass("thisclass");
+                ajax_sections(date_list[index].sections,date_list[index].day);
+                //活动场次code
+                var sectionCode = $(".warp_sh_i .thisclass").attr("data-code");
+                get_this_msg(sectionCode,type)
+                //活动日期
+                var day = $(".warp_sh_i .thisclass").attr("data-date");
+                //场次开始时间
+                var startTime = $(".warp_sh_i .thisclass").attr("data-starttime");
+                //场次结束时间
+                var endTime = $(".warp_sh_i .thisclass").attr("data-endtime");
+                //清空form 给定对应参数
+
+                $("input[name='total']").val(0);
+                $("input[name='inIntegral']").val(0);
+                $("input[name='audit']").val('20');
+                $("input[name='self']").val('20');
+
+                $("input[name='sectionCode']").val(sectionCode);
+                $("input[name='day']").val(day);
+                $("input[name='startTime']").val(startTime);
+                $("input[name='endTime']").val(endTime);
+
+                $("input[name='arriveTime']").val('');
+                $("input[name='arriveAddress']").val('');
+                $(".switch-on").attr('style','border-color: rgb(223, 223, 223); box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; background-color: rgb(255, 255, 255);');
+                $(".switch-on").attr('class','switch-off');
+                if(localStorage.getItem('manage'+sectionCode)!=undefined){
+                    $('#sub_button').val("已设置");
+                    $('#sub_button').attr("onclick",'');
+                }else{
+                    $('#sub_button').val("设置完成");
+                    $('#sub_button').attr("onclick","sub_form()");
+                }
+            }else{
+                $(".changci").hide();
+                $(this).addClass("thisclass").siblings().removeClass("thisclass");
+
+
+                $("input[name='total']").val(0);
+                $("input[name='inIntegral']").val(0);
+                $("input[name='audit']").val('20');
+                $("input[name='self']").val('20');
+
+                $("input[name='sectionCode']").val(sectionCode);
+                $("input[name='day']").val(day);
+                $("input[name='startTime']").val(startTime);
+                $("input[name='endTime']").val(endTime);
+
+                $("input[name='arriveTime']").val('');
+                $("input[name='arriveAddress']").val('');
+                $(".switch-on").attr('style','border-color: rgb(223, 223, 223); box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; background-color: rgb(255, 255, 255);');
+                $(".switch-on").attr('class','switch-off');
+                $(".warp_sh_i").html('');
+
+                if(localStorage.getItem('manageall')!=undefined){
+                    $('#sub_button').val("已设置");
+                    $('#sub_button').val("已设置");
+                    $('#sub_button').css({'background-color':'#ACACAC'});
+                    $('#sub_button').attr("onclick",'');
+                }else{
+                    $('#sub_button').val("设置完成");
+                    $('#sub_button').css({'background-color':'#72B81E'});
+                    $('#sub_button').attr("onclick","sub_formAll()");
+                }
+
+            }
+        });
+    });
+    $(function(){
+        var cotrs = $(".warp_sh_i li");
+        cotrs.live('click',function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+
+            $(this).parent().parent().next('.warp_sh_u').find('li').hide()
+
+            $(this).parent().parent().next('.warp_sh_u').find('li').eq($(this).index()).show();
+            //活动场次code
+            var sectionCode = $(".warp_sh_i .thisclass").attr("data-code");
+            //活动日期
+            var day = $(".warp_sh_i .thisclass").attr("data-date");
+            //场次开始时间
+            var startTime = $(".warp_sh_i .thisclass").attr("data-starttime");
+            //场次结束时间
+            var endTime = $(".warp_sh_i .thisclass").attr("data-endtime");
+            //清空form 给定对应参数
+
+            $("input[name='total']").val(0);
+            $("input[name='inIntegral']").val(0);
+            $("input[name='audit']").val('20');
+            $("input[name='self']").val('20');
+
+            $("input[name='sectionCode']").val(sectionCode);
+
+            $("input[name='arriveTime']").val('');
+            $("input[name='arriveAddress']").val('');
+            $(".switch-on").attr('style','border-color: rgb(223, 223, 223); box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; background-color: rgb(255, 255, 255);');
+            $(".switch-on").attr('class','switch-off');
+            if(localStorage.getItem('manage'+sectionCode)!=undefined){
+                $('#sub_button').val("已设置");
+                $('#sub_button').attr("onclick",'');
+            }else{
+                $('#sub_button').val("设置完成");
+                $('#sub_button').attr("onclick","sub_form()");
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    //ajax提交
+    function sub_form(){
+        var ans = '1';
+        var a = $('#form1').serializeArray();
+		var day = $(".warp_sh_i .thisclass").attr("data-date");
+        //console.log(a.mobile);
+        var d = {};
+        var person = [];
+         $.each(a, function(){
+            d[this.name] = this.value;
+        });
+        var time = $("input[name='arriveTime']").val();
+        var address = $("input[name='arriveAddress']").val();
+
+        if(time == ''){
+            layer.open({
+                content: '报到时间不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+
+        if(address == ''){
+            layer.open({
+                content: '报到地点不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+
+        $("#per_old").find("input[name='mobile']").each(function(index,data){
+            var mobile = $(this).val();
+            var name = $(this).parent().find("input").val();
+            var openId = $(this).parent().find("input[name='prjvUserId']").val();
+            var headUrl = $(this).parent().find("input[name='headUrl']").val();
+
+            var tel=/^1\d{10}$/;
+
+            if(!tel.test(mobile)){
+                layer.open({
+                    content: '手机号码有误'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                ans = '2';
+                return false;
+            }
+
+            if(mobile=='' || name==''){
+                layer.open({
+                    content: '人员信息不全'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                ans = '2';
+                return false;
+            }else{
+
+                person.push({'headImg':headUrl,"mobile":mobile,'nickName':name,'openId':openId});
+            }
+        })
+        if(ans == 2){
+            return false;
+        }
+
+        //console.log(person);return;
+
+        delete d.mobile;
+        delete d.realName;
+        delete d.address;
+        delete d.lat;
+        delete d.lng;
+        var count = 0;
+        $.each(JSON.parse(localStorage.getItem('date_list')),function(index,val){
+
+            $.each(val['sections'],function(index2,val2){
+
+                count += 1;
+
+            })
+        })
+        d['arriveTime'] = day + ' ' + d['arriveTime']+':00';
+        d['userList'] = person;
+        d['orgCode'] = prjvorgMsg.orgThirdAccount;
+        d['audit'] = parseInt(d['audit']);
+        d['self'] = parseInt(d['self']);
+        d['sendSMS'] = parseInt(d['sendSMS']);
+        d['inIntegral'] = parseInt(d['inIntegral']);
+        d['total'] = parseInt(d['total']);
+
+        var manageLocalStorage = localStorage.getItem('manage_'+$_GET['activityCode']);//管理员
+        if(manageLocalStorage){
+            localStorage.setItem('manage_'+$_GET['activityCode'], parseInt(manageLocalStorage)+parseInt(d['total']));
+        }else{
+            localStorage.setItem('manage_'+$_GET['activityCode'], parseInt(d['total']));
+        }
+
+        d['user'] = prjvorgMsg.prjvUserId;
+        d['name'] = actMsg.name;
+        d['application'] = '公益上海';
+        d['type'] = 80;
+        d['audit'] = 10;
+        d['contactPhone'] = actMsg.contactPhone;
+        d['coverImg'] = actMsg.coverImg;
+        d['sectionTotal'] = parseInt(count);
+        $.ajax({
+            type:"post",
+            url:base_url + "html5/v1/manager/insert",
+            data:JSON.stringify(d),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            beforeSend:function(){
+                layer.open({type: 2,content: '提交中'});
+            },
+            success:function(data){
+                //console.log(data);
+                var sectionCode = $("input[name='sectionCode']").val()
+                //如果提交成功
+                if(data.msg=="success"){
+                    layer.open({
+                        content: '设置成功'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    scrollTo(0,0);
+                    localStorage.setItem('manage'+sectionCode,JSON.stringify(d));
+                    setTimeout(function(){layer.closeAll();},1000);
+                    find_not_set();
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    setTimeout(function(){layer.closeAll();},1000);
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '设置失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                setTimeout(function(){layer.closeAll();},1000);
+                return false;
+            }
+        })
+
+        //查询下一个未设置场次的信息
+        //find_not_set()
+    }
+    //ajax提交
+    function sub_formAll(){
+        var ans = '1';
+        var a = $('#form1').serializeArray();
+        var d = {};
+        var person = [];
+         $.each(a, function(){
+            d[this.name] = this.value;
+        });
+        //console.log(a);return;
+        $("#per_old").find("input[name='mobile']").each(function(index,data){
+            var mobile = $(this).val();
+            var name = $(this).parent().find("input").val();
+            var openId = $(this).parent().find("input[name='prjvUserId']").val();
+            var headUrl = $(this).parent().find("input[name='headUrl']").val();
+
+            var tel=/^1\d{10}$/;
+
+            if(!tel.test(mobile)){
+                layer.open({
+                    content: '手机号码有误'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                ans = '2';
+                return false;
+            }
+
+            if(mobile=='' || name==''){
+                layer.open({
+                    content: '人员信息不全'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                ans = '2';
+                return false;
+            }else{
+
+                person.push({'headImg':headUrl,"mobile":mobile,'nickName':name,'openId':openId});
+            }
+        })
+        if(person == ''){
+            layer.open({
+                content: '请添加人员信息'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+
+            return false;
+        }
+        if(ans == 2){
+            return false;
+        }
+
+        //console.log(person);return;
+
+        delete d.mobile;
+        delete d.realName;
+        delete d.address;
+        delete d.lat;
+        delete d.lng;
+        delete d.sectionCode;
+        delete d.arriveTime;
+        delete d.arriveAddress;
+        var count = 0;
+        $.each(JSON.parse(localStorage.getItem('date_list')),function(index,val){
+
+            $.each(val['sections'],function(index2,val2){
+
+                count += 1;
+
+            })
+        })
+        d['userList'] = person;
+        d['orgCode'] = prjvorgMsg.orgThirdAccount;
+        d['audit'] = parseInt(d['audit']);
+        d['self'] = parseInt(d['self']);
+        d['sendSMS'] = parseInt(d['sendSMS']);
+        d['inIntegral'] = parseInt(d['inIntegral']);
+        d['total'] = parseInt(d['total']);
+        d['user'] = prjvorgMsg.prjvUserId;
+        d['name'] = actMsg.name;
+        d['application'] = '公益上海';
+        d['type'] = 70;
+        d['audit'] = 10;
+        d['contactPhone'] = actMsg.contactPhone;
+        d['coverImg'] = actMsg.coverImg;
+        d['sectionTotal'] = parseInt(count);
+        //console.log(d);return;
+        $.ajax({
+            type:"post",
+            url: base_url + "html5/v1/manager/insert",
+            data:JSON.stringify(d),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            beforeSend:function(){
+                layer.open({type: 2,content: '提交中'});
+            },
+            success:function(data){
+                //console.log(data);
+                var sectionCode = $("input[name='sectionCode']").val()
+                //如果提交成功
+                if(data.msg=="success"){
+                    localStorage.setItem('manageall',JSON.stringify(d));
+                    layer.open({
+                        content: '设置成功'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    scrollTo(0,0);
+
+                    find_not_set();
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    setTimeout(function(){layer.closeAll();},1000);
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '设置失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                setTimeout(function(){layer.closeAll();},1000);
+                return false;
+            }
+        })
+
+        //查询下一个未设置场次的信息
+        //find_not_set()
+    }
+
+    function remove_per(obj){
+        $(obj).parent().remove();
+    }
+</script>
+<script type="text/javascript">
+    $('.cell-right').click(function(){
+        var tre = $(this).find('span').hasClass('switch-on');
+        var type = tre?10:20;
+        $(this).next('input').val(type);
+    })
+
+</script>
+<script>
+$("#closeAddr").live("click",function(){
+  $(".member_list").animate({left:"100%"})
+});
+</script>
+
+</body>
+</html>

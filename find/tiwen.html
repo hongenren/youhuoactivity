@@ -1,0 +1,35 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <title>无标题</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <style type="text/css">
+    .warp_iframe{width: 100%; height: calc(100% - 62px);}
+    </style>
+</head>
+<body>
+<div class="warp">
+    <iframe class="warp_iframe"></iframe>
+    <<!--iframe src="http://news.shcvs.cn/gysh_cm_pub/inquire/putQuestion.html" class="warp_iframe"></iframe>-->
+    
+    <div id='footer'></div>
+</div>
+<script>
+    $(".warp_iframe").attr("src", news_base_url+"/gysh_cm_pub/inquire/putQuestion.html");
+    if(localStorage.getItem('prjvorgMsg')==undefined || localStorage.getItem('prjvorgMsg')==null || localStorage.getItem('prjvorgMsg')=="") {
+        $("#footer").load("../public/footer.html");
+    }
+</script>
+</body>
+</html>

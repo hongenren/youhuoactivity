@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>补登</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" href="../huangye/css/mobile.css"/>
+
+    <link rel="stylesheet" href="css/task_register_manual_sign1.css"/>
+
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="js/task_register_afterwards_change_time.js"></script>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+    <div class="warp_zy_j" style="border-bottom: 1px solid #E6E6E6">
+        <a href="javascript:history.go(-1);"></a>
+        <span>已报名补登</span>
+    </div>
+    <div class="memberSearchWrap clearfix">
+        <div class="memberSearchLeft" style="width: 100%; border-radius: 0px;background: none;border: 1px solid #E6E6E6;">
+            <input class="memberSearchVal" type="text" placeholder="请输入任务名称精确查询"style="padding-right: 0px;width: 85%;">
+            <div class="memberSearchIcon memberSearchBut" style="float:right;height:100%;width:15%;border: 0px;background: #72B81E;position:static;
+            background-image: url(../wap/img/pws_999.png);background-repeat: no-repeat;background-position: 50% 50%;background-size: auto 20px;" onclick="findByActivityCode2(1,10);"></div>
+        </div><!--
+            <div class="memberSearchRight" onclick="getUser();">筛选</div>-->
+    </div>
+    <ul class="warp_zy_h">
+        <li>
+            <a href="javascript:void(0)" style="background-image: none;">
+                <span>请选择已结束的任务</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="warp_zy_h warp_zy_h_List2">
+        <!--<li>-->
+            <!--<a href="task_register_afterwards_change_time2.html?type=2">-->
+                <!--<span>测试活动</span>-->
+                <!--<span style="color: #acacb4">2019-11-23</span>-->
+                <!--<span>上海市黄浦区</span>-->
+            <!--</a>-->
+        <!--</li>-->
+    </ul>
+    <div class="loadings" style="width:100%;height:50px;background:#fff url('../huangye/images/loadings.gif') no-repeat center;background-size:auto 80%;display:none"></div>
+    <div class="lastext" style="text-align:center;line-height:50px;color:#666;display:none">没有更多了</div>
+
+    <div class="ht70"></div>
+    <footer class="warp_pws_m_sw manualOrgNextBtn">
+        <input type="button" value="下一步" style="background-color: #bbb;">
+    </footer>
+</div>
+
+<script>
+    var manualNextBtnLight=function(){
+        if($(".warp_zy_h_List2 li.on").length>0){
+            $(".manualOrgNextBtn input").attr('style','background-color:#72B81E')
+        }else {
+            $(".manualOrgNextBtn input").css('style','background-color:#bbb')
+        }
+    };
+    $(function(){
+        $(".warp_zy_h_List2 li").live("click",function(){
+            $(this).addClass('on').siblings('li').removeClass('on')
+            manualNextBtnLight()
+        });
+        $(".manualOrgNextBtn").click(function(){
+            var select2=$(".warp_zy_h_List2 li.on");
+            if(select2.length<=0){
+                layer.open({
+                    content: '请选择任务'
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
+                });
+                return false
+            }
+            var postfile=JSON.parse(decodeURI(select2.find('a').attr('data-json')));
+            subCode=postfile.subCode;
+            setTimeout(function(){
+                window.location.href='task_register_afterwards_change_time2.html?type=2&subCode='+subCode+'&postfile='+encodeURI(JSON.stringify(postfile))
+            },500);
+        })
+    })
+</script>
+</body>
+</html>

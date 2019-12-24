@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>已提交任务</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" href="../wap/css/scale.css" type="text/css" />
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/scale.js"></script>
+    <style>
+        .exc2{padding-top: 1%}
+        .list ul li{width: 28.3%;margin: 3% 3% 0 0;}
+        .list ul li a img{width: 100%;border-radius: 5px}
+    </style>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+    <ul class="warp_sx_u" style="padding: 0 0 8px 0;">
+        <li>
+            <div class="warp_sx_u_sp">
+                <div class="warp_sx_u_so">
+                    <b>任务内容：</b>
+                    <span>加载中</span>
+                    <div class="imgDiv"></div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <div class="warp_sx_o">
+        <em></em>
+        <b>提交进度</b>
+    </div>
+
+    <ul class="warp_sx_e">
+    </ul>
+    <div class="ht60"></div><!--
+    <input type="button" value="撤销申请" onclick="changeApply()" class="warp_sx_w">-->
+</div>
+<section class="imgzoom_pack">
+    <div class="imgzoom_x">X</div>
+    <div class="imgzoom_img"><img src="" /></div>
+</section>
+<script type="text/javascript">
+    var ticket = $_GET['ticket'];
+    var user = $_GET['user'];
+    ticket_state(ticket, user);
+function ticket_state(ticket,user){
+    var str = false;
+    var html = '' ,html1 = ''; //申请进度taskCode
+    $.ajax({
+        xhrFields: {
+           withCredentials: true
+        },
+        type:"post",
+        url:base_url + "html5/v1/task/queryTaskSubmitByUser",
+        data:JSON.stringify({"ticket":ticket,"user":user}),
+        headers : {'token':token},
+        async: false,
+        dataType:'json',
+        contentType: "application/json;charset=utf-8",
+        beforeSend:function(){
+            layer.open({type: 2,content: '加载中'});
+        },
+        success:function(data){
+            if(data.code==0){
+                var data1 = data.data;
+                $(".warp_sx_u_so span").html(data1.content);
+                if(data1.state==10){
+                    var createTime = get_date(data1.createTime,0);
+                    var state = data1.state;
+                    if(state==10){
+                        state = "任务提交成功，待审核";
+                    }else if(state==20){
+                        state = "任务审核通过";
+                    }else if(state==-10){
+                        state = "任务审核失败";
+                    }
+                    html += '<li class="xt_1">\
+                                <img src="../wap/img/pws_318.png">\
+                                <span>'+createTime+'</span>\
+                                <b>'+state+'</b>\
+                            </li>';                
+                }
+                $(".warp_sx_e").html(html);
+                if(data1.img!=''){
+                    html1 += '<div class="exc2"><div class="list"><ul>';
+                    var imgs = data1.img.split(',');
+                    imgs.pop();
+                    console.log(imgs);
+                    $.each(imgs,function(index,val){
+                        html1 += '<li style="float: left;><a href="javascript:void(0)"><img name="taskImgs" src="'+val+'"></a></li>';
+                    })
+                    html1 += '</ul></div></div>';
+                }
+                $(".imgDiv").html(html1);
+                $("img[name='taskImgs']").each(function(i){
+                    $(this).height($(this).width());
+                    $(this).attr("src", $(this).attr("src")+"?x-oss-process=image/resize,m_pad,h_"+$(this).width()+",w_"+$(this).width()+",color_FFFFFF");
+                })
+                ImagesZoom.init({
+                    "elem": ".list"
+                });
+                layer.closeAll();
+            }else{
+                layer.closeAll();
+                layer.open({
+                    content: data.msg
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return str;
+            }
+        },
+        error:function(){
+            layer.closeAll();
+            layer.open({
+                content: '网络错误,请重试'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return str;
+        }
+    })
+    return str;
+}
+/*
+ * 撤销申请
+ * 
+ */
+ function changeApply(){
+    var ticket = $_GET['ticket'];
+    var type = $_GET['type'];
+    layer.open({
+            content: '您确定要这么做么？'
+                ,btn: ['确定', '取消']
+                ,yes: function(index){
+                     $.ajax({
+                        xhrFields: {
+                           withCredentials: true
+                        },
+                        type:"post",
+                        url:base_url + "html5/v1/userTicket/cancelChangeApply",
+                        data:JSON.stringify({"ticket":ticket,"type":type}),
+                        headers : {'token':token},
+                        async: false,
+                        dataType:'json',
+                        contentType: "application/json;charset=utf-8",
+                        beforeSend:function(){
+                            layer.open({type: 2,content: '提交中'});
+                        },
+                        success:function(data){
+                            console.log(data)
+                             if(data.code==0){
+                                layer.closeAll();
+                                layer.open({content: '提交成功',skin: 'msg',time: 1});
+                                setTimeout(function(){history.back(-1)},1000);
+                            }else{
+                                layer.closeAll();
+                                layer.open({content: data.msg,skin: 'msg',time: 1});
+                                return false;
+                            }
+                        },
+                        error:function(){
+                            layer.closeAll();
+                            layer.open({
+                                content: '网络错误,请重试'
+                                ,skin: 'msg'
+                                ,time: 1 //2秒后自动关闭
+                            });
+                            return str;
+                        }
+                    })
+                }
+            })
+   
+ }
+</script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海"/>
+    <meta name="description" content="公益上海"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="../meng/js/offset.js"></script>
+    <link rel="stylesheet" href="../meng/css/style.css">
+    <link rel="stylesheet" href="css/search.css">
+    <!--<link rel="stylesheet" href="css/mobiscroll.custom-2.5.0.min.css">-->
+    <link rel="stylesheet" href="css/mobiscroll.custom-3.0.0-beta6.min.css">
+    <link rel="stylesheet" href="../meng/plugins/layerUI/src/css/layui.css">
+</head>
+<body>
+<div class="container">
+    <div class="sendHistoryHead">
+        <!--<a class="sendBack" href="javascript:void(0)" onclick="jump('../org/institutions.html');"><i></i></a>-->
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i></a>
+        <div class="sendHeadList"><span>颁发团体奖项</span></div>
+        <!--<div class="sendHeadButton"><button><a href="record.html">结盟记录</a></button></div>-->
+    </div>
+    <div class="commendPersonal">
+        <div class="commendSelectList">
+            <a class="clearfix" href="javascript:void(0)">
+                <span class="left" style="color:#000;font-size:.24rem;">颁发日期</span><i class="icon_right right" style="background-image:url('../wap/img/pws_102.png')"></i><span class="right"> <input name="apt_date" placeholder="请选择" id="input" type="text"></span>
+            </a>
+        </div>
+        <div class="commendPersonalistWrap">
+            <div class="commendPersonaList">
+                <h2>奖项名称:</h2>
+                <div class="commendPersonaListTxt">
+                    <textarea class="personaListTxt txtChange" name="personalTitle" data-txt="请填写(30个字符以内)" data-len="30"></textarea>
+                </div>
+            </div>
+            <div class="commendPersonaList">
+                <h2>奖项文书名称及文号(选填):</h2>
+                <div class="commendPersonaListTxt">
+                    <textarea class="personaListTxt txtChange" name="personalNum" data-txt="请填写(50个字符以内)" data-len="50"></textarea>
+                </div>
+            </div>
+            <div class="commendPersonaList">
+                <h2>表彰奖励内容(选填):</h2>
+                <div class="commendPersonaListTxt strLimit">
+                    <textarea class="personaListTxt txtChangeLimit" name="personalContent" data-txt="请填写"></textarea>
+                    <div class="strTxt">130个字符</div>
+                </div>
+            </div>
+            <div class="commendPersonaList">
+                <h2>奖项照片:</h2>
+                <div class="commendPersonaListTxt">
+                    <!--<form action="" id="formData">-->
+                    <div class="commendPersonalImg" style="background-image:url('../wap/img/pws_96.jpg')"><input type="file" name="uploadImg"><i class="closeEmpty"></i></div>
+                    <!--</form>-->
+
+                </div>
+            </div>
+            <div class="commendPersonaList">
+                <h2>颁发单位(可多个单位联合颁发):</h2>
+                <div class="commendPersonaListTxt">
+                    <textarea class="personaListTxt" name="personalUnit"></textarea>
+                </div>
+            </div>
+            <div class="commendPersonaList">
+                <h2>奖项单位(只支持选择平台上的机构):</h2>
+                <div class="commendPersonaListTxt commendTeamListTxt">
+                    <!--<div class="commendPersonalUser clearfix">-->
+                        <!--<span>上海悠活网络科技有限公司</span>-->
+                        <!--<i class="personalUserClose"></i>-->
+                    <!--</div>-->
+                </div>
+                <div class="commendTeam_search">
+                    <button class="teamSearchButton"></button>
+                    <input type="text" contenteditable="true" id="activityUniteParamName3" placeholder="请输入机构名称进行查询" />
+                </div>
+                <div class="commendTeamSelect">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sendButtonWrap on">
+    <button class="targetNext on">完成</button>
+</div>
+
+<div class="warp_hd_t_bo1">
+    <div class="h70"></div>
+    <div class="sendHistoryHead on">
+        <!--<a class="sendBack" href="javascript:void(0)" onclick="jump('../org/institutions.html');"><i></i></a>-->
+        <a class="sendBack commendSelectCloseButton" href="javascript:void(0)"><i></i></a>
+        <div class="sendHeadList"><span>选择机构</span></div>
+        <!--<div class="sendHeadButton"><button><a href="record.html">结盟记录</a></button></div>-->
+    </div>
+    <div class="warp_hd_t_br">
+        <div class="warp_hd_t_bi">
+            <button class="SelectSearchButton SelectSearchButton1"></button>
+            <!--<a href="javascript:void(0)"></a>-->
+            <input type="text" style="color:#A3A3A3;height: 45px;width: 80%;border: 0px;" contenteditable="true" id="activityUniteParamName1" placeholder="请输入您要添加的联办单位名称" />
+        </div>
+        <div class="commendSelectWrap">
+            <ul class="warp_hd_t_bu1">
+                <!--<li class="unitLi cla">-->
+                <!--<span data-id="{&quot;orgId&quot;:&quot;4062&quot;,&quot;orgCode&quot;:&quot;AAA119875-412&quot;,&quot;orgName&quot;:&quot;上海市奉贤区奉浦社区第九社区居委会上海市奉贤区奉浦街道第九居委会公益服务站&quot;,&quot;type&quot;:&quot;20&quot;}">上海市奉贤区奉浦社区第九社区居委会上海市奉贤区奉浦街道第九居委会公益服务站</span>-->
+                <!--</li>-->
+                <!--<li class="unitLi">-->
+                <!--<span data-id="{&quot;orgId&quot;:&quot;4062&quot;,&quot;orgCode&quot;:&quot;AAA119875-412&quot;,&quot;orgName&quot;:&quot;上海市奉贤区奉浦社区第九社区居委会上海市奉贤区奉浦街道第九居委会公益服务站&quot;,&quot;type&quot;:&quot;20&quot;}">上海市奉贤区奉浦社区第九社区居委会上海市奉贤区奉浦街道第九居委会公益服务站</span>-->
+                <!--</li>-->
+            </ul>
+        </div>
+
+        <input type="button" value="全选" class="warp_hd_t_by_1"  id="selectbtn1">
+        <input type="button" value="添加" class="warp_hd_t_by" style="width: 40%;float: left;margin: 10px 5%" id="companybtn1">
+    </div>
+</div>
+<div class="warp_hd_t_bo2">
+    <div class="h70"></div>
+    <div class="sendHistoryHead on">
+        <!--<a class="sendBack" href="javascript:void(0)" onclick="jump('../org/institutions.html');"><i></i></a>-->
+        <a class="sendBack commendSelectCloseButton" href="javascript:void(0)"><i></i></a>
+        <div class="sendHeadList"><span>选择机构成员</span></div>
+        <!--<div class="sendHeadButton"><button><a href="record.html">结盟记录</a></button></div>-->
+    </div>
+    <div class="warp_hd_t_br">
+        <div class="warp_hd_t_bi">
+            <a href="javascript:void(0)"></a>
+            <input type="text" style="color:#A3A3A3;height: 45px;width: 80%;border: 0px;" contenteditable="true" placeholder="上海市公益服务促进中心" />
+        </div>
+        <div class="warp_hd_t_bi" style="margin-top:.2rem;border-top:1px solid #eee;">
+            <button class="SelectSearchButton"></button>
+            <input type="text" style="color:#A3A3A3;height: 45px;width: 80%;border: 0px;" contenteditable="true" id="activityUniteParamName2" placeholder="请输入姓名或手机号进行查询" />
+        </div>
+        <div class="commendSelectWrap">
+            <ul class="warp_hd_t_bu2">
+                <li>
+                    <strong></strong>
+                    <b style="background-image:url('../wap/img/default_acti.png')"></b>
+                    <span>张三</span>
+                </li>
+                <li class="on">
+                    <strong></strong>
+                    <b style="background-image:url('../wap/img/default_acti.png')"></b>
+                    <span>张三</span>
+                </li>
+                <!--<li class="unitLi cla">-->
+                <!--<span data-id="{&quot;orgId&quot;:&quot;4062&quot;,&quot;orgCode&quot;:&quot;AAA119875-412&quot;,&quot;orgName&quot;:&quot;上海市奉贤区奉浦社区第九社区居委会上海市奉贤区奉浦街道第九居委会公益服务站&quot;,&quot;type&quot;:&quot;20&quot;}">上海市奉贤区奉浦社区第九社区居委会上海市奉贤区奉浦街道第九居委会公益服务站</span>-->
+                <!--</li>-->
+                <!--<li class="unitLi">-->
+                <!--<span data-id="{&quot;orgId&quot;:&quot;4062&quot;,&quot;orgCode&quot;:&quot;AAA119875-412&quot;,&quot;orgName&quot;:&quot;上海市奉贤区奉浦社区第九社区居委会上海市奉贤区奉浦街道第九居委会公益服务站&quot;,&quot;type&quot;:&quot;20&quot;}">上海市奉贤区奉浦社区第九社区居委会上海市奉贤区奉浦街道第九居委会公益服务站</span>-->
+                <!--</li>-->
+            </ul>
+        </div>
+
+        <input type="button" value="全选" class="warp_hd_t_by_1"  id="selectbtn2" onclick="selectUnits()">
+        <input type="button" value="添加" class="warp_hd_t_by" style="width: 40%;float: left;margin: 10px 5%" id="companybtn2">
+    </div>
+</div>
+<script src="../meng/plugins/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script src="../meng/js/jquery.cookie.js"></script>
+<script src="../meng/js/public.js"></script>
+<!--<script src="../meng/js/config.js"></script>-->
+<script src="../meng/js/prjvorg.js"></script>
+<script src="js/index.js"></script>
+<!--<script src="js/mobiscroll.custom-2.6.2.min.js"></script>-->
+<script src="js/mobiscroll.custom-3.0.0-beta6.min.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script>
+    var now = new Date();
+    var currYear = now.getFullYear();
+    var currMonth = now.getMonth() + 1;
+    var currDay = now.getDate();
+    $('#input').mobiscroll().date({
+        theme:"material",
+        lang: "zh",
+        showLabel: true,//false  显示头部
+        setText: '确认', //确认按钮名称
+        cancelText: '取消', //取消按钮名称
+        dayText: '日',
+        monthText: '月',
+        yearText: '年', //面板中年月日文字
+        dateOrder: 'yyyymmdd', //面板中日期排列格式
+        dateFormat: 'yyyy-mm-dd', // 面板日期格式
+        display: 'bottom', //显示方式 ，可选：modal\inline\bubble\top\bottom
+        touchUi: false,
+        max: new Date(currYear, currMonth - 1, currDay), //结束年份
+        min: new Date(currYear-10, currMonth - 1, currDay)
+        // invalid: [
+        //     { start: new Date(currYear, currMonth , currDay), end: new Date(currYear+10, 12, 1) }
+        // ]
+    });
+
+    $(function(){
+        //    上传图片
+        $("input[name='uploadImg']").change(function(){
+            layer.open({type: 2,content: '上传中'});
+            var that=$(this);
+            var file=that[0].files[0];
+            console.log(file)
+
+            var form = document.createElement("form");
+            var formData = new FormData(form);
+            formData.append("gg",this.files[0]);
+            $.ajax({
+                type: "POST",
+                url: img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function(XMLHttpRequest) {
+
+                },
+                success: function(data) {
+                    if(data.errorcode==0){
+                        var src = data.data;
+                        $('.commendPersonalImg').css('backgroundImage', 'url(\''+src+'\')');
+                    }
+                    layer.closeAll();
+                },
+                error: function(){
+                    layer.closeAll();
+                    layer.open({
+                        content: '上传失败，网络错误',
+                        skin: 'msg',
+                        time: 2
+                    });
+                    return false;
+                }
+            })
+        })
+        $(".closeEmpty").click(function(){
+            $("input[name='uploadImg']").val('')
+            $('.commendPersonalImg').css('backgroundImage', 'url(\''+'../wap/img/pws_96.jpg'+'\')');
+        })
+
+        //    选择单位
+        // $("textarea[name='personalUnit']").click(function(){
+        //     console.log('111');
+        //     $(".warp_hd_t_bo1").show()
+        // });
+        $(".commendSelectCloseButton").click(function(){
+            $(".warp_hd_t_bo1").hide();
+            $(".warp_hd_t_bo2").hide()
+        });
+        //    选择机构
+        var togAll_1=function(){
+            var togAllBool=false;
+            $("#selectbtn1").unbind('click').click(function(){
+                if(!togAllBool){
+                    $(".warp_hd_t_bu1 li").addClass('cla')
+                    togAllBool=true
+                }else {
+                    $(".warp_hd_t_bu1 li").removeClass('cla')
+                    togAllBool=false
+                }
+
+            })
+        };
+
+
+        // 设置颁奖单位值
+        var textField=$("textarea[name='personalUnit']");
+        textField.val(prjvorgMsg.orgThirdAccountName+' ');
+        var startText = textField.val();
+        textField.keyup(function () {
+            //如果不是以startText开头的，就把文本框内的值设为startText
+            (textField.val().indexOf(startText) === 0) || (textField.val(startText));
+        });
+        //    滚动加载
+        var evaluateScrollEvent=function(type){
+            if($(".lastNothing").length>0){
+                $(".lastNothing").remove();
+            }
+            if($(".loadings").length>0){
+                $(".loadings").remove();
+            }
+            var types=type||1;
+            var page = 1;//从1
+            // var size = 10;
+            var t=0;
+            var p=0;
+            // page++;
+            console.log(page)
+            $(document).unbind('scroll').scroll(function(e){
+                t=$(this).scrollTop();
+                var doc=$(document).height();
+                var win=$(window).height();
+                if(p<=t){//console.log("向下");
+                    if(t>doc-(win+60)){
+                        if($(document).height() - $(window).height() == $(window).scrollTop()){
+                            page++;
+                            teamSearchGetList(page)
+                        }
+
+                    }else{
+                        $(".loadings").remove();
+                    }
+
+                }
+                setTimeout(function(){p=t},0)
+            });
+        };
+        var stopScrollEvent=function(obj){
+            $(document).unbind('scroll');
+            if($(".lastNothing").length>0){
+                $(".lastNothing").remove();
+            }
+            $(".loadings").remove();
+            if($(".loadings").length<=0){
+                $(obj).append('<div class="lastNothing" style="font-size:14px;line-height:50px;text-align:center;color:#666;">没有了</div>');
+            }
+        };
+
+        $("#companybtn1").click(function() {
+            $("textarea[name='personalUnit']").val("");
+            var txt=''
+            $(".warp_hd_t_bu1 .cla span").each(function() {
+                var comval = $(this).attr("data-id");
+                var comval1 = comval.split("\"").join("&#92;&#34;");
+
+                console.log(comval1)
+                txt+=eval("("+comval+")").orgName+' ';
+            });
+            $("textarea[name='personalUnit']").val(txt);
+            $(".warp_hd_t_bo1").hide();
+            $(".warp_hd_t_bo2").hide()
+            $(".warp_hd_t_bu1").html("");
+            $("#activityUniteParamName1").html("");
+        })
+        $(".SelectSearchButton1").click(function(){
+            $.ajax({
+                url: base_url + '/html5/v1/orgPlace/queryTotalListByName',
+                type: "post",
+                dataType: "json",
+                data: "{\"name\":\"" + $("#activityUniteParamName1").val() + "\", \"pageNumber\": 1, \"pageSize\": 6, \"orgThirdAccount\":\""+prjvorgMsg.orgThirdAccount+"\" }",
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        var record = resp.data.records;
+                        $(".warp_hd_t_bu1").html("");
+                        for (var i in record) {
+                            $(".warp_hd_t_bu1").append("<li class='unitLi'>\n" +
+                                "                            <span data-id='{\"orgId\":\""+record[i].id+"\",\"orgCode\":\""+record[i].orgThirdAccount+"\",\"orgName\":\""+record[i].name+"\",\"type\":\""+record[i].type+"\"}'>"+record[i].name+"</span>\n" +
+                                "                            </li>");
+                        }
+                        $(".warp_hd_t_bu1 li").click(function() {
+                            $(this).toggleClass('cla');
+                        });
+                        togAll_1();
+                    }
+                }
+            });
+        });
+
+
+        var personalUserCloseEvent=function(){
+            $(".personalUserClose").unbind('click').click(function(){
+                $(this).parents('.commendPersonalUser').remove();
+            });
+        };
+        var isHas=function(txt){
+            var tog=false;
+            $(".commendTeamListTxt").find('.commendPersonalUser').each(function(){
+                if($(this).find('span').text()==txt){
+                    tog=true;
+                    return tog
+                }
+            });
+            return tog
+        }
+        var teamSelectTog=function(){
+            $(".commendTeamSelect ul li").unbind('click').click(function(){
+                var cont=$(this).attr('data-id');
+                var txt=$(this).text();
+                console.log(isHas(txt));
+                if(!isHas(txt)){
+                    var ui='<div data-id="'+cont+'" class="commendPersonalUser clearfix">\n' +
+                        '                        <span>'+txt+'</span>\n' +
+                        '                        <i class="personalUserClose"></i>\n' +
+                        '                    </div>'
+                    $(".commendTeamListTxt").append(ui);
+                    personalUserCloseEvent();
+                }else{
+                    layer.open({
+                        content: '机构已存在',
+                        skin: 'msg',
+                        time: 2
+                    });
+                }
+
+            })
+        };
+        var teamSearchGetList=function(page){
+            var arr={
+                "name":$("#activityUniteParamName3").val(),
+                "pageNumber":page||1,
+                "pageSize":6,
+                "orgThirdAccount":prjvorgMsg.orgThirdAccount
+            };
+            $.ajax({
+                url: base_url + '/html5/v1/orgPlace/queryTotalListByName',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(arr),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        var record = resp.data.records;
+                        if(record.length>0){
+                            var li='';
+                            for (var i in record) {
+                                li+='<li data-id="{\'personFirstAccount\':\''+record[i].personFirstAccount+'\',\'orgThirdAccount\':\''+record[i].orgThirdAccount+'\'}">'+record[i].name+'</li>'
+                            }
+                            $(".commendTeamSelect ul").append(li);
+                            teamSelectTog()
+                        }else{
+                            stopScrollEvent($('.commendPersonalistWrap'))
+                        }
+
+                    }
+                }
+            });
+        };
+        $(".teamSearchButton").click(function(){
+            $(".commendTeamSelect ul").html("");
+            teamSearchGetList(1);
+            evaluateScrollEvent();
+        });
+
+        //  选择成员
+        $(".personalUserTog").click(function(){
+            $(".warp_hd_t_bo2").show()
+        });
+        //    完成
+        $(".targetNext").click(function(){
+            var str=$(".commendPersonalImg").css('background-image');
+            var res = str.match(/"(.*?)"/);
+            var arr={
+                "content": ($("textarea[name='personalContent']").val()).trim(),
+                "day": $("#input").val(),
+                "imgs": res[1].indexOf('wap/img/pws_96.jpg')>0?'':res[1],
+                "num": $("textarea[name='personalNum']").val(),
+                "org": "",
+                "title": $("textarea[name='personalTitle']").val(),
+                "type": 20,
+                "unit": ($("textarea[name='personalUnit']").val()).trim(),
+                "user": ''
+            };
+            $(".commendPersonalUser").each(function(){
+                var cont=$(this).attr('data-id');
+                arr['org']=prjvorgMsg.orgThirdAccount;
+                arr['user']+=eval("("+cont+")").orgThirdAccount+';';
+            });
+            arr['user']=arr['user'].substr(0,parseInt(arr['user'].length)-1);
+            if(arr['content']=='请填写'){
+                arr['content']=''
+            }
+            if(arr['num']=='请填写(50个字符以内)'){
+                arr['num']=''
+            }
+            if(arr['day']==''){
+                layer.open({
+                    content: '请选择时间',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false
+            }else if(arr['title']==''||arr['title']=='请填写(30个字符以内)'){
+                layer.open({
+                    content: '名称不能为空',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false
+            }else if(arr['imgs']==''){
+                layer.open({
+                    content: '请选择图片',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false
+            }
+            $.ajax({
+                url: base_url + '/html5/v1/userAchievement/add',
+                type: "post",
+                dataType: "json",
+                data:JSON.stringify(arr),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    console.log(resp)
+                    if (resp.code == 0) {
+                        layer.open({
+                            content: '添加成功',
+                            skin: 'msg',
+                            time: 2
+                        });
+                        setTimeout(function(){
+                            window.location.href='commend_index.html'
+                        },1500)
+                    }else {
+                        layer.open({
+                            content: resp.msg
+                            ,skin: 'msg'
+                            ,time: 2 //2秒后自动关闭
+                        });
+                        return false;
+                    }
+                },
+                error: function(){
+                    layer.closeAll();
+                    layer.open({
+                        content: '上传失败，网络错误',
+                        skin: 'msg',
+                        time: 2
+                    });
+                    return false;
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>家庭账户</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <style type="text/css">
+        .dqr_zh_p{overflow: hidden;padding: 0 3%;border-bottom: 1px solid #E6E6E6;background: #FFFFFF url(../wap/img/pws_54.png) no-repeat center;background-size: 7px 13px;background-position: 97%}
+        .dqr_zh_p a{display: block;line-height: 50px;color: #333333;font-size: 14px;padding-right: 10px}
+        .dqr_zh_p a i{display: inline-block;float: right;width: 14px;height: 14px;background: url(../wap/img/pws_263.png) no-repeat left center;background-size: 14px 14px;position: relative;top: 18px;margin-right: 8px}
+    </style>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>家庭账户</span>
+    </div>
+    <div class="warp_qh_p">
+
+        <div class="warp_dd_i_si">
+            <span>如您的家庭成员不方便使用手机，可以为其创建家庭账户，用于记录Ta的公益行为。</span>
+        </div>
+        <div class="dqr_zh_p">
+            <a href="homemember_list_wait.html">待确认家庭账户<i></i></a>
+        </div>
+
+        <ul class="warp_qh_p_so">
+            <div class="warp_qh_p_sp">
+                <b>已添加家庭账户</b>
+            </div>
+            <div id="memberList">
+                
+            </div>
+        </ul>
+    </div>
+    <div class="ht60"></div>
+    <input type="button" value="添加家庭账户功能正在调整中，稍后开放" class="warp_pws_b_su" style="background-color: #ffffff;bottom: 56px;color: #999999;">
+    <!--<input type="button" value="添加家庭账户" class="warp_pws_b_su" onclick="add_homeMemeber()"> --><!--onclick="add_homeMemeber()"-->
+</div>
+<script>
+    $(function(){
+        var cotrs = $(".warp_qh_p_so li");
+        cotrs.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    });
+</script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript">
+    var un = getCookie("un");
+    if(un==null || un==undefined || un==""){
+        alert("您还没有实名认证，请先进行实名认证后再进行查看！");
+        //jump("../cert/cert_index.html");
+        jumpBank('web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=')
+    }
+    function add_homeMemeber(){
+        window.location.href='homemember_add.html';
+    }
+</script>
+<script type="text/javascript">
+    var appUserInfoStr = localStorage.getItem('appUserInfo'),relAccount="";
+    if(appUserInfoStr){
+        var appUserInfo = JSON.parse(appUserInfoStr); //转为JSON对象
+        if(appUserInfo.relUserId==""){//主账户
+            relAccount = "html5/v1/user/myFamilyRelAccount";
+        }else{
+            relAccount = "html5/v1/user/myMasterRelAccount";
+        }
+    }
+    $(function(){
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + relAccount,//"html5/v1/user/myFamilyRelAccount",
+            data:JSON.stringify({"userId":user_msg.userId}),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                data_index = data.data.okList;
+                if(relAccount == "html5/v1/user/myMasterRelAccount"){
+                    $.each(data_index,function(v,k) {
+                        window.location.href = 'homemember_change.html?type=zi&relAccountId=' + k.relAccountId + '&relType=' + k.relType;
+                    })
+                }
+                
+                var relTypeArr = [' ','儿子','女儿','父亲','母亲','其他'];
+
+                data_applyList = data.data.applyList;
+                if(data_applyList.length == 0){
+                    $(".dqr_zh_p").hide();
+                }
+                if(data_index.length == 0){
+                    var html_1 = '<li class="thisclass">暂无数据</li>';
+                    $("#memberList").append(html_1);
+                    if(data_applyList.length == 0){
+                        $(".warp_qh_p_sp").hide();
+                    }else{
+                        $(".warp_qh_p_so").hide();
+                    }
+                }else{
+                    $.each(data_index,function(v,k) {
+                        if(k.accountIcon == ""){
+                            k.accountIcon = "../wap/img/pws_275.jpg";
+                        }
+                        if(k.accountType == 1){
+                            var html_1 = '<li class="thisclass">\
+                                                <a href="homemember_change.html?relAccountId='+k.relAccountId+'&relType='+k.relType+'">\
+                                                    <div class="warp_qh_p_si">\
+                                                        <b>'+k.relAccountName+'</b>\
+                                                        <span>'+relTypeArr[k.relType]+'</span>\
+                                                    </div>\
+                                                </a>\
+                                            </li>';
+                            $("#memberList").append(html_1);
+                        }
+                    });
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    })
+</script>
+</body>
+</html>

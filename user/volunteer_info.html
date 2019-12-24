@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益名片</title>
+    <meta name="Keywords" content="公益护照"/>
+    <meta name="description" content="公益护照"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="../srcb/js/offset.js"></script>
+    <link rel="stylesheet" href="../srcb/css/style.css">
+    <link rel="stylesheet" href="../srcb/css/identity.css">
+</head>
+<body>
+<div class="sendHistoryHead">
+    <a style="display: none;" class="sendBack" href="javascript:void(0);"><i></i><!--<span>返回</span>--></a>
+    <div class="sendHeadList"><span>公益名片</span></div>
+    <!--<div class="sendHeadButton"><button>发送历史</button></div>-->
+</div>
+<div class="addResseeContent">
+    <div class="subPhotoWrap">
+        <div class="subPhoto" style="background-image:url('../srcb/images/blank_card.jpg')">
+            <div class="subPhotoFont subPhotoName"><span class="name">姓名</span><!--<span class="red">待激活</span>--></div>
+            <div class="subPhotoFont subPhotoSex"><span class="sex">性别</span></div>
+            <div class="subPhotoFont subPhotoBirthday" style="display: none;"><span class="birthday">出生日期</span></div>
+            <div class="subPhotoFont subPhotoCode"><span class="code">公益护照编号</span></div>
+            <div class="subPhotoFont subPhotoValidityPeriod"><span class="validityPeriod">有效期</span></div>
+            <div id="qrcode" style="display: none;"></div>
+            <div class="subPhotoFont subPhotoQrCode"><img id="qrcodeImg" class="qrCode" src="../srcb/images/qrCode.png" /></div>
+        </div>
+    </div><!--
+    <div class="addResseeWarn">
+        <div class="applyTop">温馨提示</div>
+        <div class="applyList"><span>1)</span>申领人年满18周岁，并在70周岁（含）以下，并持有中华人民共和国第二代身份证可直接申领。</div>
+        <div class="applyList"><span>2)</span>申领人年满18周岁，并在70周岁（含）以下，并持有中华人民共和国第二代身份证可直接申领。</div>
+        <div class="applyList"><span>3)</span>申领人年满18周岁，并在70周岁（含）以下，并持有中华人民共和国第二代身份证可直接申领。</div>
+    </div>-->
+</div>
+
+<div class="sendNextButton" onclick="jump('../index.html')">返回首页</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.qrcode.min.js"></script>
+<script>
+    var passport = $.getUrlParam("passport");
+    querySuccess(passport);
+    function querySuccess(passport){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'get',
+            url: base_url + "html5/v1/volunteer/info?passport="+passport,
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                layer.closeAll();
+                if (data.code == 0) {
+                    var passport = data.data.passport;
+                    qrcode1(passport.qr);
+                    $(".name").html("姓名："+passport.realName);
+                    $(".sex").html("性别："+passport.sex);
+                    $(".birthday").html("出生日期："+passport.birthday);
+                    $(".code").html("公益护照编号："+passport.licenseCode);
+                    var validityPeriod = passport.validityPeriod;
+                    if(validityPeriod=="待激活"){
+                        $(".validityPeriod").html("有效期至：<span style='color: red;'>"+validityPeriod+"</span>");
+                        $(".jihuo").show();
+                    }else if(validityPeriod=="待领取"){
+                        $(".validityPeriod").html("有效期至：<span style='color: red;'>"+validityPeriod+"</span>");
+                        $(".lingqu").show();
+                    }else{
+                        $(".validityPeriod").html("有效期至：<span>"+validityPeriod+"</span>");
+                    }
+                }
+            }
+        })
+    }
+    function qrcode1(url){
+        $("#qrcode").qrcode({
+            render: "canvas", // 渲染方式有table方式（IE兼容）和canvas方式
+            width: 150, //宽度
+            height: 150, //高度
+            text: url, //内容
+            typeNumber: -1,//计算模式
+            correctLevel: 2,//二维码纠错级别
+            background: "#ffffff",//背景颜色
+            foreground: "#000000"  //二维码颜色
+        });
+        var canvas = $('#qrcode').find("canvas").get(0);
+        var url = canvas.toDataURL('image/jpeg');
+        $("#qrcodeImg").attr('src', url);
+    }
+</script>
+</body>
+</html>

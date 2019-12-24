@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海" />
+    <meta name="description" content="公益上海" />
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <script type="text/javascript" src="js/offset.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+    <link rel="stylesheet" href="css/mobile.css"/>
+</head>
+
+<body style="background:#fff">
+<div class="mlbileWrap">
+    <header class="hyhead">
+        <a href="javascript:history.go(-1);" class="hyhead_l hyhead_black" ><img class="black" src="images/leftWhite.png" /></a>
+        <div class="hyhead_c hyhead_c_black">
+            <i></i>
+            <input type="text" placeholder="机构名称" onclick="jump('searchResult.html');">
+        </div>
+        <a href="javascript:void(0)" class="hyhead_r" onclick="jump('maps.html');"> <img src="images/hyicon2.png" /><span>地图</span></a>
+    </header>
+    <div class="hyhead_b"></div>
+    <nav class="htnav">
+        <ul id="head_type">
+            <!--<li> <a href="http://h5.shcvs.cn/huangye/list.html?id=1&amp;code=1001"> <img src="images/hynav1.png" /> <span>公益基地 </span> </a> </li>
+            <li> <a href="http://h5.shcvs.cn/huangye/list.html?id=2&amp;code=1002"> <img src="images/hynav2.png" /> <span>基金会</span> </a> </li>
+            <li> <a href="http://h5.shcvs.cn/huangye/list.html?id=3&amp;code=1003"> <img src="images/hynav3.png" /> <span>社会团体</span> </a> </li>
+            <li> <a href="http://h5.shcvs.cn/huangye/list.html?id=4&amp;code=1004"> <img src="images/hynav4.png" /> <span>公益组织</span> </a> </li>
+            <li> <a href="http://h5.shcvs.cn/huangye/list.html?id=5&amp;code=1005"> <img src="images/hynav5.png" /> <span>志愿服务组织</span> </a> </li>
+            <li> <a href="http://h5.shcvs.cn/huangye/list.html?id=6&amp;code=1006"> <img src="images/hynav6.png" /> <span>爱心企业</span> </a> </li>
+            <li> <a href="http://h5.shcvs.cn/huangye/list.html?id=7&amp;code=1007"> <img src="images/hynav7.png" /> <span>公共场馆</span> </a> </li>
+            <li> <a href="http://h5.shcvs.cn/huangye/list.html?type=8"> <img src="images/hynav8.png" /> <span>更多</span> </a> </li>-->
+        </ul>
+    </nav>
+    <div class="hycon">
+        <h2> <i> </i> <span> 附近 </span> </h2>
+        <div class="hycon_con">
+            <ul id="info_list"><!--
+                <li>
+                    <a href="javascript:void(0)">
+                        <h3>上海市普陀梅陇青少年体育俱乐部</h3>
+                        <dl>
+                            <dd>公益基地</dd>
+                            <dd>公益基地</dd>
+                        </dl>
+                        <div class="hycon1">
+                            <i style="width:50%"></i>
+                            <span>1000人/2000人</span>
+                        </div>
+                        <div class="hycon2">
+                            <img src="images/hyicon3.png" />
+                            <p><span>2018-09-06 14:10</span>当前流量/损失最大承载量</p>
+                        </div>
+                    </a>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="allmap" style="height:0;overflow:hidden"></div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script>
+    function geolocationSupport(){
+        if(!navigator.geolocation){
+            alert("你的浏览器不支持HTML5 Geolocation");
+        }else{
+            var options={
+                //enableHighAccuracy:true,// 指示浏览器获取高精度的位置，默认为false
+                timeout:5000,// 指定获取地理位置的超时时间，默认不限时，单位为毫秒
+                maximumAge:3000// 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。
+            }
+            navigator.geolocation.getCurrentPosition(success,error,options);
+        }
+    }
+    function success(position){
+        var x=position.coords.longitude;
+        var y=position.coords.latitude;
+        console.log("经度为:"+x+"纬度为:"+y);
+        queryIndex(y, x);
+    }
+    function error(err){
+        var errorTypes={
+            1:"请允许地理位置获取！",
+            2:"获取不到定位信息！",
+            3:"获取定位信息超时！"
+        }
+        alert(errorTypes[err.code]);
+        jump("searchResult.html");
+    }
+    window.onload=function() {
+        //geolocationSupport();
+        get_msg();
+    }
+    function get_msg(){
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(116.331398,39.897445);
+        map.centerAndZoom(point,12);
+        var geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function(r){
+            if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                var mk = new BMap.Marker(r.point);
+                map.addOverlay(mk);
+                map.panTo(r.point);
+                queryIndex(r.point.lat, r.point.lng)
+            }
+            else{
+                layer.open({
+                    content: '获取定位失败,请重试'
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
+                });
+            }
+        });
+    }
+
+    var sortBy = function (filed, rev, primer) {
+        rev = (rev) ? -1 : 1;
+        return function (a, b) {
+            a = a[filed];
+            b = b[filed];
+            if (typeof (primer) != 'undefined') {
+                a = primer(a);
+                b = primer(b);
+            }
+            if (a < b) { return rev * -1; }
+            if (a > b) { return rev * 1; }
+            return 1;
+        }
+    };
+    function queryIndex(lat, lng) {
+        $.ajax({
+            url: base_url1 + '/html5/v1/orgPlace/queryYellowIndexPage',
+            type: "post",
+            dataType: "json",
+            data: "{\"lng\": "+lng+", \"lat\": "+lat+", \"distance\": 3000}",
+            headers: {'Content-Type': 'application/json'},
+            success: function (resp) {
+                if (resp.code == 0) {
+                    var data = resp.data;
+                    var markTagList = data.markTagList;
+                    markTagList.sort(sortBy('index', false, parseInt));
+                    for (var i in markTagList) {
+                        $("#head_type").append("<li> <a href='screen.html?code="+markTagList[i].code+"&name="+encodeURI(encodeURI(markTagList[i].name))+"'> <img src='"+ mark_tag_imgs[markTagList[i].id-1] +"' /> <span>"+ markTagList[i].name +"</span> </a> </li>");
+                    }
+                    $("#head_type").append("<li> <a href='screen.html?code=-1&name="+encodeURI(encodeURI("全部"))+"'> <img src='images/hynav8.png' /> <span>更多</span> </a> </li>");
+
+                    var orgPlaceList = data.orgPlaceList;
+                    for (var i in orgPlaceList) {
+                        //标签
+                        var markTags = "";
+                        var markTags_arr = orgPlaceList[i].markTags.split(";");
+                        for (var j = 0; j <markTags_arr.length; j++) {
+                            var markTagsArr = markTags_arr[j];
+                            if(markTagsArr.indexOf("公益基地")>=0){
+                                if(orgPlaceList[i].baseNo!=undefined && orgPlaceList[i].baseNo!=null && orgPlaceList[i].baseNo!=""){
+                                    markTags += '<dd>'+orgPlaceList[i].baseNo+"号公益基地</dd>";
+                                }
+                            }else{
+                                markTags += '<dd>'+markTagsArr+'</dd>';
+                            }
+                        }
+                        var jumpStr = "mobileDetailClaim.html?id="+orgPlaceList[i].id;
+                        if(orgPlaceList[i].orgThirdAccount){
+                            markTags += '<dd><img src="images/hylist4.png"><i>实名</i></dd>';
+                            jumpStr = "mobileDetail.html?id="+orgPlaceList[i].id+"&prjvUserId="+orgPlaceList[i].prjvUserId;
+                        }else{
+                            markTags += '<dd class="on">待认领</dd>';
+                        }
+
+                        var district = orgPlaceList[i].district;
+                        district = district!=undefined && district!=null && district!=""?district:"";
+                        var addressDetail = orgPlaceList[i].addressDetail;
+                        addressDetail = addressDetail!=undefined && addressDetail!=null && addressDetail!=""?addressDetail:"";
+                        var address = district+addressDetail;
+                        if(addressDetail.indexOf(district) != -1){
+                            address = addressDetail;
+                        }
+                        $("#info_list").append("<li onclick='jump(\""+jumpStr+"\")'>\
+                            <a href='javascript:void(0)'>\
+                            <h3>"+ orgPlaceList[i].name +"</h3>\
+                            <dl>\
+                                "+markTags.replace("1001:", "")+"\
+                            </dl>\
+                        <div class='hycon2'>\
+                            <img src='images/hylist5.png' />\
+                            <p><span>"+address+"</span></p>\
+                        </div>\
+                        </a>\
+                        </li>");
+                    }
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

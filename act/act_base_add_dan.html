@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/cc_dh_p.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/calendar_dan.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css" />
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+
+    <script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+    <script type="text/javascript" src="../wap/js/modernizr.custom.17475.js"></script>
+    <script type="text/javascript" src="../wap/js/more.js"></script>
+    <script type="text/javascript" src="../wap/js/act/act.js"></script>
+    <style type="text/css">
+		.warp_pws_m_sp li .checkinout_div{
+			display: block;
+			line-height: 50px;
+			overflow: hidden;
+			background: url(../wap/img/pws_54.png) no-repeat right center;
+			background-size: 8px 15px;
+			position: relative;
+		}
+		.warp_pws_m_sp li .checkinout_div b{
+		    display: block;
+			font-size: 18px;
+			line-height: 50px;
+			font-weight: normal;
+			color: #000000;
+			position: absolute;
+			left: 0;
+			top: 3%;
+		}
+		.warp_pws_m_sp li .checkinout_div b i{
+			font-style: normal;
+			color: #FF0000;
+			padding-right: 3px;
+		}
+
+        .Date_lr {
+            width: 92px;
+            text-align: center;
+            float: right
+        }
+
+        .span21 {
+            font-size: 14px;
+            color: #666;
+            line-height: 50px;
+            display: block;
+            float: right;
+        }
+
+        #checkinout {
+            position: relative;
+            display: -webkit-box;
+            display: flex;
+            padding-right: 14px;
+        }
+
+        #firstSelect p {
+            line-height: 25px;
+            color: #999;
+            font-size: 12px;
+        }
+
+        #startDate {
+            border: 0;
+            float: left;
+            width: 92px;
+            font-size: 16px;
+            color: #333333;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            padding: 0;
+        }
+
+        #endDate {
+            border: 0;
+            float: left;
+            width: 92px;
+            font-size: 16px;
+            color: #333333;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            padding: 0;
+        }
+
+        .mask_calendar {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, .4);
+            display: none;
+            z-index: 9999;
+        }
+
+        .calendar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+			font-size: 14px
+        }
+
+        .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translate3d(0, -100%, 0);
+                visibility: visible;
+            }
+            to {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .slideInDown {
+            animation-name: slideInDown;
+        }
+
+        .warp_cc_p {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            position: fixed;
+            left: 100%;
+            top: 0;
+            background: #FFFFFF;
+            z-index: 99
+        }
+
+        .warp_cp {
+            left: 100%
+        }
+
+        .warp_ci {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            position: fixed;
+            left: 100%;
+            top: 0;
+            background: #FFFFFF;
+            z-index: 99
+        }
+        /*//活动标签*/
+
+        .warp_hd_t_bp {
+            display: block;
+            font-size: 15px;
+            line-height: 50px;
+            color: #999999;
+            float: right;
+            padding-right: 14px;
+            border: 0;
+            background: url(../wap/img/pws_54.png) no-repeat right center;
+            background-size: 7px 13px;
+            font-family: '微软雅黑';
+            text-align: right;
+            outline: none;
+        }
+
+        .warp_hd_t_bo {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 999;
+            display: none;
+        }
+
+        .warp_hd_t_bo1 {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 999;
+            display: none;
+        }
+
+        .warp_hd_t_bi {
+            overflow: hidden;
+            padding: 0 3%;
+            line-height: 54px;
+            border-bottom: 1px solid #E6E6E6;
+        }
+
+        .warp_hd_t_bi span {
+            display: block;
+            float: left;
+            font-size: 16px;
+            color: #000000;
+        }
+
+        .warp_hd_t_bi a {
+            display: block;
+            width: 16px;
+            height: 16px;
+            background: url(../wap/img/pws_220.png) no-repeat center;
+            background-size: 100% 100%;
+            float: right;
+            margin-top: 19px;
+        }
+
+        .warp_hd_t_bu {
+            width: 100%;
+            overflow: hidden;
+            padding: 4% 0 1% 0;
+        }
+
+        .warp_hd_t_bu li {
+            width: 29.3%;
+            overflow: hidden;
+            float: left;
+            margin: 0 0 3% 3%;
+        }
+
+        .warp_hd_t_bu li.cla span {
+            border: 1px solid #72B81E;
+            background: url(../wap/img/pws_219.png) no-repeat right top;
+            background-size: 24%;
+        }
+
+        .warp_hd_t_bu li span {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #000000;
+            border: 1px solid #E6E6E6;
+            border-radius: 4px;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .warp_hd_t_bu1 {
+            width: 100%;
+            overflow: hidden;
+            padding: 4% 0 1% 0;
+        }
+
+        .warp_hd_t_bu1 li {
+            width: 29.3%;
+            overflow: hidden;
+            float: left;
+            margin: 0 0 3% 3%;
+        }
+
+        .warp_hd_t_bu1 li.cla span {
+            border: 1px solid #72B81E;
+            background: url(../wap/img/pws_219.png) no-repeat right top;
+            background-size: 24%;
+        }
+
+        .warp_hd_t_bu1 li span {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #000000;
+            border: 1px solid #E6E6E6;
+            border-radius: 4px;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .warp_hd_t_by {
+            width: 94%;
+            height: 46px;
+            border: 0;
+            background: #72B81E;
+            color: #FFFFFF;
+            font-size: 16px;
+            display: block;
+            margin: 10px auto;
+        }
+
+        .warp_hd_t_bt {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: url(../wap/img/bjtm.png);
+        }
+
+        .warp_hd_t_br {
+            width: 100%;
+            overflow: hidden;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            background: #FFFFFF;
+        }
+
+        input[disabled] {
+            color: #000000;
+            opacity: 1
+        }
+
+        .warp_tj_sp {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .warp_tj_sp textarea {
+            width: 93.5%;
+            height: 80px;
+            border: 1px solid #E6E6E6;
+            font-family: '微软雅黑';
+            font-size: 15px;
+            padding: 2% 3%;
+        }
+
+        .warp_pws_m_su li {
+            padding: 15px 0 0 0
+        }
+
+        .act_cw_p {
+            width: 100%;
+            overflow: hidden
+        }
+
+        .act_cw_p li {
+            overflow: hidden;
+            height: 50px;
+            line-height: 50px;
+            padding: 0 3%;
+            background: url(../wap/img/pws_54.png) no-repeat right center;
+            background-size: 8px 13px;
+            background-position: 97%;
+            border-bottom: 1px solid #E6E6E6
+        }
+
+        .act_cw_p li select {
+            width: 76%;
+            direction: rtl;
+            float: right;
+            height: 50px;
+            font-family: '微软雅黑';
+            color: #333333;
+            font-size: 14px;
+            background: none;
+            padding-right: 16px;
+            outline: none;
+            border: 0;
+        }
+
+        .act_cw_p li span {
+            display: block;
+            float: left;
+            font-size: 16px
+        }
+
+        .act_cw_o {
+            overflow: hidden;
+            padding: 5% 3%;
+            border-bottom: 1px solid #E6E6E6
+        }
+
+        .act_cw_o img {
+            width: 14px;
+            height: 14px;
+            float: left;
+            padding: 3px
+        }
+
+        .act_cw_o span {
+            font-size: 14px;
+            line-height: 20px
+        }
+
+        input[disabled] {
+            color: #333;
+            opacity: 1
+        }
+
+        .warp_jz {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #000000;
+            z-index: 999999;
+            opacity: 0.5;
+        }
+
+        #address {
+            background: #FFFFFF;
+            text-align: right;
+            font-family: '微软雅黑';
+            font-size: 16px;
+            margin-right: 14px;
+            line-height: 50px;
+            height: 50px;
+			float: right
+        }
+
+        #address::-webkit-input-placeholder {
+            line-height: 50px;
+        }
+
+    </style>
+    <script>
+        $('textarea').keyup(function() {
+            $(this).height(this.scrollHeight);
+        });
+        $('#address').change(function() {
+            console.log(111)
+            var arr = [];
+            var str = $('#address').html();
+            console.log(str);
+        });
+    </script>
+</head>
+
+<body style="background: #F2F2F2">
+	<!--头部开始-->
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+	<!--头部结束-->
+    <div class="warp_jm">
+
+    </div>
+    <div class="warp">
+        <header class="warp_pws_m">
+            <b><i>*</i>标题</b>
+            <input type="text" placeholder="好的标题能更快的实现资源对接（不超过20个汉字）" id="name">
+        </header>
+        <ul class="warp_pws_m_sp">
+            <li>
+                <div class="checkinout_div">
+                    <div id="checkinout">
+
+						<div class="row select-time">
+							<span class="time leavetime"></span><!--结束时间-->
+							<input id="endDate" type="text" class="input-leave none" readonly="readonly">
+							<span class="c-back">至</span>
+							<span class="time entertime"></span><!--开始时间-->
+							<input id="startDate" type="text" class="input-enter none" readonly="readonly">
+						</div>
+
+                    </div>
+                    <div class="mask_calendar">
+                        <div class="calendar"></div>
+                    </div>
+                    <b><i>*</i>日期</b>
+                </div>
+            </li>
+            <li>
+                <a href="javascript:;" class="warp_cs">
+                    <span>请选择</span>
+                    <b><i>*</i>场次</b>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;" class="warp_dd">
+                    <textarea placeholder="请选择" id="address" readonly="readonly" disabled="disabled" onfocus="this.blur()"></textarea>
+                    <!--<input type="text" value="请选择" id="address"  readonly="readonly" disabled="disabled"  onfocus="this.blur()">-->
+                    <b><i>*</i>地点</b>
+                </a>
+                <input type="hidden" id="lat" value="">
+                <input type="hidden" id="lng" value="">
+            </li>
+            <li>
+                <a href="javascript:void(0)">
+                    <input type="number" placeholder="请填写" id="contactPhone">
+                    <b>咨询电话</b>
+                </a>
+            </li>
+        </ul>
+
+        <!-- <div class="warp_pws_m">
+        <b>描述</b>
+        <input type="text" placeholder="描述是一个好的开始" name="demo">
+    </div> -->
+        <div class="warp_pws_m_so">
+            <div class="warp_pws_m_si">
+                <b>添加图片</b>
+                <span>（第一张图片将设置为封面图）</span>
+            </div>
+
+            <ul class="warp_pws_m_su">
+                <form class='test_form' action='' method="post" enctype="multipart/form-data">
+                    <li data-id='0'>
+                        <div class="warp_pws_m_sy">
+                            <div class="warp_pws_m_sq">
+                                <img src="../wap/img/pws_96.jpg" id="img0" width="100" height="100">
+                                <input type="file" onchange="uploadImg(0,this)" name="gg">
+                                <input type="hidden" id="imgsrc0" value='' name="imgsrc">
+                            </div>
+                            <i></i>
+                        </div>
+                    </li>
+                </form>
+                <form class='test_form' action='' method="post" enctype="multipart/form-data">
+                    <li data-id='1'>
+                        <div class="warp_tj_sp">
+                            <textarea placeholder="请填写您要添加的文字" onblur="setText(this.value,'imgsrc1')"></textarea>
+                            <input type="hidden" id="imgsrc1" value='' name="imgsrc">
+                        </div>
+                    </li>
+                </form>
+            </ul>
+            <script type="text/javascript">
+                function setText(vals, imgsrc1) {
+                    $('#' + imgsrc1 + '').val('{"img":"","demo":"' + vals + '"}')
+                }
+            </script>
+            <ul class="warp_pws_m_sr">
+                <li>
+                    <img src="../wap/img/pws_93.jpg">
+                    <input type="button" onclick="addDescription_img()">
+                </li>
+                <li>
+                    <img src="../wap/img/pws_92.jpg">
+                    <input type="button" onclick="addDescription_text()">
+                </li>
+            </ul>
+        </div>
+
+        <script>
+            $(function() {
+                $("input[type='checkbox']").click(function() {
+                    if ($(this).is(':checked')) {
+                        $(this).addClass('add');
+                    } else {
+                        $(this).removeClass('add');
+                    }
+                });
+            })
+        </script>
+        <ul class="warp_ms_o_sf">
+            <li>
+                <span class="warp_hd_t_bp t_bq">请选择</span>
+                <b>活动标签</b>
+            </li>
+            <li>
+                <a href="javascript:;" class="warp_hd_t_bp tt_bq">请选择</a>
+                <b>联办单位</b>
+            </li>
+        </ul>
+        <div class="warp_hd_t_bo">
+            <div class="warp_hd_t_bt"></div>
+            <div class="warp_hd_t_br">
+                <div class="warp_hd_t_bi">
+                    <a href="javascript:void(0)"></a>
+                    <span>描述标签</span>
+                </div>
+                <ul class="warp_hd_t_bu">
+                </ul>
+                <input type="button" value="确定" class="warp_hd_t_by" id="tagbtn">
+            </div>
+        </div>
+        <div class="warp_hd_t_bo1">
+            <div class="warp_hd_t_bt"></div>
+            <div class="warp_hd_t_br">
+                <div class="warp_hd_t_bi">
+                    <a href="javascript:void(0)"></a>
+                    <span>联办单位</span>
+                </div>
+                <ul class="warp_hd_t_bu1">
+                    <li>
+                        <span data-id='{"orgCode":"cft","orgName":"财富通","type":"10"}'>财富通</span>
+                    </li>
+                    <li>
+                        <span data-id='{"orgCode":"ali","orgName":"阿里","type":"20"}'>阿里</span>
+                    </li>
+                    <li>
+                        <span data-id='{"orgCode":"bd","orgName":"百度","type":"10"}'>百度</span>
+                    </li>
+                    <li>
+                        <span data-id='{"orgCode":"tx","orgName":"腾讯","type":"20"}'>腾讯</span>
+                    </li>
+                    <li>
+                        <span data-id='{"orgCode":"gg","orgName":"谷歌","type":"10"}'>谷歌</span>
+                    </li>
+                    <li>
+                        <span data-id='{"orgCode":"cs1","orgName":"测试1","type":"10"}'>测试1</span>
+                    </li>
+                    <li>
+                        <span data-id='{"orgCode":"cs2","orgName":"测试2","type":"10"}'>测试2</span>
+                    </li>
+                    <li>
+                        <span data-id='{"orgCode":"cs3","orgName":"测试3","type":"10"}'>测试3</span>
+                    </li>
+                    <li>
+                        <span data-id='{"orgCode":"cs4","orgName":"测试4","type":"10"}'>测试4</span>
+                    </li>
+                </ul>
+                <input type="button" value="确定" class="warp_hd_t_by" id="companybtn">
+            </div>
+        </div>
+        <input type="hidden" value="" id="aptag" />
+        <input type="hidden" value="" id="apcompany" />
+        <div class="warp_pws_m_se">
+            <input type="checkbox" checked class="add">
+            <span>已阅读并同意</span>
+        </div>
+
+        <div class="ht70"></div>
+        <footer class="warp_pws_m_sw">
+            <input type="button" value="保存活动" id="btn">
+        </footer>
+
+        <div class="warp_pws_m_sl">
+            <div class="warp_pws_m_sk">
+                <div class="warp_pws_m_sj">
+                    <b>温馨提示</b>
+                    <span>欢迎使用公益上海App，在你使用时，需要连接数据网络或者wlan网络，产生的流量费用请咨询当地运营商。公益上海非常重视您的隐私保护和个人信息保护。在你使用公益上海App服务前，请认真阅读《用户服务协议》及《隐私政策》全部条款，你同意并接受全部条款后在开始使用我们的服务。</span>
+                </div>
+                <div class="warp_pws_m_sh">
+                    <a href="javascript:void(0)" class="add_bty">不同意</a>
+                    <a href="javascript:void(0)" class="add_ty">同意并继续</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--场次开始-->
+    <div class="warp_cc_p">
+        <nav class="warp_pws_n" style="border-bottom: 0">
+            <div class="warp_sh_p">
+                <div class="warp_hr">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper" id="carousel"></div>
+                        <!-- Add Arrows -->
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+            <script type="text/javascript" src="../wap/js/jquery.elastislide.js"></script>
+            <script type="text/javascript">
+                function showDate(datestr) {
+                    var temp = datestr.split("-");
+                    var date = new Date(temp[0], temp[1], temp[2]);
+                    return date;
+                }
+            </script>
+        </nav>
+        <form id="classform">
+            <ul class="warp_pws_n_sp" id="carousel_change">
+
+            </ul>
+        </form>
+        <input type="hidden" value="" id="classVal">
+        <div class="ht60"></div>
+        <div class="ht70"></div>
+        <div class="warp_pws_m_sw warp_cp">
+            <div>
+                <i></i>活动一旦保存，场次信息不可修改
+            </div>
+            <!-- <input type="button" value="设置完成" id="setClassBtn"> -->
+            <ul class="warp_pws_hd">
+                <li>
+                    <input type="button" value="返回" id="closeClass">
+                </li>
+                <li>
+                    <input type="button" value="设置完成" id='setClassBtn'>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" src="../wap/js/swiper_sime.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.serializejson.js"></script>
+    <!--场次设置JS-->
+    <script type="text/javascript" src="../wap/js/act_setClass.js"></script>
+    <!--场次结束-->
+
+    <!--地点开始-->
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+    <div class="warp_ci">
+
+    </div>
+    <!--地点结束-->
+    <!---- 地图开始 ---->
+    <div class="warp_ifrem" style="background: #FFFFFF">
+
+    </div>
+    <!---- 地图结束 ---->
+    <script type="text/javascript" src="../wap/js/date_dan.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <!-- 时间选择 -->
+    <script type="text/javascript">
+		$('.select-time').hotelDate();
+	</script>
+    <!-- test -->
+    <script>
+        $(function() {
+            $(".warp_pws_m_se span").click(function() {
+                $(".warp_pws_m_sl").fadeIn();
+				$("body,html").css({
+					"height":"100%",
+					"overflow":"hidden"
+				  });
+				  $('body').addClass('add')
+            })
+
+            $(".add_bty").click(function() {
+                $(".warp_pws_m_sl").fadeOut();
+				$("body,html").css({
+					"height":"auto%",
+					"overflow":"auto"
+				  });
+				  $('body').removeClass('add')
+            })
+            $(".add_ty").click(function() {
+                $(".warp_pws_m_sl").fadeOut();
+				$("body,html").css({
+					"height":"auto%",
+					"overflow":"auto"
+				  });
+				  $('body').removeClass('add')
+            })
+        });
+    </script>
+
+    <!-- 添加图片-添加文字 -->
+    <script type="text/javascript">
+        function addDescription_img() {
+            s = $('.warp_pws_m_su li:last').attr('data-id');
+            var html = '<form class="test_form" action="" method="post" enctype="multipart/form-data">\
+                        <li data-id="' + (parseInt(s) + 1) + '">\
+                            <div class="warp_pws_m_sy">\
+                                <div class="warp_pws_m_sq">\
+                                    <img src="../wap/img/pws_96.jpg" width="100" height="100" id="img' + (parseInt(s) + 1) + '">\
+                                    <input type="file"  onchange="uploadImg(' + (parseInt(s) + 1) + ',this)" name="gg">\
+                                    <input type="hidden"  id="imgsrc' + (parseInt(s) + 1) + '" name="imgsrc">\
+                                </div>\
+                                <i></i>\
+                            </div>\
+                        </li>\
+                    </form>';
+            $('.warp_pws_m_su').append(html);
+        }
+
+        function addDescription_text() {
+            s = $('.warp_pws_m_su li:last').attr('data-id');
+            var html = '<form class="test_form" action="" method="post" enctype="multipart/form-data">\
+                        <li data-id="' + (parseInt(s) + 1) + '">\
+                            <div class="warp_tj_sp">\
+                                <textarea placeholder="请填写您要添加的文字" onblur="setText(this.value,\'imgsrc' + (parseInt(s) + 1) + '\')"></textarea>\
+                                <input type="hidden"  id="imgsrc' + (parseInt(s) + 1) + '" name="imgsrc">\
+                            </div>\
+                        </li>\
+                    </form>'
+            $('.warp_pws_m_su').append(html);
+
+        }
+    </script>
+    <script type="text/javascript">
+        $(".warp_pws_m_sy i").on("click", function() {
+            $(this).parent().parent().remove();
+        });
+    </script>
+    <!-- 上传图片 -->
+    <script type="text/javascript">
+        function uploadImg(i,inpt) {
+            //var form = document.getElementsByClassName("test_form")[i];
+            var thi = inpt; ///获取当前
+            var form = thi.parentNode.parentNode.parentNode.parentNode;
+            var imgdata = new FormData(form);
+            //利用ajax上传
+            jQuery.ajax({
+                type: "POST",
+                url: img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper',
+                data: imgdata,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function(XMLHttpRequest) {
+                   layer.open({type: 2,content: '上传中'});
+                },
+                success: function(data) {
+                    $(".warp_jm").empty();
+                    if(data.errorcode==0){
+                        var src = data.data;
+                        $('#img' + i).attr('src', src);
+                        $('#imgsrc' + i).val('{"img":"' + src + '","demo":""}');
+                    }
+                    layer.closeAll();
+                },
+                error: function(){
+                    layer.closeAll();
+                    layer.open({
+                        content: '上传失败，网络错误',
+                        skin: 'msg',
+                        time: 2
+                    });
+                    return false;
+                }
+            })
+        }
+    </script>
+    <!-- 判断场次是否设置完成 -->
+    <script type="text/javascript">
+        isSetClassVal()
+
+        function isSetClassVal() {
+            classVal = $("#classVal").val();
+            if (classVal) {
+                // $("#firstSelect").unbind();//解绑点击事件
+                // $(".warp_cs").unbind();
+                $(".warp_cs").children('span').html("已设置")
+            }
+        }
+    </script>
+    <!-- 标签确定 -->
+    <script type="text/javascript">
+        //活动标签
+        $(function() {
+            $(".warp_hd_t_bu li").click(function() {
+                $(this).toggleClass('cla');
+            });
+        })
+        $(function() {
+            $(".t_bq").click(function() {
+                $(".warp_hd_t_bo").slideDown();
+            })
+            $(".warp_hd_t_bi a").click(function() {
+                $(".warp_hd_t_bo").slideUp();
+            })
+            $(".warp_hd_t_by").click(function() {
+                $(".warp_hd_t_bo").slideUp();
+            })
+        });
+        //联办单位
+        $(function() {
+            $(".warp_hd_t_bu1 li").click(function() {
+                $(this).toggleClass('cla');
+            });
+        })
+        $(function() {
+            $(".tt_bq").click(function() {
+                $(".warp_hd_t_bo1").slideDown();
+            })
+            $(".warp_hd_t_bi a").click(function() {
+                $(".warp_hd_t_bo1").slideUp();
+            })
+            $(".warp_hd_t_by").click(function() {
+                $(".warp_hd_t_bo1").slideUp();
+            })
+        });
+        //提交
+        $("#tagbtn").click(function() {
+            document.getElementById("aptag").value = "";
+            $(".warp_hd_t_bu .cla span").each(function() {
+                var alltagval = $("#aptag").val();
+                var tagval = $(this).attr("data-id");
+
+                //回显
+                var showall = $(".t_bq").html();
+                var show = $(this).html();
+
+                if (alltagval == '') {
+                    $("#aptag").val(tagval);
+                    //回显
+                    $(".t_bq").html(show)
+                } else {
+                    $("#aptag").val(alltagval + tagval);
+                    //回显
+                    var result = "";
+                    var result_1 = showall + ',' + show;
+                    var result_arr = result_1.split(",");
+                    for (var i = 0; i < 3; i++) {
+                        if (result_arr[i]) {
+                            result = result + ',' + result_arr[i];
+                        }
+                    }
+                    $(".t_bq").html(result.substring(1))
+                }
+            });
+        })
+        $("#companybtn").click(function() {
+            document.getElementById("apcompany").value = "";
+            $(".warp_hd_t_bu1 .cla span").each(function() {
+                var allcomval = $("#apcompany").val();
+                var comval = $(this).attr("data-id");
+
+                //回显
+                var showall = $(".tt_bq").html();
+                var show = $(this).html();
+                if (allcomval == '') {
+                    $("#apcompany").val(comval);
+                    //回显
+                    $(".tt_bq").html(show)
+                } else {
+                    $("#apcompany").val(allcomval + ',' + comval);
+                    //回显
+                    var result = "";
+                    var result_1 = showall + ',' + show;
+                    var result_arr = result_1.split(",");
+                    for (var i = 0; i < 3; i++) {
+                        if (result_arr[i]) {
+                            result = result + ',' + result_arr[i]
+                        }
+                    }
+                    $(".tt_bq").html(result.substring(1))
+                }
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        $("#closeClass").live('click', function() {
+            $(".warp_cp").animate({
+                left: "200%"
+            })
+            $(".warp_cc_p").animate({
+                left: "200%"
+            })
+        })
+    </script>
+    <!-- 总提交 -->
+    <script type="text/javascript">
+        $("#btn").click(function() {
+            activityDemoParamList = [];
+            $("input[name='imgsrc']").each(function() {
+                var imgsrcs = $(this).val()
+                if (imgsrcs) {
+                    activityDemoParamList.push(JSON.parse(imgsrcs))
+                }
+            })
+            //application = "公益上海";
+            address = $("#address").val();
+            contactPhone = $("#contactPhone").val();
+            endDay = $("#endDate").val();
+            lat = $("#lat").val();
+            lng = $("#lng").val();
+            name = $("#name").val();
+            sectionList = JSON.parse("[" + $("#classVal").val() + "]");
+            // activityDemoParamList  = "";
+            activityUniteParamList = JSON.parse("[" + $('#apcompany').val() + "]");
+            startDay = $("#startDate").val();
+            user = "";
+            coverImg = "";
+            if (!name) {
+                layer.open({
+                    content: '标题不能为空!',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false;
+            }
+            if (!startDay || !endDay) {
+                layer.open({
+                    content: '时间未设置!',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false;
+            }
+            classVal = $("#classVal").val();
+            if (!classVal) {
+                layer.open({
+                    content: '场次未设置!',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false;
+            }
+            if (address == "请选择") {
+                layer.open({
+                    content: '地点未设置!',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false;
+            }
+            tag = $("#aptag").val();
+            liban = $('#apcompany').val();
+            if (activityDemoParamList.length != 0) {
+                coverImg = activityDemoParamList[0].img;
+            }
+            var postfile = {
+                //"application": "公益上海",
+                "address": "" + address + "",
+                "contactPhone": "" + contactPhone + "",
+                "coverImg": coverImg,
+                "endDay": "" + endDay + "",
+                "lat": lat,
+                "lng": lng,
+                "name": "" + name + "",
+                "orgCode": prjvorgMsg.orgThirdAccount,
+                "orgName": prjvorgMsg.orgThirdAccountName,
+                "sectionList": sectionList,
+                "activityDemoParamList": activityDemoParamList,
+                "activityUniteParamList": activityUniteParamList,
+                "startDay": "" + startDay + "",
+                "tag": tag,
+                "user": prjvorgMsg.prjvOrgId
+            };
+            // console.log(postfile)
+            $.ajax({
+				xhrFields: {
+				   withCredentials: true
+				},
+                type: "post",
+                url: base_url +"html5/v1/activity/save",
+                data: JSON.stringify(postfile),
+                headers: {
+                    'token': token
+                },
+                dataType: 'json',
+                contentType: "application/json;charset=utf-8",
+                beforeSend: function(XMLHttpRequest) {
+                    $(".warp_jm").html("<div class='warp_jz'><img src='../wap/img/loading.gif' style='width:24px;height:24px; margin:0 auto;display:block;position: absolute;left: 50%;top: 50%;margin: -12px 0 0 -12px'/></div>");
+                },
+                success: function(data) {
+                    $(".warp_jm").empty();
+                    if (data.msg == "success") {
+                        localStorage.setItem("actMsg",JSON.stringify(postfile));
+                        window.location.href = "/act/act_set.html?activityCode=" + data.data.activityCode
+                    } else {
+                        layer.open({
+                            content: data.data.msg,
+                            skin: 'msg',
+                            time: 1
+                        });
+                        return false;
+                    }
+                },
+                error: function(e) {
+                    layer.open({
+                        content: '设置失败',
+                        skin: 'msg',
+                        time: 1
+                    });
+                    return false;
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

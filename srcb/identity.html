@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>申领公益护照</title>
+    <meta name="Keywords" content="公益护照"/>
+    <meta name="description" content="公益护照"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/identity.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/layer.css">
+</head>
+<body>
+<div class="sendHistoryHead">
+    <a class="sendBack" href="javascript:void(0)" onclick="historyLocalStorage();"><i></i><!--<span>返回</span>--></a>
+    <div class="sendHeadList"><span>验证身份</span></div>
+    <!--<div class="sendHeadButton"><button>发送历史</button></div>-->
+</div>
+<div class="identityInputWrap">
+    <div class="left identityName">身份证号</div>
+    <div class="identityInput"><input type="text" id="idCard" placeholder="请输入18(含)-70(不含)周岁的18位身份证号"></div>
+</div>
+<div class="identityInputWrap idName">
+    <div class="left identityName">姓&nbsp;&nbsp;&nbsp;&nbsp;名</div>
+    <div class="identityInput"><input type="text" id="name" placeholder="请输入真实姓名"></div>
+</div>
+
+<div class="sendNextButton" onclick="realNameVerify();">下一步</div>
+<div style="overflow: hidden;padding: 2% 4%;">
+    <!--<span style="font-size: 13px;line-height: 16px;padding: 0px;color: #807d7d">提示：<br>未成年人“公益护照”实体卡的申领，将于2019年11月5日开放，请先完成成年人“公益护照”实体卡的申领，届时可直接申领未成年人“公益护照”实体卡。</span>-->
+    <span style="font-size: 13px;line-height: 16px;padding: 0px;color: #807d7d">提示：<br>如需申领未成年人“公益护照”实体卡，请先填写监护人信息，验证通过后，在下一页面填写未成年人信息。</span>
+</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script>
+    var first = $.getUrlParam("first");
+    var channel = $.getUrlParam("channel");
+    var blankType = $.getUrlParam("blankType");
+    var ifSchool = $.getUrlParam("ifSchool");
+    var schoolCode = $.getUrlParam("schoolCode");
+    var schoolName = $.getUrlParam("schoolName");
+
+    if(schoolName){
+        schoolName = decodeURI(decodeURI(schoolName));
+    }
+    var authorType = 1;
+    $(".idName").hide();
+    if(first==2) {
+        authorType = 2;
+        $("#idCard").val($.getUrlParam("idCard"));
+        $(".idName").show();
+    }
+    function realNameVerify(){
+        var idCard = $("#idCard").val();
+        if(idCard){
+            var json = {"authorType": authorType,"channel": channel, "idCard": idCard};
+            if(schoolName){
+                json.schoolCode = schoolCode;
+                json.schoolName = schoolName;
+            }
+            if(first==2){
+                if($("#name").val()){
+                    json.name = $("#name").val();
+                }else{
+                    layer.open({
+                        content: "请填写真实姓名"
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            }
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: 'post',
+                url: base_url + "/html5/v2/srcb/realNameVerify",
+                data: JSON.stringify(json),
+                dataType: 'json',
+                contentType: "application/json;charset=utf-8",
+                beforeSend: function(XMLHttpRequest) {
+                    layer.open({
+                        content: "查询中，请稍后。。。"
+                        ,skin: 'msg'
+                        ,time: 1000
+                    });
+                },
+                success: function (data) {
+                    layer.closeAll();
+                    if(data.code == 0) {
+                        var data_1 = data.data;
+                        data_1.ifSchool = ifSchool;
+                        data_1.blankType = data.data.blankCardType;
+                        if(schoolName){
+                            data_1.schoolCode = schoolCode;
+                            data_1.schoolName = schoolName;
+                        }
+                        localStorage.setItem('user_bank',JSON.stringify(data_1));
+                        jump("./adults.html");
+                    }else if(data.code == 200) {
+                        var href = "./identity.html?first=2&channel="+channel+"&blankType="+blankType+"&idCard="+idCard;
+                        if(schoolName){
+                            href = href+"&ifSchool="+ifSchool+"&schoolCode="+schoolCode+"&schoolName="+schoolName;
+                        }
+                        jump(href);
+                    }else{
+                        layer.open({
+                            content: data.msg
+                            ,skin: 'msg'
+                            ,time: 3
+                        });
+                    }
+                }
+            })
+        }else{
+            layer.open({
+                content: "请填写身份证号！"
+                ,skin: 'msg'
+                ,time: 3
+            });
+        }
+    }
+
+</script>
+</body>
+</html>

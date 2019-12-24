@@ -1,0 +1,10 @@
+const API_BASE_URL = 'https://news.shcvs.cn';
+const API_BASE_URL_XS = 'https://h5.shcvs.cn/gysh/';
+// const API_BASE_URL = '';
+const API_POST_ADD_STATION = '/cm/platformapi/addReporterStation';
+const API_GET_STATION_LIST = '/cm/platformapi/getReporterStationList';
+const API_GET_REPORTER_BY = '/cm/platformapi/getReporterBy';
+const API_POST_ADD_REPORTER = '/cm/platformapi/addReporter';
+const API_POST_DEL_REPORTER = '/cm/platformapi/delReporter';
+const API_GET_STATION_BY_ID = '/cm/platformapi/getStationById';
+const API_GET_STATION_LIST_BY_THREE_ID = '/cm/platformapi/getStationByThreeId';

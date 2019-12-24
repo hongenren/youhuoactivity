@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+
+    <div class="warp_pws_n_st_bj"></div>
+
+    <nav class="warp_gl_u_sg">
+        <ul>
+            <li class="thisclass">
+                <a href="javascript:void(0)" onclick="getworkList_scroll(10,10)">
+                    <img src="../wap/img/pws_249.png" class="warp_gl_u_sf">
+                    <img src="../wap/img/pws_249_on.png" class="warp_gl_u_sd">
+                    <span>岗位顶岗</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)"  onclick="getworkList_scroll(10,20)">
+                    <img src="../wap/img/pws_250.png" class="warp_gl_u_sf">
+                    <img src="../wap/img/pws_250_on.png" class="warp_gl_u_sd">
+                    <span>任务转接</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)"  onclick="getworkList_scroll(20,10)">
+                    <img src="../wap/img/pws_251.png" class="warp_gl_u_sf">
+                    <img src="../wap/img/pws_251_on.png" class="warp_gl_u_sd">
+                    <span>退出岗位</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)"   onclick="getworkList_scroll(20,20)">
+                    <img src="../wap/img/pws_252.png" class="warp_gl_u_sf">
+                    <img src="../wap/img/pws_252_on.png" class="warp_gl_u_sd">
+                    <span>退出任务</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="warp_pws_n_st_bj"></div>
+    <div class="warp_gl_u_ss">
+        <div class="warp_gl_u_sa">
+            <em></em>
+            <span class="name">岗位顶岗</span>
+        </div>
+        <ul class="warp_gl_u_sm">
+
+        </ul>
+    </div>
+
+</div>
+<script>
+    $(function(){
+        var cotrs = $(".warp_gl_u_sg ul li");
+        cotrs.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    });
+</script>
+<script type="text/javascript">
+    // getworkList(10,10)
+    function getworkList(type,mark,page,size,status=1){
+        if(type==10 && mark==10){
+            $(".name").html("岗位顶岗");
+        }
+        if(type==10 && mark==20){
+            $(".name").html("任务转接");
+        }
+        if(type==20 && mark==10){
+            $(".name").html("退出岗位");
+        }
+        if(type==20 && mark==20){
+            $(".name").html("退出任务");
+        }
+        var sectionCode = $_GET['sectionCode'];
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/userTicket/queryChangeApplyBySection",
+            data:JSON.stringify({"mark":mark,"pageNumber": page,"pageSize":size,"sectionCode":sectionCode,"type":type}),
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                console.log(data);
+                data_index = data.data;
+                html = "";
+                if(status==1){
+                    $(".warp_gl_u_sm").empty()
+                }
+                if(data_index.records.length>0){
+                    $.each(data_index.records,function(index,val){
+                        if(!val.receiverHeadImg){
+                            val.receiverHeadImg = "../wap/img/pws_253.png"
+                        }
+                        html += '<li>\
+                                <a href="./matters_detail.html?ticket='+val.ticket+'&type='+val.type+'">\
+                                    <span>查看详情</span>\
+                                    <img src="'+val.receiverHeadImg+'">\
+                                    <b>'+val.applyNickName+'</b>\
+                                </a>\
+                            </li>'
+                    });
+                    $(".loadings").remove();
+                    $(".warp_gl_u_sm").append(html)
+                }else{
+                    if($(".lastNothing").length>0){
+                        $(".lastNothing").remove();
+                    }
+                    $(".loadings").remove();
+                    if($(".loadings").length<=0){
+                        $(".warp_gl_u_sm").append('<div class="lastNothing" style="font-size:14px;line-height:50px;text-align:center;color:#666;">没有了</div>');
+                    }
+                }
+
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return phone_status;
+            }
+        })
+    }
+    var getworkList_scroll=function(type,mark){
+        var page = 1;//从1
+        var size = 20;
+        var t=0;
+        var p=0;
+        getworkList(type,mark,page,size,1);
+        $(document).unbind('scroll').scroll(function(e){
+            t=$(this).scrollTop();
+            var doc=$(document).height();
+            var win=$(window).height();
+            if(p<=t){//console.log("向下");
+                if(t>doc-(win+60)){
+                    if($(document).height() - $(window).height() == $(window).scrollTop()){
+                        $(".warp_gl_u_sm").append("<img class='loadings' src='../wap/img/loading.gif' style='width:24px;heigth:24px; margin:0 auto;display:block'/>");
+                        page++;
+                        getworkList(type,mark,page,size,2);
+                    }
+
+                }else{
+                    $(".loadings").remove();
+                }
+
+            }
+            setTimeout(function(){p=t},0)
+        });
+    };
+    getworkList_scroll(10,10)
+</script>
+</body>
+</html>

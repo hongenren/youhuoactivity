@@ -1,0 +1,22 @@
+
+.labelWrap{
+    padding:.1rem 0;
+}
+.labelWrap span{
+    padding-right:.1rem;
+    color:#72b81e;
+}
+.subContent{
+    text-align:justify;
+    text-align-last:left;
+}
+.subTaskList{
+    padding-bottom:.2rem;
+    margin-bottom:.2rem;
+    border-bottom:1px solid #eee;
+}
+.subTaskListWrap .subTaskList:last-child{
+    padding-bottom:0;
+    margin-bottom:0;
+    border-bottom:0;
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海" />
+    <meta name="description" content="公益上海" />
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript" src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/mobile.css"/>
+</head>
+<body>
+<div class="resourcesWrap">
+    <div class="map_head">
+        <div class="mapHead_but" onclick="javascript:history.back(-1);"></div>
+        添加公益资源
+    </div>
+    <div class="resourcesTop">
+        第一步：定位公益资源
+        <div class="nearPosition"><i></i>重新定位</div>
+    </div>
+    <div class="resourcesButWrap">
+        <div class="searchBut">
+            <input type="text" placeholder="公益服务促进中心">
+            <i></i>
+        </div>
+    </div>
+    <div class="nearbyListWrap">
+        <div class="nearbyListTxt">1、从周边地址列表选择离您最近的：</div>
+        <div class="nearbyList on">
+            <ul>
+                <li class="nearBut"><span></span></li>
+                <li>通协小区</li>
+                <li class="nearGray">北翟路981弄2号</li>
+            </ul>
+        </div>
+        <div class="nearbyList">
+            <ul>
+                <li class="nearBut"><span></span></li>
+                <li>通协小区</li>
+                <li class="nearGray">北翟路981弄2号</li>
+            </ul>
+        </div>
+        <div class="nearbyList">
+            <ul>
+                <li class="nearBut"><span></span></li>
+                <li>通协小区</li>
+                <li class="nearGray">北翟路981弄2号</li>
+            </ul>
+        </div>
+    </div>
+    <div class="nearbyListWrap on">
+        <div class="nearbyListTxt">2、调整名称或详细地址：</div>
+        <div class="neabyTeam">
+            <h2>地址名称：</h2>
+            <textarea rows="1">请填写</textarea>
+        </div>
+        <div class="neabyTeam">
+            <h2>详细地址：</h2>
+            <div class="nearbyBut">请选择<i></i></div>
+        </div>
+        <div class="neabyTeam">
+            <h2>省：</h2>
+            <div class="nearbyBut" id="province" data="0">请选择<i></i></div>
+        </div>
+        <div class="neabyTeam">
+            <h2>市：</h2>
+            <div class="nearbyBut" id="city" data="">请选择<i></i></div>
+        </div>
+        <div class="neabyTeam">
+            <h2>区县：</h2>
+            <div class="nearbyBut" id="county" data="">请选择<i></i></div>
+        </div>
+        <div class="neabyTeam">
+            <h2>街道/乡镇：</h2>
+            <div class="nearbyBut" id="street" data="">请选择<i></i></div>
+        </div>
+        <div class="neabyTeam">
+            <h2>村/居委：</h2>
+            <div class="nearbyBut" id="village" data="">请选择<i></i></div>
+        </div>
+        <div class="neabyTeam">
+            <h2>路/村：</h2>
+            <textarea id="road" rows="1" onfocus="if(value=='请填写'){value=''}" onblur="if (value ==''){value='请填写'}">请填写</textarea>
+        </div>
+        <div class="neabyTeam">
+            <div class="nearbyFormWrap on clearfix">
+                <div class="nearbyForms"><input id="nong" type="text"><label for="nong">弄</label></div>
+                <div class="nearbyForms right"><input id="num2" type="text"><label for="num2">号</label></div>
+                <div class="nearbyForms right"><input id="num1" type="text"><label for="num1">-</label></div>
+            </div>
+            <div class="nearbyFormWrap clearfix">
+                <div class="nearbyForms">
+                    <select name="" id="">
+                        <option value="">--</option>
+                        <option value="1">一楼</option>
+                        <option value="2">二楼</option>
+                    </select>
+                    <i></i>
+                </div>
+                <div class="nearbyForms right"><input id="shi" type="text"><label for="shi">室</label></div>
+                <div class="nearbyForms right"><input id="zhu" type="text"><label for="zhu">幢</label></div>
+            </div>
+        </div>
+    </div>
+    <div class="nearbyListWrap on">
+        <div class="nearbyMapDetail">
+            <h3>详细地址预览</h3>
+            <p></p>
+        </div>
+    </div>
+    <div class="nearbyListWrap on" style="margin-bottom:0;">
+        <div class="nearbySubmitBut">
+            <button>添加</button>
+        </div>
+    </div>
+</div>
+<div class="areaWrap">
+    <div class="areas">
+        <div class="areaListWrap">
+            <!--<div class="areaList">北京</div>-->
+        </div>
+        <!--<div class="areaIcon"></div>-->
+    </div>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/mobileBase.js"></script>
+<script>
+    $(document).ready(function () {
+    })
+    function regionClick(objId, id, name) {
+        var h2 = $("#"+objId).parent().children("h2:first-child");
+        $("#"+objId).parent().next().children().next().attr("data", id);
+        h2.html(h2.html()+name);
+        $(".areaWrap").hide();
+        var nearbyMapDetailHtml =  $(".nearbyMapDetail").children().next();
+        //nearbyMapDetailHtml.html($("#province").html()+$("#city").html()+$("#county").html()+$("#street").html()+$("#village").html()+$("#road").html());
+    }
+</script>
+</body>
+</html>

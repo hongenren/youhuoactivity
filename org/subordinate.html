@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>下属团体</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/subordinate.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>下属团体</span>
+    </div>
+
+    <ul class="warp_zy_l">
+        <li class="thisclass">
+            <span>待审核</span>
+        </li>
+        <li>
+            <span>已审核通过</span>
+        </li>
+    </ul>
+
+    <ul class="warp_zy_k">
+        <li class="warp_zy_k_sp">
+            <div class="warp_zy_k_so">
+                <b>以下团体申请成为本机构下辖的下属团体</b>
+                <span>可在公益数据功能查看下属团体公益数据</span>
+            </div>
+
+            <ul class="warp_zy_k_si" id="state10">
+               
+            </ul>
+        </li>
+
+        <li class="warp_zy_k_sp" style="display: none">
+            <ul class="warp_zy_k_si" id="state20">
+              
+            </ul>
+        </li>
+    </ul>
+
+    <div class="warp_zy_k_sr">
+        <div class="warp_zy_k_se"></div>
+        <div class="warp_zy_k_sw">
+            <div class="warp_zy_k_sq">
+                <span>变更负责人</span>
+            </div>
+            <table border="1" cellspacing="0" cellpadding="0" class="warp_zy_k_sl">
+                <tr>
+                    <td width="50">
+                        <span>负责人姓名：</span>
+                    </td>
+                    <td>
+                        <input type="text" name="contactName" placeholder="请输入负责人姓名" class="warp_zy_k_sk">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>负责人手机：</span>
+                    </td>
+                    <td>
+                        <input type="text" name="contactMobile" placeholder="请输入负责人手机号" class="warp_zy_k_sk">
+                        <input type="hidden" name="id" value="" id="userid">
+                    </td>
+                </tr>
+                <tr>
+
+                    <td colspan="2">
+                        <input type="button" value="变更" onclick="changeSubOrgContact()" class="warp_zy_k_sj">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    get_sub_org_msg();
+</script>
+</body>
+</html>

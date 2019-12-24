@@ -1,0 +1,103 @@
+
+::-webkit-input-placeholder {color: #999;}:-moz-placeholder {color: #999;}::-moz-placeholder {color: #999;}:-ms-input-placeholder {color: #999;}
+.security_li{
+    width: 74%;
+    float: right;
+    text-align: right;
+    height: auto;
+    word-break: break-all;
+    color: #9d9d9d;
+    font-size: 15px;
+    margin-bottom: 0;
+    line-height: 50px;
+    padding-right: 14px;
+}
+.task_editor_title{
+    font-size:.28rem;
+    line-height:.5rem;
+}
+.task_editor{
+    font-size:.28rem;
+}
+.task_help_txt{
+    padding:.14rem 0;
+    color:#999;
+}
+.task_help_togBtn{
+    display:inline-block;
+    vertical-align:middle;
+    width:.3rem;
+    height:.3rem;
+    background:url("../../wap/img/question_31.png") no-repeat center;
+    background-size:contain;
+}
+.alliance_ul{
+    margin-left:-3%;
+    margin-right:-3%;
+}
+.task_area{
+    width:100%;
+    font-size:.28rem;
+}
+.task_add_sub{
+    padding:.2rem .3rem;
+    background-color:#fff;
+}
+.task_add_subBtn{
+    font-size:.28rem;
+    color:#72b81e;
+    text-align:center;
+}
+.task_add_subBtn i,.task_add_subBtn span{
+    display:inline-block;
+    vertical-align:middle;
+}
+.task_add_subBtn i{
+    width:.24rem;
+    height:.24rem;
+    background:url("../../wap/img/pws_239.png") no-repeat center;
+    background-size:contain;
+    margin-right:.1rem;
+}
+.layui-m-layer-layerTogWrap{
+    padding:.2rem;
+    border-radius:4px!important;
+    background-color:#fff!important;
+}
+
+.removeParent_subBtn{
+    position:absolute;
+    right:3%;
+    bottom:0;
+    font-size:.24rem;
+    line-height:15px;
+    padding-bottom:3px;
+    color:#f03727;
+    display:none;
+}
+.task_help_Wrap{
+    position:fixed;
+    left:0;top:0;right:0;bottom:0;
+    z-index:191119;
+    background-color:rgba(0,0,0,.7);
+    align-items:center;
+    justify-content:center;
+    display:none;
+}
+.task_help_explain_txt{
+    /*position:absolute;*/
+    /*left:15%;*/
+    /*top:20%;*/
+    /*right:15%;*/
+    border-radius:8px;
+    background-color:#fff;
+    padding:.3rem;
+    font-size:.24rem;
+    line-height:.5rem;
+    text-align:justify;
+    text-align-last:left;
+    min-width:40%;
+    max-width:60%;
+    max-height:60%;
+    overflow-y:auto;
+}

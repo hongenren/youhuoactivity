@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" href="../huangye/css/mobile.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/calendar_dan.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/service_day.css"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <div class="warp">
+        <!--头部开始-->
+        <div class="warp_zy_j" style="background: #F2F2F2;">
+            <a href="javascript:void(0)" onclick="jump('./post_management.html')"></a>
+            <span>调整日期</span>
+        </div>
+        <!--头部结束-->
+    </div>
+<body>
+    <div class="swiper-wrapper">
+        <div class="swiper-slide ">
+            <a id="0" href="javascript:void(0)">增加</a>
+        </div>
+        <div class="swiper-slide">
+            <a id="1" href="javascript:void(0)">取消</a>
+        </div>
+        <div class="swiper-slide">
+            <a id="2" href="javascript:void(0)">修改</a>
+        </div>
+    </div>
+    <div id="select_div" class="select_div wth" style="overflow:auto;">
+
+    </div>
+    <div id="change_div" class="change_div" style="">
+        <ul>
+            <li id="title">
+                <div>
+                    请选择要修改的日期，修改后，该天的报名人员会直接调整到新日期
+                </div>
+                <input type="text" value="确定" onclick="openDate();" readonly>
+            </li>
+            <li id="year">
+
+            </li>
+            <li id="days">
+            </li>
+        </ul>
+    </div>
+    <div class="select-time" style="background: #FFFFFF;display: none;">
+        <span class="time entertime" style="color: #9d9d9d;display: none;"></span><!--开始时间-->
+        <input id="serviceDay" type="text" class="input-enter none">
+    </div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="js/date_dan_service_day.js"></script>
+<script type="text/javascript" src="./js/service_day.js"></script>
+<script type="text/javascript">
+    var pkPostCode = $.getUrlParam("pkPostCode"), type = $.getUrlParam("type"), dayListStr = "";
+    $("#0").attr("href", "./service_day.html?type=0&pkPostCode="+pkPostCode);
+    $("#1").attr("href", "./service_day.html?type=1&pkPostCode="+pkPostCode);
+    $("#2").attr("href", "./service_day.html?type=2&pkPostCode="+pkPostCode);
+    if(type==0){
+        $("#0").css("background", "#72B81E");
+        $("#0").css("color", "#ffffff");
+    }else if(type==1){
+        $("#1").css("background", "#72B81E");
+        $("#1").css("color", "#ffffff");
+    }else if(type==2){
+        $("#2").css("background", "#72B81E");
+        $("#2").css("color", "#ffffff");
+    }
+</script>
+</html>

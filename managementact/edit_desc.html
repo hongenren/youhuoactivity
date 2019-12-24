@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+    <ul class="warp_gl_q_sk">
+        <li class="warp_gl_q_sj">
+            <div class="warp_gl_q_sh">
+                <select>
+                    <option class="workcount">0个</option>
+                </select>
+                <div class="warp_gl_q_sg">
+                    <b>岗位</b>
+                    <span>按实际服务时长计算</span>
+                </div>
+            </div>
+            <ul class="warp_gl_q_sf" id='work'>
+              
+            </ul>
+        </li>
+        <li class="warp_gl_q_sj">
+            <div class="warp_gl_q_sh">
+                <select>
+                    <option class="taskcount">0个</option>
+                </select>
+                <div class="warp_gl_q_sg">
+                    <b>任务</b>
+                    <span>按次计算服务时长</span>
+                </div>
+            </div>
+            <ul class="warp_gl_q_sf" id='task'>
+                
+            </ul>
+        </li>
+    </ul>
+
+    <ul class="warp_gl_q_sk" id="dan">
+       
+    </ul>
+</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/managementact/edit_desc.js"></script>
+<script type="text/javascript">
+    var sectionCode = $_GET['sectionCode'];
+    //获取岗位描述
+    get_activity_query('work',sectionCode,'edit_work.html','#work');
+    get_activity_query('task',sectionCode,'edit_task.html','#task');
+    get_activity_query_msg('ticket',sectionCode,'./edit_ticket.html');
+    get_activity_query_msg('manage',sectionCode,'./edit_manage.html');
+    get_activity_query_msg('guestcard',sectionCode,'./edit_guestcard.html');
+    get_activity_query_msg('mediacard',sectionCode,'./edit_mediacard.html');
+</script>
+</body>
+</html>

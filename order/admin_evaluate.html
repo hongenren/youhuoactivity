@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/more-starts.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/js/order/admin_evaluate.js"></script>
+	<style>
+	.mect_sc{width: 20px;height: 20px;background: url(../wap/img/pws_121.png) no-repeat center;background-size: 100% 100%;position: absolute;right: 0;top: 0;z-index: 999999}
+	</style>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+	
+    <div class="warp_ms_y_sp">
+        <div class="BOX">
+            <div id="star" class="">
+                <span style="color: #000000">打分：</span>
+                <ul class="star_UL" sid="0">
+                    <li><a href="javascript:;">1</a></li>
+                    <li><a href="javascript:;">2</a></li>
+                    <li><a href="javascript:;">3</a></li>
+                    <li><a href="javascript:;">4</a></li>
+                    <li><a href="javascript:;">5</a></li>
+                </ul>
+                <span  class="star_result_span">
+                    <a></a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <textarea placeholder="请输入您的评价" class="warp_ms_y_so"></textarea>
+    <div class="warp_pws_n_st_bj"></div>
+    <div class="warp_ms_y_si">
+        <div class="warp_ms_y_su">
+            <b>添加照片</b>
+            <span>（您最多可以上传9张）</span>
+        </div>
+        <ul class="warp_sm_u_sp">
+            <li>
+                <div class="warp_sm_u_se">
+                    <div class="warp_sm_u_sw" data-id="0" style="overflow: visible;">
+                        <form class="test_form" action="" method="post" enctype="multipart/form-data">
+                            <input name="orgCertCodeImg1" type="file" onchange="uploadImg(0,this)" style="display: none;"/>
+                            <input type="hidden"  id="imgsrc0" name="imgsrc">
+                        </form>
+                        <img src="../wap/img/pws_175.jpg" id="img0" onclick="openFile(this);">
+                    </div>
+                    <!--<div class="warp_sm_u_sw">-->
+                    <!--<img src="wap/img/pws_175.jpg">-->
+                    <!--</div>-->
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="ht70"></div>
+    <footer class="warp_pws_m_sw">
+        <input type="button" value="发布评价" onclick="sub_task_msg()">
+    </footer>
+</div>
+</body>
+</html>

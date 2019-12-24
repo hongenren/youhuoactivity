@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/postActivity.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css" />
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+<div id="postActivity">
+    <header class="mint-header">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">发布活动</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="lc-tip row">
+        <span class="block"></span>
+        <span>活动信息<span class="shallow">（必填）</span></span>
+    </div>
+    <a class="yh-group-cell" href="./activityinfo.html">
+        <span v-if="title">{{title}}</span>
+        <span v-else>设置活动信息</span>
+        <div class="r"><span v-if="!title">请设置</span>
+            <i></i>
+        </div>
+    </a>
+    <div class="lc-tip row">
+        <span class="block"></span>
+        <span>票证信息<span class="shallow">（仅供发放票证使用，没有票证无需设置）</span></span>
+    </div>
+    <div class="moredata">如需设置多日期票证，发布成功后，请到活动管理页面再添加</div>
+    <div class="periodbox">
+        <div :class="{shade: Ishade}"></div>
+        <div class="yh-group-cell">
+            <span>票证日期</span>
+            <div class="r">
+                <input type="text" placeholder="请选择" name="postime" class="post_time">
+                <i></i>
+            </div>
+        </div>
+        <div class="newperiod" v-for="(item, index) in periodList" :key="item">
+            <div class="periodtop">
+                <span class="fl" @click="addperiod(item.id +1)" v-if="index == 0"><span style="font-size:20px;"> + </span> <span>添加新场次</span></span>
+                <span class="fr"><span style="color: #73B81F;padding-right: 10px;">复制</span><span @click="delperiod(index)" style="color:#F0676C;">删除</span></span>
+            </div>
+            <div class="periodinfo">
+                <div class="periodtime">
+                    <span><input type="text" placeholder="设置场次开始时间" :class='"start_time"+item.id'></span>
+                    <span><input type="text" placeholder="设置场次结束时间" :class='"end_time"+item.id'></span>
+                </div>
+                <a class="yh-group whitmg" @click="goticketinformation(item.id)">
+                    <span class="l">设置该场次下的票证信息{{item.id}}</span>
+                    <span><span v-if='sessionStorage.getItem("sectionCode" + item.id)' style="color: #73B81F;">已设置</span><i class="iconfont icon-icon_you"></i></span>
+                </a>
+                <a @click="gosetadministrator(item.id)">
+                    <div class="yh-group" style="background: #fff;border:none;">
+                        <span class="l">设置该场次下的票证核销管理员</span>
+                        <span><span v-if='sessionStorage.getItem("adminsectionCode" + item.id)' style="color: #73B81F;">已设置</span><i class="iconfont icon-icon_you"></i></span>
+                    </div>
+                    <div class="hintinfo">TA拥有2个权限：1、可通过管理功能的“扫一扫”，去核销本场次活动的票证 2、可增加临时管理员（TA只有可核销本场次活动的票证的权限）</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="hintsubmit">提示：场次信息如未设置完整，该场次默认不提交。</div>
+    <a href="./activitydetail.html">activitydetail</a>
+    <button class="submit-btn-tint" @click="submit">发布活动</button>
+</div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#postActivity',
+    data () {
+        return {
+            title: null,
+            startime: null,
+            number: 0,
+            Ishade: true,
+            addFrom: {
+                activityCode: sessionStorage.getItem('activityCode'),
+            },
+            periodList: [{
+                id: 0,
+                sectionCode: null,
+                startTime: null,
+                endTime: null
+            }]
+        };
+    },
+    mounted() {
+        this.title = sessionStorage.getItem('name');
+        sessionStorage.getItem('activityCode') && (this.Ishade = false);
+        this.init('0');
+        $("input[name='postime']").val(sessionStorage.getItem('postime'));
+        sessionStorage.getItem('periodList') && (this.periodList = JSON.parse(sessionStorage.getItem('periodList')));
+        for (let i = 0; i < this.periodList.length; i++) {
+            this.$nextTick(()=>{
+                this.init(i);
+                $('.start_time'+i).val(sessionStorage.getItem('.start_time'+i));
+                $('.end_time'+i).val(sessionStorage.getItem('.end_time'+i));
+                this.periodList[i].sectionCode = sessionStorage.getItem('sectionCode' + i);
+            })
+        }
+    },
+    methods: {
+        init (index) {
+            console.log(index);
+            var that  = this;
+            var theme = "ios";
+            var mode = "scroller";
+            var display = "bottom";
+            var lang="zh";
+            var currYear = (new Date()).getFullYear();
+            $('.post_time').mobiscroll().date({
+                theme: theme,
+                mode: mode,
+                display: display,
+                lang: lang,
+                //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
+                //dateFormat:"yy-mm-dd",
+                dateFormat: 'yy-mm-dd',
+                dayText:'日',
+                monthText:'月',
+                yearText:'年', //面板中年月日文字
+                onSelect: function (valueText, inst) {//选择时事件（点击确定后），valueText 为选择的时间，
+                    sessionStorage.setItem('postime', valueText);
+                    var array = valueText.split('-');
+                    var selectedDate = array[0] + "年" + array[1] + "月" + array[2] + "日";
+                    sessionStorage.setItem('postimeshow', selectedDate);
+                },
+                startYear: currYear,
+                endYear: currYear +30,
+                stepMinute: 1,
+                showNow: true
+            });
+            $('.start_time'+index).mobiscroll().time({
+                theme: theme,
+                mode: mode,
+                display: display,
+                lang: lang,
+                //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
+                //dateFormat:"yy-mm-dd",
+                timeFormat: 'HH:ii',
+                onSelect: function (valueText, inst) {//选择时事件（点击确定后），valueText 为选择的时间，
+                    var selectedStartime = valueText;
+                    console.log(index);
+                    that.periodList[index].startTime = valueText;
+                    sessionStorage.setItem('.start_time'+index, selectedStartime);
+                },
+                startYear: currYear,
+                endYear: currYear +30,
+                stepMinute: 1,
+                showNow: true
+            });
+            $('.end_time'+ index).mobiscroll().time({
+                theme: theme,
+                mode: mode,
+                display: display,
+                lang: lang,
+                //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
+                //dateFormat:"yy-mm-dd",
+                timeFormat: 'HH:ii',
+                onSelect: function (valueText, inst) {//选择时事件（点击确定后），valueText 为选择的时间，
+                    var selectedEndtime = valueText;
+                    that.periodList[index].endTime = valueText;
+                    sessionStorage.setItem('.end_time'+index, selectedEndtime);
+                },
+                startYear: currYear,
+                endYear: currYear +30,
+                stepMinute: 1,
+                showNow: true
+            });
+        },
+        // 删除场次
+        delperiod (index) {
+            console.log(index);
+            this.periodList.splice(index,1);
+        },
+        // 添加新场次
+        addperiod (index) {
+            this.number++
+            this.periodList.unshift({
+                sectionCode: null,
+                startTime: null,
+                endTime: null,
+                id: this.number
+            });
+            this.$nextTick(()=>{
+                this.init(index);
+            })
+        },
+        // 去票证
+        goticketinformation (id) {
+            window.location.href="./ticketinformation.html?id=" + id + "&sectionCode=sectionCode" + id;
+            sessionStorage.setItem('periodList', JSON.stringify(this.periodList));
+        },
+        // 去管理员
+        gosetadministrator (id) {
+            window.location.href="./setadministrator.html?adminid=" + id + "&sectionCode=adminsectionCode" +  id;
+            sessionStorage.setItem('periodList', JSON.stringify(this.periodList));
+        },
+        // 提交
+        submit () {
+            this.addFrom.periodList = this.periodList;
+            var that = this;
+            $.ajax({
+                url: base_url + '/html5/v2/activity/publish',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.addFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        console.log(resp.data);
+                    } else {
+                        layer.open({
+                            content: resp.msg,
+                            skin: 'msg',
+                            time: 1
+                        });
+                    }
+                }
+            });
+            console.log(this.periodList);
+        }
+    }
+
+})
+</script>
+</html>

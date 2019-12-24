@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>认证渠道</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+
+	<div class="warp_zy_j">
+		<a href="javascript:history.go(-1);"></a>
+		<span>认证渠道</span>
+	</div>
+
+    <ul class="warp_sm_p_se">
+        <li>
+            <a href="../cert/idcard_cert.html" style="background: url(../wap/img/pws_200.png) no-repeat left center;background-size: 18px 18px">身份证认证</a>
+        </li>
+        <!--<li class="current">-->
+            <!--<a href="javascript:void(0)" style="background: url(../wap/img/pws_201.png) no-repeat left center;background-size: 18px 18px">公案eID认证</a>-->
+        <!--</li>-->
+        <!--<li class="current">-->
+            <!--<a href="javascript:void(0)" style="background: url(../wap/img/pws_202.png) no-repeat left center;background-size: 18px 18px">人脸识别认证</a>-->
+        <!--</li>-->
+        <!--<li class="current">-->
+            <!--<a href="javascript:void(0)" style="background: url(../wap/img/pws_325.png) no-repeat left center;background-size: 18px 18px">信用上海认证</a>-->
+        <!--</li>-->
+        <!--<li class="current">-->
+            <!--<a href="javascript:void(0)" style="background: url(../wap/img/pws_204.png) no-repeat left center;background-size: 18px 18px">工会卡认证</a>-->
+        <!--</li>-->
+    </ul>
+    <div style="margin-top: 10px;"><span style="color: #7b7b7b">当前系统仅支持身份证认证，其他认证方式敬请期待</span></div>
+    <div class="warp_sm_p_sw" style="display: none">
+        <div class="warp_sm_p_sq"></div>
+        <div class="warp_sm_p_sl">
+            <img src="../wap/img/pws_205.png">
+            <span>当前系统仅支持身份证认证，其他认证方式敬请期待</span>
+            <b>确认</b>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $(function(){
+        $(".warp_sm_p_se .current").live("click",function(){
+            $(".warp_sm_p_sw").fadeIn();
+			$("body,html").css({
+					"height":"100%",
+					"overflow":"hidden"
+				  });
+        });
+        $(".warp_sm_p_sl b").on("click",function(){
+            $(".warp_sm_p_sw").fadeOut();
+			$("body,html").css({
+					"height":"auto",
+					"overflow":"auto"
+				  });
+        });
+    })
+</script>

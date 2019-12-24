@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海-个人中心</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+	<style>
+	.warp_pws_w{position: relative}
+	.warp_pws_w_aa{height: auto;display: block;overflow: hidden}
+	.warp_pws_w_si b{display: block;background: url(../wap/img/pws_62.png) no-repeat right center;background-size: 14px 14px;float: left;color: #FFFFFF;text-indent: -9999em;overflow: hidden;margin: 0;padding: 0}
+	.warp_pws_w_su b{font-weight: normal;height: 22px;line-height: 21px;text-align: center;color: #FFFFFF;padding: 0 6px;display: inline-block;float: left;border: 1px solid #609521;background: url(../wap/img/pws_46.png);background-size: 100% 100%;}
+	.warp_pws_w_su span.current i{background: url(../wap/img/pws_322.png);background-size: 100% 100%;}
+	.warp_sm_p{position: absolute;left: 52%;top: 50px;font-weight: normal;height: 22px;line-height: 21px;text-align: center;color: #FFFFFF;padding: 0 6px;display: inline-block;float: left;border: 1px solid #609521;background: url(../wap/img/pws_46.png);background-size: 100% 100%}
+	.warp_sm_p i{display: none}
+	.warp_sm_p_on{position: absolute;left: 52%;top: 50px;font-weight: normal;height: 22px;line-height: 21px;text-align: center;color: #FFFFFF;padding: 0 6px;display: inline-block;float: left;border: 1px solid #609521;background: url(../wap/img/pws_46.png);background-size: 100% 100%}
+	.warp_sm_p_on i{display: inline-block;;width: 13px;height: 15px;background: url(../wap/img/pws_323.png) no-repeat;background-size: 100% 100%;margin-right: 5px;position: relative;top: 2px}
+	</style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+
+    <div class="warp_pws_w">
+        <a href="./user_msg.html" class="warp_pws_w_aa">
+			<form class='headimg' method="post" enctype="multipart/form-data">
+			<div class="warp_pws_w_sp">
+				<img src="../wap/img/pws_244.png" id="img">
+				<input type="file" onchange="uploadImg()" name="img">
+			</div>
+			</form>
+			<div class="warp_pws_w_so">
+				<div class="warp_pws_w_si">
+					<span></span>
+					<b>设置名称</b>
+				</div>
+				<div class="warp_pws_w_su">
+					<span><i></i>未实名</span>
+				</div>
+			</div>
+			<span class="warp_pws_w_sy"></span>
+		</a>
+        <div id='warp_sm_p'>
+            <!--../cert/cert_index.html-->
+		<a href="javascript:void(0)" onclick="jumpBank('web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=')" class="warp_sm_p"><i></i>立即实名</a>
+        </div>
+    </div>
+    <div class="warp_pws_w_so_1">
+    </div>
+    <!--<div class="warp_pws_w_st">
+        <div class="warp_pws_w_sr" style="left: 5%">
+            <b>LV1</b>
+            <span>0</span>
+        </div>
+        <div class="warp_pws_w_se">
+            <div class="warp_pws_w_sw current_bj" style="left: 0;"></div>&lt;!&ndash;变色追加一个class="current_bj"&ndash;&gt;
+            <div class="warp_pws_w_sl">
+                <span style="width: 0%"></span>
+            </div>
+            <div class="warp_pws_w_sw" style="right: 0;"></div>
+        </div>
+        <div class="warp_pws_w_sr" style="right: 5%">
+            <b>LV2</b>
+            <span>600</span>
+        </div>
+    </div>
+    <ul class="warp_pws_q">
+        <li>
+            <b>0</b>
+            <span>成长值</span>
+        </li>
+        <li>
+            <b>1</b>
+            <span>VIP+</span>
+        </li>
+    </ul>-->
+    <ul class="warp_pws_l" style="padding-top: 5px;padding-bottom: 5px;">
+        <li>
+            <a href="javascript:void(0)">
+                <span id="readNums">0</span>
+                <b>阅读量</b>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <span id="watchNums">0</span>
+                <b>关注</b>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <span id="beWatchNums">0</span>
+                <b>粉丝</b>
+            </a>
+        </li>
+    </ul>
+    <ul class="warp_pws_k">
+        <li>
+            <a href="javascript:void(0)" style="height: 68px;">
+                <img src="../wap/img/pws_49.png" class="warp_pws_k_tp">
+                <div class="warp_pws_k_sp">
+                    <b>志愿服务时间</b>
+                    <span id="times">0</span>
+                    <!--<b><i>证书申请</i></b>-->
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" style="height: 68px;">
+                <img src="../wap/img/pws_50.png" class="warp_pws_k_tp">
+                <div class="warp_pws_k_sp">
+                    <b>星级</b>
+                    <div class="warp_pws_k_so" id="stars">
+                    </div>
+                    <b><i>按民政标准</i></b>
+                </div>
+            </a>
+        </li>
+        <li>
+                <a href="javascript:void(0)" onclick="jumpCheck('http://h5.shcvs.cn/gysh/html5/v1/shcredit/authorize/SH001/1',0)" style="height: 68px;">
+                <img src="../wap/img/pws_51.png" class="warp_pws_k_tp">
+                <div class="warp_pws_k_sp">
+                    <b>公益信用</b>
+                    <span id="creditValue"></span>
+                    <b><i>由信用上海提供</i></b>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" style="height: 68px;">
+                <img src="../wap/img/pws_52.png" class="warp_pws_k_tp">
+                <div class="warp_pws_k_sp">
+                    <b>积分余额</b>
+                    <span id="freeAmount">0</span>
+                </div>
+            </a>
+        </li>
+    </ul>
+    <nav>
+        <ul class="warp_pws_j">
+            <!--<li>
+                <a href="./homemember_list.html">
+                    <img src="../wap/img/pws_55.png">
+                    <span>家庭账户</span>
+                </a>
+            </li>-->
+            <li><!--
+                <a href="./temporary_passport.html">-->
+                <!--<a href="../passport/#/myLicense">-->
+                <a href="javascript:void(0)" onclick="getPassportType();">
+                    <img src="../wap/img/pws_56.png">
+                    <span>我的证照</span>
+                </a>
+            </li>
+           <!--  <li>
+                <a href="javascript:void(0)">
+                    <img src="../wap/img/pws_57.png">
+                    <span>卡劵</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)">
+                    <img src="../wap/img/pws_58.png">
+                    <span>公益足迹</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)">
+                    <img src="../wap/img/pws_59.png">
+                    <span>公益荣誉</span>
+                </a>
+            </li> -->
+            <li>
+                <a href="../post/evaluate_list_user.html">
+                    <img src="../wap/img/pws_60.png">
+                    <span>我的评价</span>
+                </a>
+            </li>
+            <li>
+                <a href="./user_org.html">
+                    <img src="../wap/img/jiaru.png" style="height: 34px;padding-top: 8px;padding-left: 2%;">
+                    <span>我加入的机构</span>
+                </a>
+            </li>
+            <li>
+                <a href="./user_setup.html">
+                    <img src="../wap/img/pws_61.png">
+                    <span>设置</span>
+                </a>
+            </li>
+            <li>
+                <a href="./user_management_org.html">
+                    <img src="../wap/img/guanli.png" style="height: 34px;padding-top: 8px;padding-left: 2%;">
+                    <span>管理机构</span>
+                </a>
+            </li>
+            <!-- <li>
+                <a href="/managementact/managementact_list.html">
+                    <img src="../wap/img/pws_61.png">
+                    <span>活动管理</span>
+                </a>
+            </li> -->
+        </ul>
+    </nav>
+
+    <!------底部开始------>
+    <div id='footer'></div>
+    <!------底部结束------>
+
+	<!--返回顶部开始-->
+	<!--<div class="tz_ym_p">
+		<a href="javascript:goTop();" class="gotop" >
+			<img src="../wap/img/tz_ym_1.png">
+		</a>
+		<a href="javascript:history.go(-1);">
+			<img src="../wap/img/tz_ym_2.png">
+		</a>
+	</div>
+	<style>
+	.tz_ym_p{width: 30px;overflow: hidden;position: fixed;right: 3%;bottom: 65px}
+	.tz_ym_p a{display: block;width: 30px;height: 30px;margin-bottom: 15px}
+	.tz_ym_p a img{width: 30px;height: 30px}
+	</style>
+	<script>
+		function goTop(){
+			$('html,body').animate({'scrollTop':0},600);
+		}
+	</script>
+	<div style="width: 30px;height: 30px;position: fixed;right: 0;top: 60%;z-index: 9999999999"></div>-->
+	<!--返回顶部结束-->
+
+</div>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script>
+    function getPassportType(){
+        var un = getCookie("un");
+        if (/^[^a-zA-Z]/g.test(un)) {
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: 'post',
+                url: base_url + "/html5/v1/license/queryLicenseExtraCardByPersonFirstAccount",
+                data: JSON.stringify({"personFirstAccount": un}),
+                dataType: 'json',
+                headers: {'token': token},
+                contentType: "application/json;charset=utf-8",
+                beforeSend: function (XMLHttpRequest) {
+
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+                        if(data.data.licenseType==1){
+                            jump("../srcb/passport.html");
+                        }else{
+                            jump("../srcb/temporary_passport.html");
+                        }
+                    }
+                }
+            })
+        }
+    }
+    function jumpCheck(herf, type){
+        var user_msg = $.cookie('user_msg');
+        var token = $.cookie('token');
+        if(user_msg==undefined || token==undefined || user_msg=="" || token==""){
+            layer.open({
+                content: '请先登录'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    $(location).attr("href", '../login/login.html?jumpAdd='+location.href);
+                }
+            });
+        }else{
+            var un = $.cookie("un");
+            if(un==null || un==undefined || un==""){
+                layer.open({
+                    content: '请先完成实名认证'
+                    , btn: ['确定', '取消']
+                    , yes: function (index) {
+                        //jump("../cert/cert_index.html");
+                        jumpBank('web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=');
+                    }
+                });
+            }else{
+                var appUserInfoStr = localStorage.getItem('appUserInfo');
+                if(appUserInfoStr){
+                    var appUserInfo = JSON.parse(appUserInfoStr); //转为JSON对象
+                    if(appUserInfo.relUserId!=""){
+                        layer.open({
+                            content: '家庭子账户，暂无该功能。'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                        return;
+                    }
+                }
+                if(type==0){
+                    herf += "/"+un;
+                }
+                $(location).attr("href", herf);
+            }
+        }
+    }
+    get_user_msg();
+    function get_user_msg(){
+    $.ajax({
+		xhrFields: {
+		   withCredentials: true
+		},
+        type:"post",
+        url:base_url + "html5/v1/user/center",
+        data:JSON.stringify({"userId":user_msg.userId}),
+        headers : {'token':token},
+        dataType:'json',
+        contentType: "application/json;charset=utf-8",
+        success:function(data){
+            console.log(data);
+            if(data.code==0){
+                var data1 = data.data;
+                if(data1.userHeadImg!=''){
+                	$('#img').attr('src',data1.userHeadImg+"?x-oss-process=image/circle,r_4000");
+                }
+           		if(data1.userNo==""){
+                    var html = '<span><i></i>未实名</span>';
+                    <!--../cert/cert_index.html-->
+                    var html2 = '<a href="../cert/cert_index.html" class="warp_sm_p"><i></i>立即实名</a>';
+                }else{
+                    var html = '<span class="current"><i></i>已实名</span>';
+                    if(data1.passportStatus){
+                        if(data1.passportStatus=="待领取" || data1.passportStatus=="待激活" || data1.passportStatus=="未激活"){
+                            var html2 = '<a href="javascript:void(0)" class="warp_sm_p_on" style="border: 0px;background: none;line-height: 24px;">'+data1.passportStatus+'</a>';
+                        }else{
+                            var html2 = '<a href="javascript:void(0)" class="warp_sm_p_on"><i></i>'+data1.passportStatus+'</a>';
+                        }
+                    }else{
+                        var html2 = '';
+                    }
+                }
+                $(".warp_pws_w_su").html(html);
+                $("#warp_sm_p").html(html2);
+                $('.warp_pws_w_si span').html(data1.userNickName);
+
+                $("#times").html(ChangeHourMinutestr(data1.times));//公益时间
+                $("#freeAmount").html(data1.integral);//积分
+                var creditValue = data1.creditValue;
+                if(1==creditValue){
+                    $("#creditValue").html("极好");//公益信用
+                }else if(2==creditValue){
+                    $("#creditValue").html("好");//公益信用
+                }else if(3==creditValue){
+                    $("#creditValue").html("较好");//公益信用
+                }else if(4==creditValue){
+                    $("#creditValue").html("一般");//公益信用
+                }else if(5==creditValue){
+                    $("#creditValue").html("较差");//公益信用
+                }else{
+                    $("#creditValue").html("");//公益信用
+                }
+                var star = "";
+                for(var i=0;i<data1.stars;i++){
+                    star += "<img src=\"../wap/img/pws_53.png\">";
+                }
+                $("#stars").html(star);
+            }else if(data.code==-100){
+                window.location.href = "../login/intercept.html";
+            }else{
+                layer.open({
+                content: '获取失败'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+                });
+            }
+
+        },
+        error:function(){
+            layer.open({
+                content: '获取失败'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+        }
+    });
+
+    //阅读量
+    $.ajax({
+        url: news_base_url+'/cm/platformapi/getReadNums?forId='+user_msg.userId+'&forLevel=',
+        //url: '/cm/termapi/geArticletListByMy',
+        type: "get",
+        success: function (resp) {
+            if(resp.success==1){
+                $("#readNums").html(resp.data);
+            }
+        }
+    });
+    //关注
+    $.ajax({
+        url: news_base_url+'/cm/termapi/getAllWatchNums?uid='+user_msg.userId,
+        //url: '/cm/termapi/geArticletListByMy',
+        type: "get",
+        success: function (resp) {
+            if(resp.success==1){
+                $("#watchNums").html(resp.data);
+            }
+        }
+    });
+    //粉丝
+    $.ajax({
+        url: news_base_url+'/cm/termapi/getAllBeWatchNums?uid='+user_msg.userId,
+        //url: '/cm/termapi/geArticletListByMy',
+        type: "get",
+        success: function (resp) {
+            if(resp.success==1){
+                $("#beWatchNums").html(resp.data);
+            }
+        }
+    });
+}
+    // $('#img').attr('src',msg.userHeadImg);
+    // console.log(msg);
+    $("#footer").load("../public/footer.html");
+
+    var userOrgTags = JSON.parse($.cookie('userOrgTags'));
+    var imgSrc = "";
+    for(var i in userOrgTags){
+        if("GYSH"!=userOrgTags[i].tagCode){
+            if(userOrgTags[i].tagCode=="SHCREDIT" || userOrgTags[i].tagCode=="SHGQT" || userOrgTags[i].tagCode=="SHHH" || userOrgTags[i].tagCode=="DANGYUAN"
+                || userOrgTags[i].tagCode=="SHSGW" || userOrgTags[i].tagCode=="SHSQW" || userOrgTags[i].tagCode=="TUANYUAN"){
+                imgSrc += '<img src="../wap/img/'+userOrgTags[i].tagCode+'.jpg"/>';
+            }
+        }
+    }
+    $(".warp_pws_w_so_1").html(imgSrc);
+</script>
+<script type="text/javascript">
+    //头像上传到云 -=
+    function uploadImg() {
+        var form = document.getElementsByClassName("headimg")[0];
+
+        var imgdata = new FormData(form);
+
+        //利用ajax上传
+        jQuery.ajax({
+            type: "POST",
+            url:img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper',
+            data: imgdata,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend:function(XMLHttpRequest){
+                layer.open({type: 2,content: '上传中'});
+            },
+            success: function (data) {
+                var src = data.data;
+                console.log(src);
+                if(src){
+                    if(upload_headimg(src)){
+                        $('#img').attr('src',src+"?x-oss-process=image/circle,r_4000");
+                        $('cookie')
+                        $('#img').attr('src',src+"?x-oss-process=image/circle,r_4000");
+                        layer.closeAll();
+                        layer.open({
+                        content: '上传成功'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                        });
+                    }else{
+                        layer.open({
+                        content: '上传失败'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                        });
+                    }
+                }else{
+                    layer.open({
+                    content: '上传失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

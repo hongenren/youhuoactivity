@@ -1,0 +1,103 @@
+#activitydetail {
+    padding-bottom: 5rem;
+    font-size: 14px;
+    color: #101010;
+}
+.activitypic{
+    position: relative;
+    width: 100%;
+    height: 8rem;
+}
+.activitypic img{
+    width: 100%;
+    height: 8rem;
+}
+.activitypic .pictext{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    opacity: 0.5;
+    background-color: rgba(15, 15, 15, 1);
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+    font-size: 16px;
+}
+
+.activitime{
+    padding: 0.4rem 0.7rem 0.4rem 0.7rem;
+}
+.activitime p{
+    padding: 0.2rem;
+}
+.activitmark{
+    padding: 0.4rem 0.7rem 0.4rem 0.7rem;
+    height: 10px;
+    overflow: hidden;
+}
+.zhankai{
+    padding-right: 10px;
+    color: #F0676C;
+    text-align: right;
+}
+.yh-group{
+    color: #101010;
+    font-weight: bold;
+    border-bottom: none;
+    padding-bottom: 0.5rem;
+}
+.yh-group .l{
+    font-size: 14px;
+}
+.unitename{
+    width: 70%;
+    padding-top: 0.6rem;
+    color: rgba(16, 16, 16, 1);
+    font-size: 16px;
+    position: relative;
+}
+.unitename .iconfont{
+    position: absolute;
+    right: -1rem;
+    top: 46%;
+    font-size: 20px;
+}
+.unitename p{
+    padding: 0.1rem 0;
+}
+.unitedanwei{
+    font-size: 14px;
+    color: #828282;
+}
+.uniteimg{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin: 0.5rem;
+    background: red;
+    overflow: hidden;
+}
+.uniteimg img{
+    width: 100%;
+    height: 100%;
+}
+.affiliationx{
+    padding: 0 0 0.2rem 0.5rem;
+}
+.affiliationx .companyname{
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 0.6rem;
+}
+.companyname p:first-child{
+    padding: 0.4rem 0;
+    color: #101010;
+}
+.companyname p:nth-child(2){
+    color: #828282;
+}
+.affiliationx img{
+    width: 7rem;
+    height: 4.3rem;
+}

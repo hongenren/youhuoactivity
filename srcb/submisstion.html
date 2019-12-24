@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益护照</title>
+    <meta name="Keywords" content="公益护照"/>
+    <meta name="description" content="公益护照"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/identity.css">
+</head>
+<body>
+<div class="sendHistoryHead">
+    <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+    <div class="sendHeadList"><span>申领公益护照</span></div>
+    <!--<div class="sendHeadButton"><button>发送历史</button></div>-->
+</div>
+<div class="addResseeContent">
+    <div class="subTextTop">
+        <p class="subTextNotes"></p>
+        <h1>数据提交成功</h1>
+    </div>
+    <div class="addResseeWarn" style="font-size: 0.24rem">
+        <div class="applyTop">温馨提示</div>
+        <div class="applyList"><span>1.</span>请到【我的】&minus;>【我的证照】查看公益护照详情。</div>
+        <div class="applyList"><span><strong style="color:#000;">2.</strong></span><strong style="color:#000;">未成年人使用“公益上海”公共服务平台，可以直接在【设置&minus;>账户切换】中选择要使用的账户或直接使用申领时的身份证件号码登录。</strong></div>
+        <div class="applyList"><span>3.</span>我们将在<strong style="color:#000;">10个工作日内寄出</strong>“公益护照”实体卡到您填写的地址，如果过期未收到，可联系上海农商银行咨询（电话：962999）。</div>
+        <div class="applyList"><span>4.</span>自申领成功“公益护照”实体卡开始，您可以正常使用“公益上海”公共服务平台，但在“公益护照”实体卡激活前不享有“志愿者保险保障”。</div>
+        <div class="applyList"><span>5.</span>成功申办“公益护照”实体卡后，请您在180天（含）内，持本人身份证明文件尽快前往上海农商银行在上海地区的任意网点办理实名认证和激活手续；附属卡办理实名认证和激活手续时，需主\附卡持卡人分别携带卡片及本人身份证明文件一同前往网点(或上门)办理。实名认证和激活后，金融功能和志愿者保险保障同时生效。</div>
+        <div class="applyList"><span>6.</span>若您未能在180天内完成实名认证和激活“公益护照”实体卡，您的“公益上海”帐户将被临时冻结，您将无法正常使用“公益上海”公共服务平台；待您完成实名认证和激活“公益护照”实体卡后，系统将自动解冻“公益上海”帐户，您将继续享受公益护照的所有权益。</div>
+        <div class="applyList"><span>7.</span>若您在用卡过程中遇到金融服务问题，可直接致电上海农商银行客服热线（962999），如遇到公益服务问题可致电公益热线（962200）。</div>
+    </div>
+</div>
+
+<div class="sendNextButton" onclick="immediateUse();">立即使用</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript">
+    function immediateUse(){
+        if($.cookie('user_msg')==undefined||$.cookie('token')==undefined){
+            jump("../login/login.html?jumpAdd=../index.html");
+        }else{
+            jump("../index.html");
+        }
+    }
+    $(function(){
+        var isType=$.getUrlParam('isType');
+        console.log(isType)
+        if(isType==1){
+            $(".subTextNotes").text('您申领的“成年人公益护照”')
+        }else if(isType==2){
+            $(".subTextNotes").text('您申领的“未成年人公益护照”')
+        }else if(isType==3){
+            $(".subTextNotes").text('您申领的“成年人和未成年人公益护照”')
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海-发布任务</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/cc_dh_o.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/honeySwitch.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/calendar_dan.css" />
+    <link rel="stylesheet" type="text/css" href="../post/css/add_job.css"/>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="../wap/js/editor/css/base.css"/>
+    <style type="text/css">
+        .warp_pws_m_sp li .checkinout_div{
+            display: block;
+            line-height: 50px;
+            overflow: hidden;
+            background: url(../wap/img/pws_54.png) no-repeat right center;
+            background-size: 8px 15px;
+            position: relative;
+        }
+        .warp_pws_m_sp li .checkinout_div b{
+            display: block;
+            font-size: 18px;
+            line-height: 50px;
+            font-weight: normal;
+            color: #000000;
+            position: absolute;
+            left: 0;
+            top: 3%;
+        }
+        .warp_pws_m_sp li .checkinout_div b i{
+            font-style: normal;
+            color: #FF0000;
+            padding-right: 3px;
+        }
+
+        .Date_lr {
+            width: 92px;
+            text-align: center;
+            float: right
+        }
+
+        .span21 {
+            font-size: 14px;
+            color: #666;
+            line-height: 50px;
+            display: block;
+            float: right;
+        }
+
+        #checkinout {
+            position: relative;
+            display: -webkit-box;
+            display: flex;
+            padding-right: 14px;
+        }
+
+        #firstSelect p {
+            line-height: 25px;
+            color: #999;
+            font-size: 12px;
+        }
+
+        #startDate {
+            border: 0;
+            float: left;
+            width: 92px;
+            font-size: 16px;
+            color: #333333;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            padding: 0;
+        }
+
+        #endDate {
+            border: 0;
+            float: left;
+            width: 92px;
+            font-size: 16px;
+            color: #333333;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            padding: 0;
+        }
+
+        .mask_calendar {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, .4);
+            display: none;
+            z-index: 9999;
+        }
+
+        .calendar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            font-size: 14px
+        }
+
+        .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translate3d(0, -100%, 0);
+                visibility: visible;
+            }
+            to {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .slideInDown {
+            animation-name: slideInDown;
+        }
+
+        .warp_cc_p {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            position: fixed;
+            left: 100%;
+            top: 0;
+            background: #FFFFFF;
+            z-index: 99
+        }
+
+        .warp_cp {
+            left: 100%
+        }
+
+        .warp_ci {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            position: fixed;
+            left: 100%;
+            top: 0;
+            background: #FFFFFF;
+            z-index: 99
+        }
+        /*//活动标签*/
+
+        .warp_hd_t_bp {
+            display: block;
+            font-size: 15px;
+            line-height: 50px;
+            color: #999999;
+            float: right;
+            padding-right: 14px;
+            border: 0;
+            background: url(../wap/img/pws_54.png) no-repeat right center;
+            background-size: 7px 13px;
+            font-family: '微软雅黑';
+            text-align: right;
+            outline: none;
+        }
+
+        .warp_hd_t_bp_21 {
+            display: block;
+            font-size: 15px;
+            line-height: 50px;
+            color: #999999;
+            float: right;
+            padding-right: 14px;
+            border: 0;
+            background-size: 7px 13px;
+            font-family: '微软雅黑';
+            text-align: right;
+            outline: none;
+        }
+
+        .warp_hd_t_bo {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 999;
+            display: none;
+        }
+
+        .warp_hd_t_bo1 {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 999;
+            display: none;
+        }
+
+        .warp_hd_t_bi {
+            overflow: hidden;
+            padding: 0 3%;
+            line-height: 54px;
+            border-bottom: 1px solid #E6E6E6;
+        }
+
+        .warp_hd_t_bi span {
+            display: block;
+            max-width:90%;
+            float: left;
+            width: 90%;
+            font-size: 16px;
+            line-height:34px;
+            padding:10px 0;
+            color: #000000;
+        }
+
+        .warp_hd_t_bi a {
+            display: block;
+            width: 16px;
+            height: 16px;
+            background: url(../wap/img/pws_220.png) no-repeat center;
+            background-size: 100% 100%;
+            float: right;
+            margin-top: 19px;
+        }
+
+        /*.warp_hd_t_bu {*/
+            /*width: 100%;*/
+            /*overflow: hidden;*/
+            /*padding: 4% 0 1% 0;*/
+        /*}*/
+
+        /*.warp_hd_t_bu li {*/
+            /*width: 29.3%;*/
+            /*overflow: hidden;*/
+            /*float: left;*/
+            /*margin: 0 0 3% 3%;*/
+        /*}*/
+
+        /*.warp_hd_t_bu li.cla span {*/
+            /*border: 1px solid #72B81E;*/
+            /*background: url(../wap/img/pws_219.png) no-repeat right top;*/
+            /*background-size: 22px 18px;*/
+        /*}*/
+
+        /*.warp_hd_t_bu li span {*/
+            /*display: block;*/
+            /*text-align: center;*/
+            /*font-size: 14px;*/
+            /*color: #000000;*/
+            /*border: 1px solid #E6E6E6;*/
+            /*border-radius: 4px;*/
+            /*height: 40px;*/
+            /*line-height: 40px;*/
+        /*}*/
+
+        .warp_hd_t_bu1 {
+            width: 100%;
+            overflow: hidden;
+            padding: 4% 0 1% 0;
+        }
+
+        .warp_hd_t_bu1 li {
+            width: 90%;
+            padding-left: 5%;
+            padding-right: 5%;
+            overflow: hidden;
+            float: left;
+            margin: 0 0 3% 3%;
+        }
+
+        .warp_hd_t_bu1 li.cla span {
+            border: 1px solid #72B81E;
+            background: url(../wap/img/pws_219.png) no-repeat right top;
+            background-size: 8%;
+        }
+
+        .warp_hd_t_bu1 li span {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #000000;
+            border: 1px solid #E6E6E6;
+            border-radius: 4px;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .warp_hd_t_by_1 {
+            width: 94%;
+            height: 46px;
+            border: 0;
+            background: #72B81E;
+            color: #FFFFFF;
+            font-size: 16px;
+            display: block;
+            margin: 10px auto;
+        }
+        .warp_hd_t_by {
+            width: 94%;
+            height: 46px;
+            border: 0;
+            background: #72B81E;
+            color: #FFFFFF;
+            font-size: 16px;
+            display: block;
+            margin: 10px auto;
+        }
+
+        .warp_hd_t_bt {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: url(../wap/img/bjtm.png);
+        }
+
+        .warp_hd_t_br {
+            width: 100%;
+            overflow: hidden;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            background: #FFFFFF;
+            z-index:100;
+        }
+
+        input[disabled] {
+            color: #000000;
+            opacity: 1
+        }
+
+        .warp_tj_sp {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .warp_tj_sp textarea {
+            width: 93.5%;
+            height: 80px;
+            border: 1px solid #E6E6E6;
+            font-family: '微软雅黑';
+            font-size: 15px;
+            padding: 2% 3%;
+        }
+
+        .warp_pws_m_su li {
+            padding: 15px 0 0 0
+        }
+
+        .act_cw_p {
+            width: 100%;
+            overflow: hidden
+        }
+
+        .act_cw_p li {
+            overflow: hidden;
+            height: 50px;
+            line-height: 50px;
+            padding: 0 3%;
+            background: url(../wap/img/pws_54.png) no-repeat right center;
+            background-size: 8px 13px;
+            background-position: 97%;
+            border-bottom: 1px solid #E6E6E6
+        }
+
+        .act_cw_p li select {
+            width: 76%;
+            direction: rtl;
+            float: right;
+            height: 50px;
+            font-family: '微软雅黑';
+            color: #333333;
+            font-size: 14px;
+            background: none;
+            padding-right: 16px;
+            outline: none;
+            border: 0;
+        }
+
+        .act_cw_p li span {
+            display: block;
+            float: left;
+            font-size: 16px
+        }
+
+        .act_cw_o {
+            overflow: hidden;
+            padding: 5% 3%;
+            border-bottom: 1px solid #E6E6E6
+        }
+
+        .act_cw_o img {
+            width: 14px;
+            height: 14px;
+            float: left;
+            padding: 3px
+        }
+
+        .act_cw_o span {
+            font-size: 14px;
+            line-height: 20px
+        }
+
+        input[disabled] {
+            color: #333;
+            opacity: 1
+        }
+
+        .warp_jz {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #000000;
+            z-index: 999999;
+            opacity: 0.5;
+        }
+
+        #address {
+            background: #FFFFFF;
+            text-align: right;
+            font-family: '微软雅黑';
+            font-size: 16px;
+            margin-right: 14px;
+            line-height: 50px;
+            height: 50px;
+            float: right
+        }
+
+        #address::-webkit-input-placeholder {
+            line-height: 50px;
+        }
+
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <!--头部开始-->
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>发布任务</span>
+    </div>
+    <!--头部结束-->
+    <div class="warp_jm" style="display:none;background: rgba(0,0,0,0.5);width: 100%;height: 100%;position: fixed;left: 0;top: 0;z-index:10000"></div>
+    <form id='form1'>
+        <ul class="warp_pws_c warp_pws_m_sp" style="margin-top: 0px;border-top: 1px solid #E6E6E6;">
+            <li>
+                <a href="javascript:void(0)" style="background: none;">
+                    <input id="task_name" onkeyup="checkNumber(this,15)" placeholder="请填写（15个汉字以内）" style="padding-right:0;"  type="text"/>
+                    <b>任务名称</b>
+                </a>
+            </li>
+        </ul>
+        <div style="padding: 3%;color: #9d9d9d;font-size: 15px;"><span style="color:#27b63f;">任务属性</span>(必填)</div>
+        <ul class="warp_pws_c warp_pws_m_sp" style="margin-top: 0px;border-top: 1px solid #E6E6E6;">
+            <li>
+                <a href="javascript:void(0)" onclick="conceal('serviceDomain');" style="height: auto">
+                    <div id="serviceDomain_name" class="security_li" style="" readonly="readonly">请选择</div>
+                    <input id="serviceDomain" type="hidden" style="width: 80%;float: right;"/>
+                    <b>服务类型</b>
+                </a>
+            </li>
+            <li class="serviceDomain" style="background: #f0eaeb;padding-left: 0px;padding-right: 0px;display: none;">
+                <ul class="warp_hd_t_bu serviceDomain_ul">
+                    <li style="width: 100%;display: none;">
+                        <div class="screenButList">
+                            <input type="search" class="search_input" placeholder="如需自定义，请手工填写">
+                            <input type="button" class="search_button" value="添加">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="conceal('serviceTarget');" style="height: auto">
+                    <div id="serviceTarget_name" class="security_li" style="" readonly="readonly">请选择</div>
+                    <input id="serviceTarget" type="hidden" style="width: 80%;float: right;"/>
+                    <b>服务对象</b>
+                </a>
+            </li>
+            <li class="serviceTarget" style="background: #f0eaeb;padding-left: 0px;padding-right: 0px;display: none;">
+                <ul class="warp_hd_t_bu serviceTarget_ul">
+                    <li style="width: 100%;display: none;">
+                        <div class="screenButList">
+                            <input type="search" class="search_input" placeholder="如需自定义，请手工填写">
+                            <input type="button" class="search_button" value="添加">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="conceal('servicePlace');" style="height: auto">
+                    <div id="servicePlace_name" class="security_li" style="" readonly="readonly">请选择</div>
+                    <input id="servicePlace" type="hidden" style="width: 80%;float: right;"/>
+                    <b>服务场所</b>
+                </a>
+            </li>
+            <li class="servicePlace" style="background: #f0eaeb;padding-left: 0px;padding-right: 0px;display: none;">
+                <ul class="warp_hd_t_bu servicePlace_ul">
+                    <li style="width: 100%;display: none;">
+                        <div class="screenButList">
+                            <input type="search" class="search_input" placeholder="如需自定义，请手工填写">
+                            <input type="button" class="search_button" value="添加">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div style="padding: 3%;color: #9d9d9d;font-size: 15px;"><span style="color:#27b63f;">任务概要信息</span>(必填)</div>
+        <ul class="warp_pws_c warp_pws_m_sp" style="margin-top: 0px;border-top: 1px solid #E6E6E6;">
+            <li>
+                <div class="task_editor_title">任务描述(300个汉字以内)</div>
+                <div class="task_editor">
+                    <div id="contentEditor" style="min-height:120px;margin-top:14px;padding-bottom:14px;"></div>
+                </div>
+            </li>
+            <li>
+                <a href="javascript:void(0)" style="background-image:none">
+                    <input id="consultantName" placeholder="请输入" type="text"/>
+                    <b>咨询人姓名</b>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" style="background-image:none">
+                    <input id="consultantMobile" placeholder="请输入" type="text"/>
+                    <b>咨询人电话</b>
+                </a>
+            </li>
+        </ul>
+        <div style="padding: 3%;color: #9d9d9d;font-size: 15px;"><span style="color:#27b63f;">选填项</span></div>
+        <ul class="warp_pws_c warp_pws_m_sp" style="margin-top: 0px;border-top: 1px solid #E6E6E6;">
+            <li>
+                <a href="javascript:void(0)" style="background-image:none">
+                    <input id="managerMobile" placeholder="请填写手机号，系统自动匹配姓名" type="text" oninput="checkLength_99(this, 11)"/>
+                    <b>管理员</b>
+                </a>
+                <div class="task_help_txt managerMobileHas">管理员需是系统实名注册用户，在个人任务订单中进行审核报名人员，审核志愿者提交的任务、计量志愿者服务时长、评价志愿者。</div>
+            </li>
+            <li class="security_lie">
+                <a href="javascript:void(0)" style="background: url(../wap/img/pws_54.png) no-repeat right center;background-size: 8px 15px;padding-right: 15px;">
+                    <select id="applyTypeB" style="color: #000000;width: auto;" onchange="apply_type(this);">
+                        <option value ="3">个人或团体均可报名</option>
+                        <option value ="0">仅本机构成员或团体报名</option>
+                        <option value ="1">仅个人报名</option>
+                        <option value ="2">仅团体报名</option>
+                        <option value ="4">仅结盟机构团体报名</option>
+                        <option value ="5">指定结盟机构团体报名</option>
+                        <option value ="6">本机构及结盟机构团体报名</option>
+                    </select>
+                    <b>报名方式 <button class="task_help_togBtn on"></button></b>
+                </a>
+            </li>
+            <li class="alliance" style="height: auto;min-height: 38px;display: none">
+                <a href="javascript:void(0)" style="height: auto;min-height: 38px;background-image:none">
+                    <div id="allianceOrgName" style="width: 100%;margin-top: 38px;float: left;text-align: left;color: #333">
+                        <p style="color:#999">请通过下面搜索查询结盟机构</p>
+                    </div>
+                    <b style="top:.1rem">指定结盟机构</b>
+                </a>
+            </li>
+            <li class="alliance" style="background: #f0eaeb;display: none;padding-top:0.5%;">
+                <ul class="warp_hd_t_bu alliance_ul" style="margin-top: 0px;">
+                    <li style="width: 100%;padding-bottom: 1px;">
+                        <div class="screenButList" style="width: 100%;height: 38px;margin: 0px">
+                            <input type="search" class="search_input alliance_input" placeholder="请输入结盟机构全称进行查询" style="text-align: left;padding-left: 3%;width: 80%">
+                            <input type="button" class="search_button alliance_button" style="background: #72B81E;background-image: url(../wap/img/pws_999.png);background-repeat: no-repeat;background-position: 50% 50%;background-size: auto 20px;
+                                             border: 0px;color: #ffffff;float: left;width: 20%;height: 40px;font-size: .24rem;-webkit-appearance:none;border-radius:0px;padding: 0px;" value="" onclick="searchAllianceList();">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li style="position: relative;">
+                <div class="testswitch" id="testswitch">
+                    <input class="testswitch-checkbox" id="isAuditSwitch" type="checkbox">
+                    <label class="testswitch-label" for="isAuditSwitch">
+                        <span class="testswitch-inner" data-on="" data-off=""></span>
+                        <span class="testswitch-switch"></span>
+                    </label>
+                </div>
+                <b style="display: block;font-size: 15px;font-weight: normal;color: #000000;position: absolute;left: 3%;top: 30%;">报名需审核</b>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="conceal('questionList_li');" style="background: url(../wap/img/pws_54.png) no-repeat right center;background-size: 8px 15px;">
+                    <input id="" placeholder="如设置问卷，用户报名时必须填写" type="text" style="padding-right: 14px;" readonly="readonly"/>
+                    <b>调查问卷</b>
+                </a>
+            </li>
+            <li class="questionList_li" id="add_job" style="background: #f0eaeb;padding-left: 0px;padding-right: 0px;padding-bottom:0px;display: none;">
+                <div style="width: 94%;height: 28px;float: left;padding: 3%;margin: 0px">
+                    <b style="line-height: 28px;color: #aaaaaa;">最多可设置10个调查问卷</b>
+                    <input onclick="add_questionLi();" type="text" id="add_question" value="新增问卷" readonly style="padding-right: 3%;width: 74px;padding: 0px 3px;height: auto;line-height: 28px">
+                </div>
+                <div id="questionList_div">
+                    <ul class="warp_hd_t_bu question_list" id="questionList">
+                        <li><input type="text" id="question_inp" placeholder="请填写问题" /><input readonly onclick="delQuestion(this, 0)" id="question_del" type="text" value="删除"></li>
+                        <li><input type="text" id="answer_inp" placeholder="请填写答案" /><input readonly onclick="selAnswer(this)" id="answer_sel" type="text" value="设为答案"><input readonly onclick="delQuestion(this, 1)" id="answer_del" type="text" value="删除"></li>
+                        <li><input type="text" id="answer_inp" placeholder="请填写答案" /><input readonly onclick="selAnswer(this)" id="answer_sel" type="text" value="设为答案"><input readonly onclick="delQuestion(this, 1)" id="answer_del" type="text" value="删除"></li>
+                        <li><input type="text" id="answer_inp" placeholder="请填写答案" /><input readonly onclick="selAnswer(this)" id="answer_sel" type="text" value="设为答案"><input readonly onclick="delQuestion(this, 1)" id="answer_del" type="text" value="删除"></li>
+                        <li><input type="text" id="answer_inp" id="bottom" placeholder="请填写答案" /><input readonly onclick="selAnswer(this)" id="answer_sel" type="text" value="设为答案"><input readonly onclick="delQuestion(this, 1)" id="answer_del" type="text" value="删除"></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div style="padding: 3%;padding-bottom: 0px;color: #9d9d9d;font-size: 15px;"><span style="color:#27b63f;">其他</span>(选填)</div>
+        <ul class="warp_pws_c warp_pws_m_sp">
+            <li>
+                <div class="warp_pws_c_sp">
+                    <b style="font-weight:normal">积分赠送<span style="color: #9d9d9d;">（每人每次）</span></b>
+                    <input id="pointB" value="0" data-time="0" type="text" name="total" class="spinnerExampleB"/>
+                </div>
+                <input type="text" placeholder="签到签出成功，系统自动发放" class="warp_pws_c_so"  readonly="readonly" unselectable="on" onfocus="this.blur()" style="width: 70%;">
+                <span style="">剩余积分：<span style="color:#27b63f;" id="jifen"></span></span>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="conceal('welfare');" style="height: auto">
+                    <div id="welfare_name" class="security_li" style="" readonly="readonly">请选择</div>
+                    <input id="welfare" type="hidden" style="width: 80%;float: right;"/>
+                    <b>志愿者保障</b>
+                </a>
+            </li>
+            <li class="welfare" style="background: #f0eaeb;padding-left: 0px;padding-right: 0px;display: none;">
+                <ul class="warp_hd_t_bu welfare_ul">
+                    <li style="width: 100%;display:none">
+                        <div class="screenButList">
+                            <input type="search" class="search_input" id="name_input" placeholder="如需自定义，请手工填写">
+                            <input type="button" class="search_button" value="添加">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)" onclick="conceal('activity_li');">
+                    <input placeholder="请填写"  type="text" disabled/>
+                    <b>关联活动</b>
+                </a>
+            </li>
+            <li class="activity_li" style="background: #f0eaeb;padding-left: 0px;padding-right: 0px;display: none;">
+                <ul class="warp_hd_t_bu">
+                    <li style="width: 100%;">
+                        <div class="screenButList">
+                            <input type="search" class="search_input" id="activity_name" placeholder="请输入活动全称进行查询" style="text-align: left;padding-left: 3%;">
+                            <input type="button" class="search_button activity_search" value="">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="task_sub_list_wrap">
+            <div class="task_sub_list">
+                <div style="padding: 3%;padding-bottom: 0px;color: #9d9d9d;font-size: 15px;position:relative"><span style="color:#27b63f;">任务执行信息</span>(选填) <button class="removeParent_subBtn">删除</button></div>
+                <ul class="warp_pws_c warp_pws_m_sp">
+                    <li>
+                        <div class="task_editor_title">子任务内容（100个汉字以内）</div>
+                        <a href="javascript:void(0)" style="height:auto;background-image:none;">
+                            <!--<input placeholder="子任务内容（100个汉字以内）" type="text" style="text-align: left;" disabled/>-->
+                            <textarea id="contentB" onkeyup="checkNumber(this,100)" class="task_area" placeholder="点击编辑内容" type="text"></textarea>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" style="background: none;height:auto;">
+                            <input id="contactMobile" placeholder="选填，请填写手机号" oninput="checkLength_98(this, 11)" type="text"/>
+                            <b>子任务联系人 <button class="task_help_togBtn" data-txt="1. 联系人如是系统实名注册用户，在TA的个人任务订单中将会生成一个”待评价“订单，在志愿者提交该子任务后，TA可以对志愿者评价。<span style='display:block;width:100%;height:.1rem;'></span>2. 联系人如不是系统用户，TA仅作为该子任务的线下联系人。"></button></b>
+                            <input id="contactName" placeholder="请填写姓名" type="text" style="display:none;height:42px;border:1px solid #eee;"/>
+                            <div class="task_help_txt" style="display:none;line-height:20px;"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" style="background: none;height:auto;padding-top:50px;">
+                            <input class='demo_time1 serviceEndTime' id="serviceEndTime" type="text" readonly="true"
+                                   name="applyBeginTime" placeholder="选择结束" value="" style="width:45%;"/>
+                            <span style="margin:0px;float: right;width: 10%;text-align: center;">至</span>
+                            <input class='demo_time1 serviceBeginTime' id="serviceBeginTime" type="text" readonly="true"
+                                   name="applyBeginTime" placeholder="选择开始" value="" style="width:45%;"/>
+                            <b>子任务时间</b>
+                        </a>
+                    </li>
+                    <li>
+                        <!--<textarea name="area"  oninput="autoHeightArea(this)" onchange="autoHeightArea(this)"></textarea>-->
+                        <a id="addres" class="warp_dd" href="javascript:void(0)" style="height:auto;min-height:50px;">
+                            <!--<a id="addres" class="warp_dd" href="javascript:void(0)" onclick="conceal('address_li');">-->
+                            <!--
+                        <input type="button" value="搜索"/>-->
+                            <!--<input type="text" id="suggestId_update" placeholder="请输入地点或名称进行查询" class="mapTest" readonly onFocus="updateAdds();" style="display: none;"/>-->
+                            <!--<input type="text" id="suggestId1" placeholder="请输入地点或名称进行查询" class="mapTest" disabled="disabled"/>-->
+                            <textarea rows="1" disabled="disabled" oninput="autoHeightArea(this)" style="max-width:70%;float:right;" id="suggestId1" placeholder="请输入地点或名称进行查询" class="map mapTest" ></textarea>
+
+                            <!--<input type="text" id="suggestId1" placeholder="请输入地点或名称进行查询" class="mapTest" disabled="disabled" oninput="addsFalse();"/>-->
+                            <!--<div id="searchResultPanel1" style="border:1px solid #C0C0C0;width:100%;height:auto; display:none;"></div>-->
+                            <!--<div id="l-map1" style="display: none;"></div>-->
+                            <!--<input type="hidden" id="address">-->
+                            <b>子任务地点</b>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="warp_pws_c_sp default-1" data-name="子任务招募人数">
+                            <b style="font-weight:normal">子任务招募人数<!--<span style="color: #9d9d9d;">（每人每次）</span>--></b>
+                            <input id="needNum" type="text" name="total" class="spinnerExample"/>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="warp_pws_c_sp default-1" data-name="志愿者服务时长">
+                            <b style="font-weight:normal">志愿者服务时长<span style="color: #9d9d9d;">（小时）</span></b>
+                            <input id="serviceTime" type="text" name="total" class="spinnerExample"/>
+                        </div>
+                        <p class="warp_pws_c_so" style="height:auto;margin-top:.1rem;color:#999;text-align:justify;text-align-last:left">志愿者在完成任务并提交后，管理员根据其达成度给与的最大服务时长</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="task_add_sub">
+            <div class="task_add_subBtn"><i></i><span>添加新的子任务</span></div>
+
+            <div class="task_help_txt">如任务有多个不同的服务对象，可分别设置多个不同的子任务，发布后，将会生成多个单独的任务。</div>
+        </div>
+    </form>
+    <div class="ht10"></div>
+    <div class="ht70"></div>
+    <footer class="warp_pws_m_sw">
+        <ul class="warp_pws_hd">
+            <li style="width: 100%">
+                <input type="button" value="发布" id="btn_add_job" onclick='add_job();'>
+            </li>
+        </ul>
+    </footer>
+</div>
+<div class="task_help_Wrap">
+    <div class="task_help_explain_txt"></div>
+</div>
+
+<!--地点开始-->
+<div class="warp_ci">
+
+</div>
+<!--地点结束-->
+<!---- 地图开始 ---->
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+<div class="warp_ifrem" style="background-color: #ffffff;">
+
+</div>
+<!---- 地图结束 ---->
+
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<!--<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>-->
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/honeySwitch.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+
+<script type="text/javascript" src="../post/js/date_dan_add_post.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/index_base.js"></script>
+
+<script type="text/javascript" src="../wap/js/editor/Eleditor.min.js"></script>
+<script type="text/javascript" src="../wap/js/editor/webuploader.min.js"></script>
+<script type="text/javascript">
+    var Edr = new Eleditor({
+        el: '#contentEditor',
+        upload:{
+            server: img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper', //填写你的后端上传路径
+            fileSizeLimit: 2 //限制图片上传大小，单位M
+            // ,max:20
+        },
+        toolbars: [
+            'insertText',
+            'editText',
+            'insertImage',
+            // 'insertLink',
+            // 'deleteBefore',
+            // 'deleteAfter',
+            // 'insertHr',
+            'delete',
+
+            'cancel',
+        ],
+        changer: function(){
+            // console.log('内容被编辑了');
+            var _content = Edr.getContentText();
+            var _content2 = Edr.getContent();
+
+            if(_content.length>300){
+                _content=_content.substr(300,_content.length);
+                _content2=_content2.replace(_content,'');
+                Edr.revoke();
+                setTimeout(function(){
+                    Edr.append(escapeHTML2(_content2));
+                },500)
+            }
+
+        }
+    });
+    $('#contentEditor').click(function(){
+        /*点击会弹出文本编辑器*/
+        // Edr.trigger('insertText')
+    });
+
+    $(function(){
+        // $("textarea[name='area']").val('123').trigger('input')
+
+        // conceal('serviceDomain');
+        // conceal('serviceTarget');
+        // conceal('servicePlace');
+        // conceal('welfare');
+        //验证咨询人电话格式
+        // $("#consultantMobile").blur(function(){
+        //     if(!checkTel($("#consultantMobile").val())){
+        //         layer.open({
+        //             content: '咨询人电话格式错误！'
+        //             ,skin: 'msg'
+        //             ,time: 2 //2秒后自动关闭
+        //         });
+        //     }
+        // })
+    })
+</script>
+<script type="text/javascript">
+    $('.select-time').hotelDate();
+
+    $('.spinnerExample').spinner({});
+
+    $('.cell-right').click(function(){
+        var tre = $(this).find('span').hasClass('switch-on');
+        var type = tre?10:20;
+        $(this).next('input').val(type);
+    })
+</script>
+
+<script>
+    //阻止浏览器默认行为
+    var stopDefault=function(e) {
+        //防止浏览器默认行为(W3C)
+        if (e && e.preventDefault) {
+            e.preventDefault();
+        }
+        //IE中组织浏览器行为
+        else {
+            window.event.returnValue = false;
+            return false;
+        }
+    };
+    $(".task_help_togBtn").click(function(e){
+        var txt=$(this).attr('data-txt');
+        if($(this).hasClass('on')){
+            var index=$("#applyTypeB").val();
+            if(index==0){
+                txt='1) 个人如是本机构成员，可通过【首页】 \t&rarr; 【找任务】报名该任务；' +
+                    '<span style=\'display:block;width:100%;height:.1rem;\'></span>2) 个人如不是本机构成员，不可报名；' +
+                    '<span style=\'display:block;width:100%;height:.1rem;\'></span>3) 本机构管理员可通过【团体报名】为自己机构成员集体报名该任务；' +
+                    '<span style=\'display:block;width:100%;height:.1rem;\'></span>4) 该任务只显示在本机构的【团体报名】列表中，其他机构中的【团体报名】列表中不显示。';
+
+            }else if(index==1){
+                txt='1) 仅支持个人通过【首页】 \t&rarr; 【找任务】报名该任务；<span style=\'display:block;width:100%;height:.1rem;\'></span>2) 该任务不显示在机构账户的【团体报名】列表中，机构管理员无法进行团体报名。';
+
+            }else if(index==2){
+                txt='1) 仅支持机构管理员通过【团体报名】为自己的机构成员集体报名该任务。<span style=\'display:block;width:100%;height:.1rem;\'></span>2) 改任务不显示在个人账户的【找任务】列表中，个人无法单独报名该任务。';
+
+            }else if(index==3){
+                txt='1) 个人可通过【首页】 \t&rarr; 【找任务】报名该任务；<span style=\'display:block;width:100%;height:.1rem;\'></span>2) 机构管理员可通过【团体报名】为自己机构成员集体报名该任务。';
+
+            }else if(index==4){
+                txt='1) 该任务只显示在“与本机构结盟的机构”的【团体报名】列表中，其他地方不显示。';
+
+            }else if(index==5){
+                txt='1) 该任务只显示在“指定结盟的机构”的【团体报名】列表中，其他地方不显示。'
+            }else if(index==6){
+                txt='1) 本机构/结盟机构管理员可通过【团体报名】 \t&rarr; 为自己机构成员集体报名该任务；<span style=\'display:block;width:100%;height:.1rem;\'></span>2) 该任务只显示在本机构/结盟机构的【团体报名】列表中，其他机构中的【团体报名】列表中不显示。';
+
+            }
+        }
+
+        // helpTog(txt);
+        stopDefault()
+        $(".task_help_explain_txt").html(txt);
+        $(".task_help_Wrap").show().css('display','flex');
+        e.stopPropagation()
+    });
+    $(document).click(function(){
+        $(".task_help_explain_txt").text('');
+        $(".task_help_Wrap").hide();
+    });
+    //时间
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    var currYear = (new Date()).getFullYear();
+    // Date & Time demo initialization
+    $('.demo_time1').mobiscroll().datetime({
+        preset: 'date',
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        timeWheels: 'HHii',//HH:24小时制；hh:12小时制
+        dateFormat:"yy/mm/dd",
+        dateOrder: 'yyyymmdd', //面板中日期排列格式
+        timeFormat: 'HH:ii',
+        startYear: currYear,
+        endYear: currYear +30,
+        stepMinute: 1,
+        showNow: true
+    });
+    $('.demo_time1').mobiscroll().datetime({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        timeWheels: 'HHii',//HH:24小时制；hh:12小时制
+        dateFormat:"yy/mm/dd",
+        timeFormat: 'HH:ii',
+        startYear: currYear,
+        endYear: currYear +30,
+        stepMinute: 1,
+        showNow: true
+    });/*
+    conceal('job_warehouse');
+    show('add_job');
+    conceal('questionList_li');*/
+</script>
+<script src="../wap/js/act/task_act.js"></script>
+</body>
+</html>
+

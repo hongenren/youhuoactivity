@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>机构信息</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../css/org.css"/>
+    <script type="text/javascript" src="../js/offset.js"></script>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+    <div class="warp_zy_j bg">
+        <a href="javascript:history.go(-1);"></a>
+        <span>二维码</span>
+    </div>
+    <div class="wrap_ewm">
+        <div class="wrap_ewm_title">
+            <img id="imgLogo" src="../images/hylist3.png">
+            <h2 id="title">公益上海</h2>
+        </div>
+        <div class="wrap_ewm_img" id="qrcode">
+            <!--<img src="../images/ewm.jpg">-->
+        </div>
+    </div>
+    <!--<div class="wrap_ewm_but">
+        <button>保存到相册</button>
+    </div>-->
+
+
+</div>
+<script src="../js/jquery-1.11.1.min.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script>
+    var prjvOrgId = $.getUrlParam("prjvOrgId");
+    function get_real(){
+        var arr = {
+            "prjvOrgId": prjvOrgId
+        };
+        console.log(arr);
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url + "queryOrgByPrjvOrgId",
+            data:JSON.stringify(arr),
+            dataType:'json',
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            beforeSend:function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                var datas=data.data;
+                console.log(datas);
+                if(datas){
+                    if(datas.logo!=undefined && datas.logo!=null && datas.logo!=""){
+                        $('#imgLogo').attr("src", datas.logo);
+                    }
+                    $('#title').html(datas.name);
+                    var qrCode=datas.qrCode;
+                    if(qrCode){
+                        $('#qrcode').qrcode(qrCode);
+                    }else{
+                        layer.open({
+                            content: '没有数据'
+                            ,skin: 'msg'
+                            ,time: 2 //2秒后自动关闭
+                        });
+                    }
+
+
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+
+        })
+    };
+    $(function(){
+        get_real();
+    })
+</script>
+</body>
+</html>

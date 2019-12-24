@@ -1,0 +1,142 @@
+.order-header{
+    border-bottom: 1px solid #BBBBBB;
+    background-color: white;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    background: #FFFFFF;
+    position: relative;
+}
+.order-header span{
+    display: block;
+    font-size: 16px;
+    text-align: center;
+}
+.order-header a {
+    height: 20px;
+    background: url(../img/prev.png) no-repeat center;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 3%;
+    top: 0px;
+}
+.order-header a img {
+    border: 0 none;
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+.order-header a i {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    position: absolute;
+    right: -3px;
+    top: 12px;
+    background-color: red;
+    color: #fff;
+    text-align: center;
+    line-height: 18px;
+    font-size: 12px;
+    font-style: normal;
+}
+/*¶©µ¥css*/
+
+.warp_dd_p {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    padding: 1% 0 3% 0;
+}
+
+.warp_dd_p a {
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    margin: 0 4%;
+}
+
+.warp_dd_p a span {
+    display: block;
+    color: #999999;
+    line-height: 34px;
+}
+
+.warp_dd_p a img {
+    width: auto;
+    height: 20px;
+}
+
+.warp_dd_p a.current {
+    font-size: 20px;
+}
+
+.warp_dd_p a.current span {
+    border-bottom: 2px solid #72B81E;
+    color: #72B81E;
+}
+
+.warp_dd_p a.curremt {
+    position: relative;
+    top: 7px;
+}
+.screenButList1{width:100%;height: auto;background-color: #f5f5f5;background-color: #ffffff;border-top: 1px solid #D9D9D9; padding: 8px;border-bottom: none;}
+.screenButList1 .search_input{width: 85%;height: 0.75rem; font-size: .24rem;background-size:16px;
+    background-color: #ffffff; border: 1px solid #3BAE3A;}
+.screenButList1 .search_button{
+    background: #72B81E;float: right;
+    width: 15%;height: 30px; font-size: .24rem;
+    background-image:url('../../wap/img/pws_999.png');
+    background-repeat:no-repeat;
+    background-position:50% 50%;
+    background-size:auto 20px;
+}
+/* liebiao */
+.order-list{
+    padding: 1.5rem 0.7rem 0 0.7rem;
+    color: #101010 100%;
+    font-size: 14px;
+    overflow: hidden;
+}
+.order-title{
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    float: left;
+    position: relative;
+}
+.order-title .titler{
+    border-radius: 0.4rem;
+    height: 16px;
+    line-height: 14px;
+    padding: 0 2px;
+    color: rgba(255, 152, 0, 1);
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid rgba(255, 152, 0, 1);
+    position: absolute;
+    top: 0;
+    right: 5px;
+}
+.order-list p{
+    padding: 0.2rem 0;
+}
+.order-list p i{
+    padding-right: 4px;
+}    
+.oforderbox{
+    text-align: right;
+    padding-top: 0.7rem;
+}
+.oforder{
+    display: inline-block;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.8rem;
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(240, 103, 108, 1);
+    text-align: center;
+    border: 1px solid rgba(240, 103, 108, 1);
+    margin-right: 4px;
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/job_list.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/personal_post_list.css"/>
+    <link rel="stylesheet" type="text/css" href="./RightMenu/smartMenu.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.qrcode.min.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+    <script src="../wap/js/jquery.baiduMap.min.js"></script><!--地图-->
+    <script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+    <script type="text/javascript" src="./js/personal_post_history_list.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <script type="text/javascript" src="../wap/js/swiper.min.js"></script>
+    <script type="text/javascript" src="./RightMenu/jquery-smartMenu-personal_post_list.js"></script>
+</head>
+<body style="background: #F2F2F2;">
+<div class="warp">
+
+    <div class="warp_zy_j" style="border-bottom: 1px solid #BBBBBB;">
+        <a href="javascript:history.go(-1);"></a>
+        <span>历史订单</span>
+        <a href="../managementact/oneSend/lastList.html" class="curremt" style="/*position: fixed;*/left: auto;top: 15px;right:3%;display: inline-block;text-align: center;margin: 0 4%;background: none;">
+            <img src="../wap/img/pws_281.png" style="width: auto;height: 20px;">
+            <i id="nums" style="
+                        display: inline-block;
+                        width: 9px;
+                        height: 9px;
+                        border-radius: 50%;
+                        position: absolute;
+                        right: -12px;
+                        top: -9px;
+                        background-color: red;
+                        color: #fff;
+                        text-align: center;
+                        line-height: 18px;
+                        font-size: 12px;
+                        font-style: normal;
+                    "></i>
+        </a>
+    </div>
+    <header class="warp_dd_p" style="background: white">
+        <a href="#" class="current" onclick="jump('personal_post_history_list.html')">
+            <span>岗位订单</span>
+        </a>
+        <a href="#" onclick="jump('../task/task_history_list.html')">
+            <span>任务订单</span>
+        </a>
+        <a href="#" onclick="jump('../order/myorder.html')">
+            <span>活动订单</span>
+        </a>
+    </header>
+
+    <div class="warp_pws_n_st_bj warp_lb_p wth">
+        <div class="screenButList">
+            <input type="search" class="search_input" id="name_input" placeholder="请输入岗位名称进行查询">
+            <input type="button" class="search_button" value="" onclick="queryPersonalPostByUserAndStatus(0, 20);">
+        </div>
+    </div>
+    <div id="content">
+        <ul class="warp_pws_c">
+            <li style="display: none;">
+                <a href="./post_content.html?pkPostCode='+val.pkPostCode+'">
+                    <h3 id="name">'+val.name+'</h3>
+                    <div class="hycon2">
+                        <img src="../wap/img/pws_151.png">
+                        <p>
+                            <span id="address">地址</span>
+                        </p>
+                    </div>
+                    <div class="hycon2">
+                        <img src="../wap/img/pws_125.png">
+                        <p>
+                            <span id="">服务时长</span>
+                        </p>
+                    </div>
+                    <div class="hycon2">
+                        <img src="../wap/img/pws_125.png">
+                        <p>
+                            <span id="day">时间</span>
+                        </p>
+                    </div>
+                </a>
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide applyDate">
+                            <div>
+                                <span class="border-span">19/01/02</span>
+                                <span>0分钟</span>
+                            </div>
+                            <div></div><div></div><div></div><div></div><div></div>
+                        </div>
+                        <div class="swiper-slide applyDate">
+                            <div></div><div></div>
+                            <div>
+                                <span class="border-span">19/01/02</span>
+                                <span>0分钟</span>
+                            </div>
+                            <div></div><div></div>
+                        </div>
+                        <div class="swiper-slide applyDate">
+                            <div></div><div></div><div></div><div></div><div></div><div></div>
+                            <div>
+                                <span class="border-span">19/01/02</span>
+                                <span>0分钟</span>
+                            </div>
+                            <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </li>
+            <div class="zw_sj_p">
+                <img src="../wap/img/pws_164.png">
+            </div>
+        </ul>
+        <div class="dropload-down"><div class="dropload-noData">没有啦~</div></div>
+    </div>
+    <div class="map_xp_p">
+        <div class="map_xp_o"><a href="javascript:void(0)"></a></div>
+        <!------地图开始------>
+        <div class="left">
+            <div id="container1" class="container"></div>
+        </div>
+        <!------地图结束------>
+    </div>
+    <!------底部开始------>
+    <div id='footer'></div>
+    <!------底部结束------>
+</div>
+<div id="allmap"></div>
+<script>
+    // $("#footer").load("../public/footer.html");
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: false,//可选选项，自动滑动
+        freeMode:false,//滑动不够一格，不会自动贴合
+        slidesPerView:1,//设置slider容器能够同时显示的slides数量
+        effect : 'cube',
+        pagination: {
+            el: '.swiper-pagination',
+        },
+    })
+    var applyCode;
+    var imageMenuData = [
+        [{
+            text: "评价",
+            func: function () {
+                jump("./evaluation.html?applyCode="+applyCode);
+            }
+        }]
+    ];
+</script>
+</body>
+</html>

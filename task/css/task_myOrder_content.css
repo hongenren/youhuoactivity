@@ -1,0 +1,148 @@
+
+html,body{
+    background-color:#fff;
+}
+.warp_pws_m_sy {
+    width:30%;
+    padding-bottom:30%;
+    float:left;
+    margin-right:5%;
+    margin-bottom:3%;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    position: relative;
+}
+/*.tmc_textarea{*/
+    /*padding:.2rem;*/
+/*}*/
+/*.tmc_textarea textarea{*/
+    /*display:block;*/
+    /*width:100%;*/
+    /*height:1.97rem;*/
+    /*background-color:#fff;*/
+    /*border:1px solid #eee;*/
+    /*padding:.05rem .1rem;*/
+    /*line-height:.4rem;*/
+/*}*/
+
+.tmc_uploadImgs{
+    padding:.2rem .3rem;
+}
+.warp_pws_m_sy i {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url(../../wap/img/pws_95.png) no-repeat center;
+    background-size: 100% 100%;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+}
+.warp_pws_m_sq {
+    position:absolute;
+    left:0;top:0;right:0;bottom:0;
+    overflow:hidden;
+}
+
+.warp_pws_m_sq img {
+    width: 100%;
+    height: 100%;
+}
+
+.warp_pws_m_sq input {
+    width: 100px;
+    height: 0;
+    padding-top: 400px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/*任务审核*/
+
+.tme_text{
+    line-height:.4rem;
+    margin:.1rem .2rem;
+    padding:.1rem .2rem;
+    background-color:#f2f2f2;
+}
+
+
+
+/*子任务确认*/
+.tme_sub_wrap{
+    padding:.2rem .2rem;
+    position:relative;
+    border-bottom:1px solid #eee;
+}
+.tme_sub_user{
+    width:.8rem;
+    height:.8rem;
+    margin-right:.2rem;
+    float:left;
+    border-radius:50%;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+}
+.tme_sub_name{
+    line-height:.8rem;
+    margin-left:1rem;
+}
+.tmeSubTimes{
+    padding:.1rem 0;
+    line-height:.4rem;
+}
+.tme_sub_btn{
+    padding:.2rem 0;
+    text-align:center;
+}
+.tme_sub_btn button{
+    display:inline-block;
+    padding:0 .3rem;
+    height:.5rem;
+    line-height:1;
+    background-color:#f03727;
+    color:#fff;
+    border-radius:.3rem;
+}
+
+
+/*退出任务*/
+.tmo_out_text{
+    line-height:.5rem;
+    color:#000;
+}
+.textAlign_right{
+    text-align:right;
+}
+
+
+/*申请任务转接*/
+.tmt_form_list{
+    padding:.2rem .2rem;
+    border-bottom:1px solid #eee;
+}
+.tmt_form_list strong{
+    display:inline-block;
+    vertical-align:middle;
+    float:left;
+    line-height:.34rem;
+}
+.tmt_form_list span{
+    display:inline-block;
+    vertical-align:middle;
+    width:60%;
+    float:right;
+}
+.tmt_form_list span input{
+    display:inline-block;
+    width:100%;
+    line-height:.34rem;
+}
+
+/*评价*/
+.tev_list{
+    padding:0 .2rem;
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下载数据</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/org_data.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/job_list.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/download_data.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp" style="padding-bottom: 100px;">
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>下载数据</span>
+    </div>
+    <span id="title" style="height: 35px;line-height: 35px;padding-left: 10px;">选择您要下载的数据，数据截止到前一天的24点前：</span>
+    <ul class="warp_pws_g" style="">
+        <li class="not_team"><a href="javascript:void(0)">
+            <b style="font-size: 15px;">报名人员待审核表</b>
+            <div class="checkbox-div female">
+                <input class="radio" type="checkbox" id="female1" name="zhaomuyaoqiu" value="0"/>
+                <label for="female1" style=""></label>
+            </div>
+        </a></li>
+        <li><a href="javascript:void(0)">
+            <b style="font-size: 15px;">报名人员审核结果表</b>
+            <div class="checkbox-div female">
+                <input class="radio" type="checkbox" id="female2" name="zhaomuyaoqiu" value="1"/>
+                <label for="female2" style=""></label>
+            </div>
+        </a></li>
+        <li class="not_team"><a href="javascript:void(0)">
+            <b style="font-size: 15px;">报名人员待审核通过表</b>
+            <div class="checkbox-div female">
+                <input class="radio" type="checkbox" id="female3" name="zhaomuyaoqiu" value="2"/>
+                <label for="female3" style=""></label>
+            </div>
+        </a></li>
+        <li><a href="javascript:void(0)">
+            <b style="font-size: 15px;">打卡记录表</b>
+            <div class="checkbox-div female">
+                <input class="radio" type="checkbox" id="female4" name="zhaomuyaoqiu" value="3"/>
+                <label for="female4" style=""></label>
+            </div>
+        </a></li>
+        <li><a href="javascript:void(0)">
+            <b style="font-size: 15px;">服务时长记录表</b>
+            <div class="checkbox-div female">
+                <input class="radio" type="checkbox" id="female5" name="zhaomuyaoqiu" value="4"/>
+                <label for="female5" style=""></label>
+            </div>
+        </a></li>
+        <li class="not_team"><a href="javascript:void(0)">
+            <b style="font-size: 15px;">服务时长明细表</b>
+            <div class="checkbox-div female">
+                <input class="radio" type="checkbox" id="female6" name="zhaomuyaoqiu" value="5"/>
+                <label for="female6" style=""></label>
+            </div>
+        </a></li>
+        <li class="not_team"><a href="javascript:void(0)">
+            <b style="font-size: 15px;">调查问卷统计结果表<span style="color: #9d9d9d;font-size: 12px;">（如未设置，该表没有）</span></b>
+            <div class="checkbox-div female">
+                <input class="radio" type="checkbox" id="female7" name="zhaomuyaoqiu" value="6"/>
+                <label for="female7" style=""></label>
+            </div>
+        </a></li>
+    </ul>
+</div>
+<footer class="warp_pws_m_sw">
+    <div class="warp_lb_p wth" style="border: 0px;background: #ffffff;margin: 0px;height: auto;width: 100%;">
+        <div id="header" style="border: 0px;background: #ffffff;margin: 0px;height: auto;width: 100%;">
+            <div class="screenButList" style="border: 0px;background: #ffffff;margin: 0px;height: auto;width: 100%;">
+                <input type="search" class="search_input" id="name_input" placeholder="请填写您正确的邮箱地址" oninput="setEmail(this);" style="color: #000000;">
+                <input type="button" class="search_button" onclick="openEmail();" value="发送" style="background-image: none;">
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+<script>
+
+    var e_mail= "", pkPostCode = $.getUrlParam("pkPostCode"), type = $.getUrlParam("type");
+    if(type==0){
+        $(".not_team").hide();
+    }
+    function openEmail(){
+        if(e_mail==""){
+            layer.open({
+                content: '请填写邮箱！'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+        var v = [];
+        $("input:checkbox:checked").each(function (index, item) {
+            v.push($(this).val());
+        });
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            url: base_url + "html5/v1/station/mailExcelData",
+            data: JSON.stringify({"pkPostCode": pkPostCode, "receiveMail": e_mail, "dataType":v,"orgCode":prjvorgMsg.orgThirdAccount}),
+            dataType: 'json',
+            headers: {'token': token},
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                layer.closeAll();
+                if (data.code == 0) {
+                    layer.open({
+                        content: '发送成功'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+            }
+        })
+    }
+    function setEmail(obj){
+        e_mail = $(obj).val();
+    }
+</script>
+</html>

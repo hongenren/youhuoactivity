@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益护照</title>
+    <meta name="Keywords" content="公益护照"/>
+    <meta name="description" content="公益护照"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/teams.css">
+    <link rel="stylesheet" href="css/layer.css">
+    <style>
+        #output{
+            width:100px;
+            height:100px;
+        }
+        .ewmWrap{
+            position:fixed;
+            left:0;top:0;right:0;bottom:0;
+            background-color:rgba(255,255,255,.9);
+            display:none;
+            align-items:center;
+            justify-content:center;
+            z-index:120401;
+        }
+        #ewm{
+            width:3rem;
+        }
+        #ewm img{
+            width:100%;
+            height:auto;
+        }
+        .teamEvm{
+            width:2.4rem;
+        }
+        .teamLeftTest{
+            margin-right:2.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="addResseeContent">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>公益护照推广管理</span></div>
+        <!--<div class="sendHeadButton"><button>发送历史</button></div>-->
+    </div>
+    <div class="identityInputWrap">
+        <div class="left identityName">团<span style="padding:0 .14rem;"></span>队<span style="padding:0 .14rem;"></span>名<span style="padding:0 .14rem;"></span>称</div>
+        <div class="identityInput"><input type="text" name="name" placeholder="请填写(10个字符以内)"></div>
+    </div>
+    <div class="identityInputWrap">
+        <div class="left identityName">团队负责人姓名</div>
+        <div class="identityInput"><input type="text" name="monitor" placeholder="请填写"></div>
+    </div>
+    <div class="identityInputWrap">
+        <div class="left identityName">团队负责人电话</div>
+        <div class="identityInput"><input type="text" name="phone" placeholder="请填写"></div>
+    </div>
+    <div class="teamsCreateEwm"><button class="toEwmBut">生成申领二维码</button></div>
+    <div class="teamManageWrap">
+
+    </div>
+</div>
+<div class="emailWrap">
+
+</div>
+<div class="ewmWrap">
+    <div id="ewm"><img src=""></div>
+</div>
+<div class="sendNextButton">下载统计数据到邮箱</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="../wap/js/config.js"></script>
+<script src="js/public.js"></script>
+<script src="js/jquery.qrcode.min.js"></script>
+<!--<script src="js/qrcode.js"></script>-->
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script>
+    function CheckImgExists(imgurl) {
+        var ImgObj = new Image(); //判断图片是否存在
+        ImgObj.src = imgurl;
+        //没有图片，则返回-1
+        if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    var teamEvmEvent=function(){
+        $(".teamEvm").unbind('click').click(function(){
+            var href=$(this).attr('data-href');
+            var code=$(this).attr('data-code');
+            var name=$(this).attr('data-name');
+            var logo=$(this).attr('data-logo');
+            setTimeout(function(){
+                $.cookie('href',href);
+                $.cookie('code',code);
+                $.cookie('name',name);
+                $.cookie('logo',logo);
+                localStorage.setItem('evm_logo',logo);
+                localStorage.setItem('evm_href',href);
+                localStorage.setItem('evm_code',code);
+                localStorage.setItem('evm_name',name);
+                window.location.href='./passport_management_ewm.html';
+
+            },500)
+        })
+    };
+    function generate(href, code){
+        console.log(href)
+        if($('#output').length>0){
+            $('#output').remove();
+        }
+        $('<div>', {
+            id: 'output'
+        }).appendTo($('body'));
+        var qrcode = new QRCode('output', {
+            width: 150,  height: 150,
+        })
+        qrcode.clear();
+        qrcode.makeCode(href);
+
+        // $('#output').qrcode(href);
+        // qrcode.call(function(imgMsg){
+        //     console.log(imgMsg)
+        // });
+        // setTimeout(function(){
+        //     var width=$("#canvas").attr("width");
+        //     var canvas = document.getElementById("canvas");
+        //     var ctx = canvas.getContext("2d");
+        //     ctx.fillStyle="#fff";
+        //     ctx.fillRect((width-100)/2,(width-40)/2,100,40);
+        //     ctx.font='24px/1 Arial';
+        //     ctx.fillStyle='#333';
+        //     ctx.fillText(code,(width-100)/2+16,(width-40)/2+28);
+        //
+        //     var imgData=document.getElementById("canvas").toDataURL("image/jpeg" ,1);
+        //     $(".team_"+code).attr('src',imgData);
+        // },100);
+    }
+    var checkEvm=function(e,obj){
+        console.log(e)
+        console.log(obj)
+        $(".ewmWrap").css('display','flex');
+        var href=$(obj).attr('data-href');
+        var code=$(obj).attr('data-code');
+        if($('#output').length>0){
+            $('#output').remove();
+        }
+        $('<div>', {
+            id: 'output'
+        }).appendTo($('body'));
+
+        $('#output').empty().qrcode(href).hide();
+        setTimeout(function(){
+            var width=$("#canvas").attr("width");
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            ctx.fillStyle="#fff";
+            ctx.fillRect((width-100)/2,(width-40)/2,100,40);
+            ctx.font='24px/1 Arial';
+            ctx.fillStyle='#333';
+            ctx.fillText(code,(width-100)/2+16,(width-40)/2+28);
+
+            var imgData=document.getElementById("canvas").toDataURL("image/jpeg" ,1);
+            $("#ewm img").attr('src',imgData);
+        },500);
+    };
+    $("#ewm").click(function(e){
+        e.stopPropagation()
+    });
+    $(".ewmWrap").click(function(){
+        $(".ewmWrap").hide();
+    });
+    var findByOrgThirdAccount=function(){
+        var err={
+            "orgThirdAccount": prjvorgMsg.orgThirdAccount
+        };
+        $.ajax({
+            type: "POST",
+            url:base_url + "/html5/v1/passportchannel/findByOrgThirdAccount",
+            dataType:'json',
+            contentType: 'application/json',
+            data:JSON.stringify(err),
+            beforeSend:function(XMLHttpRequest){
+                console.log('发送请求之前')
+            },
+            success:function(data){
+                console.log(data);
+                if(data['msg']=='success'){
+                    var list=data.data;
+                    var lists= list.sort(function(a,b){
+                        var value1 = a.code,
+                            value2 = b.code;
+                        // if(value1 === value2){
+                        //     return b.Chinese - a.Chinese;
+                        // }
+                        return value2 - value1;
+                    });
+                    console.log(lists);
+
+                    var li='<h2>团队管理</h2>' ;
+                    for(var i=0;i<list.length;i++){
+                        var urls=list[i].url?list[i].url:'';
+                        li+='        <div class="teamManageList clearfix">\n' +
+                            '            <div class="teamEvm" data-href="'+encodeURI(list[i].url)+'" data-logo="'+encodeURI(list[i].orgLogo)+'" data-code="'+list[i].code+'" data-name="'+list[i].name+'">\n' +
+                            // '                <img class="team_'+list[i].code+'" src="'+(list[i].url?list[i].url:'../wap/img/pws_275.jpg')+'" alt="">\n' +
+                            '                <button style="padding:0 .3rem;margin:.2rem 0;height:.5rem;border-radius:.3rem;font-size:.24rem;line-height:1;border:1px solid #eee;">查看申领二维码</button>\n' +
+                            '                <div class="teamTxt">'+list[i].code+'</div>\n' +
+                            '            </div>\n' +
+                            '            <div class="teamLeftTest">\n' +
+                            '                <div class="teamTest"><strong>团队名称:</strong><span>'+list[i].name+'</span></div>\n' +
+                            '                <div class="teamTest"><strong>负责人姓名:</strong><span>'+list[i].monitor+'</span></div>\n' +
+                            '                <div class="teamTest"><strong>负责人电话:</strong><span>'+list[i].phone+'</span></div>\n' +
+                            '                <div class="teamTest"><strong>申领人数:</strong><span style="color:#72b81e">'+list[i].applys+'</span><strong style="padding-left:.4rem;">激活人数:</strong><span style="color:#f07730">'+list[i].activates+'</span></div>\n' +
+                            '            </div>\n' +
+                            '        </div>'
+                    }
+                    $(".teamManageWrap").html(li);
+                    teamEvmEvent();
+                    // $(".teamEvm").each(function (index, val) {
+                    //     var href=$(this).attr('data-href');
+                    //     var code=$(this).attr('data-code');
+                    //     if(index>1){
+                    //         generate(href, code);
+                    //     }
+                    //
+                    // })
+                }
+            },
+            error:function(error){
+                layer.open({
+                    content: '请求出错'
+                    , skin: 'msg'
+                    , time: 1 //2秒后自动关闭
+                });
+            },
+            complete:function(){
+
+            }
+        });
+    };
+
+    $(function(){
+
+        findByOrgThirdAccount();
+
+        $(".toEwmBut").unbind('click').click(function(){
+            var monitor=$("input[name='monitor']").val();
+            var phone=$("input[name='phone']").val();
+            var name=$("input[name='name']").val();
+            var orgThirdAccount=prjvorgMsg.orgThirdAccount;
+            var type='B';
+
+            if(monitor==''){
+                layer.open({
+                    content: '团队负责人姓名不能为空'
+                    , skin: 'msg'
+                    , time: 1 //2秒后自动关闭
+                });
+                return;
+            }else if(phone==''){
+                layer.open({
+                    content: '团队负责人电话不能为空'
+                    , skin: 'msg'
+                    , time: 1 //2秒后自动关闭
+                });
+                return;
+            }else if(name==''){
+                layer.open({
+                    content: '团队名称不能为空'
+                    , skin: 'msg'
+                    , time: 1 //2秒后自动关闭
+                });
+                return;
+            }else {
+                if(name.length>10){
+                    layer.open({
+                        content: '团队名称不能超过10个汉字'
+                        , skin: 'msg'
+                        , time: 1 //2秒后自动关闭
+                    });
+                    return;
+                }
+                var err={
+                    "monitor":monitor,
+                    "phone":phone,
+                    "name":name,
+                    "orgThirdAccount":orgThirdAccount,
+                    "type":type
+                };
+                $.ajax({
+                    type: "POST",
+                    url:base_url + "/html5/v1/passportchannel/add",
+                    dataType:'json',
+                    contentType: 'application/json',
+                    data:JSON.stringify(err),
+                    beforeSend:function(XMLHttpRequest){
+
+                    },
+                    success:function(data){
+                        if(data.code==0){
+                            layer.open({
+                                content: '提交成功'
+                                , skin: 'msg'
+                                , time: 1 //2秒后自动关闭
+                            });
+                            $("input[name='monitor']").val("");
+                            $("input[name='phone']").val("");
+                            $("input[name='name']").val("");
+                            findByOrgThirdAccount();
+                        }else{
+                            layer.open({
+                                content: data.msg
+                                , skin: 'msg'
+                                , time: 1 //2秒后自动关闭
+                            });
+                        }
+                    },
+                    error:function(error){
+                        layer.open({
+                            content: '提交失败'
+                            , skin: 'msg'
+                            , time: 1 //2秒后自动关闭
+                        });
+                    }
+                });
+            }
+
+
+            // $(".receiveWrap").show();
+        });
+        $(".EwmBack").click(function(){
+            $(".receiveWrap").hide();
+        });
+
+        $(".sendNextButton").click(function(){
+            layer.open({
+                title: [
+                    '下载',
+                    'background-color:#72b81e;color:#fff;height:.7rem;line-height:.7rem;'
+                ]
+                ,anim: 'up'
+                ,content: '<p style="line-height:.5rem;">统计数据将会发送到您的邮箱</p><div style="text-align:center;"><input style="display:inline-block;width:90%;height:.5rem;padding:0 .1rem;border:1px solid #eee;" name="email" type="text" placeholder="请填写您正确的邮箱地址"></div>'
+                ,btn: ['发送', '取消']
+                ,yes:function(){
+                    var test=$("input[name='email']").val();
+                    function emailCheck () {
+                        var emailPat=/^(.+)@(.+)$/;
+                        var matchArray=test.match(emailPat);
+                        if (matchArray==null) {
+                            return false;
+                        }
+                        return true;
+                    }
+
+                    if(emailCheck()){
+                        layer.open({
+                            type: 2
+                            ,content: '发送中. .'
+                        });
+                        var err={
+                            'email':test,
+                            'orgThirdAccount':prjvorgMsg.orgThirdAccount
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url:base_url + "/html5/v1/passportchannel/downloadCollect",
+                            dataType:'json',
+                            contentType: 'application/json',
+                            data:JSON.stringify(err),
+                            beforeSend:function(XMLHttpRequest){
+
+                            },
+                            success:function(data){
+                                console.log(data);
+                                if(data.code==0){
+                                    layTxt('发送成功');
+                                }else{
+                                    layTxt('发送失败')
+                                }
+                            },
+                            error:function(error,status){
+                                errorStatusTime(status);
+                            },
+                            complete:function(){
+                                console.log('请求完成');
+                                layClose();
+                            }
+                        });
+                        setTimeout(function(){
+                            layer.closeAll()
+                        },3000)
+                    }else{
+                        alert('电子邮件地址必须包括 ( @ 和 . )');
+                    }
+                }
+                ,no:function(){
+
+                }
+            });
+        })
+
+    })
+</script>
+</body>
+</html>

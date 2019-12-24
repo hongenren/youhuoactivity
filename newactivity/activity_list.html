@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益活动</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css" />
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+    <script type="text/javascript" src="../wap/js/swiper.min.js"></script>
+    <script type="text/javascript" src="../huangye/js/offset.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+    <script type="text/javascript" src="../wap/js/web-storage-cache.js"></script>
+    <script type="text/javascript" src="../wap/js/regular.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../huangye/js/common.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+    <script type="text/javascript" src="js/activity_list.js"></script>
+
+    <link rel="stylesheet" href="css/mobile.css" />
+    <link rel="stylesheet" href="css/activity_list.css" />
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <form action="javascript:return true" class="search">
+        <div class="warp_zy_j" style="position:fixed;left:0;top:0;right:0;background-color:#fff;">
+            <a href="javascript:void(0)" onclick="jump('../index.html');" style="width: 25px;height:60%;background-size: 11px 20px;"></a>
+            <div class="screenButList screenBut screenButListNew">
+                <a href="javascript:void(0)" id="area_info_city" data-id="">
+                    按区域
+                    <i></i>
+                </a>
+            </div>
+        </div>
+        <div class="warp_lb_p" style="background-color: #72B81E; width: 100%;">
+            <div id="header" style="background-color: #72B81E; width: 100%;">
+                <div class="swiper-wrapper" style="background-color: #72B81E; width: 100%;text-align: center;"></div>
+            </div>
+            <a href="javascript:void(0)" class="warp_pws_i_act"></a>
+            <div class="mlbileWrap">
+                <div class="chylisthead" style="background: #F2F2F2">
+                    <div class="screenButList screenBut" style="border-right: 1px solid #D9D9D9;background: #ffffff;">
+                        <a href="javascript:void(0)" id="area_info" data-id="" style="height: 40px;line-height:40px;">
+                            按区域
+                            <i></i>
+                        </a>
+                    </div>
+                    <div class="screenButList orgTypesB1" style="border-right: 1px solid #D9D9D9;background: #ffffff;">
+                        <a href="javascript:void(0)" style="height: 40px;line-height:40px;">
+                            <b class="selectBut_screen" data-id="0">按时段</b>
+                            <i></i>
+                        </a>
+                    </div>
+                    <div class="screenButList orgTypesB3" style="background: #ffffff;">
+                        <a href="javascript:void(0)" style="height: 40px;line-height:40px;">
+                            <b class="selectBut_screen" data-id="0">筛选</b>
+                            <i></i>
+                        </a>
+                    </div>
+                    <div class="screenButList screenButList1" style="margin-top: 3px;border-top: 0px;">
+                        <input type="search" class="search_input" id="name_input" placeholder="请输入机构或活动名称来搜索" style="height:30px;-webkit-appearance:none;border-radius:0px;padding-left: 5px;">
+                        <input type="button" class="search_button" value="" style="-webkit-appearance:none;border-radius:0px;">
+                    </div>
+                </div>
+                <div class="chylisthead_b" style="height: auto;"></div>
+                <div class="hylist">
+                    <ul id="list_tree">
+
+                    </ul>
+                </div>
+            </div>
+        </div><!--
+        <div style="width: 100%;height: 380px"></div>-->
+        <div id="content" style="margin-top: 245px;">
+            <ul class="warp_bp_p lists"></ul>
+        </div>
+    </form>
+
+    <div class="mb mb_1" style="cursor:pointer"></div>
+    <div class="mb mb_2" style="cursor:pointer"></div>
+    <div class="mb mb_3" style="cursor:pointer"></div>
+    <div class="mb mb_4" style="cursor:pointer"></div>
+    <div class="hylistsxw">
+        <div class="hylistsx1 hylistsxc" style="overflow:auto;">
+            <div class="hylistsx_l" style="width: 100%;height:auto;">
+                <div class="screenButList screenButList1">
+                    <input type="search" class="search_input" id="city_search" placeholder="输入城市名或拼音查询" style="border-bottom: 1px solid #E6E6E6;-webkit-appearance:none;border-radius:0px;">
+                </div>
+                <ul class="warp_pws_g" style="border: 0px;margin-bottom: 0px;height: auto;padding-left: 0px;padding-right: 0.01%;" id="gps_city">
+                    <li style="line-height: normal;border: 0px;margin-bottom: 0px;background-color: #ffffff;height: auto;padding-top: 3px;padding-bottom: 3px;">
+                        <a href="javascript:void(0)" onclick="select_address('address','','310000000000','上海',0)" style="background: none;height: 0.75rem;vertical-align: middle;display: table-cell;">
+                            <b style="font-size: 0.25rem" id="GPS_city_b">上海<i style="color: #999999;">GPS定位</i></b>
+                        </a>
+                    </li>
+                    <li style="line-height: normal;border: 0px;margin-bottom: 0px;background-color: #f5f5f5;height: auto;padding-top: 3px;padding-bottom: 3px;">
+                        <a href="javascript:void(0)" style="background: none;">
+                            <b style="font-size: 10px;font-weight:bold;">热门城市</b>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="hylistsx_l" style="width: 100%;height:30%;" id="hot_city">
+                <!--<table style="width: 100%;height:100%;text-align: center;">
+                    <tr style="height: 25%">
+                        <td class="border_right" onclick="select_address('address','1','110100000000','北京',1)">北京</td>
+                        <td class="border_right" onclick="select_address('address','546507','510100000000','成都',1)">成都</td>
+                        <td onclick="select_address('adCode','','500000000000','重庆',0)">重庆</td></tr>
+                    <tr style="height: 25%">
+                        <td class="border_right border_top" onclick="select_address('address','486062','440100000000','广州',1)">广州</td>
+                        <td class="border_right border_top" onclick="select_address('address','182272','330100000000','杭州',1)">杭州</td>
+                        <td class="border_top" onclick="select_address('address','161276','320100000000','南京',1)">南京</td></tr>
+                    <tr style="height: 25%">
+                        <td class="border_right border_top" onclick="select_address('address','155386','310000000000','上海',1)">上海</td>
+                        <td class="border_right border_top" onclick="select_address('address','490407','440300000000','深圳',1)">深圳</td>
+                        <td class="border_top" onclick="select_address('address','167598','320500000000','苏州',1)">苏州</td></tr>
+                    <tr style="height: 25%">
+                        <td class="border_right border_top" onclick="select_address('address','7269','120100000000','天津',1)">天津</td>
+                        <td class="border_right border_top" onclick="select_address('address','408718','420100000000','武汉',1)">武汉</td>
+                        <td class="border_top" onclick="select_address('address','646421','610100000000','西安',1)">西安</td>
+                    </tr>
+                </table>-->
+            </div>
+            <div class="hylistsx_l" style="width: 100%;height:auto;background-color: #000000;" id="city_name">
+                <ul style="overflow:auto;">
+                    <li style="line-height: normal;border: 0px;margin-bottom: 0px;background-color: #f5f5f5;height: auto;padding-top: 3px;padding-bottom: 3px;">
+                        <a href="javascript:void(0)" style="background: none;">
+                            <b style="font-size: 10px;font-weight:bold;">省市区筛选列表</b>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="hylistsx_l" id="provinceDiv" style="width: 100%;height:50%;">
+                <ul id="province" style="overflow:auto;margin-bottom: 30px;">
+                </ul>
+            </div>
+            <div class="hylistsx_l" id="cityDiv" style="width: 100%;height:50%;">
+                <ul id="city" style="overflow:auto">
+                </ul>
+            </div>
+            <div class="hylistsx_l" id="city_provinceDiv" style="width: 100%;height:auto;display: none;">
+                <ul id="city_province" style="overflow:auto">
+                </ul>
+            </div>
+            <div class="hylistsx_l" id="areaDiv" style="width: 100%;height:auto">
+                <ul id="area" style="overflow:auto">
+                </ul>
+            </div>
+            <div class="hylistsx_center" id="area_c1Div" style="width: 100%;height:auto;">
+                <ul id="area_c1" style="overflow:auto">
+                </ul>
+            </div>
+            <div class="hylistsx_r" id="area_1Div" style="width: 100%;height:auto;">
+                <ul id="area_1" style="overflow:auto">
+                </ul>
+            </div>
+        </div>
+        <div class="hylistsx2 hylistsxc" style="width: 100%;height: 100%;overflow:auto;">
+            <div id="screening" style="overflow:auto;margin-bottom: 150px;">
+                <span style="margin: 10px;">招募状态</span>
+                <ul class="warp_hd_t_bu recruiting" style="border-bottom: 1px solid #E6E6E6;">
+                    <li><span onclick="selectedScreening('applyState',undefined,this)">全部</span></li>
+                </ul>
+
+                <span style="margin: 10px;">活动状态</span>
+                <ul class="warp_hd_t_bu active_state" style="border-bottom: 1px solid #E6E6E6;">
+                    <li><span onclick="selectedScreening('state',undefined,this)">全部</span></li>
+                </ul>
+                <ul class="warp_hd_t_bu" style="position: fixed;bottom: 0px;">
+                    <li style="width: 100%;" onclick="select_();"><span data-id="" style="width: 28%;margin-left: 33%;background-color: #72B81E;color: #ffffff">确定</span></li>
+                </ul>
+            </div>
+            <div id="date_time">
+                <ul class="warp_hd_t_bu" style="border-bottom: 1px solid #E6E6E6;">
+                    <li style="width: 45%;background-color: #40AFFE;" onclick="switchWarp_hd_t_bu('0',this)"><span style="border: 1px solid #40AFFE;color: #ffffff" data-id="">指定时段</span></li>
+                    <li style="width: 45%;" onclick="switchWarp_hd_t_bu('1',this)"><span style="border: 1px solid #40AFFE;" data-id="">自定义时段</span></li>
+                </ul>
+                <ul class="warp_hd_t_bu date_time_specified">
+                    <li style="width: 94%;"><span onclick='select_("Day","",this)'>全时段</span></li>
+                    <li style="width: 94%;"><span onclick='select_("Day","1",this)'>今天</span></li>
+                    <li style="width: 94%;"><span onclick='select_("Day","2",this)'>明天</span></li>
+                    <li style="width: 94%;"><span onclick='select_("Day","3",this)'>本周</span></li>
+                    <li style="width: 94%;"><span onclick='select_("Day","4",this)'>本周末</span></li>
+                    <li style="width: 94%;"><span onclick='select_("Day","5",this)'>本月</span></li>
+                </ul>
+                <ul class="warp_hd_t_bu date_time_custom" style="display: none;">
+                    <li style="width: 94%;">
+                        <span class="warp_pws_c_sp" style="padding-top: 2%;">
+                            <b style="padding-left: 5%;">开始日期</b>
+                            <input class='demo_time' id="applyBeginTime" type="text" readonly="true" name="applyBeginTime" placeholder="请选择开始日期" value="" style="text-align: right;float: right;margin: 0px;width: auto;padding-right: 5%"/>
+                        </span>
+                    </li>
+                    <li style="width: 94%;">
+                        <span class="warp_pws_c_sp" style="padding-top: 2%;">
+                            <b style="padding-left: 5%;">结束日期</b>
+                            <input class='demo_time' id="applyEndTime" type="text" readonly="true" name="applyEndTime" placeholder="请选择结束日期" value="" style="text-align: right;float: right;margin: 0px;width: auto;padding-right: 5%"/>
+                        </span>
+                    </li>
+                    <li style="width: 100%;"><span data-id="" style="width: 28%;margin-left: 33%;" onclick="select_('time')">确定</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="allmap" style="height:0;overflow:hidden"></div>
+</body>
+<script>
+    var queryMe , searchMe;
+    $(".search_button").on("click",function(e){
+        select_("searchValue",$.trim($("#name_input").val()));
+    })
+    $("#name_input").keypress(function(e){
+        var key = $.trim($(this).val());
+        if(e.keyCode === 13) {
+            //  搜索工作
+            select_("searchValue",key);
+        }
+    })
+    $("#city_search").keypress(function(e){
+        var key = $.trim($(this).val());
+        if(e.keyCode === 13) {
+            findCity(key);
+        }
+    })
+    var categorycode = $_GET['categorycode'],token = $.cookie("token"),latCurrent,lngCurrent,city;
+    console.log(categorycode);
+    window.onload=function() {
+        selectByDict();
+        get_type_list();
+        get_msg(0,20,categorycode);
+        var theme = "ios";
+        var mode = "scroller";
+        var display = "bottom";
+        var lang="zh";
+        var currYear = (new Date()).getFullYear();
+        $('.demo_time').mobiscroll().date({
+            theme: theme,
+            mode: mode,
+            display: display,
+            lang: lang,
+            dateFormat:"yy-mm-dd",
+            startYear: currYear,
+            endYear: currYear +30,
+            stepMinute: 1,
+            showNow: true
+        });
+        $(".mb").on("click",function(){
+            $(".hylistsxc").hide();
+            $(".mb").hide();
+            $(".screenBut").removeClass("choice");
+        })
+    };
+</script>
+<script>
+    $(".orgTypesB1").live("click",function(){
+        $("#date_time").show();
+        $("#screening").hide();
+        $("#nature").hide();
+        var selectList = $(".hylistsx2");
+        if(selectList.is(':hidden')){
+            selectList.show();
+            $(".mb_4").show();
+        }else{
+            selectList.hide();
+            $(".mb_4").show();
+        }
+    });
+    $(".orgTypesB3").live("click",function(){
+        $("#date_time").hide();
+        $("#screening").show();
+        $("#nature").hide();
+        var selectList = $(".hylistsx2");
+        if(selectList.is(':hidden')){
+            selectList.show();
+            $(".mb_3").show();
+        }else{
+            selectList.hide();
+            $(".mb_3").hide();
+        }
+    });
+    $(".warp_zy_j .screenBut").live("click",function(){
+        $(".hylistsx1").css("top", "50");
+        $("#hot_city").show();
+        $("#gps_city").show();
+        $("#city_name").show();
+        $("#provinceDiv").show();
+        $("#cityDiv").hide();
+        $("#city_provinceDiv").hide();
+        $("#areaDiv").hide();
+        $("#area_c1Div").hide();
+        $("#area_1Div").hide();
+        var cla=$(this).attr("class")
+        console.log(cla);
+        if(cla.indexOf("choice") > 0){
+            $(".hylistsx1").hide();
+            $(this).removeClass("choice");
+            $(".mb_2").hide();
+        }else{
+            $(this).addClass("choice").siblings().removeClass("choice");
+            $(".hylistsx1").show().siblings().hide();
+            $(".mb_2").show();
+        }
+    })
+    $(".chylisthead .screenBut").live("click",function(){
+        $(".hylistsx1").css("top", "280");
+        $("#hot_city").hide();
+        $("#gps_city").hide();
+        $("#city_name").hide();
+        var cla=$(this).attr("class");
+        $("#provinceDiv").hide();
+        $("#cityDiv").hide();
+        if(city_province==1){
+            $("#city_provinceDiv").show();
+            $("#areaDiv").hide();
+        }else{
+            $("#city_provinceDiv").hide();
+            $("#areaDiv").show();
+        }
+        $("#area_c1Div").hide();
+        $("#area_1Div").hide();
+        if(cla.indexOf("choice") > 0){
+            $(".hylistsx1").hide();
+            $(".mb_1").hide();
+            $(this).removeClass("choice")
+        }else{
+            $(this).addClass("choice").siblings().removeClass("choice");
+            $(".hylistsx1").show().siblings().hide();
+            $(".mb_1").show();
+        }
+    })
+    function get_type_list(){
+        var html = "";
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/activity/queryCategory",
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                    if(data.code==0){
+                        var arr = data.data;
+                        var urllink = './activity_list.html';
+                    $.each(arr,function(index,val){
+                        var href = urllink + '?categorycode='+val.categoryCode;
+                        if(val.categoryCode==categorycode){
+                            html += '<div class="swiper-slide current" style="background-color: #72B81E; width: 25%;border-right: 1px solid #ffffff;border-left: 1px solid #ffffff;">\
+                                            <a href="javascript:void(0)" onclick="jumpLink(\''+href+'\')" data-code="'+val.categoryCode+'" style="color: #ffffff;">'+val.categoryName+'</a>\
+                                        </div>';
+                        }else{
+                            html += '<div class="swiper-slide" style="background-color: #72B81E; width: 25%;border-right: 1px solid #ffffff;border-left: 1px solid #ffffff;">\
+                                <a href="javascript:void(0)" onclick="jumpLink(\''+href+'\')" data-code="'+val.categoryCode+'" style="color: #ffffff;">'+val.categoryName+'</a>\
+                            </div>';
+                        }
+
+                    })
+                    $(".swiper-wrapper").html(html);
+
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+    function get_msg(pageNumber,pageSize,categoryCode,me=''){
+        // if(categoryCode=="FJ"){
+            $('#allmap').attr('lat',31.24916171);
+            $('#allmap').attr('lng',121.48789949);
+            $('#allmap').attr('city',"上海");
+            area_info_city_html = '上海市<i></i>';
+            var map = new BMap.Map("allmap");
+            var point = new BMap.Point(116.331398,39.897445);
+            map.centerAndZoom(point,12);
+            var geolocation = new BMap.Geolocation();
+            geolocation.getCurrentPosition(function(r){
+                if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                    var mk = new BMap.Marker(r.point);
+                    map.addOverlay(mk);
+                    map.panTo(r.point);
+                    latCurrent = r.point.lat;
+                    lngCurrent = r.point.lng;
+                    city = r.address.city;
+                    $("#GPS_city_b").html(city+"<i style=\"color: #999999;\">GPS定位</i>");
+                    $('#allmap').attr('lat',latCurrent);
+                    $('#allmap').attr('lng',lngCurrent);
+                    $('#allmap').attr('city',city);
+                    area_info_city_html = city+'<i></i>';
+                    $.ajax({
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        type:'post',
+                        url:base_url + "/html5/v1/region/findByName",
+                        data:JSON.stringify({ "name": city}),
+                        dataType:'json',
+                        contentType: "application/json;charset=utf-8",
+                        success:function(data){
+                            var data_index = data.data;
+                            if(data_index){
+                                $("#area_info_city").html(area_info_city_html+total);
+                                if(categoryCode!=undefined && categoryCode!=null && categoryCode!=""){
+                                    dataJson.address = data_index[0].areaCode;
+                                    login_in(0,20,categoryCode,"",data_index[0].areaCode);
+                                }
+                                get_district_msg2(data_index[0].id,1,data_index[0].name,data_index[0].areaCode,0);
+                            }else{
+                                layer.open({
+                                    content: '查询失败'
+                                    ,skin: 'msg'
+                                    ,time: 2 //2秒后自动关闭
+                                });
+                                $("#area_info_city").html(area_info_city_html+total);
+                                if(categoryCode!=undefined && categoryCode!=null && categoryCode!=""){
+                                    var adCode = $_GET['adCode'];
+                                    if(adCode==undefined || adCode==null || adCode==""){
+                                        adCode = 310000000000;
+                                    }
+                                    dataJson.address = adCode;
+                                    login_in(0,20,categoryCode,"",adCode);
+                                }
+                                get_district_msg2(155387,1,"上海市",310000000000,0);
+                            }
+                        }
+                    })
+                }else{
+                    $("#GPS_city_b").html("上海市<i style=\"color: #999999;\">GPS定位</i>");
+                    area_info_city_html = '上海市<i></i>';
+                    layer.open({
+                        content: '获取定位失败,请重试'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    if(categoryCode!=undefined && categoryCode!=null && categoryCode!=""){
+                        var adCode = $_GET['adCode'];
+                        if(adCode==undefined || adCode==null || adCode==""){
+                            adCode = 310000000000;
+                        }
+                        dataJson.address = adCode;
+                        login_in(0,20,categoryCode,"",adCode);
+                    }
+                    get_district_msg2(155387,1,"上海市",310000000000,0);
+                }
+                $("#area_info_city").html(area_info_city_html+total);
+            });
+        //}
+        get_quanguo();
+    }
+    $.ajax({
+        type:"get",
+        url:news_base_url+"/cm/unitapi/getIndexList?type=2&autitFlag=2&pageNum=0&pageSize=1",
+        dataType:'json',
+        success:function(data){
+            if(data.success==1){
+                var data1 = data.data;
+                if(data1!=null){
+                    var tit = data1[0].title;
+                    if(tit.length>=14){
+                        tit = tit.substring(0, 14)+"...";
+                    }
+                    $(".warp_pws_i_act").html(
+                        '<img src="../wap/img/pws_12.jpg" class="warp_pws_i_act_ip">\
+                        <em></em>\
+                        <img src="'+data1[0].title_img+'" class="warp_pws_i_act_io">\
+                    <div class="warp_pws_i_act_ii">\
+                    <span style="white-space:pre-wrap;">'+tit+'</span>\
+                    </div>\
+                    <i>'+data1[0].news_date.substr(0,data1[0].news_date.length-3)+'</i>');
+                    $(".warp_pws_i_act").live("click",function(){
+                        $(location).attr('href', news_base_url+'/gysh_cm_pub/article/normal/detail/'+data1[0].article_id+'.html');
+                    });
+                }
+            }
+        }
+    })
+</script>
+</html>

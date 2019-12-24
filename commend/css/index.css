@@ -1,0 +1,157 @@
+html,body{
+    background-color:#F2F2F2;
+}
+.container{
+    padding-top:.7rem;
+}
+.sendHistoryHead{
+    background-color:#fff;
+    border-bottom:1px solid #eee;
+    position:fixed;
+    left:0;top:0;right:0;
+    z-index:40000;
+}
+.commendTogBase{
+    width:50%;
+    background-color:#fff;
+    border-bottom:1px solid #eee;
+}
+.commendTogBase.left{
+    border-right:1px solid #eee;
+}
+.commendTogBase a{
+    padding:.3rem 0;
+}
+.commendTogIcon{
+    width:.5rem;
+    height:.5rem;
+    margin:.1rem auto;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+}
+.commendTogTxt{
+    line-height:.5rem;
+    text-align:center;
+}
+
+.commendHistory{
+    margin-top:.3rem;
+}
+.commendSelectList{
+    padding:0 .3rem;
+}
+.commendSelectList a{
+    line-height:.5rem;
+}
+.icon_right{
+    display:inline-block;
+    width:.2rem;
+    height:.24rem;
+    margin-top:.13rem;
+    margin-left:.1rem;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+}
+
+.commendDetailWrap{
+    margin-bottom:.2rem;
+    padding:.3rem;
+    background-color:#fff;
+}
+.commendDetailTop{
+    position:relative;
+}
+.commendDetailUser{
+    width:.7rem;
+    height:.7rem;
+    border-radius:50%;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    float:left;
+    margin-right:.2rem;
+}
+.commendDetailName{
+    float:left;
+}
+.commendDetailName h2{
+    font-size:.24rem;
+    line-height:1;
+}
+.commendDetailName p{
+    font-size:.24rem;
+    line-height:.4rem;
+    color:#f07730;
+    padding-top:.2rem;
+}
+.commendDetailButton{
+    position:absolute;
+    right:0;
+    top:0;
+}
+.commendDetailButton button{
+    display:inline-block;
+    height:.44rem;
+    padding:0 .2rem;
+    border-radius:4px;
+    border:1px solid #f03727;
+    font-size:.24rem;
+    line-height:1;
+    color:#f03727;
+}
+.commendDetailTxt{
+    margin-top:.2rem;
+    padding:.1rem .2rem;
+    border-radius:4px;
+    background-color:#F2F2F2;
+    font-size:.24rem;
+    line-height:.4rem;
+    text-align: justify;
+    /*text-align-last: justify;*/
+}
+.commendDetailImg{
+    margin-top:.2rem;
+}
+.commendDetailImg img{
+    width:100%;
+}
+.commendDetailExplain{
+    margin-top:.2rem;
+}
+.commendDetailExplain ul li{
+    line-height:.44rem;
+}
+.commendDetailExplain ul li strong{
+    padding-right:.1rem;
+}
+
+/*search*/
+.commendSearchWrap{
+    padding:.3rem .3rem .1rem;
+    background-color:#fff;
+}
+.commendSearchBox{
+    height:.6rem;
+    position:relative;
+    border:1px solid #72b81e;
+    /*border-radius:4px;*/
+}
+.commendSearchBox input{
+    display:inline-block;
+    width:100%;
+    height:100%;
+    padding:0 .1rem;
+    padding-right:1.2rem;
+    line-height:.58rem;
+}
+.commendSearchBox button{
+    display:inline-block;
+    position:absolute;
+    right:0;top:0;bottom:0;
+    padding:0 .5rem;
+    background:#72b81e url("../../wap/img/pws_999.png") no-repeat center;
+    background-size:auto 60%;
+
+}

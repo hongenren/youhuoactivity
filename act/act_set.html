@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/elastislide.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/swiper_sime.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/act/act.js"></script>
+    <script type="text/javascript" src="../wap/js/regular.js"></script>
+    <script type="text/javascript">
+        ajax_get_date();
+    </script>
+<body style="background: #F2F2F2">
+<div class="warp">
+	<!--头部开始-->
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+    <div class="warp_pws_b" style="margin-top: 0px;">
+        <div style="overflow: hidden;padding: 0 3%;background: #F2F2F2;">
+            <h2 style="padding-left: 0px;border: 0;">活动基础信息<i>（场次信息不可修改）</i></h2>
+        </div>
+    </div>
+	<!--头部结束-->
+    <header class="warp_pws_b_sp" style="margin-top: 0px;">
+        <div class="warp_pws_b_so">
+            <b id="showTitle"></b>
+            <!-- <a href="javascript:;" id="showUrl">修改</a> -->
+        </div>
+        <span id="showDate"></span>
+        <!-- <input type="text" placeholder="2018年5月16日 - 5月20日"> --><!--
+        <div class="warp_pws_b_si">
+            <i></i>活动一旦保存，场次信息不可修改
+        </div>-->
+    </header>
+
+    <div class="warp_pws_b">
+        <div style="overflow: hidden;padding: 2% 4%;;border-bottom: 1px solid #E6E6E6;background: #FFD46C;">
+            <span style="font-size: 13px;color: #D07500;line-height: 16px;padding: 0 0 0 20px;background: url(../wap/img/pws_210.png) no-repeat left center;background-size:13px;">请设置活动相关的岗位、任务、公众门票、管理员工作证等</span>
+        </div>
+		<div style="overflow: hidden;padding: 0 3%;border-bottom: 1px solid #E6E6E6;background: #F2F2F2;">
+			<h2 style="padding-left: 0px;border: 0;">志愿服务招募<i>（按民政部标准记录志愿服务时长）</i></h2>
+		</div>
+        <ul>
+            <li style="background: url(../wap/img/pws_105.png) no-repeat left center;background-size: 20px 20px">
+                <a data-href="./act_job.html" class="locat_next">
+                    <!-- <span>2岗位</span> -->
+                    <b style="width: 100%;">志愿服务岗位<i>（按实际服务时长计算）</i><i id="job_i" style="float: right;color: #1B1B1B;font-size: 100%;">未设置</i></b>
+                </a>
+            </li>
+            <li style="background: url(../wap/img/pws_106.png) no-repeat left center;background-size: 20px 20px;border-bottom: 0px;">
+                <a data-href="./act_task.html" class="locat_next">
+                    <!-- <span>2个</span> -->
+                    <b style="width: 100%;">任务<i>（按次计算）</i><i id="task_i" style="float: right;color: #1B1B1B;font-size: 100%;">未设置</i></b>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="warp_pws_b" style="margin-top: 0px;">
+        <div style="overflow: hidden;padding: 0 3%;border-bottom: 1px solid #E6E6E6;background: #F2F2F2;">
+			<h2 style="padding-left: 0px;border: 0;">附加票证<i>（现场管理所发票证，无时长记录）</i></h2>
+		</div>
+        <ul>
+            <li style="background: url(../wap/img/pws_108.png) no-repeat left center;background-size: 20px 20px">
+                <a data-href="./act_ticket.html" class="locat_next">
+                    <!-- <span>2岗位</span> -->
+                    <b style="width: 100%;">公众门票<i>（普通参与者）</i><i id="ticket_i" style="float: right;color: #1B1B1B;font-size: 100%;">未设置</i></b>
+                </a>
+            </li>
+            <li style="background: url(../wap/img/pws_109.png) no-repeat left center;background-size: 20px 20px">
+                <a data-href="./act_manage_add.html" class="locat_next">
+                    <!-- <span>2个</span> -->
+                    <b style="width: 100%;">管理人员工作证<i>（管理人员）</i><i id="manage_i" style="float: right;color: #1B1B1B;font-size: 100%;">未设置</i></b>
+                </a>
+            </li>
+            <li style="background: url(../wap/img/pws_110.png) no-repeat left center;background-size: 20px 20px">
+                <a data-href="./act_guestcard.html" class="locat_next">
+                    <!-- <span>2岗位</span> -->
+                    <b style="width: 100%;">嘉宾证<i id="guestcard_i" style="float: right;color: #1B1B1B;font-size: 100%;">未设置</i></b>
+                </a>
+            </li>
+            <li style="background: url(../wap/img/pws_111.png) no-repeat left center;background-size: 20px 20px">
+                <a data-href="./act_mediacard.html" class="locat_next">
+                   <!--  <span>2个</span> -->
+                    <b style="width: 100%;">媒体记者证<i id="mediacard_i" style="float: right;color: #1B1B1B;font-size: 100%;">未设置</i></b>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="ht60"></div>
+    <input type="button" value="发布活动" class="warp_pws_b_su" onclick="sub_all()" style="display:none">
+
+</div>
+
+<script type="text/javascript">
+    //浏览器返回提示--start--
+    $(function(){
+        if(!history.state){
+            pushHistory();
+        }
+        setTimeout(function(){
+            window.addEventListener("popstate", function(e) {
+                layer.open({
+                    content: '活动未发布完成，您确定要返回吗？'
+                    , btn: ['确定', '取消']
+                    , yes: function (index) {
+                        window.history.go(-1);
+                        //$(location).attr('href', "./act_base_add.html");
+                    }
+                    , no: function (index) {
+                        e.preventDefault();
+                        pushHistory();
+                    }
+                })
+            }, false);
+        },500);
+
+        function pushHistory() {
+            var state = {
+                title: "title",
+                url: "#"
+            };
+            window.history.pushState(state, "title", "#");
+        }
+    });
+    var isPageHide =false;
+    window.addEventListener('pageshow', function(){
+        if (isPageHide) {
+            window.location.reload();
+        }
+    });
+    window.addEventListener('pagehide', function(){
+        isPageHide =true;
+    });
+    //浏览器返回提示--end--
+
+    var activityCode = $_GET['activityCode'];
+    var activityCode_ = activityCode.substring(activityCode.length-1, activityCode.length);
+    if(activityCode_=="#"){
+        activityCode = activityCode.substring(0, activityCode.length-1);
+    }
+    $.ajax({
+			xhrFields: {
+			   withCredentials: true
+			},
+            type:"post",
+            url:base_url + "html5/v1/activity/queryDetail",
+            data:JSON.stringify({'activityCode':activityCode}),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                data_index = data.data;
+                if(data_index.startDay=='--'){
+                    var showDate = data_index.endDay;
+                }else{
+                    var showDate = data_index.startDay +"至"+ data_index.endDay;
+                }
+                $("#showDate").html(showDate)
+                $("#showTitle").html("<i>*</i>"+data_index.name)
+                $("#showUrl").attr("href","/managementact/act_base_edit.html?activityCode="+activityCode)
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+</script>
+<script type="text/javascript">
+
+    //跳转对应页面
+    $(function(){
+        $('.locat_next').click(function(){
+            var activityCode = $_GET['activityCode'];
+            var activityCode_ = activityCode.substring(activityCode.length-1, activityCode.length);
+            if(activityCode_=="#"){
+                activityCode = activityCode.substring(0, activityCode.length-1);
+            }
+            var href = $(this).attr('data-href');
+            var newhref = href+'?activityCode='+activityCode;
+            window.location.href = newhref;
+        })
+    })
+</script>
+<script type="text/javascript">
+    function sub_all(){
+        var activityCode = $_GET['activityCode'];
+        var activityCode_ = activityCode.substring(activityCode.length-1, activityCode.length);
+        if(activityCode_=="#"){
+            activityCode = activityCode.substring(0, activityCode.length-1);
+        }
+         $.ajax({
+			 xhrFields: {
+			   withCredentials: true
+			},
+            type:"post",
+            url:base_url + "html5/v1/activity/publish",
+            data:JSON.stringify({'activityCode':activityCode}),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+
+                //如果提交成功
+                if(data.msg=="success"){
+                    if($.cookie('date_list')!=undefined){
+                        localStorage.clear();
+
+                        $.cookie('date_list',null);
+                    }
+                    localStorage.setItem('manageall',1);
+                    layer.open({
+                        content: '提交成功'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+
+                    setTimeout(function(){window.location.href ='../org/institutions.html'},1000);
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '设置失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+    if(activityCode){
+        var total = 0;
+        $.ajax({//岗位
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            async:false,
+            url: base_url + 'html5/v1/activity/ticketCount',
+            data: JSON.stringify({"activityCode": activityCode}),
+            headers : {'token':token},
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                if(data.code==0){
+                    var d = data.data;
+                    var job = d.recruitCount;//岗位
+                    if(job>0){
+                        $("#job_i").html("已设置");
+                        total += job;
+                    }
+                    var task = d.taskCount;//任务
+                    if(task>0){
+                        $("#task_i").html("已设置");
+                        total += task;
+                    }
+                    var ticket = d.publicCount;//门票
+                    if(ticket>0){
+                        $("#ticket_i").html("已设置");
+                        total += ticket;
+                    }
+
+                    var manage = d.managerCount;//管理员
+                    if(manage>0){
+                        $("#manage_i").html("已设置");
+                        total += manage;
+                    }
+
+                    var guestcard = d.guestCount;//嘉宾
+                    if(guestcard>0){
+                        $("#guestcard_i").html("已设置");
+                        total += guestcard;
+                    }
+
+                    var mediacard = d.mediaCount;//媒体
+                    if(mediacard>0){
+                        $("#mediacard_i").html("已设置");
+                        total += mediacard;
+                    }
+                    if(total>0){
+                        $(".warp_pws_b_su").show();
+                    }else{
+                        $(".warp_pws_b_su").hide();
+                    }
+                }
+            }
+        })
+        /*var date_list = JSON.parse(localStorage.getItem('date_list'));
+        $.each(date_list,function(i,sections){
+            $.each(sections.sections,function(j,val){
+                $.ajax({//岗位
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type: "post",
+                    async:false,
+                    url: base_url + 'html5/v1/recruit/findBySectionCode',
+                    data: JSON.stringify({"sectionCode": val.code}),
+                    dataType: 'json',
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        if(data.data.length>0){
+                            $("#job_i").html("已设置");
+                            total += data.data.length;
+                        }
+                    }
+                })
+                $.ajax({//任务
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type: "post",
+                    async:false,
+                    url: base_url + 'html5/v1/task/queryBySectionCode',
+                    data: JSON.stringify({"sectionCode": val.code}),
+                    dataType: 'json',
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        if(data.data.length>0){
+                            $("#task_i").html("已设置");
+                            total += data.data.length;
+                        }
+                    }
+                })
+                $.ajax({//公众门票
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type: "post",
+                    async:false,
+                    url: base_url + 'html5/v1/public/queryBySectionCode',
+                    data: JSON.stringify({"sectionCode": val.code}),
+                    dataType: 'json',
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        if(data.data){
+                            $("#ticket_i").html("已设置");
+                            total += 1;
+                        }
+                    }
+                })
+                $.ajax({//管理员
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type: "post",
+                    async:false,
+                    url: base_url + 'html5/v1/manager/queryBySectionCode',
+                    data: JSON.stringify({"sectionCode": val.code, "type": 80}),
+                    dataType: 'json',
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        if(data.data.length>0){
+                            $("#manage_i").html("已设置");
+                            total += data.data.length;
+                        }
+                    }
+                })
+                $.ajax({//嘉宾
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type: "post",
+                    async:false,
+                    url: base_url + 'html5/v1/mediaGuest/queryBySectionCode',
+                    data: JSON.stringify({"sectionCode": val.code, "type": 50}),
+                    dataType: 'json',
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        if(data.data.length>0){
+                            $("#guestcard_i").html("已设置");
+                            total += data.data.length;
+                        }
+                    }
+                })
+                $.ajax({//媒体记者
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type: "post",
+                    async:false,
+                    url: base_url + 'html5/v1/mediaGuest/queryBySectionCode',
+                    data: JSON.stringify({"sectionCode": val.code, "type": 60}),
+                    dataType: 'json',
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        if(data.data.length>0){
+                            $("#mediacard_i").html("已设置");
+                            total += data.data.length;
+                        }
+                    }
+                })
+            })
+        })*/
+
+        /*var job = localStorage.getItem('job_'+activityCode);//岗位
+        if(job>0){
+            $("#job_i").html("已设置");
+            total += job;
+        }
+        var task = localStorage.getItem('task_'+activityCode);//任务
+        if(task>0){
+            $("#task_i").html("已设置");
+            total += task;
+        }
+        var ticket = localStorage.getItem('ticket_'+activityCode);//门票
+        if(ticket>0){
+            $("#ticket_i").html("已设置");
+            total += ticket;
+        }
+
+        var manage = localStorage.getItem('manage_'+activityCode);//管理员
+        if(manage>0){
+            $("#manage_i").html("已设置");
+            total += manage;
+        }
+
+        var guestcard = localStorage.getItem('guestcard_'+activityCode);//嘉宾
+        if(guestcard>0){
+            $("#guestcard_i").html("已设置");
+            total += guestcard;
+        }
+
+        var mediacard = localStorage.getItem('mediacard_'+activityCode);//媒体
+        if(mediacard>0){
+            $("#mediacard_i").html("已设置");
+            total += mediacard;
+        }*/
+    }
+</script>
+</body>
+</html>
+

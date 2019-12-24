@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发票抬头</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>发票抬头</span>
+    </div>
+    <ul class="warp_pws_f">
+
+    </ul>
+    <div class="ht30"></div>
+    <div class="ht60"></div>
+    <footer class="warp_pws_g_se">
+        <input type="button" value="新增发票抬头" onclick="add_invoice()">
+    </footer>
+</div>
+<script type="text/javascript" src="../wap/js/web-storage-cache.js"></script>
+<script type="text/javascript" src="../wap/js/regular.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script>
+    function add_invoice(){
+        window.location.href = './user_invoice_add.html';
+    }
+</script>
+<script type="text/javascript">
+    login_in()
+
+    function login_in(){
+        var user_msg = '';
+        var token = '';
+        var user_msg = JSON.parse($.cookie('user_msg'));
+        var token = $.cookie('token');
+        var Nature = '';
+        var html="";
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/userInvoice/myInvoices",
+            data:JSON.stringify({"user":user_msg.userId}),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                var data1=data.data;
+                console.log(data1);
+                if(data.code==0){
+                    var eacharr=$.each(data1,function(v,k) {
+                        if(k.type==1){
+                            Nature="个人"
+                        }else{
+                            Nature="单位"
+                        }
+                        html+='<li>\
+                            <a href="#">\
+                            <h2>'+k.name+'</h2>\
+                            <div>\
+                            <span>'+Nature+'</span>\
+                            <i>默认</i>\
+                            </div>\
+                            </a>\
+                            </li>';
+                    });
+                    $('.warp_pws_f').html(html);
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '登录失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+</script>
+</body>
+</html>

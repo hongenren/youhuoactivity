@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/activity_content.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.qrcode.min.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script><!--地图-->
+    <script src="../wap/js/jquery.baiduMap.min.js"></script><!--地图-->
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <!--头部开始-->
+    <div class="warp_zy_j">
+        <a href="javascript:void(0)" onclick="jump('./activity_list.html?categorycode=DT');"></a>
+        <span>公益上海</span>
+    </div>
+    <!--头部结束-->
+    <div class="warp_hd_p_sg">
+        <img src="../wap/img/pws_37.jpg">
+        <div class="warp_hd_p_sf">
+            <b>加载中</b>
+            <div class="warp_hd_p_sd">
+
+            </div>
+            <ul class="warp_gl_r_sy">
+
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="warp_hd_p_ss">
+        <div class="warp_hd_p_sa" style="overflow: visible;">
+            <span style="margin-right: 50px;color: #999999;" class='addr'>活动日期：<i style="color: #000000;display: inline;" id="shijianI"> </i></span>
+            <span style="margin-right: 50px;color: #999999;" class='addr'>活动地点：<i style="color: #000000;display: inline;" id="dizhiI"> </i></span>
+            <span style="margin-right: 50px;color: #999999;">咨询电话：<i style="color: #000000;display: inline;" id="dianhua"> </i></span>
+            <a id="dianhuaA" style="display: none;"></a>
+            <a href="javascript:void(0)" id="ditudakai" data-lat="" data-lng="">
+                <img src="../wap/img/pws_136.png">
+            </a>
+        </div>
+        <div class="warp_hd_p_sm">
+            <div class="warp_hd_p_sn">
+                <em></em>
+                <b>公益活动简介</b>
+            </div>
+            <div class="warp_hd_p_sb" style="height: auto;">
+
+            </div>
+            <!--<a href="javascript:void(0)" class="warp_hd_p_sv">展开更多<i></i></a>-->
+        </div>
+        <div class="warp_hd_p_sm">
+            <div class="warp_hd_p_sn">
+                <a class="registration" href="javascript:void(0)">报名列表</a>
+                <em></em>
+                <b>已报名人数</b>
+                <i id='num'>（0）</i>
+            </div>
+            <ul class="warp_hd_p_sc">
+            </ul>
+            <div class="warp_hd_p_sx">
+                <a href="javascript:void(0)" onclick="reward()" class="warp_hd_p_sx_s">赏</a>
+                <span><a href="" class="url_list"><i id="reward_num">0</i>赞赏</a></span>
+            </div>
+            <div class="warp_hd_p_sz">
+                <a href="" id="append_html" class="url_list">
+
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="map_xp_p">
+        <div class="map_xp_o"><a href="javascript:void(0)"></a></div>
+    </div>
+
+    <!------地图开始------>
+    <div class="left">
+        <div id="container1" class="container"></div>
+    </div>
+    <!------地图结束------>
+
+    <div class="ht60"></div>
+    <footer class="warp_hd_i">
+        <a href="" class="warp_hd_i_sp">立即报名</a>
+        <div class="warp_hd_i_so">
+            <div class="warp_hd_i_si">
+                <a href="javascript:void(0)" onclick="jumpId();">
+                    <img src="../wap/img/pws_143.jpg">
+                    <span>问答</span>
+                </a>
+                <a href="javascript:void(0)" class="share">
+                    <img src="../wap/img/pws_144.jpg">
+                    <span>分享</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <div class="share_div">
+        <div class="share_up"></div>
+        <img id="shareImg" src="../wap/img/share_1.png">
+    </div>
+    <script>
+        function GetHttpRequest(){
+            if ( window.XMLHttpRequest ) // Gecko
+                return new XMLHttpRequest() ;
+            else if ( window.ActiveXObject ) // IE
+                return new ActiveXObject("MsXml2.XmlHttp") ;
+        }
+
+        function ajaxPage(sId, url){
+            var oXmlHttp = GetHttpRequest() ;
+            oXmlHttp.onreadystatechange = function()
+            {
+                if (oXmlHttp.readyState == 4)
+                {
+                    includeJS( sId, url, oXmlHttp.responseText );
+                }
+            }
+            oXmlHttp.open('GET', url, false);//同步操作
+            oXmlHttp.send(null);
+        }
+
+        function includeJS(sId, fileUrl, source){
+            if ( ( source != null ) && ( !document.getElementById( sId ) ) ){
+                var oHead = document.getElementsByTagName('HEAD').item(0);
+                var oScript = document.createElement( "script" );
+                oScript.type = "text/javascript";
+                oScript.id = sId;
+                oScript.text = source;
+                oHead.appendChild( oScript );
+            }
+        }
+
+        $(".share").live("click",function(){
+            ajaxPage( "scrA", "../wap/js/user/user.js" );
+            //$(".share_div").fadeIn();
+            if($.cookie('user_msg')==undefined||$.cookie('token')==undefined){
+                ajaxPage( "scrA", "../wap/js/user/user.js" );
+            }else{
+                $.ajax({
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type: "post",
+                    url: base_url + "html5/v1/user/center",
+                    data: JSON.stringify({"userId": user_msg.userId}),
+                    dataType: 'json',
+                    headers: {'token': token},
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        if (data.code == 0) {
+                            var data1 = data.data;
+                            //$(location).attr('href', url+"&name="+encodeURI(encodeURI(data1.userCertUserName))+"&headImg="+data1.userHeadImg);
+                            window.location.href='activity_share.html?activityCode='+activityCode+'&jumpAdd='+'../activity/activity_share.html?activityCode='+activityCode+"&name="+encodeURI(encodeURI(data1.userCertUserName))+"&headImg="+data1.userHeadImg;
+                        }
+                    }
+                })
+            }
+        });
+        $(".share_up").on("click",function(){
+            $(".share_div").hide();
+        });
+
+        function jumpId(){
+            jumpNewsBaseUrl('/gysh_cm_pub/inquire/question.html?forSubId='+activityCode);
+        }
+    </script>
+    <!--分享弹出窗-->
+
+</div>
+<input type="hidden" id="orgCode" value="">
+
+<script src="../wap/js/dropload.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    var activityCode = $_GET['activityCode'];
+    $(".url_list").attr("href","../activity/reward_list.html?activityCode="+activityCode)
+</script>
+<script type="text/javascript">
+    get_content();
+    var activityCode = $_GET['activityCode'];
+    function get_content(){
+        //console.log(activityCode)
+        var msg = '';
+        var taghtml = '';
+        var zhuban ='' //主办
+        var xieban ='' //协办
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"POST",
+            url:base_url + "html5/v1/activity/queryDetail",
+            data:JSON.stringify({'activityCode':activityCode}),
+            contentType: "application/json;charset=utf-8",
+            dataType:'json',
+            beforeSend:function(XMLHttpRequest){
+                layer.open({type: 2,content: '加载中'});
+            },
+            success:function(data){
+                //console.log(data);
+                if(data.code==0){
+                    var data1 = data.data;
+                    $(document).attr("title",data1.name+'-公益上海');
+                    $(".registration").attr('href',"../activity/activity_registration.html?activityCode="+data1.activityCode);
+                    if(data1.coverImg!=''){
+                        $('.warp_hd_p_sg img').attr("src",data1.coverImg);
+                    }
+                    $('.warp_hd_p_sf b').html(data1.name);
+                    if(data1.tag!=''){
+                        var tag_arr = data1.tag.split(';');
+                        for(i=0;i<tag_arr.length;i++){
+                            if(tag_arr[i]!=''){
+                                taghtml += '<span>'+tag_arr[i]+'</span>';
+                            }
+                        }
+                    }
+                    $("#orgCode").val(data1.orgCode)
+                    $(".warp_hd_p_sd").append(taghtml);
+                    $('#dianhua').html(data1.contactPhone);
+                    $('#dianhuaA').attr("href","tel:"+data1.contactPhone);
+                    $("#dianhua").live('click',function() {
+                        document.getElementById("dianhuaA").click();
+                    })
+                    if(data1.orgName != ''){
+                        //var cieloi = getId(data1.orgId);
+                        zhuban += '<li onclick="$(location).attr(\'href\', \'../huangye/mobileDetail.html?prjvOrgId='+data1.orgId+'\')">\
+                                    <b style="color: #999999#">主办方：</b>\
+										<div>\
+											<span>'+data1.orgName;
+                        zhuban += '<span/></div>\
+									</li>'
+                        $(".warp_gl_r_sy").append(zhuban)
+                    }
+                    if(data1.activityUniteParamList != false){
+                        xieban +='<li>\
+									<b style="color: #999999#">协办方：</b>\
+									<div>';
+                        $.each(data1.activityUniteParamList,function(index,val){
+                            //var cieloi = getId(val.orgId);
+                            xieban +='<span onclick="$(location).attr(\'href\', \'../huangye/mobileDetail.html?id='+val.orgId+'\')">'+val.orgName+'<span/>';
+                        })
+                        xieban +='</div>\
+								  </li>';
+
+                        $(".warp_gl_r_sy").append(xieban)
+                    }
+                    if(data1.startDay == '--'){
+                        $("#shijianI").html(data1.endDay);
+                    }else{
+                        $("#shijianI").html(data1.startDay+"至"+data1.endDay);
+                    }
+                    $("#ditudakai").attr("data-lng",data1.lng);
+                    $("#ditudakai").attr("data-lat",data1.lat);
+                    $("#dizhiI").html(data1.address);
+                    /*$(".addr").live('click',function(){
+                        $(location).attr('href', '../huangye/mobileDetail.html?id='+data1.orgId);
+                    })*/
+
+                    //var activityDemoParamListlength=data1.activityDemoParamList.length
+                    var activityDemoParamListlength=data1.activityDemoParamList.length;
+                    var activityDemoParamListArray=new Array()
+                    activityDemoParamListArray=data1.activityDemoParamList;
+                    if(activityDemoParamListlength==0){
+                        $(".warp_hd_p_sv").hide();
+                        $(".warp_hd_p_sb").css('height','auto');
+                    }
+                    for(var i= 0;i<activityDemoParamListlength;i++){
+                        var {demo,img}=activityDemoParamListArray[i];
+                        if(demo!=''){
+                            $(".warp_hd_p_sb").append("<span>"+demo+"</span>")
+                        }else{
+                            $(".warp_hd_p_sv").hide();
+                            $(".warp_hd_p_sb").css('height','auto');
+                        }
+                        if(img!=''){
+                            $(".warp_hd_p_sb").append("<img src='"+img+"'>")
+                        }
+                        //console.log(activityDemoParamListArray[i])
+                    }
+                    $(".warp_hd_i_sp").attr("href","../activity/activity_enroll.html?activityCode="+data1.activityCode);
+                    layer.closeAll();
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    setTimeout(function(){layer.closeAll();},1000);
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '加载失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                setTimeout(function(){layer.closeAll();},1000);
+            }
+        })
+    }
+
+
+
+
+    queryApplies()
+    function queryApplies(){
+        var activityCode = $_GET['activityCode'];
+        var msg = '';
+        var html=""
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"POST",
+            url:base_url + "html5/v1/activity/queryApplies",
+            data:JSON.stringify({
+                "activityCode":activityCode,
+                "sectionCode":"",
+                "type":""
+            }),
+            contentType: "application/json;charset=utf-8",
+            dataType:'json',
+            success:function(data){
+                //console.log(data)
+                if(data.code==0){
+                    var data1 = data.data;
+                    var num = data1.length;
+
+                    var eacharr=$.each(data1,function(v,k) {
+                        var headImg=k.headImg;
+                        //console.log(headImg)
+                        if(headImg==""){
+                            headImg="../wap/img/pws_244.png"
+                        }
+                        // var user= k.user
+                        // user=user.substring(0,3);
+                        html+='<li style="text-align:center;">\
+                               <i style=\'background-image:url(\"'+headImg+'?x-oss-process=image/crop,x_0,y_0\");display: inline-block;width: 66%;padding-bottom: 66%;background-repeat: no-repeat;background-position: center;background-size: cover;border-radius: 50%;\'></i>\
+                        <span>'+k.nickName+'</span>\
+                        </li>';
+                    });
+                    $("#num").text("("+num+")");
+                    $('.warp_hd_p_sc').html(html);
+
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '加载失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+        })
+    }
+
+
+    getWxConfig();
+    function getWxConfig(){
+        var wwwurl = location.href.split('#')[0];
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/wechat/getWeChatJsSign",
+            data:JSON.stringify({"url":wwwurl}),
+            //headers : {'token':token},
+            async:false,
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                console.log(data);
+                if(data.code==0){
+                    var data1 = JSON.parse(data.data.data);
+                    //sessionStorage.setItem('WxConfig',data1); //获取WX配置信息
+                    wx.config({
+                        debug: false,
+                        appId: data1.appId, // 必填，公众号的唯一标识
+                        timestamp:parseInt(data1.timestamp), // 必填，生成签名的时间戳
+                        nonceStr: data1.nonceStr, // 必填，生成签名的随机串
+                        signature: data1.signature,// 必填，签名，见附录1
+                        jsApiList: ['checkJsApi','scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+
+                    });
+                    //console.log(data1.signature);
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+    wx.error(function(res) {
+        console.log("出错了error：" + res.errMsg);
+    });
+
+
+    wx.ready(function(){
+        // 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+        wx.onMenuShareTimeline({
+            title: 'data1.name', // 分享标题
+            link:"http://gysh.dakaqi.cn/activity/activity_content.html?activityCode=BBA10116320186",
+            imgUrl: "data1.coverImg" // 分享图标
+        });
+        // 获取“分享给朋友”按钮点击状态及自定义分享内容接口
+        wx.onMenuShareAppMessage({
+            title: 'data1.name', // 分享标题
+            desc: "data1.name", // 分享描述
+            link:"{$link}",
+            imgUrl: "data1.coverImg", // 分享图标
+            type: 'link', // 分享类型,music、video或link，不填默认为link
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        if(!isWeiXinQQ()){
+            $("#shareImg").attr("src", "../wap/img/share_2.png");
+            $("#shareImg").css({"position":"absolute","left":"0","bottom":"30px","right":"0"});
+        }
+        $(".warp_hd_p_sv").live("click",function(){
+            if($(this).hasClass('cla')){
+                $(this).removeClass('cla').html("展开更多<i></i>");
+                $(".warp_hd_p_sb").css('height','100px')
+            }else{
+                $(this).addClass('cla').html("收起详情<i></i>");
+                $(".warp_hd_p_sb").css('height','auto')
+            }
+        });
+
+        $.ajax({
+            //surl: 'http://localhost:28080/cm/termapi/findInquireList?forSubId='+activityCode,
+            url: news_base_url+'/cm/termapi/findInquireList?forSubId='+activityCode,
+            type: 'post',
+            dataType: 'json',
+            success: function (resp) {
+                if (resp.errorcode == 0) {
+                    $.each(resp.data, function(i,val) {
+                        var titleImg = '<img src="' + val.titleImg + '">';
+                        if(val.titleImg==null || val.titleImg==""){
+                            titleImg = "";
+                        }
+                        $(".warp_hd_o_sp").append('<li>\
+                                <a href="'+news_base_url+'/gysh_cm_pub/inquire/normal/detail/'+val.id+'.html">\
+                                    '+titleImg+'\
+                                    <div class="warp_hd_o_so">\
+                                        <b>' + val.title + '</b>\
+                                        <span>' + val.inquireContent + '</span>\
+                                        <i>' + val.answerSum + '回答&nbsp;&nbsp;&nbsp;<time>' + val.createDate + '<time></i>\
+                                    </div>\
+                                    </a>\
+                                </li>');
+                    });
+                }else {
+                    alert(resp.data);
+                }
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    // 打赏列表
+    reward_list()
+    function reward_list(){
+        var activityCode = $_GET['activityCode'];
+        var html = ""
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"POST",
+            url:base_url + "html5/v1/activity/rewardList",
+            data:JSON.stringify({
+                "activityCode":activityCode,
+                "pageNumber":1,
+                "pageSize":100
+            }),
+            contentType: "application/json;charset=utf-8",
+            dataType:'json',
+            success:function(data){
+                if(data.code==0){
+                    // console.log(data)
+                    data_index = data.data;
+                    $("#reward_num").html(data_index.total)
+                    $.each(data_index.records,function(v,k) {
+                        var headImg = k.headImg;
+                        if(headImg==null || headImg==""){
+                            headImg = "../wap/img/pws_244.png";
+                        }
+                        html+='<img src="'+headImg+'" style="border-radius: 50%">';
+                    });
+                    $('#append_html').html(html);
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '加载失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+        })
+    }
+</script>
+<script type="text/javascript">
+    function reward(){
+        if($.cookie('user_msg')==undefined||$.cookie('token')==undefined){
+            ajaxPage( "scrA", "../wap/js/user/user.js" );
+        }else{
+            var activityCode = $_GET['activityCode'];
+            var orgCode = $("#orgCode").val();
+            window.location.href="reward.html?activityCode="+activityCode+"&orgCode="+orgCode+'&jumpAdd='+"reward.html?activityCode="+activityCode+"&orgCode="+orgCode;
+        }
+    }
+</script>
+<script>
+    $("#ditudakai").live("click",function(){
+        var lng = $(this).attr("data-lng");
+        var lat = $(this).attr("data-lat");
+        var name1 = $('.warp_hd_p_sf b').html();
+        var contactPhone = $('#dianhua').html();
+        var address = $(".warp_hd_p_sa span").html();
+        new BaiduMap({
+            id: "container1",
+            level: 15,//  选填--地图级别--(默认15)
+            title: {
+                text: name1,
+                className: "title"
+            },
+            content: {
+                className: "content",
+                text: ["地址："+address, "电话："+contactPhone]
+            },
+            point: {
+                lng: lng,
+                lat: lat
+            }
+        });
+        $(".map_xp_o").fadeIn();
+        $("body,html").css({
+            "height":"100%",
+            "overflow":"hidden"
+        });
+        $('body').addClass('add');
+    });
+    $(".map_xp_o").live("click",function(){
+        $(this).fadeOut();
+        $("body,html").css({
+            "height":"auto",
+            "overflow":"auto"
+        });
+        $('body').removeClass('add')
+    });
+
+
+</script>
+<script>
+    $(".warp_hd_p_sa a").live("click",function(){
+        $(".container").css('z-index','9999999')
+    });
+    $(".map_xp_o").live("click",function(){
+        $(".container").css('z-index','-1')
+    });
+    function getId(ordId){
+        var ace = "";
+        $.ajax({
+            url: base_url + '/html5/v1/orgPlace/queryOrgByPrjvOrgId',
+            //url: '/cm/termapi/geArticletListByMy',
+            type: "post",
+            async:false,
+            dataType: "json",
+            data: "{\"prjvOrgId\": " + ordId + "}",
+            headers: {'Content-Type': 'application/json'},
+            success: function (resp) {
+                if (resp.code == 0) {
+                    ace = resp.data.id;
+                }
+            }
+        });
+        return ace;
+    }
+</script>
+
+</body>
+</html>

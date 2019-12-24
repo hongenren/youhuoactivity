@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>电子照片</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <style type="text/css">
+        .my_tp {left: 100%}
+        .warp_dp input{float: right;text-align: right;color: #999999;width: 80px;height: 20px;line-height: 18px;border: 0;margin-top: 0;}
+        .warp_dp u{display: block;float: right;text-decoration:none}
+        .warp_dp i{font-style: normal}
+        .warp_do u{display: block;line-height: 24px;color: #999999;text-decoration:none}
+        .content{display: flex; justify-content: center; align-items: center;position: relative;}
+        .content img {width: 147.5px;height: 206.5px}
+        #uploadInput{filter:alpha(opacity=0);opacity:0;width: 0;height: 0;}
+        #uploadButton{border:0px;font-size: 14px;color: #FFFFFF;background: #72B81E;border-radius: 30px;padding: 0 8px;height: 30px;line-height: 28px;}
+        .ms{display: none;text-align: center;position: absolute; bottom:0px; width: 147.5px; height: auto;  background: rgba(0,0,0,0.3);font-size: 14px;color: #ffffff;}
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<!--头部开始-->
+<div class="warp_zy_j">
+    <a href="javascript:history.go(-1);"></a>
+    <span>电子照片</span>
+</div>
+<!--头部结束-->
+<form class='headimg' method="post" enctype="multipart/form-data">
+    <div class="warp">
+        <ul class="warp_pws_c" style="background: none;">
+            <li style="border: 0px;">
+                <div class="warp_pws_c_sp">
+                    <div class="content">
+                        <img src="../wap/img/add.png" id="img" onclick="openFile();">
+                        <input type="file" onchange="uploadImg()" name="img" id="uploadInput">
+                        <span class="ms" onclick="openFile();">点击修改</span>
+                    </div>
+                </div>
+            </li><!--
+            <li id="uploadButtonLi" style="border: 0px;text-align: center;display: none;">
+                <input type="button" id="uploadButton" value="点击修改" onclick="openFile()">
+            </li>-->
+            <li style="border: 0px;text-align: center;font-size: 12px;color: #666666;">
+                <b>该照片用于“公益护照”、“出入证”等<br />照片格式：2寸（3.5*5.3cm）</b>
+            </li><!--
+            <li style="border: 0px;">
+                <div class="content">
+                    <img src="">
+                </div>
+            </li>-->
+        </ul>
+    </div>
+</form>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+
+<script type="text/javascript">
+    function openFile(){
+        $("#uploadInput").trigger("click");
+    }
+    //头像上传到云 -=
+    function uploadImg() {
+        layer.open({
+            content: '上传中...'
+            ,skin: 'msg'
+            ,time: 100 //2秒后自动关闭
+        });
+        var form = document.getElementsByClassName("headimg")[0];
+        var imgdata = new FormData(form);
+        //利用ajax上传
+        jQuery.ajax({
+            type: "POST",
+            url:img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper',
+            data: imgdata,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                var src = data.data;
+                if(src){
+                    if(upload_ElePhoto(src)){
+                        $('#img').attr('src',src);
+                        layer.closeAll();
+                        layer.open({
+                            content: '上传成功'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                    }else{
+                        layer.closeAll();
+                        layer.open({
+                            content: '上传失败'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                    }
+                }else{
+                    layer.closeAll();
+                    layer.open({
+                        content: '上传失败'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+            }
+        })
+    }
+
+    $(document).ready(function(){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            async: false,
+            url: base_url + "html5/v1/user/center",
+            data: JSON.stringify({"userId": user_msg.userId}),
+            headers: {'token': token},
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                if (data.code == 0) {
+                    if(data.data.userCertImg1){
+                        $('#img').attr('src',data.data.userCertImg1);
+                        $('.ms').show();
+                    }
+                    if(data.data.certImgLevel!=0){
+                        $('#img').removeAttr("onclick");
+                        $('.ms').removeAttr("onclick");
+                        $(".ms").html("该照片已被管理员认证，不可修改");
+                    }
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>
+

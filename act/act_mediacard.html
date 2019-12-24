@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/cc_dh_o.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/honeySwitch.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+    <script type="text/javascript" src="../wap/js/honeySwitch.js"></script>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>
+    <style type="text/css">
+    .warp_sy_p{overflow: hidden;border: 1px solid #E6E6E6;padding: 3%;margin: 3% 3% 1% 3%}
+    .warp_sy_p li{width: 100%;overflow: hidden;}
+    .warp_sy_p li span{display: block;font-size: 14px;line-height: 24px}
+    .int1{position: relative;display: inline-block;width: 44px;height: 24px;border-radius: 16px;line-height: 32px;-webkit-tap-highlight-color: rgba(255,255,255,0)}
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <div class="warp_sh_p">
+        <div class="warp_hr">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                </div>
+                <!-- Add Arrows -->
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+
+    <ul class="warp_sh_y">
+        <li class="warp_sh_y_li">
+            <div class="warp_sh_o">
+                <ul class="warp_sh_i">
+
+                </ul>
+            </div>
+            <ul class="warp_sh_u">
+            </ul>
+        </li>
+    </ul>
+    <form>
+    <ul class="warp_sh_u" style="margin: 0;padding: 0;background: none">
+        <li>
+            <div class="warp_sh_u_ls">
+                <div class="warp_sh_u_ly">
+                    <em></em>
+                    <b>基础信息</b>
+                </div>
+                <div class="warp_sh_u_ld">
+                    <div class="warp_sh_u_la">
+                        <div class="warp_pws_c_sp">
+                            <b>积分赠送</b>
+                            <input type="number" class="spinnerExample" name="inIntegral" />
+                        </div>
+                        <div class="warp_sh_u_lt">
+                            <span>（积分剩余：<i style="font-style: normal">0</i>）</span>
+                            <b>（签到后，自动发放）</b>
+                        </div>
+                    </div>
+                    <div class="warp_sh_u_la">
+                        <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                            <b><i>*</i>报到时间</b>
+                            <input class='demo_time' type="text" readonly="true" name="arriveTime" placeholder="请选择报到时间" value="" style="width: 150px;float: right;margin: 0"/>
+                        </div>
+                    </div>
+                    <div class="warp_sh_u_la">
+                        <div class="warp_pws_c_sp" style="margin: 3% 0">
+                            <b><i>*</i>报到地点</b>
+                            <a href="javascript:void(0)" class="warp_dd">请选择</a>
+                            <input type="text" name="arriveAddress" id="address" placeholder="请在常用地址中选择" readonly="true" class="warp_pws_c_so">
+                            <input type="hidden" name="lat" id="lat" value="">
+                            <input type="hidden" name="lng" id="lng" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="warp_sh_u_ld">
+                <div class="warp_sh_u_lb">
+                    <span>报到时间及报到地点请在各场次进行设置，如不设置，则将沿用活动的场次设定。</span>
+                </div>
+            </div>
+            <div class="warp_sh_u_lv">
+                <div class="warp_sh_u_ly">
+                    <em></em>
+                    <b>采访邀请函发放<i style="display: none">（使用短信方式发送邀请函）</i></b>
+                </div>
+                <div class="warp_sh_u_lf " style="width: auto;padding: 0 3%;display: none;">
+                    <h2 style="padding: 0">是否使用短信发送通知给嘉宾</h2>
+                    <div class="common-row">
+                        <div class="cell-right"><span class="switch-off"></span></div>
+                        <input type="hidden" name="sendSMS" value="20" />
+                    </div>
+                </div>
+                <ul class="warp_sy_p" style="display: none">
+                    <li>
+                        <span>每条短信发送需要使用积分：<i style="font-style: normal">100</i></span>
+                    </li>
+                    <li>
+                        <span>当前剩余积分：<i style="font-style: normal">0</i></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="warp_sh_u_lr">
+                <div class="warp_sh_u_lm" id="per_old">
+                    <div class="warp_sh_u_ln">
+                        <a href="javascript:void(0)" class="warp_sh_u_lw" onclick="remove_per(this)"></a>
+                        <div class="warp_sh_u_lq">
+                            <i>*</i>
+                            <input type="text" placeholder="姓名" name="realName">
+                        </div>
+                        <input type="number" placeholder="手机号" class="warp_sh_u_lc" name="mobile">
+                        <input type="text" placeholder="媒体单位" name="media" class="warp_sh_u_lz">
+                    </div>
+                    <div id="before_html"></div>
+                </div>
+                <a class="warp_sh_u_li" onclick="add_person()"><i>+</i>添加</a>
+            </div>
+
+            <div class="warp_pws_v">
+                <div class="warp_sh_u_ly">
+                    <em></em>
+                    <b>记者预约登记 <i>（通过活动页面自行预约，需审核）</i></b>
+                </div>
+                <div class="warp_sh_u_ld">
+                    <div class="warp_pws_c_sp" style="margin: 5% 0">
+                        <b><i>*</i>数量</b>
+                        <input type="number" class="spinnerExample" name="total" />
+                    </div>
+                </div>
+            </div>
+            <div class="warp_sh_u_lf" style="background: #FFFFFF;padding: 0 3% 3% 3%;width: auto">
+                <h2 style="padding: 0">仅限本机构成员</h2>
+                <div class="common-row">
+                    <div class="cell-right"><span class="switch-off"></span></div>
+                    <input type="hidden" name="self" value="20" />
+                </div>
+            </div>
+        </li>
+
+        <input type="hidden" name="sectionCode" value="" />
+        <input type="hidden" name="activityCode" value="" />
+
+    </ul>
+    </form>
+    <div class="ht60"></div>
+    <div class="ht70"></div>
+     <footer class="warp_pws_m_sw">
+        <ul class="warp_pws_hd">
+          <li>
+            <input type="button" value="返回" onclick="window.history.go(-1)">
+          </li>
+          <li>
+            <input type="button" value="设置成功" onclick="sub_form()" id="sub_button">
+          </li>
+        </ul>
+    </footer>
+
+</div>
+<div class="warp_ci">
+
+</div>
+<div class="warp_ifrem" style="background: #FFFFFF">
+
+</div>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+<link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+<script type="text/javascript" src="../wap/js/swiper_sime.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/act/act.js"></script>
+<script type="text/javascript" src="../wap/js/regular.js"></script>
+<script type="text/javascript">
+    $('.spinnerExample').spinner({});
+</script>
+<script>
+    $(function(){
+        if(!history.state){
+            pushHistory();
+        }
+        window.addEventListener("popstate", function(e) {
+            layer.open({
+                content: '媒体未设置完成，您确定要返回吗？'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    window.history.go(-1);
+                    //$(location).attr('href', "./act_base_add.html");
+                }
+                , no: function (index) {
+                    e.preventDefault();
+                    pushHistory();
+                }
+            })
+        }, false);
+        function pushHistory() {
+            var state = {
+                title: "title",
+                url: "#"
+            };
+            window.history.pushState(state, "title", "#");
+        }
+    });
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    var currYear = (new Date()).getFullYear();
+    // Date & Time demo initialization
+    $('.demo_time').mobiscroll().time({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
+        //dateFormat:"yy-mm-dd",
+        timeFormat: 'HH:ii',
+        startYear: currYear,
+        endYear: currYear +30,
+        stepMinute: 1,
+        showNow: true
+    });
+</script>
+<script type="text/javascript">
+    //加载日期
+    function ajax_date(){
+        var date_list = '';
+        var date_list = JSON.parse(localStorage.getItem('date_list'));
+        var html = '';
+        $.each(date_list,function(index,val){
+            //console.log(index);
+            var thisclass = index==0?'thisclass':'';
+                html +='<div style="cursor:pointer" class="swiper-slide '+thisclass+'" day="'+val.day+'">\
+                        <a href="javascript:void(0)">\
+							<span style="line-height: 42px;">'+val.day+'</span>\
+						</a>\
+                    </div>';
+            });
+
+        $('.swiper-wrapper').empty();
+        $('.swiper-wrapper').html(html);
+
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 4,
+            spaceBetween: 5,
+            slidesPerGroup: 4,
+            loop: false,
+            loopFillGroupWithBlank: false,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            }
+        });
+
+
+        $("input[name='sectionCode']").val(date_list[0]['sections'][0]['code']);
+        $("input[name='activityCode']").val(date_list[0]['sections'][0]['activityCode']);
+        $("input[name='day']").val(date_list[0]['sections'][0]['day']);
+        $("input[name='startTime']").val(date_list[0]['sections'][0]['startTime']);
+        $("input[name='endTime']").val(date_list[0]['sections'][0]['endTime']);
+
+        ajax_sections(date_list[0]['sections'],date_list[0]['day']);
+    }
+    //加载场次
+    function ajax_sections(sections,day,code=''){
+            var html = '';
+            var name = '';
+            var index2 = '';
+            $.each(sections,function(index2,val2){
+                if(code==''){
+                    var class1 = index2==0?'thisclass':'';
+
+                    $("input[name='sectionCode']").val(val2['code']);
+                    $("input[name='day']").val(val2['day']);
+                    $("input[name='startTime']").val(val2['startTime']);
+                    $("input[name='endTime']").val(val2['endTime']);
+                }else{
+                    if(code==val2['code']){
+                        var class1 = 'thisclass';
+
+                        $("input[name='sectionCode']").val(val2['code']);
+                        $("input[name='day']").val(val2['day']);
+                        $("input[name='startTime']").val(val2['startTime']);
+                        $("input[name='endTime']").val(val2['endTime']);
+                    }
+                }
+
+                switch(val2.type){
+                    case 10:
+                    var name ='全天';
+                    break;
+                    case 20:
+                    var name ='上午场';
+                    break;
+                    case 30:
+                    var name ='下午场';
+                    break;
+                    case 40:
+                    var name ='晚上场';
+                    break;
+                }
+                html += '<li style="cursor:pointer" class="'+class1+'" data-date="'+day+'" data-code="'+val2.code+'" data-startTime="'+val2.startTime+'" data-endTime="'+val2.endTime+'">\
+                        <span>'+name+'</span>\
+                        <i></i>\
+                        </li>';
+                if(localStorage.getItem('mediacard'+val2.code)!=undefined){
+                    $('#sub_button').val("已设置");
+                    $('#sub_button').val("已设置");
+                    $('#sub_button').css({'background-color':'#ACACAC'});
+                    $('#sub_button').attr("onclick",'');
+                }else{
+                    $('#sub_button').val("设置完成");
+                    $('#sub_button').css({'background-color':'#72B81E'});
+                    $('#sub_button').attr("onclick","sub_form()");
+                }
+
+            })
+
+
+            html2 = "<div class='warp_sh_u_ln'><a href='javascript:void(0)' class='warp_sh_u_lw' onclick=\"remove_per(this)\" ></a><div class='warp_sh_u_lq'><i>*</i><input type='text' placeholder='姓名' name='realName'></div><input type='number' placeholder='手机号' class='warp_sh_u_lc' name='mobile'><input type='text' placeholder='媒体单位' class='warp_sh_u_lz' name='media'></div><div id='before_html'></div>";
+
+            $("#per_old").html(html2);
+
+            $("input[name='total']").val(0);
+            $("input[name='inIntegral']").val(0);
+            $("input[name='audit']").val('20');
+            $("input[name='self']").val('20');
+            $("input[name='arriveTime']").val('');
+            $("input[name='arriveAddress']").val('');
+            $(".switch-on").attr('style','border-color: rgb(223, 223, 223); box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; background-color: rgb(255, 255, 255);');
+            $(".switch-on").attr('class','switch-off');
+            $('.warp_sh_i').empty();
+            $('.warp_sh_i').html(html);
+            get_this_msg(sections[0]['code']);
+
+
+    }
+    //查询未设置的场次
+    function find_not_set(state){
+        var see = 1;
+        //获取日期列表
+        var date_list = JSON.parse(localStorage.getItem('date_list'));
+        //console.log(date_list);
+        //循环日期
+        $.each(date_list,function(index,data){
+            //循环场次
+            $.each(data.sections,function(index2,data2){
+                //console.log(localStorage.getItem('guestcard'+data2.code));
+                //判断场次是否设置
+                if(localStorage.getItem('mediacard'+data2.code)==undefined){
+                    //console.log(data2.day);
+                    $(".swiper-wrapper .thisclass").removeClass("thisclass");
+
+                    $("div[day='"+data2.day+"']").addClass("thisclass");
+                    //发现未设置走追加接口
+                    ajax_sections(data.sections,data2.day,data2.code);
+                    see = 2;
+                    return false;
+                }
+            })
+            if(see == 2){
+                return false;
+            }
+        })
+        if(see == 2){
+            return false;
+        }
+        //console.log(date_list[0]['sections'][0]['activityCode']);
+        if(state==1){
+        layer.open({
+                    content: '已全部设置'
+                    ,skin: 'msg'
+                    ,time: 1 //1秒后自动关闭
+                });
+        setTimeout(function(){window.location.href ='./act_set.html?activityCode='+date_list[0]['sections'][0]['activityCode']},1000);
+        }
+    }
+      ///查询该场次信息
+    function get_this_msg(sectionCode){
+        var mediacard = localStorage.getItem('mediacard'+sectionCode);
+        if(mediacard!=undefined){
+            var data = JSON.parse(mediacard);  //JSON字符串 转为JSON 对象
+            $.each(data,function(index,val){
+                if(index=='arriveTime'){
+                    var atim = split_datetime(val);
+                    var val = atim.str;
+                    $("input[name='arriveTime']").val(atim.date);
+                }
+                $("input[name='"+index+"']").val(val);
+            })
+            if(data.applyParams!=''){
+                get_person_list(data.applyParams); //获取嘉宾邀请函列表
+            }
+            botton_decide_class();
+        }
+    }
+     //判断 底部按钮选择
+    function botton_decide_class(){
+        var cla = '';
+        $('.common-row input').each(function(){
+            var val1 = $(this).val();
+            //console.log(val1)
+            var cla = val1==10?'switch-on':'switch-off';
+            //console.log($(this).prev('div').html())
+            if(cla=='switch-on'){
+                $(this).prev('div').find('span:eq(0)').attr('class',cla).addClass('int1');
+            }else{
+                $(this).prev('div').find('span:eq(0)').attr('class',cla);
+            }
+
+        })
+    }
+     //获取邀请列表
+    function get_person_list(data){
+        console.log(data);
+        var html = '';
+        $.each(data,function(index,val){
+            html += "<div class='warp_sh_u_ln'><a href='javascript:void(0)' class='warp_sh_u_lw'></a><div class='warp_sh_u_lq'><i>*</i><input type='text' placeholder='姓名' name='realName' value='"+val.realName+"'></div><input type='number' placeholder='手机号' class='warp_sh_u_lc' name='mobile' value='"+val.mobile+"'><input type='text' placeholder='媒体单位' class='warp_sh_u_lz' name='media' value='"+val.unit+"'></div><div id='before_html'></div>";
+        })
+        $("#per_old").empty().append(html);
+    }
+</script>
+<script type="text/javascript">
+    ajax_date();
+    find_not_set();
+</script>
+
+<script>
+    $(function(){
+        var cotrs = $(".swiper-wrapper div");
+        cotrs.live('click',function(index,val){
+            var index = $(this).index();
+            var date_list = JSON.parse(localStorage.getItem('date_list'));
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+            ajax_sections(date_list[index].sections,date_list[index].day);
+            //活动场次code
+            var sectionCode = $(".warp_sh_i .thisclass").attr("data-code");
+            //活动日期
+            var day = $(".warp_sh_i .thisclass").attr("data-date");
+            //场次开始时间
+            var startTime = $(".warp_sh_i .thisclass").attr("data-starttime");
+            //场次结束时间
+            var endTime = $(".warp_sh_i .thisclass").attr("data-endtime");
+            //清空form 给定对应参数
+            html = "<div class='warp_sh_u_ln'><a href='javascript:void(0)' class='warp_sh_u_lw'></a><div class='warp_sh_u_lq'><i>*</i><input type='text' placeholder='姓名' name='realName'></div><input type='number' placeholder='手机号' class='warp_sh_u_lc' name='mobile'><input type='text' placeholder='媒体单位' class='warp_sh_u_lz' name='media'></div><div id='before_html'></div>";
+
+            $("#per_old").html(html);
+
+            $("input[name='total']").val(0);
+            $("input[name='inIntegral']").val(0);
+            $("input[name='audit']").val('20');
+            $("input[name='self']").val('20');
+
+            $("input[name='sectionCode']").val(sectionCode);
+            $("input[name='day']").val(day);
+            $("input[name='startTime']").val(startTime);
+            $("input[name='endTime']").val(endTime);
+
+            $("input[name='arriveTime']").val('');
+            $("input[name='arriveAddress']").val('');
+            $(".switch-on").attr('style','border-color: rgb(223, 223, 223); box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; background-color: rgb(255, 255, 255);');
+            $(".switch-on").attr('class','switch-off');
+
+            if(localStorage.getItem('mediacard'+sectionCode)!=undefined){
+                $('#sub_button').val("已设置");
+                $('#sub_button').attr("onclick",'');
+            }else{
+                $('#sub_button').val("设置完成");
+                $('#sub_button').attr("onclick","sub_form()");
+            }
+        });
+    });
+    $(function(){
+        var cotrs = $(".warp_sh_i li");
+        cotrs.live('click',function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+
+            $(this).parent().parent().next('.warp_sh_u').find('li').hide()
+
+            $(this).parent().parent().next('.warp_sh_u').find('li').eq($(this).index()).show();
+            //活动场次code
+            var sectionCode = $(".warp_sh_i .thisclass").attr("data-code");
+            //活动日期
+            var day = $(".warp_sh_i .thisclass").attr("data-date");
+            //场次开始时间
+            var startTime = $(".warp_sh_i .thisclass").attr("data-starttime");
+            //场次结束时间
+            var endTime = $(".warp_sh_i .thisclass").attr("data-endtime");
+            //清空form 给定对应参数
+            html = "<div class='warp_sh_u_ln'><a href='javascript:void(0)' class='warp_sh_u_lw'></a><div class='warp_sh_u_lq'><i>*</i><input type='text' placeholder='姓名' name='realName'></div><input type='number' placeholder='手机号' class='warp_sh_u_lc' name='mobile'><input type='text' placeholder='媒体单位' class='warp_sh_u_lz' name='media'></div><div id='before_html'></div>";
+
+            $("#per_old").html(html);
+
+            $("input[name='total']").val(0);
+            $("input[name='inIntegral']").val(0);
+            $("input[name='audit']").val('20');
+            $("input[name='self']").val('20');
+
+            $("input[name='sectionCode']").val(sectionCode);
+
+            $("input[name='arriveTime']").val('');
+            $("input[name='arriveAddress']").val('');
+            $(".switch-on").attr('style','border-color: rgb(223, 223, 223); box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; background-color: rgb(255, 255, 255);');
+            $(".switch-on").attr('class','switch-off');
+            get_this_msg(sectionCode);
+            if(localStorage.getItem('mediacard'+sectionCode)!=undefined){
+                $('#sub_button').val("已设置");
+                $('#sub_button').attr("onclick",'');
+            }else{
+                $('#sub_button').val("设置完成");
+                $('#sub_button').attr("onclick","sub_form()");
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    //ajax提交
+    function sub_form(){
+
+        // var user_msg = JSON.parse($.cookie('user_msg'));
+        // var token = $.cookie('token');
+        var ans = '1';
+        var a = $('form').serializeArray();
+		var day = $(".warp_sh_i .thisclass").attr("data-date");
+        //console.log(a.mobile);
+        var d = {};
+        var person = [];
+         $.each(a, function(){
+            d[this.name] = this.value;
+        });
+
+        var time = $("input[name='arriveTime']").val();
+        var address = $("input[name='arriveAddress']").val();
+
+        if(time == ''){
+            layer.open({
+                content: '报到时间不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }else{
+            time += time+" 00";
+        }
+
+        if(address == ''){
+            layer.open({
+                content: '报到地点不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+
+        //console.log(a);return;
+        var mediacard = 0;
+        var mediacardLocalStorage = localStorage.getItem('mediacard_'+$_GET['activityCode']);//媒体
+        if(mediacardLocalStorage){}else{
+            $("input[name='mobile']").each(function(index,data){
+                var mobile = $(this).val();
+                var name = $(this).parent().find("input[name='realName']").val();
+                var unit = $(this).next().val();
+
+                var tel=/^1\d{10}$/;
+
+
+                if(!tel.test(mobile)){
+                    layer.open({
+                        content: '手机号码有误'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    ans = '2';
+                    return false;
+                }
+
+                if(mobile=='' || name=='' || unit==''){
+                    layer.open({
+                        content: '人员信息不全'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    ans = '2';
+                    return false;
+                }else{
+                    mediacard++;
+                    person.push({"mobile":mobile,'realName':name,'type':10,"unit":unit});
+                }
+            })
+        }
+
+        if(mediacardLocalStorage){
+            localStorage.setItem('mediacard_'+$_GET['activityCode'], parseInt(mediacardLocalStorage)+mediacard);
+        }else{
+            localStorage.setItem('mediacard_'+$_GET['activityCode'], mediacard);
+        }
+
+        if(ans == 2){
+            return false;
+        }
+
+        //console.log(person);return;
+
+        delete d.mobile;
+        delete d.realName;
+        delete d.address;
+        delete d.lat;
+        delete d.lng;
+        d['arriveTime'] = day + ' ' + d['arriveTime']+':00';
+        d['applyParams'] = person;
+        d['orgCode'] = prjvorgMsg.orgThirdAccount;
+        d['audit'] = parseInt(d['audit']);
+        d['inIntegral'] = parseInt(d['inIntegral']);
+        d['total'] = parseInt(d['total']);
+
+        var mediacardLocalStorage = localStorage.getItem('mediacard_'+$_GET['activityCode']);//媒体
+        if(mediacardLocalStorage){
+            localStorage.setItem('mediacard_'+$_GET['activityCode'], parseInt(mediacardLocalStorage)+parseInt(d['total']));
+        }else{
+            localStorage.setItem('mediacard_'+$_GET['activityCode'], parseInt(d['total']));
+        }
+
+        //d['user'] = user_msg.userId;
+        d['name'] = actMsg.name;
+        //d['address'] = 'test';
+        d['application'] = '公益上海';
+        d['type'] = 60;
+        d['audit'] = 10;
+        d['sendSMS'] = parseInt(d['sendSMS']);
+        $.ajax({
+            type:"post",
+            url:base_url + "html5/v1/mediaGuest/save",
+            data:JSON.stringify(d),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            beforeSend:function(){
+                layer.open({type: 2,content: '提交中'});
+                },
+            success:function(data){
+                console.log(data);
+                //如果提交成功
+                if(data.msg=="success"){
+                    localStorage.setItem('mediacard'+d['sectionCode'],JSON.stringify(d));
+                    layer.open({
+                        content: '设置成功'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    scrollTo(0,0);
+
+                    find_not_set(1);
+                    layer.closeAll();
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    setTimeout(function(){layer.closeAll();},1000);
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '设置失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                setTimeout(function(){layer.closeAll();},1000);
+                return false;
+            }
+
+        })
+
+        //查询下一个未设置场次的信息
+        //find_not_set()
+    }
+    //ajax追加人员
+    function add_person(){
+        html = "<div class='warp_sh_u_ln'><a href='javascript:void(0)' class='warp_sh_u_lw' style='cursor:pointer' onclick='remove_per(this)'></a><div class='warp_sh_u_lq'><i>*</i><input type='text' placeholder='姓名' name='realName'></div><input type='number' placeholder='手机号' class='warp_sh_u_lc' name='mobile'><input type='text' placeholder='媒体单位' class='warp_sh_u_lz' name='media'></div>";
+        //alert(html);
+        $("#before_html").before(html);
+    }
+    function remove_per(obj){
+        $(obj).parent().remove();
+    }
+</script>
+<script type="text/javascript">
+    $('.cell-right').click(function(){
+        var tre = $(this).find('span').hasClass('switch-on');
+        var type = tre?10:20;
+        $(this).next('input').val(type);
+    })
+</script>
+
+</body>
+</html>
+

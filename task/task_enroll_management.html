@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海"/>
+    <meta name="description" content="公益上海"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="../meng/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/task_job_list.css"/>
+    <style>
+        html,body{
+            /*min-height:auto;*/
+            /*height:100%;*/
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>报名管理</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+    <div class="tem_tab_wrap clearfix">
+        <div class="tem_tab_list tem_tab_examine on left"><span>待审核</span></div>
+        <div class="tem_tab_list tem_tab_enrolment right"><span>已报名</span></div>
+    </div>
+    <div class="tem_search_wrap">
+        <div class="tem_search"><input type="text" id="searchValue" placeholder="请输入姓名或手机号进行查询"><button class="tem_searchBtn"></button></div>
+    </div>
+    <div class="tem_enroll_examineA">
+        <div class="tmc_warning">请于任务时间结束前完成审核，若过期未审核，系统将默认审核拒绝</div>
+        <div class="tem_enroll_list_wrap tem_enroll_list_examine_wrap">
+            <!--<div class="tem_enroll_list on">-->
+                <!--<div class="tem_enroll_radios on"></div>-->
+                <!--<div class="tem_enroll_top clearfix">-->
+                    <!--<div class="tem_enroll_user" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="tem_enroll_name">-->
+                        <!--<h2>张三 <a class="tem_enroll_question_tog" href="javascript:void(0)"><span class="tem_enroll_question_togBtn">查看调查问卷</span></a></h2>-->
+                        <!--<p><strong>团队报名:</strong><span>上海市公益服务促进中心</span></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="tem_enroll_btns">-->
+                    <!--<button class="gr">通过</button>-->
+                    <!--<button class="re">拒绝</button>-->
+                    <!--<a href="javascript:void(0)"><button class="ye">联系</button></a>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="tem_enroll_editors clearfix">
+            <div class="left">
+                <button class="tem_editor_btns on">编辑</button>
+                <button class="tem_editor_all_btns">全选</button>
+            </div>
+            <div class="right">
+                <button class="tem_editor_adopt_btns">批量通过</button>
+                <button class="tem_editor_refuse_btns">批量拒绝</button>
+            </div>
+        </div>
+    </div>
+    <div class="tem_enroll_examineB" style="display:none">
+        <div class="tem_enroll_list_wrap tem_enroll_list_enrolment_wrap">
+            <!--<div class="tem_enroll_list">-->
+                <!--<div class="tem_enroll_radios on"></div>-->
+                <!--<div class="tem_enroll_top clearfix">-->
+                    <!--<div class="tem_enroll_user" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="tem_enroll_name">-->
+                        <!--<h2>张三 <a class="tem_enroll_question_tog" href="javascript:void(0)"><button>联系</button></a></h2>-->
+                        <!--<p><strong>团队报名:</strong><span>上海市公益服务促进中心</span></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="tem_enroll_progress_wrap">-->
+                    <!--<div class="tme_progress clearfix">-->
+                        <!--<div class="tme_progress_left">任务进度</div>-->
+                        <!--<div class="tme_progress_right clearfix">-->
+                            <!--<div class="tme_progress_list">-->
+                                <!--<i></i>-->
+                                <!--<strong>任务提交成功</strong>-->
+                                <!--<span>11-03 18:00</span>-->
+                            <!--</div>-->
+                            <!--<div class="tme_progress_list">-->
+                                <!--<i></i>-->
+                                <!--<strong>任务提交成功</strong>-->
+                                <!--<span>11-03 18:00</span>-->
+                            <!--</div>-->
+                            <!--<div class="tme_progress_list">-->
+                                <!--<i></i>-->
+                                <!--<strong>任务提交成功</strong>-->
+                                <!--<span>11-03 18:00</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+
+    <div class="loadings" style="padding:.3rem;text-align:center;display:none;"><img style="display:inline-block" src="../wap/img/loading.gif" alt="load"><span style="display:none;">已经没有更多了</span></div>
+</div>
+<div class="tem_enroll_question_wrap">
+    <div class="sendHistoryHead">
+        <a class="sendBack question_closeBtn" href="javascript:void(0)"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>调查问卷</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+
+    <div class="tem_enroll_question_list_wrap">
+        <h3 class="tem_enroll_question_title">张三的调查问卷</h3>
+        <div class="tem_enroll_question_list">
+            <h4>1.您懂得急救常识和急救措施吗？</h4>
+            <p><strong>答案:</strong>A.不懂得</p>
+            <p class="on"><strong><span class="red">回答错误</span>正确答案:</strong>C.非常清楚</p>
+        </div>
+        <div class="tem_enroll_question_list">
+            <h4>1.您懂得急救常识和急救措施吗？</h4>
+            <p><strong>答案:</strong>A.不懂得</p>
+            <p class="on"><strong><span class="red">回答错误</span>正确答案:</strong>C.非常清楚</p>
+        </div>
+    </div>
+</div>
+<!--<div class="sendButtonWrap on">-->
+    <!--<button class="targetNext on">发表评价</button>-->
+<!--</div>-->
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script src="js/task_enroll_management.js"></script>
+<script>
+    $(function(){
+        // $(".tem_enroll_question_togBtn").click(function(){
+        //     $(".tem_enroll_question_wrap").show();
+        // });
+        $(".question_closeBtn").click(function(){
+            $(".tem_enroll_question_wrap").hide();
+        })
+    })
+</script>
+</body>
+</html>

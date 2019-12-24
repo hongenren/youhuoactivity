@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>申领公益护照</title>
+    <meta name="Keywords" content="公益护照"/>
+    <meta name="description" content="公益护照"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/identity.css">
+</head>
+<body>
+<div class="addResseeContent">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>填写收件人信息</span></div>
+        <!--<div class="sendHeadButton"><button>发送历史</button></div>-->
+    </div>
+    <div class="identityInputWrap">
+        <div class="left identityName">收件人</div>
+        <div class="identityInput"><input type="text" id="userName" readonly></div>
+    </div>
+    <div class="identityInputWrap">
+        <div class="left identityName">姓名拼音</div>
+        <div class="identityInput"><input type="text" id="ename" placeholder=""></div>
+    </div>
+    <div class="identityInputWrap">
+        <div class="left identityName">邮寄地址</div>
+        <div class="identityInput addResseeInput"><input type="text" id="city" name="city" placeholder="请选择市" readonly><input readonly type="text" id="area" name="area" placeholder="请选择区"></div>
+        <div class="addResseeTextarea">
+            <textarea name="text" id="address" style="color: #9d9d9d;"></textarea>
+        </div>
+    </div>
+    <div class="identityInputWrap">
+        <div class="left identityName">手机号</div>
+        <div class="identityInput"><input type="text" id="mobile" placeholder="请输入本人的手机号"></div>
+    </div>
+    <!--<div class="identityInputWrap">-->
+    <div class="identityInputWrap" id="codeDiv">
+        <div class="left identityName">验证码</div>
+        <div class="identityInput"><input type="text" id="code" placeholder="请输入验证码"><button class="getYZM" id="btnSendCode" type="button" onClick="sendMessages()">获取验证码</button></div>
+    </div>
+    <div class="addResseeWarn" style="font-size: .24rem">
+        <div class="applyTop">注意事项</div>
+        <div class="applyList"><span>1.</span>邮寄地址必须填写上海市范围内的地址，外省市不支持邮寄。</div>
+        <div class="applyList"><span>2.</span>申请成功后，保持手机畅通，确保准确收件。</div>
+        <div class="applyList"><span>3.</span>成功申办“公益护照”实体卡后，请您在180天（含）内，持本人身份证明文件尽快前往上海农商银行在上海地区的任意网点办理实名认证和激活手续；附属卡办理实名认证和激活手续时，需主\附卡持卡人分别携带卡片及本人身份证明文件一同前往网点(或上门)办理。实名认证和激活后，金融功能和志愿者保险保障同时生效。</div>
+    </div>
+</div>
+
+<div class="sendNextButton" onclick="saveMailInfo()">提交申请</div>
+<div class="cityWrap" onclick="hideCity();">
+    <div class="city">
+        <ul></ul>
+    </div>
+</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script src="js/mailing_information.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script src="js/pinyin.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script>
+
+    var user_bank = {};
+    $(function(){
+        $("#city").val("上海市")
+        if(localStorage.getItem('user_bank')==undefined||localStorage.getItem('user_bank')=="") {
+            layer.open({
+                content: '数据不完整，请重新操作！'
+                ,skin: 'msg'
+                ,time: 2 //2秒后自动关闭
+            });
+            setTimeout(function(){window.history.back();},2000);
+        }else {
+            queryuuid();
+        }
+        $(".sendNextButton").click(function(){
+
+        })
+        var addressL = '';
+        $('#address').keyup(
+            function(){
+                var remain = $(this).val().length;
+                if(remain > 30){
+                    layer.open({
+                        content: "详细地址请填写30个汉字以内！"
+                        ,skin: 'msg'
+                        ,time: 3 //2秒后自动关闭
+                    })
+                    $(this).val(addressL);
+                }else{
+                    addressL = $(this).val();
+                }
+            }
+        );
+    })
+    function hideCity(){
+        $(".cityWrap").hide();
+    }
+</script>
+</body>
+</html>

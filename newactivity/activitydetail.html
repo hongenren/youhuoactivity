@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/activitydetail.css"/>
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+    <div id="activitydetail">
+        <header class="mint-header">
+            <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+            <h1 class="mint-header-title">活动详情</h1>
+            <div class="mint-header-button text-r"></div>
+        </header>
+        <div class="activitypic">
+            <img :src="detailList.coverImg" alt="" srcset="">
+            <div class="pictext">{{detailList.name}}</div>
+        </div>
+        <div class="activitime">
+            <p>{{detailList.subTitle}}</p>
+            <p>时间：{{detailList.startDay}} 至 {{detailList.endDay}}</p>
+            <p>地点：{{detailList.address}}</p>
+            <p>咨询人：{{detailList.contactName}}  {{detailList.contactPhone}}</p>
+        </div>
+        <div class="activitmark">
+            <div>{{detailList.demo}}</div>
+        </div>
+        <div class="zhankai" @click="zhankai">展开</div>
+        <div class="yh-group">
+            <span class="l">票证</span>
+            <span>查看更多</span>
+        </div>
+        <ul>
+            <li class="ticketlist" v-for="(item, index) in detailList.sectionPublicVoList" :key="index">
+                <div class="ticketleft">
+                    <p>{{item.name}}</p>
+                    <p class="ticketicobox"><i class="iconfont icon-naozhong"></i>{{item.startTime | capture(0, 16)}} 至 {{item.endTime | capture(11, 16)}} </p>
+                    <p class="ticketicobox"><i class="iconfont icon-didian"></i>{{item.publicAddress}}</p>
+                </div>
+                <div class="ticketright">
+                    <p>已领{{item.applyCount}}/共{{item.total}}张</p>
+                    <span @click="">我要领取</span>
+                </div>
+            </li>
+            <li v-if="detailList.sectionPublicVoList && detailList.sectionPublicVoList.length==0" class="ticketlist" style="text-align: center;">暂无数据</li>
+        </ul>
+        <div class="yh-group">
+            <span class="l">岗位</span>
+            <span>查看更多</span>
+        </div>
+        <ul>
+            <li class="ticketlist" v-for="(item, index) in detailList.postVoList" :key="index">
+                <div class="ticketleft">
+                    <p>{{item.name}}</p>
+                    <p>{{item.startDay}} {{item.serviceBeginTime}} 至 {{item.lastDay}} {{item.serviceEndTime}} </p>
+                    <p>{{item.address}}</p>
+                </div>
+                <div class="ticketright">
+                    <p>已领10/共100张</p>
+                    <span style="background: #F0676C;">我要报名</span>
+                </div>
+            </li>
+            <li v-if="detailList.postVoList && detailList.postVoList.length==0" class="ticketlist" style="text-align: center;">暂无数据</li>
+        </ul>
+        <div class="yh-group">
+            <span class="l">任务</span>
+            <span>查看更多</span>
+        </div>
+        <ul>
+            <li class="ticketlist" v-for="(item, index) in detailList.subTaskVoList" :key="index">
+                <div class="ticketleft">
+                    <p>{{item.name}}</p>
+                    <p>{{item.beginTime | capture(0, 16)}} 至 {{item.endTime | capture(11, 16)}} </p>
+                    <p>{{item.address}}</p>
+                </div>
+                <div class="ticketright">
+                    <p>已领{{item.applyNum}}/共{{item.needNum}}张</p>
+                    <span style="background: #F0676C;">我要报名</span>
+                </div>
+            </li>
+            <li v-if="detailList.subTaskVoList && detailList.subTaskVoList.length==0" class="ticketlist" style="text-align: center;">暂无数据</li>
+        </ul>
+        <div class="yh-group">
+            <span class="l">发布方</span>
+            <!-- mobileDetail机构详情页面 -->
+        </div>
+        <ul>
+            <li class="affiliationc" v-for="(item, index) in detailList.activityUniteVoList" :key="index">
+                <div class="fl uniteimg"><img src="../wap/images/../img/jg_tp_8.png" alt=""></div>
+                <div class="fl unitename">
+                    <p>{{item.orgName}}</p>
+                    <p class="unitedanwei">{{item.type | unitetype}}</p>
+                    <i class="iconfont icon-icon_you"></i>
+                </div>
+            </li>
+            <li v-if="detailList.activityUniteVoList && detailList.activityUniteVoList.length==0" class="ticketlist" style="text-align: center;">暂无数据</li>
+        </ul>
+        <div v-if="false">
+            <div class="yh-group">
+                <span class="l">所属项目</span>
+            </div>
+            <ul>
+                <li class="affiliationx">
+                    <img src="../wap/images/../img/jg_tp_8.png" alt="">
+                    <div class="companyname">
+                        <p>上海市公益服务促进中心</p>
+                        <p>2019/09/03 至2019/09/07</p>
+                    </div>
+                </li>
+                <li class="affiliationx">
+                    <img src="../wap/images/../img/jg_tp_8.png" alt="">
+                    <div class="companyname">
+                        <p>上海市公益服务促进中心</p>
+                        <p>2019/09/03 至2019/09/07</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#activitydetail',
+    data () {
+        return {
+            detailList: [],
+            addFrom: {
+                org: 'AAA789', // 机构标识
+                url: null
+            },
+            searchFrom: {
+                org: 'AAA789', // 机构标识
+                current: 1, // 当前页
+                size: 20 // 页容量	
+            }
+        };
+    },
+    created () {
+        // this.init();
+        this.getdetail();
+    },
+    filters: {
+        capture: function (value, start, end) {
+            return value= value.substring(start, end);
+        },
+        // 主办单位10 联办单位20 指导单位30 协办单位40 爱心支持单位50 媒体单位60 发布单位90
+        unitetype: function (type) {
+            switch (type) {
+                case 10:
+                    return '主办单位';
+                case 20:
+                    return '联办单位';
+                default:
+                    return '';
+            }
+        }
+    },
+    methods: {
+        init (){
+            // 线上
+            this.searchFrom.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'AAA789';
+        },
+        // 获得详情
+        getdetail () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/info',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify({activityCode:"31010100000020191216160836468"}),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res.data);
+                    that.detailList = res.data;
+                }
+            });
+        },
+        zhankai () {
+            $('.activitmark').css({height: "auto"});
+        },
+    }
+})
+</script>
+</html>

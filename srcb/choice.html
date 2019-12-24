@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>申领公益护照</title>
+    <meta name="Keywords" content="公益护照"/>
+    <meta name="description" content="公益护照"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/choice.css">
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/layer.css">
+</head>
+<body style="min-height:100%;overflow-y:visible;">
+<div class="sendHistoryHead">
+    <a class="sendBack" href="javascript:void(0)" onclick="historyLocalStorage();"><i></i><!--<span>返回</span>--></a>
+    <div class="sendHeadList"><span>选择学校</span></div>
+    <!--<div class="sendHeadButton"><button>发送历史</button></div>-->
+</div>
+<div class="sendInspectContent">
+    <div class="sendInspectSearch clearfix" style="margin-top:0;">
+        <div class="sendInspectSearchLeft">
+            <input type="text" id="name" placeholder="请输入名称进行查询">
+        </div>
+        <div class="sendInspectSearchRight" onclick="findByName();"><i></i></div>
+    </div>
+    <ul class="sendInspectListWrap">
+    </ul>
+    <div class="sendNextButton" style="display: none;">下一步</div>
+</div>
+<div class="choiceSearchWrap" >
+
+</div>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script>
+    var channel = $.getUrlParam("channel");
+    var blankType = $.getUrlParam("blankType");
+    var uuid = $.getUrlParam("uuid");
+    $(function() {
+        getSchoolList(0, 20);
+    })
+    function findByName(){
+        if($("#name").val()){
+            //mee.lock();
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: 'post',
+                url: base_url + "/html5/v2/srcb/school/findByName",
+                data: JSON.stringify({"name": $("#name").val()}),
+                dataType: 'json',
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    if (data.code == 0) {
+                        var html = "";
+                        var data_index = data.data.data.records;
+                        $.each(data_index, function (index, val) {
+                            html += "<li class=\"sendInspectList\" onclick='selectSchool(this);'>\
+                                        <div class=\"sendListName\">" + val.name + "</div>\
+                                        <div class=\"sendListCheck\"><input type=\"radio\" name=\"school\" value='" + val.code + "'></div>\
+                                    </li>"
+                        })
+                        $(".sendInspectListWrap").html(html);
+                    }
+                }
+            })
+        }else{
+            getSchoolList(0, 20);
+        }
+    }
+    var mee;
+    function getSchoolList(pageNumber, pageSize){
+        $(".sendInspectListWrap").html("");
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'post',
+            url: base_url + "/html5/v2/srcb/school/list",
+            data: JSON.stringify({"pageNumber": pageNumber, "pageSize": pageSize}),
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                if (data.code == 0) {
+                    var data_index = data.data.data.records;
+                    var html = "";
+                    if(data_index.length>0) {
+                        $.each(data_index, function (index, val) {
+                            html += "<li class=\"sendInspectList\" onclick='selectSchool(this);'>\
+                                <div class=\"sendListName\">" + val.name + "</div>\
+                                <div class=\"sendListCheck\"><input type=\"radio\" name=\"school\" value='" + val.code + "'></div>\
+                            </li>"
+                        })
+                        $(".sendInspectListWrap").append(html);
+                    }else{
+                        $(".sendInspectListWrap").html("");
+                        layer.open({
+                            content: "没有数据了"
+                            ,skin: 'msg'
+                            ,time: 1
+                        });
+                    }
+                }else{
+                    layer.open({
+                        content: resp.msg
+                        ,skin: 'msg'
+                        ,time: 1
+                    });
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1
+                });
+            }
+        })
+    }
+
+    var sendListCheck=function(){
+        $('.sendInspectList').each(function(){
+            var bool=$(this).find('input[type="radio"]').is(':checked');
+            if(!bool){
+                $(this).find('.sendListCheck').removeClass('on')
+            }else{
+                $(this).find('.sendListCheck').addClass('on')
+            }
+        })
+    };
+    function saveEduInfo(name, code){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'post',
+            url: base_url + "/html5/v2/srcb/school/saveEduInfo",
+            data: JSON.stringify({"uuid": uuid, "channel": channel, "code": code,"name": name}),
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                if (data.code == 100) {
+                    var data_1 = data.data;
+                    data_1.ifSchool = 1;
+                    data_1.blankType = blankType;
+                    data_1.uuid = uuid;
+                    data_1.channel = channel;
+                    localStorage.setItem('user_bank',JSON.stringify(data_1));
+                    jump("./adults.html");
+                }else if (data.code == 200) {
+                    jump("./identity.html?=ifSchool1&channel="+channel+"&blankType="+blankType+"&schoolCode="+radioObj.val()+"&schoolName="+encodeURI(encodeURI($(this).find('.sendListName').html()))+"uuid="+uuid);
+                }
+            }
+        })
+    }
+
+    function selectSchool(obj){
+        var bool=$(obj).find('input[type="radio"]').prop('checked');
+        if(!bool){
+            var radioObj = $(obj).find('input[type="radio"]');
+            radioObj.prop('checked',true);
+            $(".sendNextButton").show();
+            if(uuid){
+                $(".sendNextButton").attr("onclick", "saveEduInfo('"+$(obj).find('.sendListName').html()+"','"+radioObj.val()+"');");
+            }else{
+                $(".sendNextButton").attr("onclick", "jump('./identity.html?ifSchool=1&channel="+channel+"&blankType="+blankType+"&schoolCode="+radioObj.val()+"&schoolName="+encodeURI(encodeURI($(obj).find('.sendListName').html()))+"')");
+            }
+            sendListCheck();
+        }else{
+            $(obj).find('input[type="radio"]').prop('checked',false);
+            $(".sendNextButton").hide();
+            $(".sendNextButton").attr("onclick", "");
+            sendListCheck();
+        }
+    }
+</script>
+</body>
+</html>

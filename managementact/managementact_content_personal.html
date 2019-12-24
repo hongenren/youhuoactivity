@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>活动管理</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <style type="text/css">
+        input[node-type=jsbridge]{ 
+            visibility: hidden; 
+        }
+        .warp_gl_i li i{width: 22px;height: 22px;line-height: 22px}
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>活动管理</span>
+    </div>
+    <header class="warp_gl_p">
+        <b id="name"></b>
+        <span id="actTime"></span>
+    </header>
+
+    <div class="warp_gl_o">
+        <div class="warp_gl_o_sp">
+            <select id="classList">
+                
+            </select>
+            <b>当前管理场次：</b>
+        </div>
+        <div class="warp_gl_o_so">
+            <span style="overflow: hidden"><i style="font-style: normal;float: left">活动时间：</i><time id="arriveTime" style="overflow: hidden"></time></span>
+            <span style="overflow: hidden"><i style="font-style: normal;float: left">活动地点：</i><span id="arriveAddress" style="overflow: hidden"></span></span>
+        </div>
+    </div>
+
+    <nav>
+        <ul class="warp_gl_i warp_gl_i1" style="display: none;">
+            <li class="QRCode" style="display: none;">
+                <a href="javascript:void(0)" id="scanQRCode">
+                    <img src="../wap/img/pws_225.png">
+                    <span>扫一扫</span>
+                </a>
+            </li>
+            <li class="broadcast" style="display: none;">
+                <a href="javascript:void(0)" data-href="./broadcast_content_personal.html" class="hrefmsg">
+                    <img src="../wap/img/pws_226.png">
+                    <span>通知广播</span>
+                </a>
+            </li>
+            <li class="enroll_list" style="display: none;">
+                <a href="javascript:void(0)" data-href="./enroll_list.html" class="hrefmsg">
+                    <img src="../wap/img/pws_228.png">
+                    <span>报名表</span>
+                </a>
+            </li>
+            <li class="task_list" style="display: none;">
+                <a href="javascript:void(0)">
+                    <img src="../wap/img/pws_229.png" data-href="./task_list.html" class="hrefmsg">
+                    <span>任务管理</span>
+                </a>
+            </li>
+            <li class="startCan" style="display: none;">
+                <a href="javascript:void(0)" id="startCan">
+                    <img src="../wap/img/pws_230.png">
+                    <span>临时管理员</span>
+
+                </a>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)">
+                    <img src="../wap/img/pws_231.png" data-href="./activation_code.html" class="hrefmsg">
+                    <span>激活码门票</span>
+                    
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+        <ul class="warp_gl_i warp_gl_i2" style="display: none;">
+            <li style="display: none;">
+                <a href="javascript:void(0)" data-href="./edit_desc.html" class="hrefmsg edit_desc">
+                    <img src="../wap/img/pws_232.png">
+                    <span>修改描述</span>
+                </a>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)" data-href="./evaluate_list.html" class="hrefmsg">
+                    <img src="../wap/img/pws_233.png">
+                    <span>评价</span>
+                </a>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)" data-href="./managementact_auditee.html" class="hrefmsg">
+                    <img src="../wap/img/pws_234.png">
+                    <span>待审核人员</span>
+                </a>
+                <i class='auditing_count'>0</i>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)" data-href="./cancel_session.html" class="hrefmsg cancel_session">
+                    <img src="../wap/img/pws_235.png">
+                    <span>取消场次</span>
+                </a>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)" data-href="./edit_session.html" class="hrefmsg1 changcigaiqi">
+                    <img src="../wap/img/pws_236.png">
+                    <span>场次改期</span>
+                </a>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)" data-href="./edit_address.html" class="hrefmsg biangengdidian">
+                    <img src="../wap/img/pws_237.png">
+                    <span>变更地点</span>
+                </a>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)" data-href="./matters_list.html" class="hrefmsg">
+                    <img src="../wap/img/pws_238.png">
+                    <span>待审核事项</span>
+                </a>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)">
+                    <img src="../wap/img/pws_239.png" data-href="./add_quota.html" class="hrefmsg zengjiaminge">
+                    <span>增加名额</span>
+                </a>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)" data-href="./card_range.html" class="hrefmsg">
+                    <img src="../wap/img/pws_240.png">
+                    <span>打卡范围</span>
+                </a>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)" data-href="./post_delay.html" class="hrefmsg gangweiyanshi">
+                    <img src="../wap/img/pws_241.png">
+                    <span>岗位延时</span>
+                </a>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)">
+                    <img src="../wap/img/pws_242.png">
+                    <span>现场人流</span>
+                </a>
+            </li>
+            <li style="display: none;">
+                <a href="javascript:void(0)" data-href="./active_data.html">
+                    <img src="../wap/img/pws_243.png">
+                    <span>活动数据</span>
+                </a>
+            </li>
+        </ul>
+</div>
+<input type="hidden" id="ticketOrder" value="">
+<input type="hidden" id="thisDay" value="">
+<input type="hidden" id="thisStartTime" value="">
+<input type="hidden" id="thisEndTime" value="">
+<!-- http://sao315.com/w/api/saoyisao -->
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/managementact/managementact_personal.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    var type = $_GET['type'], sectionCode = $_GET['sectionCode'], prjvOrgId = "",latCurrent = '',lngCurrent = '',lnglat = '0';
+    function get_current_msg(){
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(116.331398,39.897445);
+        map.centerAndZoom(point,12);
+        var geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function(r){
+            if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                var mk = new BMap.Marker(r.point);
+                map.addOverlay(mk);
+                map.panTo(r.point);
+                latCurrent = r.point.lat;
+                lngCurrent = r.point.lng;
+                lnglat = r.point.lng+","+r.point.lat;
+            }else {
+                //alert('failed'+this.getStatus());
+                layer.open({
+                    content: '获取定位失败,请重试'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+        });
+    }
+function getWxConfig(){
+    var wwwurl = encodeURIComponent(location.href.split('#')[0]);
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/wechat/getWeChatJsSign",
+            data:JSON.stringify({"url":wwwurl}),
+            headers : {'token':token},
+            async:false,
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                //console.log(data);
+                if(data.code==0){
+                    //alert(data.data.data);
+                    var data1 = JSON.parse(data.data.data);
+                    //sessionStorage.setItem('WxConfig',data1); //获取WX配置信息
+                     wx.config({
+                        debug: false,
+                        appId: data1.appId, // 必填，公众号的唯一标识
+                        timestamp:parseInt(data1.timestamp), // 必填，生成签名的时间戳
+                        nonceStr: data1.nonceStr, // 必填，生成签名的随机串
+                        signature: data1.signature,// 必填，签名，见附录1
+                        jsApiList: ['checkJsApi','scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    });
+                }  
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }    
+        wx.error(function(res) {
+            layer.open({
+                content: "出错了error：" + res.errMsg
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+        });
+ 
+        wx.ready(function() {
+            wx.checkJsApi({
+                jsApiList : ['scanQRCode'],
+                success : function(res) {
+                    //alert("ready:"+res);
+                }
+            });
+            //机构扫一扫
+            document.querySelector('#scanQRCode').onclick = function() {
+                //if($('#scanQRCode').is('hrefmsg2')){
+                    wx.scanQRCode({
+                        needResult : 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                        scanType : ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                        success : function(res) {
+                            var result = res.resultStr;
+                            //$("#arriveAddress").html(result+","+user_msg.prjvUserId);
+                            $.ajax({
+                                xhrFields: {
+                                    withCredentials: true
+                                },
+                                type:"post",
+                                url:base_url + "html5/v1/admin/scan/s",
+                                data:JSON.stringify({"qrCode":result, "firstAccount":user_msg.userNo, "recruitCode":"",
+                                    "lnglat": lnglat}),
+                                headers : {'token':token},
+                                dataType:'json',
+                                contentType: "application/json;charset=utf-8",
+                                success:function(data){
+                                    if(data.code==200){//跳转
+                                        location.href = data.data.url;
+                                    }else if(data.code==0){
+                                        alert(data.msg);
+                                    }else{
+                                        alert(data.msg);
+                                    }
+                                },
+                                error:function(){
+                                    alert("失败");
+                                }
+                            })
+                        }
+                    });
+                //}
+            };
+            document.querySelector('#startCan').onclick = function() {
+                //if($('#startCan').attr('class')=="hrefmsg2") {
+                    //alert("进入startCan点击事件");
+                    wx.scanQRCode({
+                        needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                        scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                        success: function (res) {
+                            var result = res.resultStr;
+                            $.ajax({
+                                xhrFields: {
+                                    withCredentials: true
+                                },
+                                type: "post",
+                                url: base_url + "html5/v1/admin/scan/addAdmin",
+                                data: JSON.stringify({
+                                    "activityCode": $_GET['activityCode'],
+                                    "sectionCode": sectionCode,
+                                    "firstAccount": user_msg.userNo,
+                                    "qrCode": result,
+                                    "lnglat": lnglat
+                                }),
+                                headers: {'token': token},
+                                dataType: 'json',
+                                contentType: "application/json;charset=utf-8",
+                                success: function (data) {
+                                    if (data.code == 0) {
+                                        alert(data.msg);
+                                    }
+                                }
+                            })
+                        }
+                    });
+                //}
+            };
+
+        });
+        
+</script>
+<script type="text/javascript">
+    $(function(){
+        get_current_msg();
+        if(isWeiXin()){
+            getWxConfig();
+        }else{
+            document.querySelector('#scanQRCode').onclick = function() {
+                if($('#scanQRCode').attr('class')=="hrefmsg2") {
+                    layer.open({content: '请在微信内使用此功能', skin: 'msg', time: 1});
+                }
+            }
+            document.querySelector('#startCan').onclick = function() {
+                if($('#startCan').attr('class')=="hrefmsg2") {
+                    layer.open({content: '请在微信内使用此功能', skin: 'msg', time: 1});
+                }
+            }
+        }
+        //跳转
+        linkJump();
+    })
+    function linkJump(){
+        //跳转
+        $('.hrefmsg').live('click',function(){
+            var sectionCode = $("#classList").children('option:selected').attr('data-id');
+            var href = $(this).attr('data-href');
+            var ticketOrder = $("#ticketOrder").val()
+            window.location.href = href + "?activityCode="+$_GET['activityCode']+'&sectionCode='+sectionCode+'&ticketOrder='+ticketOrder+'&prjvOrgId='+prjvOrgId;
+        })
+        $('.hrefmsg1').click(function(){
+            var selected = $("#classList").children('option:selected');
+            var sectionCode = selected.attr('data-id');
+            var day = selected.attr('data-day');
+            var starttime = selected.attr('data-starttime');
+            var endtime = selected.attr('data-endtime');
+            var type = selected.attr('data-type');
+            var href = $(this).attr('data-href');
+            window.location.href = href + "?activityCode="+$_GET['activityCode']+'&sectionCode='+sectionCode+'&day='+day+'&starttime='+starttime+'&endtime='+endtime+'&type='+type;
+        })
+    }
+    // //列表信息管理
+    // function managementact_auditee(){
+        
+    //     window.location.href ="./managementact_auditee.html?activityCode="+$_GET['activityCode']+'&sectionCode='+sectionCode;
+    // }
+    activity_show($_GET['activityCode'])
+    get_activity_detail($_GET['activityCode'], $_GET['ticket'])
+    check_button_state(); //检查按钮状态
+</script>
+<script type="text/javascript">
+    $("#classList").change(function(){
+        var sectionCode = $(this).children('option:selected').attr('data-id')
+        get_activity_addr(sectionCode)
+        get_auditing_count(sectionCode)
+    })
+</script>
+
+</body>
+</html>

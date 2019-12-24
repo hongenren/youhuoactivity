@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+</head>
+<body>
+<div class="warp">
+
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+
+    <div class="warp_dk_p"></div>
+    <div class="warp_dk_o">
+        <header class="warp_dk_o_sp">
+            <span>当前位置</span>
+        </header>
+        <div class="warp_dk_o_so">
+            <input type="text" value="" class="address" placeholder="请定位您的位置" readonly="true">
+            <input type="hidden" value="" readonly="true" class="lat">
+            <input type="hidden" value="" readonly="true" class="lng">
+            <span onclick='clic()'>重新定位</span>
+        </div>
+
+        <input type="button" value="开始打卡" class="warp_dk_o_si">
+
+        <div class="warp_dk_o_su">
+            <span>注意：</span>
+            <span>1，开始打卡前，请确保您没有正在进行中的活动</span>
+            <span>2，打卡范围指为您为中心的范围，超过该范围打卡失败</span>
+        </div>
+    </div>
+
+    <!----弹出层---->
+    <div class="warp_pws_e">
+        <div class="warp_pws_e_sp"></div>
+        <div class="warp_pws_e_so">
+            <img src="../wap/img/pws_161.png">
+            <span>恭喜你，打卡成功</span>
+            <a href="javascript:void(0)">确认</a>
+        </div>
+    </div>
+    <!----弹出层---->
+</div>
+<div id="allmap"></div>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+<script>
+clic()
+function clic(){
+    var map = new BMap.Map("allmap");
+    var point = new BMap.Point(116.331398,39.897445);
+    map.centerAndZoom(point,12);
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r){
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            var mk = new BMap.Marker(r.point);
+            map.addOverlay(mk);
+            map.panTo(r.point);
+            var latCurrent = r.point.lat;
+            var lngCurrent = r.point.lng;
+            var address = r.address;
+            $('.address').val(address.province+address.city+address.district+address.street+address.street_number);
+            $('.lat').val(latCurrent);
+            $('.lng').val(lngCurrent);
+        }
+        else {
+             layer.open({
+                content: '获取定位失败,请重试'
+                 ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+        }        
+    },{enableHighAccuracy: true})  
+}
+    
+</script>
+<script>
+    $(document).ready(function(){
+        $(".warp_dk_o_si").click(function(){
+            var address = $('.address').val();
+            var ticketCode =  $_GET['ticket'];
+            var userCode = $_GET['usercode']
+            var lat = $('.lat').val();
+            var lng = $('.lng').val();
+            if(address==''){
+                layer.open({
+                content: '地址不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+            if(ticketCode==''){
+                layer.open({
+                content: '参数不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+            $.ajax({
+                type:"post",
+                url:base_url + "html5/v1/ticketSign/signIn",
+                data:JSON.stringify({"address":address,
+                            "lat":lat,
+                            "lng":lng,
+                            "locationType":"WIFI",
+                            "signStatus":1,
+                            "sourceType":2,
+                            "ticketCode":ticketCode,
+                            "userCode": userCode
+                         }),
+                dataType:'json',
+                contentType: "application/json;charset=utf-8",
+                //headers : {'token':token},
+                success:function(data){
+                    if(data.code==0){
+                         $(".warp_pws_e").fadeIn(1000);
+                     }else{
+                         layer.open({
+                            content: '打卡失败'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                            });
+                        return false;
+                     }
+                   
+                },
+                error:function(){
+                    layer.open({
+                    content: '操作失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            });
+        })
+        $(".warp_pws_e_so a").click(function(){
+            $(".warp_pws_e").fadeOut(1000);
+            window.history.back();
+        });
+        $(".warp_pws_e_sp").click(function(){
+            $(".warp_pws_e").fadeOut(1000);
+        });
+    });
+</script>
+
+</body>
+</html>

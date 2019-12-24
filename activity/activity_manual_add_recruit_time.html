@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>补登</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/cc_dh_p.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/calendar_dan.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css" />
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+
+    <script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+    <script type="text/javascript" src="../wap/js/modernizr.custom.17475.js"></script>
+    <script type="text/javascript" src="../wap/js/more.js"></script>
+    <script type="text/javascript" src="../wap/js/act/act.js"></script>
+    <script type="text/javascript" src="../wap/js/regular.js"></script>
+    <style type="text/css">
+        .warp_pws_m_sp li .checkinout_div{
+            display: block;
+            line-height: 50px;
+            overflow: hidden;
+            background: url(../wap/img/pws_54.png) no-repeat right center;
+            background-size: 8px 15px;
+            position: relative;
+        }
+        .warp_pws_m_sp li .checkinout_div b{
+            display: block;
+            font-size: 18px;
+            line-height: 50px;
+            font-weight: normal;
+            color: #000000;
+            position: absolute;
+            left: 0;
+            top: 3%;
+        }
+        .warp_pws_m_sp li .checkinout_div b i{
+            font-style: normal;
+            color: #FF0000;
+            padding-right: 3px;
+        }
+
+        .Date_lr {
+            width: 92px;
+            text-align: center;
+            float: right
+        }
+
+        .span21 {
+            font-size: 14px;
+            color: #666;
+            line-height: 50px;
+            display: block;
+            float: right;
+        }
+
+        #checkinout {
+            position: relative;
+            display: -webkit-box;
+            display: flex;
+            padding-right: 14px;
+        }
+
+        #firstSelect p {
+            line-height: 25px;
+            color: #999;
+            font-size: 12px;
+        }
+
+        #startDate {
+            border: 0;
+            float: left;
+            width: 92px;
+            font-size: 16px;
+            color: #333333;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            padding: 0;
+        }
+
+        #endDate {
+            border: 0;
+            float: left;
+            width: 92px;
+            font-size: 16px;
+            color: #333333;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            padding: 0;
+        }
+
+        .mask_calendar {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, .4);
+            display: none;
+            z-index: 9999;
+        }
+
+        .calendar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            font-size: 14px
+        }
+
+        .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translate3d(0, -100%, 0);
+                visibility: visible;
+            }
+            to {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .slideInDown {
+            animation-name: slideInDown;
+        }
+
+        .warp_cc_p {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            position: fixed;
+            left: 100%;
+            top: 0;
+            background: #FFFFFF;
+            z-index: 99
+        }
+
+        .warp_cp {
+            left: 100%
+        }
+
+        .warp_ci {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            position: fixed;
+            left: 100%;
+            top: 0;
+            background: #FFFFFF;
+            z-index: 99
+        }
+        /*//活动标签*/
+
+        .warp_hd_t_bp {
+            display: block;
+            font-size: 15px;
+            line-height: 50px;
+            color: #999999;
+            float: right;
+            padding-right: 14px;
+            border: 0;
+            background: url(../wap/img/pws_54.png) no-repeat right center;
+            background-size: 7px 13px;
+            font-family: '微软雅黑';
+            text-align: right;
+            outline: none;
+        }
+
+        .warp_hd_t_bp_21 {
+            display: block;
+            font-size: 15px;
+            line-height: 50px;
+            color: #999999;
+            float: right;
+            padding-right: 14px;
+            border: 0;
+            background-size: 7px 13px;
+            font-family: '微软雅黑';
+            text-align: right;
+            outline: none;
+        }
+
+        .warp_hd_t_bo {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 999;
+            display: none;
+        }
+
+        .warp_hd_t_bo1 {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 999;
+            display: none;
+        }
+
+        .warp_hd_t_bi {
+            overflow: hidden;
+            padding: 0 3%;
+            line-height: 54px;
+            border-bottom: 1px solid #E6E6E6;
+        }
+
+        .warp_hd_t_bi span {
+            display: block;
+            max-width:90%;
+            float: left;
+            width: 90%;
+            font-size: 16px;
+            line-height:34px;
+            padding:10px 0;
+            color: #000000;
+        }
+
+        .warp_hd_t_bi a {
+            display: block;
+            width: 16px;
+            height: 16px;
+            background: url(../wap/img/pws_220.png) no-repeat center;
+            background-size: 100% 100%;
+            float: right;
+            margin-top: 19px;
+        }
+
+        .warp_hd_t_bu {
+            width: 100%;
+            overflow: hidden;
+            padding: 4% 0 1% 0;
+        }
+
+        .warp_hd_t_bu li {
+            width: 29.3%;
+            overflow: hidden;
+            float: left;
+            margin: 0 0 3% 3%;
+        }
+
+        .warp_hd_t_bu li.cla span {
+            border: 1px solid #72B81E;
+            background: url(../wap/img/pws_219.png) no-repeat right top;
+            background-size: 22px 18px;
+        }
+
+        .warp_hd_t_bu li span {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #000000;
+            border: 1px solid #E6E6E6;
+            border-radius: 4px;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .warp_hd_t_bu1 {
+            width: 100%;
+            overflow: hidden;
+            padding: 4% 0 1% 0;
+        }
+
+        .warp_hd_t_bu1 li {
+            width: 47%;
+            overflow: hidden;
+            float: left;
+            margin: 0 0 3% 3%;
+        }
+
+        .warp_hd_t_bu1 li.cla span {
+            border: 1px solid #72B81E;
+            background: url(../wap/img/pws_219.png) no-repeat right top;
+            background-size: 12%;
+        }
+
+        .warp_hd_t_bu1 li span {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #000000;
+            border: 1px solid #E6E6E6;
+            border-radius: 4px;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .warp_hd_t_by {
+            width: 94%;
+            height: 46px;
+            border: 0;
+            background: #72B81E;
+            color: #FFFFFF;
+            font-size: 16px;
+            display: block;
+            margin: 10px auto;
+        }
+
+        .warp_hd_t_bt {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: url(../wap/img/bjtm.png);
+        }
+
+        .warp_hd_t_br {
+            width: 100%;
+            overflow: hidden;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            background: #FFFFFF;
+        }
+
+        input[disabled] {
+            color: #000000;
+            opacity: 1
+        }
+
+        .warp_tj_sp {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .warp_tj_sp textarea {
+            width: 93.5%;
+            height: 80px;
+            border: 1px solid #E6E6E6;
+            font-family: '微软雅黑';
+            font-size: 15px;
+            padding: 2% 3%;
+        }
+
+        .warp_pws_m_su li {
+            padding: 15px 0 0 0
+        }
+
+        .act_cw_p {
+            width: 100%;
+            overflow: hidden
+        }
+
+        .act_cw_p li {
+            overflow: hidden;
+            height: 50px;
+            line-height: 50px;
+            padding: 0 3%;
+            background: url(../wap/img/pws_54.png) no-repeat right center;
+            background-size: 8px 13px;
+            background-position: 97%;
+            border-bottom: 1px solid #E6E6E6
+        }
+
+        .act_cw_p li select {
+            width: 76%;
+            direction: rtl;
+            float: right;
+            height: 50px;
+            font-family: '微软雅黑';
+            color: #333333;
+            font-size: 14px;
+            background: none;
+            padding-right: 16px;
+            outline: none;
+            border: 0;
+        }
+
+        .act_cw_p li span {
+            display: block;
+            float: left;
+            font-size: 16px
+        }
+
+        .act_cw_o {
+            overflow: hidden;
+            padding: 5% 3%;
+            border-bottom: 1px solid #E6E6E6
+        }
+
+        .act_cw_o img {
+            width: 14px;
+            height: 14px;
+            float: left;
+            padding: 3px
+        }
+
+        .act_cw_o span {
+            font-size: 14px;
+            line-height: 20px
+        }
+
+        input[disabled] {
+            color: #333;
+            opacity: 1
+        }
+
+        .warp_jz {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #000000;
+            z-index: 999999;
+            opacity: 0.5;
+        }
+
+        #address {
+            background: #FFFFFF;
+            text-align: right;
+            font-family: '微软雅黑';
+            font-size: 16px;
+            margin-right: 14px;
+            line-height: 50px;
+            height: 50px;
+            float: right
+        }
+
+        #address::-webkit-input-placeholder {
+            line-height: 50px;
+        }
+
+    </style>
+    <script>
+        $('textarea').keyup(function() {
+            $(this).height(this.scrollHeight);
+        });
+        $('#address').change(function() {
+            var arr = [];
+            var str = $('#address').html();
+        });
+    </script>
+</head>
+
+<body style="background: #F2F2F2;webkit-overflow-scrolling: auto;">
+	<!--头部开始-->
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>补登</span>
+    </div>
+	<!--头部结束-->
+    <div class="warp_jm">
+
+    </div>
+    <div class="warp">
+        <header class="warp_pws_m">
+            <b><i>*</i>标题</b>
+            <input type="text" placeholder="好的标题能更快的实现资源对接（不超过20个汉字）" maxlength="20" id="name">
+        </header>
+        <ul class="warp_pws_m_sp">
+            <li>
+                <div class="checkinout_div">
+                    <div id="checkinout">
+                        <div class="row select-time" style="background: #FFFFFF;">
+                            <span class="time leavetime" style="display: none"></span><!--结束时间-->
+                            <input id="endDate" type="hidden" class="input-leave none" readonly="readonly">
+                            <span class="time entertime"></span><!--开始时间-->
+                            <input id="startDate" type="text" class="input-enter none" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="mask_calendar">
+                        <div class="calendar"></div>
+                    </div>
+                    <b><i>*</i>日期</b>
+                </div>
+            </li>
+            <li>
+                <a href="javascript:;" class="warp_cs">
+                    <span>请选择</span>
+                    <b><i>*</i>场次</b>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;" class="warp_dd">
+                    <textarea placeholder="请选择" id="address" readonly="readonly" disabled="disabled" onfocus="this.blur()"></textarea>
+                    <!--<input type="text" value="请选择" id="address"  readonly="readonly" disabled="disabled"  onfocus="this.blur()">-->
+                    <b><i>*</i>地点</b>
+                </a>
+                <input type="hidden" id="lat" value="">
+                <input type="hidden" id="lng" value="">
+                <input type="hidden" id="addressId" value="">
+            </li>
+        </ul>
+    </div>
+
+    <div class="ht70"></div>
+    <footer class="warp_pws_m_sw">
+        <input type="button" value="保存活动" id="btn">
+    </footer>
+
+    <!-- 时间选择 -->
+    <script type="text/javascript" src="../wap/js/date_dan1.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript">
+        $('.select-time').hotelDate();
+    </script>
+    <!-- 时间选择结束 -->
+
+    <!--场次开始-->
+    <div class="warp_cc_p">
+        <nav class="warp_pws_n" style="border-bottom: 0">
+            <div class="warp_sh_p">
+                <div class="warp_hr">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper" id="carousel"></div>
+                        <!-- Add Arrows -->
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+            <script type="text/javascript" src="../wap/js/jquery.elastislide.js"></script>
+        </nav>
+        <form id="classform">
+            <ul class="warp_pws_n_sp" id="carousel_change">
+
+            </ul>
+        </form>
+        <input type="hidden" value="" id="classVal">
+        <div class="ht60"></div>
+        <div class="ht70"></div>
+        <div class="warp_pws_m_sw warp_cp">
+            <div>
+                <i></i>活动一旦保存，场次信息不可修改
+            </div>
+            <!-- <input type="button" value="设置完成" id="setClassBtn"> -->
+            <ul class="warp_pws_hd">
+                <li>
+                    <input type="button" value="返回" id="closeClass">
+                </li>
+                <li>
+                    <input type="button" value="设置完成" id='setClassBtn'>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" src="../wap/js/swiper_sime.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.serializejson.js"></script>
+    <!--场次设置JS-->
+    <script type="text/javascript" src="../wap/js/act_setClass1.js"></script>
+    <!--场次结束-->
+
+    <!--地点开始-->
+    <div class="warp_ci">
+
+    </div>
+    <!--地点结束-->
+    <!---- 地图开始 ---->
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+    <div class="warp_ifrem" style="background-color: #ffffff;">
+
+    </div>
+    <!---- 地图结束 ---->
+    <!-- test -->
+    <script>
+        $("#closeClass").live('click', function() {
+            $(".warp_cp").animate({
+                left: "200%"
+            })
+            $(".warp_cc_p").animate({
+                left: "200%"
+            })
+        })
+        $(function() {
+
+            $(".warp_pws_m_se span").click(function() {
+                $(".warp_pws_m_sl").fadeIn();
+                $("body,html").css({
+                    "height":"100%",
+                    "overflow":"hidden"
+                  });
+                  $('body').addClass('add')
+            })
+
+            $(".add_bty").click(function() {
+                $(".warp_pws_m_sl").fadeOut();
+                $("body,html").css({
+                    "height":"auto%",
+                    "overflow":"auto"
+                  });
+                $(".add").attr('checked',false);
+                $(".warp_pws_m_se input").removeClass('add');
+                  $('body').removeClass('add')
+            })
+            $(".add_ty").click(function() {
+                $(".warp_pws_m_sl").fadeOut();
+                $("body,html").css({
+                    "height":"auto%",
+                    "overflow":"auto"
+                  });
+                  //$('body').removeClass('add')
+                $(".warp_pws_m_se input").addClass('add');
+                 $(".add").attr('checked',true);
+            })
+        });
+    </script>
+    <!-- 判断场次是否设置完成 -->
+    <script type="text/javascript">
+        isSetClassVal()
+
+        function isSetClassVal() {
+            classVal = $("#classVal").val();
+            if (classVal) {
+                // $("#firstSelect").unbind();//解绑点击事件
+                // $(".warp_cs").unbind();
+                $(".warp_cs").children('span').html("已设置")
+            }
+        }
+    </script>
+    <!-- 总提交 换行-->
+    <script type="text/javascript">
+        $("#btn").click(function() {
+            var startDay = $("#startDate").val();
+            var endDay = $("#endDate").val();
+            var xieyi =  $('.add').attr('checked');
+            var lat = $("#lat").val();
+            var lng = $("#lng").val();
+            addressId = $("#addressId").val();
+            var name = $("#name").val();
+            var sectionList = JSON.parse("[" + $("#classVal").val() + "]");
+            var classVal = $("#classVal").val();
+            var user = "";
+            var coverImg = "";
+            if (!name) {
+                layer.open({
+                    content: '标题不能为空!',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false;
+            }
+            if (!startDay || !endDay) {
+                layer.open({
+                    content: '时间未设置!',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false;
+            }
+            if (!classVal) {
+                layer.open({
+                    content: '场次未设置!',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false;
+            }
+            if (addressId == "请选择") {
+                layer.open({
+                    content: '地点未设置!',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false;
+            }
+            if(lat==''||lng==''){
+                layer.open({
+                    content: '经纬度未获取成功，请重新选择地点',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false;
+            }
+            var postfile = {
+                //"application": "公益上海",
+                "addressId": "" + addressId + "",
+                "coverImg": coverImg,
+                "startDay": "" + startDay + "",
+                "endDay": "" + endDay + "",
+                "lat": lat,
+                "lng": lng,
+                "name": "" + name + "",
+                "sectionList": sectionList,
+                "contactPhone": "",
+                "orgCode": prjvorgMsg.orgThirdAccount,
+                "orgName": prjvorgMsg.orgThirdAccountName,
+                "user": prjvorgMsg.prjvUserId,
+                "activityDemoParamList": [],
+                "activityUniteParamList": [],
+                "tag": ""
+            };
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: "post",
+                url: base_url +"html5/v1/activity/save",
+                data: JSON.stringify(postfile),
+                headers: {
+                    'token': token
+                },
+                dataType: 'json',
+                contentType: "application/json;charset=utf-8",
+                beforeSend: function(XMLHttpRequest) {
+                    $(".warp_jm").html("<div class='warp_jz'><img src='../wap/img/loading.gif' style='width:24px;height:24px; margin:0 auto;display:block;position: absolute;left: 50%;top: 50%;margin: -12px 0 0 -12px'/></div>");
+                },
+                success: function(data) {
+                    // return
+                    $(".warp_jm").empty();
+                    if (data.msg == "success") {
+                        window.location.href = "activity_manual_add_recruit_time1.html?activityCode="+data.data.activityCode+"&sectionList="+JSON.stringify(sectionList);
+                    } else {
+                        layer.open({
+                            content: "发布失败",
+                            skin: 'msg',
+                            time: 1
+                        });
+                        return false;
+                    }
+                },
+                error: function(e) {
+                    layer.open({
+                        content: '设置失败',
+                        skin: 'msg',
+                        time: 1
+                    });
+                    return false;
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

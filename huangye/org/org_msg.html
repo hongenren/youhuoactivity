@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>机构信息</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../css/org.css"/>
+    <script type="text/javascript" src="../js/offset.js"></script>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+    <div class="warp_zy_j" style="border-bottom: 1px solid #E6E6E6">
+        <a href="javascript:history.go(-1);"></a>
+        <span>修改</span>
+    </div>
+    <ul class="warp_zy_h">
+        <li>
+            <a id="index" href="javascript:void(0)">
+                <span>机构主页</span>
+            </a>
+        </li>
+        <li>
+            <a id="org_ewm" href="javascript:void(0)">
+                <span>机构二维码</span>
+            </a>
+        </li>
+        <li>
+            <a id="realName" href="javascript:void(0)">
+                <span>机构法人实名信息</span>
+            </a>
+        </li>
+        <li>
+            <a id="org_details" href="javascript:void(0)">
+                <span>机构基础信息</span>
+            </a>
+        </li>
+        <li>
+            <a id="org_service" href="javascript:void(0)" ><!--onclick="banLink();"-->
+                <span>机构志愿服务信息</span>
+            </a>
+        </li>
+        <!--<li>-->
+            <!--<a href="javascript:void(0)">-->
+                <!--<span>对外标签展示</span>-->
+                <!--<i>将显示在列表及详情页</i>-->
+            <!--</a>-->
+        <!--</li>-->
+    </ul>
+
+</div>
+<script src="../js/jquery-1.11.1.min.js"></script>
+<script src="../js/config.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script>
+    var prjvOrgId = $.getUrlParam("prjvOrgId");
+    window.onload=function() {
+        $.ajax({
+            url: base_url1 + '/html5/v1/orgPlace/queryOrgByPrjvOrgId',
+            //url: '/cm/termapi/geArticletListByMy',
+            type: "post",
+            dataType: "json",
+            data: "{\"prjvOrgId\": " + prjvOrgId + "}",
+            headers: {'Content-Type': 'application/json'},
+            success: function (resp) {
+                if (resp.code == 0) {
+                    $("#index").attr("href", "../mobileDetail.html?id=" + resp.data.id);
+                }
+            }
+        });
+    };
+    $("#org_ewm").attr("href", "org_ewm.html?prjvOrgId="+prjvOrgId);
+    $("#realName").attr("href", "realName.html?prjvOrgId="+prjvOrgId);
+    $("#org_details").attr("href", "org_details.html?prjvOrgId="+prjvOrgId);
+    $("#org_service").attr("href", "org_service.html?prjvOrgId="+prjvOrgId);
+    /*function banLink(){
+        alert("建设中...");
+    }*/
+</script>
+
+</body>
+</html>

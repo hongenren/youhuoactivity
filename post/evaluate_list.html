@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/group_apply_list.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/calendar_dan.css" />
+
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="./js/evaluate_list.js"></script>
+    <script type="text/javascript" src="./js/date_dan_evaluate_list.js"></script>
+    <style>
+        .exc2{padding-top: 1%}
+        .list ul li{width: 28.3%;margin: 3% 3% 0 0;float: left}
+        .list ul li a img{width: 100%;border-radius: 5px}
+        .warp_gl_w_sp li{width: 49.8%;}
+        .warp_gl_w_si li h3 {
+            font-size: 0.26rem;
+            line-height: 0.5rem;
+            color: #000;
+            margin-top: 3%;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+    <div class="succeed-list" style="padding-top: 5px;"><!--成功列表-->
+        <div class="succeed-list-title">
+            <div class="succeed-list-title-div" style="display: none;">
+                <div style="border: 0px">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="select_div" class="select_div wth" style="overflow:auto;border-top:1px solid #E6E6E6;">
+
+    </div>
+
+    <div class="warp_gl_w">
+        <nav>
+            <ul class="warp_gl_w_sp">
+                <li class="thisclass" value="20">
+                    <span>管理员的评价</span>
+                </li>
+                <li value="10">
+                    <span>志愿者的评价</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!----循环点开始---->
+        <div class="warp_gl_w_so">
+            <ul class="warp_gl_w_si">
+
+            </ul>
+        </div>
+        <!----循环点结束---->
+
+        <!----循环点开始---->
+        <div class="warp_gl_w_so" style="display: none">
+            <ul class="warp_gl_w_si">
+
+            </ul>
+        </div>
+        <!----循环点结束---->
+
+    </div>
+
+
+    <div class="warp_gl_y_sw">
+        <div class="warp_gl_y_sq"></div>
+        <ul class="warp_gl_y_sl">
+            <li>
+                <a href="#">志愿岗位名称1</a>
+            </li>
+            <li>
+                <a href="#">志愿岗位名称1</a>
+            </li>
+            <li>
+                <a href="#">志愿岗位名称1</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="xiugai" class="warp_gl_w_sf">
+        <div class="warp_gl_w_sd"></div>
+        <div class="warp_gl_w_ss">
+            <textarea placeholder="请输入" id="content" name="content" class="warp_gl_w_sa"></textarea>
+            <div class="warp_gl_w_sm">
+                <a href="javascript:void(0)" class="chance">取消</a>
+                <a href="javascript:void(0)" class="sub">修改</a>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" name="id" value="">
+    <input type="hidden" name="prjvUser" value="">
+    <input type="hidden" name="star" value="">
+    <input type="hidden" name="imgs" value="">
+
+    <div id="huifu" class="warp_gl_w_sf">
+        <div class="warp_gl_w_sd"></div>
+        <div class="warp_gl_w_ss">
+            <textarea placeholder="请输入" id="contenthuifu" name="contenthuifu" class="warp_gl_w_sa"></textarea>
+            <div class="warp_gl_w_sm">
+                <a href="javascript:void(0)" class="chance">取消</a>
+                <a href="javascript:void(0)" class="subhuifu">发送</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="select-time" style="background: #FFFFFF;display: none;">
+    <span class="time entertime" style="color: #9d9d9d;display: none;"></span><!--开始时间-->
+    <input id="serviceDay" type="text" class="input-enter none">
+</div>
+<script src="../wap/js/touchTouch.jquery.js"></script>
+<script type="text/javascript">
+    var pkPostCode = $_GET['pkPostCode'], type=20;
+    //get_evaluate_list(20);
+    $(function() {
+        $('.select-time').hotelDate();
+        // $(".succeed-list").show();
+        $(".succeed-list-ul").show();
+        getList(pkPostCode);
+    })
+</script>
+</body>
+</html>

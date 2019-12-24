@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>补登</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/cc_dh_o.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/honeySwitch.css"/>
+    <style type="text/css">
+        .demo_time{float: right;margin: 0;width:200px;text-align: center}
+        .my_tp{width: 100%;height: 100%;position: fixed;left: 100%;top: 0;background: #FFFFFF;z-index: 9999;overflow-y: auto}
+        .my_tp .warp_pws_m_sw{left: 100%}
+        .warp_dp{height: 20px;line-height: 20px;overflow: hidden;float: right;color: #999999;font-size: 16px;background: url(../wap/img/pws_102.png) no-repeat right center;background-size: 8px 14px;padding-right: 14px;}
+        .warp_dp input{float: right;text-align: right;color: #999999;width: 80px;height: 20px;line-height: 18px;border: 0;margin-top: 0;}
+        .warp_dp u{display: block;float: right;text-decoration:none}
+        .warp_dp{display: block;}
+        .warp_dp i{font-style: normal}
+        .warp_do{width: 100%;overflow: hidden;border: 0; font-size: 15px;padding: 4% 0;}
+        .warp_do u{display: block;line-height: 24px;color: #999999;text-decoration:none}
+        .content{display: flex; justify-content: center; align-items: center;}
+        .content img {width: 70px;border-radius: 100px;}
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<!--头部开始-->
+<div class="warp_zy_j">
+    <a href="javascript:history.go(-1);"></a>
+    <span>补登</span>
+</div>
+<!--头部结束-->
+    <div class="warp" style="padding-bottom: 100px;">
+        <ul class="warp_pws_c">
+            <li>
+                <div class="warp_pws_c_sp">
+                    <div class="content">
+                        <img class="headImg" src="../wap/img/pws_244.png">
+                    </div><br />
+                    <div class="content">
+                        <b class="nickName"></b>
+                    </div><br />
+                    <div>
+                        <b class="shuju" style="font-size: 14px"></b>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="warp_pws_c_sp">
+                    <b>签到    <u class="checkInTime"></u></b><br /><br />
+                    <!--<b><u class="">来源：用户打卡</u></b>-->
+                </div>
+            </li>
+            <li>
+                <div class="warp_pws_c_sp">
+                    <b>签出    <u class="checkOutTime"></u></b>
+                </div>
+            </li>
+            <li>
+                <div class="warp_pws_c_sp">
+                    <b>设置本次志愿服务时长：</b>
+                    <input type="text" name="times" class="spinnerExample" readonly="readonly" unselectable="on" onfocus="this.blur();" onchange="update()"/><br /><br />
+                    <b style="font-size: 14px">单位：（小时）服务时长将在第二天结算</b>
+                </div>
+            </li>
+            <li>
+                <div class="warp_pws_c_sp">
+                    <b>您的调整将会修改该志愿者时长计算结果，并记录来源，请谨慎操作。</b>
+                </div>
+            </li>
+        </ul>
+        <footer class="warp_pws_m_sw">
+            <ul class="warp_pws_hd">
+                <li>
+                    <input type="button" value="返回" onclick="javascript:history.go(-1)">
+                </li>
+                <li>
+                    <input type="button" value="确认补登" onclick='add()'>
+                </li>
+            </ul>
+        </footer>
+        <div id="loading"></div>
+    </div>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+
+<script type="text/javascript">
+    $('.spinnerExample').spinner({});
+    var ticketCode = $.getUrlParam("ticketCode");
+    var userCode = $.getUrlParam("userCode");
+
+    var nickName = decodeURI($.getUrlParam("nickName"));
+    var headImg = $.getUrlParam("headImg");
+    var recruitName = decodeURI($.getUrlParam("recruitName"));//岗位名称
+    var arriveTime = $.getUrlParam("arriveTime");//报到时间
+    var times = $.getUrlParam("times");//服务时长
+    var checkInTime = $.getUrlParam("checkInTime");//签到时间
+    var checkOutTime = $.getUrlParam("checkOutTime");//签出时间
+    window.onload=function(){
+        $('.nickName').html(nickName);
+        $('.headImg').attr("src", headImg);
+        $('.shuju').html("岗位名称："+recruitName+"<br />报到时间："+get_date(arriveTime, 0)+"<br />服务时长："+toHourMinute(times));
+
+        if(checkInTime==null || checkInTime==""){
+            $('.checkInTime').html("未签到");
+        }else{
+            $('.checkInTime').html(get_date(checkInTime));
+        }
+        if(checkOutTime==null || checkOutTime==""){
+            $('.checkOutTime').html("未签出");
+        }else{
+            $('.checkOutTime').html(get_date(checkOutTime));
+        }
+    }
+    function add(){
+        layer.open({
+            content: '请确认补登成员信息和补登服务时长'
+            , btn: ['确定', '取消']
+            , yes: function (index) {
+                var times = $('.spinnerExample').val();
+                var json = {};
+                json.ticketCode = ticketCode;
+                json.userCode = userCode;
+                json.times = times * 60;
+                json.arriveTime = arriveTime;
+                $.ajax({
+                    url: base_url + '/html5/v1/ticketSign/manualSign',
+                    //url: '/cm/termapi/geArticletListByMy',
+                    type: "post",
+                    async: false,
+                    dataType: "json",
+                    data: JSON.stringify(json),
+                    headers: {'Content-Type': 'application/json', 'token': $.cookie("token")},
+                    success: function (resp) {
+                        if (resp.code == 0) {
+                            layer.open({
+                                content: '补登成功'
+                                , skin: 'msg'
+                                , time: 1 //2秒后自动关闭
+                            });
+                            setTimeout(function () {
+                                history.back(-1)
+                            }, 1000);
+                        } else {
+                            layer.open({
+                                content: '补登失败'
+                                , skin: 'msg'
+                                , time: 1 //2秒后自动关闭
+                            });
+                        }
+                    }
+                })
+            }
+        })
+    }
+</script>
+</body>
+</html>
+

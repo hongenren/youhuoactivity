@@ -1,0 +1,72 @@
+#postActivity {
+    padding-bottom: 5rem;
+    font-size: 14px;
+    position: relative;
+}
+.newperiod{
+    padding: 0 0.5rem;
+}
+.periodtop{
+    background: #ffffff;
+    font-weight: bold;
+    padding: 0 0.5rem 0.25rem 0.5rem;
+    line-height: 35px;
+    overflow: hidden;
+}
+.periodinfo{
+    border-radius: 5px;
+    background: #F0676C;
+    padding: 0.5rem;
+}
+.periodtime{
+    display: flex;
+    justify-content: space-between;
+}
+.periodtime span{
+    width: 8rem;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    text-align: center;
+    background: #ffffff;
+}
+.periodtime input{
+    text-align: center;
+}
+.periodcenter{
+    margin: 0.5rem 0;
+}
+.hintinfo{
+    background: #ffffff;
+    font-size: 12px;
+    color: #828282;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    font-weight: bold;
+}
+.hintsubmit{
+    position: absolute;
+    bottom: 2.7rem;
+    left: 0.5rem;
+    color: #828282;
+    font-weight: bold;
+}
+.moredata{
+    padding: 0 0.5rem;
+    height: 17px;
+    color: rgba(130, 130, 130, 1);
+    font-size: 12px;
+}
+.whitmg{
+    background: #ffffff;
+    margin: 0.5rem 0;
+}
+@media (min-width:641px){.hintsubmit{width:640px;left: 50%;margin-left: -320px;}}
+.periodbox{
+    position: relative;
+}
+.shade{
+    position: absolute;
+    width: 100%;
+    height: 18.3rem;
+    background: #ffffff;
+    opacity: 0.8;
+}

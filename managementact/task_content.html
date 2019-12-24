@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <link rel="stylesheet" href="../wap/css/scale.css" type="text/css" />
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script><!--
+<script type="text/javascript" src="../wap/js/swiper.min.js"></script>-->
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/scale.js"></script>
+    <style>
+        .exc2{padding-top: 1%}
+        .list ul li{width: 28.3%;margin: 3% 3% 0 0;}
+        .list ul li a img{width: 100%;border-radius: 5px}
+    </style>
+
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+
+
+    <div class="warp_pws_n_st_bj"></div>
+    
+    <div class="warp_gl_q_si"></div>
+</div>
+
+<section class="imgzoom_pack">
+    <div class="imgzoom_x">X</div>
+    <div class="imgzoom_img"><img src="" /></div>
+</section>
+<script type="text/javascript">
+    function changeImgSize() {
+        $.each($(".list li img"),function(index,val) {
+            $(this).height($(this).width());
+        })
+    }
+    query_task_user();
+    function query_task_user(){
+        var taskCode = $_GET['taskCode'];
+        var user = $_GET['user'];
+        var html = '';
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/task/queryTaskSubmitByUser",
+            data:JSON.stringify({"taskCode":taskCode,"user":user}),
+            dataType:'json',
+            headers : {'token':token},
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    data1 = data.data;
+                    html += '<div class="warp_gl_q_su">\
+                                <i>'+get_date(data1.createTime, 0)+'</i>';
+                    if(data1.headImg!=''){
+                        html += '<img src="'+data1.headImg+'">';
+                    }else{
+                        html += '<img src="../wap/img/pws_244.png">';
+                    }
+                    html += '<span>'+data1.user+'</span>\
+                            </div>\
+                            <div class="warp_gl_q_sy">\
+                                <span>'+data1.content+'</span>\
+                            </div>';
+                    if(data1.img!=''){
+                        html += '<div class="exc2"><div class="list"><ul>';
+                        var imgs = data1.img.split(',');
+                        imgs.pop();
+                        $.each(imgs,function(index,val){
+                            html += '<li style="float: left;><a href="javascript:void(0)"><img src="'+val+'"></a></li>';
+                        })
+                        html += '</ul></div></div>';
+                    }
+                    $(".warp_gl_q_si").html(html);
+                    ImagesZoom.init({
+                        "elem": ".list"
+                    });
+                    changeImgSize();
+                }else{
+                    layer.open({
+                    content: data.msg
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                return false;
+            }
+        })
+    }
+</script>
+
+</body>
+</html>

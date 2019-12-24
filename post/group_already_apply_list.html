@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海-团体报名</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <link rel="stylesheet" href="../huangye/css/mobile.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/job_list.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/group_apply_list.css"/>
+    <style type="text/css">
+        .swiper-wrapper{
+            height: 40px;
+            background-color: #72B81E;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <!--头部开始-->
+    <div class="warp_zy_j">
+        <a href="javascript:void(0);" id="jump"></a>
+        <span>已报名</span>
+    </div>
+    <!--头部结束-->
+    <div class="warp_dd_p">
+        <!--<a href="./group_apply_list.html?type=0" id="ke" class="current" style="font-size: 18px;">
+            <span>可报名</span>
+        </a>
+        <a href="./group_apply_list.html?type=1" id="yi" style="font-size: 18px;">
+            <span>已报名</span>
+        </a>-->
+        <div class="screenButList">
+            <input type="search" class="search_input" id="name_input" placeholder="请输入岗位名称或机构名称进行查询">
+            <input type="button" class="search_button" value="" onclick="queryPostByRecommend(0, 20);">
+        </div>
+    </div>
+    <div id="content">
+        <ul class="warp_pws_c">
+        </ul>
+    </div>
+</div>
+<div id="allmap" style="height:0;overflow:hidden"></div>
+
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+
+<script type="text/javascript" src="./js/group_already_apply_list.js"></script>
+
+<script>
+    var type = $.getUrlParam("type");
+    $("#jump").attr("onclick", "jump('../org/institutions.html?prjvOrgId="+prjvorgMsg.prjvOrgId+"')")
+    $(function() {
+        queryPostByRecommend(0, 20);
+    });
+</script>
+</body>
+</html>
+

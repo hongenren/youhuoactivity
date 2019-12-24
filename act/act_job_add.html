@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海-岗位添加</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/cc_dh_o.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/honeySwitch.css"/>
+    <style type="text/css">
+    .demo_time{float: right;margin: 0;width:200px;text-align: center}
+    .my_tp{width: 100%;height: 100%;position: fixed;left: 100%;top: 0;background: #FFFFFF;z-index: 9999;overflow-y: auto}
+    .my_tp .warp_pws_m_sw{left: 100%}
+	.warp_dp{height: 20px;line-height: 20px;overflow: hidden;float: right;color: #999999;font-size: 16px;background: url(../wap/img/pws_102.png) no-repeat right center;background-size: 8px 14px;padding-right: 14px;}
+	.warp_dp input{float: right;text-align: right;color: #999999;width: 80px;height: 20px;line-height: 18px;border: 0;margin-top: 0;}
+	.warp_dp u{display: block;float: right;text-decoration:none}
+	.warp_dp{display: block;}
+	.warp_dp i{font-style: normal}
+	.warp_do{width: 100%;overflow: hidden;border: 0; font-size: 15px;padding: 4% 0;}
+	.warp_do u{display: block;line-height: 24px;color: #999999;text-decoration:none}
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<!--头部开始-->
+<div class="warp_zy_j">
+	<a href="javascript:history.go(-1);"></a>
+	<span>岗位添加</span>
+</div>
+<!--头部结束-->
+<form id="form1">
+<div class="warp">
+    <header class="warp_pws_m">
+        <b><i>*</i>岗位名称</b>
+        <span>选取</span>
+        <input type="text" name="name" placeholder="请输入岗位名称，比如：传单派送员"  readonly="readonly" unselectable="on" onfocus="this.blur()">
+    </header>
+    <header class="warp_pws_m">
+        <b><i>*</i>岗位描述</b>
+        <input type="text" name="demo" placeholder="请描述您本岗位职责"  readonly="readonly" unselectable="on" onfocus="this.blur()">
+    </header>
+
+    <ul class="warp_pws_c">
+        <li>
+            <div class="warp_pws_c_sp">
+                <b><i>*</i>招募人数</b>
+                <input type="text" name="total" class="spinnerExample"/>
+            </div>
+            <input type="text" placeholder="每场次所需志愿者人数，支持点击或手动输入" class="warp_pws_c_so"  readonly="readonly" unselectable="on" onfocus="this.blur()">
+        </li>
+        <li>
+            <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                <b><i>*</i>报到时间</b>
+                <input class='demo_time demo_time0' id="demo_time" type="text" readonly="true" name="arriveTime" placeholder="请选择报到时间" value="" style="text-align: right"/>
+            </div>
+        </li>
+        <li>
+            <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                <b><i>*</i>报名开始时间</b>
+                <input class='demo_time demo_time1' id="applyBeginTime" type="text" readonly="true" name="applyBeginTime" placeholder="请选择报名开始时间" value="" style="text-align: right"/>
+            </div>
+        </li>
+        <li>
+            <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                <b><i>*</i>报名结束时间</b>
+                <input class='demo_time demo_time1' id="applyEndTime" type="text" readonly="true" name="applyEndTime" placeholder="请选择报名结束时间" value="" style="text-align: right"/>
+            </div>
+        </li>
+        <li>
+            <div class="warp_pws_c_sp">
+                <b><i>*</i>服务时长<u>（小时）</u></b>
+                <input type="text" name="times" class="spinnerExample" readonly="readonly" unselectable="on" onfocus="this.blur()"/>
+            </div><!--
+            <input type="text" placeholder="签到/签出成功，获取的最大服务时长" class="warp_pws_c_so">-->
+            <input type="text" placeholder="签到/签出成功，获取的最大服务时长" class="warp_pws_c_so"  readonly="readonly" unselectable="on" onfocus="this.blur()">
+        </li>
+		<li>
+            <div class="warp_pws_c_sp" style="margin: 3% 0">
+                <b><i>*</i>报到地点</b>
+                <a href="javascript:void(0)" class="warp_dd">请选择</a>
+                <input type="text" name="arriveAddress" id="address" placeholder="请在常用岗位库中选择"  readonly="readonly" unselectable="on" onfocus="this.blur()" class="warp_pws_c_so">
+                <input type="hidden" name="lat" id="lat" value="">
+                <input type="hidden" name="lng" id="lng" value="">
+            </div>
+        </li>
+        <li>
+            <div class="warp_pws_m" style="margin: 0;padding: 3% 0 0 0" onclick="punch_range()">
+                <b><i>*</i>打卡范围</b>
+				<div class="warp_dp">
+					<u>公里</u>
+					<input type="text" name="radius" value="3" readonly="readonly" unselectable="on" onfocus="this.blur()">
+				</div>
+				<div class="warp_do">
+					<u>在“以报到地点为中心”的半径XX公里范围内打卡，才能成功；超出此范围，打卡失败。</u>
+				</div>
+
+            </div>
+
+        </li>
+        <li>
+            <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                <b>积分赠送</b>
+                <input type="text" class="spinnerExample" name="inIntegral" value="0"/>
+            </div>
+        </li>
+        <li>
+            <div class="warp_pws_c_si">
+                <span>剩余积分：<i style="font-style: normal">0</i></span>
+                <b>签到/签出成功，自动发放</b>
+            </div>
+        </li>
+    </ul>
+
+    <div class="warp_pws_v">
+        <div class="warp_pws_v_sp">
+            <em></em>
+            <b>报名方式</b>
+        </div>
+        <ul class="warp_pws_c_su">
+            <li class="thisclass" value="10">
+                <span>报名制</span>
+            </li>
+            <li value="20">
+                <span>选拔制</span>
+            </li>
+        </ul>
+        <ul class="warp_pws_c_st">
+            <li class="warp_pws_c_sr">
+                <ul class="warp_pws_c_sy">
+                    <li>
+                        <h2 style="background: url(../wap/img/pws_112.png) no-repeat left center;background-size: 20px 20px">需审核</h2>
+                        <div class="common-row">
+                            <div class="cell-right"><span class="switch-off"></span></div>
+                            <input type="hidden" name="audit" value="20">
+                        </div>
+
+                    </li>
+                    <li>
+                        <h2 style="background: url(../wap/img/pws_114.png) no-repeat left center;background-size: 20px 20px">仅限本机构成员</h2>
+                        <div class="common-row">
+                            <div class="cell-right"><span class="switch-off"></span></div>
+                            <input type="hidden" name="self" value="20">
+                        </div>
+                    </li>
+                    <li>
+                        <h2 style="background: url(../wap/img/pws_115.png) no-repeat left center;background-size: 20px 20px">参与者需要获取保险保障</h2>
+                        <div class="common-row">
+                            <div class="cell-right"><span class="switch-off"></span></div>
+                            <input type="hidden" name="insurance" value="20">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="warp_pws_c_sr" style="display: none">
+                <ul class="warp_pws_c_sy">
+                    <li>
+                        <a href="javascript:void(0)" class="warp_pws_c_se">
+                            <h2 style="background: url(../wap/img/pws_113.png) no-repeat left center;background-size: 20px 20px">设置调查问卷</h2>
+                        </a>
+                        <p>报名志愿者需填写问卷调查表，通过预审后，可成为本岗位的志愿者。</p>
+                    </li>
+                    <li>
+                        <h2 style="background: url(../wap/img/pws_114.png) no-repeat left center;background-size: 20px 20px">仅限本机构成员</h2>
+                        <div class="common-row">
+                            <div class="cell-right"><span class="switch-off"></span></div>
+                            <input type="hidden" name="self2" value="20">
+                        </div>
+                    </li>
+                    <li>
+                        <h2 style="background: url(../wap/img/pws_115.png) no-repeat left center;background-size: 20px 20px">参与者需要获取保险保障</h2>
+                        <div class="common-row">
+                            <div class="cell-right"><span class="switch-off"></span></div>
+                            <input type="hidden" name="insurance2" value="20">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- <div class="warp_pws_v" style="padding-bottom: 5%">
+        <div class="warp_pws_v_sp pws_xx">
+            <em></em>
+            <b>选项</b>
+        </div>
+        <ul class="warp_pws_c_sy pws_jh">
+            <li>
+                <h2 style="background: url(../wap/img/pws_112.png) no-repeat left center;background-size: 20px 20px">计划服务人数</h2>
+                <input type="text" class="spinnerExample" name="servePerson" />
+            </li>
+        </ul>
+    </div> -->
+
+    <div class="ht10"></div>
+    <div class="ht70"></div>
+    <input type="hidden" name="servePerson" value="1">
+   <!--  <input type="hidden" name="orgCode" value="youhuo"> -->
+    <input type="hidden" name="serveType" value="10">
+    <input type="hidden" name="serveObject" value="99">
+    <input type="hidden" name="application" value="公益上海">
+    <!-- <input type="hidden" name="coverImg" value="1"> -->
+    <input type="hidden" name="tag" value="1">
+    <input type="hidden" name="skill" value="无限制">
+    <input type="hidden" name="condition" value="无">
+    <input type="hidden" name="welfare" value="无">
+    <!-- <input type="hidden" name="contactPhone" value="1"> -->
+    <input type="hidden" name="type" value="10" id="type1">
+    <input type="hidden" name="question_json" value="">
+    <footer class="warp_pws_m_sw">
+        <ul class="warp_pws_hd">
+          <li>
+            <input type="button" value="返回" onclick="window.history.go(-1)">
+          </li>
+          <li>
+            <input type="button" value="设置成功" onclick='add_job2()'>
+          </li>
+        </ul>
+    </footer>
+    <div id="loading"></div>
+    </form>
+    <form id='form2'>
+        <div class="warp_pws_x" style="overflow-y:auto">
+            <div class="warp_pws_n_st_bj">
+                <header class="warp_pws_m">
+                    <b><i>*</i>岗位名称</b>
+                    <input type="text" name="add_name" placeholder="请输入岗位名称，比如：传单派送员">
+                </header>
+                <header class="warp_pws_m">
+                    <b><i>*</i>岗位描述</b>
+                    <input type="text" name="add_demo" placeholder="请描述您本岗位职责">
+                </header>
+            </div>
+            <!--<footer>
+                <input style='width: 94%; height: 46px; border: 0;background: #72B81E;color: #FFFFFF;font-size: 14px;display: block;margin: 10px auto;' type="button" value="添加" onclick="userpost_add()">
+            </footer>-->
+
+			<footer class="warp_pws_m_sw" style="position: relative">
+				<ul class="warp_pws_hd">
+				  <li>
+					<input type="button" value="返回" class="sw_fh_p">
+				  </li>
+				  <li>
+					<input type="button" value="添加" onclick="userpost_add()">
+				  </li>
+				</ul>
+			</footer>
+
+             <div class="warp_pws_v_sp">
+                <em></em>
+                <b>岗位库</b>
+            </div>
+            <ul class="warp_pws_x_sp">
+
+            </ul>
+            <div class="warp_pws_n_st_bj"></div>
+            <div class="warp_pws_x_so">
+                <span><i>*</i>说明：</span>
+                <span>- 新的岗位在创建时将自动保存至岗位库</span>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--地点开始-->
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+<div class="warp_ci">
+
+</div>
+<!--地点结束-->
+<!--打开范围开始-->
+<div class="warp_punch">
+
+</div>
+<!--打开范围结束-->
+<!---- 地图开始 ---->
+<div class="warp_ifrem" style="background: #FFFFFF">
+
+</div>
+<!---- 地图结束 ---->
+<form id='form4'>
+<div class="my_tp" >
+    <ul class="warp_pws_z">
+        <li>
+            <b href="javascript:void(0)" class="warp_pws_z_so1">删除</b>
+            <input type="text" name="question" placeholder="请填写问题">
+        </li>
+        <input type="hidden" name="standard" value=""/>
+        <li>
+            <a href="javascript:void(0)" class="warp_pws_z_sp" data-val="1">设置为答案</a>
+            <a href="javascript:void(0)" class="warp_pws_z_so">删除</a>
+            <input type="text" placeholder="请填写选项" name="answer1" data-del="1">
+            <div class="warp_pws_z_su">
+                <a href="javascript:void(0)">恢复</a>
+            </div>
+        </li>
+        <li>
+            <a href="javascript:void(0)" class="warp_pws_z_sp" data-val="2">设置为答案</a>
+            <a href="javascript:void(0)" class="warp_pws_z_so">删除</a>
+            <input type="text" placeholder="请填写选项" name="answer2" data-del="1">
+            <div class="warp_pws_z_su">
+                <a href="javascript:void(0)">恢复</a>
+            </div>
+        </li>
+        <li>
+            <a href="javascript:void(0)" class="warp_pws_z_sp" data-val="3">设置为答案</a>
+            <a href="javascript:void(0)" class="warp_pws_z_so">删除</a>
+            <input type="text" placeholder="请填写选项" name="answer3" data-del="1">
+            <div class="warp_pws_z_su">
+                <a href="javascript:void(0)">恢复</a>
+            </div>
+        </li>
+        <li>
+            <a href="javascript:void(0)" class="warp_pws_z_sp" data-val="4">设置为答案</a>
+            <a href="javascript:void(0)" class="warp_pws_z_so">删除</a>
+            <input type="text" placeholder="请填写选项" name="answer4" data-del="1">
+            <div class="warp_pws_z_su">
+                <a href="javascript:void(0)">恢复</a>
+            </div>
+        </li>
+    </ul>
+    <div class="append1"><div>
+    <a href="javascript:void(0)" id="addquestion" class="warp_pws_v_si1"><i>+</i>增加问题</a>
+    <div class="ht70"></div>
+    <footer class="warp_pws_m_sw">
+        <ul class="warp_pws_hd">
+            <li><input type="button" value="返回岗位添加" class="my_to"></li>
+            <li><input type="button"  value="设置完成" onclick="question_list()"></li>
+        </ul>
+    </footer>
+</div>
+</form>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/swiper_sime.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/honeySwitch.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/act/act.js"></script>
+<script type="text/javascript" src="../wap/js/act/job.js"></script>
+
+<script>
+    //场次信息提交
+    function add_job2(){
+        $(this).attr("disabled","true"); //设置变灰按钮
+        var arr = $('#form1').serializeArray();
+        var json = {};
+        var question = [];
+        $.each(arr, function(){
+            json[this.name] = this.value;
+        });
+        if(!click_str_null(json['name'],'岗位名称不能为空')){
+            return false;
+        }
+        if(!click_str_null(json['demo'],'岗位描述不能为空')){
+            return false;
+        }
+        if(!click_str_null(json['total'],'请设置招募人数')){
+            return false;
+        }
+        if(!click_str_null(json['arriveTime'],'请设置报到时间')){
+            return false;
+        }
+        if(!click_str_null(json['times'],'请设置服务时长')){
+            return false;
+        }
+        if(!click_str_null(json['applyBeginTime'],'请设置报名开始时间')){
+            return false;
+        }
+        if(!click_str_null(json['applyEndTime'],'请设置报名结束时间')){
+            return false;
+        }
+        if(!click_str_null(json['radius'],'请设置打卡范围')){
+            return false;
+        }
+        if(!click_str_null(json['arriveAddress'],'请设置报到地点')){
+            return false;
+        }
+        // if(!click_str_null(json['inIntegral'],'请设置积分赠送')){
+        //     return false;
+        // }
+        if(json.type==20&&json['question_json']==''){
+            layer.open({ content: '请设置调查问卷!' ,skin: 'msg' ,time: 2 });
+            return false;
+        }
+
+        json['inIntegral'] = parseInt(json['inIntegral'])?parseInt(json['inIntegral']):0;
+        json['lat'] = parseFloat(json['lat']);
+        json['lng'] = parseFloat(json['lng']);
+        json['radius'] = parseInt(json['radius'])*1000;//打卡半径，公里转化为米
+        json['arriveTime'] = $_GET['day']+' '+json['arriveTime']+':00';
+        json['applyBeginTime'] = json['applyBeginTime']+':00';
+        json['applyEndTime'] = json['applyEndTime']+':00';
+        json['serveObject'] = parseInt(json['serveObject']);
+        json['servePerson'] = parseInt(json['servePerson']);
+        json['serveType'] = parseInt(json['serveType']);
+        json['times'] = parseInt(Number(json['times'])*Number(60));
+        json['total'] = parseInt(json['total']);
+        json['type'] = parseInt(json['type']);
+        json['activityCode'] = $_GET['activityCode'];
+        json['sectionCode'] = $_GET['sectionCode'];
+        //json['day'] = $_GET['day'];
+        //json['startTime'] = $_GET['starttime'];
+        //json['endTime'] = $_GET['endtime'];
+        /*2018.8.24 加*/
+        json['user'] = prjvorgMsg.prjvUserId;
+        json['orgCode'] = prjvorgMsg.orgThirdAccount;
+        json['contactPhone'] = actMsg.contactPhone;  //活动咨询电话
+        json['coverImg'] = actMsg.coverImg;  //活动封面图片
+        //json['coverImg'] = actMsg.coverImg;  //活动咨询电话
+        /* 结束*/
+
+        if(json.type==10){
+            json['self'] = parseInt(json['self']);
+            json['insurance'] = parseInt(json['insurance']);
+            json['audit'] = parseInt(json['audit']);
+            delete json['self2'];
+            delete json['insurance2'];
+            question =[];
+        }else{
+            json['self'] = parseInt(json['self2']);
+            json['insurance'] = parseInt(json['insurance2']);
+            delete json['self2'];
+            delete json['insurance2'];
+            delete json['audit'];
+            question = JSON.parse(json['question_json']);
+
+        }
+        json['question'] = question;
+        delete json['question_json'];
+        var jobdata = JSON.stringify(json);
+        console.log(jobdata);
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url + "html5/v1/recruit/addSectionRecruit",
+            data:jobdata,
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            beforeSend:function(){
+                layer.open({
+                    type: 2
+                    ,content: '提交中'
+                });
+            },
+            success:function(data){
+                console.log(data);
+                if(data.code==0){
+                    localStorage.setItem('job_'+data.data.code,JSON.stringify(data.data));
+                    layer.open({
+                        content: '添加成功'
+                        ,skin: 'msg'
+                        ,time: 1 //1秒后自动关闭
+                    });
+                    setTimeout(function(){
+                        layer.closeAll();
+                        var code = $_GET['activityCode'];
+                        $(location).attr('href', "./act_job.html?activityCode="+code);},1000);
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    setTimeout(function(){layer.closeAll();},1000);
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '添加失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                setTimeout(function(){layer.closeAll();},1000);
+                return false;
+            }
+        })
+    }
+    $(function(){
+        if(!history.state){
+            pushHistory();
+        }
+        window.addEventListener("popstate", function(e) {
+            layer.open({
+                content: '岗位未设置完成，您确定要返回吗？'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    window.history.go(-1);
+                    //$(location).attr('href', "./act_base_add.html");
+                }
+                , no: function (index) {
+                    e.preventDefault();
+                    pushHistory();
+                }
+            })
+        }, false);
+        function pushHistory() {
+            var state = {
+                title: "title",
+                url: "#"
+            };
+            window.history.pushState(state, "title", "#");
+        }
+    });
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    var currYear = (new Date()).getFullYear();
+    // Date & Time demo initialization
+    $('.demo_time0').mobiscroll().time({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
+        //dateFormat:"yy-mm-dd",
+        timeFormat: 'HH:ii',
+        startYear: currYear,
+        endYear: currYear +30,
+        stepMinute: 1,
+        showNow: true
+    });
+    $('.demo_time1').mobiscroll().datetime({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        timeWheels: 'HHii',//HH:24小时制；hh:12小时制
+        dateFormat:"yy-mm-dd",
+        timeFormat: 'HH:ii',
+        startYear: currYear,
+        endYear: currYear +30,
+        stepMinute: 1,
+        showNow: true
+    });
+</script>
+<script>
+
+   $(function(){
+        // function dateToStr(datetime){
+        //     var hour = datetime.getHours();
+        //     var minutes = datetime.getMinutes();
+        //     if(hour <10){
+        //         hour = "0" + hour;
+        //     }
+        //     if(minutes <10){
+        //         minutes = "0" + minutes;
+        //     }
+        //         var time = hour+":"+minutes;
+        //         return time;
+        //  }
+
+        //  var newTime = new Date();
+
+        //  var timer =  setInterval(function(){
+        //         var time = $('#demo_time').val();
+        //         var datetime= dateToStr(newTime);
+        //         if(time){
+        //             function max(datetime,time){
+        //                 var a = datetime.split(":");
+        //                 var b = time.split(":");
+        //                 if(a[0]>b[0]){
+        //                     alert('当前时间不正确');
+        //                     $('#demo_time').val('')
+        //                 }else if(a[0]==b[0]){
+        //                     if(a[1]>=b[1]){
+        //                         alert('当前时间不正确');
+        //                         $('#demo_time').val('')
+        //                     }
+        //                 }
+        //             }
+        //         max(datetime,time);
+        //         }
+        // },10)
+   })
+
+
+</script>
+<script>
+    $(function(){
+        $(".pws_xx").click(function(){
+            $(this).toggleClass('cla');
+            $(".pws_jh").toggleClass('cla');
+        });
+    })
+</script>
+<script type="text/javascript">
+    $('.spinnerExample').spinner({});
+</script>
+<script type="text/javascript">
+    var cotrs = $(".warp_pws_c_su li");
+    cotrs.click(function(){
+        var type = $(this).val();
+        $('#type1').val(type);
+        $(this).addClass("thisclass").siblings().removeClass("thisclass");
+
+        $('.warp_pws_c_sr').eq($(this).index()).show().siblings().hide();
+    });
+</script>
+<script type="text/javascript">
+    $('.cell-right').click(function(){
+        var tre = $(this).find('span').hasClass('switch-on');
+        var type = tre?10:20;
+        $(this).next('input').val(type);
+    })
+
+</script>
+<script type="text/javascript">
+   $(function(){
+        $(".sw_fh_p").click(function(){
+            $(".warp_pws_x").animate({right:"100%"})
+        })
+
+    })
+</script>
+</body>
+</html>
+

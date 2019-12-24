@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>历史活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../huangye/css/mobile.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>历史活动</span>
+    </div>
+    <div class="memberSearchWrap clearfix">
+        <div class="memberSearchLeft" style="width: 100%; border-radius: 0px;background: none;border: 1px solid #E6E6E6;">
+            <input class="memberSearchVal" type="text" placeholder="请输入姓名进行查询" style="padding-right: 0px;width: 85%;">
+            <div onclick="selectShowList()" class="memberSearchIcon memberSearchBut" style="float:right;height:100%;width:15%;border: 0px;background: #72B81E;position:static;
+            background-image: url(../wap/img/pws_999.png);background-repeat: no-repeat;background-position: 50% 50%;background-size: auto 20px;"></div>
+        </div>
+    </div>
+    <ul class="warp_pws_g">
+
+    </ul>
+</div>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+
+<script type="text/javascript">
+    var code = $.getUrlParam("code");
+    selectShowList();
+    function selectShowList(){
+
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/userTicket/selectShowList",
+            data:JSON.stringify({"sectionCode":code, "nickName": $(".memberSearchVal").val(), "pageNumber":1, "pageSize":20}),
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    var data_list=data.data.records;
+                    var html = "";
+                    $.each(data_list,function(index,val){
+                        html += "<li>\
+                                        <a href=\"javascript:void(0);\" style='background: none;padding-right: 0px'>\
+                                            <b>"+val.nickName+"</b>\
+                                            <span style='margin-left: 30px;'>服务时长："+ChangeHourMinutestr(val.validTime)+"</span>\
+                                            <div onclick='jump(\"http://volunteer.shmzj.gov.cn/public-welfare/complaint\")' style='color: #72B81E;float: right;border:1px solid #72B81E; line-height:34px;margin-top: 10px;margin-bottom: 10px;padding-left: 10px;padding-right: 10px;'>举报</div>\
+                                        </a>\
+                                    </li>";
+                    })
+                    $('.warp_pws_g').html(html);
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '登录失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+</script>
+</body>
+</html>

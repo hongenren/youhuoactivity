@@ -1,0 +1,28 @@
+
+.receive_tog{
+    padding:.24rem 0;
+    font-size:.28rem;
+    line-height:.34rem;
+    color:#000;
+    display:flex;
+    align-items:center;
+}
+.receive_tog i{
+    display:inline-block;
+    width:.34rem;
+    height:.34rem;
+    border:1px solid #eee;
+    border-radius:.17rem;
+    margin-right:.14rem;
+    vertical-align:middle;
+    font-size:0;
+    line-height:0;
+}
+.receive_tog.on i{
+    background:url("../images/pws_288.png") no-repeat center;
+    background-size:contain;
+    border:0;
+}
+.textareaDisabled{
+    color: #c2c2c2;
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+	<link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.qrcode.min.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+	<style>
+	/*证照css*/
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
+	{margin: 0;padding: 0;border: 0;outline: 0;font-size: 100%;}
+	ul{margin: 0;padding: 0;list-style-type: none}
+	a{text-decoration: none;-webkit-tap-highlight-color:rgba(255,0,0,0);}
+	body{font-family: '微软雅黑';font-size: 12px}
+	input[type=button], input[type=submit], input[type=file], select, button { cursor: pointer; -webkit-appearance: none; }
+	input{-moz-box-sizing: border-box;box-sizing: border-box;padding: 0;margin: 0;outline:none;-webkit-tap-highlight-color:rgba(255,0,0,0);}
+	img{display: block;width: 100%}
+
+/*证照css*/
+
+	</style>
+</head>
+<body>
+<div class="warp">
+
+    <div class="warp_zz_o_sk">
+        <div class="warp_zz_o_sj">
+            <img src="../wap/img/pws_292.png">
+            <b>公益护照</b>
+            <span>Passport for Charity & Voluntary Services</span>
+        </div>
+
+        <table border="1" cellspacing="0" cellpadding="0" class="warp_zz_o_sh">
+            <tr>
+                <td width="40%">
+                    <span>姓名/Name</span>
+                    <b id="name">姓名</b>
+                </td>
+                <td width="60%">
+                    <span>护照编号/Passprot No.</span>
+                    <b id="licenseNo">000000000000000000</b>
+                </td>
+            </tr>
+            <tr>
+                <td width="40%">
+                    <span>性别/Sex</span>
+                    <b id='sex'>男</b>
+                </td>
+                <td width="60%">
+                    <span>出生日期/Date of birth</span>
+                    <b id='birthday'>0000年00月00日</b>
+                </td>
+            </tr>
+            <tr>
+                <td width="40%">
+                    <span>国籍/Nationality</span>
+                    <b id='nationality'>中国</b>
+                </td>
+                <td width="60%">
+                    <span>签发单位/Authority</span>
+                    <b id='orgName'>上海市公益服务促进中心</b>
+                </td>
+            </tr>
+        </table>
+        <div class="warp_zz_o_sg">
+            <!-- <img src="../wap/img/pws_188.jpg"> -->
+            <div id="qrcode" style="text-align: center"></div>
+            <span>请截图保存，以便离线使用</span>
+        </div>
+
+        <table border="1" cellspacing="0" cellpadding="0" class="warp_zz_o_sh">
+            <tr>
+                <td width="50%">
+                    <span>保险单号/Insurance No.</span>
+                    <!-- b id="insuranceNo"></b-->
+                </td>
+                <td width="50%">
+					<span>保单有效期/Insurance time limit</span>
+				</td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <span id="insuranceNo"></span>
+                    <!--b id="licenseDate"></b-->
+                </td>
+				<td width="50%">
+					<span id="licenseDate"></span>
+				</td>
+            </tr>
+        </table>
+        <ul class="warp_zz_o_sf" id="hz_so">
+            <li>
+                <a href="javascript:history.go(-1);">返回</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<script type="text/javascript">
+    var un = getCookie("un");
+    if(un==null || un==undefined || un==""){
+        alert("您还没有实名认证，请先进行实名认证后再进行查看！");
+        //jump("../cert/cert_index.html");
+        jumpBank('web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=');
+    }
+    get_user_msg();
+    function get_user_msg(){
+    $.ajax({
+		xhrFields: {
+		   withCredentials: true
+		},
+        type:"post",
+        url:base_url + "html5/v1/license/findByFirstAccount",
+        data:JSON.stringify({"firstAccount":user_msg.userNo}),
+        headers : {'token':token},
+        dataType:'json',
+        contentType: "application/json;charset=utf-8",
+        beforeSend:function(){
+                layer.open({type: 2,content: '加载中'});
+            },
+        success:function(data){
+            if(data.code==0){
+                var data1 = data.data;
+                $("#name").text(data1.name);
+                $("#licenseNo").text(data1.licenseNo);
+                $("#sex").text(data1.sex);
+                $("#birthday").text(data1.birthday);
+                $("#nationality").text(data1.nationality);
+                $("#orgName").text(data1.orgName);
+
+                $("#insuranceNo").text(data1.insuranceNo);
+                $("#licenseDate").text(data1.periodStart+"-"+data1.periodEnd);
+                erwei(data1.licenseNo);
+                layer.closeAll();
+            }else{
+                layer.closeAll();
+                layer.open({
+                content: '获取失败'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+                }); 
+            }
+            
+        },
+        error:function(){
+            layer.closeAll();
+            layer.open({
+                content: '获取失败'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+        }
+    })
+}
+function erwei(userQr){
+    console.log(userQr);
+    $("#qrcode").empty();
+    $("#qrcode").qrcode({
+        render: "canvas", // 渲染方式有table方式（IE兼容）和canvas方式
+        width: 300, //宽度
+        height: 300, //高度
+        text: userQr, //内容
+        typeNumber: -1,//计算模式
+        correctLevel: 2,//二维码纠错级别
+        background: "#ffffff",//背景颜色
+        foreground: "#000000"  //二维码颜色
+    });
+ }
+</script>
+</body>
+</html>

@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <!--meta name="viewport" content="initial-scale=1, viewport-fit=cover"-->
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <!-- meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"-->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="./wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="./wap/css/swiper.min.css"/>
+    <script type="text/javascript" src="./wap/js/swiper.min.js"></script>
+    <script type="text/javascript" src="./wap/js/jquery.js"></script>
+    <script type="text/javascript" src="./wap/js/config.js"></script>
+    <script type="text/javascript" src="./wap/js/common.js"></script>
+    <script type="text/javascript" src="./wap/js/public.js"></script>
+    <script type="text/javascript" src="./wap/js/jquery.rotate.min.js"></script>
+    <script type="text/javascript" src="./wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="./wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+    <script type="text/javascript" src="./wap/js/index.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        var prjvorgMsg=$.cookie('prjvorgMsg');
+        if(!prjvorgMsg){
+            console.log('机构未登录')
+        }else{
+            window.location.href='./org/institutions.html?prjvOrgId='+prjvorgMsg+'#'
+        }
+
+        var aCookie = document.cookie.split(";");
+        var re = '';
+        for (var i = 0; i < aCookie.length; i++) {
+            var aCrumb = aCookie[i].split("=");
+            if(aCrumb[0].toString().trim()=='order_list'){
+                continue;
+            }
+            re += (aCrumb[0] + " = " + decodeURIComponent(aCrumb[1]) + '\n\n');
+        }
+        // alert('cookie:\n'+re);
+        // alert('href:\n'+'./org/institutions.html?prjvOrgId='+prjvorgMsg+'#')
+    </script>
+    <style>
+        .warp_pws_p{padding: 15px 0;z-index: 9999999}
+        .swiper-slide a{display: block;width: 100%;overflow: hidden;}
+        .warp_pws_p_si{position: absolute;right: 3%;display:none}
+        .warp_pws_p_si img{width: 20px;height: 20px;margin: auto}
+        .warp_pws_p_so{margin: 0 14px 0 70px}
+
+
+        .searchTxt{
+            font-size:12px;
+            padding:30px 5px;
+            color:#999;
+            text-align:center;
+            display:none;
+        }
+        .warp_pws_h_scroll{
+            height: calc(100% - 54px);
+            overflow-y:auto;
+            margin-top:54px;
+        }
+        .divideListWrap{
+            padding:0 3%;
+        }
+        .divideList{
+            border-bottom:1px solid #eee;
+            padding:3%;
+        }
+        .divideList h2{
+            font-size:18px;
+            font-weight:bold;
+            color:#000;
+            padding-bottom:10px;
+        }
+        .divideType span{
+            display:inline-block;
+            padding:0 6px;
+            font-size:14px;
+            border-radius:4px;
+            border:1px solid #ddd;
+            margin-right:6px;
+        }
+        .divideType span i{
+            display:inline-block;
+            width:14px;
+            height:14px;
+            background:url("wap/img/pws_295.png") no-repeat center;
+            background-size:contain;
+            position:absolute;
+            left:6px;top:50%;
+            margin-top:-7px;
+        }
+        .divideType span.on{
+            color:#72b81e;
+            position:relative;
+            padding-left:24px;
+        }
+        .divideMap{
+            padding-left:20px;
+            padding-top:10px;
+            position:relative;
+            line-height:30px;
+        }
+        .divideMap i{
+            display:inline-block;
+            width:20px;
+            height:20px;
+            position:absolute;
+            left:0;
+            top:50%;
+            margin-top:-5px;
+            background:url("wap/img/pws_151.png") no-repeat left center;
+            background-size:auto 70%;
+        }
+    </style>
+</head>
+<body style="background: #F2F2F2"><!--
+<iframe src="https://www.dakaqi.cn/baidu.html" style="display: none;"></iframe>-->
+<div id="allmap"></div>
+<script type="text/javascript">
+    var lat="", lng="";
+    window.onload = function() {
+        //alert(lat+"，"+lng);
+        //$("#quinfcuurf").html(lat+","+lng);
+    }
+    var lat_localStorage = localStorage.getItem('latCurrent');
+    if(lat_localStorage!=null && lat_localStorage!=""){
+        var lng_localStorage = localStorage.getItem('lngCurrent');
+        get_index_msg("上海",lat_localStorage,lng_localStorage);
+    }else{
+        get_current_msg();
+        setInterval("selectMap()", 300000);
+    }
+    //获取当前定位信息
+</script>
+<div class="warp">
+    <header class="warp_pws_p">
+
+        <div class="warp_pws_p_si">
+            <img src="wap/img/tq_1.png">
+            <!--tq_1 晴-->
+            <!--tq_2 多云-->
+            <!--tq_3 雾-->
+            <!--tq_4 雨-->
+            <!--tq_5 雷阵雨-->
+            <!--tq_6 暴雨-->
+            <!--tq_7 雨夹雪-->
+            <!--tq_8 雪-->
+            <span>16℃~30℃</span>
+        </div>
+        <div class="warp_pws_p_sp">
+            <span><i></i></span>
+        </div>
+        <div class="warp_pws_p_so">
+            <span>请输入公益基地名称进行查询</span>
+            <i></i>
+        </div>
+    </header>
+
+    <!--<div style="width: 100%;height: 66px;overflow: hidden"></div>-->
+
+    <nav>
+        <ul class="warp_pws_o" style="display: none;">
+            <li>
+                <!--<a href="javascript:void(0)" id="scanQRCode" onclick="alertTishi();">-->
+                    <a href="post/post_list.html">
+                    <img src="./wap/img/pws_9.png">
+                </a>
+            </li>
+            <li>
+                <a href='./activity/activity_list.html?categorycode=DT'>
+                    <img src="./wap/img/pws_huodong.png">
+                </a>
+            </li>
+            <li>
+                <a href="./huangye/index.html">
+                    <img src="./wap/img/pws_6.png">
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="alertTishi();">
+                    <img src="./wap/img/pws_11.png">
+                </a>
+            </li>
+            <li style="display:none;">
+                <a href="javascript:void(0)" id="scanQRCode">
+                    <!--<a href="javascript:void(0)" id="scanQRCode" onclick="alertTishi();">-->
+                    <img src="./wap/img/pws_4.png">
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="jumpCheck('http://shop.shcvs.cn')">
+                    <img src="./wap/img/pws_5.png">
+                </a>
+            </li>
+            <li>
+                <!--<a href="https://www.creditsh.net/wx/open/cloud/app_list.html">-->
+                <a href="javascript:void(0)" onclick="jumpCheck('http://h5.shcvs.cn/gysh/html5/v1/shcredit/authorize/SH001/3',0)">
+                <!--<a href="javascript:void(0)" onclick="alertTishi();">-->
+                    <img src="./wap/img/pws_325.png">
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="jumpCheckUser('./prove/index.html', 'login/login.html?jumpAdd='+location.href)">
+                    <img src="./wap/img/pws_zhengming.png">
+                </a>
+            </li>
+            <li style="display:none;">
+                <a href="javascript:void(0)" onclick="alertTishi();">
+                    <img src="./wap/img/pws_7.png">
+                </a>
+            </li>
+
+
+<!--
+            <li>
+                <a href="javascript:void(0)" onclick="alertTishi();">
+                    <img src="./wap/img/pws_10.png">
+                    <span>公共资源</span>
+                </a>
+            </li>-->
+            <li>
+                <a href="moreservice/mobile-service.html">
+                    <img src="./wap/img/pws_12.png">
+                </a>
+            </li>
+        </ul>
+        <ul class="warp_pws_o">
+            <li>
+                <a href='post/post_list.html'>
+                    <img src="./wap/img/pws_99212.png">
+                    <span>志愿服务岗位</span>
+                </a>
+            </li>
+            <li>
+                <a href='task/task_find.html'>
+                    <img src="./wap/img/pws_99212.png">
+                    <span>志愿服务任务</span>
+                </a>
+            </li>
+            <li>
+                <a href='./activity/activity_list.html?categorycode=DT'>
+                    <img src="./wap/img/pws_9.png">
+                    <span>公益活动</span>
+                </a>
+            </li>
+            <li>
+                <a href="./huangye/index.html">
+                    <img src="./wap/img/pws_6.png">
+                    <span>公益基地</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="jump('https://s.wcd.im/v/5f0njZ3c/?slv=1&sid=9fg2&v=oosnVwjpHNmHOFkPXj20VYNQYLk4')">
+                    <img src="./wap/img/pws_13.png">
+                    <span>公益护照礼遇</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="jump('./counselor/counselor_list.html');">
+                    <img src="./wap/img/pws_7.png">
+                    <span>公益顾问</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="jumpCheck('http://shop.shcvs.cn')">
+                    <img src="./wap/img/pws_5.png">
+                    <span>福利</span>
+                </a>
+            </li>
+            <!--<li>-->
+                <!--<a href="javascript:void(0)" onclick="jumpCheck('http://h5.shcvs.cn/gysh/html5/v1/shcredit/authorize/SH001/3',0)">-->
+                    <!--<img src="./wap/img/pws_325.png">-->
+                    <!--<span>信用上海</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="javascript:void(0)" onclick="jumpCheckUser('./prove/index.html', 'login/login.html?jumpAdd='+location.href)">-->
+                    <!--<img src="./wap/img/pws_11.png">-->
+                    <!--<span>公益证明</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <li>
+                <a href="moreservice/mobile-service.html">
+                    <img src="./wap/img/pws_12.png">
+                    <span>更多</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="banner">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <a><img src="./wap/img/default_ads.jpg"></a>
+            </div>
+        </div>
+        <div class="pagination"></div>
+    </div>
+
+    <a href="javascript:void(0)" class="warp_pws_i" style="display:none;">
+        <!--<img src="./wap/img/pws_12.jpg" class="warp_pws_i_ip">
+        <em></em>
+        <img src="./wap/img/pws_20.png" class="warp_pws_i_io">
+        <div class="warp_pws_i_ii">
+            <span>公益嘉年华将于9月14日开幕</span>
+            <span>腾讯99公益日引领透明公益</span>
+        </div>
+        <i>3小时前</i>-->
+    </a>
+    <style>
+        .postClockWrap{
+            padding:0 3% 4%;
+        }
+        .postClockWrap h2{
+            font-size:.28rem;
+            font-weight:bold;
+            padding:.2rem 0 .1rem;
+            padding-right:1.4rem;
+            color:#000;
+            position:relative;
+        }
+        .postClockWrap h2 button{
+            display:inline-block;
+            padding:0 .15rem;
+            height:.4rem;
+            border-radius:.2rem;
+            font-size:.22rem;
+            line-height:1;
+            border:1px solid #f07730;
+            color:#f07730;
+            position:absolute;
+            right:0;top:50%;
+            margin-top:-.12rem;
+        }
+        .postClockList{
+            font-size:.22rem;
+            color:#666;
+            padding:.1rem 0;
+            padding-left:.5rem;
+            background:url("./wap/img/pws_125.png") no-repeat 2px center;
+            background-size:.24rem auto;
+        }
+        .postClockList.op{
+            background:url("./wap/img/pws_126.png") no-repeat 0 center;
+            background-size:.3rem auto;
+        }
+    </style>
+    <div class="warp_pws_t warp_pws_clock" style="display:none;">
+        <div class="warp_pws_t_sp">
+            <a href="javascript:void(0)" onclick="user_index('./post/personal_post_list.html')">更多</a>
+            <em></em>
+            <span class="warp_pws_t_so">我的岗位打卡</span>
+        </div>
+
+        <div class="postClockWrap">
+            <!--<h2>新华医院导医医院 <button>签到打卡</button></h2>-->
+            <!--<div class="postClockList">2019年12月09日 09:00-12:00</div>-->
+            <!--<div class="postClockList op">上海市长宁区金钟路658弄11号上海市长宁区金钟路658弄11号上海市长宁区金钟路658弄11号</div>-->
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+    <script>
+        var dakaonclick = "";
+        function alertTiShi(){
+            layer.closeAll();
+            layer.open({
+                content: '正在打卡中，不可重复打卡！'
+                ,skin: 'msg'
+                ,time: 10
+            });
+        }
+        function newPostSign(pkPostCode){
+            var user_msg = JSON.parse($.cookie('user_msg'));
+            var token = $.cookie('token');
+            layer.open({
+                content: "确定要打卡吗？"
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    //layer.closeAll();
+                    layer.open({
+                        content: '打卡定位中，请稍后'
+                        ,skin: 'msg'
+                        ,time: 10
+                    });
+                    dakaonclick = $(".postClockBtn").attr("onclick");
+                    $(".postClockBtn").attr("onclick", "alertTiShi();");
+                    var json = {"user": user_msg.userId, "pkPostCode": pkPostCode, "locationType": "GPS", "sourceType": 1};
+                    var map = new BMap.Map("allmap");
+                    var point = new BMap.Point(116.331398, 39.897445);
+                    map.centerAndZoom(point, 12);
+
+                    var geolocation = new BMap.Geolocation();
+                    geolocation.getCurrentPosition(function (r) {
+                        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                            console.log(r)
+                            var mk = new BMap.Marker(r.point);
+                            map.addOverlay(mk);
+                            map.panTo(r.point);
+                            json.lat = r.point.lat;
+                            json.lng = r.point.lng;
+                            json.address = r.address.street;
+                            $.ajax({
+                                xhrFields: {
+                                    withCredentials: true
+                                },
+                                type: 'post',
+                                url: base_url + "/html5/v1/station/newPostSign",
+                                data: JSON.stringify(json),
+                                dataType: 'json',
+                                headers: {'token': token},
+                                contentType: "application/json;charset=utf-8",
+                                success: function (data) {
+                                    layer.closeAll();
+                                    $(".postClockBtn").attr("onclick", dakaonclick);
+                                    if (data.code == 0) {
+                                        layer.open({
+                                            content: $(".postClockBtn").text()+'成功！'
+                                            , skin: 'msg'
+                                            , time: 1 //2秒后自动关闭
+                                        });
+                                        setTimeout(function () {
+                                            location.reload();
+                                        }, 1000);
+                                    } else {
+                                        layer.open({
+                                            content: data.msg
+                                            , skin: 'msg'
+                                            , time: 1 //2秒后自动关闭
+                                        });
+                                    }
+                                },
+                                error:function(){
+                                    layer.open({
+                                        content: $(".postClockBtn").text()+'失败'
+                                        ,skin: 'msg'
+                                        ,time: 1 //2秒后自动关闭
+                                    });
+                                    $(".postClockBtn").attr("onclick", dakaonclick);
+                                }
+                            });
+                        } else {
+                            layer.open({
+                                content: '获取定位失败,请重试'
+                                , skin: 'msg'
+                                , time: 1 //2秒后自动关闭
+                            });
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+    <div class="warp_pws_u">
+        <img src="./wap/img/pws_13.jpg">
+        <i id='days'>7月1日场</i><!--
+        <div class="time-item">
+            &lt;!&ndash;<span id="day_show">0天</span>&ndash;&gt;
+            <strong id="hour_show">0</strong>
+            <span>:</span>
+            <strong id="minute_show">0</strong>
+            <span>:</span>
+            <strong id="second_show">0</strong>
+        </div>-->
+        <script type="text/javascript">
+            var intDiff = parseInt(362660);//倒计时总秒数量
+            function timer(intDiff){
+                window.setInterval(function(){
+                    var day=0,
+                        hour=0,
+                        minute=0,
+                        second=0;//时间默认值
+                    if(intDiff > 0){
+                        day = Math.floor(intDiff / (60 * 60 * 24));
+                        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+                        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+                        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+                    }
+                    if (minute <= 9) minute = '0' + minute;
+                    if (second <= 9) second = '0' + second;
+                    // $('#day_show').html(day+"天");
+                    $('#hour_show').html('<s id="h"></s>'+hour+'');
+                    $('#minute_show').html('<s></s>'+minute+'');
+                    $('#second_show').html('<s></s>'+second+'');
+                    intDiff--;
+                }, 1000);
+            }
+
+            $(function(){
+                timer(intDiff);
+            });
+        </script>
+    </div>
+
+    <a href="javascript:void(0)" class="warp_pws_y">
+        <!--<img src="./wap/img/default_goods.png" class="warp_pws_y_p">-->
+        <img src="./wap/img/pws_ms_1.png" class="warp_pws_y_p">
+        <div class="warp_pws_y_o">
+            <b><u id='jifen'>10</u>积分</b>
+            <span>数量：<i id='total'>200</i></span>
+            <!--<span>剩余：<i id='residue'>0</i></span>-->
+        </div>
+        <div class="warp_pws_y_i">
+            <b>公益上海志愿者服装</b>
+            <span><img src="./wap/img/pws_20.png"> 由<i id="gname">公益服务促进中心</i>提供</span>
+        </div>
+    </a>
+
+    <!--<div class="warp_pws_t">
+        <div class="warp_pws_t_sp">
+            <a href="javascript:void(0)">更多</a>
+            <em></em>
+            <span class="warp_pws_t_so">公益信用</span>
+            <span class="huan"><img src="./wap/img/pws_35.png">换一批</span>
+        </div>
+
+        <div class="changeone">
+            <ul>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="cone_p">
+                            <img src="./wap/img/pws_xy_1.png" class="cone_o">
+                            <div class="cone_i">
+                                <div class="cone_u">
+                                    <span class="cone_y">上海玻璃博物馆</span>
+                                    <div class="cone_t">
+                                        <img src="./wap/img/pws_18.png">
+                                        <img src="./wap/img/pws_18.png">
+                                    </div>
+                                    <img src="./wap/img/pws_19.png" class="cone_r">
+                                </div>
+                                <p class="cone_fb">30分钟前发布</p>
+                            </div>
+                        </div>
+                        <div class="cone_e">
+                            <div class="cone_w">
+                                <b><i>100</i>张</b>
+                                <span>价值：20积分</span>
+                            </div>
+                            <div class="cone_q">
+                                <b>上海海玻璃博物馆夜场门票</b>
+                                <span>有效期：11月01日-11月31日</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="cone_p">
+                            <img src="./wap/img/pws_xy_2.png" class="cone_o">
+                            <div class="cone_i">
+                                <div class="cone_u">
+                                    <span class="cone_y">上海长征医院</span>
+                                    <div class="cone_t">
+                                        <img src="./wap/img/pws_18.png">
+                                        <img src="./wap/img/pws_18.png">
+                                    </div>
+                                    <img src="./wap/img/pws_19.png" class="cone_r">
+                                </div>
+                                <p class="cone_fb">3小时前发布</p>
+                            </div>
+                        </div>
+                        <div class="cone_e">
+                            <div class="cone_w">
+                                <b><i>100</i>张</b>
+                                <span>价值：20积分</span>
+                            </div>
+                            <div class="cone_q">
+                                <b>上海长征医院志愿者绿色通道</b>
+                                <span>有效期：11月01日-11月31日</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="cone_p">
+                            <img src="./wap/img/pws_xy_3.png" class="cone_o">
+                            <div class="cone_i">
+                                <div class="cone_u">
+                                    <span class="cone_y">美琪大戏院</span>
+                                    <div class="cone_t">
+                                        <img src="./wap/img/pws_18.png">
+                                        <img src="./wap/img/pws_18.png">
+                                    </div>
+                                    <img src="./wap/img/pws_19.png" class="cone_r">
+                                </div>
+                                <p class="cone_fb">5小时前发布</p>
+                            </div>
+                        </div>
+                        <div class="cone_e">
+                            <div class="cone_w">
+                                <b><i>100</i>张</b>
+                                <span>价值：20积分</span>
+                            </div>
+                            <div class="cone_q">
+                                <b>舞台剧《繁华》第一季专享票</b>
+                                <span>有效期：11月01日-11月31日</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="cone_p">
+                            <img src="./wap/img/pws_xy_1.png" class="cone_o">
+                            <div class="cone_i">
+                                <div class="cone_u">
+                                    <span class="cone_y">上海玻璃博物馆</span>
+                                    <div class="cone_t">
+                                        <img src="./wap/img/pws_18.png">
+                                        <img src="./wap/img/pws_18.png">
+                                    </div>
+                                    <img src="./wap/img/pws_19.png" class="cone_r">
+                                </div>
+                                <p class="cone_fb">30分钟前发布</p>
+                            </div>
+                        </div>
+                        <div class="cone_e">
+                            <div class="cone_w">
+                                <b><i>100</i>张</b>
+                                <span>价值：20积分</span>
+                            </div>
+                            <div class="cone_q">
+                                <b>上海海玻璃博物馆夜场门票</b>
+                                <span>有效期：11月01日-11月31日</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="cone_p">
+                            <img src="./wap/img/pws_xy_2.png" class="cone_o">
+                            <div class="cone_i">
+                                <div class="cone_u">
+                                    <span class="cone_y">上海长征医院</span>
+                                    <div class="cone_t">
+                                        <img src="./wap/img/pws_18.png">
+                                        <img src="./wap/img/pws_18.png">
+                                    </div>
+                                    <img src="./wap/img/pws_19.png" class="cone_r">
+                                </div>
+                                <p class="cone_fb">3小时前发布</p>
+                            </div>
+                        </div>
+                        <div class="cone_e">
+                            <div class="cone_w">
+                                <b><i>100</i>张</b>
+                                <span>价值：20积分</span>
+                            </div>
+                            <div class="cone_q">
+                                <b>上海长征医院志愿者绿色通道</b>
+                                <span>有效期：11月01日-11月31日</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="cone_p">
+                            <img src="./wap/img/pws_xy_3.png" class="cone_o">
+                            <div class="cone_i">
+                                <div class="cone_u">
+                                    <span class="cone_y">美琪大戏院</span>
+                                    <div class="cone_t">
+                                        <img src="./wap/img/pws_18.png">
+                                        <img src="./wap/img/pws_18.png">
+                                    </div>
+                                    <img src="./wap/img/pws_19.png" class="cone_r">
+                                </div>
+                                <p class="cone_fb">5小时前发布</p>
+                            </div>
+                        </div>
+                        <div class="cone_e">
+                            <div class="cone_w">
+                                <b><i>100</i>张</b>
+                                <span>价值：20积分</span>
+                            </div>
+                            <div class="cone_q">
+                                <b>舞台剧《繁华》第一季专享票</b>
+                                <span>有效期：11月01日-11月31日</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>-->
+
+    <!--<div class="warp_pws_t">
+        <div class="warp_pws_t_sp">
+            <a href="javascript:void(0)">更多</a>
+            <em></em>
+            <span class="warp_pws_t_so">求助</span>
+            <span class="huan_1"><img src="./wap/img/pws_35.png">换一批</span>
+        </div>
+
+        <div class="changeone_1">
+            <ul>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="cone_p">
+                            <img src="./wap/img/pws_20.jpg" class="cone_o">
+                            <div class="cone_i">
+                                <div class="cone_u">
+                                    <span class="cone_y">李小明</span>
+                                    <div class="cone_t">
+                                        <img src="./wap/img/pws_18.png">
+                                        <img src="./wap/img/pws_18.png">
+                                    </div>
+                                    <img src="./wap/img/pws_19_on.png" class="cone_r">
+                                </div>
+                                <p class="cone_fb">5分钟前发布</p>
+                            </div>
+                        </div>
+                        <div class="cone_e">
+                            <div class="cone_w" style="margin-top: 20px">
+                                <b><i>1</i>件</b>
+                                <span>男性、42码</span>
+                            </div>
+                            <div class="cone_q">
+                                <b>二手篮球鞋 1双</b>
+                                <span>截止日期：11月01日</span>
+								<span>地址：长宁区北新泾街道</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="cone_p">
+                            <img src="./wap/img/pws_21.jpg" class="cone_o">
+                            <div class="cone_i">
+                                <div class="cone_u">
+                                    <span class="cone_y">王正</span>
+                                    <div class="cone_t">
+                                        <img src="./wap/img/pws_18.png">
+                                        <img src="./wap/img/pws_18.png">
+                                    </div>
+                                    <img src="./wap/img/pws_19_on.png" class="cone_r">
+                                </div>
+                                <p class="cone_fb">30分钟前发布</p>
+                            </div>
+                        </div>
+                        <div class="cone_e">
+                            <div class="cone_w" style="margin-top: 20px">
+                                <b><i>4</i>小时</b>
+                                <span>助老服务</span>
+                            </div>
+                            <div class="cone_q">
+                                <b>志愿服务4小时</b>
+                                <span>使用日期：12月01日</span>
+								<span>地址：长宁区北新泾街道</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="cone_p">
+                            <img src="./wap/img/pws_22.jpg" class="cone_o">
+                            <div class="cone_i">
+                                <div class="cone_u">
+                                    <span class="cone_y">张帅</span>
+                                    <div class="cone_t">
+                                        <img src="./wap/img/pws_18.png">
+                                        <img src="./wap/img/pws_18.png">
+                                    </div>
+                                    <img src="./wap/img/pws_19_on.png" class="cone_r">
+                                </div>
+                                <p class="cone_fb">10分钟前发布</p>
+                            </div>
+                        </div>
+                        <div class="cone_e">
+                            <div class="cone_w" style="margin-top: 20px">
+                                <b><i>1</i>件</b>
+                                <span>重量：3公斤</span>
+                            </div>
+                            <div class="cone_q">
+                                <b>轮椅 1个</b>
+                                <span>使用日期：11月09日</span>
+								<span>地址：长宁区北新泾街道</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="cone_p">
+                            <img src="./wap/img/pws_20.jpg" class="cone_o">
+                            <div class="cone_i">
+                                <div class="cone_u">
+                                    <span class="cone_y">李小明</span>
+                                    <div class="cone_t">
+                                        <img src="./wap/img/pws_18.png">
+                                        <img src="./wap/img/pws_18.png">
+                                    </div>
+                                    <img src="./wap/img/pws_19_on.png" class="cone_r">
+                                </div>
+                                <p class="cone_fb">5分钟前发布</p>
+                            </div>
+                        </div>
+                        <div class="cone_e">
+                            <div class="cone_w" style="margin-top: 20px">
+                                <b><i>1</i>件</b>
+                                <span>男性、42码</span>
+                            </div>
+                            <div class="cone_q">
+                                <b>二手篮球鞋 1双</b>
+                                <span>截止日期：11月01日</span>
+								<span>地址：长宁区北新泾街道</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="cone_p">
+                            <img src="./wap/img/pws_21.jpg" class="cone_o">
+                            <div class="cone_i">
+                                <div class="cone_u">
+                                    <span class="cone_y">王二麻</span>
+                                    <div class="cone_t">
+                                        <img src="./wap/img/pws_18.png">
+                                        <img src="./wap/img/pws_18.png">
+                                    </div>
+                                    <img src="./wap/img/pws_19_on.png" class="cone_r">
+                                </div>
+                                <p class="cone_fb">30分钟前发布</p>
+                            </div>
+                        </div>
+                        <div class="cone_e">
+                            <div class="cone_w" style="margin-top: 20px">
+                                <b><i>4</i>小时</b>
+                                <span>助老服务</span>
+                            </div>
+                            <div class="cone_q">
+                                <b>志愿服务4小时</b>
+                                <span>使用日期：12月01日</span>
+								<span>地址：长宁区北新泾街道</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="cone_p">
+                            <img src="./wap/img/pws_22.jpg" class="cone_o">
+                            <div class="cone_i">
+                                <div class="cone_u">
+                                    <span class="cone_y">张帅</span>
+                                    <div class="cone_t">
+                                        <img src="./wap/img/pws_18.png">
+                                        <img src="./wap/img/pws_18.png">
+                                    </div>
+                                    <img src="./wap/img/pws_19_on.png" class="cone_r">
+                                </div>
+                                <p class="cone_fb">10分钟前发布</p>
+                            </div>
+                        </div>
+                        <div class="cone_e">
+                            <div class="cone_w" style="margin-top: 20px">
+                                <b><i>1</i>件</b>
+                                <span>重量：3公斤</span>
+                            </div>
+                            <div class="cone_q">
+                                <b>轮椅 1个</b>
+                                <span>使用日期：11月09日</span>
+								<span>地址：长宁区北新泾街道</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>-->
+
+    <div class="warp_pws_t">
+        <div class="warp_pws_t_sp">
+            <a href="http://news.shcvs.cn/gysh_cm_pub/subject/subject.html?index=subject">更多</a>
+            <em></em>
+            <span class="warp_pws_t_so" id="quinfcuurf">大家都在看</span>
+        </div>
+
+        <div class="warp_pws_t_si">
+            <ul class="warp_pws_t_su">
+                <li>
+                    <a href="javascript:void(0)">
+                        <img src="./wap/img/default_look.png">
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <img src="./wap/img/default_look.png">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="warp_pws_t">
+        <div class="warp_pws_t_sp">
+            <a href="activity/activity_list.html?categorycode=DT">更多</a>
+            <em></em>
+            <span class="warp_pws_t_so">今天活动</span>
+        </div>
+
+        <div class="warp_pws_t_si">
+            <ul class="warp_pws_t_sy">
+                <li>
+                    <a href="javascript:void(0)">
+                        <img src="./wap/img/default_act.png">
+                        <b>加载中</b>
+                        <span>00月00日-00月00日</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <img src="./wap/img/default_act.png">
+                        <b>加载中</b>
+                        <span>00月00日-00月00日</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <img src="./wap/img/default_act.png">
+                        <b>加载中</b>
+                        <span>00月00日-00月00日</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <link rel="stylesheet" type="text/css" href="wap/css/iphonex.css"/>
+    <div id='footer'></div>
+</div>
+
+<!------地区开始------>
+<div class="warp_pws_h pws_dq">
+    <div class="warp_pws_h_sp">
+        <input style="padding-left:14px;" type="text" readonly="readonly" placeholder="当前：上海全城">
+        <a href="javascript:void(0)">取消</a>
+    </div>
+    <div class="warp_pws_h_scroll">
+        <div class="warp_pws_h_si">
+            <!--<p>当前：上海全城</p>-->
+            <ul>
+                <li class="on">
+                    <a href="javascript:void(0)">上海市</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">卢湾区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">徐汇区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">静安区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">长宁区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">浦东新区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">黄浦区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">普陀区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">闸北区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">虹口区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">杨浦区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">闵行区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">宝山区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">奉贤区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">金山区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">崇民区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">松江区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">嘉定区</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">青浦区</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<!------地区结束------>
+
+<!------搜索开始------>
+<div class="warp_pws_h pws_ss">
+    <div class="warp_pws_h_sp">
+        <button class="pws_search"></button>
+        <input type="search" id="input" placeholder="请输入公益基地名称进行查询">
+        <a href="javascript:void(0)">取消</a>
+    </div>
+    <div class="warp_pws_h_scroll">
+        <div class="warp_pws_h_so" style="display: none;">
+            <p>热门搜索</p>
+            <ul>
+                <li>
+                    <a href="javascript:void(0)">帮助孩子走出大山</a>
+                </li>
+            </ul>
+        </div>
+        <div class="searchTxt">查询到的数据有点多，请您输入详细的基地名称进行查询</div>
+        <div class="divideListWrap">
+            <!--<div class="divideList" data-id=''>-->
+            <!--<div>-->
+            <!--<h2>上海市公益服务促进中心</h2>-->
+            <!--<div class="divideType"><span>0号公益基地</span><span class="on"><i></i>实名</span></div>-->
+            <!--<div class="divideMap">-->
+            <!--<i></i>-->
+            <!--<span>bbb</span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+
+    <!--<div class="warp_pws_h_so">-->
+        <!--<p>历史搜索</p>-->
+        <!--<ul>-->
+            <!--<li>-->
+                <!--<a href="javascript:void(0)">帮助孩子走出大山</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="javascript:void(0)">奥运会</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="javascript:void(0)">帮助老人回家</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="javascript:void(0)">帮助孩子走出大山</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="javascript:void(0)">帮助孩子走出大山</a>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+</div>
+
+<style>
+    .warp_hd_y{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 999999;
+        display: none;
+    }
+    .warp_hd_y_lp{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background: #FFFFFF;
+        opacity: 0.8;
+    }
+    .warp_hd_y_lo{
+        width: 100%;
+        overflow: hidden;
+        position: fixed;
+        left: 0;
+        bottom: 60px;
+    }
+    .warp_hd_y_lo li{
+        width: 41%;
+        overflow: hidden;
+        float: left;
+        text-align: center;
+        margin: 0 0 0 6%;
+        padding-bottom: 5%;
+        display: none;
+    }
+    .warp_hd_y_lo li a{
+        display: inline-block;
+    }
+    .warp_hd_y_lo li a img{
+        width: 60%;
+        margin: auto;
+    }
+    .warp_hd_y_lo li a span{
+        display: block;
+        text-align: center;
+        font-size: 15px;
+        color: #333333;
+        padding-top: 6px;
+    }
+    .warp_hd_y_li{
+        width: 100%;
+        overflow: hidden;
+        position: fixed;
+        left: 0;
+        bottom: 20px;
+        text-align: center;
+    }
+    .warp_hd_y_li a{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: url(./wap/img/pws_dh_7.png) no-repeat center;
+        background-size: 100% 100%;
+    }
+    .footer {
+        width: 100%;
+        height: 60px;
+        background: #FFF;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 9999;
+        border-top: 1px solid #B3B3B3;
+        box-shadow: 0px 0px 5px 1px #B3B3B3;
+    }
+
+    .footer_qt3 li {
+        float: left;
+        width: 20%;
+        height: 60px;
+    }
+
+    .footer_qt3 li a {
+        width: 100%;
+        display: block;
+        color: #999999;
+        font-size: 14px;
+        text-align: center;
+        height: 60px;
+    }
+
+    .footer_qt3 li a span {
+        margin-top: 5px;
+        display: block;
+        height: 30px
+    }
+
+    .footer_qt3 li a b {
+        display: block;
+        font-weight: normal;
+        text-align: center;
+        font-family: '微软雅黑'
+    }
+
+    .footer_qt3 .qt_ft1 a span {
+        background: url(./wap/img/pws_29.png) center no-repeat;
+        background-size: 26px auto;
+    }
+
+    .footer_qt3 .qt_ft2 a span {
+        background: url(./wap/img/pws_30.png) center no-repeat;
+        background-size: 26px auto;
+    }
+
+    .footer_qt3 .qt_ft3 a span {
+        background: url(./wap/img/pws_31.png) center no-repeat;
+        background-size: 48px auto;
+        height: 60px;
+        margin-top: -25px;
+    }
+
+    .footer_qt3 .qt_ft4 a span {
+        background: url(./wap/img/pws_32.png) center no-repeat;
+        background-size: 26px auto;
+    }
+
+    .footer_qt3 .qt_ft5 a span {
+        background: url(./wap/img/pws_33.png) center no-repeat;
+        background-size: 26px auto;
+    }
+
+    .footer_qt3 .qt_ft1.current a span {
+        background: url(./wap/img/pws_29_on.png) no-repeat center;
+        background-size: 26px auto;
+    }
+
+    .footer_qt3 .qt_ft2.current a span {
+        background: url(./wap/img/pws_30_on.png) no-repeat center;
+        background-size: 26px auto;
+    }
+
+    .footer_qt3 .qt_ft3.current a span {
+        background: url(./wap/img/pws_31.png) center no-repeat;
+        background-size: 48px auto;
+        height: 60px;
+        margin-top: -25px;
+    }
+
+    .footer_qt3 .qt_ft4.current a span {
+        background: url(./wap/img/pws_32_on.png) no-repeat center;
+        background-size: 26px auto;
+    }
+
+    .footer_qt3 .qt_ft5.current a span {
+        background: url(./wap/img/pws_33_on.png) no-repeat center;
+        background-size: 26px auto;
+    }
+
+    .footer_qt3 .qt_ft1.current a b {
+        color: #72B81E;
+    }
+
+    .footer_qt3 .qt_ft2.current a b {
+        color: #72B81E;
+    }
+
+    .footer_qt3 .qt_ft3.current a b {
+        color: #72B81E;
+    }
+
+    .footer_qt3 .qt_ft4.current a b {
+        color: #72B81E;
+    }
+
+    .footer_qt3 .qt_ft5.current a b {
+        color: #72B81E;
+    }
+</style>
+<!------底部开始------>
+<div id='footer'></div>
+<div class="ht60"></div>
+<footer class="footer">
+    <div class="footer_qt3">
+        <ul id="nav">
+            <li class="qt_ft1">
+                <a href="/" data-href=''>
+                    <span></span>
+                    <b>首页</b>
+                </a>
+            </li>
+            <li class="qt_ft2">
+                <a id="foundA" href="*" data-href='find'>
+                    <span></span>
+                    <b>发现</b>
+                </a>
+            </li>
+            <li class="qt_ft3">
+                <a href="javascript:void(0)">
+                    <span></span>
+                    <b>发布</b>
+                </a>
+            </li>
+            <li class="qt_ft4">
+                <a href="javascript:void(0)" data-href='order' onclick="user_index('./post/personal_post_list.html')">
+                    <span></span>
+                    <b>订单</b>
+                </a>
+            </li>
+            <li class="qt_ft5">
+                <a href="javascript:void(0)" data-href="user" onclick="user_index('./user/user_index.html')" >
+                    <span></span>
+                    <b>我的</b>
+                </a>
+            </li>
+        </ul>
+    </div>
+</footer>
+<div class="warp_hd_y">
+    <div class="warp_hd_y_lp"></div>
+    <ul class="warp_hd_y_lo">
+        <!-- <li class="warp_hd_y_lo_1">
+            <a href="./act/act_base_add.html">
+                <img src="./wap/img/pws_dh_1.png">
+                <span>标准发布</span>
+            </a>
+        </li>
+        <li class="warp_hd_y_lo_2">
+            <a href="">
+                <img src="./wap/img/pws_dh_2.png">
+                <span>快速发布</span>
+            </a>
+        </li> -->
+        <li class="warp_hd_y_lo_1">
+            <a href="./find/tiwen.html">
+                <img src="./wap/img/pws_dh_3.png">
+                <span>提问</span>
+            </a>
+        </li>
+        <li class="warp_hd_y_lo_2">
+            <a href="./find/fabutuwen.html">
+                <img src="./wap/img/pws_dh_4.png">
+                <span>发布图文</span>
+            </a>
+        </li>
+        <li class="warp_hd_y_lo_3">
+            <a href="./find/fabutupian.html">
+                <img src="./wap/img/pws_dh_5.png">
+                <span>发布图片</span>
+            </a>
+        </li>
+        <li class="warp_hd_y_lo_4">
+            <a href="./find/fabushipin.html">
+                <img src="./wap/img/pws_dh_6.png">
+                <span>发布视频</span>
+            </a>
+        </li>
+    </ul>
+    <div class="warp_hd_y_li">
+        <a href="javascript:void(0)"></a>
+    </div>
+</div>
+<script type="text/javascript" src="wap/js/common.js"></script>
+
+
+<script type="text/javascript">
+    //setCookie('jumpAdd', "");
+    var expiresDate= new Date();
+    expiresDate.setTime(expiresDate.getTime() + (60*60*8000));
+    $.cookie('jumpAdd', "", {expires: expiresDate, path:'/' ,domain:domain_url});
+    var jumpType = $.getUrlParam("jumpType");
+    if(jumpType){
+        $("#footer").show();
+        $("#footer").load("public/footer.html");
+        $(".ht60").hide();
+        $(".footer").hide();
+        $(".warp_hd_y").hide();
+        $(".warp_hd_y_lp").hide();
+        $(".warp_hd_y_lo").hide();
+        $(".warp_hd_y_li").hide();
+    }else{
+        $("#footer").hide();
+        $(".ht60").show();
+        $(".footer").show();
+    }
+    getWxConfig();
+    $(function() {
+        //$("#foundA").attr("href", news_base_url+"/gysh_cm_pub/article/recommend.html");
+        $("#foundA").attr("href", "http://news.shcvs.cn/gysh_cm_pub/article/recommend.html");
+    });
+    function getWxConfig(){
+        var wwwurl = location.href.split('#')[0];
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/wechat/getWeChatJsSign",
+            data:JSON.stringify({"url":wwwurl}),
+            async:false,
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    var data1 = JSON.parse(data.data.data);
+                    //sessionStorage.setItem('WxConfig',data1); //获取WX配置信息
+                    wx.config({
+                        debug: false,
+                        appId: data1.appId, // 必填，公众号的唯一标识
+                        timestamp:parseInt(data1.timestamp), // 必填，生成签名的时间戳
+                        nonceStr: data1.nonceStr, // 必填，生成签名的随机串
+                        signature: data1.signature,// 必填，签名，见附录1
+                        jsApiList: ['checkJsApi','scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    });
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+    wx.error(function(res) {
+        console.log("出错了error：" + res.errMsg);
+    });
+
+    wx.ready(function() {
+        wx.checkJsApi({
+            jsApiList : ['scanQRCode'],
+            success : function(res) {
+                console.log(res);
+            }
+        });
+        //主页扫一扫
+        document.querySelector('#scanQRCode').onclick = function() {
+            wx.scanQRCode({
+                needResult : 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                scanType : ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                success : function(res) {
+                    var result = res.resultStr;
+                    location.href = result;
+                }
+            });
+        };
+
+    });
+
+</script>
+<script language="javascript" type="text/javascript">
+    $(".qt_ft3 a").click(function(){
+        var un = $.cookie("un");//是否实名
+        var user_msg = $.cookie('user_msg');
+        var token = $.cookie('token');
+        if(user_msg==undefined || token==undefined || user_msg=="" || token==""){
+            layer.open({
+                content: '请先登录'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    $(location).attr("href", './login/login.html?jumpAdd='+location.href);
+                }
+            });
+        }else if(un==null || un==undefined || un=="") {
+            layer.open({
+                content: '请实名后再进行操作'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    //$(location).attr('href', "../cert/cert_index.html");
+                    jumpBank('web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=');
+                }
+                , no: function (index) {
+                    return;
+                }
+            });
+        }else{
+            if(reporter()){
+                $(".warp_hd_y").fadeIn();
+                $(".warp_hd_y_lo_1").fadeIn("slow");
+                $(".warp_hd_y_lo_2").fadeIn(1000);
+                $(".warp_hd_y_lo_3").fadeIn(2000);
+                $(".warp_hd_y_lo_4").fadeIn(3000);
+                // $(".warp_hd_y_lo_5").fadeIn(4000);
+                // $(".warp_hd_y_lo_6").fadeIn(5000);
+                $("body,html").css({
+                    "height":"100%",
+                    "overflow":"hidden"
+                });
+                $('body').addClass('add');
+            }else{
+                layer.open({
+                    content: '暂无权限'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+        }
+    });
+    function reporter(){//是不是小记者
+        var userOrgTags = JSON.parse($.cookie('userOrgTags'));
+        for(var i in userOrgTags) {
+            if ("NP0002" == userOrgTags[i].tagCode) {
+                return true;
+            }
+        }
+        return false;
+    }
+    $(".warp_hd_y_li a").click(function(){
+        $(".warp_hd_y").fadeOut();
+        $("body,html").css({
+            "height":"auto",
+            "overflow":"auto"
+        });
+        $('body').removeClass('add')
+    });
+</script>
+<script type="text/javascript">
+    function user_index(hr){
+        var url = '';
+        if($.cookie('user_msg')==undefined||$.cookie('token')==undefined){
+            url = './login/login.html?jumpAdd=../user/user_index.html';
+        }else{
+            url = hr;
+
+        }
+        window.location.href = url;
+
+    }
+    var curr_url = window.location.pathname+window.location.search;//获取当前URL
+    var str = curr_url.split('/');
+
+    $('#nav a').each(function(i,n){  //循环导航的a标签
+        var href = $(this).attr('data-href'); //a标签中的href链接
+        //console.log(href);
+        if(href == str[1]){  //如果当前URL,和a标签中的href相等。
+            $(this).parent().addClass('current');  //那么就给这个a标签的父元素增加selected类。
+        }
+    })
+</script>
+
+
+<script type="text/javascript">
+
+</script>
+
+<!------搜索结束------>
+<script>
+    var searchContentEvent=function(val){
+        var arr={
+            "searchContent": val
+        };
+        $.ajax({
+            type: "POST",
+            url:base_url + "html5/v1/orgPlace/searchBaseListByShanghai",
+            timeout:5000,
+            data:JSON.stringify(arr),
+            dataType: "json",
+            contentType:"application/json",
+            beforeSend:function(XMLHttpRequest){
+                XMLHttpRequest.setRequestHeader("token", $.cookie('token'));
+            },
+            success:function(data){
+                //if(data['code']==0||data['code']=="0"){
+                    var datas=data.data;
+                    if(data.code==1){
+                        layer.open({
+                            content: data.msg
+                            ,skin: 'msg'
+                            ,time: 3 //2秒后自动关闭
+                        });
+                    }
+                    if(datas.length>0){
+                        $(".warp_pws_h_so").hide();
+                        $(".searchTxt").hide();
+                        var len=10;
+                        if(datas.length<10){
+                            len=datas.length;
+                        }else if(datas.length>10){
+                            $(".searchTxt").show()
+                        }
+                        var li='';
+                        for(var i=0;i<len;i++){
+                            var nickName=datas[i].name;
+                            var baseNo=datas[i].baseNo;
+                            var orgThirdAccount=datas[i].orgThirdAccount;
+                            var personFirstAccount=datas[i].personFirstAccount;
+                            var realName='';
+                            var baseNoTxt='';
+                            var addressDetail=datas[i].addressDetail;
+                            var jumpStr = "huangye/mobileDetailClaim.html?id=" + datas[i].id;
+                            if(orgThirdAccount!==''&&personFirstAccount!==''){
+                                realName='<span class="on"><i></i>实名</span>';
+                                jumpStr = "huangye/mobileDetail.html?id=" + datas[i].id + "&prjvUserId=" + datas[i].prjvUserId;
+                            }
+                            if (datas[i].orgThirdAccount && datas[i].personFirstAccount) {
+                            }
+                            li+='<div class="divideList" data-id=\'\' onclick="jump(\''+jumpStr+'\')">\n' +
+                                '            <div>\n' +
+                                '                <h2>'+nickName+'</h2>\n' +
+                                '                <div class="divideType"><span>'+baseNo+'号公益基地</span>'+realName+'</div>\n' +
+                                '                <div class="divideMap">\n' +
+                                '                    <i></i>\n' +
+                                '                    <span>'+addressDetail+'</span>\n' +
+                                '                </div>\n' +
+                                '            </div>\n' +
+                                '       </div>'
+                        }
+                        $(".divideListWrap").html(li);
+                    }else{
+                        $(".divideListWrap").html("");
+                        layer.open({
+                            content: '没有您要查询的内容'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                    }
+                    /*}else {
+                        layer.open({
+                            content: '请求失败'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                    }*/
+            },
+            error:function(error,status){
+                console.log('请求出错'+error);
+                if(status=='timeout'){
+                    layer.open({
+                        content: '请求超时了，请检查您的网络！'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+                else{
+                    layer.open({
+                        content: '网络异常了'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+            },
+            complete:function(){
+                console.log('请求完成')
+            }
+        });
+    };
+    $(function(){
+        $(".warp_pws_p_sp").click(function(){
+            //$(".pws_dq").animate({left:"0"})
+        });
+        $(".pws_dq .warp_pws_h_sp a").click(function(){
+            $(".pws_dq").animate({left:"100%"})
+        });
+
+        $(".warp_pws_p_so").click(function(){
+            $(".pws_ss").animate({left:"0"})
+            $('#input').focus();
+        });
+        $(".pws_ss .warp_pws_h_sp a").click(function(){
+            $(".pws_ss").animate({left:"100%"})
+        });
+
+        $("#input").on('keypress',function(e) {
+            var keycode = e.keyCode;
+            var searchVal=$(this).val();
+            if(keycode=='13') {
+                e.preventDefault();
+                //请求搜索接口
+                if(searchVal==''){
+                    layer.open({
+                        content: '请输入搜索内容'
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                    return false
+                }else {
+                    searchContentEvent(searchVal)
+                }
+            }
+        });
+        $(".warp_pws_h_si ul li").click(function(){
+            $(".pws_dq").animate({left:"100%"});
+            $(this).addClass('on').siblings('li').removeClass('on');
+            city_msg($(this).find('a').text().substring(0,2))
+        });
+        $(".pws_search").click(function(){
+            var searchVal=$("input[type='search']").val();
+            if(searchVal==''){
+                layer.open({
+                    content: '请输入搜索内容'
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
+                });
+                return false
+            }else {
+                searchContentEvent(searchVal)
+            }
+        });
+        $(".warp_pws_h_so ul li").click(function(){
+            var searchVal=$(this).find('a').text();
+            if(searchVal==''){
+                layer.open({
+                    content: '搜索内容不能为空'
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
+                });
+                return false
+            }else {
+                searchContentEvent(searchVal)
+            }
+        })
+    })
+</script>
+<script>
+    function alertTishi(){
+        layer.open({
+            content: '近期开放，敬请期待。'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+    }
+    $('.huan').rotate({
+        bind: {
+            click: function(){
+                $(".huan img").rotate({
+                    angle: 0,
+                    animateTo: 360,
+                    easing: $.easing.easeInOutExpo
+                });
+            }
+        }
+    });
+    var value2 = 0
+    $(".huan_1").rotate({
+        bind:
+            {
+                click: function(){
+                    value2 +=360;
+                    $(".huan_1 img").rotate({ animateTo:value2})
+                }
+            }
+    })
+
+    var changeindex=1;
+    var clickindex=2;
+    var hp=1;
+    var sp=2;
+    $(".changeone li").each(function(index,element){
+        if(index/3<changeindex){
+
+            element.className="change"+changeindex;
+        }else{
+            changeindex++;
+            element.className="change"+changeindex;
+        }
+    })
+    $(".change1").siblings().css("display","none");
+    $(".change1").show();
+    $(".huan").click(function(){
+        if(clickindex<=changeindex){
+            $(".change"+clickindex).siblings().css("display","none");
+            $(".change"+clickindex).show();
+            clickindex++;
+        }else{
+            clickindex=1;
+            $(".change"+clickindex).siblings().css("display","none");
+            $(".change"+clickindex).show();
+        }
+    });
+    $(".changeone_1 li").each(function(indexs,elements){
+        if(indexs/3<hp){
+
+            elements.className="changes"+hp;
+        }else{
+            hp++;
+            elements.className="changes"+hp;
+        }
+    })
+    $(".changes1").siblings().css("display","none");
+    $(".changes1").show();
+    $(".huan_1").click(function(){
+        if(sp<=hp){
+            $(".changes"+sp).siblings().css("display","none");
+            $(".changes"+sp).show();
+            sp++;
+        }else{
+            sp=1;
+            $(".changes"+sp).siblings().css("display","none");
+            $(".changes"+sp).show();
+        }
+    });
+
+    function jumpCheck(herf, type){
+        var user_msg = $.cookie('user_msg');
+        var token = $.cookie('token');
+        if(user_msg==undefined || token==undefined || user_msg=="" || token==""){
+            layer.open({
+                content: '请先登录'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    $(location).attr("href", 'login/login.html?jumpAdd='+location.href);
+                }
+            });
+        }else{
+            var un = $.cookie("un");
+
+            if(un==null || un==undefined || un==""){
+                layer.open({
+                    content: '请先完成实名认证'
+                    , btn: ['确定', '取消']
+                    , yes: function (index) {
+                        //jump("cert/cert_index.html");
+                        //jumpBank(web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=');
+                    }
+                });
+            }else{
+                var appUserInfoStr = localStorage.getItem('appUserInfo');
+                if(appUserInfoStr){
+                    var appUserInfo = JSON.parse(appUserInfoStr); //转为JSON对象
+                    if(appUserInfo.relUserId!=""){
+                        layer.open({
+                            content: '家庭子账户，暂无该功能。'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                        return;
+                    }
+                }
+                if(type==0){
+                    herf += "/"+un;
+                }
+                $(location).attr("href", herf);
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

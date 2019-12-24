@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+<form id='form'>
+    <div class="warp">
+        <ul class="warp_pws_c">
+            <li>
+                <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                    <b>积分赠送</b>
+                    <input type="text" name="inIntegral" class="spinnerExample"/>
+                </div>
+            </li>
+            <input type="hidden" name="ticketOrder" value="" />
+            <input type="hidden" name="code" value="" />
+        </ul>
+        <div class="warp_pws_v">
+            <div class="warp_sh_u_lk">
+                <b><i>*</i>说明</b>
+                <span>- 请提醒活动参与者在活动前进行签到</span>
+                <span>- 活动参与者不获取志愿服务时间</span>
+                <span>- 保险保障特指在本系统所获取的保险保障</span>
+            </div>
+        </div>
+        <div class="ht60"></div>
+        <input type="button" value="保存修改" onclick="edit_sub()" class="warp_pws_b_su">
+    </div>
+</form>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript">
+    $('.spinnerExample').spinner({});
+    //获取信息
+    get_msg();
+    function get_msg(){
+        var sectionCode = $_GET['sectionCode'];
+         $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/public/queryBySectionCode",
+            data:JSON.stringify({"sectionCode":sectionCode}),
+            dataType:'json',
+            headers : {'token':token},
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    console.log(data);
+                    var data1 = data.data;
+                    $("input[name='inIntegral']").val(data1.inIntegral);
+                    $("input[name='ticketOrder']").val(data1.ticketOrder);
+                    $("input[name='code']").val(data1.code);
+                }else{
+                    layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                return false;
+            }
+        })
+    }
+    //提交修改信息\
+    function edit_sub(){
+        var arr = $('#form').serializeArray();
+        var json = {};
+        $.each(arr, function(){
+            json[this.name] = this.value;
+        });
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url +'html5/v1/public/changeIntegral',
+            data:JSON.stringify(json),
+            dataType:'json',
+            headers : {'token':token},
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    layer.open({content: '操作成功',skin: 'msg',time: 1});
+                    setTimeout(function(){window.history.back();},1000);
+                }else{
+                    layer.open({
+                    content: '提交失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                return false;
+            }
+        })
+    }
+</script>
+</body>
+</html>

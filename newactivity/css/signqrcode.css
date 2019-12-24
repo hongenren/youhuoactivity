@@ -1,0 +1,75 @@
+.qr-warp{
+    padding: 0.6rem;
+}
+.qr-personal{
+    height: 10.4rem;
+    border-radius: 0.5rem;
+    background-color: rgba(115, 184, 31, 1);
+    color: rgba(16, 16, 16, 1);
+    font-size: 14px;
+    color: #fff;
+    border: 1px solid rgba(187, 187, 187, 1);
+    font-weight: bold;
+}
+.qr-kong {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    padding: 0.2rem 0;
+}
+.qr-kong span{
+    display: inline-block;
+    width: 2rem;
+    height: 0.5rem;
+    border-radius: 0.4rem;
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(187, 187, 187, 1);
+}
+.personal-title{
+    font-size: 18px;
+    text-align: center;
+}
+.personal-info{
+    padding: 0.5rem 0.7rem;
+}
+.info-left{
+    padding-top: 0.5rem;
+    width: 66%;
+}
+.info-right{
+    width: 104px;
+    height: 127px;
+    background-color: rgba(245, 245, 245, 1);
+    border: 1px solid rgba(187, 187, 187, 1);
+}
+.qr-code{
+    padding: 0.5rem 1.5rem;
+}
+.qr-code p{
+    padding: 0.15rem 0;
+}
+.save-qrcode{
+    margin: 0 auto;
+    width: 10rem;
+    height: 10rem;
+    /* background-color: rgba(16, 16, 16, 1); */
+    text-align: center;
+}
+.save-qrcode .save-img{
+    height: 9rem;
+}
+.save-qrcode span{
+    color: rgba(130, 130, 130, 1);
+    font-size: 12px;
+}
+.footerbtn{
+    text-align: center;
+    margin-top: 1rem;
+}
+.save-btn{
+    border-radius: 0.2rem;
+    padding: 0.3rem 0.5rem;
+    color: rgba(16, 16, 16, 1);
+    font-size: 14px;
+    border: 1px solid rgba(187, 187, 187, 1);
+}

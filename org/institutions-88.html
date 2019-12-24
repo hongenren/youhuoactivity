@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>我的组织</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <div class="warp_zy_j">
+        <span>我的组织</span>
+    </div>
+
+    <div class="warp_jg_p">
+        <div class="warp_jg_o">
+            <a href="../user/change_account.html">切换账户</a>
+            <!--<img src="../wap/img/tq_1.png">
+            <!--tq_1 晴-->
+            <!--tq_2 多云-->
+            <!--tq_3 雾-->
+            <!--tq_4 雨-->
+            <!--tq_5 雷阵雨-->
+            <!--tq_6 暴雨-->
+            <!--tq_7 雨夹雪-->
+            <!--tq_8 雪-->
+            <!--<span>明日有雷阵雨，请注意加强防护</span>-->
+        </div>
+        <div class="warp_jg_i">
+            <div class="warp_jg_i_sp">
+                <img id="logo" src="../wap/img/jg_tp_4.png">
+                <div class="warp_jg_i_so">
+                    <a id="updateOrgMsg" href="javascript:void(0)">修改</a>
+                    <div class="warp_jg_i_si">
+                        <b class="name">加载中</b>
+                        <div class="warp_jg_i_su">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="warp_jg_i_sy">
+                <li>
+                    <b class="readNums">0</b>
+                    <span>阅读量排名</span>
+                </li>
+                <li>
+                    <b class="allWatchNums">0</b>
+                    <span>关注</span>
+                </li>
+                <li>
+                    <b class="allBeWatchNums">0</b>
+                    <span>粉丝</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <ul class="warp_jg_u">
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/jg_tp_2.png">
+                <div>
+                    <b>公益信用</b>
+                    <span class="star">0</span>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="./point.html">
+                <img src="../wap/img/jg_tp_3.png">
+                <div>
+                    <b>积分余额</b>
+                    <span class="integral">0</span>
+                </div>
+            </a>
+        </li>
+    </ul>
+    <ul class="warp_gl_i" style="margin-top: 0;">
+        <!--<li>
+            <a href="javascript:void(0)" id="scanQRCode">
+                <img src="../wap/img/jg_tp_5.png">
+                <span>扫一扫</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/jg_tp_6.png">
+                <span>扫我</span>
+            </a>
+        </li>-->
+        <li>
+            <a href="../act/act_base_add_quick.html">
+                <img src="../wap/img/jg_tp_7.png">
+                <span>快速发布</span>
+            </a>
+        </li>
+        <li>
+            <a href="../act/act_base_add.html">
+                <img src="../wap/img/jg_tp_8.png">
+                <span>标准发布</span>
+            </a>
+        </li>
+        <li>
+            <a href="//fuli.shcvs.cn/wap">
+                <img src="../wap/img/jg_tp_9.png">
+                <span>福利管理</span>
+            </a>
+        </li><!--
+        <li>
+            <a href="http://h5.shcvs.cn/find/fabutuwen.html">
+                <img src="../wap/img/jg_tp_10.png">
+                <span>发布资讯</span>
+            </a>
+        </li>-->
+        <li>
+            <a href="myRelease.html">
+                <img src="../wap/img/jg_tp_10.png">
+                <span>发布资讯</span>
+            </a>
+        </li>
+        <li>
+            <a id="member" href="javascript:void(0)">
+                <img src="../wap/img/jg_tp_11.png">
+                <span>成员管理</span>
+            </a>
+            <i class='auditing_count waitVerifyMembers' style="width: 10px;height: 10px;border-radius:5px;top:0%;"></i>
+        </li>
+        <!--<li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/jg_tp_12.png">
+                <span>举报受理</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/jg_tp_13.png">
+                <span>标签库</span>
+            </a>
+        </li>-->
+        <li>
+            <!--<a href="javascript:void(0)">-->
+            <a href="javascript:void(0)" onclick="jumpOrgThirdAccount('./org_data.html')">
+                <img src="../wap/img/jg_tp_14.png">
+                <span>公益数据</span>
+            </a>
+        </li>
+        <li>
+            <a href="../insurance">
+                <img src="../wap/img/jg_tp_16.png">
+                <span>保险保障</span>
+            </a>
+        </li>
+        <li>
+            <a href="org_supplement_registration.html">
+                <img src="../wap/img/jg_tp_15.png">
+                <span>记录补登</span>
+            </a>
+        </li>
+        <!--
+        <li>
+            <a href="javascript:void(0)">
+                <img src="../wap/img/jg_tp_17.png">
+                <span>公共资源</span>
+            </a>
+        </li>-->
+        <li>
+            <a href="./subordinate.html">
+                <img src="../wap/img/jg_tp_18.png">
+                <span>下属团体</span>
+            </a>
+            <i class='auditing_count waitVerifySubOrgs' style="width: 10px;height: 10px;border-radius:5px;top:0%;"></i>
+        </li>
+        <li id="reporterStation" style="display:none">
+            <a id="reporter" href="javascript:void(0)" class="hrefmsg">
+                <img src="../wap/img/pws_324.png">
+                <span>记者站</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" onclick="customHomepage()">
+                <img src="../wap/img/jgzy.png">
+                <span>机构主页</span>
+            </a>
+        </li>
+        <li>
+            <a href="./replace_admin.html">
+                <img src="../wap/img/ghgly.png">
+                <span>更换管理员</span>
+            </a>
+        </li>
+        <li>
+            <a href="./org_foreign_persion.html">
+                <img src="../wap/img/fflsk.png">
+                <span>发放临时卡</span>
+            </a>
+        </li>
+        <li>
+            <a href="../post/group_apply_list.html?type=0">
+                <img src="../wap/img/fflsk.png">
+                <span>团体报名</span>
+            </a>
+        </li>
+        <li>
+            <a href="../post/post_management.html">
+                <img src="../wap/img/fflsk.png">
+                <span>岗位管理</span>
+            </a>
+        </li>
+        <li>
+            <a href="../srcb/passport_management.html">
+                <img src="../wap/img/fflsk.png">
+                <span>渠道管理</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<!------底部开始------>
+<div class="ht60"></div>
+<div class="footer_jg">
+    <div class="footer_jg_qt3">
+        <ul>
+            <li class="jg_ft1 current">
+                <a href="./institutions.html">
+                    <span style="background-size: 36px auto;"></span>
+                    <b>我的机构</b>
+                </a>
+            </li>
+            <li class="jg_ft2">
+                <a href="../managementact/oneSend/orgLastList.html">
+                    <span></span>
+                    <b>消息</b>
+                </a>
+            </li>
+            <li class="jg_ft3">
+                <a href="./mylaunch.html">
+                    <span></span>
+                    <b>订单</b>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!------底部结束------>
+<script type="text/javascript">
+    $(function(){
+        var bool = false; //定义一个变量
+        window.addEventListener('pageshow', function () {
+            bool = false;            //进入页面时bool置为false，防止ios立即执行popstate
+            setTimeout(function(){   //定时器延迟将bool置为true
+                bool = true;
+            },500);
+        });
+
+        pushHistory();
+        window.addEventListener("popstate", function(e) {
+            if(bool) {
+                layer.open({
+                    content: '是否切换账户？'
+                    , btn: ['确定', '取消']
+                    , yes: function (index) {
+                        window.location.href = '../user/change_account.html';
+                    }
+                    , no: function (index) {
+                        e.preventDefault();
+                        pushHistory();
+                    }
+                })
+            }
+        }, false);
+        function pushHistory() {
+            var state = {
+                title: "title",
+                url: "#"
+            };
+            window.history.pushState(state, "title", "#");
+        }
+    });
+    (function ($) {
+        $.getUrlParam = function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+    })(jQuery);
+    getWxConfig();
+
+    function getWxConfig() {
+        var wwwurl = location.href.split('#')[0];
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            url: base_url + "html5/v1/wechat/getWeChatJsSign",
+            data: JSON.stringify({"url": wwwurl}),
+            headers: {'token': token},
+            async: false,
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                if (data.code == 0) {
+                    var data1 = JSON.parse(data.data.data);
+                    //sessionStorage.setItem('WxConfig',data1); //获取WX配置信息
+                    wx.config({
+                        debug: false,
+                        appId: data1.appId, // 必填，公众号的唯一标识
+                        timestamp: parseInt(data1.timestamp), // 必填，生成签名的时间戳
+                        nonceStr: data1.nonceStr, // 必填，生成签名的随机串
+                        signature: data1.signature,// 必填，签名，见附录1
+                        jsApiList: ['checkJsApi', 'scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    });
+                }
+            },
+            error: function (e) {
+                layer.open({
+                    content: '获取失败'
+                    , skin: 'msg'
+                    , time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+
+    wx.error(function (res) {
+        console.log("出错了error：" + res.errMsg);
+    });
+
+    wx.ready(function () {
+        wx.checkJsApi({
+            jsApiList: ['scanQRCode'],
+            success: function (res) {
+                console.log(res);
+            }
+        });
+        //机构扫一扫
+        document.querySelector('#scanQRCode').onclick = function () {
+            return;
+            false;
+            wx.scanQRCode({
+                needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                success: function (res) {
+                    var result = res.resultStr;
+
+                    location.href = result + '/' + prjvorgMsg.personFirstAccount;
+                }
+            });
+        };
+        document.querySelector('#startCan').onclick = function () {
+            wx.scanQRCode({
+                needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                success: function (res) {
+                    var result = res.resultStr;
+                    location.href = result + '/' + prjvorgMsg.personFirstAccount;
+                }
+            });
+        };
+
+    });
+
+</script>
+<script type="text/javascript">
+    //var news_base_url = 'http://news.shcvs.cn';
+    var orgPlaceId = "";
+    $(function () {
+        var data1 = '';
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            url: base_url + "html5/v1/orgPlace/queryOrgByPrjvOrgId",
+            data: JSON.stringify({"prjvOrgId": prjvorgMsg.prjvOrgId}),
+            headers: {'token': token},
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                data1 = data.data;
+                orgPlaceId = data1.id;
+                //教育机构可以开设记者组
+                if (data1.industryType == 'H0102') {
+                    $("#reporterStation").show();
+                }
+                if (data1.markTags != undefined && data1.markTags != null && data1.markTags != "") {
+                    $('.warp_jg_i_su').html('<span>' + data1.markTags + '</span>');
+                    /*var markTags_arr1 = data1.markTags.split(";");
+                    for (var i = 0; i < markTags_arr1.length; i++) {
+                        var markTags_arr = markTags_arr1[i].split(":");
+                        $('.warp_jg_i_su').html('<span>' + markTags_arr[1] + '</span>');
+                    }*/
+                }
+                $('.warp_jg_i_su').append('<span>已实名认证</span>');
+                $('.warp_jg_i_si b').empty();
+                $('.warp_jg_i_si b').text(data1.name);
+                $('.integral').text(data1.integral);
+                $('.star').text(data1.star);
+                if(data1.logo){
+                    $('#logo').attr("src", data1.logo);
+                }
+
+                selectFs();
+                if(!data1.waitVerifyMembers>0){//待审核成员数
+                    $('.waitVerifyMembers').hide();
+                }
+                if(!data1.waitVerifySubOrgs>0){//待审核下属团体数
+                    $('.waitVerifySubOrgs').hide();
+                }
+            },
+            error: function (e) {
+                layer.open({
+                    content: '获取失败'
+                    , skin: 'msg'
+                    , time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        });
+
+        var prjvOrgId = $.getUrlParam("prjvOrgId");
+        $('#updateOrgMsg').click(function () {
+            //window.location.href = "../huangye/org/org_msg.html?prjvOrgId="+prjvOrgId;
+            window.location.href = "../huangye/org/org_msg.html?prjvOrgId=" + prjvorgMsg.prjvOrgId;
+        })
+        $('#member').click(function () {
+            //window.location.href = "../huangye/member.html?prjvOrgId="+prjvOrgId;
+            window.location.href = "../huangye/member.html?prjvOrgId=" + prjvorgMsg.prjvOrgId;
+        })
+        $('#reporter').click(function () {
+            window.location.href = "../station/mobile_index.html?three_level_id=" + prjvorgMsg.prjvOrgId
+                + "&station_name=" + prjvorgMsg.name + "&area=";
+        })
+//        $('#reporter').click(function () {
+//            window.location.href = news_base_url + "/gysh_cm.cpanel/station/mobile_index.html?three_level_id=" + prjvorgMsg.prjvOrgId
+//                + "&station_name=" + prjvorgMsg.name + "&area=";
+//        })
+
+        function selectFs() {
+            $.ajax({
+                type: "get",
+                url: news_base_url + "/cm/platformapi/getReadNums?forId=" + prjvorgMsg.prjvOrgId + "&forLevel=org",//阅读量
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success == 1) {
+                        $('.readNums').html(data.data);
+                    }
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: news_base_url + "/cm/termapi/getAllBeWatchNums?uid=" + prjvorgMsg.prjvOrgId,//粉丝量
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success == 1) {
+                        $('.allBeWatchNums').html(data.data);
+                    }
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: news_base_url + "/cm/termapi/getAllWatchNums?uid=" + prjvorgMsg.prjvOrgId,//关注量
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success == 1) {
+                        $('.allWatchNums').html(data.data);
+                    }
+                }
+            });
+        }
+    })
+
+    function customHomepage() {
+        window.location.href = "./customHomepage.html?orgPlaceId=" + orgPlaceId;
+    }
+    function jumpOrgThirdAccount(url){
+        window.location.href = url + "?orgThirdAccount="+ prjvorgMsg.orgThirdAccount;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+
+.entryWrap{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:.3rem;
+    height:calc(100% - .7rem);
+}
+.entryList{
+    margin-bottom:.8rem;
+    text-align:center;
+}
+.entryList a{
+    display:inline-block;
+    width:70%;
+    font-size:.3rem;
+    line-height:.9rem;
+    background-color:#72b81e;
+    color:#fff;
+    text-align:center;
+    border-radius:8px;
+}

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海" />
+    <meta name="description" content="公益上海" />
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control" />
+    <meta content="no-cache" http-equiv="pragma" />
+    <meta content="0" http-equiv="expires" />
+    <meta content="telephone=no, address=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript" src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/mobile.css" />
+    <!--<link rel="stylesheet" href="css/index.css" />-->
+</head>
+<body style="background-color:#fff;">
+<div class="resourcesWrap">
+    <div class="map_head" style="background-color:#fff;">
+        <div class="mapHead_but" onclick="javascript:history.back(-1);"></div> 主页
+    </div>
+    <div>
+        <div id="baseinfo">
+            <div class="yrljg1" style="display: flex; justify-content: center; align-items: center;">
+                <img id="titleImg" style="height: 100%;width: auto;" src="images/hylist3.png" />
+                <ul>
+                    <li> <a href="javascript:;"><span>粉丝</span> <span id="beWatchNum">0</span> </a> </li>
+                    <li> <a href="javascript:;"> <img src="images/yrljgimg.png" /> <span id="imgNum">0</span> </a> </li>
+                </ul>
+                <a id="prev" class="a" style="left: 0;" href="javascript:void(0)" onclick="aprev_photo_Slide()"><</a>
+                <a id="next" class="a" style="right: 0;" href="javascript:void(0)" onclick="anext_photo_Slide()">></a>
+            </div>
+            <div class="yrljg2" data-val="100039">
+                <h3 class="clearfix"> <span></span></h3>
+                <div>
+                </div>
+                <ul>
+                    <li><a href="javascript:;"></a></li>
+                </ul>
+            </div>
+            <div class="yrljg3">
+                <ul>
+                    <li style="height: auto;"> <img src="images/yrljgicon1.png" /><span>开放时间：</span><p style=""></p> </li>
+                    <li> <img src="images/yrljgicon2.png" /> <span>咨询电话：</span> <p style=""></p> </li>
+                    <li style="height: auto;"> <img src="images/pos.png" /><p id="serviceTypes" style="width: 90%;"></p> </li>
+                    <li style="height: auto;"> <img src="images/pos.png" /><p id="serviceObjects" style="width: 90%;"></p> </li>
+                    <li style="height: auto;"> <img src="images/yrljgicon3.png" /><p id="addressDetail" style="width: 90%;"></p> </li>
+                </ul><!--
+                <div class="yrljg3_b" style="margin-left: .3rem;">
+                    <div>
+                        <p> <img src="images/yrljgicon3.png" /> <span style="margin-left: 0px;"></span> </p>
+                    </div>
+                    &lt;!&ndash;<a href="javascript:;" style="margin-right: .3rem;"> <img src="images/yrljgicon4.png" /> </a>&ndash;&gt;
+                </div>-->
+            </div>
+        </div>
+        <div class="yrljg4">
+            <h2 class="yrljghead"> <i> </i> <b> 机构简介 </b></h2>
+            <div class="yrljg4con clearfix">
+                <p id="demo" style="height: 200px;overflow: auto"></p>
+            </div>
+        </div>
+        <div class="sqjr">
+            <a href="javascript:void(0)" id="rl"> 认领该机构 </a>
+        </div>
+        <div class="sqjr_b">
+        </div>
+    </div>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/mobileBase.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/touchstart.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script>
+    var id = $.getUrlParam("id");
+    var user_msg = $.cookie("user_msg");
+    var un = $.cookie("un");//是否实名
+    window.onload=function(){
+        $.ajax({
+            url: base_url1 + '/html5/v1/orgPlace/queryOrgById',
+            //url: '/cm/termapi/geArticletListByMy',
+            type: "post",
+            dataType: "json",
+            data: "{\"id\": "+id+"}",
+            headers: {'Content-Type': 'application/json'},
+            success: function (resp) {
+                if(resp.code==0){
+                    var adafw="";
+                    for(var i=0;i<5;i++){
+                        if(i<resp.data.star){
+                            adafw += "<span></span>";
+                        }
+                    }
+                    $("#rl").click(function(){
+                        if(user_msg==null || user_msg== ""){
+                            alert("请重新登录！");
+                            window.location.href = "../../login/login.html?jumpAdd="+window.location.href;
+                        }else{
+                            if(un==null || un==undefined || un=="") {
+                                alert("您还没有实名认证，请先进行实名认证！");
+                                //jump("../cert/cert_index.html");
+                                jumpBank('web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=');
+                            }else{
+                                jump("receive/receive_mech.html?id="+resp.data.id+"&orgType="+resp.data.orgType);
+                            }
+                        }
+                    });
+                    if(resp.data.imgs!=null && resp.data.imgs!=""){
+                        titleImgArray.splice(0,1);
+                        titleImgArray = resp.data.imgs.split(",");
+                        $("#imgNum").html(titleImgArray.length);
+                        photo_Slide();
+                    }
+                    $(".clearfix").children("span").html(resp.data.name);
+                    //标签
+                    var markTags = "";
+                    if(resp.data.markTags!=null && resp.data.markTags!="") {
+                        markTags += '<a style="display: flex; justify-content: center; align-items: center;">' +resp.data.markTags+ '</a>';
+                    }
+                    if(resp.data.orgThirdAccount && resp.data.personFirstAccount){
+                        markTags += '<a style="display: flex; justify-content: center; align-items: center;"><img src="images/hylist4.png" style="height: 14px;"><i>实名</i></a>';
+                    }else{
+                        markTags += '<a class="on" style="display: flex; justify-content: center; align-items: center;">待认领</a>';
+                    }
+                    $(".yrljg2").children("div").html(adafw);
+                    $(".yrljg2").children("ul").children("li").html(markTags);
+                    var weeks = resp.data.weeks, startTime = resp.data.startTime, endTime = resp.data.endTime;
+                    if(startTime!=undefined && startTime!=null && startTime!=""){
+                        $(".yrljg3").children(":first").children(":first").children("p").append(""+startTime);
+                        if(endTime!=undefined && endTime!=null && endTime!="") {
+                            $(".yrljg3").children(":first").children(":first").children("p").append("至" + endTime);
+                        }
+                    }
+                    if(weeks!=undefined && weeks!=null &&weeks!=""){
+                        $(".yrljg3").children(":first").children(":first").children("p").html(""+weeks);
+                        if(startTime!=undefined && startTime!=null &&startTime!=""){
+                            $(".yrljg3").children(":first").children(":first").children("p").append("<br />"+startTime);
+                            if(endTime!=undefined && endTime!=null && endTime!="") {
+                                $(".yrljg3").children(":first").children(":first").children("p").append("至" + endTime);
+                            }
+                        }
+                    }/*
+                    if(resp.data.weeks!=undefined && resp.data.startTime!=undefined && resp.data.endTime!=undefined &&
+                        resp.data.weeks!=null && resp.data.startTime!=null && resp.data.endTime!=null &&
+                        resp.data.weeks!="" && resp.data.startTime!="" && resp.data.endTime!="") {
+                        $(".yrljg3").children(":first").children(":first").children("p").html(resp.data.weeks + "，" + resp.data.startTime + "至" + resp.data.endTime);
+                    }*/
+                    $(".yrljg3").children(":first").children(":first").next().children("p").html(resp.data.mobile);
+                    if(resp.data.addressDetail!= undefined ||　resp.data.addressDetail!=null && resp.data.addressDetail!=""){
+                        $("#addressDetail").html(resp.data.addressDetail);
+                    }else{
+                        $("#addressDetail").html("地址：");
+                    }
+                    //$(".yrljg3_b").children(":first").children(":first").children("span").html(resp.data.addressDetail);
+                    $("#demo").html(resp.data.demo!=null && resp.data.demo!=""?resp.data.demo:"暂无简介...");
+
+                    var serviceObjects=resp.data.serviceObjects;
+                    var serviceTypes=resp.data.serviceTypes;
+                    $("#serviceTypes").html("服务领域："+serviceTypes);
+                    $("#serviceObjects").html("服务对象："+serviceObjects);
+                    var heightSHIJIAN = parseInt($(".yrljg3").children(":first").children(":first").height());
+                    var heightDIANHUA = parseInt($(".yrljg3").children(":first").children(":first").next().height());
+                    var heightLINGYU = parseInt($("#serviceTypes").height());
+                    var heightDYUXIANG = parseInt($("#serviceObjects").height());
+                    var heightDIZHI = parseInt($("#addressDetail").height());
+                    if((heightSHIJIAN-heightDIANHUA)>20){
+                        $(".yrljg3").children(":first").children(":first").children("p").css("line-height","0.42rem");<!--line-height: 0.42rem;-->
+                    }
+                    if((heightLINGYU-heightDIANHUA)>20){
+                        $("#serviceTypes").css("line-height","0.42rem");<!--line-height: 0.42rem;-->
+                    }
+                    if((heightDYUXIANG-heightDIANHUA)>20){
+                        $("#serviceObjects").css("line-height","0.42rem");<!--line-height: 0.42rem;-->
+                    }
+                    if((heightDIZHI-heightDIANHUA)>20){
+                        $("#addressDetail").css("line-height","0.42rem");<!--line-height: 0.42rem;-->
+                    }
+                    /*if(undefined != serviceObjects && null != serviceObjects && "" != serviceObjects){
+                        var ObjectsErr=serviceObjects.split(';');
+                        var Objects=[];
+                        var Objectstr = "";
+                        for(var i in ObjectsErr){
+                            Objects.push(ObjectsErr[i].split(':'));
+                            Objectstr += ObjectsErr[i].split(':')[1]+"，";
+                        }
+                        $("#serviceObjects").html(Objectstr.substring(0, Objectstr.length-1));
+                    }
+                    if(undefined != serviceTypes && null != serviceTypes && "" != serviceTypes){
+                        var TypesErr=serviceTypes.split(';');
+                        var Types=[];
+                        var Typestr = "";
+                        for(var j in TypesErr){
+                            Types.push(TypesErr[j].split(':'));
+                            Typestr += TypesErr[j].split(':')[1]+"，";
+                        }
+                        $("#serviceTypes").html(Typestr.substring(0, Typestr.length-1));
+                    }*/
+                }
+            }
+        });
+        $(".close").bind('click',function(){
+            $(".tc").hide()
+        });
+        $(".yrljg2 h3 a").bind('click',function(){
+            $(".tc").show()
+        })
+    }
+</script>
+</body>
+</html>

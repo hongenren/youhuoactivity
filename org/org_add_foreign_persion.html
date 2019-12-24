@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../huangye/css/mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>
+
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+    <style>
+        .content{display: flex; justify-content: center; align-items: center;margin-top: 10px;}
+        .content img {;width: 92.5px;height: 113.9px;border: 1px solid #B3B3B3;}
+        .foreign_persion_ul{
+            margin: 10px 2% 0px 2%;
+        }
+        .foreign_persion_ul li{
+            overflow:hidden;
+            height: 54px;
+            line-height: 34px;
+        }
+        .foreign_persion_ul li div{
+            float: left;
+            height: 34px;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 78%;
+            border-bottom: 1px solid #B3B3B3;
+        }
+        .foreign_persion_ul li .title{
+            font-size: 12px;
+            width: 18%;
+            border-bottom: 0px;
+        }
+        .foreign_persion_ul input{
+            padding-left: 10px;
+            margin-bottom: 20px;
+            height: 34px;
+            width: 100%;
+        }
+        .foreign_persion_ul select{
+            padding-left: 10px;
+            margin-bottom: 20px;
+            height: 34px;
+            width: 100%;
+            float: right;
+        }
+        .foreign_persion_ul .radio{
+            width: 10%;
+            float: left;
+        }
+        input[type="radio"] + label::before {
+            content: "\a0"; /*不换行空格*/
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 18px;
+            width: .9em;
+            height: .9em;
+            margin-right: .4em;
+            border-radius: 50%;
+            border: 1px solid #1f7acd;
+            text-indent: .15em;
+            line-height: 1;
+        }
+        input[type="radio"]:checked + label::before {
+            background-color: #1f7acd;
+            background-clip: content-box;
+            padding: .1em;
+            width: .7em;
+            height: .7em;
+        }
+        input[type="radio"] {
+            position: absolute;
+            clip: rect(0, 0, 0, 0);
+        }
+        #birthday, #startDay, #endDay{
+            font-size: 100%;
+            line-height: 4px;
+            margin: 0px;
+            text-align: left;
+        }
+        #startDay, #endDay{
+            width: 40%;
+            float: left;
+        }
+        #uploadInput{filter:alpha(opacity=0);opacity:0;width: 0;height: 0;}
+        input::-webkit-input-placeholder{
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body style="background-color: #ffffff;">
+<div class="warp" style="padding-bottom: 100px;">
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>添加临时公益护照</span>
+    </div>
+    <div style="overflow: hidden;padding: 2% 4%;;border-bottom: 1px solid #E6E6E6;background: #FFD46C;">
+        <span style="font-size: 13px;color: #D07500;line-height: 16px;padding: 0 0 0 20px;background: url(../wap/img/pws_210.png) no-repeat left center;background-size:13px;">
+            1、临时公益护照仅限7-70周岁用户领取，初始密码为6个0。
+            <br/>2、照片格式：2寸(3.5*5.3cm)，添加成功后，照片不可修改。
+            <br/>3、证件类型为身份证的用户，平台不赠送保险保障，如该用户在参加公益活动期间发生意外，由该用户本人以及签发机构自行承担责任。
+            <br/>4、临时公益护照有效期，自签发成功日起，一年内有效；失效后无法报名岗位、任务等；如需续签，可在到期前30天，仍由原签发机构办理。
+        </span>
+    </div>
+    <form class='headimg' method="post" enctype="multipart/form-data">
+        <div class="content">
+            <img id="headPic" class="headImg" src="../wap/img/add.png" onclick="openFile();">
+            <input type="file" onchange="uploadImg()" name="img" id="uploadInput">
+        </div>
+    </form>
+    <div>
+        <ul class="foreign_persion_ul">
+            <li>
+                <div class="title">姓名</div>
+                <div><input id="name" type="text" placeholder="请填写"/></div>
+            </li>
+            <li>
+                <div class="title">国籍</div>
+                <div>
+                    <select id="country">
+                        <option value ="">请选择</option>
+                    </select>
+                </div>
+            </li>
+            <li>
+                <div class="title">证件类型</div>
+                <div>
+                    <select id="cardType"><!--
+                        <option value ="SFZ">身份证</option>-->
+                        <option value ="">请选择</option>
+                        <option value ="SFZ">身份证</option>
+                        <option value ="HZ">护照</option>
+                        <option value ="GAT">港澳台</option>
+                        <option value ="QT">其他</option>
+                    </select>
+                </div>
+            </li>
+            <li>
+                <div class="title">证件号码</div>
+                <div><input id="cardNo" type="text" placeholder="请填写"/></div>
+            </li>
+            <li>
+                <div class="title">证件有效期</div>
+                <div>
+                    <input class='demo_time demo_time1' id="startDay" type="text" readonly="true" name="applyBeginTime" placeholder="请填写" value=""/>
+                    <b style="color: #2ac845;float: left;width: 10%;">至</b>
+                    <input class='demo_time demo_time1' id="endDay" type="text" readonly="true" name="applyBeginTime" placeholder="请填写" value=""/>
+                </div>
+            </li>
+            <li class="oafp_phone_tog" style="display:none">
+                <div class="title">手机号</div>
+                <div>
+                    <input id="phone" type="text" placeholder="请填写正确的11位手机号" value=""/>
+                </div>
+            </li>
+            <li class="oafp_tog">
+                <div class="title">性别</div>
+                <div style="padding-left: 10%">
+                    <div style="width: 50%;" class="male">
+                        <input class="radio" type="radio" id="male" name="sex" value="1" checked="checked"/>
+                        <label for="male" style="float: left;width: 90%;text-align: left;font-size: 16px;">男</label>
+                    </div>
+                    <div style="width: 50%" class="female">
+                        <input class="radio" type="radio" id="female" name="sex" value="2" />
+                        <label for="female" style="float: left;width: 90%;text-align: left;font-size: 16px;">女</label>
+                    </div>
+                </div>
+            </li>
+            <li class="oafp_tog">
+                <div class="title">出生日期</div>
+                <div>
+                    <input class='demo_time2' id="birthday" type="text" readonly="true" name="applyBeginTime" placeholder="请填写" value=""/>
+                </div>
+            </li>
+
+        </ul>
+    </div><!--
+    <div style="overflow: hidden;padding: 2% 4%;background: #ffffff;padding-top: 0px;padding-bottom: 120px">
+        <b><span style="font-size: 13px;line-height: 16px;padding: 0 0 0 20px;background-size:13px;"><i style="color: red;">注：</i><i style="color: #B3B3B3">临时卡添加成功后，密码默认为6个0。照片格式：2寸（3.5*5.3cm）</i></span></b>
+    </div>-->
+</div>
+<div class="content mb" style="display:none;"><img src="../wap/img/loading.gif" style="width: 15%;height: auto;border: 0px;"/></div>
+<footer class="warp_pws_m_sw">
+    <input type="button" value="完成" onclick="add()">
+</footer>
+</body>
+<script type="text/javascript" src="../wap/js/org_foreign_persion.js"></script>
+
+<script>
+    function getBirth(idCard) {
+        var birthday = "";
+        if(idCard != null && idCard != ""){
+            if(idCard.length == 15){
+                birthday = "19"+idCard.slice(6,12);
+            } else if(idCard.length == 18){
+                birthday = idCard.slice(6,14);
+            }
+            birthday = birthday.replace(/(.{4})(.{2})/,"$1-$2-");
+            //通过正则表达式来指定输出格式为:1990-01-01
+        }
+        return birthday;
+    }
+    function getSex(idCard) {
+        var sexStr = '';
+        if (parseInt(idCard.slice(-2, -1)) % 2 == 1) {
+            sexStr = '1';
+        }
+        else {
+            sexStr = '2';
+        }
+        return sexStr;
+    }
+    $(function(){
+        $("#cardType").change(function(){
+            var types=$(this).val();
+            if(types=='SFZ'){
+                $(".oafp_tog").hide();
+                $(".oafp_phone_tog").show();
+            }else {
+                $(".oafp_tog").show();
+                $(".oafp_phone_tog").hide();
+            }
+        })
+    });
+    function add(){
+        var name = $("#name").val();
+        var sex = $("input[name='sex']:checked").val();
+        var birthday = $("#birthday").val();
+        var headPic = $('#headPic').attr('src');;
+        var cardType = $("#cardType").val();
+        var cardNo = $("#cardNo").val();
+        var country = $("#country").val();
+        var startDay = $("#startDay").val();
+        var endDay = $("#endDay").val();
+
+        var phone=$("#phone").val();
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        var reg_phone=/^1[345678]\d{9}$/;
+        if(!checkStr(name)){
+            openLayer("请填写姓名");
+            return false;
+        }
+        if(!checkStr(country)){
+            openLayer("请选择国籍");
+            return false;
+        }
+        if(!checkStr(cardType)){
+            openLayer("请选择证件类型");
+            return false;
+        }
+        if(!checkStr(cardNo)){
+            openLayer("请填写证件号码");
+            return false;
+        }
+        if($("#cardType").val()=='SFZ'){
+            if(!reg.test(cardNo)){
+                openLayer("身份证号码格式错误");
+                return false;
+            }
+            birthday=getBirth(cardNo);
+            sex=getSex(cardNo);
+        }
+        if(!checkStr(startDay)){
+            openLayer("请填写有效期");
+            return false;
+        }
+        if(!checkStr(endDay)){
+            openLayer("请填写有效期");
+            return false;
+        }
+        if($("#cardType").val()=='SFZ'){
+            if(!checkStr(phone)){
+                openLayer("请输入正确的11位手机号");
+                return false;
+            }
+            if(!reg_phone.test(phone)){
+                openLayer("手机号码格式错误");
+                return false;
+            }
+        }
+
+
+        if(!checkStr(sex)){
+            openLayer("请填写性别");
+            return false;
+        }
+        if(!checkStr(birthday)){
+            openLayer("请填写出生日期");
+            return false;
+        }
+        if(!checkStr(headPic) || headPic=="../wap/img/add.png"){
+            openLayer("请上传照片");
+            return false;
+        }
+
+console.log(1)
+
+
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            url: base_url + "html5/v1/foreignPersion/add",
+            data: JSON.stringify({"orgCode": prjvorgMsg.baseNo, "orgName": prjvorgMsg.name, "name": name, "sex": sex, "birthday": birthday
+                , "headPic": headPic, "cardType": cardType, "cardNo": cardNo, "country": country
+                , "startDay": startDay, "endDay": endDay,"mobile":phone, "channel": "GYSH"}),
+            dataType: 'json',
+            headers: {'token': token},
+            contentType: "application/json;charset=utf-8",
+            beforeSend:function(XMLHttpRequest){
+                $(".mb").show();
+            },
+            success: function (data) {
+                $(".mb").hide();
+                if (data.code == 0) {
+                    layer.open({
+                        content: "添加成功！"
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    setTimeout(function(){window.history.go(-1);},1000);
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+    $.ajax({
+        xhrFields: {
+            withCredentials: true
+        },
+        type:"post",
+        url:base_url + "html5/v1/region/country",
+        dataType:'json',
+        headers : {'token':token},
+        contentType: "application/json;charset=utf-8",
+        success:function(data) {
+            //console.log(data);
+            if (data.code == 0) {
+                var data1 = data.data.data;
+                var html = "";
+                $.each(data1, function (index, val) {
+                    html += "<option value =\"" + val.cname+"（"+val.shortEname + "）\">" + val.cname + "</option>";
+                })
+                $("#country").append(html);
+            }
+        }
+    })
+
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    $('.demo_time2').mobiscroll().date({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        timeWheels: 'HHii',//HH:24小时制；hh:12小时制
+        dateFormat:"yy-mm-dd",
+        startYear: 1900,
+        endYear: nowYear,
+        stepMinute: 1,
+        showNow: true
+    });
+    $('.demo_time1').mobiscroll().date({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        timeWheels: 'HHii',//HH:24小时制；hh:12小时制
+        dateFormat:"yy-mm-dd",
+        startYear: 1900,
+        endYear: nowYear+30,
+        stepMinute: 1,
+        showNow: true
+    });/*
+    var month = ((nowMonth+1)<10) ? '0'+(nowMonth+1) : (nowMonth+1);
+    $('#startDay').val(nowYear+"-"+month+"-"+nowDay);*/
+    function openFile(){
+        $("#uploadInput").trigger("click");
+    }
+    //头像上传到云 -=
+    function uploadImg() {
+        var form = document.getElementsByClassName("headimg")[0];
+        var imgdata = new FormData(form);
+        //利用ajax上传
+        jQuery.ajax({
+            type: "POST",
+            url:img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper',
+            data: imgdata,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend:function(XMLHttpRequest){
+                layer.open({type: 2,content: '上传中'});
+            },
+            success: function (data) {
+                var src = data.data;
+                console.log(src);
+                if(src){
+                    $('#headPic').attr('src',src);
+                    layer.closeAll();
+                    layer.open({
+                        content: '上传成功'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }else{
+                    layer.closeAll();
+                    layer.open({
+                        content: '上传失败'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+            },
+            error:function(){
+                layer.closeAll();
+                layer.open({
+                    content: '上传失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+        })
+    }
+
+    function checkStr(val){
+        if(val===undefined || val==null || val==""){
+            return false
+        }
+        return true;
+    }
+
+    function openLayer(content){
+        layer.open({
+            content: content
+            ,skin: 'msg'
+            ,time: 1 //2秒后自动关闭
+        });
+    }
+</script>
+</html>

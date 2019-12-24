@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/managementact/evaluate_list.js"></script>
+    <style>
+        .exc2{padding-top: 1%}
+        .list ul li{width: 28.3%;margin: 3% 3% 0 0;float: left}
+        .list ul li a img{width: 100%;border-radius: 5px}
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+
+    <div class="warp_gl_w">
+        <nav>
+            <ul class="warp_gl_w_sp">
+                <li class="thisclass" value="10">
+                    <span>用户评价</span>
+                </li>
+                <li value="20">
+                    <span>管理员已评</span>
+                </li>
+                <li value="30">
+                    <span>管理员写评价</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!----循环点开始---->
+        <div class="warp_gl_w_so warp_gl_w_so0">
+            <div id="warp_gl_w_si">
+                <ul  class="warp_gl_w_si">
+                    <img src="../wap/img/zwpj.png" style="width: 50%;margin: auto;margin-top: 30%">
+                </ul>
+            </div>
+
+        </div>
+        <!----循环点结束---->
+        <!----循环点结束---->
+
+        <!----循环点开始---->
+        <div class="warp_gl_w_so warp_gl_w_so1" style="display: none">
+            <ul class="warp_gl_w_sn" data-id="10">
+                <li class="current" data-id="10">
+                    <span>志愿岗位</span>
+                </li>
+                <li data-id="20">
+                    <span>活动任务</span>
+                </li>
+                <li data-id="80">
+                    <span>管理员</span>
+                </li>
+            </ul>
+            <div class="warp_gl_w_sb">
+                <span onclick="findBySectionCode()">全部岗位（待评价23）</span>
+            </div>
+            <div id="warp_gl_w_sv">
+                <ul class="warp_gl_w_sv"></ul>
+            </div>
+
+        </div>
+        <!----循环点结束---->
+
+    </div>
+
+
+    <div class="warp_gl_y_sw">
+        <div class="warp_gl_y_sq"></div>
+        <ul class="warp_gl_y_sl"></ul>
+    </div>
+
+
+    <div class="warp_gl_w_sf">
+        <div class="warp_gl_w_sd"></div>
+        <div class="warp_gl_w_ss">
+            <textarea placeholder="请输入" id="content" name="content" class="warp_gl_w_sa"></textarea>
+            <div class="warp_gl_w_sm">
+                <a href="javascript:void(0)">取消</a>
+                <a href="javascript:void(0)" id="evaluateA" onclick="updateEvaluate();">提交</a>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" name="id" value="">
+    <input type="hidden" name="ticketCode" value="">
+    <input type="hidden" name="star" value="">
+    <input type="hidden" name="imgs" value="">
+
+</div>
+<script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+
+<script src="../wap/js/touchTouch.jquery.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.warp_gl_w_sn li').click(function(){
+            $('.warp_gl_w_sv').eq($(this).index()).show();
+            $('.warp_gl_w_sn').attr("data-id", $(this).attr("data-id"));
+            $('.warp_gl_w_sv').show();
+            if($(this).attr("data-id")==80){
+                $('.warp_gl_w_sb').hide();
+                get_needEvaluate(sectionCode, "全部岗位", null);
+            }else{
+                $('.warp_gl_w_sb').show();
+                if($(this).attr("data-id")==10){
+                    get_needEvaluate(sectionCode, "全部岗位", null);
+                }else{
+                    get_needEvaluate(sectionCode, "全部任务", null);
+                }
+            }
+        });
+    });
+    $(function(){
+        var cotrs = $(".warp_gl_w_sn li");
+        cotrs.click(function(){
+            $(this).addClass("current").siblings().removeClass("current");
+        });
+    });
+</script>
+</body>
+</html>

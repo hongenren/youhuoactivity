@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海-机构基础信息</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>
+</head>
+<body style="background: #FFFFFF">
+<form id="form1">
+<div class="warp">
+   <div class="warp_zy_j" style="border-bottom: 1px solid #E6E6E6">
+        <a href="javascript:history.go(-1);"></a>
+        <span>机构基础信息</span>
+    </div>
+    <div class="warp_zy_p" style="padding: 0 3% 3% 3%">
+        <ul class="warp_zy_y">
+            <form class='headimg' method="post" enctype="multipart/form-data">
+            <li>
+                <div class="warp_zy_d">
+                    <b>logo</b>
+                    <div class="warp_zy_d_sp">
+                        <img src="../wap/img/pws_275.jpg" id="img">
+                        <input type="file" onchange="uploadImgOne()" name="img">
+                        <input type="hidden" name="logo">
+                    </div>
+                </div>
+            </li>
+            </form>
+            <li>
+
+                <div class="warp_zy_d">
+                    <b>注册日期</b>
+                    <span class="warp_zy_d_so">请选择</span>
+                    <input type="hidden" name="registerDate" value="">
+                </div>
+            </li>
+            <li>
+
+                <div class="warp_zy_d">
+                    <b>咨询电话</b>
+                    <input type="text" placeholder="请填写" name="mobile" class="warp_zy_d_si">
+                </div>
+            </li>
+            <li>
+                <div class="warp_zy_y_so">
+                    <b>工作周期</b>
+                    <a href="javascript:void(0)" class="weeks">请选择</a>
+                    <input type="hidden" name="weeks" class="weeks_msg">
+                </div>
+            </li>
+            <li>
+                <b>工作时间</b>
+                <div class="warp_zy_y_si">
+                    <input class='demo_time' type="text" readonly="true" name="startTime" placeholder="开始时间" value=""/>
+                    <span>至</span>
+                    <input class='demo_time' type="text" readonly="true" name="endTime" placeholder="结束时间" value=""/>
+                </div>
+            </li>
+            <li>
+                <b>地址</b>
+                <input type="text" name="addressName" placeholder="请填写" class="warp_zy_y_sp">
+            </li>
+            <li>
+                <b>简介</b>
+                <input type="text" name="demo" placeholder="请填写" class="warp_zy_y_sp">
+            </li>
+            <li>
+                <div class="warp_zy_y_su">
+                    <h2>添加图片</h2>
+                       <div class="warp_sm_u_se">
+                        <div class="warp_sm_u_sw" data-id="0">
+                            <form class="test_form" action="" method="post" enctype="multipart/form-data">
+                                <input name="orgCertCodeImg1" type="file" onchange="uploadImg(0,this)"/>
+                                <input type="hidden"  id="imgsrc0" name="imgs">
+                            </form>
+                            <img src="../wap/img/pws_175.jpg" id="img0">
+                        </div>
+                        <!--<div class="warp_sm_u_sw">-->
+                        <!--<img src="wap/img/pws_175.jpg">-->
+                        <!--</div>-->
+                    </div>
+                    <input type="button" value="添加图片（1-9张）" class="warp_zy_y_sr">
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="ht70"></div>
+    <div class="warp_pws_m_sw">
+        <input type="button" value="提交添加" onclick="sub_msg()">
+    </div>
+
+    <div class="warp_zy_t">
+        <div class="warp_zy_t_sp"></div>
+        <div class="warp_zy_t_so">
+            <div class="warp_zy_t_si">
+                <a href="javascript:void(0)"></a>
+                <span>请选择工作周期</span>
+            </div>
+            <ul class="warp_zy_t_su">
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周一">
+                        <span>周一</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周二">
+                        <span>周二</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周三">
+                        <span>周三</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周四">
+                        <span>周四</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周五">
+                        <span>周五</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周六">
+                        <span>周六</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周日">
+                        <span>周日</span>
+                    </label>
+                </li>
+            </ul>
+            <input type="button" value="确认"  class="warp_zy_t_sy">
+        </div>
+    </div>
+
+</div>
+</form>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/org_base_msg.js"></script>
+<script>
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    var currYear = (new Date()).getFullYear();
+    $('.demo_time').mobiscroll().time({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang
+    });
+
+</script>
+<script>
+    var unSelected = "#999999";
+    var selected = "#333333";
+    $(function () {
+        $("select").css("color", unSelected);
+        $("option").css("color", selected);
+        $("select").change(function () {
+            var selItem = $(this).val();
+            if (selItem == $(this).find('option:first').val()) {
+                $(this).css("color", unSelected);
+            } else {
+                $(this).css("color", selected);
+            }
+        });
+    })
+</script>
+<script>
+    $("input[name='weeks1']").live("click",function(){
+        var arr = [];
+        var str = '';
+        var checked = $(this).prop('checked');
+        if(checked){
+            $(this).parent().parent().addClass('cla');
+        }else{
+            $(this).parent().parent().removeClass('cla');
+        }
+        $("input[name='weeks1']:checked").each(function(){
+            arr.push($(this).val());
+        })
+        for (var i = 0; i < arr.length; i++) {
+            str += arr[i]+ ",";
+        };
+        if (str.length > 0) {
+            str = str.substr(0, str.length - 1);
+        }
+        $(".weeks").text(str)
+        $(".weeks_msg").val(str);
+   
+    });
+    $(".warp_zy_y_so a").click(function(){
+
+        $(".warp_zy_t").fadeIn();
+    })
+    $(".warp_zy_t_si a").click(function(){
+        $(".warp_zy_t").fadeOut();
+    })
+    $(".warp_zy_t_sy").click(function(){
+        $(".warp_zy_t").fadeOut();
+    })
+</script>
+<script type="text/javascript">
+    get_org_msg();
+</script>
+</body>
+</html>

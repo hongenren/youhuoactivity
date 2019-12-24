@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/signqrcode.css"/>
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+<div id="signqrcode">
+    <header class="mint-header">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">活动详情</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="qr-warp">
+        <div class="qr-personal">
+            <div class="qr-kong"><span></span></div>
+            <div class="personal-title">南京东路慈善超市参观票</div>
+            <div class="personal-info">
+                <div class="info-left fl">
+                    <p>姓名：张三</p>
+                    <p>手机号：17702188900</p>
+                    <p>所在单位：上海悠活网络科技有限公司子机构1</p>
+                </div>
+                <div class="info-right fr"></div>
+            </div>
+        </div>
+        <div class="qr-code">
+            <p>活动：南京东路慈善超市义卖活动</p>
+            <p>19/6/6 08:00-12:00 </p>
+            <p>上海市长宁区金钟路658弄11号2楼东华大学科技园内11号2楼</p>
+            <div class="save-qrcode">
+                <img class="save-img">
+                <span>管理员扫描二维码核销票证</span>
+            </div>
+        </div>
+        <div class="footerbtn"><span class="save-btn">保存到相册</span></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#signqrcode',
+    data () {
+        return {
+            fil: null,
+            recordList: [],
+            addFrom: {
+                org: 'AAA789', // 机构标识
+                url: null
+            },
+            searchFrom: {
+                org: 'AAA789', // 机构标识
+                current: 1, // 当前页
+                size: 20 // 页容量	
+            }
+        };
+    },
+    created () {
+        // this.init();
+    },
+    methods: {
+        init (){
+            // 线上
+            this.searchFrom.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'AAA789';
+        },
+        zhankai () {
+            $('.activitmark').css({height: "auto"});
+        }
+    }
+})
+</script>
+</html>

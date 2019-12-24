@@ -1,0 +1,30 @@
+
+.warp_zy_h li{
+    position:relative;
+}
+.warp_zy_h li a{
+    background-image:url("../../wap/img/pws_276.png");
+    background-size:15px 15px;
+}
+.warp_zy_h li.on a{
+    background-image:url("../../wap/img/pws_276_on.png");
+    background-size:15px 15px;
+}
+.warp_zy_h li .upTimeBtn{
+    display:inline-block;
+    padding:0 .14rem;
+    height:.4rem;
+    border-radius:.2rem;
+    border:1px solid #f03727;
+    color:#f03727;;
+    position:absolute;
+    right:calc(3% + 30px);
+    top:50%;
+    margin-top:-.22rem;
+}
+.warp_zy_h li span.trac_list_title{
+    font-size:18px;
+    font-weight:bold;
+    color:#000;
+    padding-bottom:5px;
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <style type="text/css">
+        .content{display: flex; justify-content: center; align-items: center;}
+        .content img {width: 70px;}
+        .warp_pws_c {
+            width: 100%;
+            overflow: hidden;
+            background: #FFFFFF;
+            margin: 0;
+            margin-top: 3%;
+            padding: 0;
+            list-style-type: none;
+        }
+        .warp_pws_c li {
+            overflow: hidden;
+            padding: 2% 3%;
+            border-bottom: 1px solid #E6E6E6;
+        }
+        .warp_zy_j {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            overflow: hidden;
+            background: #72B81E;
+            position: relative;
+        }
+        .warp_zy_j a {
+            width: 11px;
+            height: 20px;
+            background: url(./img/left.png) no-repeat center;
+            background-size: 100% 100%;
+            position: absolute;
+            left: 3%;
+            top: 15px;
+        }
+        .warp_zy_j span {
+            display: block;
+            font-size: 16px;
+            text-align: center;
+            color: #ffffff;
+        }
+        div{
+            color: #545454;
+        }
+        .padding_top{
+            padding-top: 3%;
+        }
+        .title{
+            color: #545454;
+            width: 100%;
+            text-align: center;
+            font-size: 1.2rem;
+            padding: 1% 0;
+        }
+        .checkboxs{
+            padding: 0 5%;
+        }
+        .checkboxs .checkboxs_label{
+            width: 40%;
+            float: left;
+            margin-top: 3%;
+        }
+        .warp_pws_m_sw {
+            width: 100%;
+            overflow: hidden;
+            background: #FFFFFF;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+        }
+        .warp_pws_m_sw input {
+            width: 94%;
+            height: 46px;
+            border: 0;
+            background: #72B81E;
+            color: #FFFFFF;
+            font-size: 14px;
+            display: block;
+            margin: 25px auto;
+        }
+    </style>
+</head>
+<body style="background: #FFFFFF;">
+<!--头部开始-->
+<!--<div class="warp_zy_j">
+    <a href="javascript:history.go(-1);"></a>
+    <span>公益上海</span>
+</div>-->
+<!--头部结束-->
+<div class="warp" style="padding-bottom: 100px;">
+    <ul class="warp_pws_c">
+        <li>
+            <div class="warp_pws_c_sp">
+                <div class="content">
+                    <img src="./img/logo.png">
+                </div>
+                <div class="title" style="font-weight:800;margin-top: 5%;">公益上海</div>
+                <div class="content">
+                    &nbsp;&nbsp;
+                </div>
+            </div>
+        </li>
+        <li>
+            <div>
+                应用介绍： 上海市公益公共服务平台（公益上海）是一款便民服务应用，能够为广大市民用户对接公益服务与公益需求，市民用户可以通过本应用进行志愿者注册、申领公益护照、了解全市公益资讯，查找参与本市公益活动，开具志愿服务记录和证明等。
+            </div>
+            <div class="padding_top">
+                服务商介绍：上海市民政局
+            </div>
+        </li>
+        <li style="border-top: 10px solid #f7f7f7;">
+            <div class="title">
+                需要如下个人信息
+            </div>
+        </li>
+        <li style="border: 0px;">
+            <div class="checkboxs">
+                <label class="checkboxs_label">
+                    <input type="checkbox" name="type" id="adviceRadio1" value="1" onchange="s(this)" checked hidden/>
+                    <label for="adviceRadio1" class="advice"></label>
+                    <span class="radio-name">姓名</span>
+                </label>
+                <label class="checkboxs_label" style="float: right">
+                    <input type="checkbox" name="type" id="adviceRadio2" value="2" onchange="s(this)" checked hidden/>
+                    <label for="adviceRadio2" class="advice"></label>
+                    <span class="radio-name">手机号码</span>
+                </label>
+            </div>
+            <div class="checkboxs">
+                <label class="checkboxs_label" style="margin-top: 5%;">
+                    <input type="checkbox" name="type" id="adviceRadio3" value="3" onchange="s(this)" checked hidden/>
+                    <label for="adviceRadio3" class="advice"></label>
+                    <span class="radio-name">身份证号</span>
+                </label>
+                <label class="checkboxs_label" style="margin-top: 5%;float: right">
+                    <input type="checkbox" name="type" id="adviceRadio4" value="4" onchange="s(this)" checked hidden/>
+                    <label for="adviceRadio4" class="advice"></label>
+                    <span class="radio-name">社保卡号</span>
+                </label>
+            </div>
+        </li>
+    </ul>
+</div>
+<footer class="warp_pws_m_sw">
+    <input id="agreed" type="button" onclick="j();" value="同意">
+</footer>
+<style type="text/css">
+    .advice{
+        height: 22px;
+        width: 22px;
+        display: inline-block;
+        background-image: url('./img/icon-no-checked.png');
+        background-size: 15px 15px;
+        background-repeat: no-repeat;
+        background-position: center;
+        vertical-align: middle;
+        margin-top: -5px;
+    }
+    input[type="checkbox"]:checked + .advice{
+        background-image: url('./img/icon-checked.png');
+    }
+</style>
+<script>
+    var ifchecked_ = 4;
+    function getParam(paramName) {
+        var paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
+    function s(obj){
+        if ($(obj).prop("checked")) {
+            ifchecked_ ++;
+        }else{
+            ifchecked_ --;
+        }
+        if(ifchecked_==4){
+            $("#agreed").attr("onclick","j();");
+            $("#agreed").css("background-color","#72B81E");
+        }else{
+            $("#agreed").removeAttr("onclick");
+            $("#agreed").css("background-color","#999999");
+        }
+    }
+    function j(){
+        var ifchecked = 0, inputs = document.getElementsByTagName("input");//获取所有的input标签对象
+        for(var i=0;i<inputs.length;i++){
+            var obj = inputs[i];
+            if(obj.type=='checkbox'){
+                if(obj.checked){
+                    ifchecked ++;
+                }
+            }
+        }
+        if(ifchecked==4){
+            //window.location.href = 'http://api.eshimin.com/api/oauth/authorize?client_id=8N2zWlPV8E&response_type=code&redirect_uri=https://h5.shcvs.cn/gysh/html5/v1/eshimin/oauth&scope=read';
+            window.location.href = 'https://h5.shcvs.cn/gysh/html5/v1/eshimin/oauth/'+ getParam("userName") +"/"+ getParam("accessToken");
+        }else{
+            alert("请选择全部的个人信息选项");
+        }
+    }
+</script>
+</body>
+</html>
+

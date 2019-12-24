@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>我的二维码</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.qrcode.min.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <style type="text/css">
+    #qrcode canvas{margin: auto}
+    </style>
+</head>
+<body style="background: #1C1B20">
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>我的二维码</span>
+    </div>
+    <div class="warp_sx_r">
+        <div class="warp_sx_r_sp">
+            <div class="warp_sx_r_sy">
+                <img src="../wap/img/pws_244.png">
+                <div class="warp_sx_r_so">
+                    <b>刘東</b>
+                    <!-- <span>上海市&nbsp;浦发新区</span> -->
+                </div>
+            </div>
+        </div>
+        <div class="warp_sx_r_si">
+            <div id="qrcode" style="text-align: center"></div>
+            <!--<span>扫一扫上面的二维码，加我好友</span>-->
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+get_user_msg1()
+function get_user_msg1(){
+    $.ajax({
+		xhrFields: {
+		   withCredentials: true
+		},
+        type:"post",
+        url:base_url + "html5/v1/user/center",
+        async:false,
+        data:JSON.stringify({"userId":user_msg.userId}),
+        headers : {'token':token},
+        dataType:'json',
+        contentType: "application/json;charset=utf-8",
+        success:function(data){
+            if(data.code==0){
+                console.log(data);
+                var data1 = data.data;
+                if(!data1.userHeadImg){
+                    data1.userHeadImg = "../wap/img/pws_244.png";
+                }
+                $('.warp_sx_r_so b').html(data1.userNickName);
+                $('.warp_sx_r_sy img').attr('src',data1.userHeadImg);
+                erwei(data1.userQr);
+            }else{
+                layer.open({
+                content: '获取失败'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+                }); 
+            }
+            
+        },
+        error:function(){
+            layer.open({
+                content: '获取失败'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+        }
+    })
+}
+
+ function erwei(userQr){
+    console.log(userQr);
+    $("#qrcode").empty();
+    $("#qrcode").qrcode({
+        render: "canvas", // 渲染方式有table方式（IE兼容）和canvas方式
+        width: 220, //宽度
+        height: 220, //高度
+        text: userQr, //内容
+        typeNumber: -1,//计算模式
+        correctLevel: 2,//二维码纠错级别
+        background: "#ffffff",//背景颜色
+        foreground: "#000000"  //二维码颜色
+    });
+ }
+    
+</script>
+</body>
+</html>

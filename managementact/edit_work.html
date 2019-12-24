@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>
+    <style>
+        .demo_time{
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+<form id='form'>
+    <div class="warp">
+        <ul class="warp_pws_c">
+            <li>
+                <div class="warp_pws_c_sp">
+                    <b>岗位描述</b>
+                </div>
+                <input type="text" name="demo" placeholder="请填写描述" class="warp_pws_c_so">
+            </li>
+            <li>
+                <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                    <b>报到时间</b>
+                    <input type="text" placeholder="" name="arriveTime" class="demo_time" style="width: 160px;float: right">
+                </div>
+
+            </li>
+            <li>
+                <div class="warp_pws_c_sp" style="margin: 3% 0 ">
+                    <b>积分赠送</b>
+                    <input type="text" name="inIntegral" class="spinnerExample"/>
+                </div>
+            </li>
+            <li>
+                <div class="warp_pws_c_si">
+                    <span>剩余积分：<i style="font-style: normal">0</i></span>
+                    <b>签到/签出成功，自动发放</b>
+                </div>
+            </li>
+        </ul>
+
+        <div class="ht60"></div>
+        <input type="button" value="保存修改" onclick="edit_sub()" class="warp_pws_b_su">
+    </div>
+</form>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script> 
+<script type="text/javascript" src="../wap/js/managementact/edit_work.js"></script>
+<script type="text/javascript" src="../wap/js/managementact/base.js"></script>
+<script type="text/javascript">
+    $('.spinnerExample').spinner({});
+    get_work_msg();
+
+</script>
+<script>
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    var currYear = (new Date()).getFullYear();
+    // Date & Time demo initialization
+    $('.demo_time').mobiscroll().datetime({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
+        dateFormat:"yy-mm-dd",
+        timeFormat: 'HH:ii',
+        startYear: currYear,
+        endYear: currYear +30,
+        stepMinute: 1,
+        showNow: true
+    });
+</script>
+</body>
+</html>

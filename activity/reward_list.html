@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <!--头部开始-->
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>积分列表</span>
+    </div>
+    <!--头部结束-->
+    <div class="warp_hd_i_sl" style="margin-top: 3%">
+        <a href="javascript:;">
+            <img src="../wap/img/default_acti.png">
+            <div class="warp_hd_i_sk">
+                <b>加载中</b>
+                <span>加载中</span>
+            </div>
+        </a>
+    </div>
+    <div class="warp_hd_i_sj">
+        <div class="warp_hd_i_sh">
+            <span><i></i><b style="font-weight: normal;" class="ren">0</b>人已赞赏<u class="fen">0</u>积分</span>
+        </div>
+        <ul class="warp_hd_i_sg"></ul>
+    </div>
+</div>
+</body>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function(){
+        $('.warp_hd_i_sy ul li').click(function(){
+            $('.warp_hd_i_sr').hide();
+            $('.warp_hd_i_sr').eq($(this).index()).show()
+        });
+    });
+    $(function(){
+        var cotrs = $(".warp_hd_i_sy ul li");
+        cotrs.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    });
+</script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+
+<script type="text/javascript">
+    get_content()
+    function get_content(){
+        var activityCode = $_GET['activityCode'];
+        var msg = '';
+        var taghtml = '';
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"POST",
+            url:base_url + "html5/v1/activity/queryDetail",
+            data:JSON.stringify({'activityCode':activityCode}),
+            contentType: "application/json;charset=utf-8",
+            dataType:'json',
+            beforeSend:function(XMLHttpRequest){
+                layer.open({type: 2,content: '加载中'});
+            },
+            success:function(data){
+                    console.log(data)
+                if(data.code==0){
+                    var data1 = data.data;
+                    $(document).attr("title",data1.name+'-公益上海');
+                    if(data1.coverImg!=''){
+                        $('.warp_hd_i_sl img').attr("src",data1.coverImg);
+                    }  
+                    $('.warp_hd_i_sl b').html(data1.name);
+                    $('.warp_hd_i_sl span').html(data1.address);
+                     layer.closeAll();
+                }else{
+                    layer.open({
+                    content: data.msg
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                   setTimeout(function(){layer.closeAll();},1000);
+                }
+            },
+            error:function(e){
+                layer.open({
+                content: '加载失败'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+                });
+                setTimeout(function(){layer.closeAll();},1000);
+            }
+        })
+    }
+</script>
+<script type="text/javascript">
+    //打赏列表
+    reward_list()
+    function reward_list(){
+        var activityCode = $_GET['activityCode'];
+        var html = ""
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"POST",
+            url:base_url + "html5/v1/activity/rewardList",
+            data:JSON.stringify({
+                "activityCode":activityCode,
+                "pageNumber":1,
+                "pageSize":100
+            }),
+            contentType: "application/json;charset=utf-8",
+            dataType:'json',
+            success:function(data){  
+                if(data.code==0){
+                    // console.log(data)
+                    data_index = data.data;
+                    $("#reward_num").html(data_index.total)
+                    console.log(data_index)
+                    $.each(data_index.records,function(v,k) {
+                        // html+='<img src="'+k.headImg+'">';
+                        if(!k.headImg){
+                            k.headImg = '../wap/img/pws_244.png';
+                        }
+                        html += '<li>\
+                                    <a href="javascript:;">\
+                                        <img src="'+k.headImg+'" style="border-radius: 50%">\
+                                        <div class="warp_hd_i_sf">\
+                                            <div class="warp_hd_i_sd">\
+                                                <span>'+k.createTime+'</span>\
+                                                <b>'+k.nickName+'</b>\
+                                            </div>\
+                                            <i>已赞赏'+k.point+'积分</i>\
+                                        </div>\
+                                    </a>\
+                                </li>'
+                    });
+                    $('.warp_hd_i_sg').html(html)
+                    // $('.ren').html(data_index.total)
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '加载失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+        })
+    }
+</script>
+<script type="text/javascript">
+    $(function(){
+        var activityCode = $_GET['activityCode'];
+        var html = ""
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"POST",
+            url:base_url + "html5/v1/activity/rewardCount",
+            data:JSON.stringify({
+                "activityCode":activityCode,
+            }),
+            contentType: "application/json;charset=utf-8",
+            dataType:'json',
+            success:function(data){  
+                if(data.code==0){
+                    data_index = data.data;
+                    $('.ren').html(data_index.rewardNum)
+                    $('.fen').html(data_index.rewardPointSum)
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '加载失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+        })
+    })
+</script>
+</html>

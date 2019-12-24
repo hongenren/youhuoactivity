@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海"/>
+    <meta name="description" content="公益上海"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="../meng/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/task_myOrder_content.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>申请退出</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+    <div class="tmc_wrap">
+        <div class="tmc_warning">申请退出，需要管理员审核</div>
+        <div class="tmc_textarea">
+            <textarea name="cont" placeholder="申请退出原因"></textarea>
+        </div>
+    </div>
+</div>
+<div class="sendButtonWrap on">
+    <button class="targetNext applyOutBtns on">提交申请</button>
+</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script>
+    $(function(){
+        var ticket=$.getUrlParam('ticket');
+        if(ticket==''||ticket=='undefined'){
+            layer.open({
+                content: '任务订单票号获取失败'
+                ,skin: 'msg'
+                ,time: 1
+            });
+        }
+
+        $(".applyOutBtns").click(function(){
+            var tmo_reason=$("textarea[name='cont']").val();
+            var tmo_arr={
+                "type":20,
+                "reason":tmo_reason,
+                "ticket":ticket
+            };
+            console.log(tmo_arr)
+            if(tmo_arr.reason==''){
+                layer.open({
+                    content: '申请内容不能为空'
+                    ,skin: 'msg'
+                    ,time: 1
+                });
+                return false
+            }else if(tmo_arr.ticket==''||tmo_arr.ticket=='undefined'){
+                layer.open({
+                    content: '任务订单票号获取失败'
+                    ,skin: 'msg'
+                    ,time: 1
+                });
+                return false
+            }
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: "post",
+                url: base_url + "html5/v1/newTask/changeApply",
+                data: JSON.stringify(tmo_arr),
+                dataType: 'json',
+                headers: {'token': token},
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    if (data.code == 0) {
+                        layer.open({
+                            content: '申请退出成功'
+                            ,skin: 'msg'
+                            ,time: 1
+                        });
+                        setTimeout(function(){
+                            window.location.href='task_myOrder.html'
+                        },1000)
+                    }
+                }
+            })
+        });
+
+    })
+</script>
+</body>
+</html>

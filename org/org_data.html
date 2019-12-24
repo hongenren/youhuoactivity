@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/org_data.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp" style="padding-bottom: 100px;">
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益数据</span>
+    </div>
+    <div style="overflow: hidden;padding: 2% 4%;border-bottom: 1px solid #E6E6E6;background: #FFD46C;">
+        <span style="font-size: 13px;color: #D07500;line-height: 16px;padding: 0 0 0 20px;background: url(../wap/img/pws_210.png) no-repeat left center;background-size:13px;">数据统计截止前一天24点</span>
+    </div>
+    <span id="title" style="height: 35px;line-height: 35px;padding-left: 10px;">本机构公益数据（不包含下属团体）</span>
+    <ul class="warp_pws_g" style="padding: 0px;margin-bottom: 0px;">
+        <li style="padding-left:3%;width: 97%;display: none;"><a id="licenseMonth" href="javascript:void(0)">
+                <b>当月签发电子公益护照（张）</b><b id="monthPNum" style="float: right">0</b>
+        </a></li>
+        <li style="padding-left:3%;width: 97%;background-color: #f5f5e0;display: none;"><a id="license" href="javascript:void(0)">
+                <b>累计签发电子公益护照（张）</b><b id="pnum" style="float: right">0</b>
+        </a></li>
+<!--
+        <li style="padding-left:3%;width: 97%;"><a href="javascript:void(0)" style="background: none;">
+                <b>当月新增机构成员（人数）</b><b id="monthJoinNum" style="float: right"></b>
+        </a></li>
+        <li style="padding-left:3%;width: 97%;"><a href="javascript:void(0)" style="background: none;">
+                <b>当月退出机构成员（人数）</b><b id="monthQuitNum" style="float: right"></b>
+        </a></li>-->
+        <li style="padding-left:3%;width: 97%;background-color: #ffffff;"><a href="javascript:void(0)" style="background: none;">
+            <b>有效机构成员总数（人数）</b><b id="memberNum" style="float: right">0</b>
+        </a></li>
+
+        <li style="padding-left:3%;width: 97%;background-color: #f5f5e0;"><a href="javascript:void(0)" style="background: none;">
+            <b>当月新增志愿服务时间（小时）</b><b id="monthVolHours" style="float: right">0</b>
+        </a></li>
+        <li style="padding-left:3%;width: 97%;"><a href="javascript:void(0)" style="background: none;">
+            <b>累计志愿服务时间（小时）</b><b id="volHours" style="float: right">0</b>
+        </a></li>
+
+        <li style="padding-left:3%;width: 97%;background-color: #f5f5e0;"><a href="javascript:void(0)" style="background: none;">
+            <b>当月已结束活动场次（小时）</b><b id="monthSectionCount" style="float: right">0</b>
+        </a></li>
+        <li style="padding-left:3%;width: 97%;"><a href="javascript:void(0)" style="background: none;">
+            <b>累计已结束活动场次（小时）</b><b id="sectionCount" style="float: right">0</b>
+        </a></li>
+    </ul>
+
+    <span class="subOrgSpan" style="height: 35px;line-height: 35px;padding-left: 10px;">下属团体</span>
+    <ul class="warp_pws_g subOrg">
+    </ul>
+</div>
+<footer class="warp_pws_m_sw">
+    <input type="button" value="查看更多公益数据，请下载到邮箱" onclick="openEmail()">
+</footer>
+</body>
+<script type="text/javascript" src="../wap/js/org_data.js"></script>
+<script>
+
+</script>
+</html>

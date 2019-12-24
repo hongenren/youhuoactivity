@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>机构信息</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../css/org.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/receive.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mobiscroll.custom.min.css"/>
+    <script type="text/javascript" src="../js/offset.js"></script>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+    <div class="warp_zy_j bg">
+        <a href="javascript:history.go(-1);"></a>
+        <span>机构志愿服务信息</span>
+    </div>
+    <div class="warp_zy_p">
+        <ul class="warp_zy_y">
+            <li class="selectEvent">
+                <b>法人机构名称</b>
+                <textarea id="orgThirdAccountName" class="scrollText addressDetail textareaDisabled" disabled></textarea>
+            </li>
+            <li class="selectClass">
+            <li>
+                <b>机构统一信用代码号</b>
+                <textarea id="creditCode" class="scrollText addressDetail textareaDisabled" disabled></textarea>
+            </li>
+        </ul>
+        <div class="receive_tog">
+            <input type="hidden" name="tog">
+            <i></i>
+            确认认领该机构
+        </div>
+    </div>
+
+    <div class="ht70"></div>
+    <div class="warp_pws_m_sw">
+        <button onclick="sub_msg()">提交认领</button>
+        <!--<input type="button" value="提交添加">-->
+    </div>
+
+</div>
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/layer.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script>
+    var inCardNo = decodeURI(decodeURI($.getUrlParam('inCardNo')));
+    var inUserName = decodeURI(decodeURI($.getUrlParam('inUserName')));
+    var id = decodeURI(decodeURI($.getUrlParam('id')));
+    $('#orgThirdAccountName').val(decodeURI(decodeURI($.getUrlParam('orgThirdAccountName'))));
+    $('#creditCode').val(decodeURI(decodeURI($.getUrlParam('creditCode'))));
+    $(".receive_tog").click(function(){
+        if($(this).hasClass("on")){
+            $(this).removeClass("on");
+        }else{
+            $(this).addClass("on");
+        }
+    });
+    function sub_msg(){
+        var un = getCookie("un");
+        if(/^[^a-zA-Z]/g.test(un)){
+            if($(".receive_tog").hasClass("on")){
+                $.ajax({
+                    url: base_url1 + '/html5/v1/orgPlace/realImportOrg',
+                    type: "post",
+                    dataType: "json",
+                    data: "{\"id\": "+id+", \"personFirstAccount\": \""+un+"\"}",
+                    headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+                    success: function (resp) {
+                        if (resp.code == 0) {
+                            alert("提交成功！");
+                            window.history.go(-2);
+                        }
+                    }
+                });
+            }
+        }else{
+            alert("你当前以机构账户登录，请切换回个人账户。");
+        }
+    }
+</script>
+</body>
+</html>

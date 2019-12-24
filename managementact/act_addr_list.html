@@ -1,0 +1,90 @@
+<script>/*
+ $('.address_msg').on('focus', function() {
+        $(this).trigger('blur');
+    });*/
+$('.demsp').on('focus', function() {
+    $(this).trigger('blur');
+});
+</script>
+<form id='form3'>
+    <div class="warp_zy_j">
+        <a href="javascript:void(0);" id="closeAddr"></a>
+        <span>快速添加地址</span>
+    </div>
+    <div class="warp_pws_v" style="margin-top: 0px;">
+        <ul class="warp_pws_v_so">
+            <li>
+                <b><i>*</i>地址</b>
+                <input type="text" placeholder="选择地址" class="address_name" name="name" value="" readonly="readonly" class="demsp" unselectable="on" onfocus="this.blur()">
+            </li>
+            <li>
+                <b>门牌号</b>
+                <input type="text" placeholder="例：6号楼403室" name="addressDetail" value="" class="address_msg">
+            </li>
+            <input type="hidden" name="province" value="">
+            <input type="hidden" name="city" value="">
+            <input type="hidden" name="lat" value="">
+            <input type="hidden" name="lng" value="">
+            <input type="hidden" name="adCode" value="">
+        </ul>
+        <ul class="act_cw_p">
+            <li style="display: none;">
+                <select class="district" name="district" autocomplete="off">
+                    <option value="">请选择</option>
+                </select>
+                <span>区</span>
+            </li>
+            <li>
+                <select class="street" name="street" autocomplete="off">
+                    <option value="">请选择</option>
+                </select>
+                <span>街/镇</span>
+            </li>
+            <li>
+                <select class="village" name="village" autocomplete="off">
+                    <option value="">请选择</option>
+                </select>
+                <span>居/村委</span>
+            </li>
+        </ul>
+        <div class="act_cw_o">
+            <img src="../wap/img/pws_98.png">
+            <span>为方便检索，请补充街/镇以及居/村委信息</span>
+        </div>
+        <!-- <a href="javascript:void(0);" class="warp_pws_v_si">确定</a> -->
+        <div class="warp_pws_m_sw" style="position: relative">
+            <ul class="warp_pws_hd"><!--
+                <li>
+                    <input type="button" value="返回" id="closeAddr">
+                </li>-->
+                <li style="width: 100%">
+                    <input type="button" value="确定" onclick="user_addr_add1();">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="warp_pws_v">
+        <div class="warp_pws_v_sp">
+            <em></em>
+            <b>地址库</b>
+        </div>
+        <ul class="warp_pws_v_sy">
+
+        </ul>
+    </div>
+</form>
+<script>
+    $(function(){
+        get_district_msg("155387",".district");
+    })
+    $("#closeAddr").click(function() {
+        $(".warp_ci").animate({
+            left: "200%"
+        })
+    })
+    $("#closeAddr").click(function() {
+        $(".member_list").animate({
+            left: "200%"
+        })
+    })
+</script>

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>创建组织</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <style type="text/css">
+    .warp_js{overflow: hidden;padding: 2% 3%;border: 1px solid #E6E6E6;}
+    .warp_js span{display: block;font-size: 14px;color: #666666;line-height: 20px;padding: 1% 0}
+    .mhp_p{width: 100%;position: relative}
+    .mhp_o{width: 70px;height: 38px;border: 0;background: #72B81E;color: #FFFFFF;font-size: 14px;font-family: '微软雅黑';position: absolute;right: 0;top: 3px;border-radius: 3px}
+    </style>
+</head>
+<body style="background: #F5F5F5">
+
+<div class="warp_zy_j">
+	<a href="javascript:history.go(-1);"></a>
+	<span>创建组织</span>
+</div>
+<div class="warp_jm">
+
+</div>
+<div class="warp">
+    <div class="warp_sm_u">
+        <img src="../wap/img/pws_213.png">
+        <ul class="warp_sm_u_sp">
+            
+        </ul>
+    </div>
+    <div class="ht70"></div>
+    <footer class="warp_pws_m_sw">
+        <input type="button" value="提交认证" onclick="setup()" id="go_btn">
+    </footer>
+</div>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script type="text/javascript" src="../wap/js/web-storage-cache.js"></script>
+<script type="text/javascript" src="../wap/js/regular.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<!-- 页面追加 -->
+<script type="text/javascript">
+    function setOrgThirdAccountNameId(){
+        var orgThirdAccountName   = $.trim($("input[name='orgThirdAccountName']").val());
+        var parentOrgThirdAccount = $.trim($(".keyupSearch").val());
+        console.log(orgThirdAccountName);
+        console.log(parentOrgThirdAccount);
+        $("#orgThirdAccountNameId").val(orgThirdAccountName+"/"+parentOrgThirdAccount);
+    }
+    $(function(){
+        var orgType  = $_GET['prjvOrgId'];
+        if(orgType == 10101 || orgType == 10201 || orgType == 10301 || orgType == 10401 || orgType == 10501 || orgType == 10601){
+            var html_ipt = '<li class="mhp_p">\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>*</i>统一信用代码</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写" class="warp_sm_u_si" name="creditCode" style="width: 4.2rem">\
+                                <input type="button" onclick="checkcert()" value="验证" class="mhp_o" style="top: 37px;">\
+                            </li>\
+                                <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b>机构中文全称</b>\
+                                </div>\
+                                <input type="text" placeholder="" class="warp_sm_u_si" name="orgThirdAccountName" onfocus="this.blur();">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>&nbsp;</i>机构英文全称</b>\
+                                </div>\
+                                <input type="text" placeholder="" class="warp_sm_u_si" name="orgThirdAccountNameEn" onfocus="this.blur();">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>*</i>请上传统一信用代码扫描件</b>\
+                                </div>\
+                                <div class="warp_sm_u_se">\
+                                    <div class="warp_sm_u_sw" data-id="0">\
+                                        <form class="test_form" action="" method="post" enctype="multipart/form-data">\
+                                            <input name="orgCertCodeImg1" type="file" onchange="uploadImg(0,this)"/>\
+                                            <input type="hidden"  id="imgsrc0" name="imgsrc">\
+                                        </form>\
+                                        <img src="../wap/img/pws_175.jpg" id="img0">\
+                                    </div>\
+                                </div>\
+                            </li>';
+        }else if(orgType == 10701){
+            var html_ipt = '<li>\
+                                <div class="warp_sm_u_so">\
+                                    <b>机构中文全称</b>\
+                                </div>\
+                                <input type="text" placeholder="" class="warp_sm_u_si" name="orgThirdAccountName">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>&nbsp;</i>机构英文全称</b>\
+                                </div>\
+                                <input type="text" placeholder="" class="warp_sm_u_si" name="orgThirdAccountNameEn">\
+                            </li>\
+                            <li class="mhp_p">\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>&nbsp;</i>统一信用代码</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写" class="warp_sm_u_si" name="creditCode" style="width: 4.2rem">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>*</i>请上传统一信用代码扫描件</b>\
+                                    \
+                                </div>\
+                                <div class="warp_sm_u_se">\
+                                    <div class="warp_sm_u_sw" data-id="0">\
+                                        <form class="test_form" action="" method="post" enctype="multipart/form-data">\
+                                            <input name="orgCertCodeImg1" type="file" onchange="uploadImg(0,this)"/>\
+                                            <input type="hidden"  id="imgsrc0" name="imgsrc">\
+                                        </form>\
+                                        <img src="../wap/img/pws_175.jpg" id="img0">\
+                                    </div>\
+                                </div>\
+                            </li>';
+        }else if(orgType == 10801||orgType == 10901){
+            if(orgType == 10801){
+                name_type = "所属学校";
+                name_type_placeholder = "详细的学校名称";
+            }else{
+                name_type = "所属机构主体";
+                name_type_placeholder = "详细的机构名称";
+            }
+            console.log(orgType);
+            var html_ipt = '<li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>*</i>团体中文全称</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写" class="warp_sm_u_si" oninput="setOrgThirdAccountNameId();" name="orgThirdAccountName">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>&nbsp;</i>团体英文全称</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写" class="warp_sm_u_si" name="orgThirdAccountNameEn">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>*</i>'+name_type+'</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写'+name_type_placeholder+'" oninput="setOrgThirdAccountNameId();" class="warp_sm_u_si keyupSearch" style="width: 70%;"><input onclick="queryOrgByName()" class="cwevwec" type="button" value="搜索"/>\
+                                <input type="hidden" name="parentOrgThirdAccount" class="keyupSearch_1">\
+                                <div class="keyup_val">\
+                                </div>\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b>您将注册以下团体</b>\
+                                </div>\
+                                <input type="text" id="orgThirdAccountNameId" readonly="readonly" class="warp_sm_u_si">\
+                                <div class="keyup_val">\
+                                </div>\
+                            </li>'
+        }else if(orgType == 90401 || orgType == 90501 || orgType == 90601 || orgType == 90701|| orgType == 90801){
+            var name_a = "";
+            if(orgType == 90701){
+                var name_a = "所在国"
+            }else if(orgType == 90601 || orgType == 90801){
+                var name_a = "所在地"
+            }
+            var html_ipt = '<li>\
+                                <div class="warp_sm_u_so">\
+                                    <b>机构中文全称</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写" class="warp_sm_u_si" name="orgThirdAccountName">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>&nbsp;</i>机构英文全称</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写" class="warp_sm_u_si" name="orgThirdAccountNameEn">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>*</i>'+name_a+'登记单位</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写" class="warp_sm_u_si" name="regUnitName">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>*</i>登记证书号码</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写" class="warp_sm_u_si" name="regUnitCode">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>&nbsp;</i>请上传登记单位证书扫描件</b>\
+                                </div>\
+                                <div class="warp_sm_u_se">\
+                                    <div class="warp_sm_u_sw" data-id="0">\
+                                        <form class="test_form" action="" method="post" enctype="multipart/form-data">\
+                                            <input name="orgCertCodeImg1" type="file" onchange="uploadImg(0,this)"/>\
+                                            <input type="hidden"  id="imgsrc0" name="imgsrc">\
+                                        </form>\
+                                        <img src="../wap/img/pws_175.jpg" id="img0">\
+                                    </div>\
+                                </div>\
+                            </li>';
+        }else if(orgType == 90101||orgType == 90201||orgType == 90301 || orgType == 11001){
+            var html_ipt = '<li>\
+                                <div class="warp_sm_u_so">\
+                                    <b>机构中文全称</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写" class="warp_sm_u_si" name="orgThirdAccountName">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>&nbsp;</i>机构英文全称</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写" class="warp_sm_u_si" name="orgThirdAccountNameEn">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>&nbsp;</i>登记单位</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写" class="warp_sm_u_si" name="regUnitName">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>&nbsp;</i>登记证书号码</b>\
+                                </div>\
+                                <input type="text" placeholder="请填写" class="warp_sm_u_si" name="regUnitCode">\
+                            </li>\
+                            <li>\
+                                <div class="warp_sm_u_so">\
+                                    <b><i>&nbsp;</i>请上传登记单位证书扫描件</b>\
+                                </div>\
+                                <div class="warp_sm_u_se">\
+                                    <div class="warp_sm_u_sw" data-id="0">\
+                                        <form class="test_form" action="" method="post" enctype="multipart/form-data">\
+                                            <input name="orgCertCodeImg1" type="file" onchange="uploadImg(0,this)"/>\
+                                            <input type="hidden"  id="imgsrc0" name="imgsrc">\
+                                        </form>\
+                                        <img src="../wap/img/pws_175.jpg" id="img0">\
+                                    </div>\
+                                </div>\
+                            </li>';
+        }
+        $(".warp_sm_u_sp").html(html_ipt)
+    })
+</script>
+
+<script>
+    //验证机构新用
+    function checkcert(){
+        var userCertNo = $.trim($("input[name='creditCode']").val());
+        if (userCertNo==''){
+            layer.open({
+            content: '统一信用代码'
+            ,skin: 'msg'
+            ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type: "post",
+            url: base_url + "html5/v1/orgPlace/checkCreditCode",
+            data: JSON.stringify({
+                "creditCode": userCertNo,
+            }),
+            headers : {'token':token},
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            beforeSend:function(XMLHttpRequest){
+                layer.open({type: 2,content: '查询中'});
+            },
+            success: function(data){
+                layer.closeAll();
+                if(data.code==0){
+                    var data1 = data.data;
+                    layer.open({content: '查询成功',skin: 'msg' ,time: 1});
+                    $("input[name='orgThirdAccountName']").val(data1.name);
+                    var ename = data1.ename;
+                    if(ename==undefined || ename==null || ename==""){
+                        $("input[name='orgThirdAccountNameEn']").attr("onfocus", "");
+                        $("input[name='orgThirdAccountNameEn']").attr("placeholder", "请填写");
+                    }else{
+                        $("input[name='orgThirdAccountNameEn']").val(data1.ename);
+                    }
+                    $("input[name='usercertenddate']").val(data1.endDate);
+                    $("input[name='orgThirdAccountNameEn']").removeAttr('readonly');
+                }else{
+                    layer.open({content: '查询为空，请重新填写',skin: 'msg' ,time: 1});
+                    $("input[name='orgThirdAccountName']").attr("value","");
+                    $("input[name='orgThirdAccountNameEn']").attr("value","");
+                    $("input[name='usercertenddate']").attr("value","");
+                    $("input[name='orgThirdAccountName']").removeAttr('readonly');
+                    $("input[name='orgThirdAccountNameEn']").removeAttr('readonly');
+                    $("input[name='usercertenddate']").removeAttr('readonly');
+                }
+                
+            },
+            error:function(e){
+                 layer.open({
+                content: '获取失败'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+    /**上传图片 追加图片 */
+    function uploadImg(i,inpt) {
+        layer.open({type: 2});
+        //var form = document.getElementsByClassName("test_form")[i];
+        var thi = inpt; ///获取当前
+        var form = thi.parentNode;
+        var imgdata = new FormData(form);
+        //利用ajax上传
+        jQuery.ajax({
+            type: "POST",
+            url: img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper',
+            data: imgdata,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend:function(XMLHttpRequest){
+                layer.open({type: 2,content: '上传中'});
+            },
+            success: function (data) {
+                // layer.close();
+                // $(".warp_jm").empty();
+                var src = data.data;
+                layer.closeAll()
+                if(src){
+                    var imgvar = $('#imgsrc'+i).val();
+                    $('#img'+i).attr('src',src)
+                    $('#imgsrc'+i).val(src);
+					//$('#imgsrc'+i).parent().append('<i class="mect_sc"></i>');
+                    // if(imgvar==''){
+                    //     add_img()
+                    // }
+                   
+                }
+            },
+            error:function(){
+                layer.closeAll()
+                $(".warp_jm").empty();
+                layer.open({
+                    content: '上传失败',
+                    skin: 'msg',
+                    time: 1 //2秒后自动关闭
+                });
+            }
+        })
+    }
+    function add_img()
+    {
+        s = $('.warp_sm_u_se div:last').attr('data-id');
+        html_img = '<div class="warp_sm_u_sw" data-id="'+(parseInt(s)+1)+'">\
+                        <form class="test_form" action="" method="post" enctype="multipart/form-data">\
+                            <input name="orgCertCodeImg1" type="file" onchange="uploadImg('+(parseInt(s)+1)+',this)"/>\
+                            <input type="hidden"  id="imgsrc'+(parseInt(s)+1)+'" name="imgsrc">\
+                        </form>\
+                        <img src="../wap/img/pws_175.jpg" id="img'+(parseInt(s)+1)+'">\
+                    </div>';
+        $(".warp_sm_u_se").append(html_img)
+    }
+</script>
+<!-- 检索 -->
+<script type="text/javascript">
+    function queryOrgByName(){
+        var orgType  = $_GET['prjvOrgId'];
+        var name = $.trim($(".keyupSearch").val());
+        var token = $.cookie('token');
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            url: base_url + "html5/v1/orgPlace/queryOrgByName",
+            data: JSON.stringify({"name":name,"orgType":orgType}),
+            headers : {'token':token},
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function(data) {
+                if(data.code==0){
+                    var data_index = data.data;
+                    var keyvalhtml = '<div class="warp_js">';
+                    $.each(data_index,function(k,v){
+                        keyvalhtml += '<span style="cursor:pointer;" data-id="'+data_index[k].orgThirdAccount+'">'+data_index[k].name+'</span>';
+                    });
+                    $(".keyup_val").html(keyvalhtml)
+                }else{
+                    layer.open({
+                        content: data.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    });
+                }
+            },
+            error: function(e) {
+                layer.open({
+                    content: '提交错误',
+                    skin: 'msg',
+                    time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+    /*$(".keyupSearch").live('input propertychange',function(){
+        var name = $(this).val()
+        var token = $.cookie('token');
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type: "post",
+            url: base_url + "html5/v1/orgPlace/queryOrgByName",
+            data: JSON.stringify({"name":name}),
+            headers : {'token':token},
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function(data) {
+                var data_index = data.data;
+                var keyvalhtml = '<div class="warp_js">';
+                $.each(data_index,function(k,v){
+                    keyvalhtml += '<span style="cursor:pointer;" data-id="'+data_index[k].orgThirdAccount+'">'+data_index[k].name+'</span>';
+                });
+                // var keyvalhtml += '</div>';
+                $(".keyup_val").html(keyvalhtml)
+            },
+            error: function(e) {
+                layer.open({
+                    content: '提交错误',
+                    skin: 'msg',
+                    time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    })*/
+    $(".warp_js span").live('click',function(){
+        var clickVal = $(this).html();
+        $(".keyupSearch").val(clickVal);
+        // var parentOrgThirdAccount = $(this).attr('data-id');
+        $(".keyupSearch_1").val($(this).attr("data-id"));
+        $(".warp_js").hide();
+        setOrgThirdAccountNameId();
+    })
+</script>
+<!-- 提交 -->
+<script type="text/javascript">
+    function setup() {
+
+        var token           = $.cookie('token');
+        var user_msg        = JSON.parse($.cookie('user_msg'));
+        var orgType         = $_GET['prjvOrgId'];
+        var orgThirdAccountName   = $.trim($("input[name='orgThirdAccountName']").val());
+        var orgThirdAccountNameEn = $.trim($("input[name='orgThirdAccountNameEn']").val());
+        if(orgType == 10801 || orgType == 10901){
+            orgThirdAccountName = $("#orgThirdAccountNameId").val();
+        }
+        if(orgType == 10101 || orgType == 10201 || orgType == 10301 || orgType == 10401 || orgType == 10501 || orgType == 10501){
+            var creditCode            = $.trim($("input[name='creditCode']").val());
+            var creditCodeImgs        = [];
+
+            if(!creditCode){
+                layer.open({ content: '请输入统一信用代码', skin: 'msg', time: 1 });
+                return false;
+            }
+            if(!orgThirdAccountName){
+                layer.open({ content: '请输入机构中文名称', skin: 'msg', time: 1 });
+                return false;
+            }
+            if (!/^[a-za-z]+$/.test(orgThirdAccountNameEn) && orgThirdAccountNameEn!=null && orgThirdAccountNameEn!="") {
+                layer.open({ content: '机构英文名称只能填写英文', skin: 'msg', time: 1 });
+                return false;
+            }
+
+            if(!orgType){
+                layer.open({ content: '机构类型不合法', skin: 'msg', time: 1 });
+                return false;
+            }
+            var length = $("input[name='imgsrc']").length;
+            if(length==0){
+                layer.open({ content: '请上传统一信用代码扫描件', skin: 'msg', time: 1 });
+                return false;
+            }
+            $("input[name='imgsrc']").each(function(j,item){
+                if(item.value){
+                    creditCodeImgs.push(item.value)
+                }
+            })
+            var creditCodeImgs = creditCodeImgs.join(",");
+            if(!creditCodeImgs){
+                layer.open({ content: '请上传统一信用代码扫描件', skin: 'msg', time: 1 });
+                return false;
+            }
+            datas = JSON.stringify({
+                        "prjvUserId"      : user_msg.userId,
+                        "orgType"         : orgType,
+                        "creditCode"      : creditCode,
+                        "orgThirdAccountName"   : orgThirdAccountName,
+                        "orgThirdAccountNameEn" : orgThirdAccountNameEn,
+                        "creditCodeImgs"        : creditCodeImgs,
+                    })
+        }else if(orgType == 10701){
+            var creditCodeImgs        = [];
+            var length = $("input[name='imgsrc']").length;
+            if(length==0){
+                layer.open({ content: '请上传统一信用代码扫描件', skin: 'msg', time: 1 });
+                return false;
+            }
+            $("input[name='imgsrc']").each(function(j,item){
+                if(item.value){
+                    creditCodeImgs.push(item.value)
+                }
+            })
+            var creditCodeImgs = creditCodeImgs.join(",");
+            if(!orgThirdAccountName){
+                layer.open({ content: '请输入机构中文名称', skin: 'msg', time: 1 });
+                return false;
+            }
+            datas = JSON.stringify({
+                        "prjvUserId"      : user_msg.userId,
+                        "orgType"         : orgType,
+                        "orgThirdAccountName"   : orgThirdAccountName,
+                        "orgThirdAccountNameEn" : orgThirdAccountNameEn,
+                        "creditCodeImgs" : creditCodeImgs,
+                    })
+        }else if(orgType == 10801||orgType == 10901){
+            var parentOrgThirdAccount = $.trim($("input[name='parentOrgThirdAccount']").val());
+            if(!orgThirdAccountName){
+                layer.open({ content: '请输入团体中文全称', skin: 'msg', time: 1 });
+                return false;
+            }
+            if(!parentOrgThirdAccount){
+                if(orgType == 10801){
+                    layer.open({ content: '请输入所属学校', skin: 'msg', time: 1 });
+                }
+                if(orgType == 10901){
+                    layer.open({ content: '请输入所属机构主体', skin: 'msg', time: 1 });
+                }
+                return false;
+            }
+            datas = JSON.stringify({
+                        "prjvUserId"      : user_msg.userId,
+                        "orgType"         : orgType,
+                        "orgThirdAccountName"   : orgThirdAccountName,
+                        "orgThirdAccountNameEn" : orgThirdAccountNameEn,
+                        "parentOrgThirdAccount" : parentOrgThirdAccount,
+                    })
+        }else if(orgType == 90101 || orgType == 90201 || orgType == 90301 || orgType == 11001){
+            if(!orgThirdAccountName){
+                layer.open({ content: '请输入机构中文名称', skin: 'msg', time: 1 });
+                return false;
+            }
+            var regUnitImgs = [];
+            var length = $("input[name='imgsrc']").length;
+            if(length==0){
+                layer.open({ content: '请上传登记单位证书扫描件', skin: 'msg', time: 1 });
+                return false;
+            }
+            $("input[name='imgsrc']").each(function(j,item){
+                if(item.value){
+                    regUnitImgs.push(item.value)
+                }
+            })
+            regUnitImgs = regUnitImgs.join(",");
+            var regUnitName = $.trim($("input[name='regUnitName']").val());
+            var regUnitCode = $.trim($("input[name='regUnitCode']").val());
+            datas = JSON.stringify({
+                        "prjvUserId"      : user_msg.userId,
+                        "orgType"         : orgType,
+                        "orgThirdAccountName"   : orgThirdAccountName,
+                        "orgThirdAccountNameEn" : orgThirdAccountNameEn,
+                        "regUnitName" : regUnitName,
+                        "regUnitCode" : regUnitCode,
+                        "regUnitImgs" : regUnitImgs,
+                    })
+        }else if(orgType == 90401 || orgType == 90501 || orgType == 90601 || orgType == 90701 || orgType == 90801){
+            // var creditCode  = $.trim($("input[name='creditCode']").val());
+            var regUnitName = $.trim($("input[name='regUnitName']").val());
+            var regUnitCode = $.trim($("input[name='regUnitCode']").val());
+            var regUnitImgs = [];
+            var length = $("input[name='imgsrc']").length;
+            if(length==0){
+                layer.open({ content: '请上传登记单位证书扫描件', skin: 'msg', time: 1 });
+                return false;
+            }
+            $("input[name='imgsrc']").each(function(j,item){
+                if(item.value){
+                    regUnitImgs.push(item.value)
+                }
+            })
+            regUnitImgs = regUnitImgs.join(",");
+            if(!orgThirdAccountName){
+                layer.open({ content: '请输入机构中文名称', skin: 'msg', time: 1 });
+                return false;
+            }
+            if(orgType == 90401 || orgType == 90501){
+                if(!regUnitName){
+                    layer.open({ content: '请输入登记单位名称', skin: 'msg', time: 1 });
+                    return false;
+                }
+            }
+            if(orgType == 90701){
+                if(!regUnitName){
+                    layer.open({ content: '请输入所在国登记单位名称', skin: 'msg', time: 1 });
+                    return false;
+                }
+            }else if(orgType == 90601 || orgType == 90801){
+                if(!regUnitName){
+                    layer.open({ content: '请输入所在地登记单位名称', skin: 'msg', time: 1 });
+                    return false;
+                }
+            }
+
+            if(!regUnitCode){
+                layer.open({ content: '请输入登记证书号码', skin: 'msg', time: 1 });
+                return false;
+            }
+            if(!orgType){
+                layer.open({ content: '机构类型不合法', skin: 'msg', time: 1 });
+                return false;
+            }
+            datas = JSON.stringify({
+                        "prjvUserId"      : user_msg.userId,
+                        "orgType"         : orgType,
+                        // "creditCode"      : creditCode,
+                        "orgThirdAccountName"   : orgThirdAccountName,
+                        "orgThirdAccountNameEn" : orgThirdAccountNameEn,
+                        "regUnitName" : regUnitName,
+                        "regUnitCode" : regUnitCode,
+                        "regUnitImgs" : regUnitImgs,
+                    })
+        }
+        $("#go_btn").val('提交中')
+        $("#go_btn").attr('style','background:#999999')
+        $("#go_btn").removeAttr("onclick");
+        // return
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type: "post",
+            url: base_url + "html5/v1/orgPlace/realOrg",
+            data: datas,
+            headers : {'token':token},
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function(data) {
+                if (data.code==0) {
+                    layer.open({
+                        content: '提交申请成功'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    setTimeout(function(){window.location.href='success.html';},1000)
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    $("#go_btn").val('提交认证')
+                    $("#go_btn").attr('style','')
+                    $("#go_btn").attr("onclick","setup()");
+                    return false;
+                }
+            },
+            error: function(e) {
+                layer.open({
+                    content: '提交错误',
+                    skin: 'msg',
+                    time: 1 //2秒后自动关闭
+                });
+                $("#go_btn").val('提交认证')
+                $("#go_btn").attr('style','')
+                $("#go_btn").attr("onclick","setup()");
+                return false;
+            }
+        })
+    }
+</script>
+<script>
+	$(".mect_sc").live("click",function(){
+	  $(this).parent().parent().remove();
+	});
+</script>
+</body>
+</html>

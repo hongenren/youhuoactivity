@@ -1,0 +1,101 @@
+/* CSS Document */
+@charset "utf-8";
+/***公共样式****/
+body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, strong, b, small, u, i, center, dl, dt, dd, ol, ul, li,  sub, sup, tt, var, del, dfn,  ins, kbd, q, s, samp,  strike, applet, object, iframe, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, div, header, hgroup, menu, nav, output, ruby, section, summary, time, blockquote, pre, a, abbr, acronym, address, big, cite, code, mark, audio, video, input, textarea, select { margin:0; padding:0;}
+ol, ul{list-style:none;}
+img{border:0; display:inline-block;max-width:100%;}
+input, button, textarea, select,a{ font-size:100%; outline:none; resize:none;border:none;background:none;-webkit-tap-highlight-color:transparent}
+select{appearance:none;-moz-appearance:none;-webkit-appearance:none;}
+table{ border-collapse: collapse; border-spacing: 0; border:none;width:100%;}
+body { font-size:14px; font-family:"Microsoft YaHei",SimHei,"Arial",Arial,Helvetica,sans-serif;color:#666;background-color:#fff;background-repeat:no-repeat;background-position:center;background-size:cover;}
+html {-webkit-text-size-adjust:none;}
+i,em{font-style:normal;}
+.clear {height:0; clear:both;}
+.clearfix { *zoom:1;}
+.clearfix:after{clear:both; display:block; height:0; visibility:hidden; line-height:0; content:'\20';}
+/*边距*/
+*{box-sizing:border-box;    -webkit-box-sizing:border-box;    -moz-box-sizing:border-box;    -o-box-sizing:border-box;}
+/*a 链接*/
+a { text-decoration:none; outline:none;display:block;}
+a:link {color:#666; }
+a:visited {color:#999; }
+a:hover, a:active, a:focus {color:#333;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
+::-webkit-input-placeholder {color: #999;}:-moz-placeholder {color: #999;}::-moz-placeholder {color: #999;}:-ms-input-placeholder {color: #999;}
+
+.left{float:left;}
+.right{float:right;}
+.center{text-align:center;}
+.flex{display:flex;}
+.justCenter{justify-content:space-between;}
+.contents{width:1200px;margin:0 auto;}
+.wrap{padding-top:40px;}
+
+html,body{
+    width:100%;
+    height:100%;
+    position:relative;
+}
+
+.serviceHead h1{
+    width:100%;
+    height:.78rem;
+    font-size:.28rem;
+    line-height:.78rem;
+    position:relative;
+    color:#010101;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.serviceHead h1 i{
+    display:inline-block;
+    width:3.6rem;
+    height:1px;
+    position:absolute;
+    left:50%;top:50%;
+    margin-left:-1.8rem;
+    background-color:#e5e5e5;
+}
+.serviceHead h1 span{
+    display:inline-block;
+    /*width:1.4rem;*/
+    height:.78rem;
+    padding:0 .3rem;
+    background-color:#fff;
+    position:relative;
+    z-index:20;
+}
+
+.serviceList,.serviceListProve{
+    width:25%;
+    padding:.25rem 0;
+    float:left;
+    text-align:center;
+}
+.serviceListIcon{
+    display:inline-block;
+    width:.86rem;
+    height:.86rem;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+}
+.serviceListTxt{
+    font-size:.24rem;
+    line-height:.8rem;
+    color:#000;
+    text-align:center;
+}
+
+.serviceEditorBut{
+    position:fixed;
+    right:0;bottom:.8rem;
+}
+.serviceEditorBut i{
+    display:inline-block;
+    width:.65rem;
+    height:.65rem;
+    background:url("../images/editor.png") no-repeat center;
+    background-size:contain;
+}

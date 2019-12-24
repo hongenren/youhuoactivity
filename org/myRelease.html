@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海"/>
+    <meta name="description" content="公益上海"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
+          name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript" src="https://gysh-test-1255773537.cossh.myqcloud.com/res/js/offset.js"></script>
+    <link rel="stylesheet" href="https://gysh-test-1255773537.cossh.myqcloud.com/res/css/style.css"/>
+    <link rel="stylesheet" href="css/offsetWidth.css"/>
+
+</head>
+<body>
+<div class="container">
+    <div class="bigButWrap">
+        <div class="bigBut butScrollTop" style="background-image:url('https://gysh-test-1255773537.cossh.myqcloud.com/res/images/top.png')"></div>
+        <div class="bigBut" onClick="javascript:history.back(-1);" style="background-image:url('https://gysh-test-1255773537.cossh.myqcloud.com/res/images/ret.png')"></div>
+    </div>
+    <div class="header">
+        <div class="headTab">
+
+        </div>
+    </div>
+
+    <div class="contents">
+        <div class="contListWrap"></div>
+        <div class="more"><span>再怎么使劲拖也没有了！</span><i></i></div>
+    </div>
+</div>
+<script src="https://gysh-test-1255773537.cossh.myqcloud.com/res/js/jquery-1.11.1.min.js"></script>
+<script src="https://gysh-test-1255773537.cossh.myqcloud.com/res/js/base.js"></script>
+<!--<script type="text/javascript" src="https://gysh-test-1255773537.cossh.myqcloud.com/res/js/init.js"></script>-->
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<!--<script type="text/javascript" src="js/init.js"></script>-->
+<script>
+    window.onload = function () {
+        var type = getQueryString("type");
+        var release = "";
+        var audit = "";
+        var draft = "";
+        if(type=="release"){
+            release = "on";
+        }else if(type=="audit"){
+            audit = "on";
+        }else if(type=="draft"){
+            draft = "on";
+        }else{
+            type = "release";
+            release = "on";
+        }
+        daoHang = '<div class="tabList '+release+'"><a href="myRelease.html?type=release">已发布</a></div>\n' +
+            '<div class="tabList '+audit+'"><a href="myRelease.html?type=audit">审核中</a></div>\n' +
+        '<div class="tabList '+draft+'"><a href="myRelease.html?type=draft">草稿箱</a></div>' +
+            '<div class="tabList"><a href="../find/fabutuwen.html">发布文章</a></div>';
+        $('.headTab').html(daoHang);
+
+        var num = 0;//每次页面
+        var size = 10;//每次页面
+        var p=0,t=0;
+        var bool=false;
+        var nulTxt='再怎么使劲拖也没有了！';
+        var getList = function () {
+            $(".more").show().removeClass("on").find('span').text(nulTxt);//显示加载动画
+            bool=true;
+            $.ajax({
+                //url: 'http://localhost:28080/cm/termapi/geArticletListByMy',
+                url: news_base_url+'/cm/termapi/geArticletListByMy',
+                type: 'get',
+                data: {
+                    'forId': getCookie('u'),
+                    //'forId': '1000174,10',
+                    'auditFlag': type,
+                    'pageNum': num,
+                    'pageSize': size
+                },
+                dataType: 'json',
+                success: function (resp) {
+                    if (resp.errorcode == 0) {
+                        var comment = resp.data;
+                        var len = comment.length;//总条数,data.length
+                        var div = "";
+                        if (len > 0) {
+                            for (var i in comment) {
+                                var titleImgType = comment[i].titleImgType;
+                                if(titleImgType == 1){
+                                    var title = comment[i].title;
+//                                    if(title.length > 27){
+//                                        title = title.substring(0,25)+'...';
+//                                    }
+                                    var href = news_base_url+'/gysh_cm_pub/article/normal/detail/'+comment[i].articleId+'.html';
+                                    if(type=="audit"){
+                                        href = "javascript:void(0)";
+                                    }
+                                    div += '<div class="contList">'
+                                        + '<a href= "'+href+'">'
+                                        + '<h2>'+title+'</h2>'
+                                        + '<div class="contImgWrap">'
+                                        + '<div class="contImg contImgMax" style="background-image:url(\''+comment[i].titleImg+'\')"></div>'
+                                        + '</div>'
+                                        + '<div class="listTime">'
+                                        + '<ul>'
+                                        + '<li><span>'+comment[i].author+'</span><i></i></li>'
+//                                        + '<li><span>99</span>评论</li>'
+                                        + '<li><span>'+comment[i].newsDate.replace(/^(.*?)T(.*?)\..*?$/i, "$1 $2")+'</span></li>'
+                                        + '</ul>'
+                                        + '</div>'
+                                        + '</a>'
+                                        + '</div>'
+                                }else if(titleImgType == 2){
+                                    var title = comment[i].title;
+//                                    if(title.length > 19){
+//                                        title = title.substring(0,18)+'...';
+//                                    }
+                                    var abstruct = comment[i].abstruct;
+//                                    if(abstruct.length > 38){
+//                                        abstruct = abstruct.substring(0,37)+'...';
+//                                    }
+                                    div += ' <div class="contList">'
+                                        + '<a href="'+news_base_url+'/gysh_cm_pub/article/normal/detail/'+comment[i].articleId+'.html">'
+                                        + '<div class="contImgWrap">'
+                                        + '<div class="contImg contImgMin" style="background-image:url(\''+comment[i].titleImg+'\')"></div>'
+                                        + '<div class="contRightTxt">'
+                                        + '<h2>'+title+'</h2>'
+                                        + '<p>'+abstruct+'</p>'
+                                        + '</div>'
+                                        + '</div>'
+                                        + '<div class="listTime">'
+                                        + '<ul>'
+                                        + '<li><span>'+comment[i].author+'</span><i></i></li>'
+//                                        + '<li><span>99</span>评论</li>'
+                                        + '<li><span>'+comment[i].newsDate.replace(/^(.*?)T(.*?)\..*?$/i, "$1 $2")+'</span></li>'
+                                        + '</ul>'
+                                        + '</div>'
+                                        + '</a>'
+                                        + '</div>'
+                                }else if(titleImgType == 3){
+                                    var imgArr = comment[i].titleImg.split(';');
+                                    div += ' <div class="contList">'
+                                        + '<a href="'+news_base_url+'/gysh_cm_pub/article/normal/detail/'+comment[i].articleId+'.html">'
+                                        + '<h2>'+comment[i].title+'</h2>'
+                                        + '<div class="contImgWrap">'
+                                        + '<div class="contImg" style="background-image:url(\''+imgArr[0]+'\')"></div>'
+                                        + '<div class="contImg" style="background-image:url(\''+imgArr[1]+'\')"></div>'
+                                        + '<div class="contImg" style="background-image:url(\''+imgArr[2]+'\')"></div>'
+                                        + '</div>'
+                                        + '<div class="listTime">'
+                                        + '<ul>'
+                                        + '<li><span>'+comment[i].author+'</span><i></i></li>'
+                                        + '<li><span>99</span>评论</li>'
+                                        + '<li><span>'+comment[i].newsDate.replace(/^(.*?)T(.*?)\..*?$/i, "$1 $2")+'</span></li>'
+                                        + '</ul>'
+                                        + '</div>'
+                                        + '</a>'
+                                        + '</div>'
+                                }
+                            }
+                            num += 1;
+                            $(".contListWrap").append(div);
+                            $(".more").hide();//隐藏加载中动画
+                        }else{
+                            $(".more").show().addClass("on").find('span').text(nulTxt);//没有了
+                        }
+                        bool=false;
+                    } else {
+                        $(".more").show().addClass("on").find('span').text("加载失败！检查一下网络");//加载失败
+                        bool=false;
+                    }
+                },
+                error:function(){
+                    $(".more").show().addClass("on").find('span').text("加载失败！检查一下网络");//加载失败
+                    bool=false;
+                }
+            });
+        };
+        getList();
+
+        $(window).scroll(function(e){
+            p = $(this).scrollTop();
+            var height=$(this).outerHeight();
+            var scrollHeight=$(document).outerHeight();
+            if(t<=p&&!bool){//下滚
+//                console.log('下');
+                if(scrollHeight<=p+height+100){
+                    getList();
+                }
+            }else{//上滚
+//                console.log('上');
+                bool=false;
+            }
+            setTimeout(function(){t = p;},0);
+        });
+    }
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+</script>
+</body>
+</html>

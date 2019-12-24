@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head><meta charset=UTF-8><title>公益上海</title><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><script>(function (doc, win) {
+              var docEl = doc.documentElement,
+                  resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                  recalc = function () {
+                      var clientWidth = docEl.clientWidth;
+                      if (!clientWidth) return;
+                      var fontSize = 17 * (clientWidth / 320);
+                      fontSize = Math.round((fontSize > 27) ? 27 : fontSize);
+                      docEl.style.fontSize = fontSize + 'px';
+                      var dpi = window.devicePixelRatio;
+                      docEl.setAttribute('data-dpi', dpi);
+                  };
+              recalc();
+              if (!doc.addEventListener) return;
+              win.addEventListener(resizeEvt, recalc, false);
+          })(document, window);</script><link rel=stylesheet href=https://unpkg.com/mint-ui/lib/style.css><link href=./static/css/app.78a7adfa2ebb2e2e8cc47160c3a09def.css rel=stylesheet></head><body><section id=passport></section><script type=text/javascript src=./static/js/manifest.3ad1d5771e9b13dbdad2.js></script><script type=text/javascript src=./static/js/vendor.ef0cc49680091da63460.js></script><script type=text/javascript src=./static/js/app.f45d8bc60e79e00eb9fa.js></script></body></html>

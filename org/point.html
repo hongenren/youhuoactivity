@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海" />
+    <meta name="description" content="公益上海" />
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript" src="../huangye/js/offset.js"></script>
+    <link rel="stylesheet" href="../huangye/css/mobile.css"/>
+    <link rel="stylesheet" href="../huangye/css/layer.css"/>
+    <style>
+        .memberBoxWrap{background-color: #ffffff;height: 100%;}
+        .memberBoxWrap ul{width: 100%;height: 100px;text-align: center;padding: 50px 0px;list-style-type: none;}
+        .memberBoxWrap ul li{width: 100%;height: 50px;line-height: 50px;}
+        .memberBoxWrap ul li b{font-size: 30px;}
+        .transaction{width: 100%;height: 50px;line-height: 50px;background: #FFFFFF url(../wap/img/pws_54.png) no-repeat center;background-size: 8px 13px;background-position: 97%;}
+        .transaction a{display: block;overflow: hidden;border: 1px solid #B3B3B3;text-align: left;padding-left: 3%;}
+    </style>
+</head>
+<body>
+<div class="resourcesWrap">
+    <div class="map_head">
+        <div class="mapHead_but" onclick="javascript:history.back(-1);"></div>
+        积分
+    </div>
+    <div class="memberTabWrap" >
+        <div class="memberTabList on" style="width: 50%;border-right: 1px solid #e5e5e5;padding: 0px;"><a href="javascript:void(0)">可用余额</a></div>
+        <div class="memberTabList" style="width: 50%;border-right: 1px solid #e5e5e5;padding: 0px;"><a href="javascript:void(0)">授信额度</a></div>
+    </div>
+    <div class="memberBoxWrap">
+        <ul class="warp_pws_j point">
+            <li><b id="freeAmount"></b></li>
+            <li style="height: 20px;line-height: 20px;color: #c8c3c4">
+                含可用授信额度：<i id="creditAmount1">0</i>
+            </li>
+            <li></li>
+            <li></li>
+            <li class="transaction"><a id="transaction_list" href="javascript:void(0)">历史账单</a></li>
+        </ul>
+        <ul class="warp_pws_j fixed" style="display: none;">
+            <li><b id="totalCreditAmount">0</b></li>
+            <li style="margin-top: 30px;">
+                可用额度
+            </li>
+            <li style="height: 20px;line-height: 20px;">
+                <i id="creditAmount">0</i>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+<script src="../huangye/js/jquery-1.11.1.min.js"></script>
+<script src="../huangye/js/jquery.cookie.js"></script>
+<script src="../huangye/js/mobileBase.js"></script>
+<script src="../wap/js/config.js"></script>
+<script src="../wap/js/public.js"></script>
+<script src="../wap/js/prjvorg/prjvorg.js"></script>
+<script src="../huangye/js/layer.js"></script>
+<script src="../huangye/js/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script>
+    var integralAccount = "";
+    //积分
+    function querySum(){
+        $(".point").show();
+        $(".fixed").hide();
+        var arr = {
+            "accountId": integralAccount,
+            "userType": 2
+        };
+        $(".memberTabList").removeClass('on').eq(0).addClass('on');
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url + "/html5/v1/point/querySum",
+            data:JSON.stringify(arr),
+            dataType:'json',
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            success:function(data){
+                if(data.code==0){
+                    var datas=data.data;
+                    $("#freeAmount").html(data.data.freeAmount+data.data.creditAmount);
+                    $("#totalCreditAmount").html(data.data.totalCreditAmount);
+                    $("#creditAmount").html(data.data.creditAmount);
+                    $("#creditAmount1").html(data.data.creditAmount);
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+
+        })
+    }
+    //授信额度
+    function searchCreditApplyLog(){
+        $(".point").hide();
+        $(".fixed").show();/*
+        var arr = {
+            "accountId": integralAccount
+        };
+        $(".memberTabList").removeClass('on').eq(1).addClass('on');
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url + "/html5/v1/point/searchCreditApplyLog",
+            data:JSON.stringify(arr),
+            dataType:'json',
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            beforeSend:function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code==0){
+                    var datas=data.data;
+                    $("#fixed_num").html(data.data.creditAmmount);
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+
+        })*/
+    }
+    window.onload=function(){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            url: base_url + "html5/v1/orgPlace/queryOrgByPrjvOrgId",
+            data: JSON.stringify({"prjvOrgId": prjvorgMsg.prjvOrgId}),
+            headers: {'token': token},
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                if(data.code==0){
+                    integralAccount = data.data.integralAccount;
+                    querySum();//积分
+                    $("#transaction_list").attr("href", "./transaction_list.html?accountId="+integralAccount);
+                }
+            }
+        })
+        //管理成员和待审核成员tab切换
+        $(".memberTabList").click(function(){
+            $(this).addClass('on').siblings('.memberTabList').removeClass('on');
+            if($(this).index()==0){
+                querySum();//积分
+            }
+            if($(this).index()==1){
+                searchCreditApplyLog() //授信额度
+            }
+        });
+    };
+
+</script>
+</body>
+</html>

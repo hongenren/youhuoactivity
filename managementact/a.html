@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>活动管理</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <style type="text/css">
+        input[node-type=jsbridge]{ 
+            visibility: hidden; 
+        }
+        .warp_gl_i li i{width: 22px;height: 22px;line-height: 22px}
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<a class="weui-btn weui-btn_primary submit-btn" id="scanQRCode" type="button">扫一扫</a>
+<!-- http://sao315.com/w/api/saoyisao -->
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    var token = $.cookie('token');
+function getWxConfig(){
+    var wwwurl = location.href.split('#')[0];
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/wechat/getWeChatJsSign",
+            data:JSON.stringify({"url":wwwurl}),
+            headers : {'token':token},
+            async:false,
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                //console.log(data);
+                if(data.code==0){
+                    var data1 = JSON.parse(data.data.data);
+                    //sessionStorage.setItem('WxConfig',data1); //获取WX配置信息
+                     wx.config({
+                        debug: false, 
+                        appId: data1.appId, // 必填，公众号的唯一标识
+                        timestamp:parseInt(data1.timestamp), // 必填，生成签名的时间戳
+                        nonceStr: data1.nonceStr, // 必填，生成签名的随机串
+                        signature: data1.signature,// 必填，签名，见附录1
+                        jsApiList: ['checkJsApi','scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    });
+                }  
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }    
+        wx.error(function(res) {
+            console.log("出错了error：" + res.errMsg);
+        });
+ 
+        wx.ready(function() {
+            wx.checkJsApi({
+                jsApiList : ['scanQRCode'],
+                success : function(res) {
+                    console.log(res);
+                }
+            });
+        });
+        //点击按钮扫描二维码
+        document.querySelector('#scanQRCode').onclick = function() {
+            wx.scanQRCode({
+                needResult : 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                scanType : [ "qrCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                success : function(res) {
+                    var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                    window.location.href = result;//因为我这边是扫描后有个链接，然后跳转到该页面
+                }
+            });
+        };
+    getWxConfig();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,424 @@
+
+.demo_time{float: right;margin: 0;width:200px;text-align: center}
+#serviceBeginTime, #serviceEndTime, #applyBeginTime, #applyEndTime{
+    width: 25%;
+    float: right;
+    padding: 0px;
+    text-align: center;
+}
+.warp_pws_m_sp li a input.serviceBeginTime, .warp_pws_m_sp li a input.serviceEndTime{
+    width: 25%;
+    float: right;
+    padding: 0px;
+    text-align: center;
+}
+
+.warp_pws_c select{
+    color: #9d9d9d;
+    font-size: 0.245rem;
+    height: 100%;
+    width: auto;
+    float: right;
+    border: 0px;
+    margin: 0;
+    direction: rtl;
+}
+.warp_pws_c option{
+    direction: ltr;
+}
+
+.conceal{
+    background: #f0eaeb;/*
+    display: none;*/
+}
+.conceal div{
+    line-height: .38rem;
+    margin-bottom: 10px;
+    width: 100%;
+    height: .38rem;
+}
+.conceal div b{
+    font-size: .23rem;
+    color: #27b63f;
+}
+.conceal div input[type='button']{
+    background: #27b63f;
+    float: right;
+    display: inline-block;
+    padding: .3em .5em;
+    border: 0px solid rgba(0,0,0,.2);
+    border-radius: .3em;
+    text-align: center;
+    color:white;
+    font-weight: bold;
+}
+.conceal ul{
+    margin-top: 1%;
+}
+.conceal ul li div{
+    width: 80%;
+    line-height: .38rem;
+    float: left;
+}
+.conceal ul li input[type='button']{
+    float: right;
+    border: 0px;
+    width: 18px;
+    height: 18px;
+    background:  url(../../wap/img/pws_101.png) no-repeat center;
+    background-size: 100% 100%;
+}
+
+.warp_pws_m_sp li .checkinout_div{
+    display: block;
+    line-height: 50px;
+    overflow: hidden;
+    background: url(../../wap/img/pws_54.png) no-repeat right center;
+    background-size: 8px 15px;
+    position: relative;
+    padding-right: 14px;
+}
+.warp_pws_m_sp li .checkinout_div b{
+    display: block;
+    font-size: 18px;
+    line-height: 50px;
+    font-weight: normal;
+    color: #000000;
+    position: absolute;
+    left: 0;
+    top: 3%;
+}
+.warp_pws_m_sp li .checkinout_div b i{
+    font-style: normal;
+    color: #FF0000;
+    padding-right: 3px;
+}
+
+.border-bottom li, .f-small li{
+    padding:0px;
+    border:0px;
+}
+.close-btn{
+    position: relative;
+    top:auto;
+    left: auto;
+    bottom: 25px;
+    float: right;
+}
+.c-red{
+    color: red;
+}
+.c-blue{
+    width: 100%;
+}
+.warp_hd_t_bu{
+    background-color: #ffffff;
+    height: auto;
+    width: 100%;
+}
+.warp_hd_t_bu li span {
+     display: block;
+     text-align: center;
+     font-size: 14px;
+     border: 1px solid #72B81E;
+     border-radius: 4px;
+     height: 34px;
+     line-height: 34px;
+ }
+
+.warp_hd_t_bu li {
+    border: 0px;
+    width: 27.3%;
+    overflow: hidden;
+    float: left;
+    background: #f0eaeb;
+}
+#questionList li{
+    width: 100%;
+    padding: 0px;
+}
+#questionList li input{
+    border-top: 1px solid #E6E6E6;
+    border-left: 1px solid #E6E6E6;
+    border-right: 1px solid #E6E6E6;
+    border-bottom: 0px;
+    padding: 0px 3%;
+    width: 60%;
+    float: left;
+}
+#questionList li #question_inp{
+    padding: 0px 3%;
+    width: 85%;
+}
+#questionList li #question_del, #questionList li #answer_del, #questionList li #answer_sel{
+    text-align: center;
+    font-size: 8px;
+    padding: 0px;
+    width: 15%;
+    color: red;
+}
+#questionList li #answer_del{
+    background: #ededed;
+}
+#questionList li #answer_sel{
+    color: #aaaaaa;
+    background: #ededed;
+    width: 25%;
+}
+.warp_hd_t_questionList li #bottom{
+    border: 1px solid #E6E6E6;
+}
+#questionList_div{
+    width: 100%;
+    height: auto;
+    padding: 0px;
+    margin: 0px;
+}
+#add_question{
+    background: #27b63f;
+    float: right;
+    display: inline-block;
+    padding: .3em .5em;
+    border: 0px solid rgba(0,0,0,.2);
+    border-radius: .3em;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+.selectedSpen{
+    font-weight: bold;
+    background-color: #72B81E;
+    color: #ffffff;
+}
+.no_selectedSpen{
+    font-weight: normal;
+    background-color: #ffffff;
+    color: #000000;
+}
+.search_input {
+    width: 77%;
+    font-size: .24rem;
+    background-size: 16px;
+    float: left;
+    background-color: #ffffff;
+    height:40px;
+    -webkit-appearance:none;
+    border-radius:0px;
+    text-align: center;
+    border: 1px solid #72B81E;
+}
+.search_button {
+    border: 0px;
+    color: #ffffff;
+     background: #72B81E;
+     float: left;
+     width: 17%;
+     height: 40px;
+     font-size: .24rem;
+    -webkit-appearance:none;
+    border-radius:0px;
+ }
+.activity_search{
+    background-image: url(../../wap/img/pws_999.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: auto 20px;
+}
+
+#add_job{
+    margin-bottom: 10px;
+}
+#add_job a{
+    height: 38px;
+    line-height: 38px;
+    background: none;
+}
+#add_job b{
+   font-size: 15px;
+}
+#add_job input{
+    padding-right: 0px;
+    font-size: 15px;
+    height: 38px;
+}
+#add_job textarea{
+    text-align: left;width: 100%;
+}
+#add_job i{
+    color: #9d9d9d;
+    font-size: 10px;
+}
+
+
+#add_job .radio-div{
+    height: 38px;
+    line-height: 38px;
+    width: 100%;
+    float: right;
+    margin-bottom: 0px;
+}
+#zhaomuyaoqiu_1, #zhaomuyaoqiu_2{
+    height: 38px;
+    line-height: 38px;
+    width: 30%;
+    float: right;
+    margin-bottom: 0px;
+}
+#add_job select{
+    padding-left: 10px;
+    margin-bottom: 20px;
+    height: 34px;
+    width: 100%;
+    float: right;
+}
+#add_job .radio{
+    width: 10%;
+    float: left;
+}
+input[type="radio"] + label::before {
+    content: "\a0"; /*不换行空格*/
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 18px;
+    width: .9em;
+    height: .9em;
+    margin-right: .4em;
+    border-radius: 50%;
+    border: 1px solid #27b63f;
+    text-indent: .15em;
+    line-height: 1;
+}
+input[type="radio"]:checked + label::before {
+    background-color: #27b63f;
+    background-clip: content-box;
+    padding: .1em;
+    width: .7em;
+    height: .7em;
+}
+input[type="radio"] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+
+#button-div{
+    width: 100%;
+    text-align: center;
+    background: none;
+    border: 0px;
+    padding-bottom: 0px;
+}
+#button-div input{
+    float: none;
+    background: none;
+    height: 30px;
+    background-color: red;
+    color: #ffffff;
+    border: 0px;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.radius_li ul li{
+    width: 10.5%;
+}
+
+#addres [type="text"]{
+    width: 90%;
+    float: right;
+}
+
+
+#testswitch {
+    position: relative;
+    float: right;
+    width: 60px;
+    height: 36px;
+    margin: 0;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+    padding-top: 2px;
+}
+
+.testswitch-checkbox {
+    display: none;
+}
+
+.testswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #999999;
+    border-radius: 20px;
+}
+
+.testswitch-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+
+.testswitch-inner::before, .testswitch-inner::after {
+    display: block;
+    float: right;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-size: 14px;
+    color: white;
+    font-family:
+            Trebuchet, Arial, sans-serif;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.testswitch-inner::after {
+    content: attr(data-on);
+    padding-left: 10px;
+    background-color: #72B81E;
+    color: #FFFFFF;
+}
+
+.testswitch-inner::before {
+    content: attr(data-off);
+    padding-right: 10px;
+    background-color: #EEEEEE;
+    color: #999999;
+    text-align: right;
+}
+
+.testswitch-switch {
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: 0px;
+    background: #FFFFFF;
+    top: 2px;
+    bottom: 0;
+    right: 28px;
+    border: 1px solid #999999;
+    border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
+}
+
+.testswitch-checkbox:checked + .testswitch-label .testswitch-inner {
+    margin-left: 0;
+}
+
+.testswitch-checkbox:checked + .testswitch-label .testswitch-switch {
+    right: 0px;}
+
+#serverTarget_name, #welfare_name, #allianceOrgName{
+    width: 80%;float: right;text-align: right;height: auto;word-break:break-all;line-height: 38px;
+    color: #9d9d9d;
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+#welfare_name{
+    width: 70%;
+    line-height: 50px;
+    padding-right: 14px;
+ }

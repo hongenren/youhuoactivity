@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>待审核事项</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+    <ul class="warp_sx_u" style="padding: 0 0 8px 0;">
+        <li>
+            <div class="warp_sx_u_sp">
+                <div class="warp_sx_u_so">
+                    <b>接收人姓名：</b>
+                    <span class="name">加载中</span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="warp_sx_u_sp">
+                <div class="warp_sx_u_so">
+                    <b>接收人手机号：</b>
+                    <span class="mobile"></span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="warp_sx_u_sp">
+                <div class="warp_sx_u_so">
+                    <b>接收人证件号：</b>
+                    <span class="id"></span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="warp_sx_u_sp">
+                <div class="warp_sx_u_so">
+                    <b>原因：</b>
+                    <span class="reason">加载中</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <div class="warp_sx_o">
+        <em></em>
+        <b>申请进度</b>
+    </div>
+
+    <ul class="warp_sx_e">
+    </ul>
+
+    <div class="ht60"></div>
+    <input type="button" value="撤销申请" onclick="changeApply()" class="warp_sx_w">
+
+</div>
+<script type="text/javascript">
+    ticket_state($_GET['ticket'],$_GET['type']);
+    //检查当前票的状态
+    /*
+     *   ticket 票号
+     *   type 变更申请类型
+     */
+    function ticket_state(ticket,type){
+        var str = false;
+        var html = ''; //申请进度
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/userTicket/queryApply",
+            data:JSON.stringify({"ticket":ticket,"type":type}),
+            headers : {'token':token},
+            async: false,
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            beforeSend:function(){
+                layer.open({type: 2,content: '加载中'});
+            },
+            success:function(data){
+                if(data.code==0){
+                    var data1 = data.data;
+                    $(".name").html(data1.receiverNickName);
+                    $(".mobile").html(data1.receiverMobile);
+                    $(".reason").html(data1.reason);
+                    if(data1.state==10){
+                        var createTime = get_date(data1.createTime,0);
+                        html += '<li class="xt_1">\
+                                <img src="../wap/img/pws_318.png">\
+                                <span>'+createTime+'</span>\
+                                <b>申请提交成功</b>\
+                            </li>';
+                    }else if(data1.state==-5){
+                        var createTime = get_date(data1.createTime,0);
+                        html += '<li class="xt_1">\
+                                <img src="../wap/img/pws_318.png">\
+                                <span>'+createTime+'</span>\
+                                <b>接收人拒绝</b>\
+                            </li>';
+                    }else if(data1.state==-10){
+                        var createTime = get_date(data1.createTime,0);
+                        html += '<li class="xt_1">\
+                                <img src="../wap/img/pws_318.png">\
+                                <span>'+createTime+'</span>\
+                                <b>管理员拒绝</b>\
+                            </li>';
+                    }else if(data1.state==15){
+                        var createTime = get_date(data1.createTime,0);
+                        html += '<li class="xt_1">\
+                                <img src="../wap/img/pws_318.png">\
+                                <span>'+createTime+'</span>\
+                                <b>接收人同意</b>\
+                            </li>';
+                    }else if(data1.state==20){
+                        var createTime = get_date(data1.createTime,0);
+                        html += '<li class="xt_1">\
+                                <img src="../wap/img/pws_318.png">\
+                                <span>'+createTime+'</span>\
+                                <b>管理员同意</b>\
+                            </li>';
+                    }
+                    $(".warp_sx_e").html(html);
+                    console.log(data);
+                    layer.closeAll();
+                }else{
+                    layer.closeAll();
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return str;
+                }
+            },
+            error:function(){
+                layer.closeAll();
+                layer.open({
+                    content: '网络错误,请重试'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return str;
+            }
+        })
+        return str;
+    }
+    /*
+     * 撤销申请
+     *
+     */
+    function changeApply(){
+        var ticket = $_GET['ticket'];
+        var type = $_GET['type'];
+        layer.open({
+            content: '您确定要这么做么？'
+            ,btn: ['确定', '取消']
+            ,yes: function(index){
+                $.ajax({
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type:"post",
+                    url:base_url + "html5/v1/userTicket/cancelChangeApply",
+                    data:JSON.stringify({"ticket":ticket,"type":type}),
+                    headers : {'token':token},
+                    async: false,
+                    dataType:'json',
+                    contentType: "application/json;charset=utf-8",
+                    beforeSend:function(){
+                        layer.open({type: 2,content: '提交中'});
+                    },
+                    success:function(data){
+                        console.log(data)
+                        if(data.code==0){
+                            layer.closeAll();
+                            layer.open({content: '提交成功',skin: 'msg',time: 1});
+                            setTimeout(function(){history.back(-1)},1000);
+                        }else{
+                            layer.closeAll();
+                            layer.open({content: data.msg,skin: 'msg',time: 1});
+                            return false;
+                        }
+                    },
+                    error:function(){
+                        layer.closeAll();
+                        layer.open({
+                            content: '网络错误,请重试'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                        return str;
+                    }
+                })
+            }
+        })
+
+    }
+</script>
+</body>
+</html>

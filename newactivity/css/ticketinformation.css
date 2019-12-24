@@ -1,0 +1,65 @@
+#ticketinformation {
+    padding-bottom: 5rem;
+    font-size: 14px;
+}
+.addticketbox{
+    padding: 0 0.5rem;
+}
+.addtickettitle{
+    color: #0F0F0F;
+    font-weight: bold;
+    padding: 0.25rem;
+    overflow: hidden;
+}
+.addtickettitle i{
+    padding: 0 0.25rem;
+}
+.addticketinfo{
+    padding: 0 0.5rem 0.75rem 0.5rem;
+    line-height: 20px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(187, 187, 187, 1);
+}
+.getway{
+    margin: 1rem 0 0.5rem 0;
+}
+.getway span{
+    width: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(115, 184, 31, 1);
+    font-weight: bold;
+    color: #73B81F;
+}
+.getway span:first-child{
+    border-radius: 4px 0 0 4px;;
+}
+.getway span:nth-child(2){
+    border-radius: 0 4px 4px 0;
+}
+.getway .active{
+    background-color: rgba(115, 184, 31, 1);
+    color: #fff;
+}
+.tishi {
+    padding: 0 0.25rem 0.5rem 0.25rem;
+    color: rgba(130, 130, 130, 1);
+    font-size: 12px;
+}
+.member{
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 14px;
+    border-bottom: 1px solid #bbbbbb;
+}
+.member span{
+    display: inline-block;
+    margin-right: 2px;
+}
+.member span:first-child{
+    font-size: 16px;
+}

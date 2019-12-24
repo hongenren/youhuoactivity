@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>完成</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+</head>
+<body>
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>完成</span>
+    </div>
+    <div class="warp_sm_o_le">
+        <span>您拥有了公益护照，一起体验公益吧！</span>
+    </div>
+
+    <div class="warp_sm_i">
+        <div class="warp_sm_i_sp">
+            <img src="../wap/img/pws_211.png">
+            <div class="warp_sm_i_so">
+                <b>公益护照</b>
+                <span>护照编号：</span>
+                <span class='censeno'>000 000 0000 0000 0000</span>
+            </div>
+        </div>
+
+        <div class="warp_sm_i_si">
+            <span>您获得了由上海市志趣公益基金会为您提供的志愿服务保障，您可以在保险保障查看相关信息。</span>
+            <img src="../wap/img/pws_212.jpg">
+        </div>
+    </div>
+
+    <div class="ht70"></div>
+    <footer class="warp_pws_m_sw">
+        <input type="button" value="返回家庭账户" onclick="but()">
+    </footer>
+
+</div>
+<script type="text/javascript">
+    $(function(){
+        var status = $_GET['status']
+        if(status != 'wait'){
+            var homecert = sessionStorage.getItem('homecert');
+            if(homecert){
+               var cert = JSON.parse(homecert);
+               $('.censeno').text(cert.licenseNo);
+            }else{
+                layer.open({
+                content: '领取失败，请重试'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        }
+        
+        
+    })
+    function but(){
+        window.location.href = './homemember_list.html';
+    }
+</script>
+</body>
+</html>

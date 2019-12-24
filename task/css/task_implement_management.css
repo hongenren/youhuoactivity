@@ -1,0 +1,84 @@
+
+.tme_sub_boxB{
+    display:none;
+}
+.tim_sub_name{
+    font-weight:bold;
+    color:#000;
+    line-height:.46rem;
+}
+.tim_sub_name span{
+    display:block;
+    font-weight:normal;
+    color:#333;
+    line-height:.34rem;
+}
+.tim_textarea{
+    padding-left:0;
+    padding-right:0;
+}
+.tim_textarea textarea{
+    height:1.3rem;
+}
+.tim_textarea p{
+    line-height:.34rem;
+}
+.tim_uploadImgs{
+    padding-left:0;
+    padding-right:0;
+}
+.tme_sub_wrap .tem_enroll_radios{
+    display:none;
+}
+.tme_sub_wrap.on{
+    padding-left:.5rem;
+}
+.tme_sub_wrap.on .tem_enroll_radios{
+    display:inline-block;
+    position:absolute;
+    left:.1rem;top:50%;
+    margin-top:-.15rem;
+}
+.tim_time_txt input{
+    display:inline-block;
+    max-width:.8rem;
+    float:right;
+    line-height:.34rem;
+    text-align:right;
+}
+
+
+
+/*批量审核*/
+.batchExamine_wrap{
+    position:fixed;
+    left:0;top:.7rem;right:0;bottom:0;
+    background-color:rgba(0,0,0,.7);
+    display:none;
+}
+.batchExamine_box{
+    width:90%;
+    margin-left:5%;
+    margin-top:30%;
+    padding:.2rem;
+    background-color:#fff;
+    border-radius:4px;
+}
+.batchExamineButtons{
+    padding:.2rem;
+    text-align:center;
+}
+.batchExamineButtons button{
+    display:inline-block;
+    width:1.8rem;
+    height:.54rem;
+    border-radius:.3rem;
+    border:1px solid #ddd;
+    margin:0 .1rem;
+    line-height:1;
+}
+.batchExamineButtons button.on{
+    border-color:#f03727;
+    background-color:#f03727;
+    color:#fff;
+}

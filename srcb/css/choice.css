@@ -1,0 +1,109 @@
+.sendInspectContent{
+    padding-bottom:1rem;
+}
+.sendInspectSearch{
+    padding:.2rem .24rem;
+    margin:.2rem 0;
+    background-color:#fff;
+}
+.sendInspectSearchLeft{
+    width:85%;
+    height:.56rem;
+    border:1px solid #eee;
+    float:left;
+    position:relative;
+}
+.sendInspectSearchLeft input{
+    display:inline-block;
+    width:100%;
+    height:100%;
+    font-size:.24rem;
+    line-height:.54rem;
+    padding:0 .1rem;
+}
+.sendInspectSearchRight{
+    width:15%;
+    height:.56rem;
+    float:right;
+    text-align:center;
+    background-color:#72b81e;
+}
+.sendInspectSearchRight i{
+    display:inline-block;
+    width:80%;
+    height:.4rem;
+    background:url("../images/sear.png") no-repeat center;
+    background-size:contain;
+    margin-top:.08rem;
+}
+.sendInspectList{
+    padding:0 .3rem;
+    background-color:#fff;
+    border-bottom:1px solid #eee;
+}
+.sendInspectList:after{clear:both; display:block; height:0; visibility:hidden; line-height:0; content:'\20';}
+.sendInspectList:last-child{
+    border-bottom:0;
+}
+.sendListName{
+    float:left;
+}
+.sendListName{
+    font-size:.28rem;
+    line-height:.8rem;
+    color:#333;
+}
+
+.sendListCheck{
+    width:.4rem;
+    height:.4rem;
+    border-radius:50%;
+    border:1px solid #eee;
+    float:right;
+    margin-right:.16rem;
+    margin-top:.2rem;
+    position:relative;
+}
+.sendListCheck.on{
+    border:0;
+    background:#72b81e url("../images/ribut.png") no-repeat center;
+    background-size:60% 60%;
+}
+.sendListCheck input{
+    display:inline-block;
+    width:100%;
+    height:0;
+    overflow:hidden;
+    opacity:0;
+}
+
+
+/*成年人未成年人*/
+.typeOld{
+    font-weight:bold;
+    line-height:.7rem;
+    color:#000;
+    padding:0 .3rem;
+}
+.oldTestTop{
+    line-height:.7rem;
+    padding:0 .3rem;
+    background-color:#f2f2f2;
+}
+.oldTestTop i,.oldTestTop span{
+    display:inline-block;
+    vertical-align:middle;
+}
+.oldTestTop i{
+    width:.3rem;
+    height:.3rem;
+    background:url("../images/add.png") no-repeat center;
+    background-size:contain;
+    margin-right:.1rem;
+}
+.oldTestTop span{
+    color:#f07730;
+}
+.oldTestListBig,.oldTestListSmall{
+    display:none;
+}

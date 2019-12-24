@@ -1,0 +1,207 @@
+
+/* CSS Document */
+@charset "utf-8";
+/***公共样式****/
+body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, strong, b, small, u, i, center, dl, dt, dd, ol, ul, li,  sub, sup, tt, var, del, dfn,  ins, kbd, q, s, samp,  strike, applet, object, iframe, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, div, header, hgroup, menu, nav, output, ruby, section, summary, time, blockquote, pre, a, abbr, acronym, address, big, cite, code, mark, audio, video, input, textarea, select,button{ margin:0; padding:0;}
+ol, ul{list-style:none;}
+img{border:0; display:inline-block;max-width:100%;}
+input, button, textarea, select,a{ font-size:100%; outline:none; resize:none;border:none;background:none;-webkit-tap-highlight-color:transparent}
+select{appearance:none;-moz-appearance:none;-webkit-appearance:none;}
+table { border-collapse: collapse; border-spacing: 0; border:none;width:100%;}
+body { font-size:100%; font-family:"Microsoft YaHei",SimSun,"Arial",Arial,Helvetica,sans-serif;color:#333333;background-color:#fff;background-repeat:no-repeat;background-position:center;background-size:cover;}
+html {-webkit-text-size-adjust:none;}
+i,em{font-style:normal;}
+.clear {height:0; clear:both;}
+.clearfix { *zoom:1;}
+.clearfix:after{clear:both; display:block; height:0; visibility:hidden; line-height:0; content:'\20';}
+/*边距*/
+*{box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-o-box-sizing:border-box;}
+/*a 链接*/
+a { text-decoration:none; outline:none;display:block;}
+a:link {color:#333; }
+a:visited {color:#333; }
+a:hover, a:active, a:focus {color:#333;}
+b{font-weight:normal}
+
+html,body{width:100%;overflow-x:hidden;}
+
+/**/
+.header{
+    margin-top:.1rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-direction:row;
+    padding:0 .2rem;
+}
+.headList{
+    display:inline-block;
+    height:.3rem;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+    font-size:.24rem;
+    line-height:.3rem;
+    color:#333;
+}
+.columns{
+    padding-top:1rem;
+    text-align:center;
+}
+.bpImg{
+    width:3.1rem;
+    height:3.1rem;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+    margin:0 auto;
+}
+.appleTxt{
+    font-size:.2rem;
+    line-height:.8rem;
+    text-align:center;
+    color:#999;
+}
+.columnBut{
+    padding-top:.4rem;
+}
+.columnBut button{
+    display:inline-block;
+    width:4.5rem;
+    height:.64rem;
+    background-color:#72b81e;
+    border-radius:.32rem;
+    text-align:center;
+    font-size:.24rem;
+    color:#fff;
+}
+.columnBut.on button{
+    display:inline-block;
+    width:4.5rem;
+    height:.64rem;
+    background-color:#e8e8e8;
+    border-radius:.32rem;
+    text-align:center;
+    font-size:.24rem;
+    color:#333;
+}
+
+.header_pageWrap{
+    height:3.4rem;
+    position:relative;
+    background:url("../images/bg.png") no-repeat center;
+    background-size:cover;
+}
+.header_page{
+    position:absolute;
+    left:0;top:0;right:0;bottom:0;
+}
+.headerTxt{
+    padding-top:.21rem;
+}
+.headerTxt p{
+    font-size:.2rem;
+    line-height:.38rem;
+    color:#fff;
+    text-align:center;
+}
+.headerTxt h1{
+    font-size:.34rem;
+    line-height:.52rem;
+    color:#fff;
+    text-align:center;
+}
+.headerTxt h2{
+    font-size:.24rem;
+    line-height:.42rem;
+    color:#fff;
+    text-align:center;
+}
+.headerTxtLeft{
+    width:50%;
+    padding-top:.2rem;
+    float:left;
+}
+
+.columns_page{
+
+}
+.columns_page h3{
+    font-size:.24rem;
+    line-height:1;
+    color:#1969c4;
+    padding:.4rem .2rem .2rem .44rem;
+    position:relative;
+}
+.columns_page h3 i{
+    display:inline-block;
+    width:.06rem;
+    height:.24rem;
+    background-color:#428bdd;
+    position:absolute;
+    left:.2rem;
+    bottom:.2rem;
+}
+.pageList{
+    height:.82rem;
+    /*margin-top:1px;*/
+    border-top:1px solid #eee;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-direction:row;
+    padding:0 .2rem;
+    /*background-color:#fff7f1;*/
+}
+.pageList.on{
+    background-color:#f4f9ed;
+}
+.pageSpace{
+    display:inline-block;
+    height:.3rem;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+    font-size:.24rem;
+    line-height:.3rem;
+    color:#333;
+}
+.pageList .pageSpace:last-child{
+    height:.4rem;
+}
+.pageSpace button{
+    display:inline-block;
+    height: .4rem;
+    padding: 0 .2rem;
+    border-radius: .2rem;
+    background-color: #72b81e;
+    color:#fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

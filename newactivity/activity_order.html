@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/activity_order.css"/>
+    <style>
+        .dropload-load {
+            width: 20px;
+            height: 20px;
+            background: url() no-repeat center;
+            background-size: 20px 20px;
+            margin: 20px auto;
+            font-size: 14px;
+            line-height: 18px;
+            padding-left: 24px;
+            text-indent: -9999px
+        }
+
+        .dropload-noData {
+            text-align: center;
+            font-size: 14px
+        }
+
+        .warp_dd_o_su {
+            width: 34%
+        }
+
+        .warp_dd_o_su div {
+            width: 90px;
+            margin: auto
+        }
+
+        .map_xp_p {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 999999;
+            background: #FFFFFF;
+            display: none
+        }
+
+        .map_xp_o {
+            width: 30px;
+            height: 30px;
+            background: url(../wap/img/pws_223.png) no-repeat center;
+            position: fixed;
+            right: 3%;
+            top: 1%;
+            z-index: 9999999
+        }
+
+        .map_xp_o a {
+            display: block;
+            width: 30px;
+            height: 30px;
+        }
+
+        .left {
+            width: 100%
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 12px
+        }
+
+        .dropload-down {
+            height: auto
+        }
+
+        .zw_sj_p img {
+            padding-top: 30%
+        }
+    </style>
+</head>
+<body>
+<div id="activityOrder">
+    <div class="order-header">
+        <span>公益上海</span>
+        <a href="#" class="curremt">
+            <img src="../wap/img/pws_281.png" style="width: auto;height: 20px;">
+            <i id="nums"></i>
+        </a>
+    </div>
+    <header class="warp_dd_p" style="border-bottom: 1px solid #BBBBBB;">
+        <a href="#" onclick="jump('../post/personal_post_list.html')">
+            <span>岗位订单</span>
+        </a>
+        <a href="#" onclick="jump('../task/task_myOrder.html')">
+            <span>任务订单</span>
+        </a>
+        <a href="#" class="current" onclick="jump('myjoin.html')">
+            <span>活动订单</span>
+        </a>
+        <a href="#" onclick="jump('../post/personal_post_history_list.html')">
+            <span>历史订单</span>
+        </a>
+    </header>
+    <div class="screenButList screenButList1" style="margin-top: 3px;border-top: 0px;">
+        <input type="search" class="search_input" id="name_input" placeholder="请输入机构或活动名称来搜索" style="height:30px;-webkit-appearance:none;border-radius:0px;padding-left: 5px;">
+        <input type="button" class="search_button" value="" style="-webkit-appearance:none;border-radius:0px;">
+    </div>
+    <div  id="content">
+    <ul>
+        <li class="order-list" v-for="(item, index) in recordList" :key="index">
+            <div class="order-title">
+                <span>南京东路慈善超市参观票{{index}}</span>
+                <span class="titler">待审核票证</span>
+            </div>
+            <p style="clear:both">所属活动：南京东路慈善超市义卖活动</p>
+            <p><i class="iconfont icon-naozhong"></i>19/6/6 08:00-12:00 </p>
+            <p><i class="iconfont icon-didian"></i>上海市长宁区金钟路658弄11号2楼东华大学科技园内11号2楼</p>
+            <p><i class="iconfont icon-renwu"></i>上海悠活网络科技有限公司</p>
+            <p><i class="iconfont icon-liwu"></i>核销后可赠送3积分</p>
+            <div class="oforderbox">
+                <span class="oforder">取消订单1</span>
+                <span class="oforder">取消订单</span>
+            </div>
+        </li>
+    </ul></div>
+    <!------底部开始------>
+    <div id='footer'></div>
+    <!------底部结束------>
+</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script src="../wap/js/dropload.min.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+<script>
+ // $("#footer").load("../public/footer.html");
+ var vueIM = new Vue({
+    el: '#activityOrder',
+    data () {
+        return {
+            fil: null,
+            recordList: [],
+            addFrom: {
+                org: 'AAA789', // 机构标识
+                url: null
+            },
+            searchFrom: {
+                org: 'AAA789', // 机构标识
+                current: 1, // 当前页
+                size: 20 // 页容量	
+            }
+        };
+    },
+    mounted () {
+        this.init();
+    },
+    methods: {
+        init (){
+            //滑动加载更多
+            var that = this;
+            $(function(){
+                // 页数
+                var page = 1;
+                var size = 5;
+                $('#content').dropload({
+                    scrollArea : window,
+                    loadDownFn : function(me){
+                        page++;
+                        let json={
+                            pageNumber: page,
+                            pageSize: size,
+                            user: 1001658,
+                            status: 1
+                        }
+                        $.ajax({
+                            xhrFields: {
+                            withCredentials: true
+                            },
+                            type:"post",
+                            url:'http://test.dakaqi.cn:28080/html5/v1/newTask/taskUserTicketList',
+                            data:JSON.stringify(json),
+                            headers : {'token':'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAxNjU4Iiwic3ViIjoiMTAwMTY1ODs3Mi0wMDAwMDg4OS03OzE4NTAxMDcwMDAxIiwiaXNzIjoi5LiK5rW35biC5b-X6Laj5YWs55uK5Z-66YeR5LyaIiwiaWF0IjoxNTc2NzE5MTEwLCJleHAiOjE1NzgwMTUxMTB9.m8S2MKk4sIilw8jTXwDPC-8v3MCX4eShqRTu3cGt_mU'},
+                            dataType:'json',
+                            contentType: "application/json;charset=utf-8",
+                            success:function(data){
+                                console.log(me);
+                                if(data.data.records.length > 0){
+                                    that.recordList.push(data.data.records);
+                                } else {
+                                    me.lock();
+                                    // 无数据
+                                    me.noData();
+                                }
+                                me.resetload();
+                            },
+                            error: function(xhr, type){
+                                //alert('Ajax error!');
+                                // 即使加载出错，也得重置
+                                me.resetload();
+                            }
+                        })
+                    }
+                })
+            })
+        }
+    }
+})
+
+</script>
+</body>
+</html>

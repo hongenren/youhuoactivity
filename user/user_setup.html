@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>设置</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>设置</span>
+    </div>
+    <ul class="warp_pws_g">
+        <!--<li>-->
+            <!--<a href="./homemember_list.html">-->
+                <!--<b>家庭账户</b>-->
+            <!--</a>-->
+        <!--</li>-->
+        <li>
+            <a href="./change_account.html">
+                <b>账户切换</b>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="warp_pws_g">
+        <li>
+            <a href="account_authorization.html">
+                <b>账号授权</b>
+            </a>
+        </li>
+        <li>
+            <a href="./edit_password.html">
+                <b>修改密码</b>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="warp_pws_g">
+        <li>
+            <a href="account_helpdoc.html">
+                <b>帮助反馈</b>
+            </a>
+        </li>
+    </ul>
+    <ul class="warp_pws_g">
+        <li>
+            <a href="about_static.html">
+                <b>关于</b>
+            </a>
+        </li>
+    </ul>
+    <input type="button" value="退出登录" class="warp_pws_r_si" onclick="login_out()" style="width: 94%;margin: auto">
+</div>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+
+<script type="text/javascript">
+    login_in()
+    var userId = "";
+    function login_in(){
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/user/center",
+            data:JSON.stringify({"userId":user_msg.userId}),
+            headers : {'token':token},
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                var data1=data.data;
+                if(data.code==0){
+                    userId = data1.userId;
+                    $('#moblie').html(data1.userLoginMobile);
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '登录失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+</script>
+</body>
+</html>

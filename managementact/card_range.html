@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/managementact/card_range.js"></script>
+	<style>
+	.warp_gl_u_sh span input{border: 0;text-align: right;color: #72B81E}
+	</style>
+    <style>
+    .dkfwtc{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 999;
+        background: #fff;
+        width: 6rem;
+        padding: 0 0.2rem;
+    }
+    .dkfwtc h4{
+        display: block;
+        width: 100%;
+        font-size: 0.28rem;
+        color: #343434;
+        font-weight: normal;
+        line-height: 0.5rem;
+        padding: 0.2rem 0;
+        overflow: hidden;
+    }
+    .dkfwtc h4 span{
+        display: block;
+        width: 1rem;
+        height: 0.5rem;
+        margin: 0 0.1rem;
+        float: left;
+        text-align: center;
+        font-size: 0.32rem;
+        border-bottom: 1px solid #121212;
+    }
+    .dkfwtc h4 i{
+        float: left;
+        font-style: normal;
+    }
+    .dkfwtc h6{
+        display: block;
+        width: 100%;
+        font-size: 0.24rem;
+        color: #9a9a9a;
+        font-weight: normal;
+        line-height: 0.3rem;
+    }
+    .dkfwtc .choice{
+        color: #73b820;
+        border: 0.02rem solid #73b820;
+    }
+    .dkfwtc .choice a{
+        color: #73b820;
+    }
+    .dkfwtc ul{
+        display: block;
+        width: 100%;
+        overflow: hidden;
+    }
+    .dkfwtc li{
+        display: block;
+        width: 1.2rem;
+        height: 0.6rem;
+        border: 0.02rem solid #bbbbbb;
+        float: left;
+        margin-right: 0.33rem;
+        margin-top: 0.2rem;
+    }
+    .dkfwtc li a{
+        display: block;
+        width: 100%;
+        text-align: center;
+        line-height: 0.6rem;
+        font-size: 0.28rem;
+        color: #9a9a9a;
+    }
+    .dkfwtc li:nth-child(4n){
+        margin-right: 0;
+    }
+    .dkfwtc div{
+        padding: 0.3rem 0 0.1rem;
+        width: 100%;
+        overflow: hidden;
+    }
+    .dkfwtc div a{
+        display: block;
+        float: left;
+        width: 2rem;
+        height: 0.7rem;
+        text-align: center;
+        line-height: 0.7rem;
+        border: 0.02rem solid #bbb;
+        margin-left: 0.7rem;
+        font-size: 0.32rem;
+        color: #bbbbbb;
+    }
+    .dkfwtc div a:last-child{
+        float: right;
+        margin-right: 0.7rem;
+        margin-left: 0;
+    }
+    .mb{
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 99;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+    }
+	.mr_w_nr{width: 100%;overflow: hidden;}
+	.mr_w_nr img{width: 40%;margin: auto}
+	.mr_w_nr span{display: block;font-size: 14px;text-align: center;line-height: 30px}
+</style>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+
+    <ul class="warp_gl_u_sh">
+        <li>
+			<div class="mr_w_nr">
+				<img src="../wap/img/pws_164.png">
+				<span>暂无内容</span>
+			</div>
+		</li>
+    </ul>
+</div>
+
+<div class="mb" style="display:none;">
+
+</div>
+<div class="dkfwtc" style="display:none;">
+    <h4>
+        <i>设置打卡范围：</i><span id='punch_num'></span><i>公里</i>
+        <input type="hidden" name="sectionCode" value="">
+    </h4>
+    <h6>
+        请在以下范围中选择
+    </h6>
+    <ul>
+        <li>
+            <a href="javascript:void(0)">1</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">2</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">3</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">5</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">10</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">20</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">100</a>
+        </li>
+    </ul>
+    <div>
+        <a href="javascript:void(0)">
+            取消
+        </a>
+        <a href="javascript:void(0)" id='yes'>
+            确定
+        </a>
+    </div>
+</div>
+<script type="text/javascript">
+    get_find_job();
+</script>
+</body>
+</html>

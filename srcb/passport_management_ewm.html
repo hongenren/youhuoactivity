@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益护照</title>
+    <meta name="Keywords" content="公益护照"/>
+    <meta name="description" content="公益护照"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/teams.css">
+    <link rel="stylesheet" href="css/layer.css">
+    <link rel="stylesheet" href="js/iShare/style/css/ishare.css">
+    <link rel="stylesheet" href="js/iShare/style/fonts/iconfont.css">
+</head>
+<body>
+<div class="addResseeContent">
+    <div class="sendHistoryHead">
+        <a class="sendBack EwmBack" href="javascript:history.go(-1);"><i></i></a>
+        <div class="sendHeadList"><span>申领二维码</span></div>
+    </div>
+    <div class="receiveEwm">
+        <img class="loadImg" src="../wap/img/loading.gif">
+        <div id="output"></div>
+        <!--<div class="ewmText"></div>-->
+    </div>
+    <div class="receiveText">长按图片保存或分享</div>
+    <!--<div class="receiveButtonWrap">-->
+        <!--<div class="receiveBut iShare">邀请朋友参加</div>-->
+        <!--<div class="receiveBut on"><a class="saveImg" href="" download="ewm">保存到相册</a></div>-->
+    <!--</div>-->
+</div>
+<div id="canvasBox" style="height:2000px;"></div>
+<canvas id='canvas2' width="540" height="720"></canvas>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/layer.js"></script>
+<script src="../wap/js/config.js"></script>
+<script src="js/public.js"></script>
+<script src="js/jquery.qrcode.min.js"></script>
+<script>
+    //         var maxH = 540;
+    // var logoWidth=110;
+    // var width2=$("#canvas2").attr("width");
+    // var canvas2 = document.getElementById("canvas2");
+    // var ctx2 = canvas2.getContext("2d");
+    //
+    // var img2 = new Image();
+    // img2.src = 'images/bj.jpg';
+    // img2.onload = function(){
+    //     console.log('加载完毕')
+    //     var t1,t2,t3;
+    //     if(img2.height > img2.width) {
+    //         t1=0;
+    //         t2=parseInt(img2.height)/2-parseInt(img2.width)/2;
+    //         t3=img2.width;
+    //     }else{
+    //         t1=parseInt(img2.width)/2-parseInt(img2.height)/2;
+    //         t2=0;
+    //         t3=img2.height;
+    //     }
+    //     // 将图片画到canvas上面上去！
+    //     ctx2.drawImage(img2,t1,t2,t3,t3,parseInt(width2-110)/2,parseInt(width2-110)/2,logoWidth,logoWidth);
+    //     ctx2.save();
+    //
+    // };
+    function writeTextOnCanvas(cns, lh, rw, text,ts,td){
+        var cns = document.getElementById(cns);
+        var ctx = cns.getContext("2d");
+        var lineheight = lh;
+        var text = text;
+
+        ctx.width = cns.width;
+        ctx.height = cns.height;
+
+        // ctx.clearRect(0, 0, ctx.width, ctx.height);
+        ctx.font = "36px 微软雅黑";
+        ctx.fillStyle = "#333";
+        ctx.textAlign = "center";
+        function getTrueLength(str){//获取字符串的真实长度（字节长度）
+            var len = str.length, truelen = 0;
+            for(var x = 0; x < len; x++){
+                if(str.charCodeAt(x) > 128){
+                    truelen += 2;
+                }else{
+                    truelen += 1;
+                }
+            }
+            return truelen;
+        }
+        function cutString(str, leng){//按字节长度截取字符串，返回substr截取位置
+            var len = str.length, tlen = len, nlen = 0;
+            for(var x = 0; x < len; x++){
+                if(str.charCodeAt(x) > 128){
+                    if(nlen + 2 < leng){
+                        nlen += 2;
+                    }else{
+                        tlen = x;
+                        break;
+                    }
+                }else{
+                    if(nlen + 1 < leng){
+                        nlen += 1;
+                    }else{
+                        tlen = x;
+                        break;
+                    }
+                }
+            }
+            return tlen;
+        }
+        console.log(getTrueLength(text));
+        console.log(cutString(text, rw))
+        for(var i = 0; getTrueLength(text) > 0; i++){
+            var tl = cutString(text, rw);
+            ctx.fillText(text.substr(0, tl).replace(/^\s+|\s+$/, ""), ts, i * lineheight + td);
+            text = text.substr(tl);
+        }
+    }
+    $(function(){
+        var href=decodeURI(localStorage.getItem('evm_href'));
+        console.log(href)
+        // var href='https://123';
+        var code=localStorage.getItem('evm_code');
+        var name=localStorage.getItem('evm_name');
+        var logo=decodeURI(localStorage.getItem('evm_logo'));
+
+        $('#output').empty().qrcode(href).hide();
+        setTimeout(function(){
+            var width=$("#canvas").attr("width");
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+
+            console.log(width)
+            console.log((width-100)/2,(width-100)/2,100,40)
+
+            ctx.fillStyle="#fff";
+            ctx.fillRect((width-120)/2,(width-40)/2,120,40);
+            //
+            // ctx.font='24px/1 Arial';
+            // ctx.fillStyle='#333';
+            // ctx.fillText(code,(width-100)/2+16,(width-40)/2+28);
+
+            var imgData=document.getElementById("canvas").toDataURL("image/jpeg" ,1);
+
+            var width2=$("#canvas2").attr("width");
+            var canvas2 = document.getElementById("canvas2");
+            var ctx2 = canvas2.getContext("2d");
+
+
+            //
+
+            var maxH = 540;
+            var logoWidth=110;
+
+            ctx2.fillStyle="#fff";
+            ctx2.fillRect(0,0,540,720);
+
+            var img = new Image();
+            img.src = imgData;
+            img.onload = function(){
+                console.log('加载完毕')
+
+                // 将图片画到canvas上面上去！
+                ctx2.drawImage(img,0,0,maxH,maxH);
+                ctx2.save();
+
+                ctx2.font='48px/1 Arial';
+                ctx2.fillStyle='#333';
+                ctx2.textAlign = "center";
+                ctx2.fillText(code,parseInt(width2)/2,parseInt(width2)/2+14);
+            };
+
+            // ctx2.fillStyle="#fff";
+            // ctx2.fillRect(parseInt(width2)/2,parseInt(width2)/2,logoWidth,logoWidth);
+
+            // var img2 = new Image();
+            // img2.setAttribute('crossOrigin', 'anonymous');
+            // // img2.src = logo;
+            // img2.src='http://volunteer.mzj.sh.gov.cn/wwwroot/证件附件/images/2019/0906/20190906115000441.jpg';
+            // img2.onload = function(){
+            //     console.log('加载完毕')
+            //     var t1,t2,t3;
+            //     if(img2.height > img2.width) {
+            //         t1=0;
+            //         t2=parseInt(img2.height)/2-parseInt(img2.width)/2;
+            //         t3=img2.width;
+            //     }else{
+            //         t1=parseInt(img2.width)/2-parseInt(img2.height)/2;
+            //         t2=0;
+            //         t3=img2.height;
+            //     }
+            //     // 将图片画到canvas上面上去！
+            //     ctx2.drawImage(img2,t1,t2,t3,t3,parseInt(width2-110)/2,parseInt(width2-110)/2,logoWidth,logoWidth);
+            //     ctx2.save();
+            //
+            // };
+            // ctx2.fillStyle="#fff";
+            // ctx2.fillRect((width2-100)/2,(width2-40)/2,100,40);
+
+            // ctx2.font='24px/1 Arial';
+            // ctx2.fillStyle='red';
+            // ctx2.fillText('1233333333333333',parseInt(width2-100)/2+16,parseInt(width2-40)/2+28);
+
+            // // 设置字体
+            // ctx2.font = "20px/1 bold 黑体";
+            // // 设置颜色
+            // ctx2.fillStyle = "#333";
+            // // 设置水平对齐方式
+            // ctx2.textAlign = "center";
+            // // // 设置垂直对齐方式
+            // // ctx2.textBaseline = "bottom";
+            // // 绘制文字（参数：要写的字，x坐标，y坐标）
+            // console.log(width2)
+            // ctx2.fillText('哈哈哈<br/>呵呵呵', parseInt(width2)/2, parseInt(width2)+24);
+
+            writeTextOnCanvas('canvas2',50,25,name,parseInt(width2)/2,parseInt(width2)+50);
+            // ctx2.font='24px/1 Arial';
+            // ctx2.fillStyle='#333';
+            // ctx2.fillText('团队名称',(width2-100)+16,(width2)+18);
+
+
+            // $("body").append(img);
+
+
+            setTimeout(function(){
+                var imgData=document.getElementById("canvas2").toDataURL("image/jpeg" ,1);
+                $(".loadImg").attr('src',imgData);
+                $("#canvasBox,#canvas2").hide();
+            },500)
+
+        },1000);
+    })
+</script>
+</body>
+</html>

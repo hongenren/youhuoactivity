@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>历史账单</span>
+    </div>
+    <ul class="warp_pws_g" style="background-color: #F2F2F2;padding: 0px;">
+        <li id="title" style="padding: 0px 3%"></li>
+        <li style="height: 90px;background-color: #ffffff;line-height: 30px;padding: 0px 3%">
+            <p style="height: 30px;">账单周期<span id="shijian" style="margin-left: 50px"></span></p>
+            <p style="height: 30px;">收入总额<span id="shouru" style="margin-left: 50px;color: #72B81E">0</span></p>
+            <p style="height: 30px;">支出总额<span id="zhichu" style="margin-left: 50px;color: red;">0</span></p>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+
+<script type="text/javascript">
+    var year = $.getUrlParam("year"), month = $.getUrlParam("month"), accountId = $.getUrlParam("accountId");
+    $('#title').append(year+"年"+month+"月账单明细");
+    $('#shijian').append(year+"年"+month+"月");
+    querySum();
+    function querySum(){
+        var arr = {
+            "accountId": accountId,
+            "month": year+"-"+month
+        };
+        $(".memberTabList").removeClass('on').eq(0).addClass('on');
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url + "/html5/v1/point/queryTransaction",
+            data:JSON.stringify(arr),
+            dataType:'json',
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            success:function(data){
+                var datas=data.data;
+                if(data.code==0){
+                    var datas=data.data.sum;
+                    for(var i=0;i<datas.length;i++) {
+                        $("#shijian").val(datas[i].logDate);
+                        if (datas[i].accountDc == 1) {//支出
+                            $("#zhichu").val(datas[i].amount);
+                        }
+                        if (datas[i].accountDc == 2) {
+                            $("#shouru").val(datas[i].amount);
+                        }
+                    }
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+
+        })
+    }
+</script>
+</body>
+</html>

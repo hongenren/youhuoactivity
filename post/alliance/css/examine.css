@@ -1,0 +1,44 @@
+.examineList{
+    padding:.2rem .2rem;
+    border-bottom:1px solid #eee;
+}
+.examineTitle{
+    font-size:.32rem;
+    line-height:.6rem;
+    font-weight:bold;
+    color:#000;
+}
+.examineTime{
+    font-size:.28rem;
+    color:#333;
+}
+.examineContent{
+    font-size:.24rem;
+    color:#666;
+    padding:.1rem 0;
+    text-align:justify;
+}
+.examineAdmin strong,.examineAdmin span{
+    display:inline-block;
+    vertical-align:middle;
+    line-height:.5rem;
+}
+.examineAdmin strong{
+    padding-right:.1rem;
+}
+.examineButton{
+    text-align:right;
+    padding-top:.2rem;
+}
+.examineButton button{
+    display:inline-block;
+    padding:0 .2rem;
+    height:.5rem;
+    border-radius:.25rem;
+    border:1px solid;
+    margin:0 .1rem;
+}
+.examineButton button.b{border-color: #2fd0f3;color:#2fd0f3}
+.examineButton button.o{border-color:#f07730;color:#f07730}
+.examineButton button.g{border-color:#72b81e;color:#72b81e}
+.examineButton button.r{border-color: #f03727;color:#f03727}

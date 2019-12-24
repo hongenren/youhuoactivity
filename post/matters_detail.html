@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>待审核事项</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+</head>
+<body style="background: #F7F7F7">
+<div class="warp">
+
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>待审核事项</span>
+    </div>
+
+    <ul class="warp_sx_u">
+        <li>
+            <div class="warp_sx_u_sp">
+                <div class="warp_sx_u_so">
+                    <b>申请人：</b>
+                    <a href="" id="apply"></a>
+                </div>
+                <div class="warp_sx_u_so">
+                    <b>时间：</b>
+                    <span id="day"></span>
+                </div>
+                <div class="warp_sx_u_so" id="hid">
+                    <b>顶岗人：</b>
+                    <a href="" id="receiver"></a>
+                </div>
+                <div class="warp_sx_u_so">
+                    <b>申请原因：</b>
+                    <span id="reason"></span>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <div class="warp_sx_y">
+        <a href="javascript:;" onclick="pass(20)" class="sq_ys_p">通 过</a>
+        <a href="javascript:;" onclick="pass(-10)" class="sq_ys_o">拒 绝</a>
+    </div>
+
+</div>
+<script type="text/javascript">
+    var code = $_GET['code'];
+    var type   = $_GET['type'];
+	$(function(){
+		var code = $_GET['code'];
+		var type   = $_GET['type'], url = "html5/v1/station/unitPostReplace/detail";
+        if(type == 10){
+            $("#hid").hide();
+            url = "html5/v1/station/unitPost/queryQuitByCode";
+        }
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + url,
+            data:JSON.stringify({"code":code}),
+            dataType:'json',
+            headers : {'token':token},
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                var data_index = data.data;
+                $("#apply").attr("href","tel:"+data_index.mobile);
+                $("#apply").html(data_index.nickName);
+                $("#day").html(data_index.day);
+                if(type == 20) {
+                    $("#apply").attr("data-id",data_index.code);
+                    $("#receiver").attr("href","tel:"+data_index.receiverMobile);
+                    $("#receiver").html(data_index.receiverNickName);
+                }else{
+                    $("#apply").attr("data-id",data_index.id);
+                }
+                $("#reason").html(data_index.reason);
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+	})
+	function pass(state){
+		var applyCode = $("#apply").attr("data-id");
+		// -5顶岗/转接人拒绝 -10 管理员拒绝 15接收人同意20管理员同意
+        var url = "html5/v1/station/unitPostReplace/detail";
+        var json = {"user":user_msg.userId};
+        if(type == 10){
+            url = "html5/v1/station/unitPost/verifyQuit";
+            if(state==-10){
+                state = -20;
+            }
+            json.id=applyCode;
+            json.state=state;
+        }else{
+            json.state=state;
+            json.code=applyCode;
+        }
+		$.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            headers : {'token':token},
+            url:base_url + url,
+            data:JSON.stringify(json),
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    layer.open({content: '提交成功',skin: 'msg',time: 1});
+                    setTimeout(function(){window.history.go(-1);},1000);
+                }else{
+                    layer.open({content: data.msg,skin: 'msg',time: 1});
+                    return false;
+                }
+
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+	}
+</script>
+</body>
+</html>

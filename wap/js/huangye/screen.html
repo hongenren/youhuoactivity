@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海" />
+    <meta name="description" content="公益上海" />
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control" />
+    <meta content="no-cache" http-equiv="pragma" />
+    <meta content="0" http-equiv="expires" />
+    <meta content="telephone=no, address=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <script type="text/javascript" src="js/offset.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+    <link rel="stylesheet" href="css/mobile.css" />
+</head>
+<body style="background:#fff">
+<div class="mlbileWrap">
+    <header class="hyhead">
+        <a href="javascript:history.go(-1);" class="hyhead_l hyhead_black"><img class="black" src="images/leftWhite.png" /></a>
+        <div class="hyhead_c" style="width:5.4rem;">
+            <i></i>
+            <input type="text" placeholder="机构名称" />
+        </div><!--
+        <a href="javascript:void(0)" class="hyhead_r"> <img src="images/hyicon2.png" /><span>地图</span></a>-->
+    </header>
+    <div class="hyhead_b"></div>
+    <div class="chylisthead">
+        <div class="screenButList screenBut">
+            <a href="javascript:void(0)" id="area_info" data-id="">
+                按区域
+                <i></i>
+            </a>
+        </div>
+        <div class="screenButList">
+            <a href="javascript:void(0)">
+                <b class="selectBut_screen">服务类型</b>
+                <div class="selectList">
+                    <dl class="service" data-id=""><dd data-val='-1'>全部</dd></dl>
+                </div>
+                <i></i>
+            </a>
+        </div>
+        <div class="screenButList">
+            <a href="javascript:void(0)">
+                <b class="selectBut_screen orgTypesB">机构类别</b>
+                <div class="selectList">
+                    <dl class="orgTypes" data-id=""></dl>
+                </div>
+                <i></i>
+            </a>
+        </div>
+        <div class="screenButList">
+            <a href="javascript:void(0)">
+                <b class="selectBut_screen selectBut_screen_nature">机构性质</b>
+                <div class="selectList">
+                    <dl class="orgNature" data-id=""></dl>
+                </div>
+                <i></i>
+            </a>
+        </div>
+    </div>
+    <div class="chylisthead_b"></div>
+    <div class="hylist">
+        <ul id="list_tree">
+
+        </ul>
+    </div>
+</div>
+<div class="mb"></div>
+
+<div class="hylistsxw">
+    <div class="hylistsx1 hylistsxc">
+        <div class="hylistsx_l">
+            <ul id="area">
+                <li class="choice"> <a href="javascript:void(0)" data-id="310101000000" onclick="get_district_msg(-1,1,&quot;全市&quot;,310101000000)">全市</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310101000000" onclick="get_district_msg(155388,1,&quot;黄浦区&quot;,310101000000)">黄浦区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310104000000" onclick="get_district_msg(155582,1,&quot;徐汇区&quot;,310104000000)">徐汇区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310105000000" onclick="get_district_msg(155900,1,&quot;长宁区&quot;,310105000000)">长宁区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310106000000" onclick="get_district_msg(156096,1,&quot;静安区&quot;,310106000000)">静安区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310107000000" onclick="get_district_msg(156172,1,&quot;普陀区&quot;,310107000000)">普陀区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310108000000" onclick="get_district_msg(156442,1,&quot;闸北区&quot;,310108000000)">闸北区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310109000000" onclick="get_district_msg(156657,1,&quot;虹口区&quot;,310109000000)">虹口区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310110000000" onclick="get_district_msg(156880,1,&quot;杨浦区&quot;,310110000000)">杨浦区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310112000000" onclick="get_district_msg(157211,1,&quot;闵行区&quot;,310112000000)">闵行区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310113000000" onclick="get_district_msg(157770,1,&quot;宝山区&quot;,310113000000)">宝山区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310114000000" onclick="get_district_msg(158242,1,&quot;嘉定区&quot;,310114000000)">嘉定区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310115000000" onclick="get_district_msg(158558,1,&quot;浦东新区&quot;,310115000000)">浦东新区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310116000000" onclick="get_district_msg(159827,1,&quot;金山区&quot;,310116000000)">金山区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310117000000" onclick="get_district_msg(160046,1,&quot;松江区&quot;,310117000000)">松江区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310118000000" onclick="get_district_msg(160364,1,&quot;青浦区&quot;,310118000000)">青浦区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310120000000" onclick="get_district_msg(160661,1,&quot;奉贤区&quot;,310120000000)">奉贤区</a> </li>
+                <li class="choice"> <a href="javascript:void(0)" data-id="310230000000" onclick="get_district_msg(160916,1,&quot;崇明县&quot;,310230000000)">崇明县</a> </li>
+            </ul>
+        </div>
+        <div class="hylistsx_center">
+            <ul id="area_c1">
+            </ul>
+        </div>
+        <div class="hylistsx_r">
+            <ul id="area_1">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="allmap" style="height:0;overflow:hidden"></div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+    var orgMarkTags;
+    var code = decodeURI(decodeURI($.getUrlParam("code")));
+    var name = decodeURI(decodeURI($.getUrlParam("name")));
+    //自定义下拉选择areaCode
+    $(function(){
+        console.log(name+"=0="+code);
+        $.ajax({
+            url: base_url1 + '/html5/v1/orgPlace/queryOrgMarkTags',
+            //url: '/cm/termapi/geArticletListByMy',
+            type: "post",
+            dataType: "json",
+            headers: {'Content-Type': 'application/json'},
+            success: function (resp) {
+                console.log(name+"=1="+code);
+                if (resp.code == 0) {
+                    console.log(name+"=2="+code);
+                    orgMarkTags = resp.data;
+                    var div = "<dd data-val='-1' onclick='replaceHtml(this)'>全部</dd>";
+                    for (var i in orgMarkTags) {
+                        div += "<dd class='orgTypes_dd' data-val='"+orgMarkTags[i].code+"' onclick='replaceHtml(this)'>"+orgMarkTags[i].name+"</dd>";
+                    }
+                    $(".orgTypes").html(div);
+                    console.log(name+"=3="+code);
+                    if(name!=null && name!="" && code!=null && code!=""){
+                        console.log(name+"=4="+code);
+                        $(".orgTypesB").html(name);
+                        $(".orgTypes").attr("data-id", code);
+                        var obj = $('.orgTypes_dd').each(function(){
+                            if($(this).attr("data-val")==code){
+                                console.log(name+"=5="+code);
+                                replaceHtml(this);
+                            }
+                        });
+                    }
+                    get_msg();
+                }
+            }
+        });
+        $('.selectBut_screen').each(function(){
+            $(this).click(function(){
+                if($(this).next('.selectList').is(':hidden')){
+                    $(this).next('.selectList').show();
+                }else{
+                    $(this).next('.selectList').hide();
+                }
+                $(this).parents('.screenButList').addClass("choice").siblings().removeClass("choice");
+            })
+        });
+        $('.selectList dl dd').click(function () {    // 选择后替换内容并恢复箭头方向136
+            $('.selectList').hide();
+            var txt=$(this).text();
+            $(this).parents(".selectList").prev('b').text(txt);
+            $(this).parents('.screenButList').removeClass("choice");
+        })
+    });
+
+    function get_list(){
+        $("#list_tree").html("");
+        var type = $_GET['code'];
+        var html = "";
+        $.ajax({
+            url: base_url1+'/html5/v1/orgPlace/chooseByAdCodeServiceMarkTagNature',
+            //url: '/cm/termapi/geArticletListByMy',
+            type: "post",
+            dataType: "json",
+            data: "{ \"adCode\":\""+$("#area_info").attr("data-id")+"\", \"serviceType\":\""+$(".service").attr("data-id")+"\"," +
+                " \"markTag\":\""+$(".orgTypes").attr("data-id")+"\", \"orgNature\":\""+$(".orgNature").attr("data-id")+"\", \"pageNumber\":1, \"pageSize\":20}",
+            headers: {'Content-Type': 'application/json'},
+            beforeSend:function(XMLHttpRequest){
+                $(".warp_sh_u").html("<img src='images/loadings.gif' style='width:24px;heigth:24px; margin:0 auto;display:block'/>");
+            },
+            success:function(data){
+                data_index = data.data.records;
+                $.each(data_index,function(k,val){
+                    if(!val.imgs){
+                        val.imgs = "images/hylist3.png";
+                    }
+                    var markTags = "";
+                    var markTags_arr = val.markTags.split(";");
+                    for (var i = 0; i <markTags_arr.length; i++) {
+                        markTags += '<dd>'+markTags_arr[i]+'</dd>';
+                    };
+                    if(val.orgThirdAccount){
+                        shiming = '<b>\
+                                    <img src="images/hylist4.png">\
+                                    <i>实名</i>\
+                                </b>';
+                    }else{
+                        shiming = '';
+                    }
+                    html+='<li> <a href="http://h5.shcvs.cn/huangye/content.html?id='+val.id+'"> <img src="'+val.imgs+'" class="hylist_l" />\n' +
+                        '                <div class="hylist_r">\n' +
+                        '                    <h3>'+val.name+'&nbsp;&nbsp;'+shiming+'</h3>\n' +
+                        '                    <dl>\n' +
+                        '                        '+markTags+
+                        '                    </dl>\n' +
+                        '                    <div>\n' +
+                        '                        <i></i>\n' +
+                        '                        <p>'+val.addressDetail+'</p>\n' +
+                        '                    </div>\n' +
+                        '                </div> </a> \n' +
+                        '            </li>'
+                });
+                $("#list_tree").append(html);
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+</script>
+<!-- 区域 -->
+<script type="text/javascript">
+    function get_msg(){/*
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(116.331398,39.897445);
+        map.centerAndZoom(point,12);
+        var geolocation = new BMap.Geolocation();
+        lat = '';
+        lng = '';
+        geolocation.getCurrentPosition(function(r){
+            if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                var mk = new BMap.Marker(r.point);
+                map.addOverlay(mk);
+                map.panTo(r.point)
+                lat = r.point.lat;
+                lng = r.point.lng;
+                //get_quxian(r.address.city);
+                var city = r.address.city;*/
+                $("#area_info").html('上海市<i></i>');
+                $("#area_info").attr("data-id", "310000000000");
+                get_list();
+                get_quxian("上海市");
+            /*}
+            else{
+                layer.open({
+                    content: '获取定位失败,请重试'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+        });*/
+    }
+    function get_quxian(name)
+    {
+        var html = "";
+        var arr = { "name": name};
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url1 + "/html5/v1/region/findByName",
+            data:JSON.stringify(arr),
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                var data_index = data.data
+                parent = data_index[0].id
+                get_district_msg(parent)
+
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+    function get_district_list(name, areaCode){
+        $(".hylistsx1").hide();
+        $(".mb").hide();
+        $("#area_info").html(name+'<i></i>');
+        $("#area_info").attr('data-id',areaCode);
+        get_list();
+        $(".chylisthead .screenButList").removeClass('choice');
+        return ;
+    }
+    function get_district_msg(parent,type=0,name="",areaCode=""){
+        if(type+1 == 4 || parent==-1){
+            //判断 如果点击的是村级  则关闭选项并传值
+            $(".hylistsx1").hide();
+            $(".mb").hide();
+            $("#area_info").html(name+'<i></i>');
+            $("#area_info").attr('data-id',areaCode);
+            get_list();
+            $(".chylisthead .screenButList").removeClass('choice');
+            return ;
+        }
+        var html = '';
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url1 + "/html5/v1/region/findByParent",
+            data:JSON.stringify({"parent":parent}),
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    var data_index = data.data;
+                    $.each(data_index,function(k,val){
+                        if(k==0){
+                            if(type == 0) {
+                                html += '<li class="choice">\
+                                    <a href="javascript:void(0)" data-id="-1" onclick=get_district_list("上海市",' + areaCode + ')>全市</a>\
+                                </li>';
+                            }else if(type == 1){
+                                html += '<li class="choice">\
+                                    <a href="javascript:void(0)" data-id="-1" onclick=get_district_list("'+name+'",'+areaCode+')>全区</a>\
+                                </li>';
+                            }else if(type == 2){
+                                html += '<li class="choice">\
+                                    <a href="javascript:void(0)" data-id="-1" onclick=get_district_list("'+name+'",'+areaCode+')>全街道</a>\
+                                </li>';
+                            }
+                        }
+                        if(val.name != "市辖区"){
+                            html += '<li class="choice">\
+                                    <a href="javascript:void(0)" data-id="'+val.areaCode+'" onclick=get_district_msg('+val.id+','+(type+1)+',"'+val.name+'",'+val.areaCode+')>'+val.name+'</a>\
+                                </li>';
+                        }
+                    });
+                    if(type == 0){
+                        //添加区县
+                        $("#area").html(html);
+                    }else if(type == 1){
+                        $("#area_c1").html(html);
+                    }else if(type == 2){
+                        $("#area_1").html(html);
+                    }
+                }else{
+                    layer.open({content:data.msg,skin: 'msg',time: 1});
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({content:'获取失败',skin: 'msg',time: 1});
+                return false;
+
+            }
+        })
+    }
+</script>
+<script>
+    $(".chylisthead .screenBut").click(function(){
+        var cla=$(this).attr("class")
+        if(cla=="choice"){
+            $(".hylistsxc").hide()
+            $(".mb").hide()
+            $(this).removeClass("choice")
+        }else{
+            $(this).addClass("choice").siblings().removeClass("choice");
+            $(".hylistsxc").eq($(this).index()).show().siblings().hide();
+            $(".mb").show()
+        }
+    })
+    $(".mb").click(function(){
+        $(".hylistsxc").hide()
+        $(".mb").hide()
+        $(".chylisthead div").removeClass("choice")
+    })
+    function replaceHtml(obj){
+        $('.selectList').hide();
+        var txt=$(obj).text();
+        $(obj.parentNode).attr("data-id",  $(obj).attr("data-val"));
+        $(obj).parents(".selectList").prev('b').text(txt);
+        $(obj).parents('.screenButList').removeClass("choice");
+        if($(obj).attr("data-val")!=-1){
+            var div = "<dd data-val='-1' onclick='replaceHtml1(this)'>全部</dd>";
+            for (var i in orgMarkTags) {
+                if($(obj).attr("data-val")==orgMarkTags[i].code){
+                    var list = orgMarkTags[i].list;
+                    for (var j in list) {
+                        div += "<dd data-val='" + list[j].code + "' onclick='replaceHtml1(this)'>" + list[j].name + "</dd>";
+                    }
+                }
+            }
+            $(".orgNature").html(div);
+        }else{
+            $(".orgNature").html("");
+            $(".selectBut_screen_nature").html("机构性质");
+        }
+        get_list();
+    }
+    function replaceHtml1(obj){
+        $('.selectList').hide();
+        var txt=$(obj).text();
+        $(obj.parentNode).attr("data-id",  $(obj).attr("data-val"));
+        $(obj).parents(".selectList").prev('b').text(txt);
+        $(obj).parents('.screenButList').removeClass("choice");
+        get_list();
+    }
+</script>
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>机构信息</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../css/org.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mobiscroll.custom.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/layer.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="../css/quill.snow.css"/>-->
+    <link rel="stylesheet" type="text/css" href="../../wap/js/editor/css/base.css"/>
+    <script type="text/javascript" src="../js/offset.js"></script>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+    <div class="warp_zy_j bg">
+        <a href="javascript:history.go(-1);"></a>
+        <span>机构基础信息</span>
+    </div>
+    <div class="warp_zy_p">
+        <ul class="warp_zy_y">
+
+            <li>
+                <form class='headimg' method="post" enctype="multipart/form-data">
+                    <div class="warp_zy_d">
+                        <b>logo</b>
+                        <div class="warp_zy_d_sp">
+                            <img src="../images/pws_275.jpg" class="logoUrl">
+                            <input type="file" onchange="uploadImgOne(this)" name="img">
+                            <input type="hidden" name="logo">
+                        </div>
+                    </div>
+                </form>
+            </li>
+
+            <li>
+
+                <div class="warp_zy_d">
+                    <b>注册日期</b>
+                    <!--<span class="warp_zy_d_so greetTime">请选择</span>-->
+                    <input class='demo_timeYWN warp_zy_d_so' type="text" readonly="true" name="registerDate" placeholder="请选择" value=""/>
+                    <input type="hidden" name="registerDate" value="">
+                </div>
+            </li>
+            <li>
+
+                <div class="warp_zy_d">
+                    <b>咨询电话</b>
+                    <input type="text" placeholder="请填写" name="mobile" class="warp_zy_d_si tellTxt">
+                </div>
+            </li>
+            <li>
+                <div class="warp_zy_y_so">
+                    <b>工作周期</b>
+                    <!--<a href="javascript:void(0)" class="weeks">请选择</a>-->
+                    <input type="text" placeholder="请选择" name="weeks" class="weeks weeks_msg warp_zy_d_si" value="">
+                </div>
+            </li>
+            <li>
+                <b>工作时间</b>
+                <div class="warp_zy_y_si">
+                    <input class='demo_time startTime' type="text" readonly="true" name="startTime" placeholder="开始时间" value=""/>
+                    <span>至</span>
+                    <input class='demo_time endTime' type="text" readonly="true" name="endTime" placeholder="结束时间" value=""/>
+                </div>
+            </li>
+            <li>
+                <b>地址</b>
+                <input name="addressName" id="addressName" placeholder="请填写" class="warp_zy_y_sp addressDetail" readonly  unselectable="on"/>
+                <input name="addressId" id="addressId" style="display:none;"/>
+            </li>
+            <li style="overflow:visible">
+                <b>简介</b>
+                <!--<input type="text" name="demo" placeholder="请填写" class="warp_zy_y_sp demo_val">-->
+                <!--<textarea name="demo" class="scrollText demo_val">请填写</textarea>-->
+                <!--<div id="editor" style="margin-top:14px;"></div>-->
+                <div id="contentEditor" style="min-height:200px;margin-top:14px;padding-bottom:14px;"></div>
+            </li>
+            <li>
+                <div class="warp_zy_y_su">
+                    <h2>添加图片</h2>
+                    <div class="warp_sm_u_se">
+                        <div class="warp_sm_u_sw" data-id="0" style="overflow:hidden;">
+                            <form class="test_form" action="" method="post" enctype="multipart/form-data">
+                                <input name="orgCertCodeImg1" type="file" onchange="uploadImg(this)"/>
+                                <input type="hidden"  id="imgsrc0" name="imgs">
+                            </form>
+                            <img src="../images/pws_175.jpg" id="img0">
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="ht70"></div>
+    <div class="warp_pws_m_sw">
+        <button onclick="sub_msg()">提交添加</button>
+        <!--<input type="button" value="提交添加">-->
+    </div>
+
+    <div class="warp_zy_t">
+        <div class="warp_zy_t_sp"></div>
+        <div class="warp_zy_t_so">
+            <div class="warp_zy_t_si">
+                <a href="javascript:void(0)"></a>
+                <span>请选择工作周期</span>
+            </div>
+            <ul class="warp_zy_t_su">
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周一">
+                        <span>周一</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周二">
+                        <span>周二</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周三">
+                        <span>周三</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周四">
+                        <span>周四</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周五">
+                        <span>周五</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周六">
+                        <span>周六</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="weeks1" value="周日">
+                        <span>周日</span>
+                    </label>
+                </li>
+            </ul>
+            <input type="button" value="确认"  class="warp_zy_t_sy">
+        </div>
+    </div>
+</div>
+<div class="adressSelectFixed">
+    <div class="adressSelectWrap">
+        <div class="nearbyListWrap on">
+            <div class="neabyTeam">
+                <h2>省：</h2>
+                <div class="nearbyBut" id="provlnceName" data="0" data-name="">请选择<i></i></div>
+            </div>
+            <div class="neabyTeam">
+                <h2>市：</h2>
+                <div class="nearbyBut" id="cityName" data="" data-name="">请选择<i></i></div>
+            </div>
+            <div class="neabyTeam">
+                <h2>区县：</h2>
+                <div class="nearbyBut" id="districtName" data="" data-name="">请选择<i></i></div>
+            </div>
+            <div class="neabyTeam">
+                <h2>街道/乡镇：</h2>
+                <div class="nearbyBut" id="street" data="" data-name="">请选择<i></i></div>
+            </div>
+            <div class="neabyTeam">
+                <h2>居/村委：</h2>
+                <div class="nearbyBut" id="village" data="" data-name="">请选择<i></i></div>
+            </div>
+            <input type="hidden"  id="adCode">
+            <div class="neabyTeam" style="display: none">
+                <h2>路：</h2>
+                <textarea class="scrollText" id="lu" rows="1" onfocus="if(value=='请填写'){value=''}" onblur="if (value ==''){value='请填写'}">请填写</textarea>
+            </div>
+            <div class="neabyTeam" style="display: none">
+                <div class="nearbyFormWrap on clearfix">
+                    <div class="nearbyForms"><input id="nong" type="text"><label for="nong">弄</label></div>
+                    <div class="nearbyForms"><input id="hao" type="text"><label for="hao">号</label></div>
+                </div>
+                <div class="nearbyFormWrap clearfix">
+                    <div class="nearbyForms"><input id="zhuang" type="text"><label for="zhuang">幢</label></div>
+                    <div class="nearbyForms"><input id="shi" type="text"><label for="shi">室</label></div>
+                </div>
+            </div>
+            <div class="neabyTeam">
+                <h2>地址名称：</h2>
+                <input class="scrollText" id="name" placeholder="请填写"/>
+            </div>
+            <div class="neabyTeam">
+                <h2>详细地址：</h2>
+                <input class="scrollText" id="addressDetail" placeholder="请填写"/>
+            </div>
+        </div>
+        <div class="adressSelectSubWrap">
+            <ul class="areaListWrap">
+                <li>北京</li>
+            </ul>
+        </div>
+    </div>
+    <div class="adressSelectButWrap">
+        <button class="adressSelectBut adressSelectButDetermine">确定</button>
+        <button class="adressSelectBut adressSelectButRight adressSelectButClose">取消</button>
+    </div>
+</div>
+<script src="../js/jquery-1.11.1.min.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/public.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/layer.js"></script>
+<script type="text/javascript" src="../js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../js/lrz.bundle.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../../wap/js/editor/Eleditor.min.js"></script>
+<!--<script type="text/javascript" src="../js/quill.js"></script>-->
+<!--<script type="text/javascript" src="../../wap/js/editor/wangEditor.min.js"></script>-->
+<script type="text/javascript">
+    var Edr = new Eleditor({
+        el: '#contentEditor',
+        upload:{
+            server: '/upload.json',
+        },
+        toolbars: [
+            'insertText',
+            'editText',
+            // 'insertImage',
+            // 'insertLink',
+            // 'deleteBefore',
+            // 'deleteAfter',
+            // 'insertHr',
+            'delete',
+
+            'cancel',
+        ]
+    });
+    $('#contentEditor').click(function(){
+        /*点击会弹出文本编辑器*/
+        Edr.trigger('insertText')
+    });
+
+    <!---->
+    // var toolbarOptions = [
+    //     ['bold', 'underline', 'strike'],        // toggled buttons
+    //     // ['blockquote', 'code-block'],
+    //
+    //     [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+    //     // [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    //     // [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+    //     [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+    //     // [{ 'direction': 'rtl' }],                         // text direction
+    //
+    //     // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+    //     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    //
+    //     [{ 'color': [] }],          // dropdown with defaults from theme
+    //     // [{ 'font': [] }],
+    //     [{ 'align': [] }],
+    //
+    //     ['clean']                                         // remove formatting button
+    // ];
+    // var editor = new Quill('#editor', {
+    //     modules: { toolbar: toolbarOptions },
+    //     theme: 'snow'
+    // });
+    // document.querySelector("#editor").addEventListener("paste", function(e) {
+    //     e.preventDefault();
+    //     var text = e.clipboardData.getData("text/plain");
+    //     document.execCommand("insertText", false, text);
+    // });
+    // // Interpret a <b> tag as bold
+    // // editor.clipboard.addMatcher('B', function(node, delta) {
+    // //     return delta.compose(new Delta().retain(delta.length(), { bold: true }));
+    // // });
+    // // var clipboard = new Clipboard('#editor');
+    // // editor.dangerouslyPasteHTML({html: String})
+    // function con(){
+    //     let content = editor.container.firstChild.innerHTML;
+    //     console.log(content)
+    // }
+    // function set(){
+    //     editor.setContents([
+    //         { insert: 'Hello 111111111' },
+    //         { insert: 'World!', attributes: { bold: true } },
+    //         { insert: '\n' }
+    //     ]);
+    //     // editor.clipboard.dangerouslyPasteHTML(5, '&nbsp;<b>World</b>');
+    // }
+
+    <!---->
+    // var E = window.wangEditor;
+    // var editor = new E('#editor');
+    // // 或者 var editor = new E( document.getElementById('editor') )
+    // editor.customConfig.menus = [
+    //     'head',
+    //     'bold',
+    //     'italic',
+    //     'underline',
+    //     // 'fontSize',
+    //     // 'emoticon',
+    //     // 'link',
+    //     // 'foreColor',
+    //     // 'image',
+    //     'undo'
+    // ];
+    // editor.customConfig.uploadImgShowBase64 = true;
+    // editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024;
+    // editor.customConfig.uploadImgMaxLength = 5;
+    // editor.customConfig.zIndex = 998;
+    // // editor.customConfig.uploadImgServer = '/upload'
+    // editor.create();
+    // document.getElementById('btn1').addEventListener('click', function () {
+    //     // 读取 html
+    //     console.log(editor.txt.html())
+    // }, false)
+</script>
+<script>
+    function regionClick(objId, id, name, areaCode) {
+        var h2 = $("#"+objId).parent().children("h2:first-child");
+        $("#"+objId).parent().next().children().next().attr("data", id);
+        $("#"+objId).attr("data-name", name);
+        $("#"+objId).attr("data-code", areaCode);
+        $("#adCode").val(areaCode);
+        h2.html(h2.html().split("：")[0]+"："+name);
+        $(".adressSelectSubWrap").hide();
+    }
+
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang="zh";
+    var currYear = (new Date()).getFullYear();
+    var prjvOrgId = $.getUrlParam("prjvOrgId");
+    $('.demo_time').mobiscroll().time({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang
+    });
+    $(".demo_timeYWN").mobiscroll().date({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        dateOrder : 'yyyymmdd', //面板中日期排列格式
+        stepminute: 1
+    });
+</script>
+<script>
+    $("input[name='weeks1']").bind("click",function(){
+        var arr = [];
+        var str = '';
+        var checked = $(this).prop('checked');
+        if(checked){
+            $(this).parent().parent().addClass('cla');
+        }else{
+            $(this).parent().parent().removeClass('cla');
+        }
+        $("input[name='weeks1']:checked").each(function(){
+            arr.push($(this).val());
+        })
+        for (var i = 0; i < arr.length; i++) {
+            str += arr[i]+ ",";
+        };
+        if (str.length > 0) {
+            str = str.substr(0, str.length - 1);
+        }
+        $(".weeks").val(str);
+
+    });
+    $(".warp_zy_y_so").click(function(){
+
+        $(".warp_zy_t").fadeIn();
+    })
+    $(".warp_zy_t_si a").click(function(){
+        $(".warp_zy_t").fadeOut();
+    })
+    $(".warp_zy_t_sy").click(function(){
+        $(".warp_zy_t").fadeOut();
+    })
+</script>
+<script>
+    var orgThirdAccount = "";
+    function get_real(){
+        var arr = {
+            "prjvOrgId": prjvOrgId
+        };
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url + "queryOrgByPrjvOrgId",
+            data:JSON.stringify(arr),
+            dataType:'json',
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            beforeSend:function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                var datas=data.data;
+                if(datas){
+                    var logoUrl=datas.logo?datas.logo:'../images/pws_275.jpg';
+                    var registerDate=datas.registerDate?datas.registerDate:'';
+                    var mobile=datas.mobile?datas.mobile:'';
+                    var weeks=datas.weeks?datas.weeks:'';
+                    var startime=datas.startTime?datas.startTime:'';
+                    var endTime=datas.endTime?datas.endTime:'';
+                    var address=datas.addressDetail?datas.addressDetail:'';
+                    var demo=datas.demo?datas.demo:'';
+                    var prjvOrgId=datas.prjvOrgId?datas.prjvOrgId:'';
+                    var addressName=datas.addressName?datas.addressName:'';
+                    var addressId=datas.addressId?datas.addressId:'';
+                    var imgs=datas.imgs?datas.imgs:'';
+                    orgThirdAccount = datas.orgThirdAccount;
+
+                    var province = datas.province?datas.province:'';
+                    var city = datas.city?datas.city:'';
+                    var district = datas.district?datas.district:'';
+                    var street = datas.street?datas.street:'';
+                    var village = datas.village?datas.village:'';
+                    var adCode = datas.adCode?datas.adCode:'';
+                    var h2 = $("#provlnceName").parent().children("h2:first-child");h2.html(h2.html().split("：")[0]+"："+province);$("#provlnceName").attr("data-name", province);
+
+                    h2 = $("#cityName").parent().children("h2:first-child");h2.html(h2.html().split("：")[0]+"："+city);$("#cityName").attr("data-name", city);
+
+                    h2 = $("#districtName").parent().children("h2:first-child");h2.html(h2.html().split("：")[0]+"："+district);$("#districtName").attr("data-name", district);
+
+                    h2 = $("#street").parent().children("h2:first-child");h2.html(h2.html().split("：")[0]+"："+street);$("#street").attr("data-name", street);
+
+                    h2 = $("#village").parent().children("h2:first-child");h2.html(h2.html().split("：")[0]+"："+village);$("#village").attr("data-name", village);$("#village").attr("data-code", adCode);
+                    $("#adCode").val(adCode);
+
+                    $(".logoUrl").attr('src',logoUrl);
+                    $("input[name='logo']").val(logoUrl);
+                    // $(".greetTime").html(newDate.toLocaleDateString());
+                    $("input[name='registerDate']").val(registerDate);
+
+                    $(".tellTxt").val(mobile);
+                    $(".weeks").val(weeks);
+                    $(".startTime").val(startime);
+                    $(".endTime").val(endTime);
+                    //$(".addressDetail").val(address);
+                    // $(".demo_val").val(demo);
+                    // editor.txt.html(escapeHTML(demo));
+                    // editor.setContents([
+                    //     { insert: escapeHTML(demo) },
+                    //     { insert: '\n' }
+                    // ]);
+                    // editor.container.firstChild.innerHTML=escapeHTML(demo)
+                    console.log(demo)
+                    Edr.append(escapeHTML(demo))
+                    // $("#contentEditor").html(escapeHTML(demo))
+                    // $("#editor").html(escapeHTML(demo)).attr('contenteditable',true)
+                    //
+                    // editor.setContents([
+                    //     { insert: '\n' }
+                    // ]);
+                    // console.log(editor.txt.html())
+
+                    $("#addressName").val(addressName);
+                    $("#name").val(addressName);
+                    $("#addressDetail").val(address);
+                    $("#addressId").val(addressId);
+
+                    imgs = trim(imgs);
+                    if(imgs!=null && imgs!=""){
+                        var imgsList = imgs.split(",");
+                        for (var i=0;i<imgsList.length ;i++ ) {
+                            if(imgsList[i]!=null && imgsList[i]!=""){
+                                var div='<div class="warp_sm_u_sw">\n' +
+                                    '                            <img class="upList" src="'+imgsList[i]+'">\n' +
+                                    '                            <i class="clearImg"></i>\n' +
+                                    '                        </div>';
+                                $(".warp_sm_u_se").append(div);
+                            }
+                        }
+                        clearImg();
+                    }
+
+                    $.cookie('prjvOrgId',prjvOrgId);
+                    $.cookie('addressId',addressId)
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+
+        })
+    };
+    function trim(str){ //删除左右两端的空格
+        return str.replace(/(^\s*)|(\s*$)/g, "");
+    }
+    function textChange(){
+        $(".scrollText").each(function(){
+            var that=$(this);
+            var textareaTxt=that.text();
+            that.on('focus',function(){
+                if($(this).text()==textareaTxt){
+                    $(this).text('')
+                }
+            });
+            that.on('blur',function(){
+                if($(this).text()==''){
+                    $(this).text(textareaTxt)
+                }
+            });
+            that.on('keyup', function(){
+                autoHeight(this);
+            });
+        });
+
+    };
+    function diverEvent(obj){
+        $(".adressSelectSubWrap li").each(function(){
+            $(this).click(function(){
+                $(".adressSelectSubWrap").hide();
+                var subTxt=$(this).text();
+                $("#"+obj).text(subTxt);
+            })
+        })
+    }
+    $(function(){
+        get_real();
+        textChange();
+        $(".nearbyBut").each(function(){
+            var cwcqc = $(this);
+            cwcqc.click(function(){
+                var parentId = $(this).attr("data");
+                if(parentId!=null && parentId!=""){
+                    $.ajax({
+                        url: base_url1+'/html5/v1/region/findByParent',
+                        //url: '/cm/termapi/geArticletListByMy',
+                        type: "post",
+                        dataType: "json",
+                        data: "{\"parent\": "+parentId+"}",
+                        headers: {'Content-Type': 'application/json'},
+                        success: function (resp) {
+                            if (resp.code == 0) {
+                                var region = resp.data;
+                                var div = "";
+                                for (var i in region) {
+                                    div += "<li class='areaList' onclick='regionClick(\""+cwcqc.attr("id")+"\", \""+region[i].id+"\",\""+region[i].name+"\",\""+region[i].areaCode+"\")'>"+region[i].name+"</li>";
+                                }
+                                $(".areaListWrap").html(div);
+                            }
+                        }
+                    });
+                    $(".areaList").click(function(){
+                        $(".adressSelectSubWrap").hide()
+                    })
+                }
+            })
+        });
+        //地址选择弹层
+        $(".addressDetail").on("click",function(){
+            $(".adressSelectFixed").show();
+        });
+        $(".adressSelectButDetermine").click(function(){
+            if(checkAddress()){
+                if($("#lu").val()=="请填写"){
+                    $("#lu").val("");
+                }
+                $.ajax({
+                    url: base_url1+'/html5/v1/address/save',
+                    type: "post",
+                    dataType: "json",
+                    data: "{\"name\": \""+$("#name").val()+"\", \"personFirstAccount\": \"\", \"orgThirdAccount\": \""+orgThirdAccount+"\", \"account\": \"\"\
+                , \"provinceName\": \""+$("#provlnceName").attr("data-name")+"\", \"cityName\": \""+$("#cityName").attr("data-name")+"\", \"districtName\": \""+$("#districtName").attr("data-name")+"\"\
+                , \"street\": \""+$("#street").attr("data-name")+"\" , \"village\": \""+$("#village").attr("data-name")+"\", \"lu\": \""+$("#lu").val()+"\", \"nong\": \""+$("#nong").val()+"\"\
+                , \"hao\": \""+$("#hao").val()+"\", \"zhuang\": \""+$("#zhuang").val()+"\", \"shi\": \""+$("#shi").val()+"\", \"addressDetail\": \""+$("#addressDetail").val()+"\"\
+                , \"adCode\": \""+$("#adCode").val()+"\", \"bLng\": \"\", \"Blat\": \"\"}",
+                    headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+                    //headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+                    success: function (resp) {
+                        if (resp.code == 0) {
+                            layer.open({
+                                content: '保存成功'
+                                ,skin: 'msg'
+                                ,time: 1 //2秒后自动关闭
+                            });
+                            $("#addressName").val($("#name").val());
+                            $("#addressId").val(resp.data.id);
+                            $(".adressSelectFixed").hide();
+                        }else{
+                            layer.open({
+                                content: resp.msg
+                                ,skin: 'msg'
+                                ,time: 1 //2秒后自动关闭
+                            });
+                        }
+                    }
+                });
+            }
+        });
+        $(".adressSelectButClose").click(function(){
+            $(".adressSelectFixed").hide();
+        });
+
+        //选择省区
+        $(".nearbyBut").click(function(){
+            var parentId = $(this).attr("data");
+            if(parentId!=null && parentId!=""){
+                $(".adressSelectSubWrap").show();
+                var diverType=$(this).attr("id");
+                diverEvent(diverType);
+            }
+        });
+    });
+    function uploadImgOne(elm){
+        var formData=new FormData();
+
+        var that=elm;
+        var files=that.files[0];
+        var arr = { "img":files,"folderName":'yepaimg'};
+        formData.append('img',files);
+        formData.append('folderName','yepaimg');
+
+        $.ajax({
+            url:up_img + "cm/upload/uploadImgFolderOSS",
+            type:'POST',
+            data:formData,
+            async:false,
+            contentType: false,
+            processData:false,
+            beforeSend:function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                var datas=data.data;
+                $(".logoUrl").attr('src',datas);
+                $("input[name='logo']").val(datas);
+            },
+            error:function(){
+                layer.open({
+                    content: 'logo上传失败'
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
+                });
+                return false;
+            }
+
+        })
+    }
+    function clearImg(){
+        $(".clearImg").click(function(){
+            $(this).parents(".warp_sm_u_sw").remove();
+        })
+    }
+    function uploadImg(elm){
+        var that=elm;
+
+        var formData=new FormData();
+        var files=that.files[0];
+        var arr = { "img":files,"folderName":'yepaimg'};
+        formData.append('img',files);
+        formData.append('folderName','yepaimg');
+
+        $.ajax({
+            url:up_img + "cm/upload/uploadImgFolderOSS",
+            type:'POST',
+            data:formData,
+            async:false,
+            contentType: false,
+            processData:false,
+            beforeSend:function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                var datas=data.data;
+
+                if(datas){
+                    var div='<div class="warp_sm_u_sw">\n' +
+                        '                            <img class="upList" src="'+datas+'">\n' +
+                        '                            <i class="clearImg"></i>\n' +
+                        '                        </div>';
+                    $(".warp_sm_u_se").append(div);
+                    clearImg();
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '上传失败'
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
+                });
+                return false;
+            }
+
+        })
+    }
+    function sub_msg(){
+        var imgList=[];
+        $(".warp_sm_u_sw").each(function(){
+            var imgUrl=$(this).find("img.upList").attr("src");
+            imgList.push(imgUrl);
+        });
+        var imgs = imgList.join(',');
+        imgs = imgs!=null && imgs!=""?imgs.substring(1, imgs.length):"";
+        if($("input[name='startTime']").val()=='请填写'){
+            $("input[name='startTime']").val("");
+        }
+         var SubData = {
+            "prjvOrgId" : prjvOrgId,
+            "logo" : $("input[name='logo']").val(),
+            "demo" : Edr.getContent(),//editor.txt.html() //$(".demo_val").val() //editor.container.firstChild.innerHTML
+            "imgs" : imgs,
+            "registerDate" : $("input[name='registerDate']").val().split('/').join('-'),
+
+            "mobile" : $("input[name='mobile']").val(),
+            "weeks" : $("input[name='weeks']").val(),
+            "startTime" : $("input[name='startTime']").val(),
+            "endTime" : $("input[name='endTime']").val(),
+            "addressId": $("#addressId").val(),
+        }
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"post",
+            url:base_url + "perfectOrgInfo",
+            data:JSON.stringify(SubData),
+            dataType:'json',
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            beforeSend:function(){
+                layer.open({type: 2,content: '加载中'});
+            },
+            success:function(data){
+                layer.closeAll();
+                if(data.code==0){
+                    layer.closeAll();
+                    layer.open({
+                        content: '添加成功'
+                        ,skin: 'msg'
+                        ,time: 1 //1秒后自动关闭
+                    });
+                    console.log(Edr.getContent())
+                    // setTimeout(function(){layer.closeAll();window.history.go(-1);},1000);
+                }else{
+                    layer.closeAll();
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                }
+            },
+            error:function(){
+                layer.closeAll();
+                layer.open({
+                    content: '上传失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+        })
+    }
+    function checkAddress(){
+        if($("#name").val()==""){
+            layer.open({
+                content: '地址名称不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+        if($("#addressDetail").val()==""){
+            layer.open({
+                content: '详细地址不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+        if($("#provlnceName").attr("data-name")==""){
+            layer.open({
+                content: '省不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+        if($("#cityName").attr("data-name")==""){
+            layer.open({
+                content: '市不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+        if($("#districtName").attr("data-name")==""){
+            layer.open({
+                content: '区县不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+        if($("#street").attr("data-name")==""){
+            layer.open({
+                content: '街道/乡镇不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+        if($("#village").attr("data-name")==""){
+            layer.open({
+                content: '村/居委不能为空'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+            });
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

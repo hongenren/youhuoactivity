@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海"/>
+    <meta name="description" content="公益上海"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="../meng/js/offset.js"></script>
+    <link rel="stylesheet" href="../meng/css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="../meng/plugins/layerUI/src/css/layui.css">
+</head>
+<body>
+<div class="container">
+    <div class="sendHistoryHead">
+        <!--<a class="sendBack" href="javascript:void(0)" onclick="jump('../org/institutions.html');"><i></i></a>-->
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i></a>
+        <div class="sendHeadList"><span>表彰奖项历史</span></div>
+        <!--<div class="sendHeadButton"><button><a href="record.html">结盟记录</a></button></div>-->
+    </div>
+    <div class="commendHistory">
+        <div class="commendSearchWrap">
+            <div class="commendSearchBox">
+                <input type="text" name="searchTitle" placeholder="请输入获奖人姓名、获奖单位或奖项名称">
+                <button class="commendSearchBtn"></button>
+            </div>
+        </div>
+        <div class="commendDetailBox">
+            <!--<div class="commendDetailWrap">-->
+                <!--<div class="commendDetailTop clearfix">-->
+                    <!--<div class="commendDetailUser" style="background-image:url('../wap/img/bp_1.jpg')"></div>-->
+                    <!--<div class="commendDetailName">-->
+                        <!--<h2>张三</h2>-->
+                        <!--<p>表彰奖励名称</p>-->
+                    <!--</div>-->
+                    <!--<div class="commendDetailButton">-->
+                        <!--<button>撤销</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="commendDetailTxt">-->
+                    <!--欢迎使用公益上海App，在你使用时，需要连接数据网络或者wlan网络，产生的流量费用请咨询当地运营商。公益上海非常重视您的隐私保护和个人信息保护-->
+                <!--</div>-->
+                <!--<div class="commendDetailImg"><img src="../wap/img/pws_137.jpg"></div>-->
+                <!--<div class="commendDetailExplain">-->
+                    <!--<ul>-->
+                        <!--<li><strong>颁奖日期: </strong>2019年1月25日</li>-->
+                        <!--<li><strong>颁奖日期: </strong>2019年1月25日</li>-->
+                        <!--<li><strong>颁奖日期: </strong>2019年1月25日</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+
+    </div>
+</div>
+<script src="../meng/plugins/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script src="../meng/js/jquery.cookie.js"></script>
+<script src="../meng/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script src="../meng/js/prjvorg.js"></script>
+<script src="js/index.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script>
+    var commendRemoveEvent=function(){
+        $(".commendRemoveBtn").unbind('click').click(function(){
+            var id=$(this).attr('data-id');
+            var org=$(this).attr('data-org');
+            var that=$(this);
+            $.ajax({
+                url: base_url + '/html5/v1/userAchievement/del',
+                type: "post",
+                dataType: "json",
+                data:JSON.stringify({"org":org,"id":id}),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    console.log(resp)
+                    if (resp.code == 0) {
+                        layer.open({
+                            content: '撤销成功',
+                            skin: 'msg',
+                            time: 2
+                        });
+                        that.parents('.commendDetailWrap').remove();
+                    }else {
+                        layer.open({
+                            content: '提交失败，网络错误',
+                            skin: 'msg',
+                            time: 2
+                        });
+                    }
+                },
+                error: function(){
+                    layer.closeAll();
+                    layer.open({
+                        content: '提交失败，网络错误',
+                        skin: 'msg',
+                        time: 2
+                    });
+                    return false;
+                }
+            });
+        })
+    };
+    var commendGetList=function(page){
+        $.ajax({
+            url: base_url + '/html5/v1/userAchievement/listByPage',
+            type: "post",
+            dataType: "json",
+            data:JSON.stringify({"org":prjvorgMsg.orgThirdAccount,"pageNumber":page||1,"pageSize":5}),
+            headers: {'Content-Type': 'application/json'},
+            success: function (resp) {
+                if (resp.code == 0) {
+                    var record = resp.data.data.records;
+                    console.log(record)
+                    if(record.length>0){
+                        var li='';
+                        for (var i in record) {
+                            var headImg=record[i].headImg==''?'../wap/img/bp_1.jpg':record[i].headImg;
+                            var userName=record[i].userName=='undefined'||record[i].userName==''?'':'<h2>'+record[i].userName+'</h2>\n' ;
+                            var title=record[i].title=='undefined'||record[i].title==''?'':'<p>'+record[i].title+'</p>\n';
+                            var id=record[i].id;
+                            var content=record[i].content=='undefined'||record[i].content==''?'':'<div class="commendDetailTxt">\n' +record[i].content+'</div>\n';
+                            var imgs=record[i].imgs;
+                            var createTime=record[i].createTime=='undefined'||record[i].createTime==''?'':'<li><strong>颁奖日期: </strong>'+record[i].createTime+'</li>\n';
+                            var num=record[i].num=='undefined'||record[i].num==''?'':'<li><strong>文书名称和文号: </strong>'+record[i].num+'</li>\n';
+                            var unit=record[i].unit=='undefined'||record[i].unit==''?'':'<li><strong>颁发者: </strong>'+record[i].unit+'</li>\n';
+                            var org=record[i].org||prjvorgMsg.orgThirdAccount;
+
+                            if(imgs=='undefined'||imgs==''){
+                                imgs=''
+                            }else{
+                                imgs='<img src="'+imgs+'">'
+                            }
+                            li+='<div class="commendDetailWrap">\n' +
+                                '                <div class="commendDetailTop clearfix">\n' +
+                                '                    <div class="commendDetailUser" style="background-image:url(\''+headImg+'\')"></div>\n' +
+                                '                    <div class="commendDetailName">\n' +
+                                userName+
+                                title+
+                                '                    </div>\n' +
+                                '                    <div class="commendDetailButton">\n' +
+                                '                        <button class="commendRemoveBtn" data-id="'+id+'" data-org="'+org+'">撤销</button>\n' +
+                                '                    </div>\n' +
+                                '                </div>\n' +
+                                content+
+                                '                <div class="commendDetailImg">'+imgs+'</div>\n' +
+                                '                <div class="commendDetailExplain">\n' +
+                                '                    <ul>\n' +
+                                createTime+
+                                num+
+                                unit+
+                                '                    </ul>\n' +
+                                '                </div>\n' +
+                                '            </div>'
+                        }
+                        $(".commendDetailBox").append(li);
+                        commendRemoveEvent()
+                    }else{
+                        stopScrollEvent($(document));
+                    }
+
+                }
+            },
+            error: function(){
+                layer.closeAll();
+                layer.open({
+                    content: '上传失败，网络错误',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false;
+            }
+        });
+    };
+    //    滚动加载
+    var evaluateScrollEvent=function(type){
+        if($(".lastNothing").length>0){
+            $(".lastNothing").remove();
+        }
+        if($(".loadings").length>0){
+            $(".loadings").remove();
+        }
+        var types=type||1;
+        var page = 1;//从1
+        // var size = 10;
+        var t=0;
+        var p=0;
+        // page++;
+        console.log(page)
+        $(document).unbind('scroll').scroll(function(e){
+            t=$(this).scrollTop();
+            var doc=$(document).height();
+            var win=$(window).height();
+            if(p<=t){//console.log("向下");
+                if(t>doc-(win+60)){
+                    if($(document).height() - $(window).height() == $(window).scrollTop()){
+                        $(".commendHistory").append("<img class='loadings' src='../wap/img/loading.gif' style='width:24px;height:24px; margin:0 auto;display:block'/>");
+                        page++;
+                        commendGetList(page)
+                    }
+
+                }else{
+                    $(".loadings").remove();
+                }
+
+            }
+            setTimeout(function(){p=t},0)
+        });
+    };
+    var stopScrollEvent=function(obj){
+        $(document).unbind('scroll');
+        if($(".lastNothing").length>0){
+            $(".lastNothing").remove();
+        }
+        $(".loadings").remove();
+        if($(".loadings").length<=0){
+            $('.commendHistory').append('<div class="lastNothing" style="font-size:14px;line-height:50px;text-align:center;color:#666;">没有了</div>');
+        }
+    };
+    $(function(){
+        commendGetList();
+        evaluateScrollEvent();
+        // 搜索按钮
+        $(".commendSearchBtn").click(function(){
+            var title=$("input[name='searchTitle']").val();
+            $(".commendDetailBox").empty();
+            if($(".lastNothing").length>0){
+                $(".lastNothing").remove();
+            }
+            if($(".loadings").length>0){
+                $(".loadings").remove();
+            }
+            $(document).unbind('scroll');
+            $.ajax({
+                url: base_url + '/html5/v1/userAchievement/search',
+                type: "post",
+                dataType: "json",
+                data:JSON.stringify({"org":prjvorgMsg.orgThirdAccount,"title":title}),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        var record = resp.data.data;
+                        console.log(record)
+                        if(record.length>0){
+                            var li='';
+                            for (var i in record) {
+                                var headImg=record[i].headImg==''?'../wap/img/bp_1.jpg':record[i].headImg;
+                                var userName=record[i].userName=='undefined'||record[i].userName==''?'':'<h2>'+record[i].userName+'</h2>\n';
+                                var title=record[i].title=='undefined'||record[i].title==''?'':'<p>'+record[i].title+'</p>\n';
+                                var id=record[i].id;
+                                var content=record[i].content=='undefined'||record[i].content==''?'':'<div class="commendDetailTxt">\n' +record[i].content+'</div>\n';
+                                var imgs=record[i].imgs;
+                                var createTime=record[i].createTime=='undefined'||record[i].createTime==''?'':'<li><strong>颁奖日期: </strong>'+record[i].createTime+'</li>\n';
+                                var num=record[i].num=='undefined'||record[i].num==''?'':'<li><strong>文书名称和文号: </strong>'+record[i].num+'</li>\n';
+                                var unit=record[i].unit=='undefined'||record[i].unit==''?'':'<li><strong>颁发者: </strong>'+record[i].unit+'</li>\n';
+                                var org=record[i].org||prjvorgMsg.orgThirdAccount;
+
+                                if(imgs=='undefined'||imgs==''){
+                                    imgs=''
+                                }else{
+                                    imgs='<img src="'+imgs+'">'
+                                }
+                                console.log(record[i].userName)
+                                li+='<div class="commendDetailWrap">\n' +
+                                    '                <div class="commendDetailTop clearfix">\n' +
+                                    '                    <div class="commendDetailUser" style="background-image:url(\''+headImg+'\')"></div>\n' +
+                                    '                    <div class="commendDetailName">\n' +
+                                    userName+
+                                    title+
+                                    '                    </div>\n' +
+                                    '                    <div class="commendDetailButton">\n' +
+                                    '                        <button class="commendRemoveBtn" data-id="'+id+'" data-org="'+org+'">撤销</button>\n' +
+                                    '                    </div>\n' +
+                                    '                </div>\n' +
+                                    content+
+                                    '                <div class="commendDetailImg">'+imgs+'</div>\n' +
+                                    '                <div class="commendDetailExplain">\n' +
+                                    '                    <ul>\n' +
+                                    createTime+
+                                    num+
+                                    unit+
+                                    '                    </ul>\n' +
+                                    '                </div>\n' +
+                                    '            </div>'
+                            }
+                            $(".commendDetailBox").append(li);
+                            commendRemoveEvent()
+                        }else{
+                            layer.open({
+                                content: '没有数据',
+                                skin: 'msg',
+                                time: 2
+                            });
+                        }
+
+                    }
+                },
+                error: function(){
+                    layer.closeAll();
+                    layer.open({
+                        content: '上传失败，网络错误',
+                        skin: 'msg',
+                        time: 2
+                    });
+                    return false;
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>

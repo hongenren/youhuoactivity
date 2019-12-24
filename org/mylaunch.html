@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/dropload.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+</head>
+<body>
+<div class="warp">
+<div class="warp_zy_j" style="border-bottom: 1px solid #E6E6E6">
+        <a href="javascript:history.go(-1);"></a>
+        <span>订单</span>
+    </div>
+    <header class="warp_dd_p">
+        <a href="./mylaunch.html" class="current">
+            <span>我发起</span>
+        </a>
+        <a href="./myJoint.html" >
+            <span>我联办</span>
+        </a>
+        <a href="./myHistory.html">
+            <span>历史订单</span>
+        </a>
+    </header>
+
+    <div class="warp_pws_n_st_bj"></div>
+    <div id="content">
+        <ul class="warp_dd_i">
+             
+        </ul>
+    </div>
+    <div class="ht60"></div>
+    <div class="footer_jg">
+        <div class="footer_jg_qt3">
+            <ul>
+                <li class="jg_ft1">
+                    <a href="./institutions.html">
+                        <span style="background-size: 36px auto;"></span>
+                        <b>我的机构</b>
+                    </a>
+                </li>
+                <li class="jg_ft2">
+                    <a href="../managementact/oneSend/orgLastList.html">
+                        <span></span>
+                        <b>消息</b>
+                    </a>
+                </li>
+                <li class="jg_ft3 current">
+                    <a href="./mylaunch.html">
+                        <span></span>
+                        <b>活动订单</b>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="../wap/js/dropload.min.js"></script>
+<script type="text/javascript">
+  get_activity_list(1,5,1);
+   ////获取 我发布的活动列表
+    function get_activity_list(pagenum,pagesize,status,me=''){
+        var html ='';
+        var data_list = '';
+        $.ajax({
+			xhrFields: {
+               withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/activity/selectByOrg",
+            data:JSON.stringify({"pageNumber":pagenum,"pageSize":pagesize,"orgCode":prjvorgMsg.orgThirdAccount,"type": 10}),
+            dataType:'json',
+            headers : {'token':token},
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    data_list = data.data.records;
+                    if(data_list!=''){
+                        $.each(data_list,function(index,val){
+                            // html +="<a href='./managementact_content.html?activityCode="+val.activityCode+"'>"+val.name+"</a></br>";  
+                            // state -10 未发布 10未开始 20进行中 30已结束 50已封存
+                            state = "";
+                            if(val.state == -10){
+                                state = "未发布"
+                            }else if(val.state == 10){
+                                state = "未开始"
+                            }else if(val.state == 20){
+                                state = "进行中"
+                            }else if(val.state == 30){
+                                state = "已结束"
+                            }else if(val.state == 50){
+                                state = "已封存"
+                            }
+                            html+='<li>\
+                                    <a href="../managementact/managementact_content.html?activityCode='+val.activityCode+'">\
+                                <div class="warp_dd_i_sp">\
+                                    <span>管理</span>\
+                                    <b>'+val.name+'</b>\
+                                </div>\
+                                <div class="warp_dd_i_so">\
+                                    <span style="background: url(../wap/img/pws_169.png) no-repeat left center;background-size: 14px 14px;background-position: 0 4px;">'+val.endDay+'  截止</span>\
+                                    <span style="background: url(../wap/img/pws_170.png) no-repeat left center;background-size: 14px 14px;background-position: 0 4px;">'+val.address+'</span>\
+                                </div>\
+                                </a>\
+                                </li>';   
+                        })
+                        //console.log(html)
+                        if(status==1){
+                            $('.warp_dd_i').html(html);
+                        }else{
+                            $(".warp_dd_i").append(html); //追加html
+                        }
+                    }else{
+                        if(status==1){
+                            html += "<div class=\"zw_sj_p\">\
+                                <img src=\"../wap/img/pws_164.png\">\
+                                <span>暂无数据</span>\
+                            </div>";
+                            $('.warp_dd_i').html(html);
+                        }else{
+                            me.lock();
+                            // 无数据
+                            me.noData(); 
+                        }
+                        
+                    }   
+                    
+                }else{
+                    layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+                // console.log(data);
+                if(status==2){
+                    me.resetload();
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                return false;
+            }
+        })
+    }
+    var page = 1;
+    var size = 5;
+    var ticket ='';
+    var html ='';  
+    $('#content').dropload({
+        scrollArea : window,
+        loadDownFn : function(me){
+            page++;
+            get_activity_list(page,size,2,me);
+        }
+     })
+</script>
+</html>

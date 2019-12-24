@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海-登录</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+	<style>
+	.ts_wz_p{width: 100%;overflow: hidden}
+	.ts_wz_p span{display: block;color: #999999;font-size:14px;}
+	</style>
+</head>
+<body style="background: #FFFFFF">
+
+<div class="warp">
+    <img src="../wap/img/pws_36.jpg">
+        <div class="warp_pws_r">
+            <ul class="warp_pws_r_sp">
+                <li>
+                    <img src="../wap/img/pws_38.jpg">
+                    <input type="text" placeholder="输入身份证号或11位手机号" name="name" class="warp_pws_r_so">
+                </li>
+                <li>
+                    <img src="../wap/img/pws_41.jpg">
+                    <input type="password" name="password" placeholder="输入6-12位数字、字母密码" class="warp_pws_r_so">
+                </li>
+                <input type="hidden" name="loginType" value="1"/>
+            </ul>
+            <input type="button" value="登录" class="warp_pws_r_si" onclick="login_in()">
+            <div class="warp_pws_r_su">
+                <a id="registerA" href="javascript:void(0)" onclick="jumpBank('web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=&userNo=')" style="float: right">没有账号？<i>去注册</i></a>
+                <a id="restart_pwdA" href="../register/restart_pwd.html" style="float: left;"><i>忘记密码</i></a>
+            </div>
+			<div class="ts_wz_p">
+				<span>注：已领取护照但未设置密码的用户默认密码为000000，登录后请及时修改密码。</span>
+			</div>
+        </div>
+</div>
+
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/web-storage-cache.js"></script>
+<script type="text/javascript" src="../wap/js/regular.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/aes.min.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.base64.js"></script>
+<script type="text/javascript" src="../wap/js/js_sha256.js"></script>
+<script type="text/javascript">
+    var jumpAdd = $.getUrlParam("jumpAdd");
+    if(jumpAdd){/*
+        $("#registerA").attr("href", "../register/register.html?jumpAdd="+jumpAdd);
+        $("#restart_pwdA").attr("href", "../register/restart_pwd.html?jumpAdd="+jumpAdd);*/
+    }
+/**
+ * 登录操作
+ */
+ function login_in(){
+    var loginName = $.trim($("input[name='name']").val());
+
+    var password = $.trim($("input[name='password']").val());
+    var loginType = $.trim($("input[name='loginType']").val());
+    /*if(!regular_tel(loginName)){
+        return false;
+    }*/
+    if(!regular_pwd(password)){
+     return false;
+    }
+    $.ajax({
+        xhrFields: {
+           withCredentials: true
+        },
+        type:"post",
+        url:base_url + "html5/v1/user/userLogin",
+        data:JSON.stringify({"loginName":loginName,"loginPassword":password,"loginType":loginType}),
+        dataType:'json',
+        contentType: "application/json;charset=utf-8",
+        beforeSend:function(XMLHttpRequest){
+            layer.open({type: 2,content: '登陆中'});
+        },
+        success:function(data){
+            layer.closeAll();
+            if(data.code==0){
+                var data1 = data.data;
+                var cookieResp =data1.cookieResp;
+                var expiresDate= new Date();
+                expiresDate.setTime(expiresDate.getTime() + (60*60*8000));
+                var userdata = JSON.stringify({"userId":data1.userId,"userNo":data1.userNo,"userNickName":data1.userNickName,"userHeadImg":data1.userHeadImg});
+                var appUserInfo = JSON.stringify(data1);
+                $.cookie('user_msg',userdata, {expires: expiresDate, path:'/',domain:domain_url});
+                $.cookie('u',cookieResp.u, {expires: expiresDate, path:'/',domain: domain_url});
+                $.cookie('un',cookieResp.un, {expires: expiresDate, path:'/',domain:domain_url});
+                $.cookie('ts',cookieResp.ts, {expires: expiresDate, path:'/' ,domain:domain_url});
+                $.cookie('nn',cookieResp.nn, {expires: expiresDate, path:'/' ,domain:domain_url});
+                $.cookie('uh',cookieResp.uh, {expires: expiresDate, path:'/' ,domain:domain_url});
+                $.cookie('uv',cookieResp.uv, {expires: expiresDate, path:'/' ,domain:domain_url});
+                $.cookie('token',cookieResp.token, {expires: expiresDate, path:'/' ,domain:domain_url});
+                $.cookie('userOrgTags',JSON.stringify(cookieResp.userOrgTags), {expires: expiresDate, path:'/' ,domain:domain_url});
+                /*setCookie('user_msg', userdata);setCookie('u', cookieResp.u);setCookie('un', cookieResp.un);setCookie('ts', cookieResp.ts);
+                setCookie('nn', cookieResp.nn);setCookie('uh', cookieResp.uh);setCookie('uv', cookieResp.uv);setCookie('token', cookieResp.token);setCookie('userOrgTags', JSON.stringify(cookieResp.userOrgTags));
+                */localStorage.setItem('appUserInfo',appUserInfo);
+
+                if($.cookie('user_msg')||$.cookie('token')){
+                    var url = '../user/user_index.html';
+                    if($_GET['activityCode']===undefined){
+                        var url = '../user/user_index.html';
+                        if(jumpAdd){
+                            url = jumpAdd;
+                        }else{
+                            //jumpAdd = getCookie("jumpAdd");
+                            jumpAdd = $.cookie("jumpAdd");
+                            if(jumpAdd!=undefined && jumpAdd!=null && jumpAdd!=""){
+                                url = jumpAdd;
+                            }
+                        }
+                    }else{
+                        var url = '../activity/activity_enroll.html?activityCode='+$_GET['activityCode'];
+                    }
+                    window.location.href = url;
+                }else{
+                    layer.open({
+                    content: '登录失败！'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            }else if(data.code==-100){
+                window.location.href = "./intercept.html";
+            }else{
+                layer.open({
+                content: data.msg
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        },
+        error:function(e){
+            layer.open({
+                content: '登录失败'
+                ,skin: 'msg'
+                ,time: 1 //2秒后自动关闭
+                });
+                return false;
+        }
+    })
+ }
+function setCookie(name,value){
+    var path = "";
+    var exp  = new Date();
+    exp.setTime(exp.getTime() + 5*24*60*60*1000);
+    var cookie =name+'='+encodeURIComponent(value)+';'  //设置Cookie的名称和Cookie的值，Cookie名称为必填项。
+    cookie+='expires='+exp.toGMTString();　　//设置Cookie的过期事件,默认为Session
+    if(!path){cookie+=';path=/'}　　//设置Cookie的路径，默认为 /
+    cookie+=';domain='+domain_url;
+    document.cookie= cookie;
+}
+</script>
+</body>
+</html>

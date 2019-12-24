@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>服务</title>
+    <meta name="Keywords" content="服务" />
+    <meta name="description" content="服务" />
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript" src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/gyshservice.css"/>
+</head>
+<body>
+<div class="serviceWrap">
+    <div class="serviceHead">
+        <h1>
+            <span>首页应用</span>
+            <i></i>
+        </h1>
+    </div>
+    <div class="serviceContent clearfix">
+        <div class="serviceListProve" data-href="../passport" data-type="0">
+            <a href="javascript:void(0)" onclick="jumpCheck('http://h5.shcvs.cn/gysh/html5/v1/shcredit/authorize/SH001/3',0)">
+                <div class="serviceListIcon" style="background-image:url('../wap/img/pws_325.png')"></div>
+                <div class="serviceListTxt">信用上海</div>
+            </a>
+        </div>
+        <div class="serviceListProve" data-href="../passport" data-type="0">
+            <a href="javascript:void(0)" onclick="jumpCheckUser('../prove/index.html', '../login/login.html?jumpAdd='+location.href)">
+                <div class="serviceListIcon" style="background-image:url('../wap/img/pws_11.png')"></div>
+                <div class="serviceListTxt">公益证明</div>
+            </a>
+        </div>
+        <div class="serviceList" data-href="../passport" data-type="0">
+            <a href="javascript:void(0)">
+                <div class="serviceListIcon" style="background-image:url('images/su03.png')"></div>
+                <div class="serviceListTxt">公益证照</div>
+            </a>
+        </div>
+        <div class="serviceList" data-href="../insurance#/naturalHome" data-type="0">
+            <a href="javascript:void(0)">
+                <div class="serviceListIcon" style="background-image:url('images/gu01.png')"></div>
+                <div class="serviceListTxt">保险保障</div>
+            </a>
+        </div>
+        <div class="serviceList" data-href="scan/signListPage/" data-type="1">
+            <a href="javascript:void(0)">
+                <div class="serviceListIcon" style="background-image:url('images/su08.png')"></div>
+                <div class="serviceListTxt">我的打卡</div>
+            </a>
+        </div>
+        <div class="serviceList" data-href="scan/optionalPage/" data-type="1">
+            <a href="javascript:void(0)">
+                <div class="serviceListIcon" style="background-image:url('images/su07.png')"></div>
+                <div class="serviceListTxt">随手签</div>
+            </a>
+        </div>
+        <!--<div class="serviceList">
+            <a href="javascript:void(0)">
+                <div class="serviceListIcon" style="background-image:url('images/su01.png')"></div>
+                <div class="serviceListTxt">知识更新</div>
+            </a>
+        </div>
+        <div class="serviceList">
+            <a href="javascript:void(0)">
+                <div class="serviceListIcon" style="background-image:url('images/su05.png')"></div>
+                <div class="serviceListTxt">信用激励</div>
+            </a>
+        </div>
+        <div class="serviceList">
+            <a href="javascript:void(0)">
+                <div class="serviceListIcon" style="background-image:url('images/su06.png')"></div>
+                <div class="serviceListTxt">公益机构</div>
+            </a>
+        </div>
+        <div class="serviceList">
+            <a href="javascript:void(0)">
+                <div class="serviceListIcon" style="background-image:url('images/su03.png')"></div>
+                <div class="serviceListTxt">公益证件</div>
+            </a>
+        </div>
+        <div class="serviceList">
+            <a href="javascript:void(0)">
+                <div class="serviceListIcon" style="background-image:url('images/su02.png')"></div>
+                <div class="serviceListTxt">公益证书</div>
+            </a>
+        </div>
+        <div class="serviceList">
+            <a href="javascript:void(0)">
+                <div class="serviceListIcon" style="background-image:url('images/su04.png')"></div>
+                <div class="serviceListTxt">信用激励</div>
+            </a>
+        </div>-->
+    </div>
+    <!--<div class="serviceHead">
+        <h1>
+            <span>管理类</span>
+            <i></i>
+        </h1>
+    </div>
+    <div class="serviceContent clearfix">
+        <div class="serviceList">
+            <a href="javascript:void(0)">
+                <div class="serviceListIcon" style="background-image:url('images/gu01.png')"></div>
+                <div class="serviceListTxt">会籍管理</div>
+            </a>
+        </div>
+        <div class="serviceList">
+            <a href="javascript:void(0)">
+                <div class="serviceListIcon" style="background-image:url('images/gu02.png')"></div>
+                <div class="serviceListTxt">统计数据</div>
+            </a>
+        </div>
+    </div>-->
+</div>
+<div id="allmap"></div>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+<script type="text/javascript">
+    function jumpCheck(herf, type){
+        var user_msg = $.cookie('user_msg');
+        var token = $.cookie('token');
+        if(user_msg==undefined || token==undefined || user_msg=="" || token==""){
+            layer.open({
+                content: '请先登录'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    $(location).attr("href", 'login/login.html?jumpAdd='+location.href);
+                }
+            });
+        }else{
+            var un = $.cookie("un");
+
+            if(un==null || un==undefined || un==""){
+                layer.open({
+                    content: '请先完成实名认证'
+                    , btn: ['确定', '取消']
+                    , yes: function (index) {
+                        //jump("cert/cert_index.html");
+                        //jumpBank(web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=');
+                    }
+                });
+            }else{
+                var appUserInfoStr = localStorage.getItem('appUserInfo');
+                if(appUserInfoStr){
+                    var appUserInfo = JSON.parse(appUserInfoStr); //转为JSON对象
+                    if(appUserInfo.relUserId!=""){
+                        layer.open({
+                            content: '家庭子账户，暂无该功能。'
+                            ,skin: 'msg'
+                            ,time: 1 //2秒后自动关闭
+                        });
+                        return;
+                    }
+                }
+                if(type==0){
+                    herf += "/"+un;
+                }
+                $(location).attr("href", herf);
+            }
+        }
+    }
+
+    var lnglat = '0';
+    get_current_msg();
+    function get_current_msg(){
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(116.331398,39.897445);
+        map.centerAndZoom(point,12);
+        var geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function(r){
+            if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                var mk = new BMap.Marker(r.point);
+                map.addOverlay(mk);
+                map.panTo(r.point);
+                lnglat = r.point.lng+","+r.point.lat;
+                /*
+                latCurrent = r.point.lat;
+                lngCurrent = r.point.lng;*/
+            }else {
+                //alert('failed'+this.getStatus());
+                layer.open({
+                    content: '获取定位失败,请重试'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            }
+        });
+    }
+
+    var user_msg = getCookie('user_msg');
+    var token = getCookie('token');
+    $(".serviceList").each(function(i){
+        $(this).click(function(){
+            var herf = $(this).attr("data-href");
+            var type = $(this).attr("data-type");
+            if(user_msg==undefined || token==undefined || user_msg=="" || token==""){
+                layer.open({
+                    content: '请先登录'
+                    , btn: ['确定', '取消']
+                    , yes: function (index) {
+                        $(location).attr("href", '../login/login.html?jumpAdd='+location.href);
+                    }
+                });
+            }else{
+                if(herf!=""){
+                    if(herf=="../passport"){
+                        getPassportType();
+                    }else{
+                        if(type=="1") {//需要进行实名认证
+                            var un = getCookie("un");
+                            if(un==null || un==undefined || un==""){
+                                layer.open({
+                                    content: '请先完成实名认证'
+                                    , btn: ['确定', '取消']
+                                    , yes: function (index) {
+                                        //jump("../cert/cert_index.html");
+                                        jumpBank('web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=');
+                                    }
+                                });
+                            }else{
+                                $(location).attr("href", base_url+herf + getCookie("un")+"/"+lnglat+"/");
+                                //$(location).attr("href", base_url+herf + getCookie("un"));
+                            }
+                        }else{
+                            $(location).attr("href", herf);
+                        }
+                    }
+                }
+            }
+        });
+    });
+    function getPassportType(){
+        var un = getCookie("un");
+        if (/^[^a-zA-Z]/g.test(un)) {
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: 'post',
+                url: base_url + "/html5/v1/license/queryLicenseExtraCardByPersonFirstAccount",
+                data: JSON.stringify({"personFirstAccount": un}),
+                dataType: 'json',
+                headers: {'token': token},
+                contentType: "application/json;charset=utf-8",
+                beforeSend: function (XMLHttpRequest) {
+
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+                        if(data.data.licenseType==1){
+                            jump("../srcb/passport.html");
+                        }else{
+                            jump("../srcb/temporary_passport.html");
+                        }
+                    }else{
+                        layer.open({
+                            content: data.msg
+                            , btn: ['确定', '取消']
+                            , yes: function (index) {
+                                $(location).attr("href", '../login/login.html?jumpAdd='+location.href);
+                            }
+                        });
+                    }
+                }
+            })
+        }
+    }
+</script>
+</body>
+</html>

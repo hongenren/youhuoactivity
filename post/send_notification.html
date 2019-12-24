@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海-发通知</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" href="../huangye/css/mobile.css" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/calendar_dan.css" />
+    <link rel="stylesheet" type="text/css" href="./css/job_list.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/group_apply_list.css"/>
+    <link rel="stylesheet" href="../managementact/oneSend/css/sendHistory.css"/>
+</head>
+<body style="background: #F2F2F2">
+    <div class="warp">
+        <!--头部开始-->
+        <div class="warp_zy_j" style="position:fixed;top:0px;z-index: 9999;">
+            <a href="javascript:history.back(-1)"></a>
+            <!--<a href="javascript:history.back(-1)" onclick="jump('./post_management.html')"></a>-->
+            <span id="title">发通知</span>
+            <button class="sendNextButton" style="top:10px;left:auto;width: auto;height:30px;line-height:30px;right:3%;border-radius: 5px;padding: 0% 1%;">下一步</button>
+            <input style="top:10px;left:auto;width: auto;height:30px;line-height:30px;right:3%;border-radius: 5px;padding: 0% 1%;" type="button" value="发送" class="warp_pws_b_su">
+        </div><!--
+        <div style="height: 50px"></div>-->
+        <!--头部结束-->
+        <div class="succeed-list" style="margin-top: 50px;">
+            <div class="succeed-list-title">
+                <div class="succeed-list-title-div" style="display: none;">
+                    <div style="border: 0px">
+
+                    </div>
+                </div>
+            </div>
+            <div class="warp_dd_p">
+                <div class="screenButList" style="margin: 0px;padding: 2% 0px;background: white;">
+
+                </div>
+            </div>
+        </div>
+        <div id="select_div" class="select_div wth" style="overflow:auto;border-top:1px solid #E6E6E6;margin-top: 10px">
+
+        </div>
+        <div class="hided">
+            <nav>
+                <ul class="warp_gl_q_st" style="margin-top: 30px">
+                    <li id="qfLi" class="current">
+                        <a id="qfHref" href="javascript:void(0)">群发</a>
+                    </li>
+                    <li id="dfLi">
+                        <a id="dfHref" href="javascript:void(0)">单发</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div id="qunfa">
+                <div class="warp_gl_q_sr" style="background: #ffffff;">
+                    <textarea placeholder="请输入通知广播内容" class="warp_gl_q_sw" style="padding: 0px;width: 100%;"></textarea>
+                    <div style="float: right;">130字</div>
+                </div>
+                <div class="ht60" style="padding-left: 3%;">你将发送消息给全部成员</div>
+                <!--<input type="button" value="发送" style="display: none" class="warp_pws_b_su">-->
+            </div>
+
+
+            <div id="danfa" class="sendHistoryWrap" style="display: none">
+                <div class="sendInspectContent">
+                    <div class="sendInspectSearch clearfix" style="margin-top:0;">
+                        <div class="sendInspectSearchLeft">
+                            <i></i>
+                            <input id="search" type="text" placeholder="请输入姓名或手机号进行搜索">
+                        </div>
+                        <button class="sendInspectSearchRight" onclick="auditList();">搜索</button>
+                    </div>
+                    <div class="sendInspectListWrap" id="initList">
+                    </div>
+                    <!--<button class="sendNextButton" style="display: none">下一步</button>-->
+                </div>
+            </div>
+            <div class="sendAloneLayerWrap">
+                <div class="sendAloneLayer">
+                    <div class="sendAloneLayerTxt"><textarea id="sendContent">请输入通知广播内容</textarea></div>
+                    <div class="sendAloneLayerButton">
+                        <button class="sendAloneButtonList sendLayerClose">取消</button>
+                        <button class="sendAloneButtonList sendLayerSubmit">发送</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="select-time" style="background: #FFFFFF;display: none;">
+        <span class="time entertime" style="color: #9d9d9d;"></span><!--开始时间-->
+        <input id="serviceDay" type="text" class="input-enter none">
+    </div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script><!--
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>-->
+    <script type="text/javascript" src="./js/date_dan_personnel_management_2.js"></script>
+    <script type="text/javascript" src="./js/personnel_management.js"></script>
+<script type="text/javascript" src="./js/send_notification.js"></script>
+<script>
+    var pkPostCode = $.getUrlParam("pkPostCode"), type = $.getUrlParam("type"), pkUnitCodeZ = "", auditNumList = [];
+    $('.select-time').hotelDate();
+    $(function() {
+        $("#qfHref").attr("href", "./send_notification.html?type=0&pkPostCode="+pkPostCode);
+        $("#dfHref").attr("href", "./send_notification.html?type=1&pkPostCode="+pkPostCode);
+
+        $(".succeed-list").show();
+        $(".succeed-list-ul").show();
+        if(type==1){
+            $(".warp_pws_b_su").hide();
+            $(".sendNextButton").show();
+            $("#qunfa").hide();
+            $("#danfa").show();
+            $("#qfLi").removeClass("current");
+            $("#dfLi").addClass("current");
+        }else{
+            $(".warp_pws_b_su").show();
+            $(".sendNextButton").hide();
+            $("#qunfa").show();
+            $("#danfa").hide();
+            $("#qfLi").addClass("current");
+            $("#dfLi").removeClass("current");
+        }
+        failList(pkPostCode);
+    });
+</script>
+</body>
+</html>

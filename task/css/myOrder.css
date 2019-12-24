@@ -1,0 +1,112 @@
+.clear {height:0; clear:both;}
+.clearfix { *zoom:1;}
+.clearfix:after{clear:both; display:block; height:0; visibility:hidden; line-height:0; content:'\20';}
+/*边距*/
+*{box-sizing:border-box;    -webkit-box-sizing:border-box;    -moz-box-sizing:border-box;    -o-box-sizing:border-box;}
+/*a 链接*/
+a { text-decoration:none; outline:none;display:block;}
+input, button, textarea, select,a{ font-size:100%; outline:none; resize:none;border:none;background:none;-webkit-tap-highlight-color:transparent}
+a:link {color:#000; }
+a:visited {color:#999; }
+a:hover, a:active, a:focus {color:#333;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
+::-webkit-input-placeholder {color: #999;}:-moz-placeholder {color: #999;}::-moz-placeholder {color: #999;}:-ms-input-placeholder {color: #999;}
+
+.left{float:left;}
+.right{float:right;}
+.center{text-align:center;}
+
+.task_order_initImg{
+    padding:.3rem;
+    text-align:center;
+    display:none;
+}
+.task_order_initImg img{
+    display:inline-block;
+    width:40%;
+    height:auto;
+}
+
+.task_order_ul li h3{
+    clear:both;
+}
+.task_order_ul li .daka{
+    margin-top:.04rem;
+    margin-right:0;
+}
+.warp_pws_c li h4 strong,.warp_pws_c li h4 span{
+    display:inline-block;
+    vertical-align:middle;
+    line-height:.4rem;
+}
+.warp_pws_c li h4 strong{
+    margin-right:.1rem;
+}
+.task_order_cont{
+    margin:.1rem 0;
+    padding:.1rem;
+    background-color:rgba(238,238,238,.5);
+}
+.hycon2 img{
+    width:.2rem;
+    height:auto;
+}
+.button-div{
+    padding:.1rem 0;
+}
+.button-div input{
+    display:inline-block;
+    padding:.1rem .14rem;
+    font-size:.24rem;
+    line-height:1;
+}
+.dropload-down,.dropload-noData{
+    height:auto;
+}
+.dropload-noData{
+    padding:10px;
+}
+/*历史订单*/
+.tme_evaluate_list{
+    width:100%;
+    float:left;
+    padding:.1rem 0;
+}
+.tme_evaluate_list strong{
+    float:left;
+    max-width:50%;
+    line-height:.4rem;
+}
+.tme_evaluate_list span{
+    float:right;
+}
+.tme_evaluate_list span i{
+    display:inline-block;
+    width:.3rem;
+    height:.3rem;
+    margin-left:.1rem;
+    vertical-align:middle;
+    background:url("../../wap/img/pws_53.png") no-repeat center;
+    background-size:contain;
+    opacity:.3;
+}
+.tme_evaluate_list span i.on{
+    opacity:1;
+}
+.tme_evaluate_list span b{
+    line-height:.4rem;
+}
+.tme_evaluate_list p{
+    line-height:.4rem;
+}
+.thl_detailBtn{
+    display:inline-block;
+    padding:.1rem .2rem;
+    border-radius:.6rem;
+    border:1px solid #f03727;
+    color:#f03727;
+    line-height:1;
+}
+.thl_btn{
+    text-align:right;
+}

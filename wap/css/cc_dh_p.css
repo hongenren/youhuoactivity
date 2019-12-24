@@ -1,0 +1,61 @@
+.swiper-container {
+    height: 100%;
+    background: #FFFFFF;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 14px;
+    height: 42px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-slide a {
+    display: block;
+    overflow: hidden;
+    line-height: 42px;
+    color: #000000;
+    text-align: center;
+    width: 100%;
+    background: #F2F2F2
+}
+
+.swiper-slide a span {
+    display: inline-block;
+    overflow: hidden
+}
+
+.swiper-wrapper {
+    background: #FFFFFF;
+}
+
+.swiper-wrapper div.thisclass a {
+    background: #72B81E;
+    color: #FFFFFF;
+}
+
+.warp_hr {
+    overflow: hidden;
+    padding: 15px 40px 0 40px;
+    position: relative;
+    background: #FFFFFF;
+}
+
+.warp_pws_c {
+    margin: 0
+}
+
+.warp_pws_c li {
+    border: 0
+}

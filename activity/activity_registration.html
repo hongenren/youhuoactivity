@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+	<!--头部开始-->
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+	<!--头部结束-->
+    <div class="warp_hd_i_su">
+        <header class="warp_hd_i_sy">
+            <ul>
+                <li class="thisclass" data-code="1">
+                    <span>志愿服务岗位</span>
+                </li>
+                <li data-code="2">
+                    <span>志愿服务任务</span>
+                </li>
+            </ul>
+        </header>
+        <ul class="warp_hd_i_st">
+            <li class="warp_hd_i_sr">
+                <ul class="warp_hd_i_se" id="gangwei"></ul>
+            </li>
+
+            <li style="display: none" class="warp_hd_i_sr">
+                <ul class="warp_hd_i_se" id="task"></ul>
+            </li>
+
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script language="javascript" type="text/javascript">
+    var dataCode = 1;
+    $(function(){
+        var cotrs = $(".warp_hd_i_sy ul li");
+        cotrs.click(function(){
+            dataCode = $(this).attr("data-code");
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+            $('.warp_hd_i_sr').hide();
+            $('.warp_hd_i_sr').eq($(this).index()).show();
+        });
+    });
+</script>
+<script type="text/javascript">
+    var activityCode = $_GET['activityCode'];
+    $(function(){
+        recruit(1);
+        task(1);
+    })
+    function recruit(type){
+        var html  ="";
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/recruit/selectByActivity",
+            data:JSON.stringify({
+                "activityCode":activityCode,
+                "pageNumber": pageNumber1,
+                "pageSize": 20
+            }),
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                if(data.code==0){
+                    data_index1 = data.data.records;
+                    if(data_index1){
+                        // data_index = data.data.data;
+                        $.each(data_index1,function(k,v) {
+                            if(!v.headImg){
+                                v.headImg = "" +
+                                    "../wap/img/pws_244.png";
+                            }
+                            var sectionType = "";
+                            if(v.sectionType==10){
+                                sectionType = "全天<br />";
+                            }else if(v.sectionType==20){
+                                sectionType = "上午<br />";
+                            }else if(v.sectionType==30){
+                                sectionType = "下午<br />";
+                            }else if(v.sectionType==30){
+                                sectionType = "晚上<br />";
+                            }
+                            if(!v.shareUser){
+                                v.shareUser ="<span>"+v.day+"   "+sectionType+"</span>";
+                            }else{
+                                v.shareUser ="<span>"+v.day+"   "+sectionType+"推荐人："+v.shareUser+"</span>";
+                            }
+                            html += '<li>\
+                                        <a href="javascript:;">\
+                                            <img src="'+v.headImg+'" class="warp_hd_i_sw">\
+                                            <b>'+v.nickName+'<br />'+v.name+'</b>\
+                                            '+v.shareUser+'\
+                                        </a>\
+                                    </li>';
+                            if(type==0){
+                                $("#gangwei").append(html)
+                            }else{
+                                $("#gangwei").html(html);
+                            }
+                        });
+                    }
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+    function task(type){
+        var html1 ="";
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:"post",
+            url:base_url + "html5/v1/task/selectByActivity",
+            data:JSON.stringify({
+                "activityCode":activityCode,
+                "pageNumber": pageNumber2,
+                "pageSize": 20
+            }),
+            dataType:'json',
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                console.log(data)
+                if(data.code==0){
+                    data_index1 = data.data.records;
+                    if(data_index1){
+                        $.each(data_index1,function(k,v) {
+                            if(!v.headImg){
+                                v.headImg = "../wap/img/pws_244.png";
+                            }
+                            var sectionType = "";
+                            if(v.sectionType==10){
+                                sectionType = "全天<br />";
+                            }else if(v.sectionType==20){
+                                sectionType = "上午<br />";
+                            }else if(v.sectionType==30){
+                                sectionType = "下午<br />";
+                            }else if(v.sectionType==30){
+                                sectionType = "晚上<br />";
+                            }
+                            if(!v.shareUser){
+                                v.shareUser ="<span>"+v.day+"    "+sectionType+"</span>";
+                            }else{
+                                v.shareUser ="<span>"+v.day+"    "+sectionType+"推荐人："+v.shareUser+"</span>";
+                            }
+                            html1 += '<li>\
+                                        <a href="javascript:;">\
+                                            <img src="'+v.headImg+'" class="warp_hd_i_sw">\
+                                            <b>'+v.nickName+'<br />'+v.name+'</b>\
+                                            '+v.shareUser+'\
+                                        </a>\
+                                    </li>';
+                            if(type==0){
+                                $("#task").append(html1)
+                            }else{
+                                $("#task").html(html1);
+                            }
+                        });
+                    }
+                }else{
+                    layer.open({
+                        content: data.msg
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            },
+            error:function(e){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                return false;
+            }
+        })
+    }
+</script>
+<script>
+    var pageNumber1=1,pageNumber2=1,pageSize=20;
+    $(function(){
+        var cotrs = $(".warp_sm_o_lu li");
+        cotrs.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+
+//获取滚动条当前的位置
+        function getScrollTop() {
+            var scrollTop = 0;
+            if(document.documentElement && document.documentElement.scrollTop) {
+                scrollTop = document.documentElement.scrollTop;
+            } else if(document.body) {
+                scrollTop = document.body.scrollTop;
+            }
+            return scrollTop;
+        }
+//获取当前可视范围的高度
+        function getClientHeight() {
+            var clientHeight = 0;
+            if(document.body.clientHeight && document.documentElement.clientHeight) {
+                clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
+            } else {
+                clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+            }
+            return clientHeight;
+        }
+//获取文档完整的高度
+        function getScrollHeight() {
+            return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        }//滚动事件触发
+        window.onscroll = function() {
+            if(getScrollTop() + getClientHeight() == getScrollHeight()) {
+                if(dataCode==1){
+                    pageNumber1++;
+                    recruit(0);
+                }else{
+                    pageNumber2++;
+                    task(0);
+                }
+            }
+        }
+    });
+</script>
+</html>

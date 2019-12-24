@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海-修改子任务</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/cc_dh_o.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/honeySwitch.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/calendar_dan.css"/>
+    <link rel="stylesheet" type="text/css" href="../post/css/add_job.css"/>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="../wap/js/editor/css/base.css"/>
+    <style type="text/css">
+
+    </style>
+</head>
+<body style="background: #F2F2F2">
+<div class="warp">
+    <!--头部开始-->
+    <div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>修改子任务</span>
+    </div>
+    <!--头部结束-->
+    <div class="warp_jm"
+         style="display:none;background: rgba(0,0,0,0.5);width: 100%;height: 100%;position: fixed;left: 0;top: 0;z-index:10000"></div>
+    <form id='form1'>
+
+        <div class="task_sub_list_wrap">
+            <div class="task_sub_list">
+                <div style="padding: 3%;padding-bottom: 0px;color: #9d9d9d;font-size: 15px;position:relative"><span
+                        style="color:#27b63f;">任务执行信息</span>(选填)
+                    <button class="removeParent_subBtn">删除</button>
+                </div>
+                <ul class="warp_pws_c warp_pws_m_sp">
+                    <li>
+                        <div class="task_editor_title">子任务内容（100个汉字以内）</div>
+                        <a href="javascript:void(0)" style="height:auto;background-image:none;">
+                            <!--<input placeholder="子任务内容（100个汉字以内）" type="text" style="text-align: left;" disabled/>-->
+                            <textarea id="contentB" class="task_area" placeholder="点击编辑内容" type="text"></textarea>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" style="background: none;height:auto;">
+                            <input id="contactMobile" placeholder="选填，请填写手机号" type="text" oninput="checkLength_98(this, 11)"/>
+                            <b>子任务联系人
+                                <button class="task_help_togBtn"
+                                        data-txt="1. 联系人如是系统实名注册用户，在TA的个人任务订单中将会生成一个”待评价“订单，在志愿者提交该子任务后，TA可以对志愿者评价。<span style='display:block;width:100%;height:.1rem;'></span>2. 联系人如不是系统用户，TA仅作为该子任务的线下联系人。"></button>
+                            </b>
+                            <input id="contactName" placeholder="请填写姓名" type="text" style="display:none;height:42px;border:1px solid #eee;"/>
+                            <div class="task_help_txt" style="display:none;line-height:20px;"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" style="background: none;height:auto;padding-top:50px;">
+                            <input class='demo_time' id="serviceEndTime" type="text" readonly="true"
+                                   name="applyBeginTime" placeholder="选择结束" value="" style="width:45%;"/>
+                            <span style="margin:0px;float: right;width: 10%;text-align: center;">至</span>
+                            <input class='demo_time' id="serviceBeginTime" type="text" readonly="true"
+                                   name="applyBeginTime" placeholder="选择开始" value="" style="width:45%;"/>
+                            <b>子任务时间</b>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="addres" class="warp_dd" href="javascript:void(0)" style="height:auto;min-height:50px;">
+                        <!--<a id="addres" href="javascript:void(0)" onclick="conceal('address_li');">-->
+                            <!--
+            <input type="button" value="搜索"/>-->
+                            <!--<input type="text" id="suggestId_update" placeholder="请输入地点或名称进行查询" class="mapTest" readonly-->
+                                   <!--onFocus="updateAdds();" style="display: none;"/>-->
+                            <!--<input type="text" id="suggestId1" placeholder="请输入地点或名称进行查询" class="mapTest"-->
+                                   <!--disabled="disabled" oninput="addsFalse();"/>-->
+                            <!--<div id="searchResultPanel1"-->
+                                 <!--style="border:1px solid #C0C0C0;width:100%;height:auto; display:none;"></div>-->
+                            <!--<div id="l-map1" style="display: none;"></div>-->
+                            <!--<input type="hidden" id="address">-->
+
+                            <textarea disabled="disabled" oninput="autoHeightArea(this)" style="max-width:70%;float:right;" id="suggestId1" placeholder="请输入地点或名称进行查询" class="map mapTest" ></textarea>
+                            <b>子任务地点</b>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="warp_pws_c_sp default-1" data-name="子任务招募人数">
+                            <b>子任务招募人数<span style="color: #9d9d9d;"></span></b>
+                            <input id="needNum" type="text" name="total" class="spinnerExample"/>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="warp_pws_c_sp default-1" data-name="志愿者服务时长">
+                            <b>志愿者服务时长<span style="color: #9d9d9d;">（小时）</span></b>
+                            <input id="serviceTime" type="text" name="total" class="spinnerExample"/>
+                        </div>
+                        <p class="warp_pws_c_so"
+                           style="height:auto;margin-top:.1rem;color:#999;text-align:justify;text-align-last:left">
+                            志愿者在完成任务并提交后，管理员根据其达成度给与的最大服务时长</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    <div class="ht10"></div>
+    <div class="ht70"></div>
+    <footer class="warp_pws_m_sw">
+        <ul class="warp_pws_hd">
+            <li style="width: 100%">
+                <input type="button" value="修改" id="btn_add_job" onclick='add_job();'>
+            </li>
+        </ul>
+    </footer>
+</div>
+<div class="task_help_Wrap">
+    <div class="task_help_explain_txt"></div>
+</div>
+
+<!--地点开始-->
+<div class="warp_ci">
+
+</div>
+<!--地点结束-->
+<!---- 地图开始 ---->
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+<div class="warp_ifrem" style="background-color: #ffffff;">
+
+</div>
+<!---- 地图结束 ---->
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript"
+        <!--src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>-->
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/honeySwitch.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+
+<script type="text/javascript" src="js/index_update_sub.js"></script>
+
+<script type="text/javascript" src="../wap/js/editor/Eleditor.min.js"></script>
+<script type="text/javascript" src="../wap/js/editor/webuploader.min.js"></script>
+<script>
+    var Edr = new Eleditor({
+        el: '#contentEditor',
+        upload: {
+            server: img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper', //填写你的后端上传路径
+            fileSizeLimit: 2 //限制图片上传大小，单位M
+        },
+        toolbars: [
+            'insertText',
+            'editText',
+            'insertImage',
+            // 'insertLink',
+            // 'deleteBefore',
+            // 'deleteAfter',
+            // 'insertHr',
+            'delete',
+
+            'cancel',
+        ]
+    });
+</script>
+<script type="text/javascript" src="js/index_update_sub.js"></script>
+
+<script type="text/javascript">
+    $('#contentEditor').click(function () {
+        /*点击会弹出文本编辑器*/
+        // Edr.trigger('insertText')
+    });
+
+    $(function () {
+        // conceal('serviceDomain');
+        // conceal('serviceTarget');
+        // conceal('servicePlace');
+        // conceal('welfare');
+        //判断$.getUrlParam('pkPostCode')
+        if(!$.getUrlParam('pkPostCode')){
+            window.location.href='task_management.html'
+        }
+        //验证咨询人电话格式
+        $("#consultantMobile").blur(function () {
+            if (!checkTel($("#consultantMobile").val())) {
+                layer.open({
+                    content: '咨询人电话格式错误！'
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+                });
+            }
+        });
+
+        //修改添加对应值
+        up_job()
+    })
+</script>
+<script type="text/javascript">
+    // $('.select-time').hotelDate();
+
+    $('.spinnerExample').spinner({});
+
+    $('.cell-right').click(function () {
+        var tre = $(this).find('span').hasClass('switch-on');
+        var type = tre ? 10 : 20;
+        $(this).next('input').val(type);
+    })
+</script>
+
+<script>
+    //阻止浏览器默认行为
+    var stopDefault = function (e) {
+        //防止浏览器默认行为(W3C)
+        if (e && e.preventDefault) {
+            e.preventDefault();
+        }
+        //IE中组织浏览器行为
+        else {
+            window.event.returnValue = false;
+            return false;
+        }
+    };
+    $(".task_help_togBtn").click(function (e) {
+        var txt = $(this).attr('data-txt');
+        // helpTog(txt);
+        stopDefault()
+        $(".task_help_explain_txt").text(txt);
+        $(".task_help_Wrap").show().css('display', 'flex');
+        e.stopPropagation()
+    });
+    $(document).click(function () {
+        $(".task_help_explain_txt").text('');
+        $(".task_help_Wrap").hide();
+    });
+    //时间
+    var theme = "ios";
+    var mode = "scroller";
+    var display = "bottom";
+    var lang = "zh";
+    var currYear = (new Date()).getFullYear();
+    // Date & Time demo initialization
+    $('.demo_time').mobiscroll().datetime({
+        preset: 'date',
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        timeWheels: 'HHii',//HH:24小时制；hh:12小时制
+        dateFormat: "yy/mm/dd",
+        dateOrder: 'yyyymmdd', //面板中日期排列格式
+        timeFormat: 'HH:ii',
+        startYear: currYear,
+        endYear: currYear + 30,
+        stepMinute: 1,
+        showNow: true
+    });
+    $('.demo_time1').mobiscroll().datetime({
+        theme: theme,
+        mode: mode,
+        display: display,
+        lang: lang,
+        timeWheels: 'HHii',//HH:24小时制；hh:12小时制
+        dateFormat: "yy/mm/dd",
+        timeFormat: 'HH:ii',
+        startYear: currYear,
+        endYear: currYear + 30,
+        stepMinute: 1,
+        showNow: true
+    });
+    /*
+        conceal('job_warehouse');
+        show('add_job');
+        conceal('questionList_li');*/
+</script>
+
+<script src="../wap/js/act/task_act.js"></script>
+</body>
+</html>
+

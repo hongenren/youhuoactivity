@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的证照</title>
+    <meta name="Keywords" content="公益护照"/>
+    <meta name="description" content="公益护照"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+    <script src="js/offset.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/identity.css">
+    <style>
+        body{
+            background:url("images/app.jpg") no-repeat center;
+            background-size:cover;
+        }
+    </style>
+</head>
+<body>
+<div style="width:100%;overflow: hidden;padding: 2% 4%;;border-bottom: 1px solid #E6E6E6;background: #FFD46C;">
+        <span style="font-size: 13px;color: #D07500;line-height: 16px;">
+            临时公益护照有效期，自签发成功日起，一年内有效；失效后无法报名岗位、任务等；如需续签，可在到期前30天，仍由原签发机构办理。
+        </span>
+</div>
+<div class="passHead">
+    <div class="passLogo"><img src="images/gysh_logo.png" alt=""></div>
+    <div class="passLogoText">公益护照<span class="temporary">(临时)</span></div>
+    <div class="passEnText">Passport for Charity & Voluntary Services</div>
+</div>
+<div class="passColumn">
+    <div class="passRight"><img class="headUrl" src="https://h5.shcvs.cn/wap/img/canvas.png" alt=""></div>
+    <div class="passLeft">
+        <div class="passPersonList">
+            <div class="personame">姓名</div>
+            <div class="personame realName"></div>
+        </div>
+        <div class="passPersonList clearfix">
+            <div class="left">
+                <div class="personame">性别</div>
+                <div class="personame sex"></div>
+            </div>
+            <div class="right">
+                <div class="personame">国籍</div>
+                <div class="personame nationality"></div>
+            </div>
+        </div>
+    </div>
+    <div class="passPersonList clearfix">
+        <div class="left">
+            <div class="personame">出生日期</div>
+            <div class="personame birthday"></div>
+        </div>
+        <div class="right" style="width: 50%;">
+            <div class="personame">护照编号</div>
+            <div class="personame licenseCode"></div>
+        </div>
+    </div>
+    <div class="passPersonList clearfix">
+        <div class="left">
+            <div class="personame">有效期至</div>
+            <div class="personame validityPeriod"></div>
+        </div>
+        <div class="right" style="width: 50%;">
+            <div class="personame">签发单位</div>
+            <div class="personame issued"></div>
+        </div>
+    </div>
+    <div class="passEwm">
+        <div class="ewm">
+            <div id="qrcode" style="display: none;"></div>
+            <img id="qrcodeImg" alt="">
+        </div>
+        <div class="ewmText">请截图保存，以便离线使用</div>
+    </div>
+</div>
+
+<div class="sendNextButton" onclick="jump('../index.html')">返回首页</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script>
+    $(function() {
+        var un = getCookie("un");
+        if (/^[^a-zA-Z]/g.test(un)) {
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: 'post',
+                url: base_url + "/html5/v1/license/queryLicenseExtraCardByPersonFirstAccount",
+                data: JSON.stringify({"personFirstAccount": un}),
+                dataType: 'json',
+                headers: {'token': token},
+                contentType: "application/json;charset=utf-8",
+                beforeSend: function (XMLHttpRequest) {
+
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+                        var user = data.data;
+                        $(".realName").html(user.realName);
+                        $(".headUrl").attr("src", user.headUrl);
+                        $(".sex").html(user.sex);
+                        $(".nationality").html(user.nationality);
+                        //$(".birthday").html(dateFormattingInt(user.birthday));
+                        $(".birthday").html(user.birthday);
+                        $(".licenseCode").html(user.licenseCode);
+                        $(".validityPeriod").html(user.validityPeriod);
+                        $(".issued").html(user.issued);
+                        if(user.licenseType==1){
+                            $(".temporary").hide();
+                        }
+                        qrcode1(user.qrCode);
+                    }
+                }
+            })
+        }
+    })
+    function qrcode1(url){
+        $("#qrcode").qrcode({
+            render: "canvas", // 渲染方式有table方式（IE兼容）和canvas方式
+            width: 150, //宽度
+            height: 150, //高度
+            text: url, //内容
+            typeNumber: -1,//计算模式
+            correctLevel: 2,//二维码纠错级别
+            background: "#ffffff",//背景颜色
+            foreground: "#000000"  //二维码颜色
+        });
+        var canvas = $('#qrcode').find("canvas").get(0);
+        var url = canvas.toDataURL('image/jpeg');
+        $("#qrcodeImg").attr('src', url);
+    }
+    if(IsWhat()==1) {//判断是否是苹果，如果是就把保存图片的按钮隐藏
+        $('#bcxc').hide();
+    }else{
+        $('#bcxc').click(function(){
+            var canvas = $('#qrcode').find("canvas").get(0);
+            try {//解决IE转base64时缓存不足，canvas转blob下载
+                var blob = canvas.msToBlob();
+                navigator.msSaveBlob(blob, 'qrcode.jpg');
+            } catch (e) {//如果为其他浏览器，使用base64转码下载
+                var url = canvas.toDataURL('image/jpeg');
+                $("#download").attr('href', url).get(0).click();
+            }
+            return false;
+        });
+    }
+</script>
+</body>
+</html>

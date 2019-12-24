@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海"/>
+    <meta name="description" content="公益上海"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="../meng/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/task_myOrder_content.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>写评价</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+    <div class="tmc_wrap">
+        <div class="tev_list clearfix">
+            <div class="tme_evaluate_list">
+                <strong>满意度</strong>
+                <span id="stars"><i class="on"></i><i></i><i></i><i></i><i></i></span>
+            </div>
+        </div>
+        <div class="tmc_textarea">
+            <textarea name="cont" placeholder="请给发布方留下您宝贵的建议(130汉字以内)"></textarea>
+        </div>
+        <div class="tmc_uploadImgs tim_uploadImgs">
+            <div class="warp_pws_m_sy">
+                <div class="warp_pws_m_sq">
+                    <form class="test_form" action="" method="post" enctype="multipart/form-data">
+                        <img src="../wap/img/pws_96.jpg" id="img0" width="100" height="100">
+                        <input type="file" onchange="uploadImg(0)" name="gg">
+                        <input type="hidden" id="imgsrc0" value='' name="imgsrc">
+                    </form>
+                </div>
+                <!--<i onclick="deleteIImg(this)"></i>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sendButtonWrap on">
+    <button class="targetNext uploadContentBtn on">发表评价</button>
+</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script>
+    function deleteIImg(obj){
+        $(obj).parent().remove();
+        if($(".tim_uploadImgs").find(".warp_pws_m_sy").length<=9){
+            $(".smallerStop").show();
+        }
+    }
+    // $(".warp_pws_m_sy i").live("click", function() {
+    //     $(this).parent().parent().remove();
+    // });
+    function uploadImg(i) {
+        var form = document.getElementsByClassName("test_form")[i];
+        var imgdata = new FormData(form);
+        //利用ajax上传
+        jQuery.ajax({
+            type: "POST",
+            url: img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper',
+            data: imgdata,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function(XMLHttpRequest) {
+                $(".warp_jm").html("<div class='warp_jz'><img src='../wap/img/loading.gif' style='width:24px;height:24px; margin:0 auto;display:block;position: absolute;left: 50%;top: 50%;margin: -12px 0 0 -12px'/></div>");
+            },
+            success: function(data) {
+                $(".warp_jm").empty();
+                if(data.errorcode==0){
+                    var src = data.data;
+                    var bgSrc='<div class="warp_pws_m_sy" style="background-image:url(\''+src+'\')">\n' +
+                        '                <i onclick="deleteIImg(this)"></i>\n' +
+                        '            </div>';
+                    // $('#img' + i).attr('src', src);
+                    // $('#imgsrc' + i).val('{"img":"' + src + '","demo":""}');
+                    $(".tim_uploadImgs").prepend(bgSrc);
+                    if($(".tim_uploadImgs").find(".warp_pws_m_sy").length>9){
+                        $(".smallerStop").hide();
+                    }
+                }
+            }
+        })
+    }
+
+    $(function(){
+        var ticket=$.getUrlParam('ticket');
+        if(ticket==''||ticket=='undefined'){
+            layer.open({
+                content: '任务订单票号获取失败'
+                ,skin: 'msg'
+                ,time: 1
+            });
+        }
+        $("#stars i").click(function(){
+            $("#stars i").removeClass('on');
+            var index=$(this).index();
+            for(var i=0; i<index+1;i++){
+                $("#stars i").eq(i).addClass('on')
+            }
+        });
+
+        // id	任务提交id
+        // adminComment	提交内容
+        // adminCommentImg	管理员评论图片url
+        // adminCommentScore	管理员评分0-5
+        // times	管理员给予时长
+        $(".uploadContentBtn").click(function(){
+            var tmo_reason=$("textarea[name='cont']").val();
+            var stars=0;
+            $("#stars i").each(function(index,item){
+                if($(item).hasClass('on')){
+                    stars+=1
+                }
+            });
+            var tmo_arr={
+                "id":1,
+                "times":1,
+                "adminCommentImg":'',
+                "adminComment":tmo_reason,
+                "adminCommentScore":stars
+                // "ticket":ticket
+            };
+
+
+            var imgs='';
+            if($(".tim_uploadImgs").find(".warp_pws_m_sy").length>1){
+                $(".tim_uploadImgs").find(".warp_pws_m_sy").each(function(index,item){
+                    if(!$(item).hasClass('smallerStop')){
+                        var img=$(item).css('background-image');
+                        var imgUrl=img.replace(/url\(([^\)]+)\).*/gi,'$1');
+                        imgs+=imgUrl+';'
+                    }
+                });
+                tmo_arr.adminCommentImg=imgs.substring(0,imgs.length-1)
+            };
+            if(tmo_arr.adminComment==''){
+                layer.open({
+                    content: '任务内容不能为空'
+                    ,skin: 'msg'
+                    ,time: 1
+                });
+                return false
+            }
+            console.log(tmo_arr)
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: "post",
+                url: base_url + "html5/v1/newTask/submitGrade",
+                data: JSON.stringify(tmo_arr),
+                dataType: 'json',
+                headers: {'token': token},
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    if (data.code == 0) {
+                        layer.open({
+                            content: '评价成功'
+                            ,skin: 'msg'
+                            ,time: 1
+                        });
+                        setTimeout(function(){
+                            jump("task_myOrder.html");
+                        },1000)
+
+                    }
+                }
+            })
+        });
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+/* CSS Document */
+@charset "utf-8";
+/***公共样式****/
+body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, strong, b, small, u, i, center, dl, dt, dd, ol, ul, li,  sub, sup, tt, var, del, dfn,  ins, kbd, q, s, samp,  strike, applet, object, iframe, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, div, header, hgroup, menu, nav, output, ruby, section, summary, time, blockquote, pre, a, abbr, acronym, address, big, cite, code, mark, audio, video, input, textarea, select { margin:0; padding:0;}
+ol, ul{list-style:none;}
+img{border:0; display:inline-block;max-width:100%;}
+input, button, textarea, select,a{ font-size:100%; outline:none; resize:none;border:none;background:none;-webkit-tap-highlight-color:transparent}
+select{appearance:none;-moz-appearance:none;-webkit-appearance:none;}
+table{ border-collapse: collapse; border-spacing: 0; border:none;width:100%;}
+body { font-size:.24rem;line-height:1.6; font-family:"Arial",Arial,"Microsoft YaHei",SimHei,Helvetica,sans-serif;color:#333;background-color:#fff;background-repeat:no-repeat;background-position:center;background-size:cover;}
+html {-webkit-text-size-adjust:none;}
+i,em{font-style:normal;}
+.clear {height:0; clear:both;}
+.clearfix { *zoom:1;}
+.clearfix:after{clear:both; display:block; height:0; visibility:hidden; line-height:0; content:'\20';}
+/*边距*/
+*{box-sizing:border-box;    -webkit-box-sizing:border-box;    -moz-box-sizing:border-box;    -o-box-sizing:border-box;}
+/*a 链接*/
+a { text-decoration:none; outline:none;display:block;}
+a:link {color:#666; }
+a:visited {color:#999; }
+a:hover, a:active, a:focus {color:#333;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
+::-webkit-input-placeholder {color: #999;}:-moz-placeholder {color: #999;}::-moz-placeholder {color: #999;}:-ms-input-placeholder {color: #999;}
+
+.left{float:left;}
+.right{float:right;}
+.center{text-align:center;}
+
+html,body{
+    height:auto;
+    min-height:100%;
+    overflow-y:visible
+}
+
+.sendHistoryHead{
+    height:.7rem;
+    padding:0 .3rem;
+    background-color:#f2f2f2;
+    text-align:center;
+    position:relative;
+}
+.sendHeadList{
+    font-size:.28rem;
+    line-height:.7rem;
+    color:#000;
+}
+.sendBack{
+    position:absolute;
+    left:.3rem;
+    top:50%;
+    width:.18rem;
+    height:.3rem;
+    margin-top:-.15rem;
+    font-size:0;
+    line-height:0;
+}
+.sendHistoryHead a i,.sendHistoryHead a span{
+    display:inline-block;
+    vertical-align:middle;
+}
+.sendHistoryHead a i{
+    display:inline-block;
+    width:.18rem;
+    height:.3rem;
+    background:url("../images/bk.png") no-repeat center;
+    background-size:contain;
+    margin-right:.14rem;
+}
+.sendHeadButton{
+    position:absolute;
+    right:.3rem;
+    top:50%;
+    margin-top:-.23rem;
+}
+.sendHistoryHead div button{
+    display:inline-block;
+    width:1.2rem;
+    height:.46rem;
+    font-size:.24rem;
+    border-radius:4px;
+    border:1px solid #bbb;
+}
+
+/*swiper*/
+.swiper-pagination-bullet{width:.1rem!important;height:.1rem!important;}
+
+/*下一步*/
+.sendNextButton{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    height:.8rem;
+    font-size:.24rem;
+    line-height:.8rem;
+    color:#fff;
+    text-align:center;
+    background-color:#72b81e;
+}
+.sendNextButton.on{
+    position:static;
+    width:90%;
+    margin:.6rem auto;
+}
+#more{
+    color: #72b81e;
+    font-size: 0.3rem;
+    background-image: linear-gradient(-180deg,rgba(255,255,255,0) 0%,#fff 70%);
+    width: 100%;
+    height: 1.2rem;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+#more p{
+    z-index:999;
+    width: 100%;
+    left: 0;
+    right: 0;
+    position:absolute;
+    bottom:3px;
+    padding:0px;
+    margin:0px
+}
+
+@media (min-width:641px) {
+    html,body {
+        width: 640px!important;
+        height:auto!important;
+        min-height:100%!important;
+        margin: auto!important;
+        position:relative!important;
+    }
+    .sendNextButton{
+        width:640px!important;
+        left:50%!important;
+        margin-left:-320px!important;
+    }
+}

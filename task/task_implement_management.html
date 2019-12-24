@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海"/>
+    <meta name="description" content="公益上海"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="../meng/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/task_myOrder_content.css"/>
+    <link rel="stylesheet" type="text/css" href="css/task_implement_management.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>执行管理</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+    <div class="tem_tab_wrap clearfix">
+        <div class="tem_tab_list on left tim_box_btnA"><span>待审核</span></div>
+        <div class="tem_tab_list right tim_box_btnB"><span>已完成</span></div>
+    </div>
+    <div class="tem_search_wrap">
+        <div class="tem_search"><input type="text" id="searchValue" placeholder="请输入姓名或手机号进行查询"><button class="tem_searchBtn"></button></div>
+    </div>
+    <div class="tme_sub_boxA" id="tme_sub_boxA">
+        <!--<div class="tme_sub_wrap on">-->
+            <!--<div class="tem_enroll_radios"></div>-->
+            <!--<div class="tmeSubUser clearfix">-->
+                <!--<div class="tme_sub_user" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                <!--<div class="tme_sub_name tim_sub_name">张三<span>个人报名</span></div>-->
+            <!--</div>-->
+            <!--<div class="tmeSubTimes">-->
+                <!--<strong>提交任务时间： </strong>-->
+                <!--<span>2019年11月1日 18:00</span>-->
+            <!--</div>-->
+            <!--<div class="tmeSubText">-->
+                <!--这是志愿者提交的任务内容-->
+            <!--</div>-->
+            <!--<div class="tme_imgs_wrap clearfix" style="padding:.1rem 0;">-->
+                <!--<div class="tme_imgs">-->
+                    <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                    <!--<div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="clearfix">-->
+                <!--<div class="tme_evaluate_list">-->
+                    <!--<strong>任何联系人给我的评价</strong>-->
+                    <!--<span><i class="on"></i><i></i><i></i><i></i><i></i></span>-->
+                <!--</div>-->
+                <!--<div class="tme_evaluate_list">-->
+                    <!--<strong>任务达成度</strong>-->
+                    <!--<span><i class="on"></i><i></i><i></i><i></i><i></i></span>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="warp_pws_c_sp clearfix">-->
+                <!--<b>获得志愿服务时长<span>（小时）</span></b>-->
+                <!--<input id="point" type="text" name="total" class="spinnerExample"/>-->
+            <!--</div>-->
+            <!--<div class="tmc_textarea tim_textarea">-->
+                <!--<textarea name="cont" placeholder="请输入您要提交的任务内容(300汉字以内)"></textarea>-->
+            <!--</div>-->
+            <!--<div class="tmc_uploadImgs tim_uploadImgs clearfix">-->
+                <!--<div class="warp_pws_m_sy" style="background-image:url('../wap/img/pws_27.jpg')">-->
+                    <!--<i onclick="deleteIImg(this)"></i>-->
+                <!--</div>-->
+                <!--<div class="warp_pws_m_sy" style="background-image:url('../wap/img/pws_27.jpg')">-->
+                    <!--<i onclick="deleteIImg(this)"></i>-->
+                <!--</div>-->
+                <!--<div class="warp_pws_m_sy" style="background-image:url('../wap/img/pws_27.jpg')">-->
+                    <!--<i onclick="deleteIImg(this)"></i>-->
+                <!--</div>-->
+                <!--<div class="warp_pws_m_sy">-->
+                    <!--<div class="warp_pws_m_sq">-->
+                        <!--<img src="../wap/img/pws_96.jpg" id="img0" width="100" height="100">-->
+                        <!--<input type="file" onchange="uploadImg(0)" name="gg">-->
+                        <!--<input type="hidden" id="imgsrc0" value='' name="imgsrc">-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;<i onclick="deleteIImg(this)"></i>&ndash;&gt;-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="tme_sub_btn"><button>确认提交</button></div>-->
+        <!--</div>-->
+    </div>
+    <div class="tme_sub_boxB">
+        <div class="tme_sub_wrap">
+            <div class="tem_enroll_radios"></div>
+            <div class="tmeSubUser clearfix">
+                <div class="tme_sub_user" style="background-image:url('../wap/img/pws_27.jpg')"></div>
+                <div class="tme_sub_name tim_sub_name">张三<span>个人报名</span></div>
+            </div>
+            <div class="tmeSubTimes">
+                <strong>提交任务时间： </strong>
+                <span>2019年11月1日 18:00</span>
+            </div>
+            <div class="tmeSubText">
+                这是志愿者提交的任务内容
+            </div>
+            <div class="tme_imgs_wrap clearfix" style="padding:.1rem 0;">
+                <div class="tme_imgs">
+                    <div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>
+                    <div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>
+                    <div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>
+                    <div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>
+                    <div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>
+                    <div class="temImg" style="background-image:url('../wap/img/pws_27.jpg')"></div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="tme_evaluate_list">
+                    <strong>任何联系人给我的评价</strong>
+                    <span><i class="on"></i><i></i><i></i><i></i><i></i></span>
+                </div>
+                <div class="tme_evaluate_list">
+                    <strong>任务达成度</strong>
+                    <span><i class="on"></i><i></i><i></i><i></i><i></i></span>
+                </div>
+            </div>
+            <div class="warp_pws_c_sp tim_time_txt clearfix">
+                <b>获得志愿服务时长<span>（小时）</span></b>
+                <input type="text" readonly="readonly" value="5"/>
+            </div>
+            <div class="tmc_textarea tim_textarea">
+                <p>在本次任务表现不错</p>
+            </div>
+            <div class="tmc_uploadImgs tim_uploadImgs clearfix">
+                <div class="warp_pws_m_sy" style="background-image:url('../wap/img/pws_27.jpg')">
+                    <i onclick="deleteIImg(this)"></i>
+                </div>
+                <div class="warp_pws_m_sy smallerStop">
+                    <form class='test_form' action='' method="post" enctype="multipart/form-data">
+                        <div class="warp_pws_m_sq">
+                            <img src="../wap/img/pws_96.jpg" id="img0" width="100" height="100">
+                            <input type="file" onchange="uploadImg(this,0)" name="gg">
+                            <input type="hidden" id="imgsrc0" value='' name="imgsrc">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tem_enroll_editors clearfix">
+    <div class="left">
+        <button class="timEditorBtn on">编辑</button>
+        <button class="timEditorAll">全选</button>
+    </div>
+    <div class="right">
+        <button class="batchExamineBtn">批量审核</button>
+    </div>
+</div>
+<div class="batchExamine_wrap">
+    <div class="batchExamine_box">
+        <div class="clearfix">
+            <!--<div class="tme_evaluate_list adminCommentScore">-->
+                <!--<strong>任何联系人给我的评价</strong>-->
+                <!--<span><i class="on"></i><i></i><i></i><i></i><i></i></span>-->
+            <!--</div>-->
+            <div class="tme_evaluate_list checkScore">
+                <strong>任务达成度</strong>
+                <span class="starsCheckBtns"><i></i><i></i><i></i><i></i><i></i></span>
+            </div>
+        </div>
+        <div class="warp_pws_c_sp clearfix">
+            <b>获得志愿服务时长<span>（小时）</span></b>
+            <input type="text" name="totalGrade" class="spinnerExample1"/>
+        </div>
+        <div class="tmc_textarea tim_textarea">
+            <textarea name="contList" placeholder="请输入您要提交的任务内容(300汉字以内)"></textarea>
+        </div>
+        <div class="batchExamineButtons">
+            <button class="batchExamine_closeBtn">取消</button>
+            <button class="batchExamine_submitBtn on">确定</button>
+        </div>
+    </div>
+</div>
+<!--<div class="sendButtonWrap on">-->
+    <!--<button class="targetNext on">修改提交任务</button>-->
+<!--</div>-->
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+<script type="text/javascript" src="../wap/js/user/user.js"></script>
+<script src="js/task_implement_management.js"></script>
+<script>
+    // <form class="test_form" action="" method="post" enctype="multipart/form-data">
+
+    function deleteIImg(obj){
+        $(obj).parent().remove();
+    }
+    $(".warp_pws_m_sy i").live("click", function() {
+        $(this).parent().parent().remove();
+    });
+    function uploadImg(obj,i) {
+        // var dlform = document.createElement('form');
+        // dlform.style = "display:none;";
+        // dlform.method = 'post';
+        // dlform.action = '';
+        // dlform.enctype = 'multipart/form-data';
+
+        var form = document.getElementsByClassName("test_form")[i];
+        var imgdata = new FormData(form);
+        //利用ajax上传
+        jQuery.ajax({
+            type: "POST",
+            url: img_url + 'cm/upload/uploadImgFolderOSS?folderName=upaper',
+            data: imgdata,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function(XMLHttpRequest) {
+                $(".warp_jm").html("<div class='warp_jz'><img src='../wap/img/loading.gif' style='width:24px;height:24px; margin:0 auto;display:block;position: absolute;left: 50%;top: 50%;margin: -12px 0 0 -12px'/></div>");
+            },
+            success: function(data) {
+                $(".warp_jm").empty();
+                if(data.errorcode==0){
+                    // var src = data.data;
+                    // $('#img' + i).attr('src', src);
+                    // $('#imgsrc' + i).val('{"img":"' + src + '","demo":""}');
+
+                    var src = data.data;
+                    var bgsrc='<div class="warp_pws_m_sy" style="background-image:url(\''+src+'\')">\n' +
+                        '                    <i onclick="deleteIImg(this)"></i>\n' +
+                        '                </div>'
+                    var bgSrc='<div class="warp_pws_m_sy" style="background-image:url(\''+src+'\')">\n' +
+                        '                <i onclick="deleteIImg(this)"></i>\n' +
+                        '            </div>';
+                    // $('#img' + i).attr('src', src);
+                    // $('#imgsrc' + i).val('{"img":"' + src + '","demo":""}');
+                    $(obj).parents('.tim_uploadImgs').prepend(bgSrc)
+                    // $(".tim_uploadImgs").prepend(bgSrc);
+                    if($(obj).parents('.tim_uploadImgs').find(".warp_pws_m_sy").length>9){
+                        $(".smallerStop").hide();
+                    }
+                }
+            }
+        })
+    }
+    $(function(){
+        // $('.spinnerExample').spinner({});
+    //
+        $(".tim_box_btnB").click(function(){
+            // $(".tme_sub_boxA").hide();
+            // $(".tme_sub_boxB").show();
+            $(this).addClass('on').siblings().removeClass('on');
+            submitListBySubCode(0,20)
+        });
+        $(".tim_box_btnA").click(function(){
+            // $(".tme_sub_boxB").hide();
+            // $(".tme_sub_boxA").show();
+            $(this).addClass('on').siblings().removeClass('on');
+            submitListBySubCode(0,15)
+        });
+    //
+        $(".starsCheckBtns i").live("click",function(){
+            var index=$(this).index();
+            $(this).parents('.starsCheckBtns').find('i').removeClass('on');
+            for(var i=0;i<=index;i++){
+                $(this).parents('.starsCheckBtns').find('i').eq(i).addClass('on')
+            }
+        })
+    })
+</script>
+</body>
+</html>

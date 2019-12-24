@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>首页</title>
+    <meta name="Keywords" content="公益上海" />
+    <meta name="description" content="公益上海" />
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control" />
+    <meta content="no-cache" http-equiv="pragma" />
+    <meta content="0" http-equiv="expires" />
+    <meta content="telephone=no, address=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript" src="js/offset.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/config.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script src="js/mobileBase.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+
+    <link rel="stylesheet" href="css/mobile.css" />
+    <link rel="stylesheet" href="css/mobileDetailIndex.css" />
+    <link rel="stylesheet" type="text/css" href="../post/css/job_list.css"/>
+    <!--<link rel="stylesheet" href="css/index.css" />-->
+</head>
+<body style="background-color:#fff;">
+<div class="resourcesWrap">
+    <div>
+        <div id="baseinfo">
+            <div class="yrljg1" style="display: flex; justify-content: center; align-items: center;">
+                <img id="titleImg" style="height: 100%;width: auto;" src="images/hylist3.png" />
+                <ul>
+                    <li> <a href="javascript:;"><span>粉丝</span> <span id="beWatchNum">0</span> </a> </li>
+                    <li> <a href="javascript:;"> <img src="images/yrljgimg.png" /> <span id="imgNum">0</span> </a> </li>
+                </ul>
+                <a id="prev" class="a" style="left: 0;" href="javascript:void(0)" onclick="aprev_photo_Slide()"><</a>
+                <a id="next" class="a" style="right: 0;" href="javascript:void(0)" onclick="anext_photo_Slide()">></a>
+            </div>
+            <div class="yrljg2" data-val="100039">
+                <h3 class="clearfix"> <span></span> <a href="javascript:void(0)">简介 &gt;</a> </h3>
+                <div><!--
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>-->
+                </div>
+                <ul>
+                    <li><a href="javascript:void(0);"></a></li>
+                    <li style="float: right;background: #73b820;height: 24px;border: 0px;"><a id="addJoin" href="javascript:void(0);" onclick="add_join()" style="color: #ffffff;"> 申请加入 </a></li>
+                </ul>
+            </div>
+            <div class="yrljg3">
+                <ul>
+                    <li style="height: auto;"> <img src="images/yrljgicon1.png" /><span>开放时间：</span><p></p> </li>
+                    <li> <img src="images/yrljgicon2.png" /> <span>咨询电话：</span> <p style=""></p> </li>
+                    <li style="height: auto;"> <img src="images/pos.png" /><p id="serviceTypes" style="width: 90%;"></p> </li>
+                    <li style="height: auto;"> <img src="images/pos.png" /><p id="serviceObjects" style="width: 90%;"></p> </li>
+                    <li style="height: auto;"> <img src="images/yrljgicon3.png" /><p id="addressDetail" style="width: 90%;"></p> </li>
+                </ul><!--
+                <div class="yrljg3_b" style="margin-left: .3rem;">
+                    <div>
+                        <p> <img src="images/yrljgicon3.png" /> <span style="margin-left: 0px;width: 90%;"></span> </p>
+                    </div>
+                    &lt;!&ndash;<a href="javascript:;" style="margin-right: .3rem;"> <img src="images/yrljgicon4.png" /> </a>&ndash;&gt;
+                </div>-->
+            </div>
+        </div>
+        <div class="yrljg4">
+            <h2 class="yrljghead"> <i> </i> <b> 志愿服务岗位 </b> <a href="javascript:void(0)" onclick="jumpId('../post/org_post_list.html?type=0');"> 更多&gt; </a></h2>
+            <div class="yrljg4con clearfix">
+                <ul class="post warp_pws_c"></ul>
+            </div>
+        </div>
+        <div class="yrljg4">
+            <h2 class="yrljghead"> <i> </i> <b> 近期公益活动 </b> <!--<a href="" > 全部活动 &gt; </a>--> </h2>
+            <div class="yrljg4con clearfix">
+                <ul class="activity"></ul>
+            </div>
+        </div>
+        <div class="yrljg5">
+            <h2 class="yrljghead"> <i> </i> <b> 近期公益资讯 </b> <!--<a href=""> 全部资讯 &gt; </a>--> </h2>
+            <div class="yrljg5con">
+                <ul class="article"></ul>
+            </div>
+        </div>
+        <div class="yrljg6">
+            <h2 class="yrljghead"> <i> </i> <b> 公益资源 </b> </h2>
+            <nav class="yrljg6con">
+                <ul>
+                    <li> <a href="javascript:void(0)" id="welfare"> <img src="images/yrljgicon5.png" /> <span> 福利 </span> <!--<i>  </i>--> </a> </li>
+                    <!--<li> <a href=""> <img src="images/yrljgicon6.png" /> <span> 公共资源 </span> <i> 1 </i> </a> </li>
+                    <li> <a href=""> <img src="images/yrljgicon7.png" /> <span> 信用兑换 </span> <i>  </i> </a> </li>-->
+                </ul>
+            </nav>
+        </div>
+        <div class="yrljg7">
+            <h2 class="yrljghead"> <i> </i> <b> 公益数据 </b> </h2>
+            <div class="yrljg7con">
+                <ul>
+                    <li> <a href="#"> <img src="images/yrljgicon8.png" />
+                        <div>
+                            <h4> 志愿时间（小时） </h4>
+                            <p id="volHours"> 0 </p>
+                        </div> </a> </li>
+                    <li> <a href="#"> <img src="../wap/img/pws_51.png" />
+                        <div>
+                            <h4> 公益信用 </h4>
+                            <p id="welfareCreditCount"> 0 </p>
+                        </div> </a> </li>
+                    <li> <a href="#"> <img src="images/chengyuan.png" />
+                        <div>
+                            <h4> 志愿者成员（人） </h4>
+                            <p id="volPersonCount"> 0 </p>
+                        </div> </a> </li>
+                    <li> <a href="#"> <img src="images/zuzhi.png" />
+                        <div>
+                            <h4> 组织公益活动（场） </h4>
+                            <p id="activityCount"> 0 </p>
+                        </div> </a> </li>
+                    <li> <a href="#"> <img src="images/paihang.png" />
+                        <div>
+                            <h4> 志愿服务岗位 </h4>
+                            <p id="postCount"> 0 </p>
+                        </div> </a> </li>
+                    <li> <a href="#"> <img src="images/paihang.png" />
+                        <div>
+                            <h4> 活动发布排行榜 </h4>
+                            <p id="activityPubRanking"> 0 </p>
+                        </div> </a> </li>
+                    <li> <a href="#"> <img src="images/chenggong.png" />
+                        <div>
+                            <h4> 活动举办成功率 </h4>
+                            <p id="activityHoldPercent"> 0% </p>
+                        </div> </a> </li>
+                    <li> <a href="#"> <img src="images/fensi.png" />
+                        <div>
+                            <h4> 粉丝 </h4>
+                            <p class="BeWatchNums" id="fanCount">0</p>
+                        </div> </a> </li>
+                    <li> <a href="#"> <img src="images/fensi.png" />
+                        <div>
+                            <h4> 下属团体 </h4>
+                            <p class="BeWatchNums" id="sunOrgCount">0</p>
+                        </div> </a> </li>
+                </ul>
+            </div>
+        </div>
+        <div class="yrljg4">
+            <h2 class="yrljghead"> <i> </i> <b> 历史活动 </b><a href="javascript:void(0);">近3个月内的活动</a> </h2>
+            <div class="yrljg4con clearfix" style="padding-top: 0px;">
+                <ul class="old_activity"></ul>
+            </div>
+        </div>
+        <div style="display: block;font-size: 14px;color: #999999;background: #f2f2f2;width: 100%;text-align: center;padding-top: 10px;">数据统计截止前一天24点</div>
+        <div class="sqjr_b">
+        </div>
+    </div>
+    <div class="tc">
+        <div>
+            <h3> 机构简介 </h3>
+            <p id="demo" style="height: 200px;overflow: auto"></p>
+        </div>
+        <a class="close" href="javascript:void(0)"> <img src="images/close.png" /> </a>
+    </div>
+</div>
+
+<!------底部开始------>
+<div class="ht60"></div>
+<footer class="footer">
+    <div class="footer_qt3">
+        <ul id="nav">
+            <li class="qt_ft1">
+                <a href="javascript:void(0)" data-href='' id="indexHref">
+                    <span></span>
+                    <b>首页</b>
+                </a>
+            </li>
+            <li class="qt_ft2">
+                <a id="foundA" href="javascript:void(0)" data-href='find'>
+                    <span></span>
+                    <b>发现</b>
+                </a>
+            </li>
+            <li class="qt_ft1">
+                <a href="javascript:void(0)" data-href="index" onclick="jumpIndex1('../index.html',0)" >
+                    <span></span>
+                    <b>公益上海</b>
+                </a>
+            </li>
+            <li class="qt_ft4">
+                    <a href="javascript:void(0)" data-href="order" onclick="jumpIndex('../order/myjoin.html',1)" >
+                    <span></span>
+                    <b>订单</b>
+                </a>
+            </li>
+            <li class="qt_ft5">
+                <a href="javascript:void(0)" data-href="user" onclick="jumpIndex('../user/user_index.html',1)" >
+                    <span></span>
+                    <b>我的</b>
+                </a>
+            </li>
+        </ul>
+    </div>
+</footer>
+<div class="warp_hd_y">
+    <div class="warp_hd_y_lp"></div>
+    <ul class="warp_hd_y_lo">
+        <li class="warp_hd_y_lo_1">
+            <a href="./find/tiwen.html">
+                <img src="../wap/img/pws_dh_3.png">
+                <span>提问</span>
+            </a>
+        </li>
+        <li class="warp_hd_y_lo_2">
+            <a href="./find/fabutuwen.html">
+                <img src="../wap/img/pws_dh_4.png">
+                <span>发布图文</span>
+            </a>
+        </li>
+        <li class="warp_hd_y_lo_3">
+            <a href="./find/fabutupian.html">
+                <img src="../wap/img/pws_dh_5.png">
+                <span>发布图片</span>
+            </a>
+        </li>
+        <li class="warp_hd_y_lo_4">
+            <a href="./find/fabushipin.html">
+                <img src="../wap/img/pws_dh_6.png">
+                <span>发布视频</span>
+            </a>
+        </li>
+    </ul>
+    <div class="warp_hd_y_li">
+        <a href="javascript:void(0)"></a>
+    </div>
+</div>
+<script type="text/javascript" src="js/touchstart.js"></script>
+<script>
+    //setCookie('jumpAdd', location.href);
+    var expiresDate= new Date();
+    expiresDate.setTime(expiresDate.getTime() + (60*60*8000));
+    $.cookie('jumpAdd', location.href, {expires: expiresDate, path:'/' ,domain:domain_url});
+    $("#indexHref").attr("href", location.href);
+    var id = $.getUrlParam("id"), orgCode = "";
+    var userId = "";
+    var dataStr = "{\"id\": " + id ;
+    if($.cookie('user_msg')) {
+        userId = JSON.parse($.cookie('user_msg')).userId;
+        dataStr += ", \"prjvUserId\": " + userId;
+    }
+    dataStr += "}";
+
+    if($.cookie('user_msg')==undefined||$.cookie('token')==undefined){
+        $('#addJoin').removeAttr('onclick');
+        $('#addJoin').on('click', null, function(){
+            layer.open({
+                content: '请登录后再进行操作'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    $(location).attr('href', "../login/login.html?jumpAdd="+location.href);
+                }
+                , no: function (index) {
+                    return;
+                }
+            });
+        })
+    }else{
+        var un = $.cookie("un");//是否实名
+        if(un==null || un==undefined || un=="") {
+            $('#addJoin').removeAttr('onclick');
+            $('#addJoin').on('click', null, function(){
+                layer.open({
+                    content: '请实名后再进行操作'
+                    , btn: ['确定', '取消']
+                    , yes: function (index) {
+                        //$(location).attr('href', "../cert/cert_index.html");
+                        jumpBank('web/srcb/index?channel=P9a4c8c66b1c74b53b881a5f337745a84&name=&idCard=&phone=');
+                    }
+                    , no: function (index) {
+                        return;
+                    }
+                });
+            })
+        }
+    }
+    var orgThirdAccount = $.getUrlParam("orgThirdAccount");
+    var prjvOrgId = $.getUrlParam("prjvOrgId");
+    window.onload=function(){
+        $("#foundA").attr("href", base_url2+"/gysh_cm_pub/article/recommend.html?jumpAdd="+encodeURI(location.href));
+        var arr, urlFunction = "";
+        if(id==undefined || id==null || id==""){
+            if(prjvOrgId!=null && prjvOrgId!=""){
+                arr = {
+                    "prjvOrgId": prjvOrgId
+                };
+                urlFunction = "queryOrgByPrjvOrgId";
+            }
+            if(orgThirdAccount!=null && orgThirdAccount!=""){
+                arr = {
+                    "orgThirdAccount": orgThirdAccount
+                };
+                urlFunction = "queryOrgByOrgThirdAccount";
+            }
+            $.ajax({
+                url: base_url1 + '/html5/v1/orgPlace/' + urlFunction,
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(arr),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        id = resp.data.id;
+                        localStorage.setItem('mobileDetailIndex_id',id);
+                        yellowOrgDetail();
+                    }
+                }
+            })
+        }else{
+            localStorage.setItem('mobileDetailIndex_id',id);
+            yellowOrgDetail();
+        }
+    }
+    function yellowOrgDetail(){
+        //公益数据
+        $.ajax({
+            url: base_url1 + '/html5/v1/orgPlace/queryYellowOrgDetail',
+            //url: '/cm/termapi/geArticletListByMy',
+            type: "post",
+            dataType: "json",
+            data: dataStr,
+
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            success: function (resp) {
+
+                if(resp.code==0){
+                    var orgData = resp.data.orgData;
+                    if(orgData.joinStatus==10){
+                        $("#addJoin").html("您已提交申请，管理员正在审核中");
+                        $('#addJoin').removeAttr('onclick');
+                        //$("#addJoin").hide();
+                    }
+                    if(orgData.joinStatus==20){
+                        $("#addJoin").html("您已经是机构成员，欢迎您");
+                        $('#addJoin').removeAttr('onclick');
+                        //$("#addJoin").hide();
+                    }
+                    prjvOrgId = orgData.prjvOrgId;
+                    shuju(prjvOrgId, orgData.orgThirdAccount);
+                    $("#welfare").click(function(){
+                        jump(base_url3+"/thirdStoreHome/"+prjvOrgId);
+                    });
+                    $("#map").click(function(){
+                        jump("maps.html?lng="+orgData.lng+"&lat="+orgData.lat);
+                    });
+                    var adafw="";
+                    for(var i=0;i<5;i++){
+                        if(i<orgData.star){
+                            adafw += "<span></span>";
+                        }
+                    }
+                    if(orgData.imgs!=null && orgData.imgs!=""){
+                        titleImgArray.splice(0,1);
+                        titleImgArray = orgData.imgs.split(",");
+                        $("#imgNum").html(titleImgArray.length);
+                        photo_Slide();
+                    }
+                    $(".clearfix").children("span").html(orgData.name);
+                    $(".yrljg2").children("div").html(adafw);
+                    //标签
+                    var markTags = "";
+                    if(orgData.markTags!=null && orgData.markTags!="") {
+                        markTags += '<a style="display: flex; justify-content: center; align-items: center;">' +orgData.markTags+ '</a>';
+                    }
+                    if(orgData.orgThirdAccount && orgData.personFirstAccount){
+                        markTags += '<a style="display: flex; justify-content: center; align-items: center;"><img src="images/hylist4.png" style="height: 15px;"><i>实名</i></a>';
+                    }else{
+                        markTags += '<a class="on" style="display: flex; justify-content: center; align-items: center;">待认领</a>';
+                    }
+                    //$(".yrljg2").children("ul").children("li:first").html(markTags.replace("1001:", ""));
+                    $(".yrljg2").children("ul").children("li:first").html(markTags);
+                    var weeks =  $.trim(orgData.weeks), startTime =  $.trim(orgData.startTime), endTime =  $.trim(orgData.endTime);
+                    if(startTime!=undefined && startTime!=null && startTime!=""){
+                        $(".yrljg3").children(":first").children(":first").children("p").append(""+startTime);
+                        if(endTime!=undefined && endTime!=null && endTime!="") {
+                            $(".yrljg3").children(":first").children(":first").children("p").append("至" + endTime);
+                        }
+                    }
+                    if(weeks!=undefined && weeks!=null &&weeks!=""){
+                        $(".yrljg3").children(":first").children(":first").children("p").html(""+weeks);
+                        if(startTime!=undefined && startTime!=null &&startTime!=""){
+                            $(".yrljg3").children(":first").children(":first").children("p").append("<br />"+startTime);
+                            if(endTime!=undefined && endTime!=null && endTime!="") {
+                                $(".yrljg3").children(":first").children(":first").children("p").append("至" + endTime);
+                            }
+                        }
+                    }
+                    $(".yrljg3").children(":first").children(":first").next().children("p").html(orgData.mobile);
+                    if(orgData.addressDetail!= undefined ||　orgData.addressDetail!=null && orgData.addressDetail!=""){
+                        $("#addressDetail").html(orgData.addressDetail);
+                    }else{
+                        $("#addressDetail").html("地址：");
+                    }
+                    //$(".yrljg3_b").children(":first").children(":first").children("span").html(orgData.addressDetail);
+                    $("#demo").html(orgData.demo!=null && orgData.demo!=""?orgData.demo:"暂无简介...");
+
+                    var region = resp.data.gyData;
+                    if (region != null) {
+                        $("#volHours").html(parseInt(region.volHours)+parseInt(region.postVolHours));
+                        $("#welfareCreditCount").html(region.welfareCreditCount);
+                        $("#volPersonCount").html(region.volPersonCount);
+                        $("#activityCount").html(region.activityCount);
+                        $("#postCount").html(region.postCount);
+                        if(region.activityPubRanking<=100){
+                            $("#activityPubRanking").html(region.activityPubRanking);
+                        }else{
+                            $("#activityPubRanking").html("100+");
+                        }
+                        if(region.activityHoldPercent!=undefined){
+                            $("#activityHoldPercent").html(region.activityHoldPercent + "%");
+                        }
+                        $("#fanCount").html(region.fanCount);
+                    }
+                    $("#sunOrgCount").html(region.sunOrgCount);
+                    var serviceObjects=orgData.serviceObjects;
+                    var serviceTypes=orgData.serviceTypes;
+                    $("#serviceTypes").html("服务领域："+serviceTypes);
+                    $("#serviceObjects").html("服务对象："+serviceObjects);
+                    var heightSHIJIAN = parseInt($(".yrljg3").children(":first").children(":first").height());
+                    var heightDIANHUA = parseInt($(".yrljg3").children(":first").children(":first").next().height());
+                    var heightLINGYU = parseInt($("#serviceTypes").height());
+                    var heightDYUXIANG = parseInt($("#serviceObjects").height());
+                    var heightDIZHI = parseInt($("#addressDetail").height());
+                    if(heightSHIJIAN>heightDIANHUA){
+                        $(".yrljg3").children(":first").children(":first").children("p").css("line-height","0.42rem");<!--line-height: 0.42rem;-->
+                    }
+                    if(heightLINGYU>heightDIANHUA){
+                        $("#serviceTypes").css("line-height","0.42rem");<!--line-height: 0.42rem;-->
+                    }
+                    if(heightDYUXIANG>heightDIANHUA){
+                        $("#serviceObjects").css("line-height","0.42rem");<!--line-height: 0.42rem;-->
+                    }
+                    if(heightDIZHI>heightDIANHUA){
+                        $("#addressDetail").css("line-height","0.42rem");<!--line-height: 0.42rem;-->
+                    }
+                    /*if(undefined != serviceObjects && null != serviceObjects && "" != serviceObjects){
+                        var ObjectsErr=serviceObjects.split(';');
+                        var Objects=[];
+                        var Objectstr = "";
+                        for(var i in ObjectsErr){
+                            Objects.push(ObjectsErr[i].split(':'));
+                            Objectstr += ObjectsErr[i].split(':')[1]+"，";
+                        }
+                        $("#serviceObjects").html(Objectstr.substring(0, Objectstr.length-1));
+                    }
+                    if(undefined != serviceTypes && null != serviceTypes && "" != serviceTypes){
+                        var TypesErr=serviceTypes.split(';');
+                        var Types=[];
+                        var Typestr = "";
+                        for(var j in TypesErr){
+                            Types.push(TypesErr[j].split(':'));
+                            Typestr += TypesErr[j].split(':')[1]+"，";
+                        }
+                        $("#serviceTypes").html(Typestr.substring(0, Typestr.length-1));
+                    }*/
+                }
+            }
+        });
+        $(".close").bind('click',function(){
+            $(".tc").hide()
+        });
+        $(".yrljg2 h3 a").bind('click',function(){
+            $(".tc").show()
+        })
+    }
+    function shuju(prjvOrgId, orgThirdAccount){
+        orgCode = orgThirdAccount;
+        if(orgThirdAccount!=undefined && orgThirdAccount!=null &&orgThirdAccount!=""){
+            //岗位
+            var dataJson = {"orgCode": orgThirdAccount, "state": 20, "pageNumber": 1, "pageSize":3}
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: 'post',
+                url: base_url1 + "/html5/v1/station/queryPostByOrgCode",
+                data: JSON.stringify(dataJson),
+                dataType: 'json',
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    if (data.code == 0) {
+                        var data_index = data.data.records;
+                        var html = "";
+                        if(data_index.length>0){
+                            $.each(data_index, function (k, val) {
+                                var hot = "";
+                                if(val.hot==1){
+                                    hot = '<div class="triangle-topright triangle-topright-red"></div><div class="triangle-topright-text" id="hot">热</div>'
+                                }else if(val.hot==1){
+                                    hot = '<div class="triangle-topright triangle-topright-orange"></div><div class="triangle-topright-text" id="hot">火</div>'
+                                }else if(val.hot==2){
+                                    hot = '<div class="triangle-topright triangle-topright-lawngreen"></div><div class="triangle-topright-text" id="hot">满</div>'
+                                }
+                                html += '<li style="width: 100%; border-bottom: 1px solid #d3d3d3;">\
+                                        <a href="../post/post_content.html?pkPostCode='+val.pkPostCode+'">\
+                                            <h3 id="name">'+val.name+'</h3>\
+                                            '+hot+'\
+                                            <div class="hycon2">\
+                                                <img src="../wap/img/pws_125.png" style="width: 0.2rem;height: 0.2rem;">\
+                                                <p style="margin-top: 0px;">\
+                                                    <span id="day">'+getDate(val.startDay,val.lastDay,val.serviceBeginTime,val.serviceEndTime,val.reqAttendTimes)+'</span>\
+                                                </p>\
+                                            </div>\
+                                            <div class="hycon2">\
+                                                <img style="width: 0.15rem;" src="../wap/img/pws_151.png" style="width: 0.2rem;height: 0.2rem;">\
+                                                <p style="margin-top: 0px;">\
+                                                    <span id="address">'+val.address+val.houseNo+'</span>\
+                                                </p>\
+                                            </div>\
+                                        </a>\
+                                    </li>';
+                            })
+                            $(".post").html(html)
+                        }
+                    }
+                }
+            })
+            //活动
+            $.ajax({
+                url: base_url1 + '/html5/v1/activity/selectByOrg',
+                //url: '/cm/termapi/geArticletListByMy',
+                type: "post",
+                dataType: "json",
+                data: "{\"orgCode\": \""+orgThirdAccount+"\", \"pageNumber\": 1, \"pageSize\": 3}",
+                headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+                success: function (resp) {
+                    if(resp.code==0){
+                        var region = resp.data.records;/*
+                    if(region==null || region.length==0){
+
+                    }*/
+                        $(".activity").append('<li id="bp_1_div"> <a href="javascript:void(0)" > <img id="bp_1" src="../wap/img/bp_1.jpg" /> <p></p></span> </a> </li>');
+                        for (var i in region) {
+                            var img = "../wap/img/bp_1.jpg";
+                            if(region[i].coverImg){
+                                img = region[i].coverImg+"?x-oss-process=image/resize,m_pad,h_"+$("#bp_1").height()+",w_"+$("#bp_1").width();
+                            }
+                            $(".activity").append('<li id="'+region[i].id+'" onclick="jump(\'../activity/activity_content.html?activityCode='+region[i].activityCode+'\')"> <a href="javascript:void(0)" > <img src="'+img+'" /> <p>'+region[i].name+'</p>' +
+                                ' <span> '+region[i].startDay+'-'+region[i].endDay+'</span> </a> </li>');
+                        }
+                        $("#bp_1_div").hide();
+                    }
+                }
+            });
+        }
+
+        //资讯
+        $.ajax({
+            url: base_url2+'/cm/orgapi/getArticleListForHY?forId='+prjvOrgId+'&forSubId=&createDateFrom=&createDateTo=&keyword=&tag=&pageNum=1&pageSize=3',
+            //url: '/cm/termapi/geArticletListByMy',
+            type: "get",
+            success: function (resp) {
+                if(resp.success==1){
+                    var region = resp.data.articles;
+                    for (var i in region) {
+                        var content = region[i].content.length>15?region[i].content.substring(0,15)+"...":region[i].content;
+                        $(".article").append(' <li id="'+region[i].article_id+'" onclick="jump(\''+base_url2+'/gysh_cm_pub/article/normal/detail/'+region[i].article_id+'.html\')"> <a href="javascript:void(0)"> <img src="'+region[i].title_img+'" />\
+                            <div>\
+                            <h3> '+region[i].title+' </h3>\
+                            <p> '+content+' </p>\
+                            <span> '+region[i].news_date.substr(0,region[i].news_date.length-3)+' </span>\
+                            </div> </a> </li>');
+                    }
+                }
+                /*if(resp.code==0){
+                }*/
+            }
+        });
+
+        //粉丝
+        $.ajax({
+            url: base_url2+'/cm/termapi/getAllBeWatchNums?uid='+prjvOrgId,
+            //url: '/cm/termapi/geArticletListByMy',
+            type: "get",
+            success: function (resp) {
+                if(resp.success==1){
+                    $("#beWatchNum").html(resp.data);
+                }
+            }
+        });
+
+        //历史活动
+        $.ajax({
+            url: base_url1 + '/html5/v1/section/selectByOrgCode',
+            type: "post",
+            dataType: "json",
+            data: "{\"orgCode\": \""+orgThirdAccount+"\", \"pageNumber\": 1, \"pageSize\": 6}",
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            success: function (resp) {
+                if(resp.code==0){
+                    var region = resp.data.records;
+                    for (var i in region) {
+                        var img = "../wap/img/bp_1.jpg";
+                        if(region[i].coverImg){
+                            img = region[i].coverImg+"?x-oss-process=image/resize,m_pad,h_"+$("#bp_1").height()+",w_"+$("#bp_1").width();
+                        }
+                        $(".old_activity").append(
+                            '<li id="'+region[i].id+'" onclick="jump(\'../org/old_activity_list.html?code='+region[i].code+'\')" style="width: 100%;float: left;padding:\
+                             10px 0px;border-bottom: 1px solid #eeeeee;"> \
+                                <a href="javascript:void(0)" > \
+                                    <img src="'+img+'" style="float: left;width: 25%;"/>\
+                                    <div style="float: left;padding-left: 3%;width: 72%;">\
+                                        <p style="width: 100px;font-size: 0.3rem;">'+region[i].name+'</p>\
+                                        <span> '+region[i].day.substring(5, region[i].day.length)+'\t&nbsp;'+region[i].startTime+'至'+region[i].endTime+'</span>\
+                                        <span style="display:inline-block;">'+region[i].address+'</span>\
+                                    </div>\
+                                </a>\
+                            </li>');
+                    }
+                }
+            }
+        });
+    }
+    function jumpIndex(href,type){
+        var url = '';
+        if($.cookie('user_msg')==undefined||$.cookie('token')==undefined){
+            var url = '../login/login.html?jumpAdd='+encodeURI(location.href);
+        }else{
+            var url = href+'?jumpType='+type+'&jumpAdd='+encodeURI(location.href);
+        }
+        window.location.href = url;
+    }
+    function jumpIndex1(href,type){
+        var url = href+'?jumpType='+type+'&jumpAdd='+encodeURI(location.href);
+        window.location.href = url;
+    }
+    function add_join(){
+        if($.cookie('user_msg')!=undefined && $.cookie('user_msg')!=null && $.cookie('user_msg')!=""){
+            /*var joinOrg = $.cookie("joinOrg");
+            var joinOrgStr = prjvOrgId + "-" + userId;
+            if(joinOrg != joinOrgStr) {*/
+                if (confirm("确定要申请加入吗？")) {
+                    $.ajax({
+                        url: base_url1 + '/html5/v1/orgPlace/joinOrg',
+                        type: "post",
+                        dataType: "json",
+                        data: "{\"prjvOrgId\": " + prjvOrgId + ", \"prjvUserId\": "+userId+"}",
+                        headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+                        success: function (resp) {
+                            if (resp.code == 0) {/*
+                                var expiresDate= new Date();
+                                expiresDate.setTime(expiresDate.getTime() + (60*60*8000));
+                                $.cookie('joinOrg', joinOrgStr, {expires: expiresDate, path:'/',domain:domain_url});*/
+                                alert("提交申请成功，等待管理员审核！");
+                            } else {
+                                alert(resp.msg);
+                            }
+                        }
+                    });
+                }
+            /*}else{
+                alert("不可重复申请！");
+            }*/
+        }else{
+            alert("请先登录！");
+            window.location.href = '../login/login.html?jumpAdd='+encodeURI(location.href);
+        }
+    }
+    function getDate(startDay, lastDay, serviceBeginTime , serviceEndTime, reqAttendTimes){
+        var r = "";
+
+        var start = new Date(startDay);
+        var last = new Date(lastDay);
+        var startyear = start.getFullYear();
+        var startmonth = start.getMonth() + 1;
+        var startweekday = start.getDate();
+
+        var lastyear = last.getFullYear();
+        var lastmonth = last.getMonth() + 1;
+        var lastweekday = last.getDate();
+        if(startyear==lastyear && startmonth==lastmonth && startweekday==lastweekday){
+            return startmonth+"月"+startweekday+"日"+"&nbsp;&nbsp;&nbsp;"+serviceBeginTime+"-"+serviceEndTime+"&nbsp;&nbsp;&nbsp;至少参加"+reqAttendTimes+"次";
+        }
+        if(startyear==lastyear && (startmonth!=lastmonth|| startweekday!=lastweekday)){
+            return startmonth+"月"+startweekday+"日至"+lastmonth+"月"+lastweekday+"日"+"&nbsp;&nbsp;&nbsp;"+serviceBeginTime+"-"+serviceEndTime+"&nbsp;&nbsp;&nbsp;至少参加"+reqAttendTimes+"次";
+        }
+        if(startyear!=lastyear){
+            return startyear+"年"+startmonth+"月"+startweekday+"日至"+lastyear+"年"+lastmonth+"月"+lastweekday+"日"+"&nbsp;&nbsp;&nbsp;"+serviceBeginTime+"-"+serviceEndTime+"&nbsp;&nbsp;&nbsp;至少参加"+reqAttendTimes+"次";
+        }
+    }
+    function jumpId(url){
+        $(location).attr('href', url+"&id="+id+"&orgCode="+orgCode+"&url=mobileDetailIndex");
+    }
+</script>
+</body>
+</html>

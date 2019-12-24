@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/user/user.js"></script>
+    <script type="text/javascript" src="../wap/js/public.js"></script>
+    <script type="text/javascript" src="../wap/js/swiper.min.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+    <script type="text/javascript" src="../wap/js/managementact/add_quota.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <style>
+        #header {width: 100%;height: 43px;overflow: hidden;background: #FFFFFF;}
+        #header .swiper-slide {padding: 0 18px;width:auto;line-height: 41px;height: 41px}
+        #header .swiper-slide a{display: block;overflow: hidden;font-size: 14px;color: #000000}
+        #header .swiper-slide.current{border-bottom: 2px solid #72B91E}
+        #header .swiper-slide.current a{color: #72B91E}
+		
+		.mr_w_nr{width: 100%;overflow: hidden;}
+		.mr_w_nr img{width: 40%;margin: auto}
+		.mr_w_nr span{display: block;font-size: 14px;text-align: center;line-height: 30px}
+    </style>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+	<div class="warp_zy_j">
+        <a href="javascript:history.go(-1);"></a>
+        <span>公益上海</span>
+    </div>
+    <ul class="warp_gl_l" id="duo">
+		<!-- <li>
+			<div class="mr_w_nr">
+				<img src="../wap/img/pws_164.png">
+				<span>暂无内容</span>
+			</div>
+		</li> -->
+    </ul>
+
+    <ul class="warp_gl_l" id='dan'>
+        <!-- <li>
+            <div class="warp_gl_l_sp ticket" data-type='ticket'>
+                <div class="warp_gl_l_so" data-type='ticket'>
+                    <b>公众门票</b>
+                </div>
+                <div class="warp_gl_l_su"></div>
+                <div class="warp_gl_l_si">
+                    <a href="javascript:void(0)">增加名额</a>
+                    <span>需报名<i>0</i>人/已报<u>0</u>人</span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="warp_gl_l_sp manage" data-type='ticket'>
+                <div class="warp_gl_l_so" data-type='ticket'>
+                    <a href="javascript:void(0)" class="certification">直接发证</a>
+                    <b>管理员工作证</b>
+                </div>
+                <div class="warp_gl_l_su"></div>
+                <div class="warp_gl_l_si">
+                    <a href="javascript:void(0)">增加名额</a>
+                    <span>需报名<i>0</i>人/已报<u>0</u>人</span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="warp_gl_l_sp guestcard" data-type='guestcard'>
+                <div class="warp_gl_l_so">
+                    <a href="javascript:void(0)" class="invite">直接邀请</a>
+                    <b>嘉宾证</b>
+                </div> 
+                <div class="warp_gl_l_su"></div>
+                <div class="warp_gl_l_si">
+                    <a href="javascript:void(0)">增加名额</a>
+                    <span>需报名<i>0</i>人/已报<u>0</u>人</span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="warp_gl_l_sp mediacard" data-type='mediacard'>
+                <div class="warp_gl_l_so">
+                    <a href="javascript:void(0)" class="invite">直接邀请</a>
+                    <b>媒体证</b>
+                </div> 
+                <div class="warp_gl_l_su"></div>
+                <div class="warp_gl_l_si">
+                    <a href="javascript:void(0)">增加名额</a>
+                    <span>需报名<i>0</i>人/已报<u>0</u>人</span>
+                </div>
+            </div>
+        </li> -->
+    </ul>
+
+    <div class="warp_gl_y_sw">
+        <div class="warp_gl_y_sq"></div>
+        <ul class="warp_gl_y_sl">
+           
+        </ul>
+    </div>
+
+    <div class="warp_gl_l_sy">
+        <div class="warp_gl_l_st"></div>
+        <div class="warp_gl_l_sr">
+            <form id='form1'>
+                <div class="warp_gl_l_se">
+                    <div class="warp_gl_l_sw">
+                        <input type="text" name="total" class="spinnerExample"/>
+                    </div>
+                    <div class="warp_gl_l_sq">
+                        <input type="hidden" name="code" value="" />
+                        <input type="hidden" name="ticketOrder" value="" />
+                        <input type="hidden" name="type" value="" />
+                        <span>请输入新增数量</span>
+                    </div>
+                    <ul class="warp_gl_l_sl">
+                        <li>
+                            <a href="javascript:void(0)">取 消</a>
+                        </li>
+                        <li>
+                            <input type="button" value="确 定">
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $('.spinnerExample').spinner({});
+    mor_activity_query('work',sectionCode,0);
+    mor_activity_query('task',sectionCode,0);
+    get_result_msg('ticket');
+    get_result_msg('manage');
+    get_result_msg('guestcard');
+    get_result_msg('mediacard');
+</script>
+</body>
+</html>

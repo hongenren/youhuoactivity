@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>补登</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../wap/css/index.css"/>
+    <link rel="stylesheet" href="../huangye/css/mobile.css"/>
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/task_register_manual_sign1.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mobiscroll.custom-3.0.0-beta6.min.css"/>
+    <script type="text/javascript" src="../wap/js/jquery.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
+    <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+    <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+    <script type="text/javascript" src="js/mobiscroll.custom-3.0.0-beta6.min.js"></script>
+</head>
+<body style="background: #FFFFFF">
+<div class="warp">
+    <div class="warp_zy_j" style="border-bottom: 1px solid #E6E6E6">
+        <a href="javascript:history.go(-1);"></a>
+        <span>已报名补登</span>
+    </div>
+    <div class="memberSearchWrap clearfix">
+        <div class="memberSearchLeft" style="width: 100%; border-radius: 0px;background: none;border: 1px solid #E6E6E6;">
+            <input class="memberSearchVal" type="text" placeholder="搜索姓名或手机号并确认成员"style="padding-right: 0px;width: 85%;">
+            <div class="memberSearchIcon memberSearchBut" style="float:right;height:100%;width:15%;border: 0px;background: #72B81E;position:static;
+            background-image: url(../wap/img/pws_999.png);background-repeat: no-repeat;background-position: 50% 50%;background-size: auto 20px;" onclick="getUser(1,10);"></div>
+        </div><!--
+        <div class="memberSearchRight" onclick="getUser(1,10);">筛选</div>-->
+    </div>
+    <ul class="warp_zy_h">
+        <li>
+            <a href="javascript:void(0)" style="background-image: none;">
+                <span>请选择需要补登的人员</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="warp_zy_h warp_zy_h_List">
+        <!--<li>-->
+        <!--<a href="task_register_manual_sign2.html?ticketCode='+val.ticket+'&userCode='+val.user+'&recruitName='+encodeURI(encodeURI(val.name))+'&arriveTime='+val.arriveTime-->
+        <!--+'&times='+val.times+'&checkInTime='+val.checkInTime+'&checkOutTime='+val.checkOutTime+'&nickName='+encodeURI(encodeURI(val.nickName))+'&headImg='+val.headImg+'">-->
+        <!--<span>张三<b style="font-weight:normal;color: #acacb4;float: right;margin-right: 30px;">哈哈</b><span style="color: #acacb4;">呵呵呵</span></span>-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--<li data-txt='{"name":"张三"}'>-->
+            <!--<a href="javascript:void(0)">-->
+                <!--<span>张三<button class="upTimeBtn">调整时长</button><span class="trac_times" style="color: #acacb4;">呵呵呵</span></span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--<li data-txt='{"name":"李四"}'>-->
+            <!--<a href="javascript:void(0)">-->
+                <!--<span>李四<b style="font-weight:normal;color: #acacb4;float: right;margin-right: 30px;">哈哈</b><span class="trac_times" style="color: #acacb4;">呵呵呵</span></span>-->
+            <!--</a>-->
+        <!--</li>-->
+    </ul>
+    <div class="loadings" style="width:100%;height:50px;background:#fff url('../huangye/images/loadings.gif') no-repeat center;background-size:auto 80%;display:none"></div>
+    <div class="lastext" style="text-align:center;line-height:50px;color:#666;display:none">没有更多了</div>
+    <!--<div class="warp_dd_i_si">-->
+        <!--<span>请仔细核对姓名后再进行下一步操作</span>-->
+    <!--</div>-->
+    <input id="input2" type="text" placeholder="时长" style="height:0;overflow:hidden">
+</div>
+<div class="ht70"></div>
+<!--<footer class="warp_pws_m_sw manualNextBtn" style="display:none">-->
+    <!--<input type="button" value="下一步" style="background-color: #72B81E;">-->
+<!--</footer>-->
+<div class="tem_enroll_editors clearfix">
+    <div class="left">
+        <button class="on check-all-btn">全选</button>
+    </div>
+    <div class="right">
+        <button class="batchExamineBtn manualNextBtn">调整时长</button>
+    </div>
+</div>
+</body>
+<!--<script type="text/javascript" src="js/task_register_manual_sign1.js"></script>-->
+<script>
+    function get_ForWaitVerify(pageNumber){
+        var arr = {
+            "subCode": $.getUrlParam('subCode'),
+            "state":20,
+            "pageSize": 10,
+            "pageNumber": pageNumber||1
+        };
+        if($(".memberSearchVal").val()!==''){
+            arr.searchValue=$(".memberSearchVal").val()
+        }
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'post',
+            url:base_url + "html5/v1/newTask/applyList",
+            data:JSON.stringify(arr),
+            dataType:'json',
+            headers: {'Content-Type': 'application/json', 'token': getCookie("token")},
+            timeout : 5000,
+            beforeSend:function(XMLHttpRequest){
+                $(".loadings").show();
+                $(".lastext").hide();
+            },
+            success:function(data){
+                var datas=data.data;
+                if(datas){
+                    var records=datas.records;
+                    if(records.length>0){
+                        var li='';
+                        for(var i=0;i<records.length;i++){
+                            var nickName=records[i].nickName;
+                            var mobile=records[i].mobile;
+                            var headImg=records[i].headUrl;
+                            var user=records[i].prjvUserId;
+                            var validTime=records[i].validTime!==0?records[i].validTime/60:records[i].validTime;
+                            var dataJson={
+                                "headImg": headImg,
+                                "mobile": mobile,
+                                "nickName": nickName,
+                                "user": user,
+                                "validTime":validTime
+                            };
+
+                            li+='<li data-json=\''+JSON.stringify(dataJson)+'\'>\n' +
+                                '            <a href="javascript:void(0)">\n' +
+                                '                <span>'+nickName+'<span style="color: #acacb4;" class="trac_times">服务时长'+validTime+'小时</span></span>\n' +
+                                '                <button class="upTimeBtn" onclick="upTimeEvent(this)">调整时长</button>'+
+                                '            </a>\n' +
+                                '        </li>'
+                        }
+                        $(".warp_zy_h_List").append(li)
+                    }else {
+                        trmsScrollEvent(pageNumber-1)
+                        $(".loadings").hide();
+                        $(".lastext").show();
+                    }
+
+
+                }
+            },
+            error:function(){
+                layer.open({
+                    content: '获取失败'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+            },
+            complete:function(XMLHttpRequest,status){
+                $(".loadings").hide();
+                if(status=='timeout'){//超时,status还有success,error等值的情况
+                    $(".loadings").hide();
+                    $(".lastext").show();
+                }
+            }
+
+        })
+    };
+    var trmsScrollEvent=function(pageNumber){
+        var pageNumber=pageNumber||1;
+        //滚动事件
+        var t=0;
+        var p=0;
+        $(document).unbind('scroll').scroll(function(e){
+            t=$(this).scrollTop();
+            var doc=$(document).height();
+            var win=$(window).height();
+            console.log('doc-'+doc,' win-'+win)
+            if(p<=t){//console.log("向下");
+                if(t>doc-(win+100)){
+
+                    if($(document).height() - $(window).height() - $(window).scrollTop()<5){
+                        //添加数据
+                        pageNumber+=1;
+                        get_ForWaitVerify(pageNumber);
+                    }
+                }else{
+                    $(".loadings").hide();
+                }
+
+            }else{//console.log("向上")
+            }
+            setTimeout(function(){p=t},0)
+        });
+    };
+
+    function stopPropagation(e) {
+        e = e || window.event;
+        if(e.stopPropagation) { //W3C阻止冒泡方法
+            e.stopPropagation();
+        } else {
+            e.cancelBubble = true; //IE阻止冒泡方法
+        }
+    }
+    var upTimeEvent=function(obj){
+        console.log('1111111');
+
+        $(obj).parents('li').addClass('on');
+        setTimeout(function(){
+            $('#input2').mobiscroll('show');
+        },500);
+        stopPropagation()
+
+        // $(obj).parents('li').find(".trac_times").text('服务时长'+event.valueText+'小时');
+
+    };
+    //时间
+    var timeEvent=function(num){
+        console.log(num)
+        if(num!==null&&parseInt(num)>0){
+            var fromValues = [],
+                toValues = ['00','30'];
+            for(var i=0;i<parseInt(num);i++){
+                fromValues.push(i+1)
+            }
+            // alert(3)
+            $('#input2').mobiscroll().scroller({
+                display: 'bottom',
+                theme: 'mobiscroll',
+                lang: "zh",
+                rows: 7,
+                wheels: [
+                    [{
+                        circular: false,
+                        data: fromValues,
+                        label: '时'
+                    }
+                        // , {
+                        //     circular: false,
+                        //     data: toValues,
+                        //     label: '分'
+                        // }
+                    ]
+                ],
+                showLabel: true,
+                minWidth: 130,
+                onSet: function (event, inst) {
+                    // console.log(event)
+                    // console.log(inst)
+
+                    var arr2={
+                        "subCode": $.getUrlParam('subCode'),
+                        "userList":'',
+                        "validTime": parseInt(event.valueText)*60
+                    };
+                    var manualists=[];
+                    $(".warp_zy_h_List li.on").each(function(){
+                        var dataTxt=$(this).attr('data-json');
+                        console.log(dataTxt)
+                        var manualObj=JSON.parse(dataTxt)
+                        var manualPush={'user':manualObj['nickName']}
+                        manualists.push(manualPush)
+                    })
+                    arr2.userList=manualists;
+
+                    $.ajax({
+                        url: base_url + 'html5/v1/newTask/batchManualChange',
+                        type: "post",
+                        async: false,
+                        dataType: "json",
+                        data: JSON.stringify(arr2),
+                        headers: {'Content-Type': 'application/json', 'token': $.cookie("token")},
+                        success: function (resp) {
+                            if (resp.code == 0) {
+                                layer.open({
+                                    content: '补登成功'
+                                    , skin: 'msg'
+                                    , time: 1 //2秒后自动关闭
+                                });
+                                $(".warp_zy_h_List li.on").each(function(){
+                                    $(this).find(".trac_times").text('服务时长'+event.valueText+'小时');
+                                });
+                                setTimeout(function () {
+                                    // window.location.href='task_register.html'
+                                }, 1000);
+                            } else {
+                                layer.open({
+                                    content: '补登失败'
+                                    , skin: 'msg'
+                                    , time: 1 //2秒后自动关闭
+                                });
+                            }
+                        }
+                    })
+                    // Your custom event handler goes here
+                },
+                formatValue: function (data) {
+                    return data[0];
+                }
+            });
+        }
+
+    };
+
+    var manualNextBtnLight=function(){
+        if( $(".warp_zy_h_List li.on").length>0){
+            $(".batchExamineBtn").addClass('manualNextBtn on')
+        }else {
+            $(".batchExamineBtn").removeClass('manualNextBtn on')
+        }
+    };
+    $(function(){
+        get_ForWaitVerify(1);
+        trmsScrollEvent(1);
+
+        var type=decodeURI($.getUrlParam("type"));
+        var postfile=JSON.parse(decodeURI($.getUrlParam('postfile')));
+
+        var nums=postfile.serviceTime==''?3:postfile.serviceTime;
+        timeEvent(parseInt(nums));
+        // if(type=='1'){
+        //     console.log('1')
+        //     $(".warp_pws_m_sw").show();
+        //     $(".tem_enroll_editors").hide()
+        // }else {
+        //     console.log('2')
+        //     $(".warp_pws_m_sw").hide();
+        //     $(".tem_enroll_editors").show()
+        // }
+
+        $(".warp_zy_h_List li").live('click',function(){
+            $(this).toggleClass('on');
+            manualNextBtnLight();
+        });
+        $(".manualNextBtn").click(function(){
+
+            var select1=$(".warp_zy_h_List li.on");
+            if(select1.length<=0){
+                layer.open({
+                    content: '请选择补登人员'
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
+                });
+                return false
+            }
+
+            $('#input2').mobiscroll('show');
+            // var manualists=[]
+            // $(".warp_zy_h_List li").each(function(){
+            //     if($(this).hasClass('on')){
+            //         var dataTxt=$(this).attr('data-txt')
+            //         console.log(dataTxt)
+            //         var manualObj=JSON.parse(dataTxt)
+            //         var manualPush={'user':manualObj['name']}
+            //         manualists.push(manualPush)
+            //     }
+            // })
+            // $.cookie("manualists",JSON.stringify(manualists))
+            // window.location.href='task_register_manual_sign2.html'
+        });
+        var isbool=false;
+        $(".check-all-btn").click(function(){
+            if(!isbool){
+                $(this).text('取消全选')
+                $(".warp_zy_h_List li").addClass('on');
+                $(".batchExamineBtn").addClass('manualNextBtn on');
+                isbool=true
+            }else {
+                $(this).text('全选')
+                $(".warp_zy_h_List li").removeClass('on');
+                $(".batchExamineBtn").removeClass('manualNextBtn on')
+                isbool=false
+            }
+
+        })
+    })
+</script>
+</html>

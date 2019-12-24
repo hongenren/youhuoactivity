@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公益上海</title>
+    <meta name="Keywords" content="公益上海"/>
+    <meta name="description" content="公益上海"/>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <!--[if lte IE 8]>
+    <script>window.location.href = 'http://support.dmeng.net/upgrade-your-browser.html?referrer=' + encodeURIComponent(window.location.href);</script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="../meng/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/task_send_management.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:history.go(-1);"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>收消息</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+    <div class="tem_tab_wrap clearfix">
+        <div class="tem_tab_list left tsm_box_btnA on"><span>转接任务</span></div>
+        <div class="tem_tab_list right tsm_box_btnB"><span>退出任务</span></div>
+    </div>
+    <div class="tsm_personal_list_wrap" id="content">
+        <div class="tsm_personal_list clearfix">
+            <!--<div class="tem_enroll_radios"></div>-->
+            <div class="tsm_personal_user" style="background-image:url('../wap/img/pws_27.jpg')"></div>
+            <div class="tsm_personal_name">张三</div>
+            <div class="trm_personal_detail">查看详情 <i></i></div>
+        </div>
+        <div class="tsm_personal_list clearfix">
+            <!--<div class="tem_enroll_radios"></div>-->
+            <div class="tsm_personal_user" style="background-image:url('../wap/img/pws_27.jpg')"></div>
+            <div class="tsm_personal_name">张三</div>
+            <div class="trm_personal_detail">查看详情 <i></i></div>
+        </div>
+    </div>
+
+</div>
+<!--<div class="sendButtonWrap on">-->
+    <!--<button class="targetNext on">发送</button>-->
+<!--</div>-->
+<div class="trm_personal_examine_wrap">
+    <div class="sendHistoryHead">
+        <a class="sendBack" href="javascript:void(0)"><i></i><!--<span>返回</span>--></a>
+        <div class="sendHeadList"><span>审核详情</span></div>
+        <!--<div class="sendHeadButton"><button>结盟目录</button></div>-->
+    </div>
+    <div class="trm_personal_examine_detail">
+        <div class="tped_user"><strong>申请人:</strong><a href="javascript:void(0)"><span>张三 <i class="tped_tell_icon"></i></span></a></div>
+        <div class="tped_user"><strong>接收人:</strong><a href="javascript:void(0)"><span>张三 <i class="tped_tell_icon"></i></span></a></div>
+        <div class="tped_user"><strong>转接日期:</strong><span>2019-11-15</span></div>
+        <div class="tped_user"><strong>申请原因:</strong>这是原因</div>
+        <div class="tped_buttons"><button>通过</button><button class="on">拒绝</button></div>
+    </div>
+</div>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/public.js"></script>
+<script type="text/javascript" src="../wap/js/common.js"></script>
+<script type="text/javascript" src="../wap/js/dropload.min.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script src="js/task_public.js"></script>
+<script src="js/task_receive_management.js"></script>
+<script>
+    $(function(){
+        queryPostByOrgCode(0,10);
+
+        //
+        $(".sendBack").click(function(){
+            $(".trm_personal_examine_wrap").hide();
+        });
+
+        //
+        $(".tsm_box_btnA").click(function(){
+            $(this).addClass('on').siblings('.tem_tab_list').removeClass('on');
+            queryPostByOrgCode(0,10);
+        })
+        $(".tsm_box_btnB").click(function(){
+            $(this).addClass('on').siblings('.tem_tab_list').removeClass('on');
+            queryPostByOrgCode(0,20);
+        })
+    })
+</script>
+</body>
+</html>

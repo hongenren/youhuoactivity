@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head><meta charset=UTF-8><title></title><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><script>(function (doc, win) {
+              var docEl = doc.documentElement,
+                  resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                  recalc = function () {
+                      var clientWidth = docEl.clientWidth;
+                      if (!clientWidth) return;
+                      var fontSize = 17 * (clientWidth / 320);
+                      fontSize = Math.round((fontSize > 27) ? 27 : fontSize);
+                      docEl.style.fontSize = fontSize + 'px';
+                      var dpi = window.devicePixelRatio;
+                      docEl.setAttribute('data-dpi', dpi);
+                  };
+              recalc();
+              if (!doc.addEventListener) return;
+              win.addEventListener(resizeEvt, recalc, false);
+          })(document, window);</script><link rel=stylesheet href=https://unpkg.com/mint-ui/lib/style.css><link href=./static/css/app.5da8e3ab8ccf235b67f6b37f60076aca.css rel=stylesheet></head><body><section id=insurance></section><script type=text/javascript src=./static/js/manifest.3ad1d5771e9b13dbdad2.js></script><script type=text/javascript src=./static/js/vendor.31185f9dc8752781f584.js></script><script type=text/javascript src=./static/js/app.2c587c385ccc96718417.js></script></body></html>
