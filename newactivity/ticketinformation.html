@@ -226,7 +226,7 @@ var vueIM = new Vue({
                 ] //票证
         }
     },
-    mounted () {
+    created () {
         this.getIntegral();
         console.log(sessionStorage.getItem(1));
         JSON.parse(sessionStorage.getItem(this.getUrlParam('id'))) && (this.publicParamList = JSON.parse(sessionStorage.getItem(this.getUrlParam('id'))));
@@ -387,6 +387,7 @@ var vueIM = new Vue({
                 success: function (resp) {
                     if (resp.code == 0) {
                         console.log(resp.data.sectionCode);
+                        window.location.href="./postActivity.html?sectionCode=" + resp.data.sectionCode;
                         sessionStorage.setItem(that.getUrlParam('id'), JSON.stringify(that.publicParamList));
                         sessionStorage.setItem(that.getUrlParam('sectionCode'), resp.data.sectionCode);
                     } else {

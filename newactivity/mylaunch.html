@@ -12,6 +12,8 @@
     <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="css/base.css"/>
     <link rel="stylesheet" href="css/activity_order.css"/>
+    <link rel="stylesheet" href="css/mylaunch.css"/>
+    <link rel="stylesheet" type="text/css" href="../post/RightMenu/smartMenu.css"/>
     <script type="text/javascript" src="js/rem.js"></script>
 </head>
 <body>
@@ -32,9 +34,34 @@
             <span>历史订单</span>
         </a>
     </div>
+    <div class="screenButList screenButList1" style="margin-top: 3px;border-top: 0px;">
+        <input type="search" class="search_input" id="name_input" placeholder="请输入机构或活动名称来搜索" style="height:30px;-webkit-appearance:none;border-radius:0px;padding-left: 5px;">
+        <input type="button" class="search_button" value="" style="-webkit-appearance:none;border-radius:0px;">
+    </div>
+    <div  id="content">
+    <ul>
+        <li class="order-list" v-for="(item, index) in 12" :key="index">
+            <div class="my-order-title">
+                <span>南京东路慈善超市参观票{{index}}</span>
+            </div>
+            <p><i class="iconfont icon-naozhong"></i>19/6/6 08:00-12:00 </p>
+            <p><i class="iconfont icon-didian"></i>上海市长宁区金钟路658弄11号2楼东华大学科技园内11号2楼</p>
+            <div class="oforderbox">
+                <span class="more">更多</span>
+                <a href="./activityPoster.html">海报</a>
+                <span class="oforder">取消订单1</span>
+                <span class="oforder">取消订单</span>
+            </div>
+            <div class="yh-group">
+                <span class="l">票证场次信息</span>
+                <span>今天</span>
+            </div>
+        </li>
+    </ul></div>
 </div>
 </body>
 <script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../post/RightMenu/jquery-smartMenu.js"></script>
 <script type="text/javascript" src="../wap/js/config.js"></script>
 <script type="text/javascript" src="js/vue.min.js"></script>
 <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
@@ -52,17 +79,47 @@ var vueIM = new Vue({
             searchFrom: {
                 org: 'AAA789', // 机构标识
                 current: 1, // 当前页
-                size: 20 // 页容量	
-            }
+                size: 20 // 页容量
+            },
+            moreMenuData:[[
+                {
+                    text: "发通知",
+                    func: function () {
+                        jump("./send_notification.html?type=0&pkPostCode="+pkPostCode);
+                    }
+                },
+                {
+                    text: "收消息",
+                    func: function () {
+                        jump("./receive_messages.html?pkPostCode="+pkPostCode);
+                    }
+                },
+            ]]
         };
     },
-    created () {
-        // this.init();
+    mounted () {
+        this.init();
     },
     methods: {
         init (){
             // 线上
             this.searchFrom.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'AAA789';
+            var _this = this;
+            $(".more").each(function(){
+                var that=$(this);
+                var offsetWidth=$(window).width() - that.offset().left - that.outerWidth();
+                if(offsetWidth<200){
+                    that.smartMenu(_this.moreMenuData,{offsetX:-100});
+                }else {
+                    if(window.innerWidth<640){
+                        that.smartMenu(_this.moreMenuData);
+                    }else{
+                        that.smartMenu(_this.moreMenuData,{offsetX:-parseInt(that.offset().left)/1.7});
+                    }
+
+                }
+                console.log()
+            });
         },
         zhankai () {
             $('.activitmark').css({height: "auto"});

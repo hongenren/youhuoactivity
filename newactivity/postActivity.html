@@ -39,11 +39,14 @@
     </div>
     <div class="moredata">如需设置多日期票证，发布成功后，请到活动管理页面再添加</div>
     <div class="periodbox">
-        <div :class="{shade: Ishade}"></div>
         <div class="yh-group-cell">
-            <span>票证日期</span>
-            <div class="r">
+            <span>票证日期{{showday}}</span>
+            <div class="r" v-if="!showday">
                 <input type="text" placeholder="请选择" name="postime" class="post_time">
+                <i></i>
+            </div>
+            <div class="r" v-if="showday">
+                <span>{{day}}</span>
                 <i></i>
             </div>
         </div>
@@ -88,9 +91,10 @@ var vueIM = new Vue({
     data () {
         return {
             title: null,
+            day: null,
+            showday: false,
             startime: null,
             number: 0,
-            Ishade: true,
             addFrom: {
                 activityCode: sessionStorage.getItem('activityCode'),
             },
@@ -104,9 +108,15 @@ var vueIM = new Vue({
     },
     mounted() {
         this.title = sessionStorage.getItem('name');
-        sessionStorage.getItem('activityCode') && (this.Ishade = false);
+        console.log(this.getUrlParam('sectionCode'));
+        if (this.getUrlParam('sectionCode')) {
+            this.showday = true;
+        } else {
+            this.showday = false;
+        }
         this.init('0');
         $("input[name='postime']").val(sessionStorage.getItem('postime'));
+        this.day = sessionStorage.getItem('postime');
         sessionStorage.getItem('periodList') && (this.periodList = JSON.parse(sessionStorage.getItem('periodList')));
         for (let i = 0; i < this.periodList.length; i++) {
             this.$nextTick(()=>{
@@ -116,8 +126,14 @@ var vueIM = new Vue({
                 this.periodList[i].sectionCode = sessionStorage.getItem('sectionCode' + i);
             })
         }
+        this.getSectionList();
     },
     methods: {
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
         init (index) {
             console.log(index);
             var that  = this;
@@ -142,6 +158,9 @@ var vueIM = new Vue({
                     var array = valueText.split('-');
                     var selectedDate = array[0] + "年" + array[1] + "月" + array[2] + "日";
                     sessionStorage.setItem('postimeshow', selectedDate);
+                },
+                onBeforeShow: function (inst) {//展示前的事件
+                    // inst.settings.readonly = true;//只读属性
                 },
                 startYear: currYear,
                 endYear: currYear +30,
@@ -213,6 +232,28 @@ var vueIM = new Vue({
         gosetadministrator (id) {
             window.location.href="./setadministrator.html?adminid=" + id + "&sectionCode=adminsectionCode" +  id;
             sessionStorage.setItem('periodList', JSON.stringify(this.periodList));
+        },
+        // 获取活动下面的场次
+        getSectionList () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/getSectionList',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.addFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        console.log(resp.data);
+                    } else {
+                        layer.open({
+                            content: resp.msg,
+                            skin: 'msg',
+                            time: 1
+                        });
+                    }
+                }
+            });
         },
         // 提交
         submit () {

@@ -73,24 +73,13 @@
 <script type="text/javascript" src="js/quill.js"></script>
 <script>
   const toolbarOptions = [
-  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-  ['blockquote', 'code-block'],
- 
-  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-  [{ 'direction': 'rtl' }],                         // text direction
- 
-  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
- 
-  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-  [{ 'font': [] }],
-  [{ 'align': [] }],
- 
-  ['clean']                                         // remove formatting button
-];
+              ['bold', 'italic', 'underline'],    //加粗，斜体，下划线，删除线
+              [{ 'header': 1 }],        // 标题，键值对的形式；1、2表示字体大小
+              [{ 'script': 'sub'}, { 'script': 'super' }],   // 上下标
+              [{ 'color': [] }],     // 字体颜色，字体背景颜色
+              [{ 'align': [] }],    //对齐方式
+              ['image']    //上传图片、上传视频
+            ];
 var editor = new Quill('#editors', {
     modules: {toolbar: toolbarOptions},
     theme: 'snow'

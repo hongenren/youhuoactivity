@@ -86,8 +86,8 @@
             <p class="profiletopintro">活动简介<span>(不超过500个字)</span></p>
             <p class="profiletophint">手机端仅支持简单的图文编辑，如果想编辑的内容更丰富，请到电脑上操作。</p>
         </div>
-        <div id="editors" style="min-height: 200px;"><!-- 编辑器容器 --></div>
     </div>
+    <div id="editors" style="min-height: 200px;"><!-- 编辑器容器 --></div>
     <div class="yh-group">
         <span class="l">活动日期<i class="iconfont icon-wenhao" @click="reminder"></i></span>
         <div class="datatime">
@@ -287,7 +287,7 @@ var vueIM = new Vue({
     },
     created () {
         this.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'BBA119945';
-        this.fuwenben();
+        // this.fuwenben();
         this.getcoverImg();
     },
     methods: {
@@ -468,6 +468,13 @@ var vueIM = new Vue({
                     console.log(resp);
                     sessionStorage.setItem('name', resp.data.name);
                     sessionStorage.setItem('activityCode', resp.data.activityCode);
+                    // -10保存活动 10直接发布
+                    if (type == -10) {
+                        window.location.href='./postActivity.html?activityCode='+resp.data.activityCode;
+                    }
+                    if (type == 10) {
+                        window.history.go(-1);
+                    }
                 },
                 error: function(e) {
                     layer.open({
@@ -512,5 +519,17 @@ var vueIM = new Vue({
         endYear: currYear +30,
         stepMinute: 1,
         showNow: true
+    });
+    const toolbarOptions = [
+            ['bold', 'italic', 'underline'],    //加粗，斜体，下划线，删除线
+            [{ 'header': 1 }],        // 标题，键值对的形式；1、2表示字体大小
+            [{ 'script': 'sub'}, { 'script': 'super' }],   // 上下标
+            [{ 'color': [] }],     // 字体颜色，字体背景颜色
+            [{ 'align': [] }],    //对齐方式
+            ['image']    //上传图片、上传视频
+        ]
+    var editor = new Quill('#editors', {
+        modules: {toolbar: toolbarOptions},
+        theme: 'snow'
     });
 </script>

@@ -32,12 +32,12 @@
             <p>咨询人：{{detailList.contactName}}  {{detailList.contactPhone}}</p>
         </div>
         <div class="activitmark">
-            <div>{{detailList.demo}}</div>
+            <!-- <div>{{detailList.demo | escapeHTML}}</div> -->
         </div>
         <div class="zhankai" @click="zhankai">展开</div>
         <div class="yh-group">
             <span class="l">票证</span>
-            <span>查看更多</span>
+            <a href="./ticketList.html">查看更多</a>
         </div>
         <ul>
             <li class="ticketlist" v-for="(item, index) in detailList.sectionPublicVoList" :key="index">
@@ -149,7 +149,7 @@ var vueIM = new Vue({
             }
         };
     },
-    created () {
+    mounted () {
         // this.init();
         this.getdetail();
     },
@@ -167,6 +167,12 @@ var vueIM = new Vue({
                 default:
                     return '';
             }
+        },
+        //字符串转HTML
+        escapeHTML (a) {
+            a = "" + a;
+            console.log(a.replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&amp;nbsp;/gi, '&nbsp;').replace("\"", ""));
+            return a.replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&amp;nbsp;/gi, '&nbsp;');
         }
     },
     methods: {
@@ -186,6 +192,7 @@ var vueIM = new Vue({
                 success: function (res) {
                     console.log(res.data);
                     that.detailList = res.data;
+                    $(".activitmark").html(that.detailList.demo.replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&amp;nbsp;/gi, '&nbsp;'));
                 }
             });
         },

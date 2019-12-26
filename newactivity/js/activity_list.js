@@ -1,5 +1,5 @@
 var total="", area_info_city_html="";
-function login_in(pageNumber,pageSize,categoryCode,city,adCode){
+function login_in(current,pageSize,categoryCode,city,adCode){
     dataJson.address = adCode;
     var startDay = "";
     var endDay = "";
@@ -37,7 +37,7 @@ function login_in(pageNumber,pageSize,categoryCode,city,adCode){
         me.resetload();
     }else{
         //searchMe.lock();
-        var url = base_url + "html5/v1/activity/queryByCategory";
+        var url = base_url + "html5/v2/activity/queryByCategory";
         $(".warp_bp_p").empty();
         $('#content').dropload({
             scrollArea : window,
@@ -45,11 +45,11 @@ function login_in(pageNumber,pageSize,categoryCode,city,adCode){
                 queryMe = me;
                 $(".noneLi").hide();
                 $(".dropload-down").remove();
-                pageNumber++;
+                current++;
                 if(city==''){
-                    var data = {"adCode":adCode,"lat":lat,"lng":lng,"startDay":startDay,"endDay":endDay,"categoryCode":categoryCode,"pageNumber":pageNumber,"pageSize":pageSize};
+                    var data = {"adCode":adCode,"lat":lat,"lng":lng,"startDay":startDay,"endDay":endDay,"categoryCode":categoryCode,"current":current,"pageSize":pageSize};
                 }else{
-                    var data = {"adCode":adCode,"lat":lat,"lng":lng,"startDay":startDay,"endDay":endDay,"categoryCode":categoryCode,"pageNumber":pageNumber,"pageSize":pageSize,"address":city};
+                    var data = {"adCode":adCode,"lat":lat,"lng":lng,"startDay":startDay,"endDay":endDay,"categoryCode":categoryCode,"current":current,"pageSize":pageSize,"address":city};
                 }
                 $.ajax({
                     xhrFields: {
@@ -74,7 +74,7 @@ function login_in(pageNumber,pageSize,categoryCode,city,adCode){
                                         var endDay = k.endDay;
                                         html += '<li>\
                                                 <a href="../activity/activity_content.html?activityCode='+k.activityCode+'">\
-                                        <p><i>主办方：</i>'+k.orgName+'</p><br/>';
+                                                <br/>';
                                         if(k.coverImg!=''){
                                             html += '<img src="' +k.coverImg +'">';
                                         }else{
@@ -104,19 +104,30 @@ function login_in(pageNumber,pageSize,categoryCode,city,adCode){
                                         if(starttimes == '--') {
                                             html += '<p style="padding-top: 5px;width: 100%;overflow: hidden">时间：<i>' + endDay.substring(5,7)+'月'+endDay.substring(8,10) + '日</i></p>';
                                         }else{
-                                            html += '<p style="padding-top: 5px;width: 100%;overflow: hidden;color: #999999;">时间：<i style="color: #000000;">' + starttimes.substring(5,7)+'月'+starttimes.substring(8,10)+'日-'+endDay.substring(5,7)+'月'+endDay.substring(8,10) + '日</i></p>';
+                                            html += '<p style="padding-top: 5px;width: 100%;overflow: hidden;color: #999999;"><i class="iconfont icon-naozhong"></i><i style="color: #000000;">' + starttimes.substring(5,7)+'月'+starttimes.substring(8,10)+'日-'+endDay.substring(5,7)+'月'+endDay.substring(8,10) + '日</i></p>';
                                         }
-                                        html += '<p style="padding-top: 5px;width: 100%;overflow: hidden;color: #999999;">地点：<i style="color: #000000;">'+k.address+'</i></p>\
-                                            <p style="padding-top: 5px;width: 100%;overflow: hidden;color: #999999;">已报名人次：<i style="color: #72B81E;">'+k.attend+'</i></p>\
+                                        html += '<p style="padding-top: 5px;width: 100%;overflow: hidden;color: #999999;"><i class="iconfont icon-didian"></i><i style="color: #000000;">'+k.address+'</i></p>\
+                                            <p style="padding-top: 5px;width: 100%;overflow: hidden;color: #999999;"><i class="iconfont icon-renwu"></i><i style="color: #72B81E;">'+k.orgName+'</i></p>\
                                                 </div>\
                                                 </a>\
-                                                <div class="tickets_number">\
-                                                    <div>'+k.recruitNeed+'<br/><i>岗位人数</i></div>\
-                                                    <div>'+k.taskNeed+'<br/><i>任务人数</i></div>\
-                                                    <div>'+k.publicNeed+'<br/><i>公众门票</i></div>\
-                                                    <div style="border-right: 0px;">'+k.mediaGuestNeed+'<br/><i>媒体记者</i></div>\
-                                                </div>\
-                                            </li>';
+                                                <div class="tickets_number">';
+                                        if (k.recruitNeed) {
+                                            html += '<div>已报'+k.recruitApply+'/需'+k.recruitNeed+'人次<br/><i>岗位</i></div>';
+                                        }  else {
+                                            html += '<div style="line-height: 50px;">暂无岗位</div>';
+                                        }
+                                        if (k.taskNeed) {
+                                            html += '<div>已报'+k.taskApply+'/需'+k.taskNeed+'人次<br/><i>任务</i></div>';
+                                        }  else {
+                                            html += '<div style="line-height: 50px;">暂无任务</div>';
+                                        }
+                                        if (k.publicNeed) {
+                                            html += '<div style="border:none">已报'+k.publicApply+'/需'+k.publicNeed+'人次<br/><i>票证</i></div>';
+                                        }  else {
+                                            html += '<div style="border:none;line-height: 50px;">暂无票证</div>';
+                                        }
+                                        html += '</div>\
+                                                </li>';
                                     });
                                     $(".warp_bp_p").append(html); //追加html
                                     me.resetload();
@@ -173,7 +184,7 @@ function login_in(pageNumber,pageSize,categoryCode,city,adCode){
         })
     }
 }
-var dataJson = {"pageSize":20,"pageNumber":1};
+var dataJson = {"pageSize":20,"current":1};
 function select_(name,val,obj,type){
     if(name=="address"){dataJson.address = val;}
     if(name=="searchValue"){dataJson.searchValue = val;}
@@ -212,17 +223,17 @@ function select_address(name,id,val,city,type){
     area_info_city_html = city+'<i></i>';
     $("#area_info_city").html(area_info_city_html);
 }
-function queryIndex(pageNumber=0,pageSize=20){
+function queryIndex(current=0,pageSize=20){
     queryMe.lock();
-    var url = base_url + "html5/v1/activity/search";
+    var url = base_url + "html5/v2/activity/search";
     $(".warp_bp_p").empty();
     $('#content').dropload({
         scrollArea : window,
         loadDownFn : function(me){
             searchMe = me;
             $(".dropload-down").remove();
-            pageNumber++;
-            dataJson.pageNumber = pageNumber;
+            current++;
+            dataJson.current = current;
             dataJson.pageSize = pageSize;
             $.ajax({
                 xhrFields: {
@@ -278,15 +289,27 @@ function queryIndex(pageNumber=0,pageSize=20){
                                     }else{
                                         html += '<p style="padding-top: 5px;width: 100%;overflow: hidden;color: #999999;">时间：<i style="color: #000000;">' + starttimes.substring(5,7)+'月'+starttimes.substring(8,10)+'日-'+endDay.substring(5,7)+'月'+endDay.substring(8,10) + '日</i></p>';
                                     }
-                                    html += '<p style="padding-top: 5px;width: 100%;overflow: hidden;color: #999999;">地点：<i style="color: #000000;">'+k.address+'</i></p>\
-                                            <p style="padding-top: 5px;width: 100%;overflow: hidden;color: #999999;"><i>主办方：</i>'+k.orgName+'</p>\
+                                    html += '<p style="padding-top: 5px;width: 100%;overflow: hidden;color: #999999;"><i class="iconfont icon-didian"></i><i style="color: #000000;">'+k.address+'</i></p>\
+                                            <p style="padding-top: 5px;width: 100%;overflow: hidden;color: #999999;"><i class="iconfont icon-renwu"></i><i style="color: #72B81E;">'+k.orgName+'</i></p>\
                                                 </div>\
                                                 </a>\
-                                                <div class="tickets_number">\
-                                                    <div>已报'+k.recruitNeed+'/需'+k.recruitNeed+'人次<br/><i>岗位</i></div>\
-                                                    <div>'+k.taskNeed+'<br/><i>任务</i></div>\
-                                                    <div style="border: none">'+k.publicNeed+'<br/><i>票证</i></div>\
-                                                </div>\
+                                                <div class="tickets_number">';
+                                    if (k.recruitNeed) {
+                                        html += '<div>已报'+k.recruitApply+'/需'+k.recruitNeed+'人次<br/><i>岗位</i></div>';
+                                    }  else {
+                                        html += '<div style="line-height: 50px;">暂无岗位</div>';
+                                    }
+                                    if (k.taskNeed) {
+                                        html += '<div>已报'+k.taskApply+'/需'+k.taskNeed+'人次<br/><i>任务</i></div>';
+                                    }  else {
+                                        html += '<div style="line-height: 50px;">暂无任务</div>';
+                                    }
+                                    if (k.publicNeed) {
+                                        html += '<div style="border:none">已报'+k.publicApply+'/需'+k.publicNeed+'人次<br/><i>票证</i></div>';
+                                    }  else {
+                                        html += '<div style="border:none;line-height: 50px;">暂无票证</div>';
+                                    }
+                                    html += '</div>\
                                             </li>';
                                 });
                                 $(".warp_bp_p").append(html); //追加html

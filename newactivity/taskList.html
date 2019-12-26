@@ -17,7 +17,7 @@
 <div id="ticketdetail">
     <header class="mint-header">
         <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
-        <h1 class="mint-header-title">票证列表</h1>
+        <h1 class="mint-header-title">任务列表</h1>
         <div class="mint-header-button text-r"></div>
     </header>
     <ul>
@@ -61,7 +61,7 @@ var vueIM = new Vue({
         init () {
             var that = this;
             $.ajax({
-                url: base_url + 'html5/v2/activity/getPublicList',
+                url: base_url + 'html5/v2/activity/getRelatedSubTaskList',
                 type: "post",
                 dataType: "json",
                 data: JSON.stringify(that.searchFrom),

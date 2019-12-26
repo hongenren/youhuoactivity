@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/activityPoster.css"/>
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+<div id="activityPoster">
+    <header class="mint-header">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">活动海报</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="poster-main-box">
+        <div class="poster-main-top">
+            <div class="poster-img"></div>
+            <p class="poster-name"><span>董晓雨</span> 邀请您一起做公益</p>
+            <p class="poster-title">活动标题活动标题活动标题活动</p>
+            <p class="poster-title1">活动副标题活动副标题活动副标题活动副标题</p>
+            <p><i class="iconfont icon-naozhong"></i>19/6/6 08:00-12:00 </p>
+            <p><i class="iconfont icon-didian"></i>上海市长宁区金钟路65811号2楼</p>
+            <p><i class="iconfont icon-renwu"></i>上海悠活网络科技有限公司</p>
+        </div>
+        <p class="poster-img1"></p>
+        <div class="poster-main-center">
+            <div class="save-qrcode">
+                <img class="save-img">
+                <span>扫描报名岗位/任务、领取票证</span>
+            </div>
+            <div class="main-center-title">主办单位</div>
+            <ul>
+                <li class="main-center-danwei">
+                    <div class="center-danwei-img fl"></div>
+                    <div class="center-danwei-name fl">上海悠活网路科技有限公司</div>
+                </li>
+            </ul>
+            <div class="main-center-title">联办单位</div>
+            <ul>
+                <li class="main-center-danwei">
+                    <div class="center-danwei-img fl"></div>
+                    <div class="center-danwei-name fl">上海悠活网路科技有限公司</div>
+                </li>
+            </ul>
+            <div class="main-center-title">活动参与方</div>
+            <p>爱心支持单位：上海悠活网路科技有限公司5</p>
+            <p>指导单位：上海悠活网路科技有限公司6</p>
+
+        </div>
+    </div>
+    <div class="actfooter">
+        <div class="nav">
+            <span>更换背景颜色</span>
+            <i></i>
+            <i></i>
+        </div>
+        <div class="btnbox">
+            <button class="btnsave" @click="saveact(-10)">邀请朋友一起参加</button>
+            <button class="btnisue" @click="saveact(10)">保存到相册</button>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#activityPoster',
+    data () {
+        return {
+            fil: null,
+            recordList: [],
+            addFrom: {
+                org: 'AAA789', // 机构标识
+                url: null
+            },
+            searchFrom: {
+                org: 'AAA789', // 机构标识
+                current: 1, // 当前页
+                size: 20 // 页容量
+            },
+            moreMenuData:[[
+                {
+                    text: "发通知",
+                    func: function () {
+                        jump("./send_notification.html?type=0&pkPostCode="+pkPostCode);
+                    }
+                },
+                {
+                    text: "收消息",
+                    func: function () {
+                        jump("./receive_messages.html?pkPostCode="+pkPostCode);
+                    }
+                },
+            ]]
+        };
+    },
+    mounted () {
+        this.init();
+    },
+    methods: {
+        init (){
+            // 线上
+            this.searchFrom.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'AAA789';
+        },
+        zhankai () {
+            $('.activitmark').css({height: "auto"});
+        }
+    }
+})
+</script>
+</html>
