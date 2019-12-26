@@ -42,12 +42,12 @@
     <div class="addticketbox" v-for="(item, index) in publicParamList" :key="index">
         <div class="addtickettitle">
             <span class="fl" @click="addnewticket" v-if="index == 0"><i class="iconfont icon-tianjiajiahaowubiankuang"></i><span>添加新票证</span></span>
-            <span class="fr"><span style="color:#F0676C;">删除</span></span>
+            <span class="fr"><span style="color:#F0676C;" @click="delnewticket(index)">删除</span></span>
         </div>
         <div class="addticketinfo">
             <div class="yh-group">
                 <span class="l">票证名称</span>
-                <div><input type="text" placeholder="例：公众门票/嘉宾证/媒体证" v-model="item.name"><i class="iconfont icon-youjiantou"></i></div>
+                <div><input type="text" placeholder="例：公众门票/嘉宾证/媒体证" maxlength="15" v-model="item.name"><i class="iconfont icon-youjiantou"></i></div>
             </div>
             <div class="yh-group">
                 <span class="l">票证地点{{item.publicAddressId}}</span>
@@ -61,9 +61,9 @@
             <div class="yh-group" style="border: none">
                 <span class="l">积分赠送<span style="color:#bbbbbb;">（每人每次）</span></span>
                 <div class="jiajian">
-                    <i class="iconfont icon-icon_weitijiao"></i>
-                    <input type="text" class="feedin" v-model="item.inIntegral">
-                    <i class="iconfont icon-add"></i>
+                    <i class="iconfont icon-icon_weitijiao" @click="subtractNumber(index, 'inIntegral')"></i>
+                    <input type="number" class="feedin" min="0" v-model="item.inIntegral">
+                    <i class="iconfont icon-add" @click="addNumber(index, 'inIntegral')"></i>
                 </div>
             </div>
             <div class="integral">
@@ -78,17 +78,17 @@
                 <div class="yh-group">
                     <span class="l">票证数量</span>
                     <div class="jiajian">
-                        <i class="iconfont icon-icon_weitijiao"></i>
-                        <input type="text" class="feedin" v-model="item.total">
-                        <i class="iconfont icon-add"></i>
+                        <i class="iconfont icon-icon_weitijiao" @click="subtractNumber(index, 'total')"></i>
+                        <input type="number" class="feedin" min="1" v-model="item.total">
+                        <i class="iconfont icon-add" @click="addNumber(index, 'total')"></i>
                     </div>
                 </div>
                 <div class="yh-group" style="border: none;">
                     <span class="l">票证积分价格</span>
                     <div class="jiajian">
-                        <i class="iconfont icon-icon_weitijiao"></i>
-                        <input type="text" class="feedin" v-model="item.outIntegral">
-                        <i class="iconfont icon-add"></i>
+                        <i class="iconfont icon-icon_weitijiao"  @click="subtractNumber(index, 'outIntegral')"></i>
+                        <input type="number" class="feedin" min="0" v-model="item.outIntegral">
+                        <i class="iconfont icon-add"  @click="addNumber(index, 'outIntegral')"></i>
                     </div>
                 </div>
                 <div class="integral" style="border-bottom: 1px solid #BBBBBB;">
@@ -109,48 +109,50 @@
                     <span><input type="radio" class="yh-radio" value="10" v-model="item.isOpen" :id='"allMembers"+index'><label :for='"allMembers"+index' class="yh-rlable">全平台机构成员</label></span>
                     <span><input type="radio" class="yh-radio" value="20" v-model="item.isOpen" :id='"appointMembers"+index'><label :for='"appointMembers"+index' class="yh-rlable">指定机构成员</label></span>
                 </div>
-                <div class="yh-group">
-                    <span class="l" style="line-height: 32px;">本机构成员{{item.selfOrg}}</span>
-                    <div class="testswitch">
-                        <input class="testswitch-checkbox" :id='"myMembers"+index' type="checkbox" v-model="item.selfOrg" true-value="10" false-value="20">
-                        <label class="testswitch-label" :for='"myMembers"+index'>
-                            <span class="testswitch-inner" data-on="" data-off=""></span>
-                            <span class="testswitch-switch"></span>
-                        </label>
+                <div v-if="item.isOpen == 20">
+                    <div class="yh-group">
+                        <span class="l" style="line-height: 32px;">本机构成员{{item.selfOrg}}</span>
+                        <div class="testswitch">
+                            <input class="testswitch-checkbox" :id='"myMembers"+index' type="checkbox" v-model="item.selfOrg" true-value="10" false-value="20">
+                            <label class="testswitch-label" :for='"myMembers"+index'>
+                                <span class="testswitch-inner" data-on="" data-off=""></span>
+                                <span class="testswitch-switch"></span>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="yh-group">
-                    <span class="l" style="line-height: 32px;">活动参与方成员</span>
-                    <div class="testswitch">
-                        <input class="testswitch-checkbox" :id='"partyMembers"+index' type="checkbox" v-model="item.unitOrg" true-value="10" false-value="20">
-                        <label class="testswitch-label" :for='"partyMembers"+index'>
-                            <span class="testswitch-inner" data-on="" data-off=""></span>
-                            <span class="testswitch-switch"></span>
-                        </label>
+                    <div class="yh-group">
+                        <span class="l" style="line-height: 32px;">活动参与方成员</span>
+                        <div class="testswitch">
+                            <input class="testswitch-checkbox" :id='"partyMembers"+index' type="checkbox" v-model="item.unitOrg" true-value="10" false-value="20">
+                            <label class="testswitch-label" :for='"partyMembers"+index'>
+                                <span class="testswitch-inner" data-on="" data-off=""></span>
+                                <span class="testswitch-switch"></span>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="yh-group" style="border: none;">
-                    <span class="l">指定机构成员领取</span>
-                    <span class="ricon">请选择</span>
-                </div>
-                <div class="companybox" style="border-bottom: 1px solid #bbb;">
-                    <div class="yh-group-company" v-for="(item, index) in companyShow" :key="index">
-                        <span>{{item.assignOrgName}}</span>
-                        <span class="iconfont icon-cha1" @click="delcompany(index)"></span>
+                    <div class="yh-group" style="border: none;" @click="Ishow = !Ishow">
+                        <span class="l">指定机构成员领取</span>
+                        <span class="ricon">请选择<i class="iconfont" :class="Ishow ? 'icon-icon_xia' : 'icon-icon_you'"></i></span>
                     </div>
-                </div>
-                <!-- 主办搜索开始 -->
-                <div class="searchcompany">
-                    <div class="screenButList">
-                        <input type="text" id="activityUniteParamName" placeholder="请输入机构名称进行查询"><i @click="search" class="iconfont icon-fangdajing"></i>
+                    <div class="companybox" style="border-bottom: 1px solid #bbb;">
+                        <div class="yh-group-company" v-for="(item, index) in companyShow" :key="index">
+                            <span>{{item.assignOrgName}}</span>
+                            <span class="iconfont icon-cha1" @click="delcompany(index)"></span>
+                        </div>
                     </div>
-                    <ul class="warp_company">
-                        <li v-for="(item, index) in companyList">
-                            <div :class="{companyname:item.checked}" @click="toggleClass(item)">{{item.name}}</div>
-                        </li>
-                    </ul>
+                    <!-- 主办搜索开始 -->
+                    <div class="searchcompany" v-if="Ishow">
+                        <div class="screenButList">
+                            <input type="text" id="activityUniteParamName" placeholder="请输入机构名称进行查询"><i @click="search" class="iconfont icon-fangdajing"></i>
+                        </div>
+                        <ul class="warp_company">
+                            <li v-for="(item, index) in companyList">
+                                <div :class="{companyname:item.checked}" @click="toggleClass(item)">{{item.name}}</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 搜索结束 -->
                 </div>
-                <!-- 搜索结束 -->
             </div>
             <!-- 指定发放 -->
             <div v-if="false">
@@ -199,9 +201,11 @@ var vueIM = new Vue({
             newIndex: 10,
             companyList: null,
             companyShow: [],
+            Ishow: false,
+            sectionCodeList: [],
             addFrom: {
-                activityCode: sessionStorage.getItem('activityCode'), // 活动一号通 
-                sectionCode: null, // 场次标识 新增场次不用传值
+                activityCode: sessionStorage.getItem('activityCode'), // 活动一号通
+                sectionCode: this.getUrlParam('sectionCode'), // 场次标识 新增场次不用传值
                 day: sessionStorage.getItem('postime'), // 场次日期
                 startTime: sessionStorage.getItem('.start_time' + this.getUrlParam('id')), // 开始时间
                 endTime: sessionStorage.getItem('.end_time' + this.getUrlParam('id')), // 结束时间
@@ -214,14 +218,14 @@ var vueIM = new Vue({
                         publicApply: '10', // 公开领取标识	10是20直接发放
                         isOpen: '10', // 领取范围 10全平台20指定机构
                         audit: null, // 需审核 10是20否
-                        inIntegral: null, // 赠送积分
+                        inIntegral: 0, // 赠送积分
                         name: null, // 票证名称
-                        outIntegral: null, // 支付积分
+                        outIntegral: 0, // 支付积分
                         publicAddressId: null, // 票证地址
+                        publicAddress: null, // 票证地址
                         selfOrg: null, // 指定本机构
                         unitOrg: null, // 指定参与方机构 10是20否
-                        outIntegral: null, // 支付积分 10是20否
-                        total: null // 数量
+                        total: 1 // 数量
                     }
                 ] //票证
         }
@@ -230,6 +234,9 @@ var vueIM = new Vue({
         this.getIntegral();
         console.log(sessionStorage.getItem(1));
         JSON.parse(sessionStorage.getItem(this.getUrlParam('id'))) && (this.publicParamList = JSON.parse(sessionStorage.getItem(this.getUrlParam('id'))));
+        this.publicParamList.map((item, index) => {
+            $("#address" + index).val(item.publicAddress);
+        });
     },
     methods: {
         getUrlParam (name) {
@@ -264,15 +271,20 @@ var vueIM = new Vue({
                 publicApply: '10', // 公开领取标识	10是20直接发放
                 isOpen: '10', // 领取范围 10全平台20指定机构
                 audit: null, // 需审核 10是20否
-                inIntegral: null, // 赠送积分
+                inIntegral: 0, // 赠送积分
                 name: null, // 票证名称
-                outIntegral: null, // 支付积分
+                outIntegral: 0, // 支付积分
                 publicAddressId: null, // 票证地址
+                publicAddress: null, // 票证地址
                 selfOrg: null, // 指定本机构
                 unitOrg: null, // 指定参与方机构 10是20否
-                outIntegral: null, // 支付积分 10是20否
-                total: null // 数量
+                total: 1 // 数量
             });
+        },
+        // 删除场次
+        delnewticket (index) {
+            console.log(index);
+            this.publicParamList.splice(index, 1);
         },
         // 地点
         warpdd (publicAddressId, index) {
@@ -312,10 +324,24 @@ var vueIM = new Vue({
                     $("#address" + index).val(name);
                     // $("#addressId").val(id);
                     that.publicParamList[that.index][publicAddressId] = id;
+                    that.publicParamList[that.index].publicAddress = name;
                     console.log(that.publicParamList);
                 }
                 $(".warp_ci").animate({left:"200%"});
             })
+        },
+        // 加减
+        addNumber (index, key) {
+            this.publicParamList[index][key]++
+
+        },
+        // 加减
+        subtractNumber (index, key) {
+            console.log(index, key);
+            this.publicParamList[index][key]--
+            if (this.publicParamList[index][key] < 0) {
+                this.publicParamList[index][key] = 0;
+            }
         },
         // 公开领取10 指定发放20
         toggleTabs (index, item) {
@@ -387,9 +413,10 @@ var vueIM = new Vue({
                 success: function (resp) {
                     if (resp.code == 0) {
                         console.log(resp.data.sectionCode);
+                        that.sectionCodeList[that.getUrlParam('id')] = resp.data.sectionCode;
                         window.location.href="./postActivity.html?sectionCode=" + resp.data.sectionCode;
                         sessionStorage.setItem(that.getUrlParam('id'), JSON.stringify(that.publicParamList));
-                        sessionStorage.setItem(that.getUrlParam('sectionCode'), resp.data.sectionCode);
+                        sessionStorage.setItem("sectionCodeList", JSON.stringify(that.sectionCodeList));
                     } else {
                         layer.open({
                             content: resp.msg,

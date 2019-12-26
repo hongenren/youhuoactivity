@@ -54,18 +54,18 @@
     <div class="yh-group" style="border: none">
         <span class="l">积分赠送<span style="color:#bbbbbb;">（每人每次）</span></span>
         <div class="jiajian">
-            <i class="iconfont icon-icon_weitijiao"></i>
-            <input v-model="addFrom.point" type="text" class="feedin">
-            <i class="iconfont icon-add"></i>
+            <i class="iconfont icon-icon_weitijiao" @click="subtractNumber('point')"></i>
+            <input v-model="addFrom.point" type="number" class="feedin">
+            <i class="iconfont icon-add" @click="addNumber('point')"></i>
         </div>
     </div>
     <div class="integral" style="border-bottom: 1px solid #bbb;">
         <span>票证核销后赠送给用户的积分</span>
         <span>可用积分：<span style="color:#73B81F;" id="jifen"></span></span>
     </div>
-    <div class="yh-group" style="border: none;">
+    <div class="yh-group" style="border: none;" @click="Ishow = !Ishow">
         <span class="l">选择管理员</span>
-        <span>请在机构成员中选择</span>
+        <span>请在机构成员中选择<i class="iconfont" :class="Ishow ? 'icon-icon_xia' : 'icon-icon_you'"></i></span>
     </div>
     <div class="companybox" style="border-bottom: 1px solid #bbb;">
         <div class="yh-group-company" v-for="(item, index) in addFrom.userInfoList" :key="index">
@@ -77,7 +77,7 @@
         </div>
     </div>
     <!-- 主办搜索开始 -->
-    <div class="searchcompany">
+    <div class="searchcompany" v-if="Ishow">
         <div class="screenButList">
             <input type="text" id="activityUniteParamName" placeholder="请输入机构名称进行查询" v-model="searchContent"><i @click="search(searchContent)" class="iconfont icon-fangdajing"></i>
         </div>
@@ -91,7 +91,7 @@
         </ul>
     </div>
     <!-- 搜索结束 -->
-    <button class="submit-btn-tint" @click="submit">保存提交</button>
+    <button class="submit-btn" @click="submit">保存提交</button>
     <!--地点开始-->
     <div class="warp_ci">
 
@@ -120,15 +120,18 @@ var vueIM = new Vue({
             newIndex: 10,
             companyList: null,
             searchContent: '',
+            Ishow: false,
+            sectionCodeList: [],
             addFrom: {
                 activityCode: sessionStorage.getItem('activityCode'), // 活动一号通
-                sectionCode: null, // 场次标识 新增场次不用传值
+                sectionCode: this.getUrlParam('sectionCode'), // 场次标识 新增场次不用传值
                 day: sessionStorage.getItem('postime'), // 场次日期
                 startTime: sessionStorage.getItem('.start_time' + this.getUrlParam('adminid')), // 开始时间
                 endTime: sessionStorage.getItem('.end_time' + this.getUrlParam('adminid')), // 结束时间
                 orgCode: JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'BBA119945', // 法人三类标识
                 arriveAddressId: null, // 票证地址
-                point: null, // 赠送积分
+                arriveAddress: null, // 票证地址
+                point: 0, // 赠送积分
                 content: null, // 工作内容
                 userInfoList: [],
             },
@@ -138,6 +141,7 @@ var vueIM = new Vue({
     mounted () {
         this.getIntegral();
         JSON.parse(sessionStorage.getItem("adminid"+this.getUrlParam('adminid'))) && (this.addFrom = JSON.parse(sessionStorage.getItem("adminid"+this.getUrlParam('adminid'))));
+        $("#address").val(this.addFrom.arriveAddress);
     },
     methods: {
         getUrlParam (name) {
@@ -163,6 +167,19 @@ var vueIM = new Vue({
                     }
                 }
             });
+        },
+        // 加减
+        addNumber (key) {
+            this.addFrom[key]++
+
+        },
+        // 加减
+        subtractNumber (key) {
+            console.log(key);
+            this.addFrom[key]--
+            if (this.addFrom[key] < 0) {
+                this.addFrom[key] = 0;
+            }
         },
         // 搜索公司
         search (searchContent) {
@@ -205,6 +222,7 @@ var vueIM = new Vue({
         // 提交
         submit () {
             this.addFrom.arriveAddressId = $('#addressId').val();
+            this.addFrom.arriveAddress = $('#address').val();
             var that = this;
             $.ajax({
                 url: base_url + '/html5/v2/activity/sectionManager/add',
@@ -215,8 +233,10 @@ var vueIM = new Vue({
                 success: function (resp) {
                     if (resp.code == 0) {
                         console.log(resp.data.sectionCode);
+                        that.sectionCodeList[that.getUrlParam('adminid')] = resp.data.sectionCode;
+                        window.location.href="./postActivity.html?sectionCode=" + resp.data.sectionCode;
                         sessionStorage.setItem("adminid"+that.getUrlParam('adminid'), JSON.stringify(that.addFrom));
-                        sessionStorage.setItem(that.getUrlParam('sectionCode'), resp.data.sectionCode);
+                        sessionStorage.setItem("sectionCodeList", JSON.stringify(that.sectionCodeList));
                     } else {
                         layer.open({
                             content: resp.msg,

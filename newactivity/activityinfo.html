@@ -47,7 +47,7 @@
 <body>
 <div id="activityinfo">
     <header class="mint-header">
-        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <div class="mint-header-button text-l"><a class="icon-back" @click="back"></a></div>
         <h1 class="mint-header-title">发布活动</h1>
         <div class="mint-header-button text-r"></div>
     </header>
@@ -171,7 +171,7 @@
                 <div class="selectbtn pattern" @click="selectImg(item.url)">选择</div>
                 <div class="bannertype pattern">{{item.note}}</div>
             </div>
-            <label for="file1"  class="submit-btn">从本地相册中选择</label>
+            <label for="file1"  class="submit-btn" style="position: absolute;">从本地相册中选择</label>
             <input type="file" id="file1" runat="server" ref="inputer1" accept="image/*" class="inputfile" @change="uploadImg(addFrom.url)" />
         </div>
     </div>
@@ -184,7 +184,7 @@
     <!-- 主办搜索开始 -->
     <div class="searchcompany">
         <header class="mint-header">
-            <div class="mint-header-button text-l searchcompanyback"><a class="icon-back"></a></div>
+            <div class="mint-header-button text-l"><a class="icon-back"></a></div>
             <h1 class="mint-header-title">选择活动参与方</h1>
             <div class="mint-header-button text-r"></div>
         </header>
@@ -197,8 +197,8 @@
                 <i class="iconfont icon-duigou"></i>
             </li> -->
         </ul>
-        <button v-if="companytype == 10" class="submit-btn searchcompanyback" @click="addCompany">添加{{companytype}}</button>
-        <button v-if="companytype == 20" class="submit-btn searchcompanyback" @click="addCompany1">添加{{companytype}}</button>
+        <button v-if="companytype == 10" class="submit-btn" style="position: absolute;" @click="addCompany">添加{{companytype}}</button>
+        <button v-if="companytype == 20" class="submit-btn" style="position: absolute;" @click="addCompany1">添加{{companytype}}</button>
     </div>
     <!-- 搜索结束 -->
     <!---- 地图开始 ---->
@@ -377,6 +377,19 @@ var vueIM = new Vue({
                 btn: '知道了'
             });
         },
+        // 返回
+        back () {
+            // href="javascript:history.go(-1);"
+            layer.open({
+                content: '活动尚未发布，确认要离开当前页面吗？'
+                , btn: ['残忍离开', '继续编辑']
+                , yes: function (index) {
+                    window.history.go(-1);
+                    //$(location).attr('href', "./act_base_add.html");
+                }
+                ,
+            })
+        },
         // 搜索公司
         search () {
             $.ajax({
@@ -447,8 +460,20 @@ var vueIM = new Vue({
         delcompany1 (index) {
             this.seecconmpanyList.splice(index, 1);
         },
+        checkTel (tel) {
+            var mobile = /^1[3|5|7|8]\d{9}$/ , phone = /^0\d{2,3}-?\d{7,8}$/;
+            return mobile.test(tel) || phone.test(tel);
+        },
         // 保存活动
         saveact (type) {
+            if(!this.checkTel(this.addFrom.contactPhone)){
+                 layer.open({
+                    content: '咨询电话格式错误!',
+                    skin: 'msg',
+                    time: 2
+                });
+                return false;
+            };
             this.addFrom.startDay = $("input[name='startime']").val();
             this.addFrom.endDay = $("input[name='endtime']").val();
             this.addFrom.addressId = $('#addressId').val();
@@ -501,9 +526,30 @@ var vueIM = new Vue({
         lang: lang,
         //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
         //dateFormat:"yy-mm-dd",
-        timeFormat: 'yyyy-mm-dd',
+        dateFormat: 'yy-mm-dd',
+        dayText:'日',
+        monthText:'月',
+        yearText:'年', //面板中年月日文字
         startYear: currYear,
         endYear: currYear +30,
+        onSelect:function(textval,inset){//点击确定按钮
+            // 转化时间戳
+            var val = new Date(textval).getTime();
+            // 判空
+            if($('.end_time').val() != ''){
+                var endtime = new Date($('.end_time').val()).getTime();
+                if(val > endtime){
+                    $('.start_time').val('')
+                    layer.open({
+                        content: '开始时间不能晚于结束时间',
+                        skin: 'msg',
+                        time: 1
+                    });
+
+                }
+            }
+
+        },
         stepMinute: 1,
         showNow: true
     });
@@ -514,9 +560,27 @@ var vueIM = new Vue({
         lang: lang,
         //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
         //dateFormat:"yy-mm-dd",
-        timeFormat: 'yyyy-mm-dd',
+        dateFormat: 'yy-mm-dd',
+        dayText:'日',
+        monthText:'月',
+        yearText:'年', //面板中年月日文字
         startYear: currYear,
         endYear: currYear +30,
+        onSelect:function(textval,inset){//点击确定按钮
+            var val = new Date(textval).getTime();
+            if ($('.start_time').val() != '') {
+                var starttime = new Date($('.start_time').val()).getTime();
+                if(val < starttime){
+                    $('.end_time').val('');
+                    layer.open({
+                        content: '结束时间不能早于开始时间',
+                        skin: 'msg',
+                        time: 1
+                    });
+                }
+            }
+
+        },
         stepMinute: 1,
         showNow: true
     });

@@ -60,11 +60,11 @@
                     <span><input type="text" placeholder="设置场次开始时间" :class='"start_time"+item.id'></span>
                     <span><input type="text" placeholder="设置场次结束时间" :class='"end_time"+item.id'></span>
                 </div>
-                <a class="yh-group whitmg" @click="goticketinformation(item.id)">
+                <a class="yh-group whitmg" @click="goticketinformation(item, index)">
                     <span class="l">设置该场次下的票证信息{{item.id}}</span>
                     <span><span v-if='sessionStorage.getItem("sectionCode" + item.id)' style="color: #73B81F;">已设置</span><i class="iconfont icon-icon_you"></i></span>
                 </a>
-                <a @click="gosetadministrator(item.id)">
+                <a @click="gosetadministrator(item, index)">
                     <div class="yh-group" style="background: #fff;border:none;">
                         <span class="l">设置该场次下的票证核销管理员</span>
                         <span><span v-if='sessionStorage.getItem("adminsectionCode" + item.id)' style="color: #73B81F;">已设置</span><i class="iconfont icon-icon_you"></i></span>
@@ -76,7 +76,7 @@
     </div>
     <div class="hintsubmit">提示：场次信息如未设置完整，该场次默认不提交。</div>
     <a href="./activitydetail.html">activitydetail</a>
-    <button class="submit-btn-tint" @click="submit">发布活动</button>
+    <button class="submit-btn" @click="submit">设置完成，对外发布</button>
 </div>
 </body>
 <script type="text/javascript" src="../wap/js/jquery.js"></script>
@@ -100,10 +100,11 @@ var vueIM = new Vue({
             },
             periodList: [{
                 id: 0,
-                sectionCode: null,
+                sectionCode: "",
                 startTime: null,
                 endTime: null
-            }]
+            }],
+            sectionCodeList: [],
         };
     },
     mounted() {
@@ -118,15 +119,20 @@ var vueIM = new Vue({
         $("input[name='postime']").val(sessionStorage.getItem('postime'));
         this.day = sessionStorage.getItem('postime');
         sessionStorage.getItem('periodList') && (this.periodList = JSON.parse(sessionStorage.getItem('periodList')));
+        sessionStorage.getItem('sectionCodeList') && (this.sectionCodeList = JSON.parse(sessionStorage.getItem('sectionCodeList')));
         for (let i = 0; i < this.periodList.length; i++) {
             this.$nextTick(()=>{
                 this.init(i);
                 $('.start_time'+i).val(sessionStorage.getItem('.start_time'+i));
                 $('.end_time'+i).val(sessionStorage.getItem('.end_time'+i));
-                this.periodList[i].sectionCode = sessionStorage.getItem('sectionCode' + i);
+                Object.keys(this.sectionCodeList).forEach(key => {
+                    if (this.periodList[i].id == key) {
+                        this.periodList[i].sectionCode = this.sectionCodeList[key];
+                    }
+                });
             })
         }
-        this.getSectionList();
+        // this.getSectionList();
     },
     methods: {
         getUrlParam (name) {
@@ -159,11 +165,8 @@ var vueIM = new Vue({
                     var selectedDate = array[0] + "年" + array[1] + "月" + array[2] + "日";
                     sessionStorage.setItem('postimeshow', selectedDate);
                 },
-                onBeforeShow: function (inst) {//展示前的事件
-                    // inst.settings.readonly = true;//只读属性
-                },
-                startYear: currYear,
-                endYear: currYear +30,
+                minDate: new Date((new Date()).getFullYear(),(new Date()).getMonth()),
+                maxDate:new Date((new Date()).getFullYear(),(new Date()).getMonth()+5),
                 stepMinute: 1,
                 showNow: true
             });
@@ -176,10 +179,35 @@ var vueIM = new Vue({
                 //dateFormat:"yy-mm-dd",
                 timeFormat: 'HH:ii',
                 onSelect: function (valueText, inst) {//选择时事件（点击确定后），valueText 为选择的时间，
-                    var selectedStartime = valueText;
-                    console.log(index);
+                    // 转化时间戳
+                    var s = "1970/1/1 ";
+                    var val = Date.parse(s + valueText);
+                    // 判空
+                    if($('.end_time'+index).val() != ''){
+                        var endtime = Date.parse(s + $('.end_time'+index).val());
+                        if(val > endtime){
+                            $('.start_time'+index).val('')
+                            layer.open({
+                                content: '开始时间不能晚于结束时间',
+                                skin: 'msg',
+                                time: 1
+                            });
+
+                        }
+                    };
                     that.periodList[index].startTime = valueText;
-                    sessionStorage.setItem('.start_time'+index, selectedStartime);
+                    sessionStorage.setItem('.start_time'+index, valueText);
+                },
+                onBeforeShow: function (inst) {//展示前的事件
+                    console.log(!sessionStorage.getItem('postimeshow'));
+                    if (!sessionStorage.getItem('postimeshow')) {
+                        layer.open({
+                            content: '请先选择票证日期',
+                            skin: 'msg',
+                            time: 2
+                        });
+                        return false;
+                    }
                 },
                 startYear: currYear,
                 endYear: currYear +30,
@@ -195,9 +223,35 @@ var vueIM = new Vue({
                 //dateFormat:"yy-mm-dd",
                 timeFormat: 'HH:ii',
                 onSelect: function (valueText, inst) {//选择时事件（点击确定后），valueText 为选择的时间，
-                    var selectedEndtime = valueText;
+                    // 转化时间戳
+                    var s = "1970/1/1 ";
+                    var val = Date.parse(s + valueText);
+                    // 判空
+                    if($('.start_time'+index).val() != ''){
+                        var starttime = Date.parse(s + $('.start_time'+index).val());
+                        if(val < starttime){
+                            $('.end_time'+index).val('')
+                            layer.open({
+                                content: '结束时间不能早于开始时间',
+                                skin: 'msg',
+                                time: 1
+                            });
+
+                        }
+                    };
                     that.periodList[index].endTime = valueText;
-                    sessionStorage.setItem('.end_time'+index, selectedEndtime);
+                    sessionStorage.setItem('.end_time'+index, valueText);
+                },
+                onBeforeShow: function (inst) {//展示前的事件
+                    console.log(!sessionStorage.getItem('postimeshow'));
+                    if (!sessionStorage.getItem('postimeshow')) {
+                        layer.open({
+                            content: '请先选择票证日期',
+                            skin: 'msg',
+                            time: 2
+                        });
+                        return false;
+                    }
                 },
                 startYear: currYear,
                 endYear: currYear +30,
@@ -214,7 +268,7 @@ var vueIM = new Vue({
         addperiod (index) {
             this.number++
             this.periodList.unshift({
-                sectionCode: null,
+                sectionCode: "",
                 startTime: null,
                 endTime: null,
                 id: this.number
@@ -224,13 +278,30 @@ var vueIM = new Vue({
             })
         },
         // 去票证
-        goticketinformation (id) {
-            window.location.href="./ticketinformation.html?id=" + id + "&sectionCode=sectionCode" + id;
+        goticketinformation (item, index) {
+            console.log(item.sectionCode);
+            if(!$('.start_time'+index).val() && !$('.end_time'+index).val()){
+                layer.open({
+                    content: '请先设置场次时间',
+                    skin: 'msg',
+                    time: 1
+                });
+                return false;
+            }
+            window.location.href="./ticketinformation.html?id=" + item.id + "&sectionCode=" + item.sectionCode;
             sessionStorage.setItem('periodList', JSON.stringify(this.periodList));
         },
         // 去管理员
-        gosetadministrator (id) {
-            window.location.href="./setadministrator.html?adminid=" + id + "&sectionCode=adminsectionCode" +  id;
+        gosetadministrator (item, index) {
+            if(!$('.start_time'+index).val() && !$('.end_time'+index).val()){
+                layer.open({
+                    content: '请先设置场次时间',
+                    skin: 'msg',
+                    time: 1
+                });
+                return false;
+            }
+            window.location.href="./setadministrator.html?adminid=" + item.id + "&sectionCode=" + item.sectionCode;
             sessionStorage.setItem('periodList', JSON.stringify(this.periodList));
         },
         // 获取活动下面的场次
@@ -268,6 +339,7 @@ var vueIM = new Vue({
                 success: function (resp) {
                     if (resp.code == 0) {
                         console.log(resp.data);
+                        sessionStorage.clear();
                     } else {
                         layer.open({
                             content: resp.msg,
