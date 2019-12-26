@@ -21,16 +21,14 @@
         <h1 class="mint-header-title">活动详情</h1>
         <div class="mint-header-button text-r"></div>
     </header>
-    <div class="period">场次：2019年10月11日 08:00-12:00</div>
+    <div class="period">场次：{{recordList.startTime | capture(0, 16)}} 至 {{recordList.endTime | captureTime(11, 16)}}</div>
     <div class="ticketdinfo">
-        <p>票证名称：南京东路慈善超市参观门票</p>
-        <p class="blod">票证地点：上海市长宁区金钟路658弄11号2楼东华大学科技园</p>
-        <p class="blod mt30">已领10/共100张   领取无需审核 </p>
-        <p>领取票证需支付1积分，票证核销后赠送3积分</p>
+        <p>票证名称：{{recordList.name}}</p>
+        <p class="blod">票证地点：{{recordList.publicAddress}}</p>
+        <p class="blod mt30">已领{{recordList.applyCount}}/共{{recordList.total}}张   {{recordList.audit | Isaudit}} </p>
+        <p>领取票证需支付{{recordList.outIntegral}}积分，票证核销后赠送{{recordList.inIntegral}}积分</p>
         <p class="mt30">指定机构成员领取：</p>
-        <p>上海市公益服务促进中心</p>
-        <p>上海市公益服务促进中心南京路慈善超市</p>
-        <p>上海市公益服务促进中心南京路慈善超市2</p>
+        <p v-for="item in assignOrgNameList" :key="item">{{item}}</p>
     </div>
     <button class="submit-btn">立即领取</button>
 </div>
@@ -45,25 +43,53 @@ var vueIM = new Vue({
     data () {
         return {
             fil: null,
-            recordList: [],
-            addFrom: {
-                org: 'AAA789', // 机构标识
-                url: null
+            recordList: {
+                startTime: '',
+                endTime: '',
             },
-            searchFrom: {
-                org: 'AAA789', // 机构标识
-                current: 1, // 当前页
-                size: 20 // 页容量	
-            }
+            assignOrgNameList: []
         };
     },
     created () {
-        // this.init();
+        this.init();
+    },
+    filters: {
+        capture: function (value, start, end) {
+            return value= value.substring(0, 4) + '年' + value.substring(5, 7) + '月' + value.substring(8, 10) + '日' + value.substring(10, 16);
+        },
+        captureTime (value, start, end) {
+            return value= value.substring(start, end);
+        },
+        Isaudit (value) {
+            if (value == 10) {
+                return '领取需要审核'
+            }
+            if (value == 20) {
+                return '领取无需审核'
+            }
+        }
     },
     methods: {
-        init (){
-            // 线上
-            this.searchFrom.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'AAA789';
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
+        init () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/sectionPublic/info',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify({pubCode: that.getUrlParam("pubCode")}),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res);
+                    that.recordList = res.data;
+                    that.assignOrgNameList = that.recordList.assignOrgName.split(",");
+                    console.log(that.recordList.assignOrgName.split(","));
+                }
+            });
         },
         zhankai () {
             $('.activitmark').css({height: "auto"});

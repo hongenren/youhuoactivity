@@ -21,18 +21,11 @@
         <div class="mint-header-button text-r"></div>
     </header>
     <ul>
-        <li class="yh-activity-list">
+        <li class="yh-activity-list" v-for="(item, index) in detailList" :key="index" @click="goticketinformation(item.pubCode)">
             <div>
-                <p class="avtivity-title">南京东路慈善超市参观门票</p>
-                <p class="avtivity-icobox"><i class="iconfont icon-naozhong"></i>19/6/6 08:00 至 12:00 </p>
-                <p class="avtivity-icobox"><i class="iconfont icon-didian"></i>上海市长宁区金钟路658弄11号2楼东华大学科技园内11号2楼</p>
-            </div>
-        </li>
-        <li class="yh-activity-list">
-            <div>
-                <p class="avtivity-title">南京东路慈善超市参观门票</p>
-                <p class="avtivity-icobox"><i class="iconfont icon-naozhong"></i>19/6/6 08:00 至 12:00 </p>
-                <p class="avtivity-icobox"><i class="iconfont icon-didian"></i>上海市长宁区金钟路658弄11号2楼东华大学科技园内11号2楼</p>
+                <p class="avtivity-title">{{item.name}}</p>
+                <p class="avtivity-icobox"><i class="iconfont icon-naozhong"></i>{{item.startTime | capture(0, 16)}} 至 {{item.endTime | capture(11, 16)}} </p>
+                <p class="avtivity-icobox"><i class="iconfont icon-didian"></i>{{item.publicAddress}}</p>
             </div>
         </li>
     </ul>
@@ -48,16 +41,27 @@ var vueIM = new Vue({
     data () {
         return {
             searchFrom: {
-                activityCode: '31010500000020191205153534395', // 机构标识
+                activityCode: this.getUrlParam('activityCode'), // 机构标识
                 current: 1, // 当前页
                 size: 20 // 页容量
-            }
+            },
+            detailList: []
         };
     },
     created () {
         this.init();
     },
+    filters: {
+        capture: function (value, start, end) {
+            return value= value.substring(start, end);
+        }
+    },
     methods: {
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
         init () {
             var that = this;
             $.ajax({
@@ -68,9 +72,12 @@ var vueIM = new Vue({
                 headers: {'Content-Type': 'application/json'},
                 success: function (res) {
                     console.log(res.data);
-                    that.detailList = res.data;
+                    that.detailList = res.data.records;
                 }
             });
+        },
+        goticketinformation (pubCode) {
+            window.location.href="./ticketdetail.html?pubCode=" + pubCode;
         }
     }
 })

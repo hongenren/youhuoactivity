@@ -73,7 +73,7 @@ function login_in(current,pageSize,categoryCode,city,adCode){
                                         var starttimes = k.startDay;
                                         var endDay = k.endDay;
                                         html += '<li>\
-                                                <a href="../activity/activity_content.html?activityCode='+k.activityCode+'">\
+                                                <a href="../../newactivity/activitydetail.html?activityCode='+k.activityCode+'">\
                                                 <br/>';
                                         if(k.coverImg!=''){
                                             html += '<img src="' +k.coverImg +'">';
@@ -257,7 +257,7 @@ function queryIndex(current=0,pageSize=20){
                                     var starttimes = k.startDay;
                                     var endDay = k.endDay;
                                     html += '<li>\
-                                                <a href="../activity/activity_content.html?activityCode='+k.activityCode+'">';
+                                                <a href="../../newactivity/activitydetail.html?activityCode='+k.activityCode+'">';
                                     if(k.coverImg!=''){
                                         html += '<img src="' +k.coverImg +'">';
                                     }else{

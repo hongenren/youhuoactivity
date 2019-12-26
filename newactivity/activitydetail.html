@@ -37,7 +37,7 @@
         <div class="zhankai" @click="zhankai">展开</div>
         <div class="yh-group">
             <span class="l">票证</span>
-            <a href="./ticketList.html">查看更多</a>
+            <a :href='"./ticketList.html?activityCode="+detailList.activityCode'>查看更多</a>
         </div>
         <ul>
             <li class="ticketlist" v-for="(item, index) in detailList.sectionPublicVoList" :key="index">
@@ -180,6 +180,11 @@ var vueIM = new Vue({
             // 线上
             this.searchFrom.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'AAA789';
         },
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
         // 获得详情
         getdetail () {
             var that = this;
@@ -187,7 +192,7 @@ var vueIM = new Vue({
                 url: base_url + 'html5/v2/activity/info',
                 type: "post",
                 dataType: "json",
-                data: JSON.stringify({activityCode:"31010100000020191216160836468"}),
+                data: JSON.stringify({activityCode: that.getUrlParam("activityCode")}),
                 headers: {'Content-Type': 'application/json'},
                 success: function (res) {
                     console.log(res.data);
