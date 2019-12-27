@@ -39,6 +39,7 @@
         <div class="mint-header-button text-r"></div>
     </header>
     <div class="period">场次：{{addFrom.day}} {{addFrom.startTime}}-{{addFrom.endTime}}</div>
+    <div v-if="publicParamList.length == 0" class="addele" style="padding-left: 0.8rem;" @click="addnewticket"><i class="iconfont icon-tianjiajiahaowubiankuang"></i><span>添加新票证</span></div>
     <div class="addticketbox" v-for="(item, index) in publicParamList" :key="index">
         <div class="addtickettitle">
             <span class="fl" @click="addnewticket" v-if="index == 0"><i class="iconfont icon-tianjiajiahaowubiankuang"></i><span>添加新票证</span></span>
@@ -74,7 +75,7 @@
                 <span :class="{ active: item.publicApply==10 }" @click="toggleTabs(10, item)">公开领取</span><span :class="{ active: item.publicApply==20 }" @click="toggleTabs(20, item)">指定发放</span>
             </div>
             <!-- 公开领取 -->
-            <div v-if="true">
+            <div v-if="item.publicApply==10">
                 <div class="yh-group">
                     <span class="l">票证数量</span>
                     <div class="jiajian">
@@ -155,20 +156,26 @@
                 </div>
             </div>
             <!-- 指定发放 -->
-            <div v-if="false">
+            <div v-if="item.publicApply==20">
                 <div class="tishi">如指定用户是系统中已实名注册用户，在Ta的个人订单中将会生成一张票证订单；如指定用户是非系统实名用户，系统将会以短信形式发送给Ta。</div>
-                <div class="addtickettitle"><i class="iconfont icon-jiahao"></i>添加新用户</div>
-                <div class="yh-group">
-                    <span class="l">手机号</span>
-                    <input type="text">
-                </div>
-                <div class="yh-group">
-                    <span class="l">姓名</span>
-                    <input type="text">
-                </div>
-                <div class="yh-group">
-                    <span class="l">所在单位名称</span>
-                    <input type="text">
+                <div v-if="item.userInfoList.length == 0" class="addtickettitle" @click="addnewUser(index)"><i class="iconfont icon-tianjiajiahaowubiankuang"></i>添加新用户</div>
+                <div v-for="(item1, index1) in item.userInfoList" :key="index1">
+                    <div class="addtickettitle">
+                        <span class="fl" v-if="index1 == 0"  @click="addnewUser(index)"><i class="iconfont icon-tianjiajiahaowubiankuang"></i>添加新用户</span>
+                        <span class="fr" @click="delUser(index, index1)" style="color:#F0676C;">删除</span>
+                    </div>
+                    <div class="yh-group">
+                        <span class="l">手机号</span>
+                        <input type="text" v-model="item1.mobile" maxlength="11" @input="matePhone($event, index, index1)" placeholder="请填写">
+                    </div>
+                    <div class="yh-group">
+                        <span class="l">姓名</span>
+                        <input type="text" v-model="item1.nickName" placeholder="请填写">
+                    </div>
+                    <div class="yh-group">
+                        <span class="l">所在单位名称</span>
+                        <input type="text" v-model="item1.unit" placeholder="选填">
+                    </div>
                 </div>
             </div>
         </div>
@@ -202,7 +209,7 @@ var vueIM = new Vue({
             companyList: null,
             companyShow: [],
             Ishow: false,
-            sectionCodeList: [],
+            sectionCodeList: {},
             addFrom: {
                 activityCode: sessionStorage.getItem('activityCode'), // 活动一号通
                 sectionCode: this.getUrlParam('sectionCode'), // 场次标识 新增场次不用传值
@@ -225,7 +232,16 @@ var vueIM = new Vue({
                         publicAddress: null, // 票证地址
                         selfOrg: null, // 指定本机构
                         unitOrg: null, // 指定参与方机构 10是20否
-                        total: 1 // 数量
+                        total: 1, // 数量
+                        userInfoList: [
+                            {
+                                headImg: '',
+                                mobile: '',
+                                nickName: '',
+                                unit:'',
+                                user: ''
+                            }
+                        ]
                     }
                 ] //票证
         }
@@ -234,9 +250,11 @@ var vueIM = new Vue({
         this.getIntegral();
         console.log(sessionStorage.getItem(1));
         JSON.parse(sessionStorage.getItem(this.getUrlParam('id'))) && (this.publicParamList = JSON.parse(sessionStorage.getItem(this.getUrlParam('id'))));
-        this.publicParamList.map((item, index) => {
-            $("#address" + index).val(item.publicAddress);
-        });
+        this.$nextTick(()=>{
+            this.publicParamList.map((item, index) => {
+                $("#address" + index).val(item.publicAddress);
+            });
+        })
     },
     methods: {
         getUrlParam (name) {
@@ -278,13 +296,38 @@ var vueIM = new Vue({
                 publicAddress: null, // 票证地址
                 selfOrg: null, // 指定本机构
                 unitOrg: null, // 指定参与方机构 10是20否
-                total: 1 // 数量
+                total: 1 , // 数量
+                userInfoList: [
+                    {
+                        headImg: '',
+                        mobile: '',
+                        nickName: '',
+                        unit:'',
+                        user: ''
+                    }
+                ]
             });
         },
         // 删除场次
         delnewticket (index) {
             console.log(index);
             this.publicParamList.splice(index, 1);
+        },
+        // 添加新票证
+        addnewUser (index) {
+            this.publicParamList[index].userInfoList.unshift({
+                headImg: '',
+                mobile: '',
+                nickName: '',
+                unit:'',
+                user: ''
+            });
+        },
+        // 删除用户
+        delUser (index, index1) {
+            console.log(index, index1);
+            console.log(this.publicParamList[index].userInfoList[index1]);
+            this.publicParamList[index].userInfoList.splice(index1, 1);
         },
         // 地点
         warpdd (publicAddressId, index) {
@@ -321,7 +364,7 @@ var vueIM = new Vue({
                     // $("#job_lng").val(lng);
                     // $("#job_lat").val(lat);
                     // $(".addr11").text(address);
-                    $("#address" + index).val(name);
+                    $("#address" + that.index).val(name);
                     // $("#addressId").val(id);
                     that.publicParamList[that.index][publicAddressId] = id;
                     that.publicParamList[that.index].publicAddress = name;
@@ -393,6 +436,51 @@ var vueIM = new Vue({
         // 删除
         delcompany (index) {
             this.companyShow.splice(index, 1);
+        },
+        // 匹配手机号
+        matePhone (e, index, index1) {
+            let reg = /^1[3456789]\d{9}$/;
+            console.log(e.target.value.length==11);
+            if (e.target.value.length==11) {
+                if (!reg.test(e.target.value)) {
+                    e.target.value = "";
+                    layer.open({
+                        content: "请输入正确的手机号",
+                        skin: 'msg',
+                        time: 1
+                    });
+                    return false;
+                } else {
+                    var that = this;
+                    $.ajax({
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        type: 'post',
+                        url: base_url + "html5/v1/user/queryGyshUser",
+                        data: JSON.stringify({"mobile": e.target.value}),
+                        dataType:'json',
+                        headers : {'token':token},
+                        contentType: "application/json;charset=utf-8",
+                        success: function (data) {
+                            console.log(data)
+                            if (data.code == 0) {
+                                if(data.data==''){
+                                    layer.open({
+                                        content: "该用户为非系统实名用户",
+                                        skin: 'msg',
+                                        time: 1
+                                    });
+                                }else{
+                                    that.publicParamList[index].userInfoList[index1].headImg = data.data.headImg;
+                                    that.publicParamList[index].userInfoList[index1].nickName = data.data.realName;
+                                    that.publicParamList[index].userInfoList[index1].user = data.data.prjvUserId;
+                                }
+                            }
+                        }
+                    });
+                }
+            }
         },
         // 提交
         submit () {

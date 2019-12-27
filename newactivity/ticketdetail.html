@@ -27,16 +27,24 @@
         <p class="blod">票证地点：{{recordList.publicAddress}}</p>
         <p class="blod mt30">已领{{recordList.applyCount}}/共{{recordList.total}}张   {{recordList.audit | Isaudit}} </p>
         <p>领取票证需支付{{recordList.outIntegral}}积分，票证核销后赠送{{recordList.inIntegral}}积分</p>
-        <p class="mt30">指定机构成员领取：</p>
+        <p class="mt30">领取成员:{{recordList.isOpen | IsOpen}}</p>
+        <p>
+            <span v-if="recordList.selfOrg">{{recordList.selfOrg | IselfOrg}}、</span>
+            <span v-if="recordList.selfOrg">{{recordList.unitOrg | IsunitOrg}}、</span>
+            <span v-if="assignOrgNameList.length>0">及以下指定机构成员</span>
+        </p>
         <p v-for="item in assignOrgNameList" :key="item">{{item}}</p>
     </div>
-    <button class="submit-btn">立即领取</button>
+    <button v-if="recordList.isApply == 0" class="submit-btn" @click="submit">我要领取</button>
+    <button v-if="recordList.isApply == 1" class="submit-btn">您已领取，等待管理员审核中</button>
+    <button v-if="recordList.isApply == 2" class="submit-btn">您已领取成功</button>
 </div>
 </body>
 <script type="text/javascript" src="../wap/js/jquery.js"></script>
 <script type="text/javascript" src="../wap/js/config.js"></script>
 <script type="text/javascript" src="js/vue.min.js"></script>
 <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
 <script>
 var vueIM = new Vue({
     el: '#ticketdetail',
@@ -67,7 +75,31 @@ var vueIM = new Vue({
             if (value == 20) {
                 return '领取无需审核'
             }
-        }
+        },
+        IselfOrg (value) {
+            switch (value) {
+                case 10:
+                    return '本机构成员';
+                default:
+                    return '';
+            }
+        },
+        IsunitOrg (value) {
+            switch (value) {
+                case 10:
+                    return '活动参与方成员';
+                default:
+                    return '';
+            }
+        },
+        IsOpen (value) {
+            switch (value) {
+                case 10:
+                    return '全平台机构成员';
+                default:
+                    return '';
+            }
+        },
     },
     methods: {
         getUrlParam (name) {
@@ -81,7 +113,7 @@ var vueIM = new Vue({
                 url: base_url + 'html5/v2/activity/sectionPublic/info',
                 type: "post",
                 dataType: "json",
-                data: JSON.stringify({pubCode: that.getUrlParam("pubCode")}),
+                data: JSON.stringify({pubCode: that.getUrlParam("pubCode"), user: prjvorgMsg.prjvUserId}),
                 headers: {'Content-Type': 'application/json'},
                 success: function (res) {
                     console.log(res);
@@ -91,8 +123,29 @@ var vueIM = new Vue({
                 }
             });
         },
-        zhankai () {
-            $('.activitmark').css({height: "auto"});
+        submit () {
+            if($.cookie('user_msg')==undefined||$.cookie('token')==undefined){
+                layer.open({
+                    content: '请登陆后再进行操作'
+                    ,skin: 'msg'
+                    ,time: 1 //2秒后自动关闭
+                });
+                setTimeout(function(){
+                    window.location.href = '../login/login.html';
+                },2000);
+                return false
+            };
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/sectionPublic/apply',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify({pubCode: that.getUrlParam("pubCode"), user: prjvorgMsg.prjvUserId}),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res);
+                }
+            });
         }
     }
 })

@@ -50,6 +50,7 @@
                 <i></i>
             </div>
         </div>
+        <div v-if="periodList.length == 0" class="addele" @click="addperiod(1)"><span style="font-size:20px;"> + </span> <span>添加新场次</span></div>
         <div class="newperiod" v-for="(item, index) in periodList" :key="item">
             <div class="periodtop">
                 <span class="fl" @click="addperiod(item.id +1)" v-if="index == 0"><span style="font-size:20px;"> + </span> <span>添加新场次</span></span>
@@ -60,14 +61,14 @@
                     <span><input type="text" placeholder="设置场次开始时间" :class='"start_time"+item.id'></span>
                     <span><input type="text" placeholder="设置场次结束时间" :class='"end_time"+item.id'></span>
                 </div>
-                <a class="yh-group whitmg" @click="goticketinformation(item, index)">
+                <a class="yh-group whitmg" @click="goticketinformation(item)">
                     <span class="l">设置该场次下的票证信息{{item.id}}</span>
-                    <span><span v-if='sessionStorage.getItem("sectionCode" + item.id)' style="color: #73B81F;">已设置</span><i class="iconfont icon-icon_you"></i></span>
+                    <span><span v-if='sessionStorage.getItem(item.id)' style="color: #73B81F;">已设置</span><i class="iconfont icon-icon_you"></i></span>
                 </a>
-                <a @click="gosetadministrator(item, index)">
+                <a @click="gosetadministrator(item)">
                     <div class="yh-group" style="background: #fff;border:none;">
                         <span class="l">设置该场次下的票证核销管理员</span>
-                        <span><span v-if='sessionStorage.getItem("adminsectionCode" + item.id)' style="color: #73B81F;">已设置</span><i class="iconfont icon-icon_you"></i></span>
+                        <span><span v-if='sessionStorage.getItem("adminid" + item.id)' style="color: #73B81F;">已设置</span><i class="iconfont icon-icon_you"></i></span>
                     </div>
                     <div class="hintinfo">TA拥有2个权限：1、可通过管理功能的“扫一扫”，去核销本场次活动的票证 2、可增加临时管理员（TA只有可核销本场次活动的票证的权限）</div>
                 </a>
@@ -278,9 +279,9 @@ var vueIM = new Vue({
             })
         },
         // 去票证
-        goticketinformation (item, index) {
+        goticketinformation (item) {
             console.log(item.sectionCode);
-            if(!$('.start_time'+index).val() && !$('.end_time'+index).val()){
+            if(!$('.start_time'+item.id).val() && !$('.end_time'+item.id).val()){
                 layer.open({
                     content: '请先设置场次时间',
                     skin: 'msg',
@@ -292,8 +293,8 @@ var vueIM = new Vue({
             sessionStorage.setItem('periodList', JSON.stringify(this.periodList));
         },
         // 去管理员
-        gosetadministrator (item, index) {
-            if(!$('.start_time'+index).val() && !$('.end_time'+index).val()){
+        gosetadministrator (item) {
+            if(!$('.start_time'+item.id).val() && !$('.end_time'+item.id).val()){
                 layer.open({
                     content: '请先设置场次时间',
                     skin: 'msg',

@@ -121,7 +121,7 @@ var vueIM = new Vue({
             companyList: null,
             searchContent: '',
             Ishow: false,
-            sectionCodeList: [],
+            sectionCodeList: {},
             addFrom: {
                 activityCode: sessionStorage.getItem('activityCode'), // 活动一号通
                 sectionCode: this.getUrlParam('sectionCode'), // 场次标识 新增场次不用传值
