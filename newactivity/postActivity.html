@@ -280,8 +280,7 @@ var vueIM = new Vue({
         },
         // 去票证
         goticketinformation (item) {
-            console.log(item.sectionCode);
-            if(!$('.start_time'+item.id).val() && !$('.end_time'+item.id).val()){
+            if(!(!!$('.start_time'+item.id).val()&&!!$('.end_time'+item.id).val())){
                 layer.open({
                     content: '请先设置场次时间',
                     skin: 'msg',

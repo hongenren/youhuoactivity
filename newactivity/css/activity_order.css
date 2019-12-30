@@ -115,28 +115,62 @@
     color: #ffffff;
     font-size: 12px;
     text-align: center;
-    background: rgba(255, 152, 0, 1);
     position: absolute;
     top: 0;
     right: 5px;
+}
+.titler30{
+    background: #73B81F;
+}
+.titler80{
+    background: #F0676C;
+}
+.titler90{
+    background: #FCCA00;
 }
 .order-list p{
     padding: 0.2rem 0;
 }
 .order-list p i{
     padding-right: 4px;
-}    
+}
 .oforderbox{
     text-align: right;
     padding-top: 0.7rem;
 }
+.checkIn{
+    position: absolute;
+    right: 1.5rem;
+    font-weight: bold;
+    color: #F0676C;
+    top: 0.5rem
+}
+.ticketlist{
+    padding: 0.5rem 0rem 0.5rem 1.25rem;
+}
+.ticketlist .ticket-title{
+    font-size: 16px;
+}
+.ticketlist .statistics span{
+    margin-right: 1rem;
+}
 .oforder{
     display: inline-block;
-    padding: 0.2rem 0.4rem;
+    padding: 0.2rem 0.6rem;
     border-radius: 0.8rem;
     background-color: rgba(255, 255, 255, 1);
     color: rgba(240, 103, 108, 1);
     text-align: center;
     border: 1px solid rgba(240, 103, 108, 1);
+    margin-right: 4px;
+}
+.oforders{
+    display: inline-block;
+    padding: 0.2rem 1rem;
+    border-radius: 0.8rem;
+    background-color: rgba(255, 255, 255, 1);
+    color: #73B81F;
+    text-align: center;
+    border: 1px solid #73B81F;
     margin-right: 4px;
 }

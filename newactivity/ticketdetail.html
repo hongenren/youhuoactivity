@@ -18,7 +18,7 @@
 <div id="ticketdetail">
     <header class="mint-header">
         <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
-        <h1 class="mint-header-title">活动详情</h1>
+        <h1 class="mint-header-title">票证信息</h1>
         <div class="mint-header-button text-r"></div>
     </header>
     <div class="period">场次：{{recordList.startTime | capture(0, 16)}} 至 {{recordList.endTime | captureTime(11, 16)}}</div>
@@ -31,7 +31,7 @@
         <p>
             <span v-if="recordList.selfOrg">{{recordList.selfOrg | IselfOrg}}、</span>
             <span v-if="recordList.selfOrg">{{recordList.unitOrg | IsunitOrg}}、</span>
-            <span v-if="assignOrgNameList.length>0">及以下指定机构成员</span>
+            <span v-if="assignOrgNameList.length>1">及以下指定机构成员</span>
         </p>
         <p v-for="item in assignOrgNameList" :key="item">{{item}}</p>
     </div>

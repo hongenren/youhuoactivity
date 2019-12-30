@@ -114,30 +114,53 @@
         </a>
     </header>
     <div class="screenButList screenButList1" style="margin-top: 3px;border-top: 0px;">
-        <input type="search" class="search_input" id="name_input" placeholder="请输入机构或活动名称来搜索" style="height:30px;-webkit-appearance:none;border-radius:0px;padding-left: 5px;">
-        <input type="button" class="search_button" value="" style="-webkit-appearance:none;border-radius:0px;">
+        <input type="search" v-model="searchFrom.searchValue" class="search_input" id="name_input" placeholder="请输入机构或活动名称来搜索" style="height:30px;-webkit-appearance:none;border-radius:0px;padding-left: 5px;">
+        <input type="button" class="search_button" @click="search" style="-webkit-appearance:none;border-radius:0px;">
     </div>
     <div  id="content">
-    <ul>
-        <li class="order-list" v-for="(item, index) in recordList" :key="index">
-            <div class="order-title">
-                <span>南京东路慈善超市参观票{{index}}</span>
-                <span class="titler">待审核票证</span>
-            </div>
-            <p style="clear:both">所属活动：南京东路慈善超市义卖活动</p>
-            <p><i class="iconfont icon-naozhong"></i>19/6/6 08:00-12:00 </p>
-            <p><i class="iconfont icon-didian"></i>上海市长宁区金钟路658弄11号2楼东华大学科技园内11号2楼</p>
-            <p><i class="iconfont icon-renwu"></i>上海悠活网络科技有限公司</p>
-            <p><i class="iconfont icon-liwu"></i>核销后可赠送3积分</p>
-            <div class="oforderbox">
-                <a class="oforder" href="./order_transfer.html">转赠</a>
-                <a class="oforder" href="./admin_evaluate.html">评价</a>
-                <span class="oforder">添加临时管理员</span>
-                <span class="oforder">取消订单1</span>
-                <span class="oforder">取消订单</span>
-            </div>
-        </li>
-    </ul></div>
+        <ul>
+            <li class="order-list" v-for="(item, index) in recordList" :key="index">
+                <div class="order-title">
+                    <span>{{item.name}}</span>
+                    <span class="titler" :class='"titler" + item.type'>{{item.type | orderState(item.state)}}</span>
+                </div>
+                <p style="clear:both">所属活动：{{item.activityName}}</p>
+                <p><i class="iconfont icon-naozhong"></i>{{item.startTime | capture(0, 16)}}-{{item.startTime | capture(11, 16)}}</p>
+                <p><i class="iconfont icon-didian"></i>{{item.address}}</p>
+                <p><i class="iconfont icon-renwu"></i>上海悠活网络科技有限公司</p>
+                <p style="position: relative;"><i class="iconfont icon-liwu"></i>核销后可赠送{{item.point}}积分
+                    <span v-if="item.type == 30 && item.state == 10">（管理员扫描票证二维码进行核销）</span>
+                    <span v-if="item.type == 30 && item.state == 20"> | 09:00已核销</span v-if="item.type == 30 && item.state == 10">
+                    <span v-if="item.type == 80 && item.state == 10" class="checkIn">我要签到</span>
+                </p>
+                <div style="color:#828282">管理员工作提示：1、必须在场次开始前半小时到达报到地点2、活动当天尽量穿正装</div>
+                <ul>
+                    <li class="ticketlist" v-for="(item1, index1) in item.publicList" :key="index1">
+                        <p class="ticket-title">{{item1.name}}</p>
+                        <p><i class="iconfont icon-didian"></i>{{item1.publicAddress}}</p>
+                        <p class="statistics"><i class="iconfont icon-shuangren"></i>
+                            <span>已核销：{{item1.checkCount}}</span>
+                            <span>已领取：{{item1.applyCount}}</span>
+                            <span>共发放：{{item1.total}}</span>
+                        </p>
+                        <p class="oforderbox">
+                            <span v-if="item.type == 80" class="oforders">添加临时管理员</span>
+                            <span v-if="item.type == 80" class="oforder">扫一扫</span>
+                        </p>
+                    </li>
+                </ul>
+                <div class="oforderbox">
+                    <span v-if="item.type == 30 && item.state == 0" class="oforder" @click="cancelorder(item.ticket)">取消订单</span>
+                    <span v-if="item.type == 30 && item.state == 10" class="oforders" @click="donation()">转赠</span>
+                    <span v-if="item.type == 30 && item.state == 20" class="oforder" href="./admin_evaluate.html">评价</span>
+                    <span v-if="item.type == 30 && (item.state == 10 || item.state == 20)" class="oforder">票证二维码</span>
+                </div>
+            </li>
+        </ul>
+        <div class="dropload-downs" v-if="dropload">
+            <div class="dropload-noData">没有啦~</div>
+        </div>
+    </div>
     <!------底部开始------>
     <div id='footer'></div>
     <!------底部结束------>
@@ -149,24 +172,59 @@
 <script src="../wap/js/dropload.min.js"></script>
 <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
+
 <script>
  // $("#footer").load("../public/footer.html");
  var vueIM = new Vue({
     el: '#activityOrder',
     data () {
         return {
-            fil: null,
+            dropload: false,
             recordList: [],
-            addFrom: {
-                org: 'AAA789', // 机构标识
-                url: null
-            },
+            publicList: null,
             searchFrom: {
-                org: 'AAA789', // 机构标识
-                current: 1, // 当前页
-                size: 20 // 页容量
+                status: 1, // 票证标识
+                user: "" + JSON.parse($.cookie('user_msg')).userId, // 用户标识
+                searchValue: '', // 搜索值
+                current: 0, // 当前页
+                size: 5 // 页容量
             }
         };
+    },
+    filters: {
+        capture: function (value, start, end) {
+            return value= value.substring(start, end);
+        },
+        orderState (type, state) {
+            console.log(type, state);
+            // state状态 -10作废 待审核0 10待使用 20使用中 30已结算
+            // type票类型 30公众票证 80场次管理员
+            if (type == 30) {
+                switch (state) {
+                    case -10:
+                        return "作废";
+                    case 0:
+                        return "待审核票证";
+                    case 10:
+                        return "待核销票证";
+                    case 20:
+                        return "已核销票证";
+                    case 30:
+                        return "已结算";
+                }
+            }
+            if (type == 80) {
+                switch (state) {
+                    case 10:
+                        return "待签到管理员";
+                    case 20:
+                        return "已签到管理员";
+                }
+            }
+            if (type == 90) {
+                return "临时管理员"
+            }
+        }
     },
     mounted () {
         this.init();
@@ -175,40 +233,37 @@
         init (){
             //滑动加载更多
             var that = this;
-            $(function(){
-                // 页数
-                var page = 1;
-                var size = 5;
                 $('#content').dropload({
                     scrollArea : window,
                     loadDownFn : function(me){
-                        page++;
-                        let json={
-                            pageNumber: page,
-                            pageSize: size,
-                            user: 1001658,
-                            status: 1
-                        }
+                        $(".dropload-down").remove();
+                        that.searchFrom.current++
                         $.ajax({
                             xhrFields: {
                             withCredentials: true
                             },
                             type:"post",
-                            url:'http://test.dakaqi.cn:28080/html5/v1/newTask/taskUserTicketList',
-                            data:JSON.stringify(json),
-                            headers : {'token':'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAxNjU4Iiwic3ViIjoiMTAwMTY1ODs3Mi0wMDAwMDg4OS03OzE4NTAxMDcwMDAxIiwiaXNzIjoi5LiK5rW35biC5b-X6Laj5YWs55uK5Z-66YeR5LyaIiwiaWF0IjoxNTc2NzE5MTEwLCJleHAiOjE1NzgwMTUxMTB9.m8S2MKk4sIilw8jTXwDPC-8v3MCX4eShqRTu3cGt_mU'},
+                            url: base_url +  'html5/v2/activity/userTicket/getListByUser',
+                            data:JSON.stringify(that.searchFrom),
+                            headers : {'token': $.cookie('token')},
                             dataType:'json',
                             contentType: "application/json;charset=utf-8",
                             success:function(data){
-                                console.log(me);
+                                console.log(data.data.records);
                                 if(data.data.records.length > 0){
-                                    that.recordList.push(data.data.records);
+                                    for (let i = 0; i < data.data.records.length; i++) {
+                                        that.recordList.push(data.data.records[i]);
+                                    }
+                                    console.log(that.recordList);
                                 } else {
                                     me.lock();
                                     // 无数据
                                     me.noData();
+                                    that.dropload = true;
                                 }
-                                me.resetload();
+                                that.$nextTick(() => {
+                                    me.resetload();
+                                })
                             },
                             error: function(xhr, type){
                                 //alert('Ajax error!');
@@ -218,7 +273,61 @@
                         })
                     }
                 })
+        },
+        search () {
+            var that = this;
+            that.searchFrom.current = 1;
+            $.ajax({
+                xhrFields: {
+                withCredentials: true
+                },
+                type:"post",
+                url: base_url +  'html5/v2/activity/userTicket/getListByUser',
+                data:JSON.stringify(that.searchFrom),
+                headers : {'token': $.cookie('token')},
+                dataType:'json',
+                contentType: "application/json;charset=utf-8",
+                success:function(data){
+                    console.log(data.data.records);
+                    if(data.data.records.length > 0){
+                        that.recordList = data.data.records;
+                        console.log(that.recordList);
+                    } else {
+                        that.dropload = true;
+                    }
+                }
             })
+        },
+        // 取消订单
+        cancelorder (ticket) {
+            layer.open({
+                content: '当前票证正在审核中，您确定要取消吗？'
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    $.ajax({
+                        xhrFields: {
+                        withCredentials: true
+                        },
+                        type:"post",
+                        url: base_url +  'html5/v2/activity/userTicket/cancel',
+                        data:JSON.stringify({ticket: ticket}),
+                        headers : {'token': $.cookie('token')},
+                        dataType:'json',
+                        contentType: "application/json;charset=utf-8",
+                        success:function(data){
+                            console.log(data.code);
+                            if (data.code == 0) {
+                                location.href = "javascript:location.replace(location.href)";
+                            }
+                        }
+                    })
+                }
+                ,
+            })
+        },
+        // 转赠
+        donation () {
+            window.location.href ="./order_transfer.html"
         }
     }
 })

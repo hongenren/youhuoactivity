@@ -183,6 +183,7 @@
     <!--地点结束-->
     <!-- 主办搜索开始 -->
     <div class="searchcompany">
+        <div class="searchwarp">
         <header class="mint-header">
             <div class="mint-header-button text-l"><a class="icon-back"></a></div>
             <h1 class="mint-header-title">选择活动参与方</h1>
@@ -199,6 +200,7 @@
         </ul>
         <button v-if="companytype == 10" class="submit-btn" style="position: absolute;" @click="addCompany">添加{{companytype}}</button>
         <button v-if="companytype == 20" class="submit-btn" style="position: absolute;" @click="addCompany1">添加{{companytype}}</button>
+        </div>
     </div>
     <!-- 搜索结束 -->
     <!---- 地图开始 ---->

@@ -698,6 +698,21 @@ input, textarea{
     padding: 0 0.5rem;
     font-weight: bold;
 }
-@media (min-width:641px){body{width:640px;margin:auto!important;}}
-@media (min-width:641px){.submit-btn-tint{width:640px;left: 50%;margin-left: -320px;}}
-@media (min-width:641px){.submit-btn{width:640px;left: 50%;margin-left: -320px;}}
+
+@media (min-width:641px) {
+    html,body,.searchwarp{
+        width: 640px!important;
+        height:auto!important;
+        min-height:100%!important;
+        margin: auto!important;
+        position:relative!important;
+    }
+    .submit-btn-tint{width:640px;left: 50%;margin-left: -320px;}
+    .submit-btn{width:640px;left: 50%;margin-left: -320px;}
+    #activitybanner{
+        width: 640px!important;
+        height:auto!important;
+        min-height:100%!important;
+        margin: auto!important;
+    }
+}
