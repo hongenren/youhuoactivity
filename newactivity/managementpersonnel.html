@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+<div id="managementpersonnel">
+    <header class="mint-header" style="border-bottom: 1px solid #bbb;">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">人员管理</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="yh-tab">
+        <div>待审核</div>
+        <div>已领取</div>
+    </div>
+    <div class="screenButList screenButList1" style="margin-top: 3px;border-top: 0px;">
+        <input type="search" class="search_input" id="name_input" placeholder="请输入机构或活动名称来搜索" style="height:30px;-webkit-appearance:none;border-radius:0px;padding-left: 5px;">
+        <input type="button" class="search_button" style="-webkit-appearance:none;border-radius:0px;">
+    </div>
+    <div class="ts_warning">请在场次开始前审核完成，过期不审者，系统默认审核“拒绝”</div>
+    <ul>
+        <li class="personneList">
+            <div>
+                <span class="imgbox"></span>
+                <span class="personnename">张三</s>
+            </div>
+            <div class="personnebtnbox">
+                <span class="oforder1F">通过</span>
+                <span class="oforder">拒绝</span class="oforder00">
+                <span class="oforder00">联系</span>
+            </div>
+        </li>
+    </ul>
+    <div class="operationBtn">
+        <div class="fl">
+            <span>编辑</span>
+            <span>全选</span>
+        </div>
+        <div class="fr">
+            <span>批量通过</span>
+            <span>批量拒绝</span>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#managementpersonnel',
+    data () {
+        return {
+            searchFrom: {
+                activityCode: this.getUrlParam('activityCode'), // 机构标识
+                current: 1, // 当前页
+                size: 20 // 页容量
+            },
+            detailList: []
+        };
+    },
+    created () {
+        this.init();
+    },
+    filters: {
+        capture: function (value, start, end) {
+            return value= value.substring(start, end);
+        }
+    },
+    methods: {
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
+        init () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/getPublicList',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.searchFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res.data);
+                    that.detailList = res.data.records;
+                }
+            });
+        },
+        goticketinformation (pubCode) {
+            window.location.href="./ticketdetail.html?pubCode=" + pubCode;
+        }
+    }
+})
+</script>
+</html>

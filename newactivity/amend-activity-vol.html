@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/activityinfo.css"/>
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+<div id="amendActivityVol">
+    <header class="mint-header" style="border-bottom: 1px solid #bbb;">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">修改活动参与方</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="optional">
+        <p><span style="color:#73B81F;">活动参与方</span><span style="font-size: 12px;"></span></p>
+        <p style="font-size: 12px;">主办和联办单位需在系统中选择，需对方审核后才能通过</p>
+    </div>
+    <div class="yh-group" style="border: none;">
+        <span class="l">主办单位</span>
+        <a class="ricon" @click="selectcompany(10)">
+            默认是本机构，可修改为其他机构
+        </a>
+    </div>
+    <div class="companybox" style="border-bottom: 1px solid #bbb;">
+        <div class="yh-group-company" v-for="(item, index) in auspiceconmpanyList" :key="index">
+            <span>{{item.orgName}}</span>
+            <span class="iconfont icon-cha1" @click="delcompany(index)"></span>
+        </div>
+    </div>
+    <div class="yh-group" style="border: none;">
+        <span class="l">联办单位</span>
+        <div class="ricon" @click="selectcompany(20)">
+            请选择
+        </div>
+    </div>
+    <div class="companybox" style="border-bottom: 1px solid #bbb;">
+        <div class="yh-group-company" v-for="(item, index) in seecconmpanyList" :key="index">
+            <span>{{item.orgName}}</span>
+            <span class="iconfont icon-cha1" @click="delcompany1(index)"></span>
+        </div>
+    </div>
+    <div class="whitecompany" style="border-bottom: 1px solid #bbb;">
+        <textarea placeholder=""></textarea>
+    </div>
+    <!-- 主办搜索开始 -->
+    <div class="searchcompany">
+        <div class="searchwarp">
+        <header class="mint-header">
+            <div class="mint-header-button text-l"><a class="icon-back"></a></div>
+            <h1 class="mint-header-title">选择活动参与方</h1>
+            <div class="mint-header-button text-r"></div>
+        </header>
+        <div class="screenButList">
+            <input type="text" id="activityUniteParamName" placeholder="请输入机构名称进行查询"><i @click="search" class="iconfont icon-fangdajing"></i>
+        </div>
+        <ul class="warp_company">
+            <!-- <li class="yh-group">
+                <span class="l">上海悠活网络科技有限公司</span>
+                <i class="iconfont icon-duigou"></i>
+            </li> -->
+        </ul>
+        <button v-if="companytype == 10" class="submit-btn" style="position: absolute;" @click="addCompany">添加{{companytype}}</button>
+        <button v-if="companytype == 20" class="submit-btn" style="position: absolute;" @click="addCompany1">添加{{companytype}}</button>
+        </div>
+    </div>
+    <!-- 搜索结束 -->
+</div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#amendActivityVol',
+    data () {
+        return {
+            companytype: 10,
+            auspiceconmpanyList: [],
+            seecconmpanyList: [],
+            searchFrom: {
+                activityCode: this.getUrlParam('activityCode'), // 机构标识
+                current: 1, // 当前页
+                size: 20 // 页容量
+            },
+            detailList: []
+        };
+    },
+    created () {
+        this.init();
+    },
+    filters: {
+        capture: function (value, start, end) {
+            return value= value.substring(start, end);
+        }
+    },
+    methods: {
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
+        init () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/getPublicList',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.searchFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res.data);
+                    that.detailList = res.data.records;
+                }
+            });
+        },
+        // 搜索公司
+        search () {
+            $.ajax({
+                url: base_url + '/html5/v1/orgPlace/queryTotalListByName',
+                type: "post",
+                dataType: "json",
+                data: "{\"name\":\"" + $("#activityUniteParamName").val() + "\", \"pageNumber\": 1, \"pageSize\": 6, \"orgThirdAccount\":\""+this.org+"\" }",
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        var record = resp.data.records;
+                        $(".warp_company").html("");
+                        for (var i in record) {
+                            $(".warp_company").append(`<li>
+                                <div data-orgId="${record[i].id}" data-type="${record[i].type}" data-orgName="${record[i].name}" data-orgCode="${record[i].orgThirdAccount}">${record[i].name}</div>
+                            </li>`);
+                        }
+                        $(".warp_company li div").click(function() {
+                            $(this).toggleClass('companyname');
+                        });
+                    }
+                }
+            });
+        },
+        selectcompany (type) {
+            $('.warp_company li div').removeClass('companyname')
+            this.companytype = type;
+            console.log(this.companytype);
+            $(".searchcompany").animate({left:"0"})
+        },
+        addCompany () {
+            var that = this;
+            var company = $(".companyname");
+            var arrList = new Array();
+            $(".companyname").each(function(){
+                arrList.push({
+                    orgId: $(this).attr('data-orgId'),
+                    orgCode: $(this).attr('data-orgCode'),
+                    orgName: $(this).attr('data-orgName'),
+                    type: that.companytype
+                });
+            });
+            this.auspiceconmpanyList = arrList;
+            $(".searchcompany").animate({left:"100%"})
+            console.log(arrList);
+        },
+        addCompany1 () {
+            var that = this;
+            var company = $(".companyname");
+            var arrList = new Array();
+            $(".companyname").each(function(){
+                arrList.push({
+                    orgId: $(this).attr('data-orgId'),
+                    orgCode: $(this).attr('data-orgCode'),
+                    orgName: $(this).attr('data-orgName'),
+                    type: that.companytype
+                });
+            });
+            this.seecconmpanyList = arrList;
+            $(".searchcompany").animate({left:"100%"})
+            console.log(arrList);
+        },
+    }
+})
+</script>
+</html>

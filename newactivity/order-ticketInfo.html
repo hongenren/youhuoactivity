@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/activity_order.css"/>
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+<div id="orderTicketInfo">
+    <header class="mint-header">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">票证信息</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="sessionTime">
+        <span class="l">场次：19/6/6 08:00-12:00   </span>
+        <span class="r"><i class="iconfont icon-tianjiajiahaowubiankuang"></i> 添加新票证</span>
+    </div>
+    <ul style="padding-right: 1rem;">
+        <li class="ticketlist" v-for="(item1, index1) in 1" :key="index1">
+            <p class="ticket-title">{{item1.name}}</p>
+            <p><i class="iconfont icon-didian"></i>{{item1.publicAddress}}</p>
+            <p class="statistics"><i class="iconfont icon-shuangren"></i>
+                <span>已核销：{{item1.checkCount}}</span>
+                <span>已领取：{{item1.applyCount}}</span>
+                <span>共发放：{{item1.total}}</span>
+            </p>
+            <p class="oforderbox">
+                <span>更多</span>
+                <span class="oforderF9">修改票证</span>
+                <span class="oforder1F">扫一扫</span>
+                <span class="oforder" @click="gomanagementpersonnel()">人员管理</span>
+            </p>
+        </li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#orderTicketInfo',
+    data () {
+        return {
+            searchFrom: {
+                activityCode: this.getUrlParam('activityCode'), // 机构标识
+                current: 1, // 当前页
+                size: 20 // 页容量
+            },
+            detailList: []
+        };
+    },
+    created () {
+        this.init();
+    },
+    filters: {
+        capture: function (value, start, end) {
+            return value= value.substring(start, end);
+        }
+    },
+    methods: {
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
+        init () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/getPublicList',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.searchFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res.data);
+                    that.detailList = res.data.records;
+                }
+            });
+        },
+        goticketinformation (pubCode) {
+            window.location.href="./ticketdetail.html?pubCode=" + pubCode;
+        },
+        gomanagementpersonnel (pubCode) {
+            window.location.href="./managementpersonnel.html?pubCode=" + pubCode;
+        }
+    }
+})
+</script>
+</html>

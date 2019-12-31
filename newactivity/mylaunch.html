@@ -12,9 +12,13 @@
     <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="css/base.css"/>
     <link rel="stylesheet" href="css/activity_order.css"/>
-    <link rel="stylesheet" href="css/mylaunch.css"/>
     <link rel="stylesheet" type="text/css" href="../post/RightMenu/smartMenu.css"/>
     <script type="text/javascript" src="js/rem.js"></script>
+    <style>
+        .yh-group .l{
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
 <div id="mylaunch">
@@ -23,7 +27,7 @@
         <h1 class="mint-header-title">活动订单</h1>
         <div class="mint-header-button text-r"></div>
     </header>
-    <div class="warp_dd_p">
+    <div class="warp_dd_p" style="padding:0;">
         <a class="current" href="#" onclick="jump('../post/personal_post_list.html')">
             <span>我发起</span>
         </a>
@@ -40,24 +44,80 @@
     </div>
     <div  id="content">
     <ul>
-        <li class="order-list" v-for="(item, index) in 12" :key="index">
+        <li class="order-list" v-for="(item, index) in recordList" :key="index">
             <div class="my-order-title">
-                <span>南京东路慈善超市参观票{{index}}</span>
+                <span>{{item.name}}</span>
             </div>
-            <p><i class="iconfont icon-naozhong"></i>19/6/6 08:00-12:00 </p>
-            <p><i class="iconfont icon-didian"></i>上海市长宁区金钟路658弄11号2楼东华大学科技园内11号2楼</p>
+            <p><i class="iconfont icon-naozhong"></i>{{item.startDay}}{{item.endDay}}</p>
+            <p><i class="iconfont icon-didian"></i>{{item.address}}</p>
             <div class="oforderbox">
                 <span class="more">更多</span>
-                <a href="./activityPoster.html">海报</a>
-                <span class="oforder">取消订单1</span>
+                <span class="oforderF9" href="./activityPoster.html">海报</span>
+                <span class="oforder1F" @click="goDownData">下载数据</span>
                 <span class="oforder">取消订单</span>
             </div>
             <div class="yh-group">
                 <span class="l">票证场次信息</span>
-                <span>今天</span>
+                <span>共{{item.sectionGeneralVoList.length}}个场次<i class="iconfont icon-icon_you"></i></span>
             </div>
+            <ul>
+                <li v-for="(item1, index1) in item.sectionGeneralVoList" :key="index1">
+                    <div class="yh-group-noborder">
+                        <span class="l">{{item1.day}} {{item1.startTime}}-{{item1.endTime}}</span>
+                        <p>
+                            <span class="textF9">复制</span>
+                            <span class="text1F">修改</span>
+                            <span class="text6C">取消</span>
+                        </p>
+                    </div>
+                    <div class="yh-group-noborder" @click="goOrdertickInfo()">
+                        <span class="l">该场次下的票证</span>
+                        <span>共{{item1.sectionPublicNum}}种<i class="iconfont icon-icon_you"></i></span>
+                    </div>
+                    <div class="yh-group-noborder">
+                        <span class="l">该场次下的票证核销管理员</span>
+                        <span>共{{item1.sectionManagerNum}}种<i class="iconfont icon-icon_you"></i></span>
+                    </div>
+                </li>
+            </ul>
+            <div class="yh-group">
+                <span class="l">岗位信息</span>
+                <span>共{{item.postVoList.length}}个场次<i class="iconfont icon-icon_you"></i></span>
+            </div>
+            <ul>
+                <li class="order-list" v-for="(item2, index2) in item.postVoList" :key="index2">
+                    <div class="my-order-title">
+                        <span>{{item.name}}</span>
+                    </div>
+                    <p><i class="iconfont icon-naozhong"></i>{{item.startDay}}{{item.endDay}}</p>
+                    <p><i class="iconfont icon-didian"></i>{{item.address}}</p>
+                    <div class="oforderbox">
+                        <span class="oforder">接触关联</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="yh-group">
+                <span class="l">任务信息</span>
+                <span>共{{item.subTaskVoList.length}}个场次<i class="iconfont icon-icon_you"></i></span>
+            </div>
+            <ul>
+                <li class="order-list" v-for="(item3, index3) in item.subTaskVoList" :key="index3">
+                    <div class="my-order-title">
+                        <span>{{item.name}}</span>
+                    </div>
+                    <p><i class="iconfont icon-naozhong"></i>{{item.startDay}}{{item.endDay}}</p>
+                    <p><i class="iconfont icon-didian"></i>{{item.address}}</p>
+                    <div class="oforderbox">
+                        <span class="oforder">接触关联</span>
+                    </div>
+                </li>
+            </ul>
         </li>
-    </ul></div>
+    </ul>
+    <div class="dropload-down" v-if="dropload">
+        <div class="dropload-noData">没有啦~</div>
+    </div>
+    </div>
 </div>
 </body>
 <script type="text/javascript" src="../wap/js/jquery.js"></script>
@@ -65,64 +125,125 @@
 <script type="text/javascript" src="../wap/js/config.js"></script>
 <script type="text/javascript" src="js/vue.min.js"></script>
 <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script src="../wap/js/dropload.min.js"></script>
 <script>
 var vueIM = new Vue({
     el: '#mylaunch',
     data () {
         return {
-            fil: null,
             recordList: [],
-            addFrom: {
-                org: 'AAA789', // 机构标识
-                url: null
-            },
+            dropload: false,
             searchFrom: {
-                org: 'AAA789', // 机构标识
-                current: 1, // 当前页
-                size: 20 // 页容量
+                orgCode: JSON.parse(localStorage.getItem('prjvorgMsg')).cookieResp.un, // 机构账户标识
+                current: 0, // 当前页
+                size: 5 // 页容量
             },
             moreMenuData:[[
                 {
-                    text: "发通知",
+                    text: "修改活动基本信息",
                     func: function () {
                         jump("./send_notification.html?type=0&pkPostCode="+pkPostCode);
                     }
                 },
                 {
-                    text: "收消息",
+                    text: "修改活动参与方",
                     func: function () {
-                        jump("./receive_messages.html?pkPostCode="+pkPostCode);
+                        window.location.href="./amend-activity-vol.html"
+                    }
+                },
+                {
+                    text: "取消活动",
+                    func: function () {
+                        jump("./send_notification.html?type=0&pkPostCode="+pkPostCode);
+                    }
+                },
+                {
+                    text: "监管通知",
+                    func: function () {
+                        window.location.href="./supervise-inform.html"
+                    }
+                },
+                {
+                    text: "待审核事项",
+                    func: function () {
+                        window.location.href="./checkitem.html"
                     }
                 },
             ]]
         };
     },
     mounted () {
-        this.init();
+        this.getselectPublish();
     },
     methods: {
         init (){
-            // 线上
-            this.searchFrom.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'AAA789';
-            var _this = this;
+            var _this= this;
             $(".more").each(function(){
                 var that=$(this);
                 var offsetWidth=$(window).width() - that.offset().left - that.outerWidth();
                 if(offsetWidth<200){
-                    that.smartMenu(_this.moreMenuData,{offsetX:-100});
+                    that.smartMenu(_this.moreMenuData,{offsetX:-100, textLimit: 8});
                 }else {
                     if(window.innerWidth<640){
-                        that.smartMenu(_this.moreMenuData);
+                        that.smartMenu(_this.moreMenuData, {textLimit: 8});
                     }else{
-                        that.smartMenu(_this.moreMenuData,{offsetX:-parseInt(that.offset().left)/1.7});
+                        that.smartMenu(_this.moreMenuData,{offsetX:-parseInt(that.offset().left)/1.7, textLimit: 8});
                     }
 
                 }
-                console.log()
             });
         },
-        zhankai () {
-            $('.activitmark').css({height: "auto"});
+        getselectPublish () {
+            var that = this;
+            $('#content').dropload({
+                scrollArea : window,
+                loadDownFn : function(me){
+                    $(".dropload-down").remove();
+                    that.searchFrom.current++
+                    $.ajax({
+                        xhrFields: {
+                        withCredentials: true
+                        },
+                        type:"post",
+                        url: base_url +  'html5/v2/activity/selectPublish',
+                        data:JSON.stringify(that.searchFrom),
+                        headers : {'token': $.cookie('token')},
+                        dataType:'json',
+                        contentType: "application/json;charset=utf-8",
+                        success:function(data){
+                            console.log(data.data);
+                            if(data.data.records.length > 0){
+                                for (let i = 0; i < data.data.records.length; i++) {
+                                    that.recordList.push(data.data.records[i]);
+                                }
+                                console.log(that.recordList);
+                                that.$nextTick(() => {
+                                    that.init();
+                                });
+                            } else {
+                                me.lock();
+                                // 无数据
+                                me.noData();
+                                that.dropload = true;
+                            }
+                            that.$nextTick(() => {
+                                me.resetload();
+                            })
+                        },
+                        error: function(xhr, type){
+                            //alert('Ajax error!');
+                            // 即使加载出错，也得重置
+                            me.resetload();
+                        }
+                    })
+                }
+            })
+        },
+        goOrdertickInfo () {
+            window.location.href="./order-ticketInfo.html";
+        },
+        goDownData () {
+            window.location.herf="./download_data.html";
         }
     }
 })

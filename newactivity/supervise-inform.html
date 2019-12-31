@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+<div id="amendActivityVol">
+    <header class="mint-header" style="border-bottom: 1px solid #bbb;">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">监管通知</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <ul>
+        <li class="infobox">
+            <div style="color: #828282;">2019年10月10日 19:09</div>
+            <div>由于该活动涉及到XXXX，该活动暂被冻结,该活动暂被冻结,该活动暂被冻结。</div>
+        </li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#amendActivityVol',
+    data () {
+        return {
+            companytype: 10,
+            auspiceconmpanyList: [],
+            seecconmpanyList: [],
+            searchFrom: {
+                activityCode: this.getUrlParam('activityCode'), // 机构标识
+                current: 1, // 当前页
+                size: 20 // 页容量
+            },
+            detailList: []
+        };
+    },
+    created () {
+        this.init();
+    },
+    filters: {
+        capture: function (value, start, end) {
+            return value= value.substring(start, end);
+        }
+    },
+    methods: {
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
+        init () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/getPublicList',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.searchFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res.data);
+                    that.detailList = res.data.records;
+                }
+            });
+        },
+    }
+})
+</script>
+</html>

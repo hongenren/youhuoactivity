@@ -151,7 +151,7 @@
                 </ul>
                 <div class="oforderbox">
                     <span v-if="item.type == 30 && item.state == 0" class="oforder" @click="cancelorder(item.ticket)">取消订单</span>
-                    <span v-if="item.type == 30 && item.state == 10" class="oforders" @click="donation()">转赠</span>
+                    <span v-if="item.type == 30 && item.state == 10" class="oforder1F" @click="donation()">转赠</span>
                     <span v-if="item.type == 30 && item.state == 20" class="oforder" href="./admin_evaluate.html">评价</span>
                     <span v-if="item.type == 30 && (item.state == 10 || item.state == 20)" class="oforder">票证二维码</span>
                 </div>
@@ -233,46 +233,46 @@
         init (){
             //滑动加载更多
             var that = this;
-                $('#content').dropload({
-                    scrollArea : window,
-                    loadDownFn : function(me){
-                        $(".dropload-down").remove();
-                        that.searchFrom.current++
-                        $.ajax({
-                            xhrFields: {
-                            withCredentials: true
-                            },
-                            type:"post",
-                            url: base_url +  'html5/v2/activity/userTicket/getListByUser',
-                            data:JSON.stringify(that.searchFrom),
-                            headers : {'token': $.cookie('token')},
-                            dataType:'json',
-                            contentType: "application/json;charset=utf-8",
-                            success:function(data){
-                                console.log(data.data.records);
-                                if(data.data.records.length > 0){
-                                    for (let i = 0; i < data.data.records.length; i++) {
-                                        that.recordList.push(data.data.records[i]);
-                                    }
-                                    console.log(that.recordList);
-                                } else {
-                                    me.lock();
-                                    // 无数据
-                                    me.noData();
-                                    that.dropload = true;
+            $('#content').dropload({
+                scrollArea : window,
+                loadDownFn : function(me){
+                    $(".dropload-down").remove();
+                    that.searchFrom.current++
+                    $.ajax({
+                        xhrFields: {
+                        withCredentials: true
+                        },
+                        type:"post",
+                        url: base_url +  'html5/v2/activity/userTicket/getListByUser',
+                        data:JSON.stringify(that.searchFrom),
+                        headers : {'token': $.cookie('token')},
+                        dataType:'json',
+                        contentType: "application/json;charset=utf-8",
+                        success:function(data){
+                            console.log(data.data.records);
+                            if(data.data.records.length > 0){
+                                for (let i = 0; i < data.data.records.length; i++) {
+                                    that.recordList.push(data.data.records[i]);
                                 }
-                                that.$nextTick(() => {
-                                    me.resetload();
-                                })
-                            },
-                            error: function(xhr, type){
-                                //alert('Ajax error!');
-                                // 即使加载出错，也得重置
-                                me.resetload();
+                                console.log(that.recordList);
+                            } else {
+                                me.lock();
+                                // 无数据
+                                me.noData();
+                                that.dropload = true;
                             }
-                        })
-                    }
-                })
+                            that.$nextTick(() => {
+                                me.resetload();
+                            })
+                        },
+                        error: function(xhr, type){
+                            //alert('Ajax error!');
+                            // 即使加载出错，也得重置
+                            me.resetload();
+                        }
+                    })
+                }
+            })
         },
         search () {
             var that = this;
