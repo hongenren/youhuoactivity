@@ -46,3 +46,23 @@ input[type="checkbox"] {
 label{
     float: right;width: 90%;text-align: right;font-size: 16px;color: #000000;
 }
+.downbtn-warp{
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    width: 100%;
+}
+.screenButList .search_input{
+    width: 70%;
+    height: 30px;
+    color: rgba(136, 136, 136, 1);
+    border: 1px solid rgba(115, 184, 31, 1);
+    margin-right: 10px;
+}
+.screenButList .search_button{
+    width: 20%;
+    height: 30px;
+    border-radius: 4px;
+    background-color: rgba(115, 184, 31, 1);
+    color: rgba(255, 255, 255, 1);
+}

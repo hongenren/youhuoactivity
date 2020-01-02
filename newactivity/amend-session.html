@@ -15,44 +15,15 @@
     <script type="text/javascript" src="js/rem.js"></script>
 </head>
 <body>
-<div id="managementpersonnel">
+<div id="amendSession">
     <header class="mint-header" style="border-bottom: 1px solid #bbb;">
         <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
-        <h1 class="mint-header-title">待审核事项</h1>
+        <h1 class="mint-header-title">修改场次</h1>
         <div class="mint-header-button text-r"></div>
     </header>
-    <div class="yh-tab">
-        <div :class="{moduleactive: addFrom.module == 10}" @click="selectModule(10)">关联岗位</div>
-        <div :class="{moduleactive: addFrom.module == 20}" @click="selectModule(20)">关联任务</div>
+    <div class="yh-activity-list">
+        11
     </div>
-    <ul v-if="addFrom.module == 10">
-        <li class="yh-activity-list" v-for="(item, index) in postList" :key="index">
-            <div>
-                <p class="avtivity-title">{{item.name}}</p>
-                <p class="avtivity-icobox"><i class="iconfont icon-naozhong"></i>发起方：{{item.orgName}}</p>
-                <p class="avtivity-icobox"><i class="iconfont icon-naozhong"></i>{{item.startDay}} {{item.serviceBeginTime}} 至 {{item.lastDay}} {{item.serviceEndTime}}</p>
-                <p class="avtivity-icobox"><i class="iconfont icon-didian"></i>{{item.address}}</p>
-            </div>
-            <div class="oforderbox">
-                <span class="oforder1F" @click="checkBtn(item.pkPostCode, 20)">通过</span>
-                <span class="oforder" style="padding: 0.2rem 1rem;" @click="checkBtn(item.pkPostCode, -10)">拒绝</span>
-            </div>
-        </li>
-    </ul>
-    <ul v-if="addFrom.module == 20">
-        <li class="yh-activity-list" v-for="(item, index) in subTaskList" :key="index">
-            <div>
-                <p class="avtivity-title">{{item.name}}</p>
-                <p class="avtivity-icobox"><i class="iconfont icon-naozhong"></i>发起方：{{item.orgName}}</p>
-                <p class="avtivity-icobox"><i class="iconfont icon-naozhong"></i>{{item.beginTime | capture(0, 16)}} 至 {{item.endTime | capture(0, 16)}}</p>
-                <p class="avtivity-icobox"><i class="iconfont icon-didian"></i>{{item.address}}</p>
-            </div>
-            <div class="oforderbox">
-                <span class="oforder1F" @click="checkBtn(item.mainCode, 20)">通过</span>
-                <span class="oforder" style="padding: 0.2rem 1rem;" @click="checkBtn(item.mainCode, -10)">拒绝</span>
-            </div>
-        </li>
-    </ul>
 </div>
 </body>
 <script type="text/javascript" src="../wap/js/jquery.js"></script>
@@ -61,7 +32,7 @@
 <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
 <script>
 var vueIM = new Vue({
-    el: '#managementpersonnel',
+    el: '#amendSession',
     data () {
         return {
             searchFrom: {
@@ -81,8 +52,8 @@ var vueIM = new Vue({
         };
     },
     created () {
-        this.getRelatedPostList();
-        this.getRelatedSubTaskList();
+        // this.getRelatedPostList();
+        // this.getRelatedSubTaskList();
     },
     filters: {
         capture: function (value, start, end) {

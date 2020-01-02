@@ -117,6 +117,11 @@
 .titler90{
     background: #FCCA00;
 }
+.moduleactive{
+    color: #73B81F;
+    font-size: 16px;
+    font-weight: bold;
+}
 .order-list p{
     padding: 0.2rem 0;
 }

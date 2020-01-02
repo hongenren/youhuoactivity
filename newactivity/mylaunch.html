@@ -48,11 +48,11 @@
             <div class="my-order-title">
                 <span>{{item.name}}</span>
             </div>
-            <p><i class="iconfont icon-naozhong"></i>{{item.startDay}}{{item.endDay}}</p>
+            <p><i class="iconfont icon-naozhong"></i>{{item.startDay}} 至 {{item.endDay}}</p>
             <p><i class="iconfont icon-didian"></i>{{item.address}}</p>
             <div class="oforderbox">
-                <span class="more">更多</span>
-                <span class="oforderF9" href="./activityPoster.html">海报</span>
+                <span class="more" :data-code='item.activityCode'>更多</span>
+                <span class="oforderF9"  @click="goActivityPoster">海报</span>
                 <span class="oforder1F" @click="goDownData">下载数据</span>
                 <span class="oforder">取消订单</span>
             </div>
@@ -66,7 +66,7 @@
                         <span class="l">{{item1.day}} {{item1.startTime}}-{{item1.endTime}}</span>
                         <p>
                             <span class="textF9">复制</span>
-                            <span class="text1F">修改</span>
+                            <span class="text1F" @click="amendsession(item1.day, item1.startTime, item1.endTime)">修改</span>
                             <span class="text6C">取消</span>
                         </p>
                     </div>
@@ -125,6 +125,7 @@
 <script type="text/javascript" src="../wap/js/config.js"></script>
 <script type="text/javascript" src="js/vue.min.js"></script>
 <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
 <script src="../wap/js/dropload.min.js"></script>
 <script>
 var vueIM = new Vue({
@@ -142,19 +143,39 @@ var vueIM = new Vue({
                 {
                     text: "修改活动基本信息",
                     func: function () {
-                        jump("./send_notification.html?type=0&pkPostCode="+pkPostCode);
+                        window.location.href="./activityinfo.html?activityCode=" + $(this).data("code") + "&amendbase=base";
                     }
                 },
                 {
                     text: "修改活动参与方",
                     func: function () {
-                        window.location.href="./amend-activity-vol.html"
+                        window.location.href="./activityinfo.html?activityCode=" + $(this).data("code") + "&amendunit=unit";
                     }
                 },
                 {
                     text: "取消活动",
                     func: function () {
-                        jump("./send_notification.html?type=0&pkPostCode="+pkPostCode);
+                        let json = {
+                            activityCode: $(this).data("code")
+                        };
+                        layer.open({
+                            content: '活动取消后，该活动下所有票证将同时取消；如有关联岗位/任务，将会取消关联；如要取消岗位/任务，请到岗位/任务模块操作；确认要取消吗？'
+                            , btn: ['确认', '取消']
+                            , yes: function (index) {
+                                $.ajax({
+                                    url: base_url + 'html5/v2/activity/cancel',
+                                    type: "post",
+                                    dataType: "json",
+                                    data: JSON.stringify(json),
+                                    headers: {'Content-Type': 'application/json'},
+                                    success: function (res) {
+                                        console.log(res);
+                                        layer.closeAll();
+                                    }
+                                });
+                            }
+                            ,
+                        })
                     }
                 },
                 {
@@ -166,7 +187,7 @@ var vueIM = new Vue({
                 {
                     text: "待审核事项",
                     func: function () {
-                        window.location.href="./checkitem.html"
+                        window.location.href="./checkitem.html?activityCode=" + $(this).data("code");
                     }
                 },
             ]]
@@ -242,9 +263,18 @@ var vueIM = new Vue({
         goOrdertickInfo () {
             window.location.href="./order-ticketInfo.html";
         },
+        // 海报
+        goActivityPoster () {
+            window.location.href="./activityPoster.html";
+        },
         goDownData () {
             window.location.herf="./download_data.html";
-        }
+        },
+        // 修改场次
+        amendsession (day, startTime, endTime) {
+            console.log("Aa");
+            window.location.herf = "./activityPoster.html";
+        },
     }
 })
 </script>

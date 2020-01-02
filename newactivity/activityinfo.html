@@ -47,116 +47,127 @@
 <body>
 <div id="activityinfo">
     <header class="mint-header">
-        <div class="mint-header-button text-l"><a class="icon-back" @click="back"></a></div>
-        <h1 class="mint-header-title">发布活动</h1>
+        <div class="mint-header-button text-l">
+            <a v-if="!(amendbase || amendunit)" class="icon-back" @click="back"></a>
+            <a v-if="amendbase || amendunit" class="icon-back"></a>
+        </div>
+        <h1 class="mint-header-title" v-cloak v-if="!(amendbase || amendunit)">发布活动</h1>
+        <h1 class="mint-header-title" v-cloak v-if="amendbase">修改活动基本信息</h1>
+        <h1 class="mint-header-title" v-cloak v-if="amendunit">修改活动参与方</h1>
         <div class="mint-header-button text-r"></div>
     </header>
     <div class="warp">
-    <a class="coverPlan">
-        <div v-if="!addFrom.coverImg" @click="showwarp">
-            <span class="submit-btn-draw">上传/选择封面图</span>
-            <p>图片尺寸840*480，.jpg或.png格式，不超过2M</p>
+        <div v-if="amendbase">
+            <a class="coverPlan">
+                <div v-if="!addFrom.coverImg" @click="showwarp">
+                    <span class="submit-btn-draw">上传/选择封面图</span>
+                    <p>图片尺寸840*480，.jpg或.png格式，不超过2M</p>
+                </div>
+                <img v-if="addFrom.coverImg" :src="addFrom.coverImg" alt="">
+            </a>
+            <div class="yh-group">
+                <span class="l">活动名称</span>
+                <div class="textarea-wrapper">
+                    <div class="content">{{addFrom.name}}</div>
+                    <textarea
+                        v-model="addFrom.name"
+                        placeholder="请填写(不超过30个字)"
+                        maxlength="30"
+                    ></textarea>
+                </div>
+            </div>
+            <div class="yh-group">
+                <span class="l">活动副标题</span>
+                <div class="textarea-wrapper">
+                    <div class="content">{{addFrom.subTitle}}</div>
+                    <textarea
+                        v-model="addFrom.subTitle"
+                        placeholder="选填(不超过30个字)"
+                        maxlength="30"
+                    ></textarea>
+                </div>
+            </div>
+            <div class="profile">
+                <div class="profiletop">
+                    <p class="profiletopintro">活动简介<span>(不超过500个字)</span></p>
+                    <p class="profiletophint">手机端仅支持简单的图文编辑，如果想编辑的内容更丰富，请到电脑上操作。</p>
+                </div>
+            </div>
+            <div id="editors" style="min-height: 200px;"><!-- 编辑器容器 --></div>
+            <div class="yh-group">
+                <span class="l">活动日期<i class="iconfont icon-wenhao" @click="reminder"></i></span>
+                <div class="datatime">
+                    <span>
+                        <input type="text" placeholder="开始日期" name="startime" class="start_time">
+                    </span><span class="zhi">至</span><span>
+                        <input type="text" placeholder="结束日期" name="endtime" class="end_time">
+                    </span>
+                </div>
+            </div>
+            <div class="yh-group">
+                <span class="l">地点</span>
+                <a href="javascript:;" class="warp_dd">
+                    <textarea placeholder="请选择" id="address" readonly="readonly" disabled="disabled"></textarea>
+                </a>
+                <input type="hidden" id="lat" value="">
+                <input type="hidden" id="lng" value="">
+                <input type="hidden" id="addressId" value="">
+            </div>
+            <div class="yh-group">
+                <span class="l">咨询人姓名</span>
+                <input type="text" placeholder="请填写" v-model="addFrom.contactName">
+            </div>
+            <div class="yh-group">
+                <span class="l">咨询电话</span>
+                <input type="text" placeholder="请填写" v-model="addFrom.contactPhone">
+            </div>
         </div>
-        <img v-if="addFrom.coverImg" :src="addFrom.coverImg" alt="">
-    </a>
-    <div class="yh-group">
-        <span class="l">活动名称</span>
-        <div class="textarea-wrapper">
-            <div class="content">{{addFrom.name}}</div>
-            <textarea
-                v-model="addFrom.name"
-                placeholder="请填写(不超过30个字)"
-                maxlength="30"
-            ></textarea>
+        <div v-if="amendunit">
+            <div class="optional">
+                <p><span style="color:#73B81F;">活动参与方</span><span style="font-size: 12px;" v-if="!amendunit">（选填）</span></p>
+                <p style="font-size: 12px;">主办和联办单位需在系统中选择，需对方审核后才能通过</p>
+            </div>
+            <div class="yh-group" style="border: none;">
+                <span class="l">主办单位</span>
+                <a class="ricon" @click="selectcompany(10)">
+                    默认是本机构，可修改为其他机构
+                </a>
+            </div>
+            <div class="companybox" style="border-bottom: 1px solid #bbb;">
+                <div class="yh-group-company" v-for="(item, index) in auspiceconmpanyList" :key="index">
+                    <span>{{item.orgName}}</span>
+                    <span class="iconfont icon-cha1" @click="delcompany(index)"></span>
+                </div>
+            </div>
+            <div class="yh-group" style="border: none;">
+                <span class="l">联办单位</span>
+                <div class="ricon" @click="selectcompany(20)">
+                    请选择
+                </div>
+            </div>
+            <div class="companybox" style="border-bottom: 1px solid #bbb;">
+                <div class="yh-group-company" v-for="(item, index) in seecconmpanyList" :key="index">
+                    <span>{{item.orgName}}</span>
+                    <span class="iconfont icon-cha1" @click="delcompany1(index)"></span>
+                </div>
+            </div>
+            <div class="whitecompany">
+                <textarea v-model="addFrom.parties" placeholder="自定义参与方（不超过500个字）
+        例如：协办单位：XXXX社区、XXXX社区
+        指导单位：XXXX民政局、XXXX团省委
+        爱心支持单位：XXXX公司
+        媒体支持单位：东方早报"></textarea>
+            </div>
         </div>
-    </div>
-    <div class="yh-group">
-        <span class="l">活动副标题</span>
-        <div class="textarea-wrapper">
-            <div class="content">{{addFrom.subTitle}}</div>
-            <textarea
-                v-model="addFrom.subTitle"
-                placeholder="选填(不超过30个字)"
-                maxlength="30"
-            ></textarea>
+        <button v-if="amendbase" class="submit-btn" @click="amendbaseacti">确认修改</button>
+        <button v-if="amendunit" class="submit-btn" @click="amendunitacti">确认修改</button>
+        <div class="actfooter" v-if="(!amendunit && !amendbase)">
+            <div class="tishi">活动中需要公众/嘉宾/记者等参与的，需要设置票证；普通活动，无需设置。</div>
+            <div class="btnbox">
+                <button class="btnsave" @click="saveact(-10)">保存活动，去设票证</button>
+                <button class="btnisue" @click="saveact(10)">无需票证，直接发布</button>
+            </div>
         </div>
-    </div>
-    <div class="profile">
-        <div class="profiletop">
-            <p class="profiletopintro">活动简介<span>(不超过500个字)</span></p>
-            <p class="profiletophint">手机端仅支持简单的图文编辑，如果想编辑的内容更丰富，请到电脑上操作。</p>
-        </div>
-    </div>
-    <div id="editors" style="min-height: 200px;"><!-- 编辑器容器 --></div>
-    <div class="yh-group">
-        <span class="l">活动日期<i class="iconfont icon-wenhao" @click="reminder"></i></span>
-        <div class="datatime">
-            <span>
-                <input type="text" placeholder="开始日期" name="startime" class="start_time">
-            </span><span class="zhi">至</span><span>
-                <input type="text" placeholder="结束日期" name="endtime" class="end_time">
-            </span>
-        </div>
-    </div>
-    <div class="yh-group">
-        <span class="l">地点</span>
-        <a href="javascript:;" class="warp_dd">
-            <textarea placeholder="请选择" id="address" readonly="readonly" disabled="disabled"></textarea>
-        </a>
-        <input type="hidden" id="lat" value="">
-        <input type="hidden" id="lng" value="">
-        <input type="hidden" id="addressId" value="">
-    </div>
-    <div class="yh-group">
-        <span class="l">咨询人姓名</span>
-        <input type="text" placeholder="请填写" v-model="addFrom.contactName">
-    </div>
-    <div class="yh-group">
-        <span class="l">咨询电话</span>
-        <input type="text" placeholder="请填写" v-model="addFrom.contactPhone">
-    </div>
-    <div class="optional">
-        <p><span style="color:#73B81F;">活动参与方</span><span style="font-size: 12px;">（选填）</span></p>
-        <p style="font-size: 12px;">主办和联办单位需在系统中选择，需对方审核后才能通过</p>
-    </div>
-    <div class="yh-group" style="border: none;">
-        <span class="l">主办单位</span>
-        <a class="ricon" @click="selectcompany(10)">
-            默认是本机构，可修改为其他机构
-        </a>
-    </div>
-    <div class="companybox" style="border-bottom: 1px solid #bbb;">
-        <div class="yh-group-company" v-for="(item, index) in auspiceconmpanyList" :key="index">
-            <span>{{item.orgName}}</span>
-            <span class="iconfont icon-cha1" @click="delcompany(index)"></span>
-        </div>
-    </div>
-    <div class="yh-group" style="border: none;">
-        <span class="l">联办单位</span>
-        <div class="ricon" @click="selectcompany(20)">
-            请选择
-        </div>
-    </div>
-    <div class="companybox" style="border-bottom: 1px solid #bbb;">
-        <div class="yh-group-company" v-for="(item, index) in seecconmpanyList" :key="index">
-            <span>{{item.orgName}}</span>
-            <span class="iconfont icon-cha1" @click="delcompany1(index)"></span>
-        </div>
-    </div>
-    <div class="whitecompany">
-        <textarea v-model="addFrom.parties" placeholder="自定义参与方（不超过500个字）
-例如：协办单位：XXXX社区、XXXX社区
-指导单位：XXXX民政局、XXXX团省委
-爱心支持单位：XXXX公司
-媒体支持单位：东方早报"></textarea>
-    </div>
-    <div class="actfooter">
-        <div class="tishi">活动中需要公众/嘉宾/记者等参与的，需要设置票证；普通活动，无需设置。</div>
-        <div class="btnbox">
-            <button class="btnsave" @click="saveact(-10)">保存活动，去设票证</button>
-            <button class="btnisue" @click="saveact(10)">无需票证，直接发布</button>
-        </div>
-    </div>
     </div>
     <!-- 图片开始 -->
     <div class="warp_banner">
@@ -226,6 +237,10 @@ var vueIM = new Vue({
     data () {
         return {
             value: '',
+            amendbase: true,
+            amendunit: true,
+            activityCode: null,
+            activicitytext: "发布活动",
             startDay: '开始日期',
             endDay: '结束日期',
             recordList : [],
@@ -243,6 +258,19 @@ var vueIM = new Vue({
                 state: null, // 状态 -10待发布 10未开始
                 activityUniteParamList: [],
                 parties: null
+            },
+            addbaseFrom: {
+                activityCode: null,
+                coverImg: null, // 封面图片url
+                addressId: null, // 地址id
+                address: null, // 地址id
+                contactName: null, // 咨询人姓名
+                contactPhone: null, // 咨询人电话
+                name: null, // 活动名称
+                startDay: null, // 开始日期
+                endDay: null, // 结束日期
+                demo: null, // 活动简介
+                subTitle: null, // 副标题
             },
             searchFrom: {
                 org: 'AAA789', // 机构标识
@@ -289,8 +317,11 @@ var vueIM = new Vue({
     },
     created () {
         this.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'BBA119945';
-        // this.fuwenben();
+        this.amendbase = this.getUrlParam("amendbase");
+        this.amendunit = this.getUrlParam("amendunit");
+        this.activityCode = this.getUrlParam("activityCode");
         this.getcoverImg();
+        (this.getUrlParam("amendbase") || this.getUrlParam("amendunit")) && this.getdetail();
     },
     methods: {
         // 富文本
@@ -312,6 +343,25 @@ var vueIM = new Vue({
                 success: function (res) {
                     that.recordList = res.data.records;
                     console.log(that.recordList);
+                }
+            });
+        },
+        // 获得详情
+        getdetail () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/info',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify({activityCode: that.getUrlParam("activityCode")}),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res.data);
+                    that.addFrom = res.data;
+                    $("input[name='endtime']").val(that.addFrom.endDay);
+                    $("input[name='startime']").val(that.addFrom.startDay);
+                    $('#address').val(that.addFrom.address);
+                    editor.pasteHTML(that.addFrom.demo.replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&amp;nbsp;/gi, '&nbsp;'));
                 }
             });
         },
@@ -466,8 +516,7 @@ var vueIM = new Vue({
             var mobile = /^1[3|5|7|8]\d{9}$/ , phone = /^0\d{2,3}-?\d{7,8}$/;
             return mobile.test(tel) || phone.test(tel);
         },
-        // 保存活动
-        saveact (type) {
+        addfrombase () {
             if(!this.checkTel(this.addFrom.contactPhone)){
                  layer.open({
                     content: '咨询电话格式错误!',
@@ -479,7 +528,81 @@ var vueIM = new Vue({
             this.addFrom.startDay = $("input[name='startime']").val();
             this.addFrom.endDay = $("input[name='endtime']").val();
             this.addFrom.addressId = $('#addressId').val();
+            this.addFrom.address = $('#address').val();
             this.addFrom.demo = document.querySelector('#editors').children[0].innerHTML;
+        },
+        // 修改基本信息
+        amendbaseacti () {
+            this.addfrombase();
+            for (var attr in this.addbaseFrom) {
+                this.addbaseFrom[attr] = this.addFrom[attr];
+            }
+            console.log(this.addbaseFrom);
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/updateBaseInfo',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.addbaseFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    console.log(resp);
+                    window.history.back(-1);
+                },
+                error: function(e) {
+                    layer.open({
+                        content: '失败',
+                        skin: 'msg',
+                        time: 1
+                    });
+                    return false;
+                }
+            });
+        },
+        // 修改参与方
+        amendunitacti () {
+            var that = this;
+            that.addunitFrom = {
+                "activityCode": "31010100000020191230161508244",
+                "activityUniteParamList": [
+                    {
+                        "orgCode": "BBA119945",
+                        "orgId": "123445",
+                        "orgName": "测试机构66785",
+                        "type": 20
+                    },
+                    {
+                        "orgCode": "BBA119945",
+                        "orgId": "123445",
+                        "orgName": "测试机构66785",
+                        "type": 10
+                    }
+                ],
+                "parties": "单位1  单位2"
+            },
+            $.ajax({
+                url: base_url + 'html5/v2/activity/updateUnits',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.addunitFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    console.log(resp);
+                    window.history.back(-1);
+                },
+                error: function(e) {
+                    layer.open({
+                        content: '失败',
+                        skin: 'msg',
+                        time: 1
+                    });
+                    return false;
+                }
+            });
+        },
+        // 保存活动
+        saveact (type) {
+            this.addfrombase();
             this.addFrom.orgCode = this.org;
             this.addFrom.state = type;
             this.addFrom.activityUniteParamList = this.auspiceconmpanyList.concat(this.seecconmpanyList);
