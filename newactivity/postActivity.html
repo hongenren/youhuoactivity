@@ -22,22 +22,24 @@
         <h1 class="mint-header-title">发布活动</h1>
         <div class="mint-header-button text-r"></div>
     </header>
-    <div class="lc-tip row">
-        <span class="block"></span>
-        <span>活动信息<span class="shallow">（必填）</span></span>
-    </div>
-    <a class="yh-group-cell" href="./activityinfo.html">
-        <span v-if="title">{{title}}</span>
-        <span v-else>设置活动信息</span>
-        <div class="r"><span v-if="!title">请设置</span>
-            <i></i>
+    <div v-if="copy">
+        <div class="lc-tip row">
+            <span class="block"></span>
+            <span>活动信息<span class="shallow">（必填）</span></span>
         </div>
-    </a>
-    <div class="lc-tip row">
-        <span class="block"></span>
-        <span>票证信息<span class="shallow">（仅供发放票证使用，没有票证无需设置）</span></span>
+        <a class="yh-group-cell" href="./activityinfo.html">
+            <span v-if="title">{{title}}</span>
+            <span v-else>设置活动信息</span>
+            <div class="r"><span v-if="!title">请设置</span>
+                <i></i>
+            </div>
+        </a>
+        <div class="lc-tip row">
+            <span class="block"></span>
+            <span>票证信息<span class="shallow">（仅供发放票证使用，没有票证无需设置）</span></span>
+        </div>
+        <div class="moredata">如需设置多日期票证，发布成功后，请到活动管理页面再添加</div>
     </div>
-    <div class="moredata">如需设置多日期票证，发布成功后，请到活动管理页面再添加</div>
     <div class="periodbox">
         <div class="yh-group-cell">
             <span>票证日期{{showday}}</span>
@@ -76,8 +78,8 @@
         </div>
     </div>
     <div class="hintsubmit">提示：场次信息如未设置完整，该场次默认不提交。</div>
-    <a href="./activitydetail.html">activitydetail</a>
     <button class="submit-btn" @click="submit">设置完成，对外发布</button>
+    <button class="submit-btn" @click="submit">保存提交</button>
 </div>
 </body>
 <script type="text/javascript" src="../wap/js/jquery.js"></script>
@@ -91,6 +93,7 @@ var vueIM = new Vue({
     el: '#postActivity',
     data () {
         return {
+            copy: true,
             title: null,
             day: null,
             showday: false,
@@ -110,7 +113,7 @@ var vueIM = new Vue({
     },
     mounted() {
         this.title = sessionStorage.getItem('name');
-        console.log(this.getUrlParam('sectionCode'));
+        this.getUrlParam('copy') && (this.copy = false);
         if (this.getUrlParam('sectionCode')) {
             this.showday = true;
         } else {
@@ -133,7 +136,7 @@ var vueIM = new Vue({
                 });
             })
         }
-        // this.getSectionList();
+        this.getSectionList();
     },
     methods: {
         getUrlParam (name) {
@@ -311,11 +314,12 @@ var vueIM = new Vue({
                 url: base_url + 'html5/v2/activity/getSectionList',
                 type: "post",
                 dataType: "json",
-                data: JSON.stringify(that.addFrom),
+                data: JSON.stringify({activityCode: that.getUrlParam("activityCode")}),
                 headers: {'Content-Type': 'application/json'},
                 success: function (resp) {
                     if (resp.code == 0) {
                         console.log(resp.data);
+                        that.periodList = resp.data;
                     } else {
                         layer.open({
                             content: resp.msg,

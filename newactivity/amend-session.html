@@ -12,6 +12,7 @@
     <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="css/base.css"/>
     <link rel="stylesheet" href="css/activity_order.css"/>
+    <link rel="stylesheet" type="text/css" href="../wap/css/mobiscroll.custom.min.css" />
     <script type="text/javascript" src="js/rem.js"></script>
 </head>
 <body>
@@ -22,7 +23,19 @@
         <div class="mint-header-button text-r"></div>
     </header>
     <div class="yh-activity-list">
-        11
+        <div>
+            <span>日期：</span>
+            <input type="text" placeholder="请选择" name="postime" class="post_time" style="text-align: left;">
+        </div>
+        <div style="padding: 1rem 0;">
+            <span>开始时间：</span>
+            <input type="text" placeholder="请选择" name="starTime" class="start_time" style="text-align: left;">
+        </div>
+        <div>
+            <span>结束时间：</span>
+            <input type="text" placeholder="请选择" name="endTime" class="end_time" style="text-align: left;">
+        </div>
+        <button class="submit-btn" @click="amend">确认修改</button>
     </div>
 </div>
 </body>
@@ -30,30 +43,31 @@
 <script type="text/javascript" src="../wap/js/config.js"></script>
 <script type="text/javascript" src="js/vue.min.js"></script>
 <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/mobiscroll.custom.min.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+
 <script>
 var vueIM = new Vue({
     el: '#amendSession',
     data () {
         return {
-            searchFrom: {
-                activityCode: this.getUrlParam('activityCode'), // 活动一通号
-                state: "10",
-                current: 1, // 当前页
-                size: 20 // 页容量
-            },
             addFrom: {
-                activityCode: this.getUrlParam('activityCode'), // 活动一通号
-                pkCode: null,
-                module: 10,
-                state: null
+                sectionCode: this.getUrlParam('sectionCode'), // 次标识号
+                day: this.getUrlParam('day'),
+                startTime: this.getUrlParam('startTime'),
+                endTime: this.getUrlParam('endTime')
             },
             postList: [],
             subTaskList: []
         };
     },
     created () {
-        // this.getRelatedPostList();
-        // this.getRelatedSubTaskList();
+        this.$nextTick(() => {
+            $('.post_time').val(this.getUrlParam('day'));
+            $('.start_time').val(this.getUrlParam('startTime'));
+            $('.end_time').val(this.getUrlParam('endTime'));
+            this.init();
+        })
     },
     filters: {
         capture: function (value, start, end) {
@@ -61,49 +75,107 @@ var vueIM = new Vue({
         }
     },
     methods: {
+        init () {
+            var that  = this;
+            var theme = "ios";
+            var mode = "scroller";
+            var display = "bottom";
+            var lang="zh";
+            var currYear = (new Date()).getFullYear();
+            $('.post_time').mobiscroll().date({
+                theme: theme,
+                mode: mode,
+                display: display,
+                lang: lang,
+                //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
+                //dateFormat:"yy-mm-dd",
+                dateFormat: 'yy-mm-dd',
+                dayText:'日',
+                monthText:'月',
+                yearText:'年', //面板中年月日文字
+                onSelect: function (valueText, inst) {//选择时事件（点击确定后），valueText 为选择的时间，
+                    that.addFrom.day = valueText;
+                },
+                minDate: new Date((new Date()).getFullYear(),(new Date()).getMonth()),
+                maxDate:new Date((new Date()).getFullYear(),(new Date()).getMonth()+5),
+                stepMinute: 1,
+                showNow: true
+            });
+            $('.start_time').mobiscroll().time({
+                theme: theme,
+                mode: mode,
+                display: display,
+                lang: lang,
+                //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
+                //dateFormat:"yy-mm-dd",
+                timeFormat: 'HH:ii',
+                onSelect: function (valueText, inst) {//选择时事件（点击确定后），valueText 为选择的时间，
+                    // 转化时间戳
+                    var s = "1970/1/1 ";
+                    var val = Date.parse(s + valueText);
+                    // 判空
+                    if($('.end_time').val() != ''){
+                        var endtime = Date.parse(s + $('.end_time').val());
+                        if(val > endtime){
+                            $('.start_time').val('')
+                            layer.open({
+                                content: '开始时间不能晚于结束时间',
+                                skin: 'msg',
+                                time: 1
+                            });
+
+                        }
+                    };
+                    that.addFrom.startTime = valueText;
+                },
+                startYear: currYear,
+                endYear: currYear +30,
+                stepMinute: 1,
+                showNow: true
+            });
+            $('.end_time').mobiscroll().time({
+                theme: theme,
+                mode: mode,
+                display: display,
+                lang: lang,
+                //timeWheels: 'HHiiss',//HH:24小时制；hh:12小时制
+                //dateFormat:"yy-mm-dd",
+                timeFormat: 'HH:ii',
+                onSelect: function (valueText, inst) {//选择时事件（点击确定后），valueText 为选择的时间，
+                    // 转化时间戳
+                    var s = "1970/1/1 ";
+                    var val = Date.parse(s + valueText);
+                    // 判空
+                    if($('.start_time').val() != ''){
+                        var starttime = Date.parse(s + $('.start_time').val());
+                        if(val < starttime){
+                            $('.end_time').val('')
+                            layer.open({
+                                content: '结束时间不能早于开始时间',
+                                skin: 'msg',
+                                time: 1
+                            });
+
+                        }
+                    };
+                    that.addFrom.endTime = valueText;
+                },
+                startYear: currYear,
+                endYear: currYear +30,
+                stepMinute: 1,
+                showNow: true
+            });
+        },
         getUrlParam (name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return unescape(r[2]); return null;
         },
-        // 岗位
-        getRelatedPostList () {
+        // 修改场次
+        amend () {
             var that = this;
             $.ajax({
-                url: base_url + 'html5/v2/activity/getRelatedPostList',
-                type: "post",
-                dataType: "json",
-                data: JSON.stringify(that.searchFrom),
-                headers: {'Content-Type': 'application/json'},
-                success: function (res) {
-                    console.log(res.data);
-                    that.postList = res.data.records;
-                }
-            });
-        },
-        getRelatedSubTaskList () {
-            var that = this;
-            $.ajax({
-                url: base_url + 'html5/v2/activity/getRelatedSubTaskList',
-                type: "post",
-                dataType: "json",
-                data: JSON.stringify(that.searchFrom),
-                headers: {'Content-Type': 'application/json'},
-                success: function (res) {
-                    console.log(res.data);
-                    that.subTaskList = res.data.records;
-                }
-            });
-        },
-        selectModule (type) {
-            this.addFrom.module = type;
-        },
-        checkBtn (pkCode, state) {
-            this.addFrom.pkCode = pkCode;
-            this.addFrom.state = state;
-            var that = this;
-            $.ajax({
-                url: base_url + 'html5/v2/activity/auditRelated',
+                url: base_url + 'html5/v2/activity/section/update',
                 type: "post",
                 dataType: "json",
                 data: JSON.stringify(that.addFrom),
@@ -112,9 +184,6 @@ var vueIM = new Vue({
                     console.log(res.data);
                 }
             });
-        },
-        goticketinformation (pubCode) {
-            window.location.href="./ticketdetail.html?pubCode=" + pubCode;
         }
     }
 })

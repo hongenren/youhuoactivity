@@ -65,9 +65,9 @@
                     <div class="yh-group-noborder">
                         <span class="l">{{item1.day}} {{item1.startTime}}-{{item1.endTime}}</span>
                         <p>
-                            <span class="textF9">复制</span>
-                            <span class="text1F" @click="amendsession(item1.day, item1.startTime, item1.endTime)">修改</span>
-                            <span class="text6C">取消</span>
+                            <a class="textF9" :href='"./postActivity.html?activityCode="+item.activityCode+"&copy=false"'>复制</a>
+                            <a class="text1F" :href='"./amend-session.html?day="+item1.day+"&startTime="+item1.startTime+"&endTime="+item1.endTime+"&sectionCode="+item1.sectionCode'>修改</a>
+                            <span class="text6C" @click="cancel(item1.sectionCode)">取消</span>
                         </p>
                     </div>
                     <div class="yh-group-noborder" @click="goOrdertickInfo()">
@@ -260,6 +260,22 @@ var vueIM = new Vue({
                 }
             })
         },
+        // 取消场次
+        cancel (sectionCode) {
+            $.ajax({
+                url: base_url + 'html5/v2/activity/section/cancel',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify({sectionCode: sectionCode}),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res);
+                }
+            });
+        },
+        fuzhi () {
+            window.location.herf="./postActivity.html"
+        },
         goOrdertickInfo () {
             window.location.href="./order-ticketInfo.html";
         },
@@ -271,9 +287,9 @@ var vueIM = new Vue({
             window.location.herf="./download_data.html";
         },
         // 修改场次
-        amendsession (day, startTime, endTime) {
+        amendsession () {
             console.log("Aa");
-            window.location.herf = "./activityPoster.html";
+            window.location.herf = "./amend-session.html";
         },
     }
 })
