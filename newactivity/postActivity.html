@@ -65,12 +65,12 @@
                 </div>
                 <a class="yh-group whitmg" @click="goticketinformation(item)">
                     <span class="l">设置该场次下的票证信息{{item.id}}</span>
-                    <span><span v-if='sessionStorage.getItem(item.id)' style="color: #73B81F;">已设置</span><i class="iconfont icon-icon_you"></i></span>
+                    <span><span v-if='sessionStorage.getItem(item.id) || !copy' style="color: #73B81F;">已设置</span><i class="iconfont icon-icon_you"></i></span>
                 </a>
                 <a @click="gosetadministrator(item)">
                     <div class="yh-group" style="background: #fff;border:none;">
                         <span class="l">设置该场次下的票证核销管理员</span>
-                        <span><span v-if='sessionStorage.getItem("adminid" + item.id)' style="color: #73B81F;">已设置</span><i class="iconfont icon-icon_you"></i></span>
+                        <span><span v-if='sessionStorage.getItem("adminid" + item.id)  || !copy' style="color: #73B81F;">已设置</span><i class="iconfont icon-icon_you"></i></span>
                     </div>
                     <div class="hintinfo">TA拥有2个权限：1、可通过管理功能的“扫一扫”，去核销本场次活动的票证 2、可增加临时管理员（TA只有可核销本场次活动的票证的权限）</div>
                 </a>
@@ -119,23 +119,11 @@ var vueIM = new Vue({
         } else {
             this.showday = false;
         }
-        this.init('0');
         $("input[name='postime']").val(sessionStorage.getItem('postime'));
         this.day = sessionStorage.getItem('postime');
-        sessionStorage.getItem('periodList') && (this.periodList = JSON.parse(sessionStorage.getItem('periodList')));
-        sessionStorage.getItem('sectionCodeList') && (this.sectionCodeList = JSON.parse(sessionStorage.getItem('sectionCodeList')));
-        for (let i = 0; i < this.periodList.length; i++) {
-            this.$nextTick(()=>{
-                this.init(i);
-                $('.start_time'+i).val(sessionStorage.getItem('.start_time'+i));
-                $('.end_time'+i).val(sessionStorage.getItem('.end_time'+i));
-                Object.keys(this.sectionCodeList).forEach(key => {
-                    if (this.periodList[i].id == key) {
-                        this.periodList[i].sectionCode = this.sectionCodeList[key];
-                    }
-                });
-            })
-        }
+        this.$nextTick(() => {
+            this.init('0');
+        })
         this.getSectionList();
     },
     methods: {
@@ -291,8 +279,7 @@ var vueIM = new Vue({
                 });
                 return false;
             }
-            window.location.href="./ticketinformation.html?id=" + item.id + "&sectionCode=" + item.sectionCode;
-            sessionStorage.setItem('periodList', JSON.stringify(this.periodList));
+            window.location.href="./ticketinformation.html?id=" + item.id + "&sectionCode=" + item.sectionCode + "&copy=" + this.getUrlParam('copy') + "&activityCode=" + this.getUrlParam('activityCode');
         },
         // 去管理员
         gosetadministrator (item) {
@@ -304,8 +291,7 @@ var vueIM = new Vue({
                 });
                 return false;
             }
-            window.location.href="./setadministrator.html?adminid=" + item.id + "&sectionCode=" + item.sectionCode;
-            sessionStorage.setItem('periodList', JSON.stringify(this.periodList));
+            window.location.href="./setadministrator.html?adminid=" + item.id + "&sectionCode=" + item.sectionCode + "&copy=" + this.getUrlParam('copy') + "&activityCode=" + this.getUrlParam('activityCode');
         },
         // 获取活动下面的场次
         getSectionList () {
@@ -317,15 +303,22 @@ var vueIM = new Vue({
                 data: JSON.stringify({activityCode: that.getUrlParam("activityCode")}),
                 headers: {'Content-Type': 'application/json'},
                 success: function (resp) {
-                    if (resp.code == 0) {
-                        console.log(resp.data);
-                        that.periodList = resp.data;
-                    } else {
-                        layer.open({
-                            content: resp.msg,
-                            skin: 'msg',
-                            time: 1
-                        });
+                    console.log(resp.data);
+                    if (resp.data.length > 0) {
+                        $('.post_time').val(resp.data[0].day);
+                        sessionStorage.setItem('postime', resp.data[0].day);
+                        that.periodList = resp.data[0].sectionList;
+                        for (let i = 0; i < that.periodList.length; i++){
+                            that.periodList[i].id = i;
+                            that.$nextTick(()=>{
+                                that.init(i);
+                                console.log(that.periodList[i].startTime);
+                                $('.start_time'+ i).val(that.periodList[i].startTime);
+                                $('.end_time'+ i).val(that.periodList[i].endTime);
+                                sessionStorage.setItem('.start_time'+i, that.periodList[i].startTime);
+                                sessionStorage.setItem('.end_time'+i, that.periodList[i].endTime);
+                            })
+                        }
                     }
                 }
             });

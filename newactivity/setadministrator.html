@@ -123,7 +123,7 @@ var vueIM = new Vue({
             Ishow: false,
             sectionCodeList: {},
             addFrom: {
-                activityCode: sessionStorage.getItem('activityCode'), // 活动一号通
+                activityCode: this.getUrlParam('activityCode'), // 活动一号通
                 sectionCode: this.getUrlParam('sectionCode'), // 场次标识 新增场次不用传值
                 day: sessionStorage.getItem('postime'), // 场次日期
                 startTime: sessionStorage.getItem('.start_time' + this.getUrlParam('adminid')), // 开始时间
@@ -140,6 +140,7 @@ var vueIM = new Vue({
     },
     mounted () {
         this.getIntegral();
+        this.getSectionManager();
         JSON.parse(sessionStorage.getItem("adminid"+this.getUrlParam('adminid'))) && (this.addFrom = JSON.parse(sessionStorage.getItem("adminid"+this.getUrlParam('adminid'))));
         $("#address").val(this.addFrom.arriveAddress);
     },
@@ -164,6 +165,35 @@ var vueIM = new Vue({
                 success: function (data) {
                     if (data.code == 0) {
                         $('#jifen').text(data.data.integral);
+                    }
+                }
+            });
+        },
+        // 管理员证列表
+        getSectionManager () {
+            var that = this;
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: 'post',
+                url: base_url + "html5/v2/activity/sectionManager/getPage",
+                data: JSON.stringify({"sectionCode": that.getUrlParam("sectionCode"), current: 1, size: 20}),
+                dataType:'json',
+                headers : {'token':token},
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    if (data.code == 0) {
+                        console.log(data.data.records);
+                        if (data.data.records.length > 0) {
+                            that.addFrom.arriveAddress = data.data.records[0].arriveAddress;
+                            that.addFrom.arriveAddressId = data.data.records[0].arriveAddressId;
+                            that.addFrom.content = data.data.records[0].content;
+                            that.addFrom.point = data.data.records[0].point;
+                            that.$nextTick(()=>{
+                                $("#address").val(that.addFrom.arriveAddress);
+                            });
+                        }
                     }
                 }
             });

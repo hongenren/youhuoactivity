@@ -158,7 +158,7 @@
             <!-- 指定发放 -->
             <div v-if="item.publicApply==20">
                 <div class="tishi">如指定用户是系统中已实名注册用户，在Ta的个人订单中将会生成一张票证订单；如指定用户是非系统实名用户，系统将会以短信形式发送给Ta。</div>
-                <div v-if="item.userInfoList.length == 0" class="addtickettitle" @click="addnewUser(index)"><i class="iconfont icon-tianjiajiahaowubiankuang"></i>添加新用户</div>
+                <div v-if="item.userInfoList && item.userInfoList.length == 0" class="addtickettitle" @click="addnewUser(index)"><i class="iconfont icon-tianjiajiahaowubiankuang"></i>添加新用户</div>
                 <div v-for="(item1, index1) in item.userInfoList" :key="index1">
                     <div class="addtickettitle">
                         <span class="fl" v-if="index1 == 0"  @click="addnewUser(index)"><i class="iconfont icon-tianjiajiahaowubiankuang"></i>添加新用户</span>
@@ -211,7 +211,7 @@ var vueIM = new Vue({
             Ishow: false,
             sectionCodeList: {},
             addFrom: {
-                activityCode: sessionStorage.getItem('activityCode'), // 活动一号通
+                activityCode: this.getUrlParam('activityCode'), // 活动一号通
                 sectionCode: this.getUrlParam('sectionCode'), // 场次标识 新增场次不用传值
                 day: sessionStorage.getItem('postime'), // 场次日期
                 startTime: sessionStorage.getItem('.start_time' + this.getUrlParam('id')), // 开始时间
@@ -220,6 +220,7 @@ var vueIM = new Vue({
             },
             publicParamList: [
                     {
+                        pubCode: "", // 票证唯一标识
                         assignOrgCode: '', // 指定其他机构标识
                         assignOrgName: '', // 指定其他机构
                         publicApply: '10', // 公开领取标识	10是20直接发放
@@ -248,19 +249,50 @@ var vueIM = new Vue({
     },
     created () {
         this.getIntegral();
-        console.log(sessionStorage.getItem(1));
-        JSON.parse(sessionStorage.getItem(this.getUrlParam('id'))) && (this.publicParamList = JSON.parse(sessionStorage.getItem(this.getUrlParam('id'))));
-        this.$nextTick(()=>{
-            this.publicParamList.map((item, index) => {
-                $("#address" + index).val(item.publicAddress);
-            });
-        })
+        this.getSectionPublic();
     },
     methods: {
         getUrlParam (name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return unescape(r[2]); return null;
+        },
+        // 修改获得数据票证列表
+        getSectionPublic () {
+            var that = this;
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: 'post',
+                url: base_url + "html5/v2/activity/sectionPublic/getPage",
+                data: JSON.stringify({"sectionCode": that.getUrlParam("sectionCode"), current: 1, size: 20}),
+                dataType:'json',
+                headers : {'token':token},
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    if (data.code == 0) {
+                        console.log(data.data);
+                        if (data.data.records.length > 0) {
+                            that.publicParamList = data.data.records;
+                            that.$nextTick(()=>{
+                                that.publicParamList.map((item, index) => {
+                                    $("#address" + index).val(item.publicAddress);
+                                    that.publicParamList[index].userInfoList = [
+                                            {
+                                                headImg: '',
+                                                mobile: '',
+                                                nickName: '',
+                                                unit:'',
+                                                user: ''
+                                            }
+                                    ];
+                                });
+                            });
+                        }
+                    }
+                }
+            });
         },
         // 获取积分
         getIntegral () {
@@ -284,6 +316,7 @@ var vueIM = new Vue({
         // 添加新场次
         addnewticket () {
             this.publicParamList.unshift({
+                pubCode: "", // 票证唯一标识
                 assignOrgCode: '', // 指定其他机构标识
                 assignOrgName: '', // 指定其他机构
                 publicApply: '10', // 公开领取标识	10是20直接发放
@@ -502,8 +535,7 @@ var vueIM = new Vue({
                     if (resp.code == 0) {
                         console.log(resp.data.sectionCode);
                         that.sectionCodeList[that.getUrlParam('id')] = resp.data.sectionCode;
-                        window.location.href="./postActivity.html?sectionCode=" + resp.data.sectionCode;
-                        sessionStorage.setItem(that.getUrlParam('id'), JSON.stringify(that.publicParamList));
+                        // window.location.href="./postActivity.html?sectionCode=" + resp.data.sectionCode + "&copy=" + that.getUrlParam('copy');
                         sessionStorage.setItem("sectionCodeList", JSON.stringify(that.sectionCodeList));
                     } else {
                         layer.open({
