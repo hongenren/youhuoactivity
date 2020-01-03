@@ -279,7 +279,10 @@ var vueIM = new Vue({
                 });
                 return false;
             }
-            window.location.href="./ticketinformation.html?id=" + item.id + "&sectionCode=" + item.sectionCode + "&copy=" + this.getUrlParam('copy') + "&activityCode=" + this.getUrlParam('activityCode');
+            window.location.href="./ticketinformation.html?id=" + item.id +
+            "&sectionCode=" + item.sectionCode + "&copy=" + this.getUrlParam('copy') +
+            "&activityCode=" + this.getUrlParam('activityCode') +
+            "&day=" + $('.post_time').val() + "&startTime=" + item.startTime + "&endTime=" + item.endTime;
         },
         // 去管理员
         gosetadministrator (item) {
@@ -291,7 +294,10 @@ var vueIM = new Vue({
                 });
                 return false;
             }
-            window.location.href="./setadministrator.html?adminid=" + item.id + "&sectionCode=" + item.sectionCode + "&copy=" + this.getUrlParam('copy') + "&activityCode=" + this.getUrlParam('activityCode');
+            window.location.href="./ticketinformation.html?id=" + item.id +
+            "&sectionCode=" + item.sectionCode + "&copy=" + this.getUrlParam('copy') +
+            "&activityCode=" + this.getUrlParam('activityCode') +
+            "&day=" + $('.post_time').val() + "&startTime=" + item.startTime + "&endTime=" + item.endTime;
         },
         // 获取活动下面的场次
         getSectionList () {

@@ -213,9 +213,9 @@ var vueIM = new Vue({
             addFrom: {
                 activityCode: this.getUrlParam('activityCode'), // 活动一号通
                 sectionCode: this.getUrlParam('sectionCode'), // 场次标识 新增场次不用传值
-                day: sessionStorage.getItem('postime'), // 场次日期
-                startTime: sessionStorage.getItem('.start_time' + this.getUrlParam('id')), // 开始时间
-                endTime: sessionStorage.getItem('.end_time' + this.getUrlParam('id')), // 结束时间
+                day: this.getUrlParam('day'), // 场次日期
+                startTime: this.getUrlParam("startTime"), // 开始时间
+                endTime: this.getUrlParam("endTime"), // 结束时间
                 orgCode: JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'BBA119945', // 法人三类标识
             },
             publicParamList: [

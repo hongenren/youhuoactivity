@@ -165,7 +165,6 @@
 .sessionTime{
     display: flex;
     justify-content: space-between;
-    font-weight: bold;
     padding: 0.75rem;
 }
 .sessionTime .l{

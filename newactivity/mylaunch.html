@@ -70,7 +70,7 @@
                             <span class="text6C" @click="cancel(item1.sectionCode)">取消</span>
                         </p>
                     </div>
-                    <div class="yh-group-noborder" @click="goOrdertickInfo()">
+                    <div class="yh-group-noborder" @click="goOrdertickInfo(item.activityCode)">
                         <span class="l">该场次下的票证</span>
                         <span>共{{item1.sectionPublicNum}}种<i class="iconfont icon-icon_you"></i></span>
                     </div>
@@ -276,8 +276,8 @@ var vueIM = new Vue({
         fuzhi () {
             window.location.herf="./postActivity.html"
         },
-        goOrdertickInfo () {
-            window.location.href="./order-ticketInfo.html";
+        goOrdertickInfo (activityCode) {
+            window.location.href="./order-ticketInfo.html?activityCode=" + activityCode;
         },
         // 海报
         goActivityPoster () {

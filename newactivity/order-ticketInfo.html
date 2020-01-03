@@ -12,6 +12,7 @@
     <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="css/base.css"/>
     <link rel="stylesheet" href="css/activity_order.css"/>
+    <link rel="stylesheet" type="text/css" href="../post/RightMenu/smartMenu.css"/>
     <script type="text/javascript" src="js/rem.js"></script>
 </head>
 <body>
@@ -21,22 +22,22 @@
         <h1 class="mint-header-title">票证信息</h1>
         <div class="mint-header-button text-r"></div>
     </header>
-    <div class="sessionTime">
-        <span class="l">场次：19/6/6 08:00-12:00   </span>
+    <div class="sessionTime" @click="goticketinformation()">
+        <span class="l" v-if="detailList.length>0">场次：{{detailList[0].endTime | capture(0, 16)}}-{{detailList[0].startTime | capture(11, 16)}}</span>
         <span class="r"><i class="iconfont icon-tianjiajiahaowubiankuang"></i> 添加新票证</span>
     </div>
     <ul style="padding-right: 1rem;">
-        <li class="ticketlist" v-for="(item1, index1) in 1" :key="index1">
-            <p class="ticket-title">{{item1.name}}</p>
-            <p><i class="iconfont icon-didian"></i>{{item1.publicAddress}}</p>
+        <li class="ticketlist" v-for="(item, index) in detailList" :key="index">
+            <p class="ticket-title">{{item.name}}</p>
+            <p><i class="iconfont icon-didian"></i>{{item.publicAddress}}</p>
             <p class="statistics"><i class="iconfont icon-shuangren"></i>
-                <span>已核销：{{item1.checkCount}}</span>
-                <span>已领取：{{item1.applyCount}}</span>
-                <span>共发放：{{item1.total}}</span>
+                <span>已核销：{{item.checkCount}}</span>
+                <span>已领取：{{item.applyCount}}</span>
+                <span>共发放：{{item.total}}</span>
             </p>
             <p class="oforderbox">
-                <span>更多</span>
-                <span class="oforderF9">修改票证</span>
+                <span class="more" :data-code='item.pubCode'>更多</span>
+                <span class="oforderF9" @click="amendticketinformation(item.sectionCode, item.pubCode)">修改票证</span>
                 <span class="oforder1F">扫一扫</span>
                 <span class="oforder" @click="gomanagementpersonnel()">人员管理</span>
             </p>
@@ -47,6 +48,8 @@
 <script type="text/javascript" src="../wap/js/jquery.js"></script>
 <script type="text/javascript" src="../wap/js/config.js"></script>
 <script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../post/RightMenu/jquery-smartMenu.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
 <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
 <script>
 var vueIM = new Vue({
@@ -58,11 +61,45 @@ var vueIM = new Vue({
                 current: 1, // 当前页
                 size: 20 // 页容量
             },
-            detailList: []
+            detailList: [],
+            moreMenuData:[[
+                {
+                    text: "取消票证",
+                    func: function () {
+                        let json = {
+                            pubCode: $(this).data("code")
+                        };
+                        layer.open({
+                            content: '确认要取消吗？'
+                            , btn: ['确认', '取消']
+                            , yes: function (index) {
+                                $.ajax({
+                                    url: base_url + 'html5/v2/activity/sectionPublic/cancel',
+                                    type: "post",
+                                    dataType: "json",
+                                    data: JSON.stringify(json),
+                                    headers: {'Content-Type': 'application/json'},
+                                    success: function (res) {
+                                        console.log(res);
+                                        layer.closeAll();
+                                    }
+                                });
+                            }
+                            ,
+                        })
+                    }
+                },
+                {
+                    text: "添加临时管理员",
+                    func: function () {
+                        // window.location.href="./activityinfo.html?activityCode=" + $(this).data("code") + "&amendunit=unit";
+                    }
+                },
+            ]]
         };
     },
     created () {
-        this.init();
+        this.getPublicList();
     },
     filters: {
         capture: function (value, start, end) {
@@ -70,12 +107,29 @@ var vueIM = new Vue({
         }
     },
     methods: {
+        init (){
+            var _this= this;
+            $(".more").each(function(){
+                var that=$(this);
+                var offsetWidth=$(window).width() - that.offset().left - that.outerWidth();
+                if(offsetWidth<200){
+                    that.smartMenu(_this.moreMenuData,{offsetX:-100, textLimit: 8});
+                }else {
+                    if(window.innerWidth<640){
+                        that.smartMenu(_this.moreMenuData, {textLimit: 8});
+                    }else{
+                        that.smartMenu(_this.moreMenuData,{offsetX:-parseInt(that.offset().left)/1.7, textLimit: 8});
+                    }
+
+                }
+            });
+        },
         getUrlParam (name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return unescape(r[2]); return null;
         },
-        init () {
+        getPublicList () {
             var that = this;
             $.ajax({
                 url: base_url + 'html5/v2/activity/getPublicList',
@@ -84,16 +138,27 @@ var vueIM = new Vue({
                 data: JSON.stringify(that.searchFrom),
                 headers: {'Content-Type': 'application/json'},
                 success: function (res) {
-                    console.log(res.data);
+                    console.log(res.data.records);
                     that.detailList = res.data.records;
+                    that.$nextTick(() => {
+                        that.init();
+                    });
                 }
             });
         },
-        goticketinformation (pubCode) {
-            window.location.href="./ticketdetail.html?pubCode=" + pubCode;
+        goticketinformation () {
+            let day = this.detailList[0].startTime.substring(0, 10);
+            let startTime = this.detailList[0].startTime.substring(11, 16);
+            let endTime= this.detailList[0].endTime.substring(11, 16);
+            window.location.href="./ticketinformation.html?day=" + day + "&startTime=" + startTime + "&endTime=" + endTime + "&form=orderticketInfo";
         },
-        gomanagementpersonnel (pubCode) {
-            window.location.href="./managementpersonnel.html?pubCode=" + pubCode;
+        amendticketinformation (sectionCode, pubCode) {
+            let day = this.detailList[0].startTime.substring(0, 10);
+            let startTime = this.detailList[0].startTime.substring(11, 16);
+            let endTime= this.detailList[0].endTime.substring(11, 16);
+            window.location.href="./ticketinformation.html?day=" + day +
+            "&startTime=" + startTime + "&endTime=" + endTime + "&form=orderticketInfo"+
+            "&sectionCode="+sectionCode + "&pubCode="+pubCode;
         }
     }
 })
