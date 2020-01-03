@@ -57,7 +57,7 @@
         <div class="mint-header-button text-r"></div>
     </header>
     <div class="warp">
-        <div v-if="amendbase">
+        <div v-if="amendbase || (!amendunit && !amendbase)">
             <a class="coverPlan">
                 <div v-if="!addFrom.coverImg" @click="showwarp">
                     <span class="submit-btn-draw">上传/选择封面图</span>
@@ -122,7 +122,7 @@
                 <input type="text" placeholder="请填写" v-model="addFrom.contactPhone">
             </div>
         </div>
-        <div v-if="amendunit">
+        <div v-if="amendunit || (!amendunit && !amendbase)">
             <div class="optional">
                 <p><span style="color:#73B81F;">活动参与方</span><span style="font-size: 12px;" v-if="!amendunit">（选填）</span></p>
                 <p style="font-size: 12px;">主办和联办单位需在系统中选择，需对方审核后才能通过</p>
