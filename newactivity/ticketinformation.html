@@ -134,24 +134,24 @@
                             </label>
                         </div>
                     </div>
-                    <div class="yh-group" style="border: none;" @click="Ishow = !Ishow">
+                    <div class="yh-group" style="border: none;" @click="showHide(item.pubCode)">
                         <span class="l">指定机构成员领取</span>
-                        <span class="ricon">请选择<i class="iconfont" :class="Ishow ? 'icon-icon_xia' : 'icon-icon_you'"></i></span>
+                        <span class="ricon">请选择<i class="iconfont" :class="IsPubCode == item.pubCode ? 'icon-icon_xia' : 'icon-icon_you'"></i></span>
                     </div>
                     <div class="companybox" style="border-bottom: 1px solid #bbb;">
-                        <div class="yh-group-company" v-for="(item, index) in companyShow" :key="index">
-                            <span>{{item.assignOrgName}}</span>
-                            <span class="iconfont icon-cha1" @click="delcompany(index)"></span>
+                        <div class="yh-group-company" v-for="(item1, index1) in item.companyShow" :key="index1">
+                            <span>{{item1.assignOrgName}}</span>
+                            <span class="iconfont icon-cha1" @click="delcompany(item.companyShow, index1)"></span>
                         </div>
                     </div>
                     <!-- 主办搜索开始 -->
-                    <div class="searchcompany" v-if="Ishow">
+                    <div class="searchcompany" v-if="IsPubCode == item.pubCode">
                         <div class="screenButList">
                             <input type="text" id="activityUniteParamName" placeholder="请输入机构名称进行查询"><i @click="search" class="iconfont icon-fangdajing"></i>
                         </div>
                         <ul class="warp_company">
-                            <li v-for="(item, index) in companyList">
-                                <div :class="{companyname:item.checked}" @click="toggleClass(item)">{{item.name}}</div>
+                            <li v-for="(item2, index2) in companyList" :key="index2">
+                                <div :class="{companyname:item2.checked}" @click="toggleClass(item, item2)">{{item2.name}}</div>
                             </li>
                         </ul>
                     </div>
@@ -212,6 +212,7 @@ var vueIM = new Vue({
         return {
             newIndex: 10,
             companyList: null,
+            IsPubCode: null,
             companyShow: [],
             Ishow: false,
             sectionCodeList: {},
@@ -239,6 +240,7 @@ var vueIM = new Vue({
                         selfOrg: null, // 指定本机构
                         unitOrg: null, // 指定参与方机构 10是20否
                         total: 1, // 数量
+                        companyShow: [], // 机构 自定义存放的
                         publicApplyVoList: [
                             {
                                 applyCode: "", // 报名记录标识	false	string	删除必传
@@ -292,6 +294,20 @@ var vueIM = new Vue({
                             } else {
                                 that.publicParamList = data.data.records;
                             }
+                            that.publicParamList.map((item) => {
+                                if (item.assignOrgCode) {
+                                    item.assignOrgCode = item.assignOrgCode.replace(/,+$/,"").split(",");
+                                    item.assignOrgName = item.assignOrgName.replace(/,+$/,"").split(",");
+                                }
+                                item.companyShow = [];
+                                console.log(item.assignOrgCode);
+                                for (var i = 0; i < item.assignOrgCode.length; i++) {
+                                    item.companyShow[i] = {
+                                        assignOrgName: item.assignOrgName[i],
+                                        assignOrgCode: item.assignOrgCode[i]
+                                    }
+                                }
+                            });
                             that.$nextTick(()=>{
                                 that.publicParamList.map((item, index) => {
                                     $("#address" + index).val(item.publicAddress);
@@ -434,6 +450,10 @@ var vueIM = new Vue({
             this.newIndex = index;
             item.publicApply = index;
         },
+        // 是否选择公司
+        showHide (pubCode) {
+            this.IsPubCode = pubCode;
+        },
         // 搜索公司
         search () {
             var that = this;
@@ -460,25 +480,30 @@ var vueIM = new Vue({
             });
         },
         // 选择公司
-        toggleClass (item) {
-            if (typeof item.checked == 'undefined') {
-                this.$set(item, "checked", true)
+        toggleClass (item, item2) {
+            console.log(item, item2);
+            if (typeof item2.checked == 'undefined') {
+                this.$set(item2, "checked", true)
             } else {
-				item.checked = !item.checked
+				item2.checked = !item2.checked
 			}
-            this.companyShow = [];
-            this.companyList.map((item)=>{
-                if (item.checked) {
-                    this.companyShow.push({
-                        assignOrgName: item.name,
-                        assignOrgCode: item.orgThirdAccount
+            item.companyShow = [];
+            this.companyList.map((item3)=>{
+                if (item3.checked) {
+                    item.companyShow.push({
+                        assignOrgName: item3.name,
+                        assignOrgCode: item3.orgThirdAccount
                     });
                 }
             });
+            console.log(item);
         },
         // 删除
-        delcompany (index) {
-            this.companyShow.splice(index, 1);
+        delcompany (item1, index1) {
+            this.$nextTick(() =>{
+                item1.splice(index1, 1);
+            })
+            this.$forceUpdate();
         },
         // 匹配手机号
         matePhone (e, index, index1) {
@@ -527,11 +552,13 @@ var vueIM = new Vue({
         },
         // 提交
         submit () {
-            this.publicParamList[0].assignOrgName ='',
-            this.publicParamList[0].assignOrgCode ='',
-            this.companyShow.map((item)=>{
-                this.publicParamList[0].assignOrgName += item.assignOrgName + ',';
-                this.publicParamList[0].assignOrgCode += item.assignOrgCode + ',';
+            this.publicParamList.map((item, index)=>{
+                this.publicParamList[index].assignOrgName = "",
+                this.publicParamList[index].assignOrgCode = "",
+                this.publicParamList[index].companyShow.map((item1, index1)=>{
+                    this.publicParamList[index].assignOrgName += item1.assignOrgName + ',';
+                    this.publicParamList[index].assignOrgCode += item1.assignOrgCode + ',';
+                });
             });
             this.addFrom.publicParamList = this.publicParamList;
             var that = this;
@@ -560,12 +587,15 @@ var vueIM = new Vue({
         },
         // 修改提交
         amendsubmit () {
-            this.publicParamList[0].assignOrgName ='',
-            this.publicParamList[0].assignOrgCode ='',
-            this.companyShow.map((item)=>{
-                this.publicParamList[0].assignOrgName += item.assignOrgName + ',';
-                this.publicParamList[0].assignOrgCode += item.assignOrgCode + ',';
+            this.publicParamList.map((item, index)=>{
+                this.publicParamList[index].assignOrgName = "",
+                this.publicParamList[index].assignOrgCode = "",
+                this.publicParamList[index].companyShow.map((item1, index1)=>{
+                    this.publicParamList[index].assignOrgName += item1.assignOrgName + ',';
+                    this.publicParamList[index].assignOrgCode += item1.assignOrgCode + ',';
+                });
             });
+            console.log(this.publicParamList);
             var that = this;
             $.ajax({
                 url: base_url + '/html5/v2/activity/sectionPublic/update',
