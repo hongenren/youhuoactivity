@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/activityinfo.css"/>
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+<div id="amendUnit">
+    <header class="mint-header" style="border-bottom: 1px solid #bbb;">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">修改活动参与方</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="yh-group-noborder"  @click="selectcompany(10)">
+        <span>主办单位</span>
+        <p><i class="iconfont icon-tianjiajiahaowubiankuang"></i>添加新单位</p>
+    </div>
+    <ul>
+        <li v-for="(item, index) in majorUnitList">
+            <div class="yh-group-company" style="padding: 0.5rem 0.76rem 0.5rem 0.5rem;">
+                <span>{{item.orgName}}</span>
+                <p v-if="item.state == 10" class="color00">待审核</p>
+                <p v-if="item.state == 20" class="color1F">已通过</p>
+                <p v-if="item.state == -10" class="color6C">已拒绝</p>
+            </div>
+            <div class="yh-group-company">
+                <span></span>
+                <p class="yh-btn-nomal" @click="cancel(item.id)">取消</p>
+            </div>
+        </li>
+    </ul>
+    <div class="yh-group-noborder"  @click="selectcompany(20)" style="margin-top: 1rem;">
+        <span>联办单位</span>
+        <p><i class="iconfont icon-tianjiajiahaowubiankuang"></i> 添加新单位</p>
+    </div>
+    <ul>
+        <li v-for="(item, index) in cooperateUnitList">
+            <div class="yh-group-company" style="padding: 0.5rem 0.76rem 0.5rem 0.5rem;">
+                <span>{{item.orgName}}</span>
+                <p v-if="item.state == 10" class="color00">待审核</p>
+                <p v-if="item.state == 20" class="color1F">已通过</p>
+                <p v-if="item.state == -10" class="color6C">已拒绝</p>
+            </div>
+            <div class="yh-group-company">
+                <span></span>
+                <p class="yh-btn-nomal" @click="cancel(item.id)">取消</p>
+            </div>
+        </li>
+    </ul>
+    <div class="yh-group-noborder" style="border-bottom: 1px solid #bbb;padding-right: 0.8rem;">
+        <span>其他自定义参与方</span>
+        <p v-if="showbtn" @click="showbtn = !showbtn">修改</p>
+        <p v-if="!showbtn" class="color03" @click="save">保存</p>
+    </div>
+    <div class="whitecompany">
+        <textarea v-model="addFrom.parties"
+        placeholder="自定义参与方（不超过500个字）
+例如：协办单位：XXXX社区、XXXX社区
+指导单位：XXXX民政局、XXXX团省委
+爱心支持单位：XXXX公司
+媒体支持单位：东方早报"></textarea>
+    </div>
+    <!-- 主办搜索开始 -->
+    <div class="searchcompany">
+        <div class="searchwarp">
+        <header class="mint-header">
+            <div class="mint-header-button text-l"><a class="icon-back"></a></div>
+            <h1 class="mint-header-title">选择活动参与方</h1>
+            <div class="mint-header-button text-r"></div>
+        </header>
+        <div class="screenButList">
+            <input type="text" id="activityUniteParamName" placeholder="请输入机构名称进行查询"><i @click="search" class="iconfont icon-fangdajing"></i>
+        </div>
+        <ul class="warp_company">
+            <!-- <li class="yh-group">
+                <span class="l">上海悠活网络科技有限公司</span>
+                <i class="iconfont icon-duigou"></i>
+            </li> -->
+        </ul>
+        <button v-if="companytype == 10" class="submit-btn" style="position: absolute;" @click="addCompany">添加{{companytype}}</button>
+        <button v-if="companytype == 20" class="submit-btn" style="position: absolute;" @click="addCompany1">添加{{companytype}}</button>
+        </div>
+    </div>
+    <!-- 搜索结束 -->
+</div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+
+<script>
+var vueIM = new Vue({
+    el: '#amendUnit',
+    data () {
+        return {
+            showbtn: true,
+            companytype: null,
+            addFrom: {
+                activityCode: this.getUrlParam("activityCode"),
+                activityUniteParamList: [],
+                parties: ""
+            },
+            majorUnitList: [],
+            cooperateUnitList: [],
+        };
+    },
+    created () {
+        this.getdetail();
+    },
+    filters: {
+        capture: function (value, start, end) {
+            return value= value.substring(start, end);
+        }
+    },
+    methods: {
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
+        // 获得详情
+        getdetail () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/activityUnite/findByActivityCode',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify({activityCode: that.getUrlParam("activityCode")}),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res.data.majorUnitList);
+                    that.majorUnitList = res.data.majorUnitList;
+                    that.cooperateUnitList = res.data.cooperateUnitList;
+                    that.addFrom.parties = res.data.parties;
+                }
+            });
+        },
+        // 搜索公司
+        search () {
+            $.ajax({
+                url: base_url + '/html5/v1/orgPlace/queryTotalListByName',
+                type: "post",
+                dataType: "json",
+                data: "{\"name\":\"" + $("#activityUniteParamName").val() + "\", \"pageNumber\": 1, \"pageSize\": 6, \"orgThirdAccount\":\""+this.org+"\" }",
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        var record = resp.data.records;
+                        $(".warp_company").html("");
+                        for (var i in record) {
+                            $(".warp_company").append(`<li>
+                                <div data-orgId="${record[i].id}" data-type="${record[i].type}" data-orgName="${record[i].name}" data-orgCode="${record[i].orgThirdAccount}">${record[i].name}</div>
+                            </li>`);
+                        }
+                        $(".warp_company li div").click(function() {
+                            $(this).toggleClass('companyname');
+                        });
+                    }
+                }
+            });
+        },
+        selectcompany (type) {
+            $('.warp_company li div').removeClass('companyname')
+            this.companytype = type;
+            console.log(this.companytype);
+            $(".searchcompany").animate({left:"0"})
+        },
+        addCompany () {
+            var that = this;
+            var company = $(".companyname");
+            var arrList = new Array();
+            $(".companyname").each(function(){
+                arrList.push({
+                    orgId: $(this).attr('data-orgId'),
+                    orgCode: $(this).attr('data-orgCode'),
+                    orgName: $(this).attr('data-orgName'),
+                    type: that.companytype
+                });
+            });
+            this.auspiceconmpanyList = arrList;
+            $(".searchcompany").animate({left:"100%"})
+            console.log(arrList);
+        },
+        addCompany1 () {
+            var that = this;
+            var company = $(".companyname");
+            var arrList = new Array();
+            $(".companyname").each(function(){
+                arrList.push({
+                    orgId: $(this).attr('data-orgId'),
+                    orgCode: $(this).attr('data-orgCode'),
+                    orgName: $(this).attr('data-orgName'),
+                    type: that.companytype
+                });
+            });
+            this.addFrom.activityUniteParamList = [];
+            this.addFrom.activityUniteParamList=arrList;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/updateUnits',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.addFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    console.log(resp);
+                    $(".searchcompany").animate({left:"100%"})
+                },
+                error: function(e) {
+                    layer.open({
+                        content: '失败',
+                        skin: 'msg',
+                        time: 1
+                    });
+                    return false;
+                }
+            });
+        },
+        // 保存
+        save () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/updateUnits',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.addFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    console.log(resp);
+                },
+                error: function(e) {
+                    layer.open({
+                        content: '失败',
+                        skin: 'msg',
+                        time: 1
+                    });
+                    return false;
+                }
+            });
+        },
+        cancel (id) {
+            var that = this;
+            this.addFrom.activityUniteParamList = [];
+            that.addFrom.activityUniteParamList.push({
+                id: id
+            });
+            $.ajax({
+                url: base_url + 'html5/v2/activity/updateUnits',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.addFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    console.log(resp);
+                },
+                error: function(e) {
+                    layer.open({
+                        content: '失败',
+                        skin: 'msg',
+                        time: 1
+                    });
+                    return false;
+                }
+            });
+        },
+        // 修改场次
+        amend () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/section/update',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.addFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res.data);
+                }
+            });
+        }
+    }
+})
+</script>
+</html>

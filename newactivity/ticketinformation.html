@@ -38,10 +38,13 @@
         <h1 class="mint-header-title">票证信息</h1>
         <div class="mint-header-button text-r"></div>
     </header>
-    <div class="period">场次：{{addFrom.day}} {{addFrom.startTime}}-{{addFrom.endTime}}</div>
-    <div v-if="publicParamList.length == 0" class="addele" style="padding-left: 0.8rem;" @click="addnewticket"><i class="iconfont icon-tianjiajiahaowubiankuang"></i><span>添加新票证</span></div>
+    <div v-if="!getUrlParam('pubCode')" v-cloak>
+        <div class="period">场次：{{addFrom.day}} {{addFrom.startTime}}-{{addFrom.endTime}}</div>
+        <div v-if="publicParamList.length == 0" class="addele" style="padding-left: 0.8rem;" @click="addnewticket"><i class="iconfont icon-tianjiajiahaowubiankuang"></i><span>添加新票证</span></div>
+    </div>
+    <div v-if="getUrlParam('pubCode')" style="margin-top: 1rem;"></div>
     <div class="addticketbox" v-for="(item, index) in publicParamList" :key="index">
-        <div class="addtickettitle">
+        <div class="addtickettitle" v-if="!getUrlParam('pubCode')" v-cloak>
             <span class="fl" @click="addnewticket" v-if="index == 0"><i class="iconfont icon-tianjiajiahaowubiankuang"></i><span>添加新票证</span></span>
             <span class="fr"><span style="color:#F0676C;" @click="delnewticket(index)">删除</span></span>
         </div>
@@ -158,8 +161,8 @@
             <!-- 指定发放 -->
             <div v-if="item.publicApply==20">
                 <div class="tishi">如指定用户是系统中已实名注册用户，在Ta的个人订单中将会生成一张票证订单；如指定用户是非系统实名用户，系统将会以短信形式发送给Ta。</div>
-                <div v-if="item.userInfoList && item.userInfoList.length == 0" class="addtickettitle" @click="addnewUser(index)"><i class="iconfont icon-tianjiajiahaowubiankuang"></i>添加新用户</div>
-                <div v-for="(item1, index1) in item.userInfoList" :key="index1">
+                <div v-if="item.publicApplyVoList && item.publicApplyVoList.length == 0" class="addtickettitle" @click="addnewUser(index)"><i class="iconfont icon-tianjiajiahaowubiankuang"></i>添加新用户</div>
+                <div v-for="(item1, index1) in item.publicApplyVoList" :key="index1">
                     <div class="addtickettitle">
                         <span class="fl" v-if="index1 == 0"  @click="addnewUser(index)"><i class="iconfont icon-tianjiajiahaowubiankuang"></i>添加新用户</span>
                         <span class="fr" @click="delUser(index, index1)" style="color:#F0676C;">删除</span>
@@ -181,6 +184,8 @@
         </div>
     </div>
     <button class="submit-btn" @click="submit">保存提交</button>
+    <!-- 修改 -->
+    <button class="submit-btn" @click="amendsubmit">保存提交1</button>
     <!--地点开始-->
     <div class="warp_ci">
 
@@ -234,13 +239,14 @@ var vueIM = new Vue({
                         selfOrg: null, // 指定本机构
                         unitOrg: null, // 指定参与方机构 10是20否
                         total: 1, // 数量
-                        userInfoList: [
+                        publicApplyVoList: [
                             {
-                                headImg: '',
-                                mobile: '',
-                                nickName: '',
-                                unit:'',
-                                user: ''
+                                applyCode: "", // 报名记录标识	false	string	删除必传
+                                headImg: '', // 头像
+                                mobile: '', // 电话
+                                nickName: '', // 昵称
+                                unit:'', // 单位名称
+                                user: '' // 用户 新增系统用户必传
                             }
                         ]
                     }
@@ -274,19 +280,21 @@ var vueIM = new Vue({
                     if (data.code == 0) {
                         console.log(data.data);
                         if (data.data.records.length > 0) {
-                            that.publicParamList = data.data.records;
+                            if (that.getUrlParam("pubCode")) {
+                                let arrList = [];
+                                data.data.records.map((item) => {
+                                    console.log(item.pubCode);
+                                    if (item.pubCode == that.getUrlParam("pubCode")) {
+                                        arrList.push(item);
+                                    }
+                                });
+                                that.publicParamList = arrList;
+                            } else {
+                                that.publicParamList = data.data.records;
+                            }
                             that.$nextTick(()=>{
                                 that.publicParamList.map((item, index) => {
                                     $("#address" + index).val(item.publicAddress);
-                                    that.publicParamList[index].userInfoList = [
-                                            {
-                                                headImg: '',
-                                                mobile: '',
-                                                nickName: '',
-                                                unit:'',
-                                                user: ''
-                                            }
-                                    ];
                                 });
                             });
                         }
@@ -330,13 +338,14 @@ var vueIM = new Vue({
                 selfOrg: null, // 指定本机构
                 unitOrg: null, // 指定参与方机构 10是20否
                 total: 1 , // 数量
-                userInfoList: [
+                publicApplyVoList: [
                     {
-                        headImg: '',
-                        mobile: '',
-                        nickName: '',
-                        unit:'',
-                        user: ''
+                        applyCode: "", // 报名记录标识	false	string	删除必传
+                        headImg: '', // 头像
+                        mobile: '', // 电话
+                        nickName: '', // 昵称
+                        unit:'', // 单位名称
+                        user: '' // 用户 新增系统用户必传
                     }
                 ]
             });
@@ -348,19 +357,20 @@ var vueIM = new Vue({
         },
         // 添加新票证
         addnewUser (index) {
-            this.publicParamList[index].userInfoList.unshift({
-                headImg: '',
-                mobile: '',
-                nickName: '',
-                unit:'',
-                user: ''
+            this.publicParamList[index].publicApplyVoList.unshift({
+                applyCode: "", // 报名记录标识	false	string	删除必传
+                headImg: '', // 头像
+                mobile: '', // 电话
+                nickName: '', // 昵称
+                unit:'', // 单位名称
+                user: '' // 用户 新增系统用户必传
             });
         },
         // 删除用户
         delUser (index, index1) {
             console.log(index, index1);
-            console.log(this.publicParamList[index].userInfoList[index1]);
-            this.publicParamList[index].userInfoList.splice(index1, 1);
+            console.log(this.publicParamList[index].publicApplyVoList[index1]);
+            this.publicParamList[index].publicApplyVoList.splice(index1, 1);
         },
         // 地点
         warpdd (publicAddressId, index) {
@@ -505,9 +515,9 @@ var vueIM = new Vue({
                                         time: 1
                                     });
                                 }else{
-                                    that.publicParamList[index].userInfoList[index1].headImg = data.data.headImg;
-                                    that.publicParamList[index].userInfoList[index1].nickName = data.data.realName;
-                                    that.publicParamList[index].userInfoList[index1].user = data.data.prjvUserId;
+                                    that.publicParamList[index].publicApplyVoList[index1].headImg = data.data.headImg;
+                                    that.publicParamList[index].publicApplyVoList[index1].nickName = data.data.realName;
+                                    that.publicParamList[index].publicApplyVoList[index1].user = data.data.prjvUserId;
                                 }
                             }
                         }
@@ -547,6 +557,37 @@ var vueIM = new Vue({
                 }
             });
             console.log(this.publicParamList);
+        },
+        // 修改提交
+        amendsubmit () {
+            this.publicParamList[0].assignOrgName ='',
+            this.publicParamList[0].assignOrgCode ='',
+            this.companyShow.map((item)=>{
+                this.publicParamList[0].assignOrgName += item.assignOrgName + ',';
+                this.publicParamList[0].assignOrgCode += item.assignOrgCode + ',';
+            });
+            var that = this;
+            $.ajax({
+                url: base_url + '/html5/v2/activity/sectionPublic/update',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.publicParamList),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        console.log(resp.data.sectionCode);
+                        that.sectionCodeList[that.getUrlParam('id')] = resp.data.sectionCode;
+                        // window.location.href="./postActivity.html?sectionCode=" + resp.data.sectionCode + "&copy=" + that.getUrlParam('copy');
+                        sessionStorage.setItem("sectionCodeList", JSON.stringify(that.sectionCodeList));
+                    } else {
+                        layer.open({
+                            content: resp.msg,
+                            skin: 'msg',
+                            time: 1
+                        });
+                    }
+                }
+            });
         }
     },
 })

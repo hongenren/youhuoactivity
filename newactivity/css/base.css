@@ -825,6 +825,27 @@ input, textarea{
     border: 1px solid #FF9800;
     margin-right: 4px;
 }
+.color00 {
+    color: #FF9800;
+}
+.color1F {
+    color: #73B81F;
+}
+.color6C {
+    color: #F0676C;
+}
+.color03 {
+    color: #FB0303;
+}
+.yh-btn-nomal{
+    width: 3rem;
+    height: 1.3rem;
+    border-radius: 0.76rem;
+    color: rgba(15, 15, 15, 1);
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid rgba(187, 187, 187, 1);
+}
 .operationBtn{
     position: fixed;
     bottom: 0;

@@ -146,12 +146,14 @@ var vueIM = new Vue({
                 }
             });
         },
+        // 添加新票证
         goticketinformation () {
             let day = this.detailList[0].startTime.substring(0, 10);
             let startTime = this.detailList[0].startTime.substring(11, 16);
             let endTime= this.detailList[0].endTime.substring(11, 16);
             window.location.href="./ticketinformation.html?day=" + day + "&startTime=" + startTime + "&endTime=" + endTime + "&form=orderticketInfo";
         },
+        // 修改票证
         amendticketinformation (sectionCode, pubCode) {
             let day = this.detailList[0].startTime.substring(0, 10);
             let startTime = this.detailList[0].startTime.substring(11, 16);
