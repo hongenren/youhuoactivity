@@ -378,6 +378,7 @@ input, textarea{
     overflow: hidden;
     padding: 0 0.65rem;
     padding-bottom: 1.1rem;
+    background: #ffffff;
 }
 .ticketleft{
     float: left;
@@ -684,10 +685,18 @@ input, textarea{
     color: red;
 }
 /* 岗位 任务 票证列表 */
+.textcenter{
+    text-align: center;
+    background: #ffffff;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    margin-top: 5px;
+}
 .yh-activity-list{
-    padding: 0.5rem 0.8rem;
+    padding: 0.5rem 1rem;
     font-size: 14px;
     color: #101010;;
+    background: #ffffff;
 }
 .avtivity-title{
     padding: 0.5rem 0;

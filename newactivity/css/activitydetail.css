@@ -27,27 +27,33 @@
 
 .activitime{
     padding: 0.4rem 0.7rem 0.4rem 0.7rem;
+    background: #ffffff;
 }
 .activitime p{
     padding: 0.2rem;
 }
 .activitmark{
-    padding: 0.4rem 0.7rem 0.4rem 0.7rem;
+    margin: 0.4rem 0rem 0rem 0rem;
+    padding: 0 0.7rem;
     height: 10px;
     overflow: hidden;
+    background: #ffffff;
 }
 .zhankai{
     padding-right: 10px;
     color: #F0676C;
     text-align: right;
+    background: #ffffff;
 }
-.yh-group{
+.yh-group-background{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
     color: #101010;
     font-weight: bold;
-    border-bottom: none;
     padding-bottom: 0.5rem;
 }
-.yh-group .l{
+.yh-group-background .l{
     font-size: 14px;
 }
 .unitename{
