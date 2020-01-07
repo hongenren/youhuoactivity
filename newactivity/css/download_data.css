@@ -23,20 +23,20 @@ input[type="checkbox"] + label::before {
     display: inline-block;
     vertical-align: middle;
     font-size: 18px;
-    width: .9em;
-    height: .9em;
-    margin-right: .4em;
+    width: 20px;
+    height:20px;
+    margin-right: 10px;
     border-radius: 50%;
     border: 1px solid #27b63f;
-    text-indent: .15em;
+    text-indent: 10px;
     line-height: 1;
 }
 input[type="checkbox"]:checked + label::before {
     background-color: #27b63f;
     background-clip: content-box;
     padding: .1em;
-    width: .7em;
-    height: .7em;
+    width: 1.2em;
+    height: 1.2em;
 }
 input[type="checkbox"] {
     position: absolute;
@@ -65,4 +65,16 @@ label{
     border-radius: 4px;
     background-color: rgba(115, 184, 31, 1);
     color: rgba(255, 255, 255, 1);
+}
+.check-box{
+    height: 50px;
+    width: 10%;
+    position: absolute;
+    top: 3rem;
+    left: 0.5rem;
+}
+.radio{
+    height: 20px;
+    width: 20px;
+    background: red;
 }

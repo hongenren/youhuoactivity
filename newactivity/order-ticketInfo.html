@@ -39,7 +39,7 @@
                 <span class="more" :data-code='item.pubCode'>更多</span>
                 <span class="oforderF9" @click="amendticketinformation(item.sectionCode, item.pubCode)">修改票证</span>
                 <span class="oforder1F">扫一扫</span>
-                <span class="oforder" @click="gomanagementpersonnel()">人员管理</span>
+                <span class="oforder" @click="gomanagementpersonnel(item.pubCode)">人员管理</span>
             </p>
         </li>
     </ul>
@@ -161,6 +161,9 @@ var vueIM = new Vue({
             window.location.href="./ticketinformation.html?day=" + day +
             "&startTime=" + startTime + "&endTime=" + endTime + "&form=orderticketInfo"+
             "&sectionCode="+sectionCode + "&pubCode="+pubCode;
+        },
+        gomanagementpersonnel (pubCode) {
+            window.location.href="./managementpersonnel.html?pubCode="+pubCode;
         }
     }
 })

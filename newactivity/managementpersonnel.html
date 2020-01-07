@@ -11,6 +11,7 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/download_data.css">
     <script type="text/javascript" src="js/rem.js"></script>
 </head>
 <body>
@@ -21,8 +22,8 @@
         <div class="mint-header-button text-r"></div>
     </header>
     <div class="yh-tab">
-        <div>待审核</div>
-        <div>已领取</div>
+        <div :class="{selecttab: searchFrom.state == 10}" @click="search(10)">待审核</div>
+        <div :class="{selecttab: searchFrom.state == 20}" @click="search(20)">已领取</div>
     </div>
     <div class="screenButList screenButList1" style="margin-top: 3px;border-top: 0px;">
         <input type="search" class="search_input" id="name_input" placeholder="请输入机构或活动名称来搜索" style="height:30px;-webkit-appearance:none;border-radius:0px;padding-left: 5px;">
@@ -30,26 +31,38 @@
     </div>
     <div class="ts_warning">请在场次开始前审核完成，过期不审者，系统默认审核“拒绝”</div>
     <ul>
-        <li class="personneList">
+        <li class="personneList" v-for="(item, index) in personList" :key="index">
             <div>
-                <span class="imgbox"></span>
-                <span class="personnename">张三</s>
+                <span class="imgbox">
+                    <img :src="item.headImg" alt="">
+                </span>
+                <span class="personnename">{{item.nickName}}</s>
             </div>
             <div class="personnebtnbox">
-                <span class="oforder1F">通过</span>
-                <span class="oforder">拒绝</span class="oforder00">
+                <span class="oforder1F" @click="batchAuditApply(item.applyCode, 20)">通过</span>
+                <span class="oforder" @click="batchAuditApply(item.applyCode, -10)">拒绝</span class="oforder00">
                 <span class="oforder00">联系</span>
+            </div>
+            <div class="check-box" v-if="!showCheck">
+                    <input class="radio" type="checkbox" id="female1" v-model="item.check" @click="selectCheck(item)"/>
+                    <label for="female1"></label>
             </div>
         </li>
     </ul>
     <div class="operationBtn">
         <div class="fl">
-            <span>编辑</span>
-            <span>全选</span>
+            <span v-if="showCheck" @click="showCheck = !showCheck">编辑</span>
+            <span v-if="!showCheck" @click="showCheck = !showCheck" class="color6C">取消</span>
+            <span v-if="showAllCheck" @click="allcheck">全选</span>
+            <span v-if="!showAllCheck" @click="cancelAll">取消全选({{addFrom.applyCodeList.length}})</span>
         </div>
-        <div class="fr">
+        <div class="fr" v-if="addFrom.applyCodeList.length <= 0" style="color: #C8C8C8;">
             <span>批量通过</span>
-            <span>批量拒绝</span>
+            <span style="margin-right: 0rem;">批量拒绝</span>
+        </div>
+        <div class="fr" v-if="addFrom.applyCodeList.length > 0">
+            <span class="color1F">批量通过</span>
+            <span class="color6C" style="margin-right: 0rem;">批量拒绝</span>
         </div>
     </div>
 </div>
@@ -63,16 +76,24 @@ var vueIM = new Vue({
     el: '#managementpersonnel',
     data () {
         return {
+            ss: null,
+            showCheck: true,
+            showAllCheck: true,
             searchFrom: {
-                activityCode: this.getUrlParam('activityCode'), // 机构标识
+                pubCode: "PlbJFFaHVjCA", // 机构标识
+                state: 10,
                 current: 1, // 当前页
                 size: 20 // 页容量
             },
-            detailList: []
+            addFrom: {
+                applyCodeList: [],
+                state: null,
+            },
+            personList: []
         };
     },
     created () {
-        this.init();
+        this.search(10);
     },
     filters: {
         capture: function (value, start, end) {
@@ -85,23 +106,66 @@ var vueIM = new Vue({
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return unescape(r[2]); return null;
         },
-        init () {
+        search (type) {
             var that = this;
+            that.searchFrom.state = type;
             $.ajax({
-                url: base_url + 'html5/v2/activity/getPublicList',
+                url: base_url + 'html5/v2/activity/sectionPublic/getApplyList',
                 type: "post",
                 dataType: "json",
                 data: JSON.stringify(that.searchFrom),
                 headers: {'Content-Type': 'application/json'},
                 success: function (res) {
-                    console.log(res.data);
-                    that.detailList = res.data.records;
+                    console.log(res.data.records);
+                    that.personList = res.data.records;
                 }
             });
         },
-        goticketinformation (pubCode) {
-            window.location.href="./ticketdetail.html?pubCode=" + pubCode;
-        }
+        // 单选
+        selectCheck (item) {
+            item.check = !item.check;
+            let idx = this.addFrom.applyCodeList.indexOf(item.applyCode);
+            console.log(idx);
+            idx > -1 ? this.addFrom.applyCodeList.splice(idx, 1) : this.addFrom.applyCodeList.push(item.applyCode);
+            console.log(this.addFrom.applyCodeList);
+        },
+        // 全选
+        allcheck () {
+            for (let i = 0; i<this.personList.length; i++) {
+                let idx = this.addFrom.applyCodeList.indexOf(this.personList[i].applyCode);
+                idx < 0 && this.addFrom.applyCodeList.push(this.personList[i].applyCode);
+                this.personList[i].check = true;
+            }
+            this.showAllCheck = false;
+            this.$forceUpdate();
+            console.log(this.personList);
+        },
+        cancelAll () {
+            for (let i = 0; i<this.personList.length; i++) {
+                this.addFrom.applyCodeList = [];
+                this.personList[i].check = false;
+            }
+            this.showAllCheck = true;
+            this.$forceUpdate();
+        },
+        // 审核
+        batchAuditApply (applyCode, type) {
+            var that = this;
+            this.addFrom.applyCodeList = [];
+            this.addFrom.applyCodeList.push(applyCode);
+            this.addFrom.state = type;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/sectionPublic/batchAuditApply',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.addFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res.data.records);
+                    that.personList = res.data.records;
+                }
+            });
+        },
     }
 })
 </script>
