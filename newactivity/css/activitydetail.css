@@ -56,6 +56,11 @@
 .yh-group-background .l{
     font-size: 14px;
 }
+.affiliationc{
+    overflow: hidden;
+    background: #ffffff;
+    margin-bottom: 2px;
+}
 .unitename{
     width: 70%;
     padding-top: 0.6rem;

@@ -42,7 +42,7 @@
         <ul>
             <li class="yh-activity-list" v-for="(item, index) in detailList.sectionPublicVoList" :key="index">
                 <div>
-                    <p>{{item.name}}</p>
+                    <p class="avtivity-title">{{item.name}}</p>
                     <p class="ticketicobox"><i class="iconfont icon-naozhong"></i>{{item.startTime | capture(0, 16)}} 至 {{item.endTime | capture(11, 16)}} </p>
                     <p class="ticketicobox"><i class="iconfont icon-didian"></i>{{item.publicAddress}}</p>
                 </div>
@@ -51,28 +51,28 @@
         </ul>
         <div class="yh-group-background">
             <span class="l">岗位</span>
-            <span>查看更多</span>
+            <a :href='"./postList.html?activityCode="+detailList.activityCode'>查看更多</a>
         </div>
         <ul>
             <li class="yh-activity-list" v-for="(item, index) in detailList.postVoList" :key="index">
                 <div>
-                    <p>{{item.name}}</p>
-                    <p>{{item.startDay}} {{item.serviceBeginTime}} 至 {{item.lastDay}} {{item.serviceEndTime}} </p>
-                    <p>{{item.address}}</p>
+                    <p class="avtivity-title">{{item.name}}</p>
+                    <p class="ticketicobox"><i class="iconfont icon-naozhong"></i>{{item.startDay}} {{item.serviceBeginTime}} 至 {{item.lastDay}} {{item.serviceEndTime}} </p>
+                    <p class="ticketicobox"><i class="iconfont icon-didian"></i>{{item.address}}</p>
                 </div>
             </li>
             <li v-if="detailList.postVoList && detailList.postVoList.length==0" class="textcenter" style="text-align: center;">暂无数据</li>
         </ul>
         <div class="yh-group-background">
             <span class="l">任务</span>
-            <span>查看更多</span>
+            <a :href='"./taskList.html?activityCode="+detailList.activityCode'>查看更多</a>
         </div>
         <ul>
             <li class="yh-activity-list" v-for="(item, index) in detailList.subTaskVoList" :key="index">
                 <div>
-                    <p>{{item.name}}</p>
-                    <p>{{item.beginTime | capture(0, 16)}} 至 {{item.endTime | capture(11, 16)}} </p>
-                    <p>{{item.address}}</p>
+                    <p class="avtivity-title">{{item.name}}</p class="avtivity-title">
+                    <p class="ticketicobox"><i class="iconfont icon-naozhong"></i>{{item.beginTime | capture(0, 16)}} 至 {{item.endTime | capture(11, 16)}} </p class="ticketicobox">
+                    <p class="ticketicobox"><i class="iconfont icon-didian"></i>{{item.address}}</p>
                 </div>
             </li>
             <li v-if="detailList.subTaskVoList && detailList.subTaskVoList.length==0" class="textcenter">暂无数据</li>
