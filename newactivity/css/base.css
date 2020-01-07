@@ -639,6 +639,7 @@ input, textarea{
     width: 100%;
     overflow: hidden;
     padding: 0 4%;
+    background: #fff;
 }
 
 .warp_company li {
@@ -777,7 +778,7 @@ input, textarea{
 }
 .oforder{
     display: inline-block;
-    padding: 0.2rem 0.6rem;
+    padding: 0.2rem 1rem;
     border-radius: 0.8rem;
     background-color: rgba(255, 255, 255, 1);
     color: rgba(240, 103, 108, 1);

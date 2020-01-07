@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>填写活动信息</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <script type="text/javascript" src="js/rem.js"></script>
+    <style>
+        .warp_ci {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            position: fixed;
+            left: 100%;
+            top: 0;
+            background: #FFFFFF;
+            z-index: 99
+        }
+        .warp{
+            width: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="setadministrator">
+    <header class="mint-header">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">管理员</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="yh-group" style="border: none;" @click="Ishow = !Ishow">
+        <span class="l">选择管理员</span>
+        <span>请在机构成员中选择<i class="iconfont" :class="Ishow ? 'icon-icon_xia' : 'icon-icon_you'"></i></span>
+    </div>
+    <div class="companybox" style="border-bottom: 1px solid #bbb;">
+        <div class="yh-group-company" v-for="(item, index) in addFrom.userList" :key="index">
+            <span>{{item.realName}}</span>
+            <div>
+                <span style="padding-right: 50px;">{{item.mobile}}</span>
+                <span class="iconfont icon-cha1" @click="delcompany(index)"></span>
+            </div>
+        </div>
+    </div>
+    <!-- 主办搜索开始 -->
+    <div class="searchcompany" v-if="Ishow">
+        <div class="screenButList">
+            <input type="text" id="activityUniteParamName" placeholder="请输入机构名称进行查询" v-model="searchContent"><i @click="search(searchContent)" class="iconfont icon-fangdajing"></i>
+        </div>
+        <ul class="warp_company">
+            <li class="unitLi" v-for="(item, index) in companyList">
+                <div :class="{companyname:item.checked}" @click="toggleClass(item)">
+                    <span>{{item.realName}}</span>
+                    <span>{{item.mobile}}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- 搜索结束 -->
+    <button class="submit-btn" @click="submit">保存提交</button>
+</div>
+</body>
+<script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="../wap/js/prjvorg/prjvorg.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#setadministrator',
+    data () {
+        return {
+            companyList: null,
+            searchContent: '',
+            Ishow: false,
+            addFrom: {
+                managerCode: this.getUrlParam("managerCode"),
+                userList: []
+            },
+        }
+    },
+    mounted () {
+        // this.getSectionManager();
+    },
+    methods: {
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
+        // 搜索公司
+        search (searchContent) {
+            var that = this;
+            $.ajax({
+                url: base_url + '/html5/v1/orgPlace/queryMembersForVerify',
+                type: "post",
+                dataType: "json",
+                data: "{\"prjvOrgId\":\"" + prjvorgMsg.prjvOrgId + "\", \"pageNumber\": 1, \"pageSize\": 6, \"searchContent\":\""+searchContent+"\" }",
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        that.companyList = resp.data.records;
+                    }
+                }
+            });
+        },
+        toggleClass (item) {
+            if (typeof item.checked == 'undefined') {
+                this.$set(item, "checked", true)
+            } else {
+                item.checked = !item.checked
+            }
+            this.addFrom.userList = [];
+            this.companyList.map((item)=>{
+                if (item.checked) {
+                    this.addFrom.userList.push({
+                        realName: item.realName,
+                        mobile: item.mobile,
+                        headImg: item.headUrl,
+                        user: item.prjvUserId
+                    });
+                }
+            });
+        },
+        // 删除
+        delcompany (index) {
+            this.addFrom.userList.splice(index, 1);
+        },
+        // 提交
+        submit () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/sectionManager/addManagers',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.addFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (resp) {
+                    if (resp.code == 0) {
+                        console.log(resp.data.sectionCode);
+                        window.location.href="./postActivity.html?sectionCode=" + resp.data.sectionCode;
+                        sessionStorage.setItem("adminCode", JSON.stringify(resp.data.sectionCode));
+                    } else {
+                        layer.open({
+                            content: resp.msg,
+                            skin: 'msg',
+                            time: 1
+                        });
+                    }
+                }
+            });
+        }
+    },
+})
+</script>
+</html>

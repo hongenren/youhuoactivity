@@ -178,3 +178,10 @@
     color: #F0676C;
     font-size: 14px;
 }
+.textcenter{
+    text-align: center;
+    background: #ffffff;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    margin-top: 5px;
+}

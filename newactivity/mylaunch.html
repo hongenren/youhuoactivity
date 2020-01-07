@@ -56,11 +56,11 @@
                 <span class="oforder1F" @click="goDownData">下载数据</span>
                 <span class="oforder">取消订单</span>
             </div>
-            <div class="yh-group" @click="showSession = !showSession">
+            <div class="yh-group" @click="showSession(item)">
                 <span class="l">票证场次信息</span>
                 <span>共{{item.sectionGeneralVoList.length}}个场次<i class="iconfont icon-icon_you"></i></span>
             </div>
-            <ul v-if="showSession">
+            <ul v-if="item.showSession">
                 <li v-for="(item1, index1) in item.sectionGeneralVoList" :key="index1">
                     <div class="yh-group-noborder">
                         <span class="l">{{item1.day}} {{item1.startTime}}-{{item1.endTime}}</span>
@@ -80,27 +80,27 @@
                     </div>
                 </li>
             </ul>
-            <div class="yh-group">
+            <div class="yh-group" @click="showPost(item)">
                 <span class="l">岗位信息</span>
                 <span>共{{item.postVoList.length}}个场次<i class="iconfont icon-icon_you"></i></span>
             </div>
-            <ul>
+            <ul v-if="item.showPost">
                 <li class="order-list" v-for="(item2, index2) in item.postVoList" :key="index2">
                     <div class="my-order-title">
                         <span>{{item.name}}</span>
                     </div>
-                    <p><i class="iconfont icon-naozhong"></i>{{item.startDay}}{{item.endDay}}</p>
+                    <p><i class="iconfont icon-naozhong"></i>{{item.startDay}}至{{item.endDay}}</p>
                     <p><i class="iconfont icon-didian"></i>{{item.address}}</p>
                     <div class="oforderbox">
-                        <span class="oforder">接触关联</span>
+                        <span class="oforder" @click="release(item.activityCode, item2.pkPostCode, 10)">解除关联</span>
                     </div>
                 </li>
             </ul>
-            <div class="yh-group">
+            <div class="yh-group" @click="showSubTask(item)">
                 <span class="l">任务信息</span>
                 <span>共{{item.subTaskVoList.length}}个场次<i class="iconfont icon-icon_you"></i></span>
             </div>
-            <ul>
+            <ul v-if="item.showSubTask">
                 <li class="order-list" v-for="(item3, index3) in item.subTaskVoList" :key="index3">
                     <div class="my-order-title">
                         <span>{{item.name}}</span>
@@ -108,7 +108,7 @@
                     <p><i class="iconfont icon-naozhong"></i>{{item.startDay}}{{item.endDay}}</p>
                     <p><i class="iconfont icon-didian"></i>{{item.address}}</p>
                     <div class="oforderbox">
-                        <span class="oforder">接触关联</span>
+                        <span class="oforder" @click="release(item.activityCode, item3.mainCode, 20)">解除关联</span>
                     </div>
                 </li>
             </ul>
@@ -132,7 +132,7 @@ var vueIM = new Vue({
     el: '#mylaunch',
     data () {
         return {
-            showSession: false,
+            sessionIndex: null,
             recordList: [],
             dropload: false,
             searchFrom: {
@@ -261,6 +261,33 @@ var vueIM = new Vue({
                 }
             })
         },
+        // 显示场次下面的数据
+        showSession (item) {
+            if (!item.showSession) {
+                this.$set(item, "showSession", false);
+                item.showSession = !item.showSession;
+            } else {
+                item.showSession = !item.showSession;
+            }
+        },
+        // 显示岗位下面的数据
+        showPost (item) {
+            if (!item.showPost) {
+                this.$set(item, "showPost", false);
+                item.showPost = !item.showPost;
+            } else {
+                item.showPost = !item.showPost;
+            }
+        },
+        // 显示任务下面的数据
+        showSubTask (item) {
+            if (!item.showSubTask) {
+                this.$set(item, "showSubTask", false);
+                item.showSubTask = !item.showSubTask;
+            } else {
+                item.showSubTask = !item.showSubTask;
+            }
+        },
         // 取消场次
         cancel (sectionCode) {
             $.ajax({
@@ -274,8 +301,20 @@ var vueIM = new Vue({
                 }
             });
         },
-        fuzhi () {
-            window.location.herf="./postActivity.html"
+        // 接触关联
+        release (activityCode, pkCode, module) {
+            console.log(activityCode, pkCode, module);
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/ra/release',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify({activityCode: activityCode, pkCode: pkCode, module: module}),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res);
+                }
+            });
         },
         // 去票证
         goOrdertickInfo (activityCode) {

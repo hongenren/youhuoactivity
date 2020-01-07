@@ -21,35 +21,37 @@
         <h1 class="mint-header-title">管理员</h1>
         <div class="mint-header-button text-r"></div>
     </header>
-    <div class="sessionTime" @click="goticketinformation()">
-        <span class="l">场次：1</span>
-        <span class="r"><i class="iconfont icon-tianjiajiahaowubiankuang"></i> 添加新票证</span>
+    <div class="sessionTime" @click="gonewadmin(detailList.sectionCode, detailList.managerCode)">
+        <span class="l">场次：{{detailList.startTime | capture(0, 16)}}-{{detailList.endTime | capture(11, 16)}}</span>
+        <span class="r"><i class="iconfont icon-tianjiajiahaowubiankuang"></i> 添加新管理员</span>
     </div>
     <div class="paragraph">
-        <p>报到地点：上海长宁金钟路11号2楼20</p>
+        <p>报到地点：{{detailList.arriveAddress}}</p>
         <p>管理员工作提示：</p>
-        <p>1、必须在场次开始前半小时到达报到地点</p>
-        <p>2、活动当天尽量上传正装活动当天尽量上传正装</p>
+        <p>{{detailList.content || "无"}}</p>
         <div class="yh-group-nopadding">
-            <span>签到后积分赠送：0</span>
-            <span class="color6C">修改</span>
+            <span>签到后积分赠送：{{detailList.point}}</span>
+            <span class="color6C" @click="goamendadmin(detailList.sectionCode, detailList.managerCode)">修改</span>
         </div>
     </div>
     <ul style="margin-top: 5px;">
-        <li class="adminList" v-for="(item, index) in 2" :key="index">
+        <li class="adminList" v-for="(item, index) in publicApplyVoList" :key="index">
             <div class="fl adminleft">
-                <div class="imgbox"></div>
+                <div class="imgbox">
+                    <img :src="item.headImg" alt="">
+                </div>
                 <div class="adminname">
-                    <p>张三</p>
-                    <p class="smallFont">签到</p>
+                    <p>{{item.nickName}}</p>
+                    <p class="smallFont">{{item.checkTime || "暂未"}}签到</p>
                 </div>
             </div>
             <div class="adminbtnbox fr">
-                <span class="oforder00">联系</span>
-                <span class="oforder1F" @click="batchAuditApply(item.applyCode, 20)">通过</span>
+                <span class="oforder" @click="kickOut(item.ticket)">剔除</span>
+                <span class="oforder1F" @click="batchAuditApply(item.applyCode, 20)">联系</span>
             </div>
         </li>
     </ul>
+    <div v-if="publicApplyVoList.length ==0" class="textcenter">暂无管理员</div>
 </div>
 </body>
 <script type="text/javascript" src="../wap/js/jquery.js"></script>
@@ -69,7 +71,9 @@ var vueIM = new Vue({
             addFrom: {
                 applyCodeList: [],
                 state: null,
-            }
+            },
+            detailList: {},
+            publicApplyVoList: []
         };
     },
     created () {
@@ -77,7 +81,9 @@ var vueIM = new Vue({
     },
     filters: {
         capture: function (value, start, end) {
-            return value= value.substring(start, end);
+            if (value) {
+                return value= value.substring(start, end);
+            }
         }
     },
     methods: {
@@ -96,24 +102,32 @@ var vueIM = new Vue({
                 headers: {'Content-Type': 'application/json'},
                 success: function (res) {
                     console.log(res.data);
+                    that.detailList = res.data;
+                    that.publicApplyVoList = res.data.publicApplyVoList;
                 }
             });
         },
-        // 审核
-        batchAuditApply (applyCode, type) {
+        // 修改积分
+        goamendadmin (sectionCode, managerCode) {
+            window.location.href="./amendadministrator.html?sectionCode=" + sectionCode +
+            "&managerCode=" + managerCode + "&amend=amend";
+        },
+        // 添加新管理员
+        gonewadmin (sectionCode, managerCode) {
+            window.location.href="./new-administrator.html?sectionCode=" + sectionCode +
+            "&managerCode=" + managerCode + "&amend=amend";
+        },
+        // 剔除
+        kickOut (ticket) {
             var that = this;
-            this.addFrom.applyCodeList = [];
-            this.addFrom.applyCodeList.push(applyCode);
-            this.addFrom.state = type;
             $.ajax({
-                url: base_url + 'html5/v2/activity/sectionPublic/batchAuditApply',
+                url: base_url + 'html5/v2/activity/sectionManager/kickOut',
                 type: "post",
                 dataType: "json",
-                data: JSON.stringify(that.addFrom),
+                data: JSON.stringify({ticket: ticket}),
                 headers: {'Content-Type': 'application/json'},
                 success: function (res) {
-                    console.log(res.data.records);
-                    that.personList = res.data.records;
+                    console.log(res.data);
                 }
             });
         },
