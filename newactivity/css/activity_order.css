@@ -49,6 +49,7 @@
     overflow: hidden;
     text-align: center;
     padding: 1% 0 3% 0;
+    background: #fff;
 }
 
 .warp_dd_p a {
@@ -84,10 +85,12 @@
 }
 /* liebiao */
 .order-list{
-    padding: 1.5rem 0.7rem 0 0.7rem;
+    padding: 0.7rem 0rem 0.5rem 0.7rem;
+    margin-bottom: 0.7rem;
     color: #101010 100%;
     font-size: 14px;
     overflow: hidden;
+    background: #fff;
 }
 .order-title{
     width: 100%;
@@ -154,10 +157,10 @@
     font-weight: bold;
 }
 .textF9{
-    color: #25B0F9;
+    color: #25B0F9!important;
 }
 .text1F{
-    color: #73B81F;
+    color: #73B81F!important;
 }
 .text6C{
     color: rgba(240, 103, 108, 1);

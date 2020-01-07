@@ -280,6 +280,7 @@ input, textarea{
     justify-content: space-between;
     color: #828282;
     font-size: 14px;
+    background: #fff;
     border-bottom: 1px solid #BBBBBB;
     padding: 0.5rem;
 }
@@ -294,11 +295,12 @@ input, textarea{
 .yh-group-noborder{
     display: flex;
     justify-content: space-between;
+    background: #fff;
     color: #0F0F0F;
     font-size: 14px;
     padding: 0.5rem;
 }
-.yh-group i{
+.yh-group-noborder i{
     padding-left: 0.25rem;
 }
 /* css */
@@ -330,26 +332,6 @@ input, textarea{
     position: absolute;
     left: 0;
     top: 0;
-}
-.yh-group-cell {
-    color: #0F0F0F;
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    padding: 0.5rem;
-}
-.yh-group-cell .r span{
-    color:  #828282;
-    padding-right: 0.5rem;
-}
-.yh-group-cell .r i{
-    display: inline-block;
-    width: 11px;
-    height: 13px;
-    background: url(../../wap/img/next.png) no-repeat center;
-    background-size: 100% 100%;
-    position: relative;
-    top: 2px;
 }
 /* // 上下 */
 .yh-group-bolster{
@@ -691,9 +673,10 @@ input, textarea{
 .yh-group-company{
     display: flex;
     justify-content: space-between;
-    color: #111111;
+    color: #101010;
     font-size: 14px;
     padding: 0 0.5rem;
+    background: #fff;
 }
 .yh-group-company .icon-cha1{
     font-size: 14px;

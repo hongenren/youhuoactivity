@@ -183,9 +183,9 @@
             </div>
         </div>
     </div>
-    <button class="submit-btn" @click="submit">保存提交</button>
+    <button v-if="this.getUrlParam('add')" class="submit-btn" @click="submit">保存提交</button>
     <!-- 修改 -->
-    <button class="submit-btn" @click="amendsubmit">保存提交1</button>
+    <button v-if="!this.getUrlParam('add')" class="submit-btn" @click="amendsubmit">保存提交1</button>
     <!--地点开始-->
     <div class="warp_ci">
 
@@ -573,7 +573,7 @@ var vueIM = new Vue({
                         console.log(resp.data.sectionCode);
                         that.sectionCodeList[that.getUrlParam('id')] = resp.data.sectionCode;
                         // window.location.href="./postActivity.html?sectionCode=" + resp.data.sectionCode + "&copy=" + that.getUrlParam('copy');
-                        sessionStorage.setItem("sectionCodeList", JSON.stringify(that.sectionCodeList));
+                        sessionStorage.setItem("ticketCode", JSON.stringify(resp.data.sectionCode));
                     } else {
                         layer.open({
                             content: resp.msg,

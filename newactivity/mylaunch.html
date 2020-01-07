@@ -56,11 +56,11 @@
                 <span class="oforder1F" @click="goDownData">下载数据</span>
                 <span class="oforder">取消订单</span>
             </div>
-            <div class="yh-group">
+            <div class="yh-group" @click="showSession = !showSession">
                 <span class="l">票证场次信息</span>
                 <span>共{{item.sectionGeneralVoList.length}}个场次<i class="iconfont icon-icon_you"></i></span>
             </div>
-            <ul>
+            <ul v-if="showSession">
                 <li v-for="(item1, index1) in item.sectionGeneralVoList" :key="index1">
                     <div class="yh-group-noborder">
                         <span class="l">{{item1.day}} {{item1.startTime}}-{{item1.endTime}}</span>
@@ -132,6 +132,7 @@ var vueIM = new Vue({
     el: '#mylaunch',
     data () {
         return {
+            showSession: false,
             recordList: [],
             dropload: false,
             searchFrom: {

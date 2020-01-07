@@ -1,12 +1,11 @@
 #postActivity {
-    padding-bottom: 5rem;
     font-size: 14px;
 }
 .newperiod{
     padding: 0 0.5rem;
 }
 .periodtop{
-    background: #ffffff;
+    background: #f8f8f8;
     font-weight: bold;
     padding: 0 0.5rem 0.25rem 0.5rem;
     line-height: 35px;
@@ -42,9 +41,7 @@
     font-weight: bold;
 }
 .hintsubmit{
-    position: absolute;
-    bottom: 2.7rem;
-    left: 0.5rem;
+    padding: 0.2rem 0.9rem;
     color: #828282;
     font-weight: bold;
 }

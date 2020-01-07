@@ -28,6 +28,11 @@
             background: #FFFFFF;
             z-index: 99
         }
+        .fixedclass {
+            position: fixed;
+            left: 100%;
+            z-index: 99
+        }
         .warp_banner{
             width: 100%;
             height: 100%;
@@ -182,7 +187,7 @@
                 <div class="selectbtn pattern" @click="selectImg(item.url)">选择</div>
                 <div class="bannertype pattern">{{item.note}}</div>
             </div>
-            <label for="file1"  class="submit-btn" style="position: absolute;">从本地相册中选择</label>
+            <label for="file1"  class="submit-btn fixedclass" style="position: fixed;">从本地相册中选择</label>
             <input type="file" id="file1" runat="server" ref="inputer1" accept="image/*" class="inputfile" @change="uploadImg(addFrom.url)" />
         </div>
     </div>
@@ -392,7 +397,8 @@ var vueIM = new Vue({
                    layer.open({type: 2,content: '上传中'});
                 },
                 success: function(data) {
-                    $(".warp_banner").animate({left:"100%"})
+                    $(".warp_banner").animate({left:"100%"});
+                    $(".fixedclass").animate({left:"100%"});
                     layer.closeAll();
                 },
                 error: function(){
@@ -409,11 +415,13 @@ var vueIM = new Vue({
         selectImg (url) {
             console.log(url);
             this.addFrom.coverImg = url;
-            $(".warp_banner").animate({left:"100%"})
+            $(".warp_banner").animate({left:"100%"});
+            $(".fixedclass").animate({left:"100%"});
         },
         // 显示添加banner
         showwarp () {
-            $(".warp_banner").animate({left:"0"})
+            $(".warp_banner").animate({left:"0"});
+            $(".fixedclass").animate({left:"0"});
         },
         getUrlParam (name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
