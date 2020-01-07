@@ -131,7 +131,7 @@
                 <p style="position: relative;"><i class="iconfont icon-liwu"></i>核销后可赠送{{item.point}}积分
                     <span v-if="item.type == 30 && item.state == 10">（管理员扫描票证二维码进行核销）</span>
                     <span v-if="item.type == 30 && item.state == 20"> | 09:00已核销</span v-if="item.type == 30 && item.state == 10">
-                    <span v-if="item.type == 80 && item.state == 10" class="checkIn">我要签到</span>
+                    <span v-if="item.type == 80 && item.state == 10" class="checkIn" @click="adminCheck(item.ticket)">我要签到</span>
                 </p>
                 <div style="color:#828282">管理员工作提示：1、必须在场次开始前半小时到达报到地点2、活动当天尽量穿正装</div>
                 <ul>
@@ -323,6 +323,23 @@
                     })
                 }
                 ,
+            })
+        },
+        // 我要签到
+        adminCheck (ticket) {
+            var that = this;
+            $.ajax({
+                xhrFields: {
+                withCredentials: true
+                },
+                type:"post",
+                url: base_url +  'html5/v2/activity/sectionPublic/adminCheck',
+                data:JSON.stringify({ticket: ticket, checkAdmin: JSON.parse(localStorage.getItem('prjvorgMsg')).prjvUserId}),
+                dataType:'json',
+                contentType: "application/json;charset=utf-8",
+                success:function(data){
+                    console.log(data.data);
+                }
             })
         },
         // 转赠
