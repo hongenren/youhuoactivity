@@ -54,6 +54,7 @@ iframe {
 html,
 body {
     height: 100%;
+    background: #F8F8F8;
 }
 
 ul,
@@ -873,4 +874,47 @@ input, textarea{
     color: rgba(115, 184, 31, 1);
     font-size: 16px;
     border-bottom: 2px solid rgba(115, 184, 31, 1);
+}
+/* 段落 */
+.paragraph{
+    background: #ffffff;
+    padding: 0.2rem 0.7rem;
+}
+.paragraph p{
+    padding: 4px 0;
+}
+/* nopadding */
+.yh-group-nopadding{
+    display: flex;
+    justify-content: space-between;
+}
+.adminList{
+    background: #ffffff;
+    overflow: hidden;
+    padding: 0.5rem;
+    border-bottom: 1px solid #bbbbbb;
+}
+.adminList .imgbox{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: rgba(251, 164, 167, 1);
+    overflow: hidden;
+}
+.adminleft div{
+    display: inline-block;
+    vertical-align: middle;
+}
+.adminname p{
+    line-height: 30px;
+}
+.smallFont{
+    color: #828282;
+    font-size: 12px;
+}
+.adminbtnbox{
+    display:flex;
+    align-items:center;
+    height: 3rem;
 }

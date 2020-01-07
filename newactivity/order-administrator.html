@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布活动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/activity_order.css">
+    <script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+<div id="orderAdministrator">
+    <header class="mint-header" style="border-bottom: 1px solid #bbb;">
+        <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
+        <h1 class="mint-header-title">管理员</h1>
+        <div class="mint-header-button text-r"></div>
+    </header>
+    <div class="sessionTime" @click="goticketinformation()">
+        <span class="l">场次：1</span>
+        <span class="r"><i class="iconfont icon-tianjiajiahaowubiankuang"></i> 添加新票证</span>
+    </div>
+    <div class="paragraph">
+        <p>报到地点：上海长宁金钟路11号2楼20</p>
+        <p>管理员工作提示：</p>
+        <p>1、必须在场次开始前半小时到达报到地点</p>
+        <p>2、活动当天尽量上传正装活动当天尽量上传正装</p>
+        <div class="yh-group-nopadding">
+            <span>签到后积分赠送：0</span>
+            <span class="color6C">修改</span>
+        </div>
+    </div>
+    <ul style="margin-top: 5px;">
+        <li class="adminList" v-for="(item, index) in 2" :key="index">
+            <div class="fl adminleft">
+                <div class="imgbox"></div>
+                <div class="adminname">
+                    <p>张三</p>
+                    <p class="smallFont">签到</p>
+                </div>
+            </div>
+            <div class="adminbtnbox fr">
+                <span class="oforder00">联系</span>
+                <span class="oforder1F" @click="batchAuditApply(item.applyCode, 20)">通过</span>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript" src="../wap/js/jquery.js"></script>
+<script type="text/javascript" src="../wap/js/config.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script>
+var vueIM = new Vue({
+    el: '#orderAdministrator',
+    data () {
+        return {
+            searchFrom: {
+                sectionCode: this.getUrlParam('sectionCode'), //
+                current: 1, // 当前页
+                size: 20 // 页容量
+            },
+            addFrom: {
+                applyCodeList: [],
+                state: null,
+            }
+        };
+    },
+    created () {
+        this.getAdminList();
+    },
+    filters: {
+        capture: function (value, start, end) {
+            return value= value.substring(start, end);
+        }
+    },
+    methods: {
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
+        getAdminList () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/sectionManager/getPage',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.searchFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res.data);
+                }
+            });
+        },
+        // 审核
+        batchAuditApply (applyCode, type) {
+            var that = this;
+            this.addFrom.applyCodeList = [];
+            this.addFrom.applyCodeList.push(applyCode);
+            this.addFrom.state = type;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/sectionPublic/batchAuditApply',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify(that.addFrom),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res.data.records);
+                    that.personList = res.data.records;
+                }
+            });
+        },
+    }
+})
+</script>
+</html>
