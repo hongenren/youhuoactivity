@@ -365,6 +365,12 @@ var vueIM = new Vue({
                     }
                 ]
             });
+            console.log(this.publicParamList);
+            this.publicParamList.map((item, index) => {
+                this.$nextTick(() => {
+                    $("#address" + index).val(item.publicAddress);
+                })
+            });
         },
         // 删除场次
         delnewticket (index) {
