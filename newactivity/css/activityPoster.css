@@ -105,9 +105,8 @@
     display: inline-block;
     width: 1rem;
     height: 1rem;
-    background: red;
     vertical-align: middle;
-    padding-right: 0.5rem;
+    margin: 0 0.2rem;
 }
 .btnbox button{
     width: 8.4rem;
@@ -125,4 +124,30 @@
     background-color: rgba(115, 184, 31, 1);
     color: #ffffff;
 }
+.background6C{
+    background: #F0676C;
+}
+.backgroundA6{
+    background: #FEEDA6;
+}
+.backgroundE4{
+    background: #DDFAE4;;
+}
+.backgroundE9{
+    background: #FFE9E9;
+}
+.background00{
+    background: #FCCA00;
+}
+.backgroundFF{
+    background: #59DBFF;
+}
+.background1F{
+    background: #73B81F;
+}
+.backgroundFB{
+    background: #D2EDFB;
+}
+.share_div{width: 100%;height: 100%;overflow: hidden;background: url(../../wap/img/bjtm.png);background-size: 100% 100%;position: fixed;left: 0;top: 0;z-index: 999999;display: none}
+.share_up{width: 100%;height: 100%;overflow: hidden;position: fixed;left: 0;top: 0;}
 @media (min-width:641px){.actfooter{width:640px;margin:auto!important;}}

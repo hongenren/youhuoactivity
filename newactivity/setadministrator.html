@@ -79,7 +79,7 @@
     <!-- 主办搜索开始 -->
     <div class="searchcompany" v-if="Ishow">
         <div class="screenButList">
-            <input type="text" id="activityUniteParamName" placeholder="请输入机构名称进行查询" v-model="searchContent"><i @click="search(searchContent)" class="iconfont icon-fangdajing"></i>
+            <input type="text" id="activityUniteParamName" placeholder="请输入机构名称进行查询" v-model="searchContent"><i @click="search(searchContent)" class="iconfont icon-fangdajing search_button"></i>
         </div>
         <ul class="warp_company">
             <li class="unitLi" v-for="(item, index) in companyList">

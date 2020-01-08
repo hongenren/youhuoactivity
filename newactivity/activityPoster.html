@@ -21,51 +21,64 @@
         <h1 class="mint-header-title">活动海报</h1>
         <div class="mint-header-button text-r"></div>
     </header>
-    <div class="poster-main-box">
+    <div class="poster-main-box" ref="one">
         <div class="poster-main-top">
             <div class="poster-img"></div>
             <p class="poster-name"><span>董晓雨</span> 邀请您一起做公益</p>
-            <p class="poster-title">活动标题活动标题活动标题活动</p>
-            <p class="poster-title1">活动副标题活动副标题活动副标题活动副标题</p>
-            <p><i class="iconfont icon-naozhong"></i>19/6/6 08:00-12:00 </p>
-            <p><i class="iconfont icon-didian"></i>上海市长宁区金钟路65811号2楼</p>
+            <p class="poster-title">{{detailList.name}}</p>
+            <p class="poster-title1">{{detailList.subTitle}}</p>
+            <p><i class="iconfont icon-naozhong"></i>时间：{{detailList.startDay}} 至 {{detailList.endDay}}</p>
+            <p><i class="iconfont icon-didian"></i>{{detailList.address}}</p>
             <p><i class="iconfont icon-renwu"></i>上海悠活网络科技有限公司</p>
         </div>
-        <p class="poster-img1"></p>
+        <p class="poster-img1">
+            <img :src="detailList.coverImg" alt="">
+        </p>
         <div class="poster-main-center">
             <div class="save-qrcode">
-                <img class="save-img">
+                <div id="qrcode" class="preserveEWM" style="display: none;"></div>
+                <img class="save-img" src="">
                 <span>扫描报名岗位/任务、领取票证</span>
             </div>
             <div class="main-center-title">主办单位</div>
             <ul>
-                <li class="main-center-danwei">
+                <li class="main-center-danwei" v-for="(item, index) in activityUniteVoList" :key="index">
                     <div class="center-danwei-img fl"></div>
                     <div class="center-danwei-name fl">上海悠活网路科技有限公司</div>
                 </li>
             </ul>
             <div class="main-center-title">联办单位</div>
             <ul>
-                <li class="main-center-danwei">
+                <li class="main-center-danwei" v-for="(item, index) in activityUniteVoList" :key="index">
                     <div class="center-danwei-img fl"></div>
                     <div class="center-danwei-name fl">上海悠活网路科技有限公司</div>
                 </li>
             </ul>
             <div class="main-center-title">活动参与方</div>
-            <p>爱心支持单位：上海悠活网路科技有限公司5</p>
-            <p>指导单位：上海悠活网路科技有限公司6</p>
-
+            <p>{{detailList.parties}}</p>
         </div>
     </div>
     <div class="actfooter">
         <div class="nav">
             <span>更换背景颜色</span>
-            <i></i>
+            <i class="backgroundA6" @click="addbackground('#FEEDA6')"></i>
+            <i class="backgroundFB" @click="addbackground('#D2EDFB')"></i>
+            <i class="backgroundE4" @click="addbackground('#DDFAE4')"></i>
+            <i class="backgroundE9" @click="addbackground('#FFE9E9')"></i>
+            <i class="background00" @click="addbackground('#FCCA00')"></i>
+            <i class="backgroundFF" @click="addbackground('#59DBFF')"></i>
+            <i class="background1F" @click="addbackground('#73B81F')"></i>
+            <i class="background6c" @click="addbackground('#F0676C')"></i>
             <i></i>
         </div>
         <div class="btnbox">
-            <button class="btnsave" @click="saveact(-10)">邀请朋友一起参加</button>
-            <button class="btnisue" @click="saveact(10)">保存到相册</button>
+            <button class="btnsave" @click="share">邀请朋友一起参加</button>
+            <a id="download" download="qrcode.jpg"></a>
+            <button class="btnisue" @click="bcxc">保存到相册</button>
+        </div>
+        <div class="share_div">
+            <div class="share_up"></div>
+            <img id="shareImg" src="../wap/img/share_1.png">
         </div>
     </div>
 </div>
@@ -74,48 +87,76 @@
 <script type="text/javascript" src="../wap/js/config.js"></script>
 <script type="text/javascript" src="js/vue.min.js"></script>
 <script type="text/javascript" src="../wap/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../wap/js/jquery.qrcode.min.js"></script>
 <script>
 var vueIM = new Vue({
     el: '#activityPoster',
     data () {
         return {
-            fil: null,
-            recordList: [],
-            addFrom: {
-                org: 'AAA789', // 机构标识
-                url: null
-            },
-            searchFrom: {
-                org: 'AAA789', // 机构标识
-                current: 1, // 当前页
-                size: 20 // 页容量
-            },
-            moreMenuData:[[
-                {
-                    text: "发通知",
-                    func: function () {
-                        jump("./send_notification.html?type=0&pkPostCode="+pkPostCode);
-                    }
-                },
-                {
-                    text: "收消息",
-                    func: function () {
-                        jump("./receive_messages.html?pkPostCode="+pkPostCode);
-                    }
-                },
-            ]]
+            detailList: {},
+            activityUniteVoList: [],
         };
     },
     mounted () {
-        this.init();
+        this.getdetail();
     },
     methods: {
-        init (){
-            // 线上
-            this.searchFrom.org = JSON.parse(localStorage.getItem('appUserInfo')).cookieResp.un && 'AAA789';
+        getUrlParam (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
         },
-        zhankai () {
-            $('.activitmark').css({height: "auto"});
+        // 获得详情
+        getdetail () {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/info',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify({activityCode: that.getUrlParam("activityCode")}),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res.data);
+                    that.detailList = res.data;
+                    that.activityUniteVoList = res.data.activityUniteVoList;
+                    that.qrcode1(res.data.qrCode);
+                }
+            });
+        },
+        addbackground (backgroundColor) {
+            this.$refs.one.style.backgroundColor = backgroundColor;
+        },
+        qrcode1(url){
+            $("#qrcode").qrcode({
+                render: "canvas", // 渲染方式有table方式（IE兼容）和canvas方式
+                width: 150, //宽度
+                height: 150, //高度
+                text: url, //内容
+                typeNumber: -1,//计算模式
+                correctLevel: 2,//二维码纠错级别
+                background: "#ffffff",//背景颜色
+                foreground: "#000000"  //二维码颜色
+            });
+            var canvas = $('#qrcode').find("canvas").get(0);
+            var url = canvas.toDataURL('image/jpeg');
+            $(".save-img").attr('src', url);
+        },
+        share () {
+            $(".share_div").fadeIn();
+            $(".share_up").click(function () {
+                $(".share_div").hide();
+            });
+        },
+        bcxc () {
+            var canvas = $('#qrcode').find("canvas").get(0);
+            try {//解决IE转base64时缓存不足，canvas转blob下载
+                var blob = canvas.msToBlob();
+                navigator.msSaveBlob(blob, 'qrcode.jpg');
+            } catch (e) {//如果为其他浏览器，使用base64转码下载
+                var url = canvas.toDataURL('image/jpeg');
+                $("#download").attr('href', url).get(0).click();
+            }
+            return false;
         }
     }
 })

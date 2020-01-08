@@ -85,7 +85,7 @@
 }
 /* liebiao */
 .order-list{
-    padding: 0.7rem 0rem 0.5rem 0.7rem;
+    padding: 0.7rem 0.5rem 0.5rem 0.7rem;
     margin-bottom: 0.7rem;
     color: #101010 100%;
     font-size: 14px;
@@ -157,6 +157,8 @@
     color: rgba(3, 3, 3, 1);
     font-size: 16px;
     font-weight: bold;
+    display: flex;
+    justify-content: space-between;
 }
 .textF9{
     color: #25B0F9!important;

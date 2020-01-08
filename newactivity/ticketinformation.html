@@ -147,7 +147,7 @@
                     <!-- 主办搜索开始 -->
                     <div class="searchcompany" v-if="IsPubCode == item.pubCode">
                         <div class="screenButList">
-                            <input type="text" id="activityUniteParamName" placeholder="请输入机构名称进行查询"><i @click="search" class="iconfont icon-fangdajing"></i>
+                            <input type="text" id="activityUniteParamName" placeholder="请输入机构名称进行查询"><i @click="search" class="iconfont icon-fangdajing search_button"></i>
                         </div>
                         <ul class="warp_company">
                             <li v-for="(item2, index2) in companyList" :key="index2">

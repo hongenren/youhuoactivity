@@ -21,17 +21,17 @@
     </style>
 </head>
 <body>
-<div id="mylaunch">
+<div id="myParticipate">
     <header class="mint-header">
         <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
         <h1 class="mint-header-title">活动订单</h1>
         <div class="mint-header-button text-r"></div>
     </header>
     <div class="warp_dd_p" style="padding:0;">
-        <a class="current" href="./mylaunch.html">
+        <a href="./mylaunch.html">
             <span>我发起</span>
         </a>
-        <a href="./myParticipate.html">
+        <a class="current" href="./myParticipate.html">
             <span>我参与</span>
         </a>
         <a href="./mylaunchhistory.html">
@@ -39,17 +39,23 @@
         </a>
     </div>
     <div class="screenButList" style="margin-top: 3px;border-top: 0px;">
-        <input type="search" class="search_input" v-model="searchFrom.searchValue" placeholder="请输入机构或活动名称来搜索"><i @click="search" class="iconfont icon-fangdajing search_button"></i>
+        <input type="search" class="search_input" v-model="searchFrom.searchValue" placeholder="请输入机构或活动名称来搜索"
+        ><i class="iconfont icon-fangdajing search_button" @click="search"></i>
     </div>
     <div  id="content">
     <ul class="order-list-box">
         <li class="order-list" v-for="(item, index) in recordList" :key="index">
             <div class="my-order-title">
                 <span>{{item.name}}</span>
+                <span style="font-size: 12px;line-height: 24px;" class="color6C">{{item.unitType == 10 ? "主办单位" : "联办单位"}}</span>
             </div>
             <p><i class="iconfont icon-naozhong"></i>{{item.startDay}} 至 {{item.endDay}}</p>
             <p><i class="iconfont icon-didian"></i>{{item.address}}</p>
-            <div class="oforderbox">
+            <div class="oforderbox" v-if="item.unitState != 20">
+                <span class="oforder1F" @click="auditactivityUnite(item.activityCode, 20)">通过</span>
+                <span class="oforder"  @click="auditactivityUnite(item.activityCode, -10)">拒绝</span>
+            </div>
+            <div class="oforderbox" v-if="item.unitState == 20">
                 <span class="more" :data-code='item.activityCode'>更多</span>
                 <span class="oforderF9"  @click="goActivityPoster(item.activityCode)">海报</span>
                 <span class="oforder1F" @click="goDownData">下载数据</span>
@@ -128,7 +134,7 @@
 <script src="../wap/js/dropload.min.js"></script>
 <script>
 var vueIM = new Vue({
-    el: '#mylaunch',
+    el: '#myParticipate',
     data () {
         return {
             sessionIndex: null,
@@ -136,8 +142,6 @@ var vueIM = new Vue({
             dropload: false,
             searchFrom: {
                 orgCode: JSON.parse(localStorage.getItem('prjvorgMsg')).cookieResp.un, // 机构账户标识
-                state: 20,
-                searchValue: "", // 搜索值
                 current: 0, // 当前页
                 size: 5 // 页容量
             },
@@ -233,7 +237,7 @@ var vueIM = new Vue({
                         withCredentials: true
                         },
                         type:"post",
-                        url: base_url +  'html5/v2/activity/selectPublish',
+                        url: base_url +  'html5/v2/activity/selectJoin',
                         data:JSON.stringify(that.searchFrom),
                         headers : {'token': $.cookie('token')},
                         dataType:'json',
@@ -316,6 +320,20 @@ var vueIM = new Vue({
                 type: "post",
                 dataType: "json",
                 data: JSON.stringify({activityCode: activityCode, pkCode: pkCode, module: module}),
+                headers: {'Content-Type': 'application/json'},
+                success: function (res) {
+                    console.log(res);
+                }
+            });
+        },
+        // 拒绝 通过
+        auditactivityUnite (activityCode, state) {
+            var that = this;
+            $.ajax({
+                url: base_url + 'html5/v2/activity/activityUnite/audit',
+                type: "post",
+                dataType: "json",
+                data: JSON.stringify({activityCode: activityCode, orgCode: that.searchFrom.orgCode, state: state}),
                 headers: {'Content-Type': 'application/json'},
                 success: function (res) {
                     console.log(res);

@@ -610,6 +610,7 @@ input, textarea{
 /* 搜索样式 */
 .screenButList{
     padding: 0.5rem;
+    background: #fff;
 }
 .screenButList input{
     vertical-align: middle;
@@ -618,13 +619,14 @@ input, textarea{
     text-align: left;
     border: 1px solid #3BAE3A;
 }
-.screenButList i{
+.screenButList .search_button{
     width: 15%;
     display: inline-block;
     background: #72b81e;
     color: #ffffff;
     padding: 0.3rem 0;
     text-align: center;
+    vertical-align: middle;
 }
 #searchcompany .yh-group{
     color: #101010;
@@ -740,17 +742,6 @@ input, textarea{
 }
 .yh-tab div{
     padding: 0.25rem 0.5rem;
-}
-.screenButList1{width:100%;height: auto;background-color: #f5f5f5;background-color: #ffffff;border-top: 1px solid #D9D9D9; padding: 8px;border-bottom: none;}
-.screenButList1 .search_input{width: 85%;height: 0.75rem; font-size: .24rem;background-size:16px;
-    background-color: #ffffff; border: 1px solid #3BAE3A;}
-.screenButList1 .search_button{
-    background: #72B81E;float: right;
-    width: 15%;height: 30px; font-size: .24rem;
-    background-image:url('../../wap/img/pws_999.png');
-    background-repeat:no-repeat;
-    background-position:50% 50%;
-    background-size:auto 20px;
 }
 .ts_warning{
     width: 100%;

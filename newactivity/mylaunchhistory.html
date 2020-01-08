@@ -21,25 +21,27 @@
     </style>
 </head>
 <body>
-<div id="mylaunch">
+<div id="mylaunchhistory">
     <header class="mint-header">
         <div class="mint-header-button text-l"><a class="icon-back" href="javascript:history.go(-1);"></a></div>
         <h1 class="mint-header-title">活动订单</h1>
         <div class="mint-header-button text-r"></div>
     </header>
     <div class="warp_dd_p" style="padding:0;">
-        <a class="current" href="./mylaunch.html">
+        <a href="./mylaunch.html">
             <span>我发起</span>
         </a>
         <a href="./myParticipate.html">
             <span>我参与</span>
         </a>
-        <a href="./mylaunchhistory.html">
+        <a class="current" href="./mylaunchhistory.html">
             <span>历史订单</span>
         </a>
     </div>
-    <div class="screenButList" style="margin-top: 3px;border-top: 0px;">
-        <input type="search" class="search_input" v-model="searchFrom.searchValue" placeholder="请输入机构或活动名称来搜索"><i @click="search" class="iconfont icon-fangdajing search_button"></i>
+    <div class="screenButList">
+        <input type="search" class="search_input" style="width: 70%;" v-model="searchFrom.searchValue" placeholder="请输入机构或活动名称来搜索"
+        ><i class="iconfont icon-fangdajing search_button" @click="search"></i>
+        <span class="screen">筛选<i class="iconfont icon-icon_xia"></i></span>
     </div>
     <div  id="content">
     <ul class="order-list-box">
@@ -128,7 +130,7 @@
 <script src="../wap/js/dropload.min.js"></script>
 <script>
 var vueIM = new Vue({
-    el: '#mylaunch',
+    el: '#mylaunchhistory',
     data () {
         return {
             sessionIndex: null,

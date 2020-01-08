@@ -113,9 +113,8 @@
             <span>历史订单</span>
         </a>
     </header>
-    <div class="screenButList screenButList1" style="margin-top: 3px;border-top: 0px;">
-        <input type="search" v-model="searchFrom.searchValue" class="search_input" id="name_input" placeholder="请输入机构或活动名称来搜索" style="height:30px;-webkit-appearance:none;border-radius:0px;padding-left: 5px;">
-        <input type="button" class="search_button" @click="search" style="-webkit-appearance:none;border-radius:0px;">
+    <div class="screenButList" style="margin-top: 3px;border-top: 0px;">
+        <input type="search" v-model="searchFrom.searchValue" class="search_input" placeholder="请输入机构或活动名称来搜索"><i @click="search" class="iconfont icon-fangdajing search_button"></i>
     </div>
     <div  id="content">
         <ul>
@@ -153,12 +152,14 @@
                     <span v-if="item.type == 30 && item.state == 0" class="oforder" @click="cancelorder(item.ticket)">取消订单</span>
                     <span v-if="item.type == 30 && item.state == 10" class="oforder1F" @click="donation()">转赠</span>
                     <span v-if="item.type == 30 && item.state == 20" class="oforder" href="./admin_evaluate.html">评价</span>
-                    <span v-if="item.type == 30 && (item.state == 10 || item.state == 20)" class="oforder">票证二维码</span>
+                    <span v-if="item.type == 30 && (item.state == 10 || item.state == 20)" class="oforder">
+                        <a :href='"./sign-qrcode.html?ticket=" + item.ticket'>票证二维码</a>
+                    </span>
                 </div>
             </li>
         </ul>
         <div class="dropload-downs" v-if="dropload">
-            <div class="dropload-noData">没有啦~</div>
+            <div class="textcenter">没有啦~</div>
         </div>
     </div>
     <!------底部开始------>
