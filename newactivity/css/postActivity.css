@@ -55,7 +55,6 @@
     background: #ffffff;
     margin: 0.5rem 0;
 }
-@media (min-width:641px){.hintsubmit{width:640px;left: 50%;margin-left: -320px;}}
 .periodbox{
     position: relative;
 }

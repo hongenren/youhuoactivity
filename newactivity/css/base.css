@@ -797,7 +797,7 @@ input, textarea{
 }
 .oforder1F{
     display: inline-block;
-    padding: 0.2rem 1rem;
+    padding: 0.2rem 0.8rem;
     border-radius: 0.8rem;
     background-color: rgba(255, 255, 255, 1);
     color: #73B81F;
@@ -807,7 +807,7 @@ input, textarea{
 }
 .oforderF9{
     display: inline-block;
-    padding: 0.2rem 1rem;
+    padding: 0.2rem 0.8rem;
     border-radius: 0.8rem;
     background-color: rgba(255, 255, 255, 1);
     color: #25B0F9;

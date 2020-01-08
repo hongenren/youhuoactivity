@@ -145,7 +145,7 @@
                         </p>
                         <p class="oforderbox">
                             <span v-if="item.type == 80" class="oforder1F">添加临时管理员</span>
-                            <span v-if="item.type == 80" class="oforder">扫一扫</span>
+                            <span v-if="item.type == 80" class="oforder" @click="scanCode">扫一扫</span>
                         </p>
                     </li>
                 </ul>
@@ -171,6 +171,7 @@
 <script type="text/javascript" src="js/vue.min.js"></script>
 <script src="../wap/js/dropload.min.js"></script>
 <script type="text/javascript" src="../wap/Layer.m/layer.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=uRhBKfzW36pGW8KGkyAhpwXDYwmjNcZP&s=1"></script>
 
 <script>
@@ -341,6 +342,87 @@
                     console.log(data.data);
                 }
             })
+        },
+        // 调用微信扫一扫
+        getWxConfig(){
+            var wwwurl = location.href.split('#')[0];
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:"post",
+                url:base_url + "html5/v1/wechat/getWeChatJsSign",
+                data:JSON.stringify({"url":wwwurl}),
+                async:false,
+                dataType:'json',
+                contentType: "application/json;charset=utf-8",
+                success:function(data){
+                    if(data.code==0){
+                        var data1 = JSON.parse(data.data.data);
+                        //sessionStorage.setItem('WxConfig',data1); //获取WX配置信息
+                        wx.config({
+                            debug: false,
+                            appId: data1.appId, // 必填，公众号的唯一标识
+                            timestamp:parseInt(data1.timestamp), // 必填，生成签名的时间戳
+                            nonceStr: data1.nonceStr, // 必填，生成签名的随机串
+                            signature: data1.signature,// 必填，签名，见附录1
+                            jsApiList: ['checkJsApi','scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                        });
+                    }
+                },
+                error:function(e){
+                    layer.open({
+                        content: '获取失败'
+                        ,skin: 'msg'
+                        ,time: 1 //2秒后自动关闭
+                    });
+                    return false;
+                }
+            })
+        },
+        // 扫一扫
+        scanCode () {
+            var that = this;
+            wx.scanQRCode({
+                needResult : 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                scanType : ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                success : function(res) {
+                    var result = res.resultStr;
+                    //$("#arriveAddress").html(result+","+user_msg.prjvUserId);
+                    $.ajax({
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        type:"post",
+                        url: base_url + "html5/v1/admin/scan/s",
+                        data:JSON.stringify({
+                            /*"qrCode":result,
+                            "firstAccount":user_msg.prjvUserId,
+                            "recruitCode":""*/
+                            "activityCode": $_GET['activityCode'],
+                            "sectionCode": sectionCode,
+                            "firstAccount": user_msg.prjvUserId,
+                            "qrCode": result,
+                            "lnglat": lnglat
+                        }),
+                        headers : {'token':token},
+                        dataType:'json',
+                        contentType: "application/json;charset=utf-8",
+                        success:function(data){
+                            if(data.code==200){//跳转
+                                location.href = data.data.url;
+                            }else if(data.code==0){
+                                alert(data.msg);
+                            }else{
+                                alert(data.msg);
+                            }
+                        },
+                        error:function(){
+                            alert("失败");
+                        }
+                    })
+                }
+            });
         },
         // 转赠
         donation () {

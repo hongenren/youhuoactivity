@@ -41,7 +41,9 @@
             <div class="personnebtnbox">
                 <span class="oforder1F" @click="batchAuditApply(item.applyCode, 20)">通过</span>
                 <span class="oforder" @click="batchAuditApply(item.applyCode, -10)">拒绝</span class="oforder00">
-                <span class="oforder00">联系</span>
+                <span class="oforder00">
+                    <a :href='"tel:"+item.mobile'>联系</a>
+                </span>
             </div>
             <div class="check-box" v-if="!showCheck">
                     <input class="radio" type="checkbox" id="female1" v-model="item.check" @click="selectCheck(item)"/>

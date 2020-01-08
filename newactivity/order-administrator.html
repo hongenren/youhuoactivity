@@ -47,7 +47,7 @@
             </div>
             <div class="adminbtnbox fr">
                 <span class="oforder" @click="kickOut(item.ticket)">剔除</span>
-                <span class="oforder1F" @click="batchAuditApply(item.applyCode, 20)">联系</span>
+                <span class="oforder1F"><a :href='"tel:"+item.mobile'>联系</a></span>
             </div>
         </li>
     </ul>
